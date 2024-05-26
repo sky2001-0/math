@@ -1,0 +1,617 @@
+\lsection{実数}
+
+\lsubsection{実数の構成}
+
+\rem{実数の準備}{
+  $\Q$上の\textit{Cauchy}列全体の集合$A$を考える。
+}
+
+\lem{実数の準備：前順序}{
+  $A$上の自己関係$\preccurlyeq_R$は前順序である。
+  \eq*{
+    \qty(x_n)_{n \in \N} \preccurlyeq_R \qty(y_n)_{n \in \N} \defiff \forall \epsilon \in \Q^+ \exists N \in \N \forall n \in \N_{\geq N} \qty(x_n - y_n < \epsilon)
+  }
+}{
+  $x_n - x_n = 0 < \epsilon$より、反射的である。
+
+  $\qty(x_n)_{n \in \N} \preccurlyeq_R \qty(y_n)_{n \in \N} \land \qty(y_n)_{n \in \N} \preccurlyeq_R \qty(z_n)_{n \in \N}$のとき、
+  \eq*{
+    \exists N \in \N \forall n \in \N_{\geq N} \qty(x_n - y_n < \epsilon / 2 \land y_n - z_n < \epsilon / 2)
+  }
+  ゆえに、$x_n - z_n < \epsilon$を得る。推移的である。
+}
+
+\lem{実数の準備：前順序の全域性}{
+  $A$上で\lemref{実数の準備：前順序}の前順序$\preccurlyeq_R$は以下を満たす。
+  \eq*{
+    \forall x, y \in A \qty(x \preccurlyeq_R y \lor y \preccurlyeq_R x)
+  }
+}{
+  成り立たないと仮定する。
+
+  $\exists \qty(x_n)_{n \in \N}, \qty(y_n)_{n \in \N} \in A$について、
+  \eqg*{
+    \exists \epsilon_1 \in \Q^+ \forall N \in \N \exists n \in \N_{\geq N} \qty(x_n - y_n \geq \epsilon_1) \\*
+    \exists \epsilon_2 \in \Q^+ \forall N \in \N \exists m \in \N_{\geq N} \qty(x_m - y_m \leq -\epsilon_2)
+  }
+
+  よって、$\epsilon = 2 \min \qty{\epsilon_1, \epsilon_2}$として、
+  \eq*{
+    \forall N \in \N \exists n, m \in \N_{\geq N} \qty(\qty(x_n - y_n) - \qty(x_m - y_m) \geq \epsilon)
+  }
+
+  $\qty(x_n - y_n)_{n \in \N}$は、\lemref{位相群のCauchyネットの積}より\textit{Cauchy}列であるので、
+  \eq*{
+    \forall \epsilon \in \Q^+ \exists N \in \N \forall n, m \in \N_{\geq N} \qty(\abs{\qty(x_n - y_n) - \qty(x_m - y_m)} < \epsilon)
+  }
+
+  矛盾する。背理法より示される。
+}
+
+\lem{実数の準備：前順序の補足}{
+  $A$上で\lemref{実数の準備：前順序}の前順序$\preccurlyeq_R$は以下を満たす。
+  \eq*{
+    \forall \qty(x_n)_{n \in \N}, \qty(y_n)_{n \in \N} \in A \qty(\lnot x \preccurlyeq y \leftrightarrow \exists \epsilon \in \Q^+ \exists N \in \N \forall n \in \N_{\geq N} \qty(x_n - y_n \geq \epsilon))
+  }
+}{
+  右を示す。
+
+  \lemref{位相群のCauchyネットの積}より$\qty(x_l - y_l)_{l \in \N}$は\textit{Cauchy}的である。
+
+  したがって$\exists N \in \N \forall m \in \N_{\geq N}$について、$\abs{\qty(x_n - y_n) - \qty(x_m - y_m)} < \epsilon / 2$
+
+  ゆえに、$x_m - y_m > x_n - y_n - \epsilon / 2 \geq \epsilon / 2$\\*
+
+  左を示す。
+
+  $x \preccurlyeq y$とすると定義より矛盾。背理法より示される。
+}
+
+\lem{実数の準備：加法可換群}{
+  $A$上の以下の演算$+$は可換群をなす。
+  \eq*{
+    \forall \qty(x_n)_{n \in \N}, \qty(y_n)_{n \in \N} \in A \qty(\qty(x_n)_{n \in \N} + \qty(y_n)_{n \in \N} \defiff \qty(x_n + y_n)_{n \in \N})
+  }
+}{
+  \lemref{位相群のCauchyネットの積}よりマグマである。
+
+  結合法則は、有理数の可換体としての性質より明らか。
+
+  $\qty(0)_{n \in \N}$は単位元である。
+
+  $\qty(x_n)_{n \in \N}$に対して、\lemref{可換位相群のCauchyネットの逆}より$\qty(-x_n)_{n \in \N}$は逆元である。
+
+  交換法則は、有理数の可換体としての性質より明らか。
+}
+
+\lem{実数の準備：可換環}{
+  \lemref{実数の準備：加法可換群}の定める可換群$\qty(A, +)$上の以下の演算$\times$は可換環をなす。
+  \eq*{
+    \forall \qty(x_n)_{n \in \N}, \qty(y_n)_{n \in \N} \in A \qty(\qty(x_n)_{n \in \N} \times \qty(y_n)_{n \in \N} \defiff \qty(x_n \times y_n)_{n \in \N})
+  }
+}{
+  \lemref{順序体上のCauchy列の積}よりマグマである。
+
+  結合法則は、有理数の可換体としての性質より明らか。
+
+  $\qty(1)_{n \in \N}$は単位元である。
+
+  交換法則は、有理数の可換体としての性質より明らか。
+
+  分配法則は、有理数の可換体としての性質より明らか。
+}
+
+\lem{実数の準備：同値類}{
+  $A$上で以下の自己関係$\sim_R$は同値類である。
+  \eq*{
+    \forall \qty(x_n)_{n \in \N}, \qty(y_n)_{n \in \N} \in A \qty(\qty(x_n)_{n \in \N} \sim_R \qty(y_n)_{n \in \N} \defiff \qty(x_n)_{n \in \N} \preccurlyeq \qty(y_n)_{n \in \N} \land \qty(y_n)_{n \in \N} \preccurlyeq \qty(x_n)_{n \in \N})
+  }
+
+  さらに、$\qty(x_n)_{n \in \N} \sim_R \qty(y_n)_{n \in \N}$であるとき、$\qty(x_n - y_n)_{n \in \N}$は収束して以下を満たす。
+  \eq*{
+    \lim_{n \rightarrow \infty} \qty(x_n - y_n) = 0
+  }
+}{
+  \lemref{実数の準備：前順序}より前順序。明らかに対称的であるので、同値類である。
+
+  \thmref{epsilon-delta論法}より明らか。
+}
+
+\lem{実数の準備：両立}{
+  $A$上で\lemref{実数の準備：同値類}の同値類$\sim_R$は、\lemref{実数の準備：前順序}の前順序、\lemref{実数の準備：加法可換群}の加法、\lemref{実数の準備：可換環}の乗法のそれぞれと両立する。
+}{
+  前順序と両立することは、$\sim_R$の定義と前順序の推移性より明らか。\\*
+
+  $\qty(x_n)_{n \in \N} \sim_R \qty(x'_n)_{n \in \N} \land \qty(y_n)_{n \in \N} \sim_R \qty(y'_n)_{n \in \N}$とする。
+
+  $\qty(x_n + y_n) - \qty(x'_n + y'_n) = \qty(x_n - x'_n) + \qty(y_n - y'_n)$であるので、\lemref{位相群の収束ネットの積と逆}より$0$に収束する。\\*
+
+  $\qty(x_n)_{n \in \N} \sim_R \qty(x'_n)_{n \in \N} \land \qty(y_n)_{n \in \N} \sim_R \qty(y'_n)_{n \in \N}$とする。
+  \eq*{
+    \abs{\qty(x_n y_n) - \qty(x'_n y'_n)} = \abs{\qty(x_n - x'_n) y_n + x'_n \qty(y_n - y'_n)}
+  }
+
+  ここで、\corref{Cauchy列は全有界}と\thmref{順序群では全有界ならば有界}より2つの\textit{Cauchy}列は有界で、\thmref{順序環のノルム}より、
+  \eq*{
+    \exists K \in \Q^+ \qty(\abs{\qty(x_n y_n) - \qty(x'_n y'_n)} \leq K \qty(\abs{x_n - x'_n} + \abs{y_n - y'_n}))
+  }
+
+  ゆえに$0$に収束する。
+}
+
+\dfn{実数}{
+  \lemref{実数の準備：両立}より定まる商マグマ$A / \sim_R$を実数と呼び、$\R$と表す。
+  またその元も実数と呼ぶ。
+
+  定義より$\R$は可換体である。
+}
+
+\lem{実数の準備：可換体としての実数}{
+  可換環$\qty(\qty(\R, +), \times)$は体である。
+}{
+  $x = \qty[\qty(x_n)_{n \in \N}]$について、以下の点列を考える。
+  \eq*{
+    y_n =
+    \begin{cases}
+      0 & \qty(x_n = 0) \\*
+      1 / x_n & \qty(x_n \neq 0)
+    \end{cases}
+  }
+
+  全順序性より、$x < 0 \lor 0 < x$
+
+  $0 < x$のとき、
+  \eq*{
+    \exists \epsilon \in \Q^+ \forall N \in \N \exists n \in \N_{\geq N} \qty(\epsilon \leq x_n)
+  }
+  \textit{Cauchy}列であることより、
+  \eq*{
+    \exists N \in \N \forall m \in \N_{\geq N} \qty(\abs{x_n - x_m} < \epsilon / 2)
+  }
+
+  したがって、
+  \eq*{
+    \exists N \in \N \forall m \in \N_{\geq N} \qty(\epsilon / 2 < x_m)
+  }
+
+  今、$\qty(y_n)_{n \in \N}$について考える。
+
+  $k, l \geq N$について、$\abs{y_k - y_l} = \abs{1 / x_k - 1 / x_l} \leq \abs{x_k - x_l} / \abs{x_k x_l}$
+
+  定義より、$\epsilon' \in \Q^+$に対して$k, l \geq N' \rightarrow \abs{x_k - x_l} < \epsilon' \epsilon^2 / 4$とする$N' > N$が存在するので\textit{Cauchy}\\*
+
+  $x < 0$のときも同様に示される。
+}
+
+\lem{実数の準備：全順序}{
+  \lemref{実数の準備：両立}より与えられる$\R$上の前順序$\leq$は全順序である。
+}{
+  $\sim_R$の定義より反対称的である。
+
+  \lemref{実数の準備：前順序の全域性}より全順序である。
+}
+
+\thm{順序体としての実数}{
+  $\qty(\R, \leq)$は順序体である。すなわち$\R$は体で、$\leq$は全順序であり、かつ以下を満たす。
+  \eqg*{
+    \forall x, y, z \in \R \qty(x \leq y \rightarrow x + z \leq y + z) \\*
+    \forall x, y \in \R \qty(0_\R < x \land 0_\R < y \rightarrow 0_\R < x y)
+  }
+}{
+  \lemref{実数の準備：全順序}より全順序。\\*
+
+  第一式について、$x_n - y_n < \epsilon \rightarrow \qty(x_n + z_n) - \qty(y_n + z_n) < \epsilon$より明らか。\\*
+
+  第二式について、$x = \qty[\qty(x_n)_{n \in \N}], y = \qty[\qty(y_n)_{n \in \N}]$とする。
+
+  \lemref{実数の準備：前順序の補足}より、
+  \eq*{
+    \exists \epsilon_1, \epsilon_2 \in \Q^+ \exists N \in \N \forall k \in \N_{\geq N} \qty(\epsilon_1 \leq x_k \land \epsilon_2 \leq y_k)
+  }
+
+  $\qty(x_n y_n)_{n \in \N}$は\lemref{順序体上のCauchy列の積}より\textit{Cauchy}列であり、\lemref{実数の準備：前順序の補足}より$\lnot \qty(0)_{n \in \N} \succcurlyeq \qty(x_n y_n)_{n \in \N}$
+
+  \lemref{実数の準備：全順序}より示される。
+}
+
+\lem*{
+  写像$\varphi \in \R^\Q, \varphi(a) = \qty[\qty(a)_{n \in \N}]$は以下を満たす。
+  \begin{enumerate}
+    \item 単射
+    \item 加法、乗法について環準同型
+    \item 全順序と両立
+    \item 一様連続
+  \end{enumerate}
+}{
+  定義より明らか。
+}
+
+\dfn{有理数の実数への埋め込み}{
+  \mlemref{0}の写像$\varphi$について、像$\varphi(\Q)$を誤解のない範囲で有理数$\Q$と呼ぶ。
+}
+
+\cor*{
+  \eq*{
+    \Q \subset \R
+  }
+}
+
+
+\lsubsection{実数の性質}
+
+\thm{実数の有理数による近似}{
+  \eq*{
+    \forall x, y \in \R \qty(x < y \rightarrow \exists a \in \Q \qty(x < a < y))
+  }
+}{
+  $x = \qty[\qty(x_n)_{n \in \N}], y = \qty[\qty(y_n)_{n \in \N}]$とする。
+
+  $x < y$より\lemref{実数の準備：前順序の補足}より
+  \eq*{
+    \exists \epsilon \in \Q^+ \exists N \in \N \forall n \in \N_{\geq N} \qty(x_n - y_n \geq \epsilon)
+  }
+
+  \textit{Cauchy}列の定義より、
+  \eq*{
+    \exists M \in \N \forall n, m \in \N_{\geq M} \qty(\abs{x_n - x_m} < \epsilon / 4 \land \abs{y_n - y_m} < \epsilon / 4)
+  }
+
+  ゆえに$K = \max \qty{M, N}$について、$a = x_{s(K)} + \epsilon / 2 \in \Q$が存在して
+  \eq*{
+    \forall n \in \N \qty(n > K \rightarrow x_n + \epsilon / 4 < a \land a + \epsilon / 4 < y_n)
+  }
+}
+
+\thmf{$\R$上の\textit{Archimedes}の原理}{R上のArchimedesの原理}{
+  \eq*{
+    \forall x \in \R \exists n \in \N \qty(n > x)
+  }
+}{
+  \thmref{実数の有理数による近似}より、有理数$a$が存在して、
+  \eq*{
+    x < a < x + 1
+  }
+
+  \thmref{Q上のArchimedesの原理}より示される。
+}
+
+\thmf{$\R$は可算一様}{Rは可算一様}{
+  $\R$は可算一様である。
+}{
+  \thmref{R上のArchimedesの原理}より、$\mathcal{U} \coloneqq \qty{\qty{\qty(x, y) \mid \abs{x - y} < 1 / s(n)} \mid n \in \N}$は基本近縁系である。
+}
+
+\lem*{
+  全単射$\varphi \in \R^{\qty[0, 1]}$が存在する。
+}{
+  以下の写像は、全単射$f \in \R^{\sqty{0, 1}}$である。
+  \eq*{
+    f(x) \coloneqq \frac{1 / 2 - x}{x \qty(x - 1)}
+  }
+
+  以下の写像は、全単射$g \in \sqty{0, 1}^{\qty[0, 1]}$である。
+  \eq*{
+    g(x) \coloneqq
+    \begin{cases}
+      1 / 2 + 1 / 2^{s(n)} & \qty(\exists n \in \N \qty(1 / 2 + 1 / 2^n = x)) \\*
+      1 / 2 - 1 / 2^{s(n)} & \qty(\exists n \in \N \qty(1 / 2 - 1 / 2^n = x)) \\*
+      x & \qty(\otherwise)
+    \end{cases}
+  }
+
+  $\varphi = f \circ g$として成り立つ。
+}
+
+\thm{連続体濃度}{
+  全単射$\sigma \in \R^{\P(\N)}$が存在する。
+}{
+  $f \in \P(\Q)^\R, f(r) = \qty{q \in \Q \mid q < r}$は\thmref{実数の有理数による近似}より単射である。\\*
+
+  以下で定める写像$g \in \qty[0, 1]^{\P(\N)}$を考える。
+
+  $A \in \P(\N)$について以下の点列$\qty(y_m)_{m \in \N}$が与えられる。
+  \eq*{
+    y_m \coloneqq
+    \begin{cases}
+      1 & \qty(m \in A) \\*
+      0 & \qty(m \notin A)
+    \end{cases}
+  }
+
+  $x_n \coloneqq \sum_{m = 0}^{n} \qty(y_m / 2^m)$とすると、$\qty(x_n)_{n \in \N}$は$\Q$上の\textit{Cauchy}列である。
+
+  $A$に対して$\qty[\qty(x_n)_{n \in \N}]$を定める写像$g$は単射である。
+
+  \mlemref{-1}より単射$\varphi$が存在して、単射$\varphi \circ g \in \R^{\P(\N)}$が存在する。\\*
+
+  \thmref{Bernsteinの定理}より成り立つ。
+}
+
+\thm{実数の直積は連続体濃度}{
+  全単射$\sigma \in \R^{\R \times \R}$が存在する。
+}{
+  ??
+}
+
+\thm{有界と全有界}{
+  $\R$の部分集合$A$について、以下の２つは同値である。
+  \begin{enumerate}
+    \item $A$は全有界
+    \item $A$が有界
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$は、\thmref{順序群では全有界ならば有界}より成り立つ。\\*
+
+  $2. \rightarrow 1.$を考える。
+
+  有界ならば$\exists d, u \in \R \forall a \in A \qty(d \leq a \land a \leq u)$
+
+  \thmref{R上のArchimedesの原理}より$\forall \epsilon \in \R^+ \exists n \in \N \qty(\qty(u - d) / \epsilon < n)$
+
+  \thmref{順序群の一様構造}より$A \subset \qty{B(\epsilon)[d + m \times \epsilon] \mid m \in s(n)}$である。
+}
+
+
+\lsubsection{実数の完備性}
+
+\lem*{
+  $\Q$上の\textit{Cauchy}列$\qty(x_m)_{m \in \N}$は以下を満たす。
+  \eq*{
+    \forall \epsilon \in \Q^+ \exists N \in \N \forall n \in \N_{\geq N} \qty(\abs{x_n - \qty[\qty(x_m)_{m \in \N}]} < \epsilon)
+  }
+}{
+  \textit{Cauchy}列より$\forall \epsilon \in \Q^+ \exists N \in \N \forall n, m \in \N_{\geq N} \qty(\epsilon - \abs{x_n - x_m} \geq \epsilon / 2)$
+
+  \lemref{実数の準備：前順序の補足}より$\abs{x_n - \qty[\qty(x_m)_{m \in \N}]} < \epsilon$
+}
+
+\lem*{
+  $\Q$上の\textit{Cauchy}列$\qty(x_m)_{m \in \N}$について、以下を満たす部分\textit{Cauchy}列$\qty(x_{N_0(m)})_{m \in \N}$を持つ。
+  \eqg*{
+    \qty(x_{N_0(m)})_{m \in \N} \sim_R \qty(x_m)_{m \in \N} \\*
+    \forall n \in \N \qty(\abs{x_{N_0(n)} - \qty[\qty(x_m)_{m \in \N}]} < 1 / s(n))
+  }
+}{
+  \textit{Cauchy}列より$\forall n \in \N \exists N \in \N \forall m, l \in \N_{\geq N} \qty(\abs{x_m - x_l} < 1 / \qty(2 s(n)))$である。
+
+  以下のような写像$N_0 \in \N^\N$を考える。
+  \eqg*{
+    N_0(0) \coloneqq N(0) \\*
+    N_0(s(n)) \coloneqq \max \qty{N(s(n)), s(N_0(n))}
+  }
+
+  ここから得る点列$\qty(x_{N_0(m)})_{m \in \N}$について考える。\\*
+
+  定義より部分列である。さらに\textit{Cauchy}列の部分列より\textit{Cauchy}列である。
+
+  $\forall \epsilon \in \Q^+ \exists N_1 \in \N \forall n \in \N_{\geq N_1} \qty(\abs{x_n - x_{N_0(n)}} < \epsilon)$より第一式を満たす。\\*
+
+  $\forall m, l \in \N$について$n \coloneqq \min \qty{m, l}$とすると$N_0(m), N_0(l) \geq N_0(n)$より、
+  $\abs{x_{N_0(m)} - x_{N_0(l)}} < 1 / \qty(2 s(n)) = 1 / \qty(2 \min \qty{s(m), s(l)})$である。
+
+  ゆえに$\forall m \in \N_{\geq n} \qty(1 / s(n) - \abs{x_n - x_m} > 1 / \qty(2 s(n)))$
+
+  \lemref{実数の準備：前順序の補足}より$\abs{x_n - \qty[\qty(x_m)_{m \in \N}]} < 1 / s(n)$
+}
+
+\lem*{
+  $\R$上の\textit{Cauchy}列$\qty(\qty[\qty(x_{n, m})_{m \in \N}])_{n \in \N}$を考える。
+
+  このとき\mlemref{-1}の主張する$N_0$について、$\Q$上の点列$\qty(x_{n, N_0(n)})_{n \in \N}$は\textit{Cauchy}列である。
+}{
+  $\forall \epsilon \in \Q^+$を考える。
+
+  \thmref{Q上のArchimedesの原理}より、$\exists N_1 \in \N \qty(8 / \epsilon < N_1 < s(N_1))$
+
+  \mlemref{-1}より、$\exists N_2 \in \N \forall n, m \in \N_{\geq N_2} \qty(\abs{x_n - x_m} < \epsilon / 2)$
+
+  ゆえに$N \coloneqq \max \qty{N_1, N_2} \in \N$として$\forall n, m \in \N_{\geq N}$について、
+
+  $\abs{x_{n, N_0(n)} - x_{m, N_0(m)}} \leq \abs{x_{n, N_0(n)} - x_n} + \abs{x_n - x_m} + \abs{x_m - x_{m, N_0(m)}} < 2 / s(n) + \epsilon / 2 + 2 / s(m) \leq 4 / s(N) + \epsilon / 2 < \epsilon$である。
+}
+
+\lemf{$\R$上の\textit{Cauchy}列は収束する}{R上のCauchy列は収束する}{
+  $\R$上の\textit{Cauchy}列は収束する。
+}{
+  $\R$上の\textit{Cauchy}列を考える。\mlemref{-2}より$\qty(\qty[\qty(x_{n, N_0(m)})_{m \in \N}])_{n \in \N}$と表せる。
+
+  \mlemref{-1}より得る$y \coloneqq \qty[\qty(x_{n, N_0(n)})_{n \in \N}] \in \R$を考える。\\*
+
+  $\forall \epsilon \in \R^+$を考える。
+
+  \mlemref{-3}より$\exists N_1 \in \N \forall n \in \N_{\geq N_1} \qty(\abs{x_{n, N_0(n)} - y} < \epsilon / 2)$
+
+  \thmref{R上のArchimedesの原理}より、$\exists N_2 \in \N \qty(2 / \epsilon < N_2 < s(N_2))$
+
+  \mlemref{-2}より$\abs{x_n - x_{n, N_0(n)}} < 1 / s(n)$
+
+  $N \coloneqq \max \qty{N_1, N_2}$とする。
+
+  $\forall n \in \N_{\geq N} \qty(\abs{x_n - y} \leq \abs{x_n - x_{n, N_0(n)}} + \abs{x_{n, N_0(n)} - y} < 1 / s(n) + \epsilon / 2 \leq 1 / s(N) + \epsilon / 2 < \epsilon)$
+}
+
+\thm{実数の完備性}{
+  $\R$は完備である。
+}{
+  \lemref{R上のCauchy列は収束する}\thmref{Rは可算一様}\thmref{可算一様空間における完備}より完備である。
+}
+
+
+\lsubsection{実数の連続性}
+
+\thm{区間縮小法}{
+  以下を満たす広義単調増加列$\qty(a_n)_{n \in \N}$、広義単調減少列$\qty(b_n)_{n \in \N}$を考える。
+  \eqg*{
+    \forall n \in \N \qty(a_n < b_n) \\*
+    \lim_{n \rightarrow \infty} \qty(b_n - a_n) = 0
+  }
+
+  このとき、$\bigcap \qty{\qty[a_n, b_n] \mid n \in \N}$は単集合である。
+}{
+  $\forall \epsilon \in \R^+ \exists N \in \N \forall n, m \in \N_{\geq N} \qty(\abs{a_n - a_m} < b_N - a_N < \epsilon)$
+
+  よって、$\qty(a_n)_{n \in \N}$は\textit{Cauchy}列である。
+
+  \thmref{実数の完備性}より$c \in \R$に収束する。
+
+  $\exists n \in \N \qty(c < a_n)$とすると、$\forall m \in \N_{\geq n} \qty(c < a_n \leq a_m)$であり$c$に収束しない。反する。
+
+  $\exists n \in \N \qty(b_n < c)$とすると、$\forall m \in \N_{\geq n} \qty(a_m < b_m \leq b_n < c)$であり$c$に収束しない。反する。
+
+  ゆえに$c \in \bigcap \qty{\qty[a_n, b_n] \mid n \in \N}$
+
+  $\exists c_1, c_2 \in \bigcap \qty{\qty[a_n, b_n] \mid n \in \N} \qty(c_1 < c_2)$とすると、$\forall n \in \N \qty(\abs{b_n - a_n} \geq b_n - a_n \geq c_2 - c_1)$より$\lim_{n \rightarrow \infty} \qty(b_n - a_n) = 0$に反する。
+
+  背理法より示される。
+}
+
+\cor*{
+  \eq*{
+    \forall n \in \N \qty(s(n) \leq 2^n)
+  }
+}
+
+\thm{上限の存在}{
+  $\R$の空でない部分集合$A$について、上に有界ならば上限を持つ。
+}{
+  $A$の上界の全体$U$を考える。
+
+  $A$は空でないので$\exists a \in A$である。$a \in U$ならば$a$は上限である。
+
+  $a \notin U$を考える。上界を持つので$\exists u \in U$
+
+  以下の点列$\qty(a_n)_{n \in \N}, \qty(b_n)_{n \in \N}$を考える。
+  \eq*{
+    \qty(a_0, b_0) = \qty(a, u)
+    \qquad
+    \qty(a_{s(n)}, b_{s(n)}) =
+    \begin{cases}
+      \qty(a_n, \frac{a_n + b_n}{2}) & \qty(\frac{a_n + b_n}{2} \in U) \\*
+      \qty(\frac{a_n + b_n}{2}, b_n) & \qty(\frac{a_n + b_n}{2} \notin U)
+    \end{cases}
+  }
+
+  定義より\thmref{数学的帰納法}から$\forall n \in \N \qty(a_n < b_n)$であり、\thmref{R上のArchimedesの原理}より$\qty(b_n - a_n)_{n \in \N}$は$0$に収束する。
+
+  \thmref{区間縮小法}より$\exists r \in \R \qty(\qty{r} = \bigcap \qty{\qty[a_n, b_n] \mid n \in \N})$である。
+
+  $\forall c \in \R \qty(r < c \rightarrow \exists n \in \N \qty(r < b_n < c))$である。
+  $b_n \in U$より$c \notin A$、ゆえに$r$は上界である。
+
+  $\forall c \in \R \qty(c < r \rightarrow \exists n \in \N \qty(c < a_n < r))$である。
+  $a_n \in X \setminus U$より$c \notin U$、ゆえに$r$は上限である。
+}
+
+\lem*{
+  $\R$の上に有界な空でない部分集合$A$について、$\sup A \in \bar{A}$
+}{
+  $\sup A \notin \bar{A}$と仮定する。
+
+  \thmref{閉包}より$\exists \epsilon \in \R^+ \qty(A \cap \sqty{\sup A - \epsilon, \sup A + \epsilon} = \varnothing)$である。
+
+  $\sup A - \epsilon / 2$も上界となり、上限の定義に反する。
+
+  背理法より$\sup A \in \bar{A}$
+}
+
+\thm{有界な単調列は収束する}{
+  $\R$上の上に有界な広義単調増加列$\qty(x_n)_{n \in \N}$は収束する。
+}{
+  \thmref{上限の存在}より、$\qty(x_n)_{n \in \N}$は上限$s$を持つ。
+
+  今、単調性と上界集合の最小元であることから
+  \eq*{
+    \forall \epsilon \in \R^+ \exists N \in \N \forall n \in \N_{\geq N} \qty(s - \epsilon < x_n \leq s)
+  }
+}
+
+\thmf{$\R$は連結}{Rは連結}{
+  $\R$は連結である。また、$\R$上の区間は連結である。
+}{
+  連結でないと仮定する。$\exists U, V \in \mathcal{O} \setminus \qty{\varnothing} \qty(U \cup V = \R \land U \cap V = \varnothing)$
+
+  $U, V$は空でないので$\exists u \in U \exists v \in V \qty(u \neq v)$である。\\*
+
+  $u < v$とする。
+  $B \coloneqq \qty{x \in U \mid x < v}$を考える。
+
+  $x \in B$であり、$v$は$B$の上界であるので、\thmref{上限の存在}から上限$b \coloneqq \sup B$を持つ。
+
+  $b \in V$とすると、$V$は開集合であるので$\exists \epsilon \in \R^+ \qty(\sqty{b - \epsilon, b + \epsilon} \subset V)$
+
+  このとき$b - \epsilon$も$B_1$の上界となり矛盾。
+  ゆえに$b \notin V$
+  よって$b < v$である。
+
+  $b \in U$とすると、$U$は開集合であるので$\exists \epsilon' \in \R^+ \qty(\sqty{b - \epsilon', b + \epsilon'} \subset U)$
+
+  $b < b + \min \qty{\epsilon', v - b} / 2 \in B$より$b$は上界でない。ゆえに$b \notin U$\\*
+
+  $U \cup V = \R$に反する。背理法より連結。$v < u$の場合も同様である。
+
+  区間についても同様に示される。
+}
+
+\thm{有界閉集合とコンパクト}{
+  $\R$上の部分集合$A$について、以下は同値である。
+  \begin{enumerate}
+    \item $A$は有界閉集合
+    \item $A$はコンパクト
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を考える。
+
+  \thmref{有界と全有界}より全有界。
+
+  $A$上の\textit{Cauchy}ネットは\thmref{実数の完備性}と\thmref{閉包}より$A$に収束する。
+  すなわち$A$は完備である。
+
+  \thmref{Heine-Borelの被覆定理}より成り立つ。\\*
+
+  $2. \rightarrow 1.$を考える。
+
+  \thmref{Heine-Borelの被覆定理}より全有界かつ完備。
+  \thmref{有界と全有界}より有界。
+
+  $A$が閉集合でないとすると、あるネットが存在して$\R \setminus A$に収束する。
+
+  収束ネットは\textit{Cauchy}より$A$は完備でない。
+
+  背理法より、$A$は閉集合である。
+}
+
+
+\lsubsection{実一変数関数}
+
+\dfn{関数}{
+  集合$X$について、写像$f \in X^\R$を関数と呼ぶ。
+}
+
+\thm{最大値の定理}{
+  空でないコンパクト空間$X$上で定義された連続関数$f \in \R^X$は最大値を持つ。
+}{
+  \thmref{コンパクト空間の連続像はコンパクト}より、$f(X)$はコンパクト。
+
+  \thmref{有界閉集合とコンパクト}より$f(X)$は有界閉集合である。したがって上に有界。
+
+  $f(X)$は空でないので、\thmref{上限の存在}より上限$\sup f(X)$が存在する。
+
+  閉集合より$\sup f(X) \in \bar{f(X)} = f(X)$であるので、$\exists x \in X \qty(f(x) = \sup f(X))$
+}
+
+\thm{中間値の定理}{
+  連結空間$X$上で定義された連続関数$f \in \R^X$について、以下が成り立つ。
+  \eq*{
+    \forall x_1, x_2 \in X \forall y \in \qty[f(x_1), f(x_2)] \exists x \in X \qty(f(x) = y)
+  }
+}{
+  $\exists x_1, x_2 \in X \exists y \in \qty[f(x_1), f(x_2)] \forall x \in X \qty(f(x) \neq y)$とする。
+
+  定義より、$y \in \sqty{f(x_1), f(x_2)}$
+
+  $R_1 \coloneqq \qty{r \in \R \mid r < y}, R_2 \coloneqq \qty{r \in \R \mid y < r}$は開集合であり、$R_1 \cup R_2 \supset f(X) \land R_1 \cap R_2 = \varnothing$である。
+
+  $f(x_1) \in R_1 \cap f(X) \neq \varnothing \land f(x_2) \in R_2 \cap f(X) \neq \varnothing$より$f(X)$は連結でない。
+
+  \thmref{連結空間の連続像は連結}より$f(X)$が連結であることに反する。背理法より示される。
+}

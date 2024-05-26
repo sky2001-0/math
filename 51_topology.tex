@@ -1,0 +1,1230 @@
+\lsection{位相空間}
+
+\lsubsection{位相}
+
+\dfn{開基}{
+  空でない集合$X$について、以下を満たす集合系$\mathcal{B} \in \P \qty(\P(X))$を開基と呼ぶ。
+  \eqg*{
+    \forall x \in X \exists B \in \mathcal{B} \qty(x \in B) \\*
+    \forall B_1, B_2 \in \mathcal{B} \forall x \in B_1 \cap B_2 \exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)
+  }
+}
+
+\dfn{開集合系}{
+  空でない集合$X$の開基$\mathcal{B}$について、以下で与える集合系$\mathcal{O}$を開集合系と呼ぶ。
+  \eq*{
+    \mathcal{O} \coloneqq \qty{O \in \P(X) \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subset O)}
+  }
+
+  また、$\mathcal{O}$の要素を開集合と呼ぶ。
+}
+
+\cor*{
+  空でない集合$X$の開基$\mathcal{B}$と、$\mathcal{B}$の与える開集合系$\mathcal{O}$は、以下を満たす。
+  \eq*{
+    \mathcal{B} \subset \mathcal{O}
+  }
+}
+
+\lem{開集合系の一意性}{
+  集合$X$の開基$\mathcal{B}$と集合系$\mathcal{B'} \in \P \qty(\P(X))$について、以下を満たすとき、$\mathcal{B'}$は開基である。
+  \eqg*{
+    \forall B' \in \mathcal{B'} \forall x \in B' \exists B \in \mathcal{B} \qty(x \in B \land B \subset B') \\*
+    \forall B \in \mathcal{B} \forall x \in B \exists B' \in \mathcal{B'} \qty(x \in B' \land B' \subset B)
+  }
+
+  さらに$\mathcal{B}$の定める開集合系と、$\mathcal{B'}$の定める開集合系、この２つは一致する。
+}{
+  第一式を考える。\dfnref{開基}第一式から$\exists B \in \mathcal{B}$であり、$\exists x \in X$より、仮定から$\exists B' \in \mathcal{B'}$\\*
+
+  第二式を考える。仮定より$\forall B'_1, B'_2 \in \mathcal{B'} \forall x \in B'_1 \cap B'_2 \exists B_1, B_2 \in \mathcal{B} \qty(x \in B_1 \cap B_2 \subset B'_1 \cap B'_2)$である。
+
+  \dfnref{開基}第二式から$\exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)$である。再び仮定より、$\exists B' \in \mathcal{B} \qty(x \in B' \subset B \subset B'_1 \cap B'_2)$\\*
+
+  $\forall O \in \mathcal{O} \forall x \in O \exists B \in \mathcal{B} \exists B' \in \mathcal{B'} \qty(x \in B' \subset B \subset O)$である。ゆえに、$O \in \mathcal{O'}$である。
+
+  同様に$\forall O' \in \mathcal{O'} \qty(O \in \mathcal{O'})$である。
+}
+
+\thm{開集合系の公理}{
+  空でない集合$X$の開集合系$\mathcal{O}$について、以下が成り立つ。
+  \eqg*{
+    X \in \mathcal{O} \\*
+    \forall O_1, O_2 \in \mathcal{O} \qty(O_1 \cap O_2 \in \mathcal{O}) \\*
+    \forall A \in \P(\mathcal{O}) \qty(\bigcup A \in \mathcal{O})
+  }
+}{
+  第一式を示す。
+
+  \dfnref{開基}第一式より、$\forall x \in X \exists B \in \mathcal{B} \qty(x \in B \land B \subset X)$であるので、$X \in \mathcal{O}$\\*
+
+  第二式を示す。$O_1, O_2 \in \mathcal{O}$について、$\forall x \in O_1 \cap O_2 \exists B_1, B_2 \in \mathcal{B} \qty(x \in B_1 \cap B_2 \land B_1 \cap B_2 \subset O_1 \cap O_2)$
+
+  \dfnref{開基}第二式より、$\exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)$であるので、$O_1 \cap O_2 \in \mathcal{O}$\\*
+
+  第三式を示す。$A \in \P(\mathcal{O})$について、$\forall x \in \bigcup A \exists O \in \mathcal{O} \exists B \in \mathcal{B} \qty(x \in B \land B \subset O \land O \subset \bigcup A)$であるので$\bigcup A \in \mathcal{O}$
+}
+
+\lem{開集合系の公理を満たす集合系}{
+  空でない集合$X$と、\thmref{開集合系の公理}を満たす集合系$\mathcal{O}$を考える。
+
+  このとき$\mathcal{O}$は開基であり、さらに、$\mathcal{O}$の定める開集合系$\mathcal{O'}$は$\mathcal{O}$に一致する。
+}{
+  \thmref{開集合系の公理}第一式、第二式より、開基である。\\*
+
+  \dfnref{開集合系}より$\mathcal{O} \subset \mathcal{O'}$を得る。
+
+  \dfnref{開集合系}より$\forall O' \in \mathcal{O'} \forall x \in O' \exists O_x \in \mathcal{O} \qty(x \in O_x \land O_x \subset O')$である。
+
+  $O' = \bigcup \qty{O_x \mid x \in O'} \in \mathcal{O}$である。
+}
+
+\dfn{位相空間}{
+  空でない集合$X$と、$X$上の開集合系$\mathcal{O}$について、順序対$\qty(X, \mathcal{O})$を位相空間と呼ぶ。
+  または単に$X$と書き、位相空間と集合どちらも表すものとする。
+
+  $\mathcal{O}$をとくに位相と呼ぶ。また、位相空間の元を点と呼ぶ。
+}
+
+\dfn{連続}{
+  位相空間$\qty(X, \mathcal{O}), \qty(X', \mathcal{O'})$について、写像$f \in \qty(X')^X$が以下を満たすとき、$f$は連続であると呼ぶ。
+  \eq*{
+    \forall O' \in \mathcal{O'} \qty(f^{-1}(O') \in \mathcal{O})
+  }
+}
+
+\lem{開基と連続}{
+  位相空間$\qty(X, \mathcal{O}), \qty(X', \mathcal{O'})$と$X'$の開基$\mathcal{B'}$、および写像$f \in \qty(X')^X$を考える。
+  このとき、以下の２つは同値である。
+  \begin{enumerate}
+    \item $f$は連続。
+    \item $\forall B' \in \mathcal{B'} \qty(f^{-1}(B') \in \mathcal{O})$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$は、$\mathcal{B} \subset \mathcal{O}$より明らか。\\*
+
+  $2. \rightarrow 1.$を示す。$O' \in \mathcal{O'}$について考える。
+
+  \thmref{開集合系の公理}より$\forall x \in O' \exists B' \in \mathcal{B'} \qty(x \in B' \land B' \subset O')$である。
+
+  ゆえに、$O' = \bigcup \qty{B'(x) \mid x \in O'}$である。。
+
+  \thmref{原像の性質}より$f^{-1}(O') = \bigcup \qty{f^{-1}(B'(x)) \mid x \in O'}$であるので、\thmref{開集合系の公理}第三式より示される。
+}
+
+\thm{連続写像の合成}{
+  位相空間$X, Y, Z$について、写像$f \in Y^X, g \in Z^Y$がともに連続であるとき、合成$g \circ f$は連続である。
+}{
+  $\forall O_Z \in \mathcal{O}_Z \qty(g^{-1}(O_Z) \in \mathcal{O}_Y)$であり、$f^{-1}(g^{-1}(O_Z)) \in \mathcal{O}_X$である。
+}
+
+\dfn{同相}{
+  位相空間$X, X'$と写像$f \in \qty(X')^X$について、$f$が全単射かつ$f$と$f^{-1}$がともに連続であるとき、$f$を同相写像と呼ぶ。
+
+  また、同相写像$f \in Y^X$が存在するとき、$X$と$Y$は位相同型または同相であると呼ぶ。
+}
+
+
+\lsubsection{誘導位相}
+
+\lem*{
+  空でない集合$X$と、位相空間$\qty(X', \mathcal{O'})$、$\mathcal{O'}$を与える$X$の開基$\mathcal{B'}$、写像$f \in \qty(X')^X$を考える。
+
+  このとき、以下の集合系$\mathcal{B}$は$X$の開基である。
+  \eq*{
+    \mathcal{B} \coloneqq \qty{f^{-1}(B) \mid B \in \mathcal{B'}}
+  }
+
+  さらに、$\mathcal{B}$の与える開集合系$\mathcal{O}_1$と、$\mathcal{O'}$からこの補題により与える開基$\mathcal{O}_2$は一致する。
+}{
+  第一式を考える。$\forall x \in X$について、\dfnref{開基}第一式より$\exists B' \in \mathcal{B'} \qty(f(x) \in B')$であるので、$x \in f^{-1}(B')$\\*
+
+  第二式を考える。$\forall B'_1, B'_2 \in \mathcal{B'}$について考える。
+
+  $\forall x \in f^{-1}(B'_1) \cap f^{-1}(B'_2)$について、\thmref{原像の性質}より$f(x) \in B'_1 \cap B'_2$である。
+
+  ゆえに\dfnref{開基}第二式より$\exists B' \in \mathcal{B'} \qty(f(x) \in B' \land B' \subset B'_1 \cap B'_2)$である。
+
+  \thmref{原像の性質}より$x \in f^{-1}(B') \land f^{-1}(B') \subset f^{-1}(B'_1 \cap B'_2) = f^{-1}(B'_1) \cap f^{-1}(B'_2)$\\*
+
+  \lemref{開集合系の公理を満たす集合系}を用いて、$\mathcal{O}_2$が開集合であることを示す。
+
+  第一式を考える。\thmref{開集合系の公理}第一式より$X' \in \mathcal{O'}$であるので、$X = f^{-1}(X') \in \mathcal{O}_2$
+
+  第二式を考える。\thmref{原像の性質}と\thmref{開集合系の公理}第二式より$\forall O'_1, O'_2 \in \mathcal{O'} \qty(f^{-1}(O'_1) \cap f^{-1}(O'_2) = f^{-1}(O'_1 \cap O'_2) \in \mathcal{O}_2)$
+
+  第三式を考える。\thmref{原像の性質}と\thmref{開集合系の公理}第三式より$\forall A' \in \P(\mathcal{O'}) \qty(\bigcup  \qty{f^{-1}(O') \mid O' \in A'} = f^{-1}(\bigcup A') \in \mathcal{O}_2)$
+
+  ゆえに$\mathcal{O}_2$は開集合系である。\\*
+
+  $\forall B' \in \mathcal{B'} \forall x \in f^{-1}(B') \qty(f^{-1}(B') \in \mathcal{O}_2 \land x \in f^{-1}(B'))$である。
+
+  $\forall O' \in \mathcal{O'} \forall x \in f^{-1}(O')$について、$\exists B' \in \mathcal{B'} \qty(f(x) \in B' \land B' \subset O')$である。
+
+  よって、\thmref{原像の性質}より$x \in f^{-1}(B') \land f^{-1}(B') \subset f^{-1}(O')$
+
+  \lemref{開集合系の一意性}より成り立つ。
+}
+
+\dfn{誘導空間}{
+  空でない集合$X$と、位相空間$\qty(X', \mathcal{O'})$、写像$f \in \qty(X')^X$について、\mlemref{0}より定まる開集合系$\mathcal{O}$が存在する。
+
+  位相空間$\qty(X, \mathcal{O})$を誘導空間と呼ぶ。
+}
+
+\dfn{部分空間}{
+  位相空間$\qty(X, \mathcal{O})$と、$X$の空でない部分集合$A$を考える。
+
+  $f = \id_X \rvert_A$により定まる誘導空間$\qty(A, \mathcal{O}_A)$を部分空間と呼ぶ。
+}
+
+\lem*{
+  位相空間$\qty(X_1, \mathcal{O}_1), \qty(X_2, \mathcal{O}_2)$と$\mathcal{O}_1, \mathcal{O}_2$を与える開基$\mathcal{B}_1, \mathcal{B}_2$を考える。
+
+  このとき、$\mathcal{B}_1 \times \mathcal{B}_2$は$X_1 \times X_2$の開基である。
+
+  さらに、$\mathcal{B}_1, \mathcal{B}_2$の与える開集合系と、$\mathcal{O}_1, \mathcal{O}_2$からこの補題により与える開基の定める開集合系、この２つは一致する。
+}{
+  第一式を考える。
+
+  \dfnref{開基}第一式より$\forall \qty(x_1, x_2) \in X_1 \times X_2 \exists \qty(B_1, B_2) \in \mathcal{B}_1 \times \mathcal{B}_2 \qty(x_1 \in B_1 \land x_2 \in B_2)$である。\\*
+
+  第二式を考える。
+  $\forall \qty(B_{11}, B_{21}), \qty(B_{12}, B_{22}) \in \mathcal{B}_1 \times \mathcal{B}_2 \forall \qty(x_1, x_2) \in \qty(B_{11} \cap B_{12}, B_{21} \cap B_{22})$を考える。
+
+  \dfnref{開基}第二式より$\exists B_1 \in \mathcal{B}_1 \exists B_2 \in \mathcal{B}_2 \qty(x_1 \in B_1 \subset B_{11} \cap B_{12} \land x_2 \in B_2 \subset B_{21} \cap B_{22})$
+
+  $\qty(B_{11} \cap B_{12}, B_{21} \cap B_{22}) = \qty(B_{11}, B_{21}) \cap \qty(B_{12}, B_{22})$であるので成り立つ。\\*
+
+  $\mathcal{B}_1 \times \mathcal{B}_2 \subset \mathcal{O}_1 \times \mathcal{O}_2$である。
+
+  $\forall \qty(O_1, O_2) \in \mathcal{O}_1 \times \mathcal{O}_2 \forall \qty(x_1, x_2) \in \mathcal{O}_1 \times \mathcal{O}_2$について考える。
+
+  \dfnref{開集合系}より$\exists \qty(B_1, B_2) \in \mathcal{B}_1 \times \mathcal{B}_2 \qty(x_1 \in B_1 \land B_1 \subset O_1 \land x_2 \in B_2 \land B_2 \subset O_2)$
+
+  $\qty(x_1, x_2) \in B_1 \times B_2 \land B_1 \times B_2 \subset O_1 \times O_2$である。
+
+  したがって、\lemref{開集合系の一意性}より成り立つ。
+}
+
+\dfn{直積空間}{
+  位相空間$\qty(X_1, \mathcal{O}_1), \qty(X_2, \mathcal{O}_2)$について、\mlemref{0}より定まる位相空間$\qty(X_1 \times X_2, \mathcal{O})$を直積空間と呼ぶ。また位相$\mathcal{O}$を箱位相と呼ぶ。
+}
+
+\lem{直積と連続}{
+  位相空間$\qty(X_1, \mathcal{O}_1), \qty(X_2, \mathcal{O}_2), \qty(Y, \mathcal{O})$について、連続写像$f \in Y^{X_1 \times X_2}$を考える。
+
+  このとき、$\forall w \in X_1$について写像$f_w \in Y^{X_2}, f_w(x) = f(w, x)$は連続である。
+}{
+  $\forall O \in \mathcal{O}$について、$f_w^{-1}(O) = \qty{x \in X_2 \mid f(w, x) \in O}$である。
+
+  $f$は連続より$\forall x \in f_w^{-1}(O) \exists \qty(O_1, O_2) \in \mathcal{O}_1 \times \mathcal{O}_2 \qty(\qty(w, x) \in O_1 \times O_2 \land O_1 \times O_2 \subset f^{-1}(O))$
+
+  $\forall z \in O_2$について、$\qty(w, z) \in O_1 \times O_2 \subset f^{-1}(O)$より、$f(w, z) \in O$である。したがって$O_2 \subset f_w^{-1}(O)$である。
+
+  $f_w^{-1}(O) = \bigcup \qty{O_2 \mid x \in f_w^{-1}(O)} \in \mathcal{O}_2$より連続。
+}
+
+
+\lsubsection{近傍}
+
+\dfn{基本近傍系}{
+  空でない集合$X$とその任意の点$x$について、以下を満たす集合系$\mathcal{B}(x) \in \P \qty(\P(X))$を基本近傍系と呼ぶ。
+  \eqg*{
+    \mathcal{B}(x) \neq \varnothing \\*
+    \forall B \in \mathcal{B}(x) \qty(x \in B) \\*
+    \forall B_1, B_2 \in \mathcal{B}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B_1 \cap B_2) \\*
+    \forall B \in \mathcal{B}(x) \exists B' \in \mathcal{B}(x) \forall y \in B' \exists D \in \mathcal{B}(y) \qty(D \subset B)
+  }
+}
+
+\cor{有向集合としての基本近傍系}{
+  空でない集合$X$とその点$x \in X$について、$\qty(\mathcal{B}(x), \supset)$は有向集合である。
+}
+
+\dfn{近傍系}{
+  空でない集合$X$の基本近傍系$\mathcal{B}(x)$について、以下で与える集合系$\mathcal{N}(x)$を近傍系と呼ぶ。
+  \eq*{
+    \mathcal{N}(x) \coloneqq \qty{N \in \P(X) \mid \exists B \in \mathcal{B}(x) \qty(B \subset N)}
+  }
+}
+
+\cor*{
+  空でない集合$X$の基本近傍系$\mathcal{B}(x)$と、$\mathcal{B}(x)$の与える開集合系$\mathcal{N}(x)$は、以下を満たす。
+  \eq*{
+    \forall x \in X \qty(\mathcal{B}(x) \subset \mathcal{N}(x))
+  }
+}
+
+\lem{近傍系の一意性}{
+  空でない集合$X$の基本近傍系$\mathcal{B}(x)$と集合系$\mathcal{B'}(x) \in \P \qty(\P(X))$について、以下を満たすとき、$\mathcal{B'}(x)$は基本近傍系である。
+  \eqg*{
+    \forall B' \in \mathcal{B'}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B') \\*
+    \forall B \in \mathcal{B}(x) \exists B' \in \mathcal{B'}(x) \qty(B' \subset B)
+  }
+
+  さらに$\mathcal{B}(x)$の定める近傍系と、$\mathcal{B'}(x)$の定める近傍系、この２つは一致する。
+}{
+  第一式を考える。\dfnref{基本近傍系}第一式から$\exists B \in \mathcal{B}(x)$より、仮定から$\exists B' \in \mathcal{B'}(x)$\\*
+
+  第二式を考える。\dfnref{基本近傍系}第二式より$\forall B' \in \mathcal{B'}(x) \exists B \in \mathcal{B}(x) \qty(x \in B \subset B')$\\*
+
+  第三式を考える。\dfnref{基本近傍系}第三式より$\forall B'_1, B'_2 \in \mathcal{B'}(x) \exists B_1, B_2, B \in \mathcal{B}(x) \exists B' \in \mathcal{B'}(x) \qty(B' \subset B \subset B_1 \cap B_2 \subset B'_1 \cap B'_2)$\\*
+
+  第四式を考える。仮定より$\forall B' \in \mathcal{B'}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B')$である。
+
+  \dfnref{基本近傍系}第四式より$\exists C \in \mathcal{B}(x) \forall y \in C \exists D \in \mathcal{B}(y) \qty(D \subset B)$である。
+
+  仮定より$\exists C' \in \mathcal{B'}(x) \qty(C' \subset C)$より、$\forall y \in C' \exists D \in \mathcal{B}(y) \qty(D \subset B)$である。
+
+  仮定より$\exists D' \in \mathcal{B'}(y) \qty(D' \subset D)$であり、$D' \subset D \subset B' \subset B$より成り立つ。\\*
+
+  $\forall N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \exists B' \in \mathcal{B'}(x) \qty(B' \subset B \subset N)$である。ゆえに、$N \in \mathcal{N'}(x)$である。
+
+  $\forall N' \in \mathcal{N'}(x) \exists B' \in \mathcal{B'}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B' \subset N')$である。ゆえに、$N' \in \mathcal{N}(x)$である。
+}
+
+\lem{近傍系は基本近傍系}{
+  近傍系$\mathcal{N}(x)$は基本近傍系である。さらに$\mathcal{N}(x)$から\dfnref{近傍系}より定まる近傍系は、$\mathcal{N}(x)$に一致する。
+}{
+  定義より$\forall \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(B \subset N)$である。
+
+  $\mathcal{B}(x) \subset \mathcal{N}(x)$である。
+
+  \lemref{近傍系の一意性}より成り立つ。
+}
+
+\thm{開基の定める基本近傍系}{
+  位相空間$\qty(X, \mathcal{O})$と、$\mathcal{O}$を与える$X'$の開基$\mathcal{B}$を考える。
+
+  $X$の任意の点$x$について、以下を満たす集合系$\mathcal{B}(x)$は基本近傍系である。
+  \eq*{
+    \mathcal{B}(x) \coloneqq \qty{B \in \mathcal{B} \mid x \in B}
+  }
+
+  さらに$\mathcal{B}(x)$の与える近傍系と、$\mathcal{O}$からこの定理の与える基本近傍系$\mathcal{B'}(x)$が与える近傍系、この２つは一致する。
+}{
+  第一式を考える。\dfnref{開基}第一式と定義より成り立つ。\\*
+
+  第二式は定義より明らか。\\*
+
+  第三式を考える。\dfnref{開基}第二式より$\exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)$が成り立つ。
+
+  ゆえに、$B \in \mathcal{B}(x)$\\*
+
+  第四式を考える。定義より$B = B' = D$として成り立つ。\\*
+
+  $\mathcal{B} \subset \mathcal{O}$より、$\mathcal{B}(x) \subset \mathcal{B'}(x)$である。
+
+  $\forall B' \in \mathcal{B'}(x)$について、$x \in B' \land \forall y \in B' \exists B \in \mathcal{B} \qty(y \in B \land B \subset B')$である。
+  ゆえに、$\exists B \in \mathcal{B}(x) \qty(B \subset B')$
+
+  \lemref{近傍系の一意性}より成り立つ。
+}
+
+\thm{基本近傍系の定める位相}{
+  空でない集合$X$とその任意の点$x$について、基本近傍系$\mathcal{B}(x)$が与えられているとする。
+
+  このとき、以下の集合$\mathcal{O}$は$X$の開基であり、かつ$\mathcal{O}$の定める開集合系は$\mathcal{O}$である。
+  \eq*{
+    \mathcal{O} \coloneqq \qty{O \in \P(X) \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subset O)}
+  }
+
+  さらに$\mathcal{O}$と、$\mathcal{N}(x)$からこの定理の与える開集合系$\mathcal{O'}$、この２つは一致する。
+}{
+  \lemref{開集合系の公理を満たす集合系}を用いて示す。\\*
+
+  第一式を考える。\dfnref{基本近傍系}第一式より$\forall x \in X \exists B \in \mathcal{B}(x) \qty(B \subset X)$であるので、$X \in \mathcal{O}$\\*
+
+  第二式を考える。$O_1, O_2 \in \mathcal{O}$とする。
+
+  $\forall x \in O_1 \cap O_2$について、定義より$\exists B_1, B_2 \in \mathcal{B}(x) \qty(B_1 \cap B_2 \subset O_1 \cap O_2)$である。
+
+  \dfnref{基本近傍系}第三式より$\exists B \in \mathcal{B} \qty(B \subset B_1 \cap B_2 \subset O_1 \cap O_2)$であるので、$O_1 \cap O_2 \in \mathcal{N}(x)$である。\\*
+
+  第三式を考える。$A \in \P(\mathcal{O})$を考える。
+
+  $A = \varnothing$のとき、$\bigcup A = \bigcup \varnothing = \varnothing \in \mathcal{O}$より成り立つ。
+
+  $A \neq \varnothing$のとき、$\forall x \in \bigcup A$について、$\exists O \in \mathcal{O} \qty(x \in O \subset \bigcup A)$である。
+
+  定義より$\exists B \in \mathcal{B}(x) \qty(B \subset O \subset \bigcup A)$である。定義より示される。\\*
+
+  $\forall x \in X \qty(\mathcal{B}(x) \subset \mathcal{N}(x))$より、$\mathcal{O} \subset \mathcal{O'}$である。
+
+  $\forall O' \in \mathcal{O'} \forall y \in O' \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(N \subset B \subset O)$より、$\mathcal{O'} \subset \mathcal{O}$である。
+}
+
+\lem*{
+  空でない集合$X$を考える。\\*
+
+  開基$\mathcal{B}$の定める開集合系$\mathcal{O}$と、\thmref{開基の定める基本近傍系}と\thmref{基本近傍系の定める位相}により定まる開集合系$\mathcal{O'}$は、一致する。\\*
+
+  基本近傍系$\mathcal{B}(x)$について、\thmref{基本近傍系の定める位相}と\thmref{開基の定める基本近傍系}の定める基本近傍系$\mathcal{B'}(x)$を考える。
+
+  $\mathcal{B}(x)$の定める近傍系と、$\mathcal{B'}(x)$の定める近傍系は、一致する。
+}{
+  以下より一致する。
+  \eq*{
+    \mathcal{O'} = \qty{O \in \P(X) \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subset O)} = \qty{O \in \P(X) \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subset O)} = \mathcal{O}
+  }\\*
+
+  定義より、以下である。
+  \eq*{
+    \mathcal{B'}(x) = \qty{B' \in \P(X) \mid x \in B' \land \forall y \in B' \exists D \in \mathcal{B}(y) \qty(D \subset B')}
+  }
+
+  $\forall B' \in \mathcal{B'}(x)$について、\dfnref{基本近傍系}第二式より$x \in B'$であるので、定義から$\exists B \in \mathcal{B}(x) \qty(B \subset B')$である。\\*
+
+  $\forall B \in \mathcal{B}(x)$について、$B' \coloneqq \qty{y \in X \mid \exists E \in \mathcal{B}(y) \qty(E \subset B)}$を考える。
+  定義より$B' \subset B$であり、$x \in B'$である。
+
+  $\forall y \in B' \exists E \in \mathcal{B}(y) \qty(E \subset B)$について、\dfnref{基本近傍系}第四式より$\exists C \in \mathcal{B}(y) \forall z \in C \exists D \in \mathcal{B}(z) \qty(D \subset E \subset B)$である。
+
+  定義より$z \in B'$である。したがって$C \subset B'$である。
+
+  よって$B' \subset B$である。\\*
+
+  \lemref{近傍系の一意性}より成り立つ。
+}
+
+\dfn{収束}{
+  位相空間$X$と$X$上の点$a$について、$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が以下を満たすとき、$\qty(x_\lambda)_{\lambda \in \Lambda}$は$a$に収束すると呼ぶ。
+  \eq*{
+    \forall N \in \mathcal{N}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset N)
+  }
+
+  また、この$a$を$\qty(x_\lambda)_{\lambda \in \Lambda}$の収束先と呼び、一意に定まるとき$\lim_{\lambda \rightarrow \infty} \qty(x_\lambda)_{\lambda \in \Lambda} \coloneqq a$と表す。
+}
+
+\cor*{
+  位相空間$X$について、$X$上の点$a$に収束するネットの部分ネットは$a$に収束する。
+}
+
+\lem{基本近傍系と収束}{
+  位相空間$X$と$X$上の点$a$と、$\mathcal{N}(a)$を与える$X$の基本近傍系$\mathcal{B}(a)$、および$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$を考える。
+  このとき、以下の２つは同値である。
+  \begin{enumerate}
+    \item $\qty(x_\lambda)_{\lambda \in \Lambda}$は$a$に収束する。
+    \item $\forall B \in \mathcal{B}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B)$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$は、$\mathcal{B}(a) \subset \mathcal{N}(a)$より明らか。\\*
+
+  $2. \rightarrow 1.$を示す。
+
+  $\forall N \in \mathcal{N}(a) \exists B \in \mathcal{B}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B \subset N)$
+}
+
+\dfn{点連続}{
+  位相空間$X, X'$と点$x \in X$、写像$f \in \qty(X')^X$について、以下を満たすとき、写像$f$は点$x$で連続であると言う。
+  \eq*{
+    \forall N' \in \mathcal{N}(f(x)) \exists N \in \mathcal{N}(x) \qty(f(N) \subset N')
+  }
+}
+
+\cor*{
+  位相空間$X_1, X_2, X_3$と点$x \in X_1$、写像$f \in X_2^{X_1}, g \in X_3^{X_2}$について、$f$は点$x$で連続であり、$g$が点$f(x)$で連続であるとき、合成写像$g \circ f$は点$x$で連続である。
+}
+
+\thm{点連続と収束}{
+  位相空間$X, X'$と点$x \in X$、写像$f \in \qty(X')^X$と、近傍系$\mathcal{N}(x)$を与える基本近傍系$\mathcal{B}(x)$について、以下の３つは同値である。
+  \begin{enumerate}
+    \item $f$が$x$で連続
+    \item $\forall B' \in \mathcal{B}(f(x)) \exists B \in \mathcal{B}(x) \qty(f(B) \subset B')$
+    \item $x$に収束する任意のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、ネット$\qty(f(x_\lambda))_{\lambda \in \Lambda}$は$f(x)$に収束する。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+  \eq*{
+    \forall B' \in \mathcal{B}(f(x)) \subset \mathcal{N}(f(x)) \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(f(B) \subset f(N) \subset B')
+  }\\*
+
+  $2. \rightarrow 3.$を示す。
+  \eq*{
+    \forall B' \in \mathcal{B}(f(x)) \exists B \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(\qty(f(x_\lambda))_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \in f(B) \subset B')
+  }\\*
+
+  $3. \rightarrow 1.$を示す。$f$が$x$で連続でないと仮定する。
+  \eq*{
+    \exists N' \in \mathcal{N}(f(x)) \forall N \in \mathcal{N}(x) \exists y \in N \qty(f(y) \notin N')
+  }
+  \thmref{選択公理が与える写像}より、写像$g \in X^{\mathcal{N}(x)}, f(g(N)) \notin N'$が存在して、$\qty(\mathcal{N}(x), \supset)$は\corref{有向集合としての基本近傍系}より有向集合である。
+
+  今、$g$から構成されるネットは、順序を包含で定義したことから$x$に収束するが、$f \circ g$から構成されるネットは$f(x)$に収束しない。背理法より示される。
+}
+
+\thm{連続と点連続}{
+  位相空間$\qty(X, \mathcal{O}), \qty(X', \mathcal{O})$と写像$f \in \qty(X')^X$について、以下の２つは同値である。
+  \begin{enumerate}
+    \item $f$は$X$上の任意の点$x$で連続
+    \item $f$は連続
+  \end{enumerate}
+}{
+  $\mathcal{O}, \mathcal{O'}$を与える開基$\mathcal{B}, \mathcal{B'}$を考える。\\*
+
+  $1. \rightarrow 2.$を示す。
+
+  $B' \in \mathcal{B}'$について、$f^{-1}(B') = \varnothing$のとき明らか。$f^{-1}(B') \neq \varnothing$のときを考える。
+
+  $\forall x \in f^{-1}(B')$について、$B' \in \mathcal{B}(f(x))$であるので点連続性から$\exists B \in \mathcal{B}(x) \qty(f(B) \subset B')$となる。
+
+  \corref{像と原像}より$B \subset f^{-1}(f(B)) \subset f^{-1}(B')$であるので、\thmref{基本近傍系の定める位相}より、$f^{-1}(B')$は開集合である。\\*
+
+  $2. \rightarrow 1.$を示す。
+
+  $\forall x \in X \forall B' \in \mathcal{B}(f(x))$について、$B' \in \mathcal{B'}$より、$f^{-1}(B') \in \mathcal{O}$である。
+
+  今、$x \in f^{-1}(B')$であるので、\dfnref{開集合系}より$\exists B \in \mathcal{B}(x) \qty(B \subset f^{-1}(B'))$となる。
+
+  したがって、\corref{像と原像}より$f(B) \subset f(f^{-1}(B')) \subset B'$
+}
+
+
+\lsubsection{閉集合}
+
+\dfn{閉集合系}{
+  位相空間$\qty(X, \mathcal{O})$について、以下を満たす集合系$\mathcal{F}$を閉集合系と呼ぶ。
+  \eq*{
+    \mathcal{F} \coloneqq \qty{F \in \P(X) \mid X \setminus F \in \mathcal{O}}
+  }
+
+  また、$\mathcal{F}$の要素を閉集合と呼ぶ。
+}
+
+\thm{閉集合系}{
+  位相空間$X$について、閉集合系$\mathcal{F}$は以下を満たす。
+  \eqg*{
+    \varnothing, X \in \mathcal{F} \\*
+    \forall A \in \P(\mathcal{F}) \qty(A \neq \varnothing \rightarrow \bigcap A \in \mathcal{F}) \\*
+    \forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cup F_2 \in \mathcal{F})
+  }
+}{
+  \thmref{De Morganの法則}と\thmref{開集合系の公理}より示される。
+}
+
+\dfn{閉包}{
+  位相空間$X$と$X$の部分集合$A$について、以下で定義する集合を閉包と呼び、$\bar{A}$で表す。
+  \eq*{
+    \bar{A} = \bigcap \qty{F \in \mathcal{F} \mid A \subset F}
+  }
+}
+
+\cor*{
+  位相空間$X$について、以下が成り立つ。
+  \eqg*{
+    \forall A, B \in \P(X) \qty(A \subset B \rightarrow \bar{A} \subset \bar{B}) \\*
+    \forall D \in \P \qty(\P(X)) \qty(\bigcup \qty{\bar{A} \mid A \in D} \subset \bar{\bigcup D})
+  }
+}
+
+\thm{閉包}{
+  位相空間$X$と$X$の部分集合$A$と、近傍系$\mathcal{N}(x)$を与える基本近傍系$\mathcal{B}(x)$について、以下の４つは同値である。
+  \begin{enumerate}
+    \item $x \in \bar{A}$
+    \item $\forall N \in \mathcal{N}(x) \qty(A \cap N \neq \varnothing)$
+    \item $\forall B \in \mathcal{B}(x) \qty(A \cap B \neq \varnothing)$
+    \item $x$に収束する$A$上のネットが存在する。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を考える。
+
+  $\exists N \in \mathcal{N}(x) \qty(A \cap N = \varnothing)$と仮定する。
+
+  $\exists O \in \mathcal{O} \qty(x \in O \land O \subset N)$であるので、$x \notin X \setminus O$
+
+  $X \setminus O \in \mathcal{F}$であり、$A \subset X \setminus N \subset X \setminus O$
+
+  $x \in \bar{A}$とすると、$x \in X \setminus O$となり矛盾。背理法より示される。\\*
+
+  $2. \rightarrow 3.$は$\mathcal{B}(x) \subset \mathcal{N}(x)$より明らか。\\*
+
+  $3. \rightarrow 4.$を考える。
+
+  仮定より$\forall B \in \mathcal{B}(x) \exists y \in A \qty(y \in B)$である。
+
+  \corref{有向集合としての基本近傍系}より、$\qty(\mathcal{B}(x), \supset)$は有向集合である。
+
+  ネット$\qty(y_B)_{B \in \mathcal{B}(x)}$は、順序を包含で定義したことから$x$に収束する。\\*
+
+  $4. \rightarrow 1.$を考える。
+
+  $x \notin \bar{A}$に収束するネット$\qty(y_\lambda)_{\lambda \in \Lambda} \subset A$が存在すると仮定する。
+
+  $\exists F \in \mathcal{F} \qty(x \notin F \cap A \subset F)$より、$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset X \setminus F \subset X \setminus A)$
+
+  これは$A$上のネットであることに反する。背理法より示される。
+}
+
+\dfn{開被覆}{
+  位相空間$\qty(X, \mathcal{O})$とその被覆$C$について、以下が成り立つとき、$C$を開被覆と呼ぶ。
+  \eq*{
+    C \subset \mathcal{O}
+  }
+}
+
+\dfn{コンパクト}{
+  位相空間$X$について、その任意の開被覆が、開被覆となる有限部分集合を持つとき、$X$はコンパクトであると呼ぶ。
+}
+
+\lem{コンパクトの言い換え}{
+  コンパクトな位相空間について、以下が成り立つ。
+  \eq*{
+    \forall A \in \P(\mathcal{F}) \qty(A \neq \varnothing \land \bigcap A = \varnothing \rightarrow \exists A' \in \P(A) \qty(A' \neq \varnothing \land \bigcap A' = \varnothing \land \abs{A'} < \infty))
+  }
+}{
+  コンパクトの定義と\thmref{De Morganの法則}より成り立つ。
+}
+
+\thm{ネットによるコンパクトの特徴づけ}{
+  位相空間$X$について、以下の３つは同値である。
+  \begin{enumerate}
+    \item $X$はコンパクトである。
+    \item $X$上の任意の普遍ネットは収束する。
+    \item $X$上の任意のネットは収束する部分ネットを持つ。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  $X$上の普遍ネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、
+  $F \coloneqq \bigcap \qty{\bar{\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}}} \mid \lambda \in \Lambda}$を考える。\\*
+
+  $F = \varnothing$とすると、\lemref{コンパクトの言い換え}より$\exists n \in \N \qty(n > 0 \land \bigcap \qty{\bar{\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda(m)}}} \mid m < n} = \varnothing)$である。
+
+  ここで\thmref{有限有向集合の上界}から$\exists \mu' \in \Lambda \forall m \in n \qty(\mu' \succcurlyeq \lambda_m)$であり、$x_{\mu'} \in \bigcap \qty{\bar{\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}}} \mid m \leq n}$より反する。
+
+  背理法より$\exists a \in F$である。\\*
+
+  $\forall \lambda \in \Lambda \qty(a \in \bar{\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}}})$であるので、閉包の定義より$\forall N \in \mathcal{N}(a) \forall \lambda \in \Lambda \qty(N \cap \qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}} \neq \varnothing)$である。
+
+  すなわち、$\forall N \in \mathcal{N}(a) \forall \lambda \in \Lambda \exists \mu \in \Lambda \qty(\lambda \preccurlyeq \mu \land x_\mu \in N)$
+
+  普遍ネットの定義とあわせて、$\forall N \in \mathcal{N}(a) \exists \lambda \in \Lambda \qty(\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}} \subset N)$\\*
+
+  $2. \rightarrow 3.$を示す。
+
+  仮定と\thmref{普遍部分ネットの存在}より明らか。\\*
+
+  $3. \rightarrow 1.$を示す。
+
+  コンパクトでないと仮定する。その任意の有限部分集合が開被覆とならない$X$の開被覆$C$が存在する。
+
+  $P \coloneqq \qty{A \in \P(C) \mid \abs{A} < \infty \land A \neq \varnothing}$について$\qty(P, \subset)$は有向集合であり、
+
+  コンパクトでないことから$\forall A \in P \exists x \in X \setminus \bigcup A$である。このようなネット$\qty(x_A)_{A \in P}$を考える。\\*
+
+  仮定より、$a \in X$に収束する部分ネット$\qty(x_{\varphi(\mu)})_{\mu \in M}$を持つ。
+
+  開被覆であることより$\exists C_0 \in C \qty(a \in C_0 \land \qty{C_0} \in P)$であり、\dfnref{部分ネット}より$\exists \mu_0 \in M \qty(\qty{C_0} \subset \varphi(\mu_0))$である。
+
+  $a \in \bigcup \varphi(\mu_0) \in \mathcal{O}$であり、収束することと有向性より$\exists \mu_1 \in M \qty(\varphi(\mu_0) \subset \varphi(\mu_1) \land x_{\varphi(\mu_1)} \in \bigcup \varphi(\mu_0) \subset \bigcup \varphi(\mu_1))$であるが、このネットの定義に反する。\\*
+
+  背理法より示される。
+}
+
+\thmf{\textit{Tychonoff}の定理}{Tychonoffの定理}{
+  コンパクトな位相空間$X, Y$について、位相空間$X \times Y$はコンパクトである。
+}{
+  $X \times Y$上の普遍ネット$\qty(\qty(x_\lambda, y_\lambda))_{\lambda \in \Lambda}$を考える。
+
+  今、$\qty(x_\lambda)_{\lambda \in \Lambda}$は普遍ネットである。これは\thmref{ネットによるコンパクトの特徴づけ}より収束する。収束先を$x_0$とする。
+
+  同様に$\qty(y_\lambda)_{\lambda \in \Lambda}$も$y_0$に収束する。
+
+  したがって、もとの普遍ネットは$\qty(x_0, y_0)$に収束する。\thmref{ネットによるコンパクトの特徴づけ}より示される。
+}
+
+\thm{コンパクト空間の連続像はコンパクト}{
+  コンパクトな位相空間$\qty(X, \mathcal{O})$と、位相空間$\qty(X', \mathcal{O'})$について、連続写像$f \in \qty(X')^X$を考える。
+  このとき、像$f(X)$はコンパクトである。
+}{
+  $f(X)$の任意の開被覆$C'$について、$C \coloneqq \qty{f^{-1}(O') \mid O' \in C'}$を考える。
+
+  連続性より$\forall O' \in C' \qty(f^{-1}(O') \in \mathcal{O})$である。
+
+  $\forall x \in X \exists O' \in C' \qty(f(x) \in O')$より、$C$は$X$の開被覆である。
+
+  コンパクト性から、$\exists A' \in \P(C') \qty(\abs{A'} < \infty \land X = \bigcup \qty{f^{-1}(O') \mid O' \in A'})$
+
+  \thmref{像の性質}、\corref{像と原像}から$f(X) = \bigcup \qty{f(f^{-1}(O')) \mid O' \in A'} \subset \bigcup \qty{O' \mid O' \in A'}$より$A'$は有限開被覆である。
+}
+
+\dfnf{\textit{Lindel\"{o}f}}{Lindelof}{
+  位相空間$X$について、その任意の開被覆が、開被覆となる可算部分集合を持つとき、$X$は\textit{Lindel\"{o}f}であると呼ぶ。
+}
+
+\cor*{
+  位相空間$X$について、$X$がコンパクトならば$X$は\textit{Lindel\"{o}f}である。
+}
+
+\dfn{点列コンパクト}{
+  位相空間$X$について、$X$上の任意の点列が収束する部分列を持つとき、$X$は点列コンパクトであると呼ぶ。
+}
+
+\thm*{
+  \textit{Lindel\"{o}f}で点列コンパクトな位相空間$X$は、コンパクトである。
+}{
+  コンパクトでないと仮定する。その任意の有限部分集合が開被覆とならない$X$の開被覆$C$が存在する。
+
+  仮定より可算な部分開被覆$C' \coloneqq \qty{O_n \mid n \in \N}$が存在する。
+
+  $n \in \N$について、$P_n \coloneqq \qty{O_m \mid m \in \N \land m \leq n}$を考える。
+
+  $C$の定義より$\bigcup P_n \neq X$である。
+
+  したがって、$x_n \in X \setminus \bigcup P_n$なる点列$\qty(x_n)_{n \in \N}$を取れる。
+
+  点列コンパクトより、$a \in X$に収束する部分列$\qty(x_{n(k)})_{k \in \N}$が存在する。
+
+  今、開被覆より$\exists l \in \N \qty(a \in O_l)$であり、収束の定義から$\exists j \in \N \forall j' \in \N \qty(j \leq j' \rightarrow x_{j'} \in O_l)$。
+
+  \dfnref{部分ネット}より$\exists h \in \N \qty(l \leq n(h))$であり、$\forall h' \in \N \qty(h \leq h' \rightarrow a \in X \setminus \bigcup P_{n(h')} \subset X \setminus \bigcup P_{n(l)} \subset X \setminus O_l)$
+
+  矛盾するので、背理法よりコンパクト。
+}
+
+
+\lsubsection{分離}
+
+\dfnf{$T_0$空間}{T_0空間}{
+  位相空間$X$の近傍系$\mathcal{N}(x)$が以下を満たすとき、$X$を$T_0$空間と呼ぶ。
+  \eq*{
+    \forall x, y \in X \qty(x \neq y \rightarrow \exists N_x \in \mathcal{N}(x) \qty(y \notin N_x) \lor \exists N_y \in \mathcal{N}(y) \qty(x \notin N_y))
+  }
+}
+
+\dfnf{$T_1$空間}{T_1空間}{
+  位相空間$X$の近傍系$\mathcal{N}(x)$が以下を満たすとき、$X$を$T_1$空間と呼ぶ。
+  \eq*{
+    \forall x, y \in X \qty(x \neq y \rightarrow \exists N \in \mathcal{N}(x) \qty(y \notin N))
+  }
+}
+
+\thmf{\textit{Fr\'{e}chet}性}{Frechet性}{
+  位相空間$X$と、開基$\mathcal{B}$について、以下の３つは同値である。
+  \begin{enumerate}
+    \item $X$は$T_1$空間
+    \item $\forall x, y \in X \qty(x \neq y \rightarrow \exists B \in \mathcal{B}(x) \qty(y \notin B))$
+    \item $\forall x \in X \qty(\qty{x} \in \mathcal{F})$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+  \eq*{
+    \forall x, y \in X \qty(x \neq y \rightarrow \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(y \in X \setminus N \subset X \setminus B))
+  }
+
+  よって示される。\\*
+
+  $2. \rightarrow 3.$を示す。
+
+  $2.$より、$\forall y \in X \qty(x \neq y \rightarrow \exists B \in B(y) \qty(x \notin B))$である。
+
+  $X \setminus \qty{x} = \bigcup \qty{B \mid y \in X}$より成り立つ。\\*
+
+  $3. \rightarrow 1.$を示す。
+
+  $x \neq y$について、$y \in X \setminus \qty{x} \in \mathcal{O}$である。
+
+  ゆえに、$X \setminus \qty{x} \in \mathcal{N}(y)$である。
+}
+
+\thm*{
+  位相空間$X$が$T_1$空間ならば、$T_0$空間である。
+}{
+  明らか。
+}
+
+\dfnf{$T_2$空間}{T_2空間}{
+  位相空間$X$の近傍系$\mathcal{N}(x)$が以下を満たすとき、$X$を$T_2$空間と呼ぶ。
+  \eq*{
+    \forall x, y \in X \qty(x \neq y \rightarrow \exists N_x \in \mathcal{N}(x) \exists N_y \in \mathcal{N}(y) \qty(N_x \cap N_y = \varnothing))
+  }
+}
+
+\thm*{
+  位相空間$X$が$T_2$空間ならば、$T_1$空間である。
+}{
+  $\forall x, y \in X \qty(x \neq y)$を考える。$\exists N_x \in \mathcal{N}(x) \exists N_y \in \mathcal{N}(y) \qty(N_x \cap N_y = \varnothing)$
+
+  $y \in N_y$より、$y \notin N_x$
+}
+
+\cor*{
+  $T_2$空間の部分空間は$T_2$空間である。
+}
+
+\thmf{\textit{Hausdorff}性}{Hausdorff性}{
+  位相空間$X$と、開基$\mathcal{B}$について、以下の５つは同値である。
+  \begin{enumerate}
+    \item $X$は$T_2$空間
+    \item $\forall x, y \in X \qty(x \neq y \rightarrow \exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y = \varnothing))$
+    \item $X$上の収束するネットの収束先は一意に定まる。
+    \item 直積集合$X \times X$について、対角集合$\Delta \coloneqq \qty{\qty(x, x) \mid x \in X}$は閉集合である。
+    \item $\forall x \in X \qty(\qty{x} = \bigcap \qty{\bar{B} \mid B \in \mathcal{B}(x)})$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+  \eq*{
+    \forall x, y \in X \qty(x \neq y \rightarrow \exists N_x \in \mathcal{N}(x) \exists N_y \in \mathcal{N}(y) \exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y \subset N_x \cap N_y = \varnothing))
+  }
+
+  よって示される。\\*
+
+  $2. \rightarrow 3.$を示す。
+
+  ２点$x, y \in X \qty(x \neq y)$に収束するとする仮定する。
+
+  仮定より$\exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y = \varnothing)$
+
+  \lemref{基本近傍系と収束}より$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B_x \cap B_y)$
+
+  これは矛盾する。背理法より示される。\\*
+
+  $3. \rightarrow 1.$を示す。$T_2$でないとすると、
+  \eq*{
+    \exists x, y \in X \qty(x \neq y \land \forall N_x \in \mathcal{N}(x) \forall N_y \in \mathcal{N}(y) \exists z \in X \qty(z \in N_x \cap N_y))
+  }
+
+  \thmref{選択公理が与える写像}より、写像$g \in X^{\mathcal{N}(x) \times \mathcal{N}(y)}, g \qty(\qty(N_x, N_y)) \in N_x \cap N_y$が存在する。
+
+  $\mathcal{N}(x) \times \mathcal{N}(y)$上の半順序を以下のように定義する。
+  \eq*{
+    \qty(N_x, N_y) \preccurlyeq \qty(N'_x, N'_y) \defiff N_x \supset N'_x \land N_y \supset N'_y
+  }
+
+  \corref{有向集合としての基本近傍系}より、$\qty(\mathcal{N}(x) \times \mathcal{N}(y), \preccurlyeq)$は有向集合である。
+
+  $g$の与えるネットは、順序を包含で定義したことから、$x$と$y$の双方に収束する。対偶法より示される。\\*
+
+  $2. \rightarrow 4.$を示す。
+
+  $\forall \qty(x, y) \in \qty(X \times X) \setminus \Delta$について、$\exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y = \varnothing)$である。
+
+  よって$B_x \times B_y \subset \qty(X \times X) \setminus \Delta$であるので、$\qty(X \times X) \setminus \Delta$は開集合である。\\*
+
+  $4. \rightarrow 2.$を示す。
+
+  $\forall \qty(x, y) \in \qty(X \times X) \setminus \Delta$について、$\exists B_x, B_y \in \mathcal{B} \qty(\qty(x, y) \in B_x \times B_y \subset \qty(X \times X) \setminus \Delta)$である。
+
+  よって、$B_x \in \mathcal{B}(x) \land B_y \in \mathcal{B}(y) \land B_x \cap B_y = \varnothing$である。\\*
+
+  $2. \rightarrow 5.$を示す。
+
+  $\forall x, y \in X \qty(x \neq y \rightarrow \exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \subset X \setminus B_y \in \mathcal{F}))$
+
+  よって$\bar{B_x} \subset X \setminus B_y$であるので、$y \notin \bar{B_x}$\\*
+
+  $5. \rightarrow 2.$を示す。
+
+  $\forall x, y \in X \qty(x \neq y)$について、$\exists B \in \mathcal{B}(x) \qty(y \notin \bar{B})$
+
+  $y \in X \setminus \bar{B} \in \mathcal{O}$より、$\exists B' \in \mathcal{B}(y) \qty(B' \subset X \setminus \bar{B})$。
+
+  $B \cap B' = \varnothing$より成り立つ。
+}
+
+\dfnf{$T_3$空間}{T_3空間}{
+  位相空間$X$が以下を満たすとき、$X$を$T_3$空間と呼ぶ。
+  \eq*{
+    \forall x \in X \forall F \in \mathcal{F} \qty(x \notin F \rightarrow \exists O_x, O_F \in \mathcal{O} \qty(x \in O_x \land F \subset O_F \land O_x \cap O_F = \varnothing))
+  }
+}
+
+\thmf{\textit{Vietoris}性}{Vietoris性}{
+  位相空間$X$と、開基$\mathcal{B}$について、以下の４つは同値である。
+  \begin{enumerate}
+    \item $X$は$T_3$空間
+    \item $\forall x \in X \forall B \in \mathcal{B}(x) \exists D \in \mathcal{B}(x) \qty(\bar{D} \subset B)$
+    \item $\forall x \in X \forall F \in \mathcal{F} \qty(x \notin F \rightarrow \exists O_x, O_F \in \mathcal{O} \qty(x \in O_x \land F \subset O_F \land \bar{O_x} \cap \bar{O_F} = \varnothing))$
+    \item $\forall F \in \mathcal{F} \qty(F = \bigcap \qty{\bar{O} \mid O \in \mathcal{O} \land F \subset O})$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  $\forall B \in \mathcal{B}(x)$について、$x \in X \setminus B \land X \setminus B \in \mathcal{F}$である。
+
+  仮定より、$\exists O_x, O_F \in \mathcal{O} \qty(x \in O_x \land X \setminus B \subset O_F \land O_x \cap O_F = \varnothing)$である。
+
+  ここで$O_x \in \mathcal{N}(x)$であるので、$\exists D \in \mathcal{B}(x) \qty(D \subset O_x)$である。
+
+  $D \subset O_x \subset X \setminus O_F$であるので、閉包の定義より$\bar{D} \subset X \setminus O_F \subset X \setminus \qty(X \setminus B) = B$\\*
+
+  $2. \rightarrow 3.$を示す。
+
+  $x \in X \setminus F \in \mathcal{O}$であるので、$X \setminus F \in \mathcal{N}(x)$すなわち、$\exists B \in \mathcal{B}(x) \qty(B \subset X \setminus F)$である。
+
+  仮定より、$\exists D \in \mathcal{B}(x) \qty(\bar{D} \subset B)$であり、再び仮定より、$\exists E \in \mathcal{B}(x) \qty(\bar{E} \subset D)$
+
+  $F = X \setminus \qty(X \setminus F) \subset X \setminus B \subset X \setminus \bar{D} \subset X \setminus D$である。
+
+  $O_F \coloneqq X \setminus \bar{D}$とすると、$X \setminus D \in \mathcal{F}$より、$\bar{O_F} \subset X \setminus D \subset X \setminus \bar{E}$
+
+  $O_x \coloneqq E$として成り立つ。\\*
+
+  $3. \rightarrow 4.$を示す。
+
+  $A \coloneqq \qty{\bar{O} \mid O \in \mathcal{O} \land F \subset O}$とする。$X \in A$より、$X \neq \varnothing$である。
+
+  定義より$F \subset \bigcap A$である。
+
+  $\forall x \in X \setminus F$について、仮定より$\exists O_F \in \mathcal{O} \qty(F \subset O_F \land x \notin \bar{O_F})$であるので、$x \notin \bigcap A$
+
+  ゆえに、$X \setminus F \subset X \setminus \bigcap A$\\*
+
+  $4. \rightarrow 1.$を示す。
+
+  $\forall x \in X \forall F \in \mathcal{F} \qty(x \notin F)$のとき、仮定より$\exists O_F \in \mathcal{O} \qty(x \notin \bar{O_F} \land F \subset O_F)$
+
+  $O_x \coloneqq X \setminus \bar{O_F}$として成り立つ。
+}
+
+\thm{正則空間}{
+  位相空間$X$が$T_1$空間かつ$T_3$空間であるならば、$X$は$T_2$空間である。
+}{
+  \thmref{Frechet性}より、一点集合は閉集合である。
+
+  $T_3$空間の定義より、$T_2$空間である。
+}
+
+\dfnf{$T_4$空間}{T_4空間}{
+  位相空間$X$が以下を満たすとき、$X$を$T_4$空間と呼ぶ。
+  \eq*{
+    \forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing \rightarrow \exists O_1, O_2 \in \mathcal{O} \qty(F_1 \subset O_1 \land F_2 \subset O_2 \land O_1 \cap O_2 = \varnothing))
+  }
+}
+
+\thmf{\textit{Tietze}性}{Tietze性}{
+  位相空間$\qty(X, \mathcal{O})$について、以下の３つは同値である。
+  \begin{enumerate}
+    \item $X$は$T_4$空間
+    \item $\forall O \in \mathcal{O} \forall F \in \mathcal{F} \qty(F \subset O \rightarrow \exists U \in \mathcal{O} \qty(F \subset U \land \bar{U} \subset O))$
+    \item $\forall O_1, O_2 \in \mathcal{O} \qty(O_1 \cup O_2 = X \rightarrow \exists F_1, F_2 \in \mathcal{F} \qty(F_1 \subset O_1 \land F_2 \subset O_2 \land F_1 \cup F_2 = X))$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  $X \setminus O \in \mathcal{F}$から、仮定より$\exists U, U' \in \mathcal{O} \qty(F \subset U \land X \setminus O \subset U' \land U \cap U' = \varnothing)$である。
+
+  $U \subset X \setminus U' \in \mathcal{F}$であるので、$\bar{U} \subset X \setminus U' \subset X \setminus \qty(X \setminus O) = O$\\*
+
+  $2. \rightarrow 3.$を示す。
+
+  $X \setminus O_1 \subset O_2 \land X \setminus O_1 \in \mathcal{F}$より、仮定より$\exists U \in \mathcal{O} \qty(X \setminus O_1 \subset U \land \bar{U} \subset O_2)$
+
+  $X \setminus U \subset X \setminus \qty(X \setminus O_1) = O_1 \land \qty(X \setminus U) \cup \bar{U} = X$より示される。\\*
+
+  $3. \rightarrow 1.$を示す。
+
+  $\forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing)$とする。
+
+  $\qty(X \setminus F_1) \cup \qty(X \setminus F_2) = X$であるので、仮定より$\exists H_1, H_2 \in \mathcal{F} \qty(H_1 \subset X \setminus F_1 \land H_2 \subset X \setminus F_2 \land H_1 \cup H_2 = X)$
+
+  $F_1 = X \setminus \qty(X \setminus F_1) \subset X \setminus H_1 \land F_2 = X \setminus \qty(X \setminus F_2) \subset X \setminus H_2$
+
+  ここで、$O_1 \coloneqq X \setminus H_1, O_2 \coloneqq X \setminus H_2$として成り立つ。
+}
+
+\thm{正規空間}{
+  位相空間$X$が$T_1$空間かつ$T_4$空間であるならば、$X$は$T_3$空間である。
+}{
+  \thmref{Frechet性}より、一点集合は閉集合である。
+
+  $T_4$空間の定義より、$T_3$空間である。
+}
+
+\thm*{
+  $T_3$空間$X$が\textit{Lindel\"{o}f}ならば、$X$は$T_4$空間である。
+}{
+  $\forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing)$を考える。
+
+  $\forall x \in F_1$について、$x \in X \setminus F_2$より、仮定から$\exists O_1(x) \in \mathcal{O} \qty(x \in O_1(x) \land \bar{O_1(x)} \cap F_2 = \varnothing)$
+
+  \textit{Lindel\"{o}f}より、$F_1$の可算部分$A_1$が存在して、$F_1 \subset \bigcup \qty{O_1(x) \mid x \in A_1}$
+
+  すなわち、写像$\varphi_1 \in \mathcal{O}^\N$が存在して、$F_1 \subset \bigcup \qty{\varphi_1(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_1(n)} \cap F_2 = \varnothing)$\\*
+
+  同様に、写像$\varphi_2 \in \mathcal{O}^\N$が存在して、$F_2 \subset \bigcup \qty{\varphi_2(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_2(n)} \cap F_1 = \varnothing)$\\*
+
+  以下に定める集合$U_1, U_2$は定義より開集合である。
+  \eqa*{
+    U_1 &\coloneqq \bigcup \qty{\varphi_1(n) \setminus \bigcup \qty{\bar{\varphi_2(m)} \mid m \in n} \mid n \in \N} \\*
+    U_2 &\coloneqq \bigcup \qty{\varphi_2(n) \setminus \bigcup \qty{\bar{\varphi_1(m)} \mid m \in s(n)} \mid n \in \N}
+  }
+
+  $\exists z \in U_1 \cap U_2$とする。
+
+  $\exists n_1 \in \N \qty(z \in \varphi_1(n_1) \land \forall m \in n_1 \qty(z \notin \bar{\varphi_2(m)})) \land \exists n_2 \in \N \qty(z \in \varphi_2(n_2) \land \forall m \in s(n_2) \qty(z \notin \bar{\varphi_1(m)}))$
+
+  $n_1 \leq n_2 \lor n_1 > n_2$の場合分けにより、どちらの場合も矛盾。ゆえに$U_1 \cap U_2 = \varnothing$
+
+  $F_1 \subset U_1 \land F_2 \subset U_2$より示される。
+}
+
+
+\lsubsection{連結}
+
+\dfn{連結}{
+  位相空間$\qty(X, \mathcal{O})$について、以下を満たす$X$を連結であると呼ぶ。
+  \eq*{
+    \mathcal{O} \cap \mathcal{F} = \qty{\varnothing, X}
+  }
+}
+
+\thm{非連結}{
+  位相空間$\qty(X, \mathcal{O})$について、以下の３つは同値である。
+  \begin{enumerate}
+    \item $X$は連結でない
+    \item $\exists U, V \in \mathcal{O} \setminus \qty{\varnothing} \qty(X = U \cup V \land U \cap V = \varnothing)$
+    \item $\exists A, B \in \P(X) \setminus \qty{\varnothing} \qty(X = A \cup B \land A \cap \bar{B} = \varnothing \land \bar{A} \cap B = \varnothing)$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を考える。
+
+  開集合、閉集合の定義より$\mathcal{O} \cap \mathcal{F} \supset \qty{\varnothing, X}$であるので、非連結ならば$\exists U \in \mathcal{O} \cap \mathcal{F} \setminus \qty{\varnothing, X}$である。
+
+  $V \coloneqq X \setminus U \in \mathcal{O} \setminus \qty{\varnothing}$より成り立つ。\\*
+
+  $2. \rightarrow 3.$を考える。
+
+  $V = X \setminus U \land U = X \setminus V$より、$U, V \in \mathcal{F}$である。
+
+  したがって、$U \cap \bar{V} = \bar{U} \cap V = U \cap V = \varnothing$である。\\*
+
+  $3. \rightarrow 1.$を考える。
+
+  $\bar{A} = X \cap \bar{A} = \qty(A \cup B) \cap \bar{A} = \qty(A \cap \bar{A}) \cup \qty(B \cap \bar{A}) = A$より、$A$は閉集合である。
+
+  同様に、$B$は閉集合であるので、$A$は開集合である。
+
+  $B \neq \varnothing$より、$A \neq X$である。したがって、$A \in \qty(\mathcal{O} \cap \mathcal{F}) \setminus \qty{\varnothing, X}$
+}
+
+\thm{連結空間の連続像は連結}{
+  連結な位相空間$\qty(X, \mathcal{O})$と、位相空間$\qty(X', \mathcal{O'})$について、連続写像$f \in \qty(X')^X$を考える。
+  このとき、像$f(X)$は連結である。
+}{
+  $f(X)$が連結でないと仮定する。
+
+  \thmref{非連結}より$\exists U, V \in \mathcal{O'} \qty(f(X) \subset U \cup V \land U \cap V = \varnothing \land U \cap f(X) \neq \varnothing \land V \cap f(X) \neq \varnothing)$
+
+  $\exists y \in U \cap f(X) \exists x \in X \qty(f(x) = y)$すなわち$x \in f^{-1}(U \cap f(X)) \subset f^{-1}(U)$であるので、$f^{-1}(U) \neq \varnothing$となる。
+  同様に$f^{-1}(V) \neq \varnothing$
+
+  $f$は連続より$f^{-1}(U), f^{-1}(V) \in \mathcal{O} \setminus \qty{\varnothing}$である。
+
+  \corref{像と原像}、\thmref{原像の性質}より$f^{-1}(U) \cup f^{-1}(V) = f^{-1}(U \cup V) \supset f^{-1}(f(X)) \supset X$
+
+  \thmref{原像の性質}より$f^{-1}(U) \cap f^{-1}(V) = f^{-1}(U \cap V) = f^{-1}(\varnothing) = \varnothing$
+
+  \thmref{非連結}より$X$は連結でない。矛盾するので背理法より示される。
+}
+
+
+\lsubsection{可算な位相}
+
+\dfn{第一可算}{
+  位相空間$X$について、その任意の点$x$に対して可算な基本近傍系$\mathcal{B}(x)$が存在するとき、位相空間$X$は第一可算であると呼ぶ。
+}
+
+\lem{第一可算空間における基本近傍系の単調列}{
+  第一可算な位相空間$X$とその任意の点$x \in X$について、以下を満たす基本近傍系$\qty(B_n)_{n \in \N}$が存在する。
+  \eqg*{
+    \forall n \in \N \qty(B_{s(n)} \subset B_n)
+  }
+}{
+  第一可算であるので、$\N$からの全射$\varphi$が存在するような基本近傍系$\mathcal{B}(x)$が存在する。
+
+  以下のように定めた$B_n$は条件を満たす。
+  \eqg*{
+    B_0 \coloneqq \varphi(0) \\*
+    B_{s(n)} \coloneqq B_n \cap \varphi(s(n))
+  }
+
+  定義と$\varphi$の全射性より、$\forall B \in \mathcal{B}(x) \exists n \in \N \qty(B_n \subset \varphi(n) = B)$である。\\*
+
+  $\varphi(0) \subset B_0$である。$\exists B \in \mathcal{B} \qty(B \subset B_n)$とすると、$\exists B' \in \mathcal{B}(x) \qty(B' \subset B \cap \varphi(s(n)) \subset B_{s(n)})$
+
+  \thmref{数学的帰納法}より、$\forall n \in \N \exists B \in \mathcal{B}(x) \qty(B \subset B_n)$である。\\*
+
+  ゆえに\lemref{近傍系の一意性}より、$\qty(B_n)_{n \in \N}$は$\mathcal{B}(x)$と同じ近傍系を与える基本近傍系である。
+}
+
+\thmf{\textit{Bolzano-Weierstrass}の定理}{Bolzano-Weierstrassの定理}{
+  第一可算でコンパクトな位相空間$X$は、点列コンパクトである。
+}{
+  $X$上の点列$\qty(x_k)_{k \in \N}$について、$\qty(F_k)_{k \in \N}, F_k = \qty{x_l \mid l \in \N \land l \geq k} \in \P(X)$を考える。\\*
+
+  $\bigcap \qty{\bar{F_k} \mid k \in \N} = \varnothing$とすると、\lemref{コンパクトの言い換え}より$\exists n \in \N \qty(n > 0 \land \bigcap \qty{\bar{F_{k_m}} \mid m \leq n} = \varnothing)$である。
+
+  $x_{s(k_n)} \in \bigcap \qty{\bar{F_k} \mid k \in \N}$であるので反する。背理法より$\bigcap \qty{\bar{F_k} \mid k \in \N} \neq \varnothing$を得る。\\*
+
+  $\exists a \in X \forall k \in \N \qty(a \in \bar{F_k})$であるので、\lemref{第一可算空間における基本近傍系の単調列}の点列$\qty(B_n)_{n \in \N}$を用いて$\forall j \in \N \qty(F_k \cap B_j(a) \neq \varnothing)$である。
+
+  ここで、以下の写像$\varphi \in \N^\N$を考える。
+  \eqg*{
+    x_{\varphi(0)} \in B_0(a) \\*
+    x_{\varphi(s(n))} \in F_{s(\varphi(n))} \cap B_n(a)
+  }
+
+  $\qty(x_{\varphi(n)})_{n \in \N}$は部分列であり、$a$に収束する。
+}
+
+\thm{第一可算空間における点連続と収束}{
+  第一可算な位相空間$X$、位相空間$X'$、点$x \in X$、写像$f \in \qty(X')^X$について、以下の２つは同値である。
+  \begin{enumerate}
+    \item $f$が$x$で連続
+    \item $x$に収束する任意の点列$\qty(x_n)_{n \in \N}$について、点列$\qty(f(x_n))_{n \in \N}$は$f(x)$に収束する。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$は、\thmref{点連続と収束}と、点列がネットであることより明らか。\\*
+
+  $2. \rightarrow 1.$を示す。\lemref{第一可算空間における基本近傍系の単調列}の与える基本近傍系を$\qty(B_n)_{n \in \N}$とする。
+  \eq*{
+    \exists N' \in \mathcal{N}(f(x)) \forall n \in \N \exists y \in B_n(x) \qty(f(y) \notin N')
+  }
+  \thmref{選択公理が与える写像}より、写像$g \in X^\N, g(n) \in B_n(x) \setminus f^{-1}(N')$が存在する。
+
+  今、$g$から構成される点列は$x$に収束するが、$f \circ g$から構成される点列は$f(x)$に収束しない。
+}
+
+\dfn{可分}{
+  位相空間$X$について、$X$の可算部分$Y$が存在して$\bar{Y} = X$であるとき、$X$は可分であると呼ぶ。
+}
+
+\dfn{第二可算}{
+  位相空間$\qty(X, \mathcal{O})$について、$\mathcal{O}$が可算な開基から与えられるとき、位相空間$\qty(X, \mathcal{O})$は第二可算であると呼ぶ。
+}
+
+\thm{第二可算空間の満たす性質}{
+  位相空間$\qty(X, \mathcal{O})$が第二可算ならば、以下の３つを満たす。
+  \begin{itemize}
+    \item $X$は第一可算
+    \item $X$は\textit{Lindel\"{o}f}
+    \item $X$は可分
+  \end{itemize}
+}{
+  第一可算性を示す。
+
+  \thmref{開基の定める基本近傍系}より、開基の部分となる基本近傍系をとれる。\\*
+
+  \textit{Lindel\"{o}f}性を示す。
+
+  第二可算性より、点列$\qty(B_n)_{n \in \N}$が存在して$\qty{B_n \mid n \in \N}$は開基である。
+
+  開被覆$C$について、\dfnref{開集合系}より$\forall x \in X \exists O \in C \exists n \in \N \qty(x \in B_n \land B_n \subset O)$
+
+  \thmref{選択公理が与える写像}より$n(x)$を考える。このとき、$\qty{B_{n(x)} \mid x \in \N} = \qty{B_m \mid m \in \Im(n)}$は開被覆である。
+
+  $\forall m \in \Im(n) \exists O \in C \qty(B_m \subset O)$より\thmref{選択公理が与える写像}の与える$O(m)$が与えられて、$C' \coloneqq \qty{O(m) \mid m \in \Im(n)}$とする。
+
+  今、$X = \bigcup \qty{B_m \mid m \in \Im(n)} \subset \bigcup C' \subset X$より、$C'$は開被覆であり、定義より$C$の可算部分である。\\*
+
+  可分性を示す。
+
+  第二可算性より、可算な開基$\mathcal{B}$が存在する。
+
+  $\forall B \in \mathcal{B} \setminus \qty{\varnothing} \exists x_B \in X \qty(x_B \in B)$であり、$M \coloneqq \qty{x_B \mid B \in \mathcal{B} \setminus \qty{\varnothing}}$を考えると、$M$は可算である。
+
+  閉包は閉集合より$X \setminus \bar{M}$は開集合である。
+
+  ここで、$\exists x \in X \setminus \bar{M}$と仮定する。
+
+  $\exists B' \in \mathcal{B} \qty(x \in B' \subset X \setminus \bar{M})$である。
+
+  したがって、$x_{B'} \in X \setminus \bar{M} \subset X \setminus M$より矛盾。背理法より示される。
+}
+
+
+\lsubsection{順序位相}
+
+\lem{順序の開基}{
+  空でない全順序集合$\qty(X, \leq)$について、以下を満たす新たな２元$\infty, -\infty$を加えた集合$\hat{X}$を考える。
+  \eqg*{
+    \forall x \in X \qty(-\infty < x \land x < \infty) \\*
+    \hat{X} \coloneqq X \cup \qty{\infty, -\infty}
+  }
+
+  このとき、以下の集合系$\mathcal{B}$は$X$の開基である。
+  \eq*{
+    \mathcal{B} \coloneqq \qty{\sqty{a, b} \mid \qty(a, b) \in \hat{X} \times \hat{X}}
+  }
+}{
+  $\forall B \in \mathcal{B} \qty(-\infty \notin B \land \infty \notin B)$であるので、$\mathcal{B} \in \P \qty(\P(X))$である。\\*
+
+  第一式を示す。$\forall x \in X \qty(x \in \sqty{-\infty, \infty})$である。\\*
+
+  第二式を示す。$\forall a_1, b_1, a_2, b_2 \in \hat{X}$について、$\sqty{a_1, b_1} \cap \sqty{a_2, b_2} = \sqty{\max \qty{a_1, a_2}, \min \qty{b_1, b_2}} \in \mathcal{B}$である。
+}
+
+\cor*{
+  空でない全順序集合$\qty(X, \leq)$について、$X$が最大元、最小元をともに持たないとき、以下の集合系$\mathcal{B'}$は開基である。
+  \eq*{
+    \mathcal{B'} \coloneqq \qty{\sqty{a, b} \mid \qty(a, b) \in X \times X}
+  }
+
+  このとき、\lemref{順序の開基}から得る開集合系と、$\mathcal{B'}$の定める開集合系、この２つは一致する。
+}
+
+\dfn{順序空間}{
+  \lemref{順序の開基}と\dfnref{開集合系}より定まる位相空間$\qty(X, \mathcal{O})$を順序空間と呼ぶ。
+}
+
+\lem*{
+  順序空間$\qty(X, \mathcal{O})$について、開区間は開集合であり、閉区間は閉集合である。
+}{
+  定義より開区間は開集合である。\\*
+
+  閉区間$\qty[a, b]$を考える。$X \setminus \qty[a, b] = \sqty{-\infty, a} \cup \sqty{b, \infty} \in \mathcal{O}$より成り立つ。
+}
+
+\lem*{
+  順序空間$\qty(X, \mathcal{O})$と、$X$の閉集合$F_1, F_2$を考える。
+
+  $F_1 \cap F_2 = \varnothing$であるとき、$\forall x \in F_1$について以下の全てを満たす$a, b \in \hat{X}$が存在する。
+  \begin{itemize}
+    \item $x \in \sqty{a, b}$
+    \item $\sqty{a, b} \cap F_2 = \varnothing$
+    \item $\sqty{a, x} = \varnothing \lor a \in F_1 \lor \qty(a \notin F_2 \land \sqty{a, x} \cap F_1 = \varnothing)$
+    \item $\sqty{x, b} = \varnothing \lor b \in F_1 \lor \qty(b \notin F_2 \land \sqty{x, b} \cap F_1 = \varnothing)$
+  \end{itemize}
+}{
+  \thmref{閉包}より、$\exists p, q \in \hat{X} \qty(x \in \sqty{p, q} \subset X \setminus F_1)$である。
+
+  $\sqty{p, x} = \varnothing$のとき、$a \coloneqq p$で成り立つ。
+
+  $\exists z \in \sqty{p, x} \cap F_1$のとき、$a \coloneqq z$で成り立つ。
+
+  $\exists z \in \sqty{p, x} \land \sqty{p, x} \cap F_1 = \varnothing$のとき、$a \coloneqq z$で成り立つ。
+
+  同様に$b$を定めることができて、条件を満たす。
+}
+
+\thm{順序空間は正規}{
+  順序空間は$T_1$空間かつ$T_4$空間である。
+}{
+  $\forall x \in X$について、\mlemref{-2}より$\qty{x} = \qty[x, x] \in \mathcal{F}$である。\thmref{Frechet性}より、$T_1$である。\\*
+
+  $\forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing)$として、$\forall x \in F_1$について考える。
+
+  $x \notin F_2$より\mlemref{-1}の条件を満たす$a_x, b_x \in \hat{X}$が存在する。
+
+  ここで、$U \coloneqq \bigcup \qty{\sqty{a_x, b_x} \mid x \in F_1}$を考える。明らかに$F_1 \subset U \land U \in \mathcal{O}$である。\\*
+
+  $\forall y \in F_2$を考える。$y \notin F_1 = \bar{F_1}$より、$\exists \qty(c, d) \in \hat{X} \times \hat{X} \qty(\sqty{c, d} \cap F_1 = \varnothing)$である。\\*
+
+  $F'_1 \coloneqq \qty{x \in F_1 \mid x < y \land \sqty{a_x, b_x} \cap \sqty{c, d} \neq \varnothing}$とする。
+
+  $\exists x_1, x_2 \in F'_1 \qty(x_1 < x_2)$とすると、$c$の定義と\mlemref{-1}第二式より$x_1 < x_2 < c < b_{x_1} \land b_{x_1} \notin F_1$である。
+
+  これは\mlemref{-1}第四式に反する。
+  ゆえに、$\forall x_1, x_2 \in F'_1 \qty(x_1 = x_2)$である。
+
+  $\exists x \in X \qty(F'_1 = \qty{x})$のときを考える。
+  \mlemref{-1}第四式より$b_x < y$である。$a' \coloneqq b_x$とする。
+
+  $F'_1 = \varnothing$であるとき、$a' \coloneqq c$とする。\\*
+
+  同様に$b'$を定めると、$y \notin U$より$y \in \sqty{a', b'} \land \sqty{a', b'} \cap U = \varnothing$である。\thmref{閉包}より$y \notin \bar{U}$
+
+  よって、$F_2 \subset X \setminus \bar{U}$
+}

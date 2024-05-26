@@ -1,0 +1,60 @@
+\lsection{複素数}
+
+\lsubsection{複素数の定義}
+
+\cor*{
+  多項式環$\R[X]$について、単項イデアル$\aqty{X^2 + 1}$は極大イデアルである。
+}
+
+\dfn{複素数}{
+  体$\R[X] / \aqty{X^2 + 1}$を複素数$\C$と呼ぶ。
+
+  またその元も複素数と呼ぶ。
+}
+
+\thmf{$\R^2$としての$\C$}{R^2としてのC}{
+  $\C$を$\R$-加群としたとき、その次元は$2$である。
+}{
+  ???
+}
+
+
+\lsubsection{複素数の位相}
+
+\dfn{複素数の絶対値}{
+  ???
+}
+
+\lem*{
+  多項式$f \in \R[X]$について、$\deg(f)$が$1$でない奇数ならば、$f$は次数既約ではない。
+}{
+  $n \coloneqq \deg(f)$とする。
+
+  $x \coloneqq n \times f(n) / \abs{f(n)} \times \max \qty{\abs{f(m) / f(n)} \mid m \in s(n)}$とする。ただし、$f(i)$は\dfnref{多項式環}に基づく写像の値とする。
+
+  $f(-x) < 0 < f(x)$であるので、\thmref{中間値の定理}より、$\exists y \in \R \qty(f(y) = 0)$である。
+
+  $h \in \R[X]$を以下で定義する。
+  \eq*{
+    h(n) =
+    \begin{cases}
+      -y & \qty(n = 0) \\*
+      1 & \qty(n = 1) \\*
+      0 & \qty(n \geq 2)
+    \end{cases}
+  }
+
+  \thmref{剰余の定理}より、$\exists g \in \R[X] \qty(\deg(g) = n - 1 \land f = g h)$である。
+}
+
+\thm{代数学の基本定理}{
+  \eq*{
+    \forall f \in \C[X] \qty(\deg(f) \geq 1 \rightarrow \exists x \in \C \qty(f(x) = 0))
+  }
+}{
+  ???
+}
+
+\dfn{複素関数}{
+  集合$X$について、写像$f \in X^\C$を複素関数、または単に関数と呼ぶ。
+}

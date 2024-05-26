@@ -1,0 +1,206 @@
+\lsection{有理数}
+
+\lsubsection{有理数の構成}
+
+\lem{有理数の準備：前順序}{
+  直積集合$\Z \times \qty(\Z \setminus \qty{0})$上で以下の自己関係$\preccurlyeq_Q$は前順序である。
+  \eq*{
+    \forall \qty(a_1, a_2), \qty(b_1, b_2) \in \Z \times \qty(\Z \setminus \qty{0}) \qty(\qty(a_1, a_2) \preccurlyeq_Q \qty(b_1, b_2) \defiff a_1 a_2 b_2 b_2 \leq b_1 a_2 a_2 b_2)
+  }
+}{
+  反射的である。\\*
+
+  推移的であることを示す。
+  \eqg*{
+    a_1 a_2 b_2 b_2 \leq a_2 a_2 b_1 b_2 \land b_1 b_2 c_2 c_2 \leq b_2 b_2 c_1 c_2 \\*
+    a_1 a_2 b_2 b_2 c_2 c_2 \leq a_2 a_2 b_1 b_2 c_2 c_2 \land a_2 a_2 b_1 b_2 c_2 c_2 \leq a_2 a_2 b_2 b_2 c_1 c_2 \\*
+    a_1 a_2 b_2 b_2 c_2 c_2 \leq a_2 a_2 b_2 b_2 c_1 c_2 \\*
+    a_1 a_2 c_2 c_2 \leq a_2 a_2 c_1 c_2
+  }
+
+  したがって、前順序である。
+}
+
+\lem{有理数の準備：前順序の全域性}{
+  直積集合$\Z \times \qty(\Z \setminus \qty{0})$上で\lemref{有理数の準備：前順序}の前順序$\preccurlyeq_Q$は以下を満たす。
+  \eq*{
+    \forall a, b \in \Z \times \qty(\Z \setminus \qty{0}) \qty(a \preccurlyeq_Q b \lor b \preccurlyeq_Q a)
+  }
+}{
+  整数の全順序性より明らか。
+}
+
+\lem{有理数の準備：加法可換群}{
+  直積集合$\Z \times \qty(\Z \setminus \qty{0})$上の以下の演算$+$は可換群をなす。
+  \eq*{
+    \forall \qty(a_1, a_2), \qty(b_1, b_2) \in \Z \times \qty(\Z \setminus \qty{0}) \qty(\qty(a_1, a_2) + \qty(b_1, b_2) \defiff \qty(a_1 b_2 + b_1 a_2, a_2 b_2))
+  }
+}{
+  $\Z$は整域よりマグマである。\\*
+
+  結合法則を示す。
+  \eqa*{
+    a + \qty(b + c)
+    &= \qty(a_1, a_2) + \qty(b_1 c_2 + c_1 b_2, b_2 c_2) \\*
+    &= \qty(\qty(b_1 c_2 + c_1 b_2) a_2 + a_1 \qty(b_2 c_2), a_2 b_2 c_2) \\*
+    &= \qty(a_2 b_2 c_1 + \qty(b_1 a_2 + a_1 b_2) c_2, a_2 b_2 c_2) \\*
+    &= \qty(a_1 b_2 + b_1 a_2, a_2 b_2) + \qty(c_1, c_2) \\*
+    &= \qty(\qty(a_1, a_2) + \qty(b_1, b_2)) + \qty(c_1, c_2)
+  }
+
+  $\qty(0, 1)$は単位元である。
+
+  $\qty(a_1, a_2)$に対して、$\qty(-a_1, a_2)$は逆元である。
+
+  交換法則は、整数の可換環としての性質より明らか。
+}
+
+\lem{有理数の準備：乗法可換モノイド}{
+  直積集合$\Z \times \qty(\Z \setminus \qty{0})$上の以下の演算$\times$について、可換モノイドをなす。
+  \eq*{
+    \forall \qty(a_1, a_2), \qty(b_1, b_2) \in \Z \times \qty(\Z \setminus \qty{0}) \qty(\qty(a_1, a_2) \times \qty(b_1, b_2) \defiff \qty(a_1 b_1, a_2 b_2))
+  }
+}{
+  $\Z$は整域より$\times$はマグマであり、$\Z$が環であることから半群である。\\*
+
+  $\qty(1, 1)$は単位元である。\\*
+
+  $\Z$が可換環であることから可換である。
+}
+
+\lem{有理数の準備：同値類}{
+  直積集合$\Z \times \qty(\Z \setminus \qty{0})$上で以下の自己関係$\sim_Q$は同値類である。
+  \eq*{
+    \forall \qty(a_1, a_2), \qty(b_1, b_2) \in \Z \times \qty(\Z \setminus \qty{0}) \qty(\qty(a_1, a_2) \sim_Q \qty(b_1, b_2) \defiff \qty(a_1, a_2) \preccurlyeq \qty(b_1, b_2) \land \qty(b_1, b_2) \preccurlyeq \qty(a_1, a_2))
+  }
+}{
+  \lemref{有理数の準備：前順序}より前順序。明らかに対称的であるので、同値類である。
+}
+
+\lem{約分}{
+  \eq*{
+    \forall \qty(a_1, a_2), \qty(b_1, b_2) \in \Z \times \qty(\Z \setminus \qty{0}) \forall n \in \Z \setminus \qty{0} \qty(\qty(a_1, a_2) \sim_Q \qty(b_1, b_2) \leftrightarrow a_1 b_2 = a_2 b_1)
+  }
+}{
+  \lemref{整数の乗法の簡約則}より明らか。
+}
+
+\lem{有理数の準備：両立}{
+  直積集合$\Z \times \qty(\Z \setminus \qty{0})$上で\lemref{有理数の準備：同値類}の同値類$\sim_Q$は、\lemref{有理数の準備：前順序}の前順序、\lemref{有理数の準備：加法可換群}の加法、\lemref{有理数の準備：乗法可換モノイド}の乗法のそれぞれと両立する。
+}{
+  前順序と両立することは、$\sim_Q$の定義と前順序の推移性より明らか。\\*
+
+  $\qty(a_1, a_2) \sim_Q \qty(a'_1, a'_2) \land \qty(b_1, b_2) \sim_Q \qty(b'_1, b'_2)$とする。
+  \eqg*{
+    a_1 a'_2 b_2 b'_2 = a_2 a'_1 b_2 b'_2 \land a_2 a'_2 b_1 b'_2 = a_2 a'_2 b_2 b'_1 \\*
+    a_1 a'_2 b_2 b'_2 + a_2 a'_2 b_1 b'_2 = a_2 a'_1 b_2 b'_2 + a_2 a'_2 b_2 b'_1 \\*
+    \qty(a_1 b_2 + a_2 b_1) a'_2 b'_2 = \qty(a'_1 b'_2 + a'_2 b'_1) a_2 b_1 \\*
+    \qty(a_1 b_2 + a_2 b_1, a_2 b_2) \sim_Q \qty(a'_1 b'_2 + a'_2 b'_1, a'_2 b'_2)
+  }
+
+  $\qty(a_1, a_2) \sim_Q \qty(a'_1, a'_2) \land \qty(b_1, b_2) \sim_Q \qty(b'_1, b'_2)$とする。\lemref{整数の乗法の簡約則}より、
+  \eqg*{
+    a_1 a'_2 b_1 b'_2 = a'_1 a_2 b'_1 b_2 \\*
+    \qty(a_1 b_1) \qty(a'_2 b'_2) = \qty(a'_1 b'_1) \qty(a_2 b_2)
+  }
+}
+
+\dfn{有理数}{
+  \lemref{有理数の準備：両立}より定まる商マグマ$\qty(\Z \times \qty(\Z \setminus \qty{0})) / \sim_Q$を有理数と呼び、$\Q$で表す。
+  また、その元も有理数と呼ぶ。
+
+  定義より$\Q$は可換群である。
+}
+
+
+\lsubsection{有理数の性質}
+
+\lem{体としての有理数}{
+  可換群$\qty(\Q, +)$上の\lemref{有理数の準備：両立}より定まる演算$\times$は、体をなす。
+}{
+  右分配法則を示す。\lemref{約分}より、
+  \eqa*{
+    \qty(\qty[\qty(a_1, a_2)] + \qty[\qty(b_1, b_2)]) \times \qty[\qty(c_1, c_2)]
+    &= \qty[\qty(a_1 b_2 + b_1 a_2, a_2 b_2)] \times \qty[\qty(c_1, c_2)] \\*
+    &= \qty[\qty(\qty(a_1 b_2 + b_1 a_2) c_1, a_2 b_2 c_2)] \\*
+    &= \qty[\qty(a_1 c_1 b_2 + b_1 c_1 a_2, a_2 b_2 c_2)] \\*
+    &= \qty[\qty(a_1, a_2)] \times \qty[\qty(c_1, c_2)] + \qty[\qty(b_1, b_2)] \times \qty[\qty(c_1, c_2)]
+  }
+
+  左分配法則は、右分配法則と交換法則より示される。\\*
+
+  $\qty(a_1, a_2)$について、$a_1 \neq 0$ならば逆元$\qty(a_2, a_1)$が存在する。
+
+  $a_1 = 0$のとき、$\qty[\qty(0, a_2)] = \qty[\qty(0, 0)] = 0_\Q$
+
+  ゆえに、$\Q^\times = \Q \setminus \qty{0_\Q}$
+}
+
+\lem{有理数の準備：全順序}{
+  \lemref{有理数の準備：両立}より与えられる$\Q$上の前順序$\leq$は全順序である。
+}{
+  $\sim_Q$の定義より反対称的である。
+
+  \lemref{有理数の準備：前順序の全域性}より全順序である。
+}
+
+\thm{順序体としての有理数}{
+  $\qty(\Q, \leq)$は順序体である。
+}{
+  \lemref{有理数の準備：全順序}より全順序。\\*
+
+  第一式について、$a = \qty[\qty(a_1, a_2)], b = \qty[\qty(b_1, b_2)], c = \qty[\qty(c_1, c_2)]$として、$\Z$が順序環であることより、
+  \eqa*{
+    a_1 a_2 b_2 b_2 &< a_2 a_2 b_1 b_2 \\*
+    a_1 a_2 b_2 b_2 c_2 c_2 &< a_2 a_2 b_1 b_2 c_2 c_2 \\*
+    a_1 a_2 b_2 b_2 c_2 c_2 + a_2 a_2 b_2 b_2 c_1 c_2 &< a_2 a_2 b_1 b_2 c_2 c_2 + a_2 a_2 b_2 b_2 c_1 c_2 \\*
+    \qty(a_1 c_2 + a_2 c_1) a_2 b_2 b_2 c_2 &< \qty(b_1 c_2 + b_2 c_1) a_2 a_2 b_2 c_2 \\*
+    \qty(a_1 c_2 + a_2 c_1) a_2 b_2 b_2 c_2 c_2 c_2 &< \qty(b_1 c_2 + b_2 c_1) a_2 a_2 b_2 c_2 c_2 c_2 \\*
+    \qty(a_1 c_2 + a_2 c_1) \qty(a_2 c_2) \qty(b_2 c_2) \qty(b_2 c_2) &< \qty(b_1 c_2 + b_2 c_1) \qty(a_2 c_2) \qty(a_2 c_2) \qty(b_2 c_2) \\*
+    \qty[\qty(a_1 c_2 + a_2 c_1, a_2 c_2)] &< \qty[\qty(b_1 c_2 + b_2 c_1, b_2 c_2)]
+  }
+
+  第二式について、$a = \qty[\qty(a_1, a_2)], b = \qty[\qty(b_1, b_2)]$とすると、$0 < a_1 a_2 \land 0 < b_1 b_2$である。
+
+  ゆえに、$0_\Z < \qty(a_1 b_1) \qty(a_2 b_2)$であるので、$0_\Q < a b$
+}
+
+\lem*{
+  写像$\varphi \in \Q^\Z, \varphi(a) = \qty[\qty(a, 1)]$は以下を満たす。
+  \begin{enumerate}
+    \item 単射
+    \item 加法、乗法について環準同型
+    \item 全順序と両立
+  \end{enumerate}
+}{
+  定義より明らか。
+}
+
+\dfn{整数の有理数への埋め込み}{
+  \mlemref{0}の写像$\varphi$について、像$\varphi(\Z)$を誤解のない範囲で整数$\Z$と呼ぶ。
+}
+
+\cor*{
+  \eq*{
+    \Z \subset \Q
+  }
+}
+
+\thmf{$\Q$上の\textit{Archimedes}の原理}{Q上のArchimedesの原理}{
+  順序体$\Q$は\textit{Archimedes}的である。
+}{
+  $a = \qty[\qty(a_1, a_2)]$とする。
+
+  $a_2 < 0$のとき、\lemref{約分}より$a_2 > 0$とする$a_1, a_2$をとることができる。
+
+  $a > 0$のとき、$a_1 a_2 > 0$であるので、背理法から$a_1 > 0$である。
+
+  また、以下を満たす。
+  \eq*{
+    2 a_1 > a
+  }
+
+  $a \leq 0$のとき、$n = 1$は満たす。
+
+  よって示される。
+}

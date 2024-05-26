@@ -1,0 +1,198 @@
+\lsection{環論}
+
+\lsubsection{環}
+
+単位的環を環として扱う。
+
+\dfn{環}{
+  集合$R$上の２つの演算、加法$+$、乗法$\times$が以下を満たすとき、順序対$\qty(\qty(R, +), \times)$を環（ring）と呼ぶ。または単に$R$と書き、環と集合どちらも表すものとする。
+
+  \begin{itemize}
+    \item $\qty(R, +)$は可換群である。この単位元を$0_R$で表す。元$a$の逆元を$-a$と表記する。
+    \item $\qty(R, \times)$はモノイドである。この単位元を$1_R$で表す。
+    \item 左分配する。すなわち、$\forall x, y, z \in R \qty(x \times \qty(y + z) = x \times y + x \times z)$
+    \item 右分配する。すなわち、$\forall x, y, z \in R \qty(\qty(x + y) \times z = x \times y + x \times z)$
+  \end{itemize}
+
+  演算$\times$は、演算$+$よりも先に演算される。
+
+  また、$a + (-b)$、$a \times b$を誤解のない範囲で、$a - b$、$a b$と略記する。
+}
+
+\lem{環の性質}{
+  環$R$について、以下が成り立つ。
+  \eqg*{
+    \forall a \in R \qty(a 0_R = 0_R a = 0_R) \\*
+    \forall a, b \in R \qty(a (-b) = (-a) b = -(a b)) \\*
+    \forall a, b \in R \qty(a b = (-a) (-b))
+  }
+}{
+  第一式は以下より示される。
+  \eqg*{
+    a 0_R = a 0_R + a 0_R + -(a 0_R) = a (0_R + 0_R) + -(a 0_R) = a 0_R + -(a 0_R) = 0_R \\*
+    0_R a = 0_R a + 0_R a + -(0_R a) = (0_R + 0_R) a + -(0_R a) = 0_R a + -(0_R a) = 0_R
+  }
+
+  第二式は以下より示される。
+  \eqg*{
+    a (-b) = a (-b) + a b + -(a b) = a ((-b) + b) + -(a b) = a 0_R + -(a b) = -(a b) \\*
+    (-a) b = (-a) b + a b + -(a b) = ((-a) + a) b + -(a b) = 0_R b + -(a b) = -(a b)
+  }
+
+  第三式は以下より示される。
+  \eq*{
+    a b = a (-(-b)) = -(a (-b)) = (-a) (-b)
+  }
+}
+
+\cor*{
+  環$\qty(\qty(R, +), \times)$と乗法可逆元の全体$R^\times$について、順序対$\qty(R^\times, \times)$は群である。
+}
+
+\dfn{零環}{
+  環$R$について、$R = \qty{0_R}$である環を零環と呼ぶ。
+}
+
+\cor*{
+  環$R$について、$R$が零環であることは、$0_R = 1_R$であることと必要十分。
+}
+
+\dfn{可換環}{
+  環$\qty(\qty(R, +), \times)$について、$\qty(R, \times)$が可換モノイドであるとき、$R$を可換環と呼ぶ。
+}
+
+
+\lsubsection{環と準同型}
+
+\dfn{環準同型}{
+  環$R_1, R_2$について以下を満たす写像$\varphi \in R_2^{R_1}$が存在するとき、$\varphi$を環準同型写像、または単に環準同型と呼ぶ。
+  \begin{itemize}
+    \item 群$\qty(R_1, +), \qty(R_2, +)$について、群準同型。
+    \item モノイド$\qty(R_1, \times), \qty(R_2, \times)$について、モノイド準同型。
+  \end{itemize}
+}
+
+\dfn{環同型}{
+  全単射な環準同型を、環同型写像、または単に環同型と呼ぶ。
+}
+
+\thm{可換群上の自己準同型全体}{
+  可換群$\qty(G, +)$について、$\End(G)$上の以下の演算$+'$を考える。このとき、順序対$\qty(\qty(\End(G), +'), \circ)$は環をなす。
+  \eq*{
+    \qty(f +' g)(x) \coloneqq f(x) + g(x)
+  }
+}{
+  \thmref{可換群上の準同型全体}より可換群をなす。
+
+  \thmref{自己準同型の全体}よりモノイドをなす。
+
+  準同型性から$f \circ \qty(g + h) (x) = f(g(x) + h(x)) = f(g(x)) + f(h(x)) = \qty(f \circ g + f \circ h) (x)$
+
+  右分配も同様に示せる。
+}
+
+
+\lsubsection{イデアル}
+
+\dfn{左イデアル}{
+  環$R$とその空でない部分集合$I$について、以下を満たすとき、$I$を$R$の左イデアルと呼ぶ。
+  \eqg*{
+    \forall a, b \in I \qty(a - b \in I) \\*
+    \forall r \in R \forall a \in I \qty(r a \in I)
+  }
+}
+
+\lem{左イデアルは加法正規部分群}{
+  環$R$と、その左イデアル$I$について、$I$は$R$の加法について、正規部分群である。
+}{
+  $R$が可換群であることと\lemref{部分群の判定}より、空でないことと\dfnref{左イデアル}第一式から示される。
+}
+
+\cor*{
+  環$R$と、その左イデアル$I$について、以下が成り立つ。
+  \eq*{
+    1_R \in I \rightarrow I = R
+  }
+}
+
+\dfn{両側イデアル}{
+  環$R$とその左イデアル$I$について、以下を満たすとき、$I$を$R$の両側イデアルと呼ぶ。
+  \eq*{
+    \forall r \in R \forall a \in I \qty(a r \in I)
+  }
+}
+
+\cor*{
+  可換環の左イデアルは両側イデアルである。このとき、単にイデアルと呼ぶ。
+}
+
+\cor*{
+  環準同型写像の核は両側イデアルである。
+}
+
+\dfn{極大左イデアル}{
+  環$R$の左イデアル$I$について、以下を満たすとき、$I$を極大左イデアルと呼ぶ。
+  \begin{itemize}
+    \item $R$の任意のイデアル$J$について、$I \subset J \rightarrow J = I \lor J = R$
+    \item $R \neq I$
+  \end{itemize}
+}
+
+\thm{極大左イデアルの存在}{
+  環$R$と左イデアル$I$について、$I \neq R$ならば、極大左イデアル$J$が存在して、$I \subset J$である。
+}{
+  $T = \qty{J \in \P(R) \mid J \text{は左イデアル} \land I \subset J \land J \neq R}$を考える。
+
+  $I \in T$である。
+
+  半順序集合$\qty(T, \subset)$の部分$S$が全順序であるとする。
+
+  このとき、$\bigcup S$は左イデアルである。$1_R \notin \bigcup S$より、$\bigcup S \in T$である。
+
+  したがって、$T$は帰納的半順序集合である。\thmref{Zornの補題}より極大元を持つ。
+}
+
+
+\lsubsection{環と準同型定理}
+
+\dfn{部分環}{
+  環$R$の部分集合$S$が、加法について部分群をなして、乗法について部分モノイドをなすとき、$S$は環となり、環$S$を環$R$の部分環と呼ぶ。
+}
+
+\dfn{商環}{
+  環$\qty(\qty(R, +), \times)$を考える。
+
+  \corref{直積集合と自明な同値関係}の意味で演算$+, \times$と両立する同値関係$\sim$について、\thmref{両立}より定める演算$+', \times'$が存在する。
+
+  このとき、環$\qty(\qty(R / \sim, +'), \times')$を環$R$の商環と呼ぶ。
+}
+
+\lem{両側イデアルの定める同値関係}{
+  環$R$とその両側イデアル$I$について、以下で定める同値関係$\sim$は\corref{直積集合と自明な同値関係}の意味で演算$+, \times$と両立する同値関係である。
+  \eq*{
+    \forall x, y \in R \qty(x \sim y \defiff x - y \in I)
+  }
+}{
+  \lemref{左イデアルは加法正規部分群}と\lemref{正規部分群の定める同値関係}より、加法と両立する同値関係である。
+
+  $x_1 - y_1, x_2 - y_2 \in I$であるとき、
+  \eq*{
+    x_1 x_2 - y_1 y_2 = x_1 \qty(x_2 - y_2) + \qty(x_1 - y_1) y_2 \in I
+  }
+
+  両立する。
+}
+
+\dfn{剰余環}{
+  環$R$とその両側イデアル$I$について、\lemref{両側イデアルの定める同値関係}の定める同値関係による商環を、剰余環と呼び、$R / I$と表す。
+}
+
+\thm{環準同型定理}{
+  環$R_1, R_2$と、環準同型$f \in R_2^{R_1}$、$f$に付随する同値関係$\sim_{f}$について、環同型$\bar{f} \in \Im(f)^{R_1 / \sim_{f}}$が存在する。
+}{
+  $\Im(f)$は$R_2$の部分環である。
+
+  \thmref{群準同型定理}より、得る$\bar{f}$は加法群同型。
+
+  \thmref{モノイド準同型定理}より、得る$\bar{f}$は乗法モノイド同型。\\*
+}

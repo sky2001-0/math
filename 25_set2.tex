@@ -1,0 +1,515 @@
+\lsection{集合論の補足}
+
+\lsubsection{直積}
+
+\thm*{
+  集合$X$について、具体的な全単射$\sigma \in \qty(2^X)^{\P(X)}$が存在する。
+}{
+  $x \in X$について、以下のように$\sigma$を定める。
+  \eq*{
+    \sigma(A)(x) =
+    \begin{cases}
+      1 & \qty(x \in A) \\*
+      0 & \qty(x \notin A)
+    \end{cases}
+  }
+
+  以下で定める$\sigma^{-1}$は逆写像である。
+  \eq*{
+    \sigma^{-1}(f) = \qty{x \in X \mid f(x) = 1}
+  }
+
+  \thmref{全単射と逆写像}より全単射である。
+}
+
+\thm*{
+  集合$X, Y$について、以下を満たす写像$A \in \qty{X, Y}^2$を考える。
+  \eq*{
+    A(0) = X \land A(1) = Y
+  }
+
+  このとき具体的な全単射$\sigma \in \qty(\prod A)^{X \times Y}$が存在する。
+}{
+  $x \in X$について、以下のように$\sigma$を定める。
+  \eq*{
+    \sigma(x, y)(n) =
+    \begin{cases}
+      x & \qty(n = 0) \\*
+      y & \qty(n = 1)
+    \end{cases}
+  }
+
+  以下で定める$\sigma^{-1}$は逆写像である。
+  \eq*{
+    \sigma^{-1}(f) = \qty(f(0), f(1))
+  }
+
+  \thmref{全単射と逆写像}より全単射である。
+}
+
+\thm*{
+  集合$X, Y, Z$について、具体的な全単射$\sigma \in \qty(X \times \qty(Y \times Z))^\qty(\qty(X \times Y) \times Z)$が存在する。
+}{
+  $\sigma \qty(\qty(x, y), z) = \qty(x, \qty(y, z))$は全単射である。
+}
+
+
+\lsubsection{同値関係}
+
+\dfn{同値関係}{
+  対称的な前順序を、同値関係と呼ぶ。同値関係であることを明示的に記号$\sim$で表す。
+}
+
+\cor*{
+  等号は同値関係である。集合$X$上の同値関係であることを明示的に、$=_X$で表す。
+}
+
+\dfn{同値類}{
+  空でない集合$X$上で定義された同値関係$\sim$と、$X$の要素$a$について、以下で定義された集合を$a$の同値類と呼ぶ。この$a$を特に代表元と呼ぶ。
+  \eq*{
+    \qty[a] \coloneqq \qty{x \in X \mid x \sim a}
+  }
+}
+
+\cor*{
+  空でない集合$X$上で定義された同値関係$\sim$について、以下が成り立つ。
+  \eq*{
+    X = \bigsqcup \qty{\qty[x] \mid x \in X}
+  }
+}
+
+\cor{直積集合と自明な同値関係}{
+  写像$A \in Z^\Lambda$について考える。
+
+  任意の$\lambda$について$A(\lambda)$上に同値関係$\sim_\lambda$が存在するとき、写像$A$の直積集合$\prod A$上の以下で定める関係$\sim$は、同値関係である。
+  \eq*{
+    f \sim f' \defiff \forall \lambda \in \Lambda \qty(f(\lambda) \sim_\lambda f'(\lambda))
+  }
+}
+
+\dfn{商集合}{
+  同値関係の定義された空でない集合$X$について、商集合を以下のように定める。
+  \eq*{
+    X / \sim \coloneqq \qty{[x] \mid x \in X}
+  }
+}
+
+\cor*{
+  集合$X$について、以下が成り立つ。
+  \eq*{
+    \qty(X / =_X) = X
+  }
+}
+
+\dfn{商写像}{
+  写像$\qty[] \in \qty(X / \sim)^X$を商写像と呼ぶ。
+}
+
+\cor*{
+  商写像は全射である。
+}
+
+\dfn{写像と同値関係の両立}{
+  空でない集合$X$と$X$上の同値関係$\sim_X$、集合$Y$と$Y$上の同値関係$\sim_Y$を考える。
+
+  写像$f \in Y^X$が同値関係$\sim_X, \sim_Y$と両立するとは、以下を満たすことである。
+  \eq*{
+    \forall x_1, x_2 \in X \qty(x_1 \sim x_2 \rightarrow f(x_1) \sim_Y f(x_2))
+  }
+}
+
+\dfn{写像に付随する同値関係}{
+  写像$f \in Y^X$について、以下で定める$X$上の関係$\sim_{f}$は同値関係であり、これを写像$f$に付随する同値関係と呼ぶ。
+  \eq*{
+    x \sim_{f} y \defiff f(x) = f(y)
+  }
+}
+
+\cor*{
+  写像$f \in Y^X$について、$f$は$\sim_f, =_Y$と両立する。
+}
+
+\thm{両立}{
+  空でない集合$X$と$X$上の同値関係$\sim_{X}$、空でない集合$Y$と$Y$上の同値関係$\sim_{Y}$について、写像$f \in Y^X$が$\sim_{X}, \sim_{Y}$と両立することは、以下と必要十分である。
+  \eq*{
+    \exists h \in \qty(Y / \sim_{Y})^{X / \sim_{X}} \qty(\qty[]_{Y} \circ f = h \circ \qty[]_{X})
+  }
+
+  さらに、上で定まる写像$h$は一意である。
+}{
+  $\qty[]_{X}$は全射より、右逆写像$r$が存在する。
+
+  まず、必要性を示す。$h \coloneqq \qty[]_{Y} \circ f \circ r$を考える。
+
+  今、仮定より以下を満たす。
+  \eq*{
+    \forall x \in X / \sim_{X} \forall z, w \in x \qty(\qty[f(z)]_{Y} = \qty[f(w)]_{Y})
+  }
+
+  ゆえに、$\qty[]_{Y} \circ f = h \circ \qty[]_{X}$を満たす。\\*
+
+  十分性を示す。$\forall x, y \in X $について、$x \sim_{X} y$ならば、$\qty[f(x)]_{Y} = h(\qty[x]_{X}) = h(\qty[y]_{X}) = \qty[f(y)]_{Y}$
+
+  よって、$f(x) \sim_{Y} f(y)$\\*
+
+  一意であることを示す。２つ存在すると仮定すると、$h \circ \qty[]_{X} = h' \circ \qty[]_{X}$
+
+  右から$r$をかけて、$h = h'$。
+}
+
+\thm{標準分解}{
+  写像$f \in Y^X$について、全単射$\bar{f} \in \Im(f)^{X / \sim_{f}}$が存在する。
+}{
+  \thmref{両立}より、写像$h \in Y^{X / \sim_{f}}$が存在して、$\Im(h) = \Im(f)$。
+
+  単射であることを示す。$h([x]) = h([y])$のとき、$f(x) = f(y)$より、$[x] = [y]$
+
+  写像$\bar{f} \in \Im(f)^{X / \sim_{f}}$は全射となる。
+}
+
+
+\lsubsection{有限}
+
+\dfn{有限集合}{
+  集合$X$について、ある自然数$n \in \N$が存在して全単射$f \in X^n$が構成できるとき、$X$を有限集合と呼ぶ。
+  または、単に$X$は有限であると呼ぶ。
+}
+
+\lem{全射と要素数}{
+  $\forall n, m \in \N$について、$n$から$m$への全射が存在するならば、$m \leq n$
+}{
+  $n = 0$のとき、$m \neq 0$ならば全射が存在しない。$m = 0$より示される。\\*
+
+  ある$n$で成り立つとき、全射$f \in m^{s(n)}$が存在することを考える。
+
+  $0^{s(n)} = \varnothing$より、$m \neq 0$である。
+
+  $\exists k \in n \qty(f(k) = f(n))$のとき、自明な全射$f \rvert_n$を構成できて、仮定より$m \leq n \leq s(n)$
+
+  $\forall k \in n \qty(f(k) \neq f(n))$のとき、以下のような全射$g \in p(m)^n$を構成できる。
+  \eq*{
+    g(x) =
+    \begin{cases}
+      f(x) & \qty(f(x) < f(n)) \\*
+      p(f(x)) & \qty(f(x) > f(n))
+    \end{cases}
+  }
+
+  仮定より$p(m) \leq n$より、$m = s(p(m)) \leq s(n)$\\*
+
+  \thmref{数学的帰納法}より、任意の$n$について成り立つ。
+}
+
+\lem{単射と要素数}{
+  自然数$n, m \in \N$について、$n$から$m$への単射が存在するならば、$n \leq m$
+}{
+  $n = 0$のとき、明らか。
+
+  $n \neq 0$のとき、\thmref{単射と左逆写像}より$m$から$n$への左逆写像すなわち全射を構成できて、\lemref{全射と要素数}より$n \leq m$
+}
+
+\thm{鳩の巣原理}{
+  自然数$n, m \in \N$について、$m < n$ならば$n$から$m$への単射が存在しない。
+}{
+  \lemref{単射と要素数}の対偶である。
+}
+
+\lem*{
+  有限集合$X$について、全単射$f \in X^n$が構成できる自然数$n \in \N$は一意に定まる。
+}{
+  \lemref{全射と要素数}、\lemref{単射と要素数}より、背理法より示される。
+}
+
+\dfn{要素数}{
+  有限集合$X$について、\mlemref{0}より主張される自然数を要素数$\abs{X}$と呼ぶ。
+
+  また、集合$X$が有限集合であることを主張するときは、アリティ1の述語記号$\abs{X} < \infty$を用いる。
+}
+
+\lem{単射と有限}{
+  自然数$n$と集合$A$について、以下の２つは同値である。
+  \begin{enumerate}
+    \item $A$は有限集合であり、$\abs{A} \leq n$
+    \item 単射$f \in n^A$が存在する。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  全単射$f_1 \in \abs{A}^A$が存在して、単射$f_2 \in n^{\abs{A}}$が存在する。
+
+  ゆえに、単射$f_2 \circ f_1 \in n^A$が存在する。\\*
+
+  $2. \rightarrow 1.$を示す。
+
+  $n = 0$のとき、$n^A \neq \varnothing$より、$A = \varnothing$である。
+
+  ある$n$について成り立つとする。
+
+  $\forall a \in A \qty(f(a) \neq n)$のとき、自明な単射$\tilde{f} \in n^A$が存在する。よって$\abs{A} \leq n \leq s(n)$
+
+  $\exists a \in A \qty(f(a) = n)$のとき、単射$\tilde{f} \in n^{A \setminus \qty{a}}$が構成できる。
+
+  仮定より$\exists m \in \N \qty(m \leq n)$であり、全単射$g \in m^{A \setminus \qty{a}}$が存在する。
+
+  ここで、以下のような全単射$h \in s(m)^A$を構成できる。
+  \eq*{
+    h(x) =
+    \begin{cases}
+      m & \qty(x = a) \\*
+      g(f(x)) & \qty(x \neq a)
+    \end{cases}
+  }
+
+  $\abs{A} = s(m) \leq s(n)$を得るので成り立つ。
+}
+
+\cor*{
+  有限集合の像は有限集合である。
+
+  有限集合の部分集合は有限集合である。
+
+  有限集合の商集合は有限集合である。
+
+  有限集合の冪集合は有限集合である。
+
+  有限集合の直積集合は有限集合である。
+}
+
+\lem{要素数の和}{
+  有限集合$X, Y$について、$X \cap Y = \varnothing$ならば、$X \cup Y$は有限集合となり、以下が成り立つ。
+  \eq*{
+    \abs{X \cup Y} = \abs{X} + \abs{Y}
+  }
+}{
+  $X, Y$は有限より、全単射$f \in X^\abs{X}, f' \in Y^\abs{Y}$が存在する。
+
+  ゆえに、以下のような全単射$g \in \qty(X \cup Y)^{\abs{X} + \abs{Y}}$を構成できる。
+  \eq*{
+    g(x) =
+    \begin{cases}
+      g(x) & \qty(x < \abs{X}) \\*
+      g'(x - \abs{X}) & \qty(\abs{X} \leq x < \abs{X} + \abs{Y})
+    \end{cases}
+  }
+}
+
+\lem{要素数の和}{
+  有限集合$X, Y$について、$X \cup Y, X \cap Y$は有限集合となり、以下が成り立つ。
+  \eq*{
+    \abs{X \cup Y} + \abs{X \cap Y} = \abs{X} + \abs{Y}
+  }
+}{
+  単射$f \in X^{X \cap Y}$が構成できるので、\lemref{単射と有限}より$X \cap Y$は有限集合である。
+
+  \lemref{要素数の和}より、$\abs{X} = \abs{X \cap Y} + \abs{X \setminus Y}$
+
+  \lemref{要素数の和}より、$\abs{X \cup Y} = \abs{\qty(X \setminus Y) \cup Y} = \abs{X \setminus Y} + \abs{Y}$
+
+  したがって、$\abs{X \cup Y} + \abs{X \cap Y} + \abs{X \setminus Y} = \abs{X \setminus Y} + \abs{Y} + \abs{X}$
+
+  \dfnref{自然数の減法}より成り立つ。
+}
+
+\thm{有限有向集合の上界}{
+  空でない有向集合の有限部分集合$A$は、上界を持つ。
+}{
+  $\abs{A} = 1$のとき、$A$は唯一つの元を持ち、上界である。
+
+  $\abs{A} = 2$のとき、$a_0 \neq a_1$を用いて$A = \qty{a_0, a_1}$と書ける。有向集合であることより上界が存在する。
+
+  $\abs{A} = n$のとき成り立つとする。
+
+  $\abs{A} = s(n)$について、$A$のある元$a$を考える。集合$A \setminus \qty{a}$は要素数が$n$であるため、仮定より上界$a_n$を持つ。
+
+  ゆえに、今、集合$\qty{a, a_n}$は上界$a_{s(n)}$を持ち、推移律から$A$の上界となる。
+
+  要素数$\abs{A}$について、\thmref{数学的帰納法}より示される。
+}
+
+\thm{有限全順序集合の最大元}{
+  空でない全順序集合の有限部分集合$A$は、最大元と最小元を持つ。
+}{
+  $\abs{A} = 1$のとき、$A$は唯一つの元を持ち、最大元かつ最小元である。
+
+  $\abs{A} = 2$のとき、$a_0 \neq a_1$を用いて$A = \qty{a_0, a_1}$と書ける。全順序性より$a_0 > a_1 \lor a_0 < a_1$である。
+
+  $a_0 > a_1$のとき、最大元$a_0$、最小元$a_1$である。$a_0 < a_1$のとき、最大元$a_1$、最小元$a_0$である。
+
+  $\abs{A} = n$のとき成り立つとする。
+
+  $\abs{A} = s(n)$について、$A$のある元$a$を考える。集合$A \setminus \qty{a}$は要素数が$n$であるため、仮定より最大元$a_{\text{max}}$と最小元$a_{\text{min}}$を持つ。
+
+  ゆえに、$A$は最大元$\max \qty{a, a_{\text{max}}}$を持ち、$A$は最小元$\min \qty{a, a_{\text{min}}}$を持つ。
+
+  要素数$\abs{A}$について、\thmref{数学的帰納法}より示される。
+}
+
+\thm{自然数の上界と有限}{
+  $\N$の部分集合$A$について、$A$が上に有界ならば$A$は有限である。
+}{
+  上界$n$について考える。
+
+  $n = 0$のとき、$A \neq \varnothing$ならば全射が存在しないので、示される。
+
+  ある$n$で成り立つとき、$A$が有限であることを考える。
+
+  $s(n)$が上界で、$n$が上界でないとき、$s(n) \in A$である。
+
+  仮定より、$\exists m \in \N$で、全単射$f_0 \in \qty(A \setminus \qty{s(n)})^m$が存在する。
+
+  したがって、以下のような全単射$f \in A^{s(m)}$を構成できる。
+  \eq*{
+    f(x) =
+    \begin{cases}
+      f_0(x) & \qty(x \neq m) \\*
+      s(n) & \qty(x = m)
+    \end{cases}
+  }
+
+  \thmref{数学的帰納法}より、任意の$n$について成り立つ。
+}
+
+
+\lsubsection{可算}
+
+\dfn{可算}{
+  集合$X$について、$X$が空集合または全射$f \in X^\N$が存在するとき、$X$を可算集合と呼ぶ。
+  または、単に$X$は可算であると呼ぶ。
+
+  また、集合$X$が可算集合であることを主張するときは、アリティ1の述語記号$\abs{X} \leq \aleph_0$を用いる。
+}
+
+\cor*{
+  可算集合の部分集合は可算集合である。
+}
+
+\dfn{有限列}{
+  自然数$n \in \N$から集合$X$へのネットを、$X$上の有限列、または組、$n$-組と呼ぶ。
+}
+
+\dfn{点列}{
+  自然数$\N$から集合$X$へのネットを、$X$上の点列と呼ぶ。
+}
+
+\dfn{点列の部分列}{
+  単射な写像$\varphi \N^\N$を用いて表せる部分ネット$\qty(x_{\varphi(m)})_{m \in \N}$を点列$\qty(x_n)_{n \in \N}$の部分列と呼ぶ。
+}
+
+\dfn{単調列}{
+  全順序集合$X$上の点列$\qty(x_n)_{n \in \N}$について、以下のいずれかを満たす点列を単調列と呼ぶ。
+  \eqg*{
+    \forall n \in \N \qty(x_n < x_{s(n)}) \\*
+    \forall n \in \N \qty(x_n \leq x_{s(n)}) \\*
+    \forall n \in \N \qty(x_n > x_{s(n)}) \\*
+    \forall n \in \N \qty(x_n \geq x_{s(n)})
+  }
+
+  特にそれぞれ、第一式を満たす点列を狭義単調増加列、第二式を広義単調増加列、第三式を狭義単調減少列、第四式を広義単調減少列と呼ぶ。
+}
+
+\thm{無限集合は可算部分を含む}{
+  有限でない集合$X$について、単射$a \in X^\N$が存在する。
+}{
+  $\forall A \in \P(X) \setminus \qty{\varnothing} \exists a \in A \qty(a \in A)$である。
+
+  \thmref{選択公理が与える写像}より定まる写像$f \in X^{\P(X) \setminus \qty{\varnothing}}, f(X) \in A$を考える。
+
+  $X$は空でないので、$\exists a_0 \in X$である。
+
+  $\forall n \in \N$について、点列$a_{s(n)} \coloneqq f(X \setminus \qty{a_0, \cdots, a_n})$を考えることができる。
+
+  なぜなら、$\exists n \in \N \qty(X \setminus \qty{a_0, \cdots, a_n} = \varnothing)$とすると、$X$は有限となり仮定に反する。
+
+  定義より$\forall n, m \in \N \qty(a_n \neq a_m)$
+
+  単射$a \in X^\N$を持つ。
+}
+
+\thm{自然数の直積は可算}{
+  $\N \times \N$は可算である。
+}{
+  全単射$\varphi \in \N^{\N \times \N}, \varphi \qty(n, m) = \qty(\qty(n + m) \times \qty(n + m + 1)) \divisionsymbol 2 + n$が存在する。
+
+  ただし、$a \divisionsymbol b$を除算の商を表すものとする。
+}
+
+\thmf{\textit{Bernstein}の定理}{Bernsteinの定理}{
+  集合$A, B$について、$A$から$B$への単射$f$が存在して、$B$から$A$の単射$g$が存在するならば、$A$から$B$への全単射が存在する。
+}{
+  以下のような点列$\qty(C_n)_{n \in \N}$を考える。
+  \eq*{
+    \begin{cases}
+      C_0 \coloneqq A \setminus g(B) \\*
+      C_{s(n)} \coloneqq g(f(C_n))
+    \end{cases}
+  }
+
+  点列の値域全体の和集合$C \coloneqq \bigcup \qty{C_n \mid n \in \N}$を考える。
+
+  今、\thmref{De Morganの法則}より$A \setminus C \subset g(B)$と、$g$の単射性から、以下のような写像$h \in B^A$が構成できる。
+
+  \eq*{
+    h(x) \coloneqq
+    \begin{cases}
+      f(x) & \qty(x \in C) \\*
+      g^{-1}(x) & \qty(x \in A \setminus C)
+    \end{cases}
+  }\\*
+
+  単射でないと仮定すると、$x \in C_n \land y \in A \setminus C$について、
+  \eq*{
+    h(x) = h(y) \rightarrow g(f(x)) = y \in C_{s(n)}
+  }
+
+  矛盾するので、背理法より単射。\\*
+
+  $D \coloneqq \bigcup \qty{C_{s(n)} \mid n \in \N}$について、$D \subset g(B)$であり、\thmref{像の性質}より、
+  \eq*{
+    g^{-1}(D) = \bigcup \qty{g^{-1}(C_{s(n)}) \mid n \in \N} = \bigcup \qty{f(C_n) \mid n \in \N} = f(C)
+  }
+
+  今、$g(B) \subset A$より、
+  \eq*{
+    A \setminus C = A \setminus \qty(C_0 \cup D) = \qty(A \setminus C_0) \setminus D = \qty(A \setminus \qty(A \setminus g(B))) \setminus D = g(B) \setminus D
+  }
+
+  したがって$g$の単射性と\thmref{原像の性質}より
+  \eq*{
+    h(A \setminus C) = g^{-1}(A \setminus C) = g^{-1}(g(B) \setminus D) = B \setminus g^{-1}(D) = B \setminus f(C)
+  }
+
+  ゆえに全射。
+}
+
+\thm{濃度の比較可能定理}{
+  集合$A, B$について、単射$f \in B^A$または単射$f' \in A^B$が存在する。
+}{
+  以下で定義する半順序集合$\qty(\mathcal{M}, \subset)$を考える。
+  \eq*{
+    \mathcal{M} \coloneqq \qty{G \in \P \qty(X \times Y) \mid \forall \qty(x_1, y_1), \qty(x_2, y_2) \in G \qty(x_1 = x_2 \leftrightarrow y_1 = y_2)}
+  }
+
+  $\mathcal{M}$の全順序部分$C$を考える。
+
+  $\forall \qty(x_1, y_1), \qty(x_2, y_2) \in \bigcup C \exists G_1, G_2 \in C \qty(\qty(x_1, y_1) \in G_1 \land \qty(x_2, y_2) \in G_2)$である。
+
+  ここで$G_1 \subset G_2 \lor G_2 \subset G_1$より、$x_1 = x_2 \leftrightarrow y_1 = y_2$である。
+
+  ゆえに、$\bigcup C \in \mathcal{M}$は上界である。
+
+  したがって、$\mathcal{M}$は帰納的である。\\*
+
+  \thmref{Zornの補題}より、極大元$G_0$が存在する。
+
+  $G_0$によって特徴づけられる二項関係$R_0$を考える。
+
+  $\exists \qty(x, y) \in \qty(A \setminus \dom(R)) \times \qty(B \setminus \ran(R))$とする。
+
+  このとき、$G_1 = \qty{\qty(x, y)} \cup G_0 \in \mathcal{M}$となるので、$G_0$の極大性に反する。\\*
+
+  ゆえに、$A = \dom(R) \lor B = \ran(R)$である。
+
+  $A = \dom(R)$のとき、$G_0$の特徴づける写像は単射である。
+
+  $B = \ran(R)$のとき、$G_0$の特徴づける写像は全射である。\thmref{全射と右逆写像}より単射な右逆写像が存在する。
+}

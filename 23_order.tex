@@ -1,0 +1,529 @@
+\lsection{順序}
+
+\lsubsection{自己関係}
+
+\dfn{自己関係}{
+  空でない集合$X$について、$X$と$X$の間の関係を、明示的に$X$上の自己関係、または単に$X$上の関係と呼ぶ。
+}
+
+\dfn{反射的}{
+  空でない集合$X$上の関係$R$が反射的であるとは、以下を満たすことである。
+  \eq*{
+    \forall x \in X \qty(R(x, x))
+  }
+}
+
+\dfn{対称的}{
+  空でない集合$X$上の関係$R$が対称的であるとは、以下を満たすことである。
+  \eq*{
+    \forall x, y \in X\qty(R(x, y) \rightarrow R(y, x))
+  }
+}
+
+\dfn{反対称的}{
+  空でない集合$X$上の関係$R$が反対称的であるとは、以下を満たすことである。
+  \eq*{
+    \forall x, y \in X \qty(R(x, y) \land R(y, x) \rightarrow x = y)
+  }
+}
+
+\dfn{推移的}{
+  空でない集合$X$上の関係$R$が推移的であるとは、以下を満たすことである。
+  \eq*{
+    \forall x, y, z \in X \qty(R(x, y) \land R(y, z) \rightarrow R(x, z))
+  }
+}
+
+
+\lsubsection{前順序}
+
+\dfn{前順序}{
+  反射的かつ推移的な関係を、前順序と呼ぶ。
+
+  空でない集合$X$と$X$上の前順序$\preccurlyeq$について、順序対$\qty(X, \preccurlyeq)$を前順序集合と呼ぶ。または単に$X$と書き、前順序集合と集合どちらも表すものとする。
+
+  略記$\prec, \succcurlyeq, \succ$を以下のように定める。
+  \eqg*{
+    x \prec y \defiff x \preccurlyeq y \land x \neq y \\*
+    x \succcurlyeq y \defiff y \preccurlyeq x \\*
+    x \succ y \defiff y \prec x
+  }
+}
+
+\cor*{
+  \eqg*{
+    x \preccurlyeq y \leftrightarrow x \prec y \lor x = y \\*
+    x \succcurlyeq y \leftrightarrow x \succ y \lor x = y
+  }
+}
+
+\dfn{上界}{
+  前順序集合$P$について、その部分集合$A$を考える。
+
+  $A$が上に有界であるとは、以下を満たすことである。
+  \eq*{
+    \exists b \in P \forall a \in A \qty(a \preccurlyeq b)
+  }
+
+  このとき、$b$を$A$の上界と呼ぶ。
+}
+
+\dfn{下界}{
+  前順序集合$P$について、その部分集合$A$を考える。
+
+  $A$が下に有界であるとは、以下を満たすことである。
+  \eq*{
+    \exists b \in P \forall a \in A \qty(b \preccurlyeq a)
+  }
+
+  このとき、$b$を$A$の下界と呼ぶ。
+}
+
+\dfn{有界}{
+  前順序集合$P$について、その部分集合$A$を考える。
+
+  $A$が有界であるとは、$A$が上に有界かつ下に有界であることである。
+}
+
+\dfn{有向集合}{
+  前順序集合$\Lambda$について、任意の二元$\lambda, \mu \in \Lambda$から成る集合$\qty{\lambda, \mu}$が上に有界であるとき、前順序集合$\Lambda$を有向集合と呼ぶ。
+}
+
+\dfn{上方集合}{
+  有向集合$\Lambda$とその元$\lambda_0 \in \Lambda$について、集合$\Lambda_{\succcurlyeq \lambda_0}, \Lambda_{\succ \lambda_0}$を以下のように定める。
+  \eqg*{
+    \Lambda_{\succcurlyeq \lambda_0} \coloneqq \qty{\lambda \in \Lambda \mid \lambda_0 \preccurlyeq \lambda} \\*
+    \Lambda_{\succ \lambda_0} \coloneqq \qty{\lambda \in \Lambda \mid \lambda_0 \prec \lambda}
+  }
+}
+
+\dfn{前順序との両立}{
+  集合$X$と$X$上の前順序$\preccurlyeq_{X}$、集合$Y$と$Y$上の前順序$\preccurlyeq_{Y}$について、写像$f \in Y^X$が$\preccurlyeq_{X}, \preccurlyeq_{Y}$と両立するとは、以下を満たすことである。
+  \eq*{
+    \forall x, y \in X \qty(x \preccurlyeq_{X} y \rightarrow f(x) \preccurlyeq_{Y} f(y))
+  }
+}
+
+
+\lsubsection{半順序}
+
+\dfn{半順序}{
+  反対称的な前順序を、半順序と呼ぶ。
+
+  空でない集合$A$と$A$上の半順序$\preccurlyeq$について、順序対$\qty(A, \preccurlyeq)$を半順序集合と呼ぶ。または単に$A$と書き、半順序集合と集合どちらも表すものとする。
+}
+
+\cor*{
+  空でない集合$A$について、$\qty(A, \subset)$は半順序集合である。また、$\qty(A, \supset)$も半順序集合である。
+}
+
+\dfn{単調}{
+  半順序と両立する写像を単調である、または広義単調であると呼ぶ。
+}
+
+\dfn{極大元}{
+  半順序集合$A$について、以下の元$b$を$A$の極大元と呼ぶ。
+  \eq*{
+    b \in A \land \forall a \in A \qty(\lnot b \prec a)
+  }
+}
+
+\dfn{最大元}{
+  半順序集合$A$について、以下の元$b$を$A$の最大元と呼ぶ。
+  \eq*{
+    b \in A \land \forall a \in A \qty(a \preccurlyeq b)
+  }
+}
+
+\dfn{極小元}{
+  半順序集合$A$について、以下の元$b$を$A$の極小元と呼ぶ。
+  \eq*{
+    b \in A \land \forall a \in A \qty(\lnot b \succ a)
+  }
+}
+
+\dfn{最小元}{
+  半順序集合$A$について、以下の元$b$を$A$の最小元と呼ぶ。
+  \eq*{
+    b \in A \land \forall a \in A \qty(a \succcurlyeq b)
+  }
+}
+
+\cor*{
+  半順序集合$A$の最大元は、極大元である。
+}
+
+\cor{最大元の一意性}{
+  半順序集合$A$の最大元は存在するならば一意である。これは半順序の反対称性から従う。
+
+  ここから、半順序集合$A$の最大元$b$を$\max{A} \coloneqq b$と表す。
+}
+
+\cor*{
+  半順序集合$A$の最小元は、極小元である。
+}
+
+\cor{最小元の一意性}{
+  半順序集合$A$の最小元は存在するならば一意である。これは半順序の反対称性から従う。
+
+  ここから、半順序集合$A$の最小元$b$を$\min{A} \coloneqq b$と表す。
+}
+
+\dfn{上限}{
+  半順序集合$P$について、その部分集合$A$を考える。
+
+  \thmref{分出の公理図式}より定まる、$A$の上界全体の集合について、最小元が存在するとき、これを$A$の上限と呼び$\sup{A}$と表す。
+}
+
+\dfn{下限}{
+  半順序集合$P$について、その部分集合$A$を考える。
+
+  \thmref{分出の公理図式}より定まる、$A$の下界全体の集合について、最大元が存在するとき、これを$A$の下限と呼び$\inf{A}$と表す。
+}
+
+\dfn{束}{
+  以下を満たす半順序集合$P$を束と呼ぶ。
+  \eq*{
+    \forall x, y \in P \exists z, w \in P \qty(z = \sup \qty{x, y} \land w = \inf \qty{x, y})
+  }
+}
+
+\cor*{
+  束は有向集合である。
+}
+
+\dfn{全順序}{
+  以下を満たす空でない集合$X$上の半順序$\preccurlyeq$を全順序と呼ぶ。全順序であることを明示的に記号$\leq$で表す。
+  \eq*{
+    \forall x, y \in X \qty(x \preccurlyeq y \lor y \preccurlyeq x)
+  }
+
+  空でない集合$X$と$X$上の全順序$\leq$について、順序対$\qty(X, \leq)$を全順序集合と呼ぶ。または単に$X$と書き、全順序集合と集合どちらも表すものとする。
+
+  略記$<, \geq, >$を以下のように定める。
+  \eqg*{
+    x < y \defiff x \leq y \land x \neq y \\*
+    x \geq y \defiff y \leq x \\*
+    x > y \defiff y < x
+  }
+}
+
+\cor*{
+  全順序集合$A$の極大元は最大元であり、極小元は最小元である。
+}
+
+\cor*{
+  全順序集合は束である。
+}
+
+\dfn{区間}{
+  全順序集合$P$と$a, b \in P$について、以下で定める$P$の部分集合をそれぞれ、開区間$\sqty{a, b}$、閉区間$\qty[a, b]$と呼ぶ。
+  \eqg*{
+    \sqty{a, b} \coloneqq \qty{x \in P \mid a < x \land x < b} \\*
+    \qty[a, b] \coloneqq \qty{x \in P \mid a \leq x \land x \leq b}
+  }
+
+  開区間、閉区間をまとめて区間と呼ぶ。
+}
+
+
+\lsubsectionf{\textit{Zorn}の補題}{Zornの補題}
+
+\dfn{帰納的}{
+  半順序集合$\qty(P, \preccurlyeq)$を考える。$P$の任意の空でない部分集合$A$について、順序対$\qty(A, \preccurlyeq)$が全順序集合ならば$A$が上に有界となるとき、$P$は帰納的であると呼ぶ。
+}
+
+\lem*{
+  帰納的な半順序集合$\qty(X, \preccurlyeq)$について、以下の集合$\mathcal{T}$、すなわち$X$の全順序部分集合の全体を考える。
+  \eq*{
+    \mathcal{T} \coloneqq \qty{T \in \P(X) \mid T \neq \varnothing \land \forall x, y \in T \qty(x \preccurlyeq y \lor y \preccurlyeq x)}
+  }
+
+  以下の写像$U \in \P(X)^{\mathcal{T}}$を考える。
+  \eq*{
+    \forall T \in \mathcal{T} \qty(U(T) \coloneqq \qty{u \in X \mid \forall t \in T \qty(t \prec u)})
+  }
+
+  このとき、以下が成り立つ。
+  \eqg*{
+    \forall S \in \P(X) \forall T \in \mathcal{T} \qty(S \neq \varnothing \land S \subset T \rightarrow S \in \mathcal{T}) \\*
+    \forall T \in \mathcal{T} \qty(U(T) \cap T = \varnothing)
+  }
+}{
+  第一式は明らか。\\*
+
+  第二式について考える。
+
+  $\exists u \in U(T) \cap T$であるならば、$\qty(u \prec u)$より矛盾。背理法より、成り立つ。
+}
+
+\lem*{
+  帰納的な半順序集合$X$が極大元を持たないならば、以下を満たす写像$f \in X^{\qty{U(T) \mid T \in \mathcal{T}}}$が存在する。
+  \eq*{
+    f(U) \in U
+  }
+}{
+  帰納的であることより、$\forall T \in \mathcal{T}$に対して上界$u_T$が存在する。
+
+  今、$u_T$は極大元でないので、$\exists v \in X \qty(u_T \prec v)$である。推移律から、$v \in U(T)$である。
+
+  $\forall U \in \qty{U(T) \mid T \in \mathcal{T}} \exists T \in \mathcal{T} \exists v \in X \qty(v \in U(T) \land U(T) = T)$であるので、\thmref{選択公理が与える写像}より存在する。
+}
+
+\lem*{
+  帰納的な半順序集合$X$が極大元を持たないとき、以下の集合を考える。
+  \eqg*{
+    \mathcal{T}_0 \coloneqq \qty{T \in \mathcal{T} \mid \forall S \in \P(T) \setminus \qty{\varnothing} \qty(U(S) \setminus U(T) \neq \varnothing \rightarrow f(U(S)) \in T)} \\*
+    \mathcal{T}_1 \coloneqq \qty{T \in \mathcal{T}_0 \mid \forall S \in \mathcal{T}_0 \qty(T \setminus S \subset U(S))} \\*
+    T^* \coloneqq \bigcup \mathcal{T}_1
+  }
+
+  このとき、$T^* \in \mathcal{T}_1$である。
+}{
+  $\forall S \in \mathcal{T}_0$について、$\forall x \in T^* \setminus S \exists T \in \mathcal{T}_1 \qty(x \in T \setminus S \subset U(S))$である。
+
+  すなわち、$\forall S \in \mathcal{T}_0 \qty(T^* \setminus S \subset U(S))$\\*
+
+  $\forall x, y \in T^*$について、$\exists T \in \mathcal{T}_1 \subset \mathcal{T}_0 \subset \mathcal{T} \qty(x \in T)$である。
+
+  $y \in T$のとき、$x \preccurlyeq y \lor y \preccurlyeq x$である。
+
+  $y \notin T$のとき、$y \in T^* \setminus T \subset U(T)$より、$x \preccurlyeq y$である。
+
+  したがって、$T^* \in \mathcal{T}$である。\\*
+
+  $R \in \P \qty(T^*) \setminus \qty{\varnothing}$について、$\exists v \in U(R) \setminus U(T^*)$とする。
+
+  $\exists w \in T^* \exists T \in \mathcal{T}_1 \qty(\lnot w \prec v \land w \in T)$より、$\exists T \in \mathcal{T}_1 \qty(v \in U(R) \setminus U(T))$
+
+  $y \in R \cap U(T)$とすると、$v \in U(R)$より$y \prec v$であり、推移律から$v \in U(T)$となり矛盾。したがって、$R \cap U(T) = \varnothing$である。
+
+  $R \setminus T = R \cap \qty(R \setminus T) \subset R \cap \qty(T^* \setminus T) \subset R \cap U(T) = \varnothing$より、$R \setminus T = \varnothing$、すなわち$R \subset T$である。
+
+  $T \in \mathcal{T}_0$より、$f(U(R)) \in T \subset T^*$である。したがって、$T^* \in \mathcal{T}_0$であり、ただちに$T^* \in \mathcal{T}_1$を得る。
+}
+
+\lem*{
+  帰納的な半順序集合$X$が極大元を持たないとき、\mlemref{-1}より$T^* \in \mathcal{T}$であるので、以下の集合を考える。
+  \eq*{
+    T' \coloneqq T^* \cup \qty{f(U(T^*))}
+  }
+
+  このとき、$T' \in \mathcal{T}_1$である。
+}{
+  簡単のため、$u \coloneqq f(U(T^*))$と置く。
+
+  今、$u$は定義より$T'$の最大元となるので、$T' \in \mathcal{T}$である。\\*
+
+  $S \in \P \qty(T') \setminus \qty{\varnothing}$について、$U(S) \setminus U(T') \neq \varnothing$とする。
+
+  $u \in S$とすると、$U(S) = U(\qty{u}) = U(T')$より矛盾。したがって、$u \notin S$より、$S \subset T^*$を得る。
+
+  ゆえに、$U(T^*) \subset U(S)$であり、$U(S) \setminus U(T^*) \neq \varnothing$のとき、$f(U(S)) \in T^* \subset T'$を得る。
+
+  $U(S) \subset U(T^*)$のとき、$U(S) = U(T^*)$より、$f(U(S)) = u \in T'$
+
+  したがって、$T' \in \mathcal{T}_0$である。\\*
+
+  $\forall R \in \mathcal{T}_0$について考える。
+
+  $\exists v \in T^* \cap U(R)$のとき、$v \prec u$より$u \in U(R)$である。
+
+  \mlemref{-1}より$T' \setminus R \subset \qty(T^* \setminus R) \cup \qty{u} \subset U(R)$を得る。
+
+  $T^* \cap U(R) = \varnothing$のとき、\mlemref{-1}より$T^* \setminus R \subset U(R)$であるので$T^* \subset R$である。
+
+  $R \in \mathcal{T}_0$より、$U(T^*) \subset U(R) \lor u = f(U(T^*)) \in R$、すなわち$u \in U(R) \cup R$となる。
+
+  したがって、$T' \setminus R = \qty{u} \setminus R \subset U(R)$を得る。
+
+  $\forall R \in \mathcal{T}_0 \qty(T' \setminus R \subset U(R))$である。
+}
+
+\thmf{\textit{Zorn}の補題}{Zornの補題}{
+  帰納的な半順序集合には極大元が存在する。
+}{
+  極大元を持たないとすると、\mlemref{-1}より$T' \in \mathcal{T}_1$から$T' \subset \bigcup \mathcal{T}_1 = T^*$
+
+  定義より$u \in T' \setminus T^*$であり、矛盾する。
+
+  背理法より示される。
+}
+
+
+\lsubsection{フィルターとネット}
+
+\dfn{フィルター}{
+  半順序集合$\qty(P, \preccurlyeq)$と$P$の空でない部分集合$F$について、以下を満たすとき$F$を$P$のフィルターと呼ぶ。
+  \eqg*{
+    \forall x, y \in F \exists z \in F \qty(z \preccurlyeq x \land z \preccurlyeq y) \\*
+    \forall x \in F \forall y \in P \qty(x \preccurlyeq y \rightarrow y \in F)
+  }
+}
+
+\cor*{
+  フィルターは逆順序について有向集合である。
+}
+
+\dfn{細分}{
+  半順序集合$P$上のフィルター$F, G$に対して、$F \subset G$であるとき、$G$は$F$の細分であると呼ぶ。
+}
+
+\dfn{超フィルター}{
+  自身以外の細分を持たないフィルターを超フィルターと呼ぶ。
+}
+
+\thm{超フィルターの存在}{
+  任意のフィルターに対して、その細分である超フィルターが存在する。
+}{
+  フィルター$F$に対して、その細分の全体$\mathcal{F}$を考える。
+  半順序集合$\qty(\mathcal{F}, \subset)$を考える。
+
+  $\mathcal{F}$の全順序部分集合$A$に対して、$\bigcup A \in \mathcal{F}$である。
+
+  ゆえに、$\mathcal{F}$は帰納的である。
+
+  \thmref{Zornの補題}より極大元が存在する。これは超フィルターである。
+}
+
+\dfn{集合におけるフィルター}{
+  集合$X$について、半順序集合$\qty(\P(X) \setminus \qty{\varnothing}, \subset)$のフィルターを、集合$X$のフィルターと呼ぶ。
+}
+
+\cor*{
+  集合$X$のフィルター$\mathcal{F}$は以下を満たす。
+  \eqg*{
+    X \in \mathcal{F} \\*
+    \forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 \in \mathcal{F})
+  }
+}
+
+\thm{集合の超フィルター}{
+  集合$X$のフィルター$\mathcal{F}$について、以下の２つは同値である。
+  \begin{enumerate}
+    \item $\mathcal{F}$は超フィルターである
+    \item $\forall A \in \P(X) \qty(A \in \mathcal{F} \lor X \setminus A \in \mathcal{F})$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  $A \in \mathcal{F}$のとき明らかであるので、$A \notin \mathcal{F}$のときを考える。
+
+  $\mathcal{S} \coloneqq \qty{S \in \P(X) \mid A \cup S \in \mathcal{F}}$について、定義より$\mathcal{F} \subset \mathcal{S} \land X \setminus A \in \mathcal{S}$である。
+
+  今、$\forall S_1, S_2 \in \mathcal{S}$について、$A \cup \qty(S_1 \cap S_2) = \qty(A \cup S_1) \cap \qty(A \cup S_2) \in \mathcal{F}$より、$S_1 \cap S_2 \in \mathcal{S}$である。
+
+  $S \in \mathcal{S} \land T \in \P(X) \land S \subset T$とすると、$A \cup S \in \mathcal{F} \rightarrow A \cup T \in \mathcal{F}$より$T \in \mathcal{S}$
+
+  $A \cup X = X \in \mathcal{F}$より、$X \in \mathcal{S}$である。すなわち、$\mathcal{S} \neq \varnothing$
+
+  $\varnothing \notin \mathcal{S}$より、$\mathcal{S}$はフィルターでありかつ$\mathcal{F}$の細分である。
+
+  ここで、$\mathcal{F}$は超フィルターであるので$X \setminus A \in \mathcal{S} = \mathcal{F}$\\*
+
+  $2. \rightarrow 1.$を示す。
+
+  超フィルターでないとすると、$\mathcal{F}$の細分$\mathcal{F'}$が存在して、$\exists A \in \mathcal{F'} \qty(A \notin \mathcal{F} \land A \in \mathcal{F'})$である。
+
+  仮定より、$X \setminus A \in \mathcal{F} \subset \mathcal{F'}$であり、$\varnothing = A \cap \qty(X \setminus A) \in \mathcal{F'}$よりフィルターの定義に矛盾。背理法より示される。
+}
+
+\dfn{ネット}{
+  有向集合$\Lambda$から集合$X$への写像を、$X$上のネットと呼ぶ。
+
+  ネットは、明示的に$\qty(x_\lambda)_{\lambda \in \Lambda}$と表す。このとき、$x_\lambda$は$X$上の元で、$\lambda \in \Lambda$での値を表す。
+
+  また誤解のない限り、$\qty(x_\lambda)_{\lambda \in \Lambda}$で値域を表す。
+}
+
+\dfn{部分ネット}{
+  集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$と有向集合$M$について、写像$\varphi \in \Lambda^M$が以下を満たすとき、$\qty(x_{\varphi(\mu)})_{\mu \in M}$を$\qty(x_\lambda)_{\lambda \in \Lambda}$の部分ネットと呼ぶ。
+  \eqg*{
+    \forall \mu_1, \mu_2 \in M \qty(\mu_1 \preccurlyeq \mu_2 \rightarrow \varphi(\mu_1) \preccurlyeq \varphi(\mu_2)) \\*
+    \forall \lambda \in \Lambda \exists \mu \in M \qty(\lambda \preccurlyeq \varphi(\mu))
+  }
+}
+
+\dfn{普遍}{
+  集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が以下を満たすとき、$\qty(x_\lambda)_{\lambda \in \Lambda}$は普遍であると呼ぶ。
+  \eq*{
+    \forall A \in \P(X) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset A \lor \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset X \setminus A)
+  }
+}
+
+\thm{ネットの定めるフィルター}{
+  集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、以下で定める集合系$\mathcal{F}$は$X$のフィルターである。
+  \eq*{
+    \mathcal{F} \coloneqq \qty{F \in \P(X) \mid \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset F)}
+  }
+}{
+  明らかに$\varnothing \notin \mathcal{F} \land X \in \mathcal{F}$である。\\*
+
+  $F_1, F_2 \in \mathcal{F}$について、定義より$\exists \lambda_1, \lambda_2 \subset \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_1}} \subset F_1 \land \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_2}} \subset F_2)$である。
+
+  $\Lambda$が有向集合であることから、$\exists \lambda_3 \in \Lambda \qty(\lambda_1 \preccurlyeq \lambda_3 \land \lambda_2 \preccurlyeq \lambda_3)$であり、$\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_3}} \subset F_1 \cap F_2$。
+
+  ゆえに$F_1 \cap F_2 \in \mathcal{F}$である。\\*
+
+  $\forall F \in \mathcal{F} \forall G \subset \P(X)$について、$F \subset G$ならば定義より明らかに$G \in \mathcal{F}$
+}
+
+\lem*{
+  集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$と\thmref{ネットの定めるフィルター}の定めるフィルター$\mathcal{F}$を考える。
+
+  このとき、$\mathcal{F}$の任意の細分$\mathcal{F'}$について、以下が成り立つ。
+  \eq*{
+    \forall F \in \mathcal{F'} \forall \lambda_0 \in \Lambda \exists \lambda \in \Lambda \qty(\lambda_0 \preccurlyeq \lambda \land x_\lambda \in F)
+  }
+}{
+  $\exists F \in \mathcal{F'} \exists \lambda_0 \in \Lambda \forall \lambda \in \Lambda \qty(\lambda_0 \preccurlyeq \lambda \rightarrow x_\lambda \notin F)$とする。
+
+  今、$\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \in \mathcal{F} \subset \mathcal{F'}$であるので、$\varnothing = F \cap \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \in \mathcal{F'}$より、フィルターの定義に矛盾。
+
+  背理法より示される。
+}
+
+\thm{フィルターの定める部分ネット}{
+  集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$と、\thmref{ネットの定めるフィルター}の定めるフィルター$\mathcal{F}$について考える。
+
+  $\mathcal{F}$の任意の細分$\mathcal{F'}$に対して、ある部分ネット$\qty(x_{\varphi(\mu)})_{\mu \in M}$が存在して、その部分ネットの\thmref{ネットの定めるフィルター}から定まるフィルターは$\mathcal{F'}$の細分となる。
+}{
+  $M \coloneqq \qty{\qty(\lambda, F) \in \Lambda \times \mathcal{F'} \mid x_\lambda \in F}$を考える。
+
+  $M$上の前順序$\forall \qty(\lambda_1, F_1), \qty(\lambda_2, F_2) \in M \qty(\qty(\lambda_1, F_1) \preccurlyeq \qty(\lambda_2, F_2) \defiff \lambda_1 \preccurlyeq \lambda_2 \land F_1 \supset F_2)$を考える。\\*
+
+  $\qty(\lambda_1, F_1), \qty(\lambda_2, F_2) \in M$とする。
+
+  $\mathcal{F'}$はフィルターより$F_1 \cap F_2 \in \mathcal{F'}$
+
+  $\Lambda$は有向集合であるので、$\exists \lambda_3 \in \Lambda \qty(\lambda_1 \preccurlyeq \lambda_3 \land \lambda_2 \preccurlyeq \lambda_3)$である。
+
+  \mlemref{-1}より$\exists \lambda_4 \in \Lambda \qty(\lambda_3 \preccurlyeq \lambda_4 \land x_{\lambda_4} \in F_1 \cap F_2)$
+
+  $\qty(\lambda_4, F_1 \cap F_2)$は、$\qty{\qty(\lambda_1, F_1), \qty(\lambda_2, F_2)}$の上界であるので、$M$は有向集合である。\\*
+
+  ここで、写像$\varphi \in \Lambda^M$を$\varphi \qty(\lambda, F) \coloneqq \lambda$として定める。
+
+  \mlemref{-1}より$\forall \lambda \in \Lambda \exists F \in \mathcal{F'} \exists \lambda_1 \in \Lambda \qty(\lambda \preccurlyeq \lambda_1 = \varphi(\lambda_1, F) \land \qty(\lambda_1, F) \in M)$である。
+
+  したがって、$\qty(x_{\varphi(\mu)})_{\mu \in M}$は部分ネットである。\\*
+
+  今、\mlemref{-1}より$\forall F \in \mathcal{F'} \exists \lambda_0 \in \Lambda \qty(\qty(\lambda_0, F) \in M)$
+
+  $\forall \qty(\lambda', F') \in M$について、$\qty(\lambda_0, F) \preccurlyeq \qty(\lambda', F')$ならば、$x_{\lambda'} \in F' \subset F$となる。
+
+  よって、$F \in \qty{F \in \P(X) \mid \exists \mu_0 \in M \qty(\qty(x_{\varphi(\mu)})_{\mu \in M_{\succcurlyeq \mu_0}} \subset F)}$
+}
+
+\thm{普遍部分ネットの存在}{
+  任意のネットは、普遍な部分ネットを持つ。
+}{
+  ネットに対して\thmref{ネットの定めるフィルター}の定めるフィルター$\mathcal{F}$が存在する。
+
+  \thmref{超フィルターの存在}より$\mathcal{F}$の細分である超フィルター$\mathcal{U}$が存在する。
+
+  \thmref{フィルターの定める部分ネット}より、\thmref{ネットの定めるフィルター}の定めるフィルターが$\mathcal{U}$に一致する部分ネットが存在する。
+
+  \thmref{集合の超フィルター}より、この部分ネットは普遍である。
+}
+

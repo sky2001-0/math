@@ -1,0 +1,217 @@
+\lsection{整数}
+
+\lsubsection{整数の構成}
+
+\lem{整数の準備：前順序}{
+  直積集合$\N^2$上で以下の自己関係$\preccurlyeq_Z$は前順序である。
+  \eq*{
+    \forall \qty(a_1, a_2), \qty(b_1, b_2) \in \N^2 \qty(\qty(a_1, a_2) \preccurlyeq_Z \qty(b_1, b_2) \defiff a_1 + b_2 \leq b_1 + a_2)
+  }
+}{
+  反射的である。\\*
+
+  推移的であることを示す。
+  \eq*{
+    a_1 + b_2 \leq b_1 + a_2 \land b_1 + c_2 \leq c_1 + b_2 \rightarrow a_1 + b_2 + b_1 + c_2 \leq b_1 + a_2 + c_1 + b_2
+  }
+
+  \lemref{自然数の順序の加法による保存}の対偶をとって、
+  \eq*{
+    a_1 + c_2 \leq c_1 + a_2
+  }
+
+  したがって、前順序である。
+}
+
+\lem{整数の準備：前順序の全域性}{
+  直積集合$\N^2$上で\lemref{整数の準備：前順序}の前順序$\preccurlyeq_Z$は以下を満たす。
+  \eq*{
+    \forall a, b \in \N^2 \qty(a \preccurlyeq_Z b \lor b \preccurlyeq_Z a)
+  }
+}{
+  \thmref{自然数の全順序}より明らか。
+}
+
+\lem{整数の準備：加法可換群}{
+  直積集合$\N^2$上の以下の演算$+$は可換群をなす。
+  \eq*{
+    \forall \qty(a_1, a_2), \qty(b_1, b_2) \in \N^2 \qty(\qty(a_1, a_2) + \qty(b_1, b_2) \defiff \qty(a_1 + b_1, a_2 + b_2))
+  }
+}{
+  結合法則は、\thmref{自然数は可換モノイド}より明らか。
+
+  $\qty(0, 0)$は単位元である。
+
+  $\qty(a_1, a_2)$に対して、$\qty(a_2, a_1)$は逆元である。
+
+  交換法則は、\thmref{自然数は可換モノイド}より明らか。
+}
+
+\lem{整数の準備：可換環}{
+  \lemref{整数の準備：加法可換群}の定める可換群$\qty(\N^2, +)$上の以下の演算$\times$は可換環をなす。
+  \eq*{
+    \forall \qty(a_1, a_2), \qty(b_1, b_2) \in \N^2 \qty(\qty(a_1, a_2) \times \qty(b_1, b_2) \defiff \qty(a_1 b_1 + a_2 b_2, a_1 b_2 + a_2 b_1))
+  }
+}{
+  結合法則を示す。
+  \eqa*{
+    \qty(a_1, a_2) \times \qty(\qty(b_1, b_2) \times \qty(c_1, c_2))
+    &= \qty(a_1, a_2) \times \qty(b_1 c_1 + b_2 c_2, b_1 c_2 + b_2 c_1) \\*
+    &= \qty(a_1 \qty(b_1 c_1 + b_2 c_2) + a_2 \qty(b_1 c_2 + b_2 c_1) , a_1 \qty(b_1 c_2 + b_2 c_1) + a_2 \qty(b_1 c_1 + b_2 c_2)) \\*
+    &= \qty(\qty(a_1 b_1 + a_2 b_2) c_1 + \qty(a_1 b_2 + a_2 b_1) c_2 , \qty(a_1 b_1 + a_2 b_2) c_2 + \qty(a_1 b_2 + a_2 b_1) c_1) \\*
+    &= \qty(\qty(a_1, a_2) \times \qty(b_1, b_2)) \times \qty(c_1, c_2)
+  }
+
+  $\qty(1, 0)$は単位元である。\\*
+
+  交換法則は、\thmref{自然数は可換モノイド}より明らか。\\*
+
+  右分配法則を示す。
+  \eqa*{
+    \qty(\qty(a_1, a_2) + \qty(b_1, b_2)) \times \qty(c_1, c_2)
+    &= \qty(a_1 + b_1, a_2 + b_2) \times \qty(c_1, c_2) \\*
+    &= \qty(\qty(a_1 + b_1) c_1 + \qty(a_2 + b_2) c_2, \qty(a_1 + b_1) c_2 + \qty(a_2 + b_2) c_1) \\*
+    &= \qty(a_1 c_1 + a_2 c_2 + b_1 c_1 + b_2 c_2, a_1 c_2 + a_2 c_1 + b_1 c_2 + b_2 c_1) \\*
+    &= \qty(a_1, a_2) \times \qty(c_1, c_2) + \qty(b_1, b_2) \times \qty(c_1, c_2)
+  }
+
+  左分配法則は、右分配法則と交換法則より示される。
+}
+
+\lem{整数の準備：同値類}{
+  直積集合$\N^2$上で以下の自己関係$\sim_Z$は同値類である。
+  \eq*{
+    \forall \qty(a_1, a_2), \qty(b_1, b_2) \in \N^2 \qty(\qty(a_1, a_2) \sim_Z \qty(b_1, b_2) \defiff \qty(a_1, a_2) \preccurlyeq \qty(b_1, b_2) \land \qty(b_1, b_2) \preccurlyeq \qty(a_1, a_2))
+  }
+}{
+  \lemref{整数の準備：前順序}より前順序。明らかに対称的であるので、同値類である。
+}
+
+\lem{整数の準備：両立}{
+  直積集合$\N^2$上で\lemref{整数の準備：同値類}の同値類$\sim_Z$は、\lemref{整数の準備：前順序}の前順序、\lemref{整数の準備：加法可換群}の加法、\lemref{整数の準備：可換環}の乗法のそれぞれと両立する。
+}{
+  前順序と両立することは、$\sim_Z$の定義と前順序の推移性より明らか。\\*
+
+  $\qty(a_1, a_2) \sim_Z \qty(a'_1, a'_2) \land \qty(b_1, b_2) \sim_Z \qty(b'_1, b'_2)$とする。
+
+  $\qty(a_1 + b_1) + \qty(a'_2 + b'_2) = \qty(a_1 + a'_2) + \qty(b_1 + b'_2) = \qty(a'_1 + a_2) + \qty(b'_1 + b_2) = \qty(a'_1 + b'_1) + \qty(a_2 + b_2)$より成り立つ。\\*
+
+  $\qty(a_1, a_2) \sim_Z \qty(a'_1, a'_2) \land \qty(b_1, b_2) \sim_Z \qty(b'_1, b'_2)$とする。
+  \eqa*{
+    a_2 \qty(b_2 + b'_1) &= a_2 \qty(b_1 + b'_2) \\*
+    a_2 \qty(b_2 + b'_1) + a'_1 b'_1 &= a_2 \qty(b_1 + b'_2) + a'_1 b'_1 \\*
+    a_2 b_2 + \qty(a_2 + a'_1) b'_1 &= a_2 \qty(b_1 + b'_2) + a'_1 b'_1 \\*
+    a_2 b_2 + \qty(a_1 + a'_2) b'_1 &= a_2 \qty(b_1 + b'_2) + a'_1 b'_1 \\*
+    a_2 b_2 + \qty(a_1 + a'_2) b'_1 + a_1 b_2 + a'_1 b'_2 &= a_2 \qty(b_1 + b'_2) + a'_1 b'_1 + a_1 b_2 + a'_1 b'_2 \\*
+    a_2 b_2 + a_1 \qty(b'_1 + b_2) + a'_2 b'_1 + a'_1 b'_2 &= a_2 b_1 + \qty(a'_1 + a_2) b'_2 + a'_1 b'_1 + a_1 b_2 \\*
+    a_2 b_2 + a_1 \qty(b_1 + b'_2) + a'_2 b'_1 + a'_1 b'_2 &= a_2 b_1 + \qty(a_1 + a'_2) b'_2 + a'_1 b'_1 + a_1 b_2 \\*
+    a_1 b_1 + a_2 b_2 + a_1 b'_2 + a'_1 b'_2 + a'_2 b'_1 &= a'_1 b'_1 + a'_2 b'_2 + a_1 b'_2 + a_1 b_2 + a_2 b_1
+  }
+  \dfnref{自然数の減法}より
+  \eq*{
+    a_1 b_1 + a_2 b_2 + a'_1 b'_2 + a'_2 b'_1 = a_1 b_2 + a_2 b_1 + a'_1 b'_1 + a'_2 b'_2
+  }
+}
+
+\dfn{整数}{
+  \lemref{整数の準備：両立}より定まる商マグマ$\N^2 / \sim_Z$を整数と呼び、$\Z$で表す。
+  また、その元も整数と呼ぶ。
+
+  定義より$\Z$は可換環である。
+}
+
+
+\lsubsection{整数の性質}
+
+\lem*{
+  可換環$\Z$は零環でない。
+}{
+  $0_\Z = \qty[\qty(0, 0)], 1_\Z = \qty[\qty(1, 0)]$より明らか。
+}
+
+\lem{整数の全順序}{
+  \lemref{整数の準備：両立}より与えられる$\Z$上の前順序$\leq$は全順序である。
+}{
+  $\sim_Z$の定義より反対称的である。
+
+  \lemref{整数の準備：前順序の全域性}より全順序である。
+}
+
+\thm{順序環としての整数}{
+  $\qty(\Z, \leq)$は順序環である。すなわち$\Z$は零環でない可換環で、$\leq$は全順序であり、かつ以下を満たす。
+  \eqg*{
+    \forall a, b, c \in \Z \qty(a \leq b \rightarrow a + c \leq b + c) \\*
+    \forall a, b \in \Z \qty(0_\Z < a \land 0_\Z < b \rightarrow 0_\Z < a b)
+  }
+}{
+  \lemref{整数の全順序}より全順序。\mlemref{-2}より零環でない。\\*
+
+  第一式について、$a = \qty[\qty(a_1, a_2)], b = \qty[\qty(b_1, b_2)], c = \qty[\qty(c_1, c_2)]$として、\lemref{自然数の順序の加法による保存}より、
+  \eq*{
+    a_1 + b_2 < a_2 + b_1 \rightarrow \qty(a_1 + c_1) + \qty(b_2 + c_2) < \qty(a_2 + c_2) + \qty(b_1 + c_1)
+  }
+
+  第二式について、$0_\Z < a, 0_\Z < b$より、\dfnref{自然数の減法}より$a = \qty[\qty(a', 0)], b = \qty[\qty(b', 0)]$と置ける。
+  \eq*{
+    a b = \qty[\qty(a', 0)] \times \qty[\qty(b', 0)] = \qty[\qty(a' b', 0)] > 0
+  }
+}
+
+\lem*{
+  写像$\varphi \in \Z^\N, \varphi(n) = \qty[\qty(n, 0)]$は以下を満たす。
+  \begin{enumerate}
+    \item 単射
+    \item 加法についてモノイド準同型
+    \item 乗法についてモノイド準同型
+    \item 全順序と両立
+  \end{enumerate}
+}{
+  定義より明らか。
+}
+
+\dfn{自然数の整数への埋め込み}{
+  \mlemref{0}の写像$\varphi$について、像$\varphi(\N)$を誤解のない範囲で自然数$\N$と呼ぶ。
+}
+
+\cor*{
+  \eq*{
+    \N \subset \Z
+  }
+}
+
+\thmf{整数は\textit{Euclid}整域}{整数はEuclid整域}{
+  整数$\Z$は\textit{Euclid}整域である。
+}{
+  以下で定める写像$\sign \in \qty{1, -1}^\Z$を考える。
+  \eq*{
+    \sign(x) =
+    \begin{cases}
+      1 & \qty(x \geq 0) \\*
+      -1 & \qty(x < 0)
+    \end{cases}
+  }
+
+  写像$\abs{} \in \Z^\Z, \abs{x} = x \sign(x)$を考える。
+
+  ここで、$\abs{\Z} = \N$である。
+
+  $\forall a \in \Z \forall b \in \Z \setminus \qty{0}$について、\dfnref{自然数の除法}より以下が成り立つ。
+  \eq*{
+    \exists q, r \in \N \qty(\abs{a} = \abs{b} q + r \land r < \abs{b})
+  }
+
+  ゆえに、
+  \eq*{
+    a = b \qty(\sign(a) \sign(b) q) + \qty(\sign(a) r) \land \abs{\sign(a) r} < \abs{b}
+  }
+
+  また、$\forall a, b \in \Z \setminus \qty{0}$について、$1 \leq \abs{a} \leq \abs{a b}$
+}
+
+\lem{整数の乗法の簡約則}{
+  \eq*{
+    \forall a, b, c \in \Z \qty(c \neq 0 \land a c = b c \rightarrow a = b)
+  }
+}{
+  \thmref{整数はEuclid整域}および\lemref{簡約則}より明らか。
+}

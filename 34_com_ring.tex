@@ -1,0 +1,415 @@
+\lsection{可換環論}
+
+\lsubsection{倍元と約元}
+
+\dfn{倍元}{
+  可換環$R$と元$a, b \in R$について、以下を満たすとき、$a$は$b$の倍元、または$b$は$a$の約元と呼ぶ。
+  \eq*{
+    \exists c \in R \qty(a = b c)
+  }
+}
+
+\lem{倍元と単項イデアル}{
+  可換環$R$について、以下の３つは同値である。
+  \begin{enumerate}
+    \item $a$は$b$の倍元
+    \item $a \in \aqty{b}$
+    \item $\aqty{a} \subset \aqty{b}$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  $\exists c \in R \qty(a = c b)$より、$a \in \aqty{b}$である。\\*
+
+  $2. \rightarrow 3.$を示す。
+
+  $\forall a' \in \aqty{a} \exists c' \in R \qty(a' = c' a)$である。
+
+  仮定より$\exists c \in R \qty(a = c b)$である。ゆえに、$a' = \qty(c' c) b$\\*
+
+  $3. \rightarrow 1.$を示す。
+
+  $a$は$b$の倍元でないとする。
+
+  $a \in \aqty{a} \setminus \aqty{b} \neq \varnothing$より、対偶法より満たす。
+}
+
+\dfn{既約元}{
+  可換環$R$の元$a$について、以下を満たすとき、$a$を既約元と呼ぶ。
+  \eq*{
+    a \neq 0_R \land \forall x, y \in R \qty(x y = a \rightarrow x \in R^\times \lor y \in R^\times)
+  }
+}
+
+\dfn{単項イデアル}{
+  可換環$R$と、元$a \in R$について、以下で定まる集合$\aqty{a}$はイデアルである。
+  \eq*{
+    \aqty{a} \coloneqq \qty{r a \mid r \in R}
+  }
+
+  このように構成されるイデアルを単項イデアルと呼ぶ。
+}
+
+\cor*{
+  可換環$R$と、元$a \in R$、イデアル$I$について、以下が成り立つ。
+  \eq*{
+    a \in I \rightarrow \aqty{a} \subset I
+  }
+}
+
+
+\lsubsection{整域}
+
+\dfn{整域}{
+  可換環$D$が以下を満たすとき、$D$を整域と呼ぶ。
+  \eq*{
+    D \neq \qty{0_D} \land \forall x, y \in D \qty(x y = 0_D \rightarrow x = 0_D \lor y = 0_D)
+  }
+}
+
+\cor*{
+  整域$R$の部分環$S$は整域である。
+}
+
+\lem{簡約則}{
+  整域$D$について以下が成り立つ。
+  \eq*{
+    \forall a, b, c \in D \qty(c \neq 0_D \rightarrow \qty(a c = b c \rightarrow a = b))
+  }
+}{
+  \lemref{環の性質}より、
+  \eq*{
+    0_D = a c + -(b c) = a c + (-b) c = \qty(a + (-b)) c
+  }
+  整域より、$a + (-b) = 0_D$。ゆえに、$a = b$
+}
+
+\dfn{素イデアル}{
+  可換環$R$のイデアル$I$について、以下を満たすとき、$I$を素イデアルと呼ぶ。
+  \eq*{
+    R \neq I \land \forall a, b \in R \qty(a b \in I \rightarrow a \in I \lor b \in I)
+  }
+}
+
+\cor*{
+  整域$D$のイデアル$\qty{0_D}$は素イデアルである。
+}
+
+\thm{素イデアルと整域}{
+  可換環$R$とイデアル$I$について、以下の３つは同値である。
+  \begin{enumerate}
+    \item $I$は素イデアル
+    \item 差集合$R \setminus I$は乗法について$R$の部分モノイド
+    \item 剰余環$R / I$は整域
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  $\forall a, b \in R \setminus I$について、$I$は素イデアルより対偶法から$ab \in R \setminus I$である。
+
+  素イデアルより、$1_R \notin I$より成り立つ。\\*
+
+  $2. \rightarrow 3.$を示す。
+
+  $R \setminus I$が部分モノイドであることから$1_R \notin I$である。ゆえに$R / I \neq \qty{0_R}$
+
+  $\forall a, b \in R$について、$\qty[a b] = \qty[a] \qty[b] = 0_{R / I}$とする。
+
+  $R \setminus I$のモノイド性と対偶法より$\qty[a] = 0_{R / I} \lor \qty[b] = 0_{R / I}$である。\\*
+
+  $3. \rightarrow 1.$を示す。
+
+  $\forall a, b \in R \qty(a b \in I)$とする。
+
+  $\qty[a] \qty[b] = \qty[a b] = 0_{R / I}$より、整域であることから、$\qty[a] = 0_{R / I} \lor \qty[b] = 0_{R / I}$すなわち$a \in I \lor b \in I$
+}
+
+\thm{極大イデアルは素イデアル}{
+  可換環$R$について、極大イデアル$I$は素イデアルである。
+}{
+  $\forall x, y \in R \qty(x y \in I)$とする。
+
+  $x \in I$のとき成り立つ。
+
+  $x \notin I$のとき、$J \coloneqq \qty{r x + i \mid \qty(r, i) \in R \times I}$はイデアルである。
+
+  ここで、$I$は極大かつ$I \subsetneq J$より、$J = R$である。
+
+  したがって$\exists \qty(r, i) \in R \times I \qty(1_R = r x + i)$である。
+
+  ゆえに、$y = r x y + i y \in I$である。
+}
+
+\dfn{素元}{
+  可換環$R$と元$a \in R \setminus \qty{0_R}$について、単項イデアル$\aqty{a}$が素イデアルとなるとき、$a$を素元と呼ぶ。
+}
+
+\lem{整域の素元は可逆でない既約元}{
+  整域$D$について、素元は可逆でない既約元である。
+}{
+  素元$a$が可逆とすると、$1_D = a^{-1} a \in \aqty{a}$であるので、$D = \aqty{a}$より素イデアルではない。背理法より可逆でない。\\*
+
+  素元$a$が既約元でないとする。$\exists x, y \in D \setminus D^\times \qty(x y = a)$
+
+  $x y = a \in \aqty{a}$であるので、素イデアルの定義から$\exists r \in D \qty(x = r a \lor y = r a)$である。
+
+  $x = r a$のとき、可換性から$a \qty(r y - 1_D) = 0_D$である。$D$は整域で$a \neq 0_D$より、$r y = 1_D$である。これは$y \notin D^\times$に反する。
+
+  $y = r a$のときも同様。背理法より既約元である。
+}
+
+
+\lsubsection{一意分解整域}
+
+\dfn{素元の全体}{
+  可換環$R$について、素元の全体を$\mathcal{P}(R)$と表す。
+}
+
+\dfn{素元分解}{
+  整域$D$と元$a \in D$について、以下が成り立つとき、$a$は素元分解可能であると呼ぶ。
+  \begin{itemize}
+    \item $\exists n \in \N \exists p \in \mathcal{P}(D)^n \exists u \in D^\times \qty(a = u \prod_{m = 0}^n p(m))$
+  \end{itemize}
+}
+
+\dfn{一意分解整域}{
+  整域$D$について、以下が成り立つとき、$D$を一意分解整域、またはUFD(unique factorization domain)と呼ぶ。
+  \begin{itemize}
+    \item $\forall a \in D \setminus \qty{0_D}$は素元分解可能であり、各$p(m)$の順序交換と$u$および各$p(m)$の可逆元倍を除いて一意である。
+  \end{itemize}
+}
+
+\lem{UFDの可逆でない既約元は素元}{
+  一意分解整域$D$について、可逆でない既約元は素元である。
+}{
+  可逆でない既約元$a \in D$を考える。
+
+  $a$は既約元より$a \neq 0_D$である。したがって、素元分解$a = u \prod_{m = 0}^n p(m)$ができる。
+
+  $n = 0$とすると、$a = u$より可逆でないことに反する。
+
+  $n = 2$とすると、$a u^{-1}$は既約であることより、$p(0)$または$p(1)$が可逆元であるが、\lemref{整域の素元は可逆でない既約元}に反する。
+
+  $n \geq 3$についても帰納的に否定される。
+
+  よって、$n = 1$である。すなわち$a = u p(0)$と表せる。
+
+  $\aqty{a} = \aqty{p(0)}$であるので、$a$は素元。
+}
+
+\dfn{単項イデアル整域}{
+  整域$D$のイデアルが全て単項イデアルであるとき、$D$を単項イデアル整域、またはPID(principal ideal domain)と呼ぶ。
+}
+
+\thmf{PIDは\textit{Noether}}{PIDはNoether}{
+  単項イデアル整域$D$について、$\P(D)$上の以下を満たす点列$\qty(I_n)_{n \in \N}$を考える。
+  \begin{itemize}
+    \item $\forall n \in \N$について$I_n$はイデアル
+    \item $I_n \subset I_{s(n)}$
+  \end{itemize}
+
+  このとき、以下が成り立つ。
+  \eq*{
+    \exists N \in \N \forall n \in \N_{\geq N} \qty(I_n = I_N)
+  }
+}{
+  $J \coloneqq \bigcup \qty{I_n \mid n \in \N}$はイデアルである。
+
+  単項イデアル整域であるので、$\exists a \in D \qty(\aqty{a} = J)$
+
+  $a \in J$より、$\exists N \in \N \qty(a \in I_N)$より、$\aqty{a} \subset I_N$
+
+  $\forall N \in \N_{\geq N} \qty(\aqty{a} \subset I_N \subset I_n \subset J = \aqty{a})$
+}
+
+\thm{PIDの素イデアルは極大イデアル}{
+  単項イデアル整域$D$の素イデアルは極大イデアルである。
+}{
+  極大イデアルでない素イデアル$\aqty{a}$を考える。
+
+  このとき$\exists b \in D \qty(\aqty{a} \subsetneq \aqty{b} \neq D)$
+
+  $\exists c \in R \qty(a = c b)$である。$b \in \aqty{a}$のとき、$\aqty{a} = \aqty{b}$となり仮定に反する。
+
+  素イデアルの定義より$c \in \aqty{a}$であるので、$\exists d \in R \qty(c = d a)$
+
+  ゆえに$a \qty(b d - 1_D) = 0_D$であり、整域より$b d = 1_D$
+
+  よって$\aqty{b} = D$となり矛盾。
+
+  背理法より示される。
+}
+
+\thm{PIDはUFD}{
+  単項イデアル整域$D$は一意分解整域である。
+}{
+  素元分解できない$a \in D \setminus \qty{0_D}$が存在すると仮定する。
+
+  $1_R \in \aqty{a}$とすると、$a$は可逆元となり、素元分解できる。
+  ゆえに$\aqty{a} \neq D$である。\\*
+
+  \thmref{極大左イデアルの存在}、\thmref{極大イデアルは素イデアル}と$D$が単項イデアル整域であることより、素元$p_1$が存在して$a \in \aqty{a} \subset \aqty{p_1}$
+
+  ゆえに$\exists a_1 \in D \qty(a = a_1 p_1)$と書ける。$a \neq 0_D$より$a_1 \neq 0_D$
+
+  $\aqty{a} \supset \aqty{a_1}$とすると、$\exists b \in D \qty(a_1 = b a)$より$a_1 \qty(b p_1 - 1_R) = 0_R$であり、整域と$a_1 \neq 0_R$から$p_1 \in D^\times$
+
+  これは\lemref{整域の素元は可逆でない既約元}に反する。ゆえに$\aqty{a} \subsetneq \aqty{a_1}$
+
+  $a$は素元分解できないので、$a_1$も素元分解でもない。\\*
+
+  帰納的にイデアル列$\aqty{a} \subset \aqty{a_1} \subset \cdots$がつくれるが、これは\thmref{PIDはNoether}に反する。
+
+  ゆえに素元分解可能である。\\*
+
+  一意性を示す。
+
+  $a = u \prod_{m = 0}^n p(m) = u' \prod_{m = 0}^{n'} p'(m)$とする。$n \leq l$とする。\\*
+
+  $n = 0$のとき、$a = u = u' \prod_{m = 0}^{n'} p'(m)$である。
+
+  $n' \neq 0$のとき、\lemref{整域の素元は可逆でない既約元}より$\prod_{m = 0}^{n'} p'(m)$は可逆でない。
+  したがって$u$が可逆でなくなり仮定に反するので、$n' = 0$である。ゆえに一意。\\*
+
+  ある$n \in \N$で一意とする。
+
+  $a = u \prod_{m = 0}^{s(n)} p(m) = u' \prod_{m = 0}^{n'} p'(m)$とする。
+
+  $a \in \aqty{p(n)}$より、素イデアルの定義から$\exists k \in n' \qty(p'(k) \in \aqty{p(n)})$である。ゆえに$\aqty{p'(k)} \subset \aqty{p(n)}$
+
+  \thmref{PIDの素イデアルは極大イデアル}より$\aqty{p'(k)} = \aqty{p(n)}$
+
+  以下の$q \in \mathcal{P}(D)^{n'}$を考える。
+  \eq*{
+    q(m) =
+    \begin{cases}
+      p(m) & \qty(m \neq k) \\*
+      1_D & \qty(m = k)
+    \end{cases}
+  }
+
+  整域より$u \prod_{m = 0}^{n} p(m) = u'' \prod_{m = 0}^{n'} q(m)$が成り立つ。帰納法の仮定より一意。\\*
+
+  \thmref{数学的帰納法}より、任意の$n$について成り立つ。
+}
+
+\dfnf{\textit{Euclid}整域}{Euclid整域}{
+  整域$D$について、以下を満たす写像$f \in \N^{D \setminus \qty{0_D}}$が存在するとき、$D$を\textit{Euclid}整域と呼ぶ。
+  \eqg*{
+    \forall a \in D \forall b \in D \setminus \qty{0_D} \exists q, r \in D \qty(a = b q + r \land \qty(r = 0_D \lor f(r) < f(b))) \\*
+    \forall a, b \in D \setminus \qty{0_D} \qty(f(a) \leq f(a b))
+  }
+}
+
+\thm{EDはPID}{
+  \textit{Euclid}整域$D$は単項イデアル整域である。
+}{
+  イデアル$I$を考える。$0_D \in I$である。
+
+  $\qty{0_D} = I$であるとき、$\aqty{0_D} = I$
+
+  $\qty{0_D} \subsetneq I$であるとき、$M \coloneqq \qty{f(i) \mid i \in I \setminus \qty{0_D}}$を考える。
+
+  $M$は空でない$\N$の部分より、\thmref{最小値原理}から最小限が存在する。よって、$\exists m \in I \qty(f(m) = \min M)$
+
+  $\forall i \in I$について、$\exists q, r \in R \qty(i = m q + r \land \qty(r = 0_R \lor f(r) < f(m)))$
+
+  今、$r = i - m q \in I$であるため、$r \neq 0_R$とすると$m$の最小性に反する。
+
+  よって$r = 0_R$、すなわち$i \in \aqty{m}$
+
+  $m \in I$より$\aqty{m} = I$
+}
+
+
+\lsubsection{多項式環}
+
+\dfn{多項式環}{
+  可換環$R$について、集合$R[X]$を以下のように定義する。
+  \eq*{
+    R[X] \coloneqq \qty{\varphi \in R^\N \mid \exists N \in \N \forall n \in \N_{\geq N} \qty(\varphi(n) = 0_R)}
+  }
+
+  ここで、$R[X]$上の加法$+$、乗法$\times$を以下のように定める。
+  \eqg*{
+    \forall n \in \N \qty(\qty(\varphi + \psi)(n) \coloneqq \varphi(n) + \psi(n)) \\*
+    \forall n \in \N \qty(\qty(\varphi \times \psi)(n) \coloneqq \sum_{k \in s(n)} \varphi(k) \times \psi(n - k))
+  }
+
+  \dfnref{多項式環}より定まる順序対$\qty(\qty(R[X], +), \times)$は可換環である。この環を多項式環と呼ぶ。
+
+  また、多項式環の元を多項式と呼ぶ。
+}
+
+\lem*{
+  以下で定義する写像$\gamma \in R[X]^R$を考える。
+  \eq*{
+    \gamma(a)(n) \coloneqq
+    \begin{cases}
+      a & \qty(n = 0) \\*
+      0_R & \qty(n \neq 0)
+    \end{cases}
+  }
+
+  このとき、$\gamma$は以下を満たす。
+  \begin{enumerate}
+    \item 単射
+    \item 加法、乗法について環準同型
+  \end{enumerate}
+}{
+  定義より明らか。
+}
+
+\cor*{
+  可換環$R$と、$R$の部分環$S$について、$S[X]$は$R[X]$の部分環である。
+}
+
+\lem{多項式の次数}{
+  可換環$R$上の多項式環$R[X]$について、以下が成り立つ。
+  \eq*{
+    \forall \varphi \in R[X] \setminus \qty{0_{R[X]}} \exists N \in \N \qty(\varphi(N) \neq 0_R \land \forall n \in \N_{\geq N} \qty(\varphi(n) = 0_R))
+  }
+}{
+  $M \coloneqq \qty{n \in \N \mid \varphi(n) \neq 0_R}$とする。
+
+  $\varphi \neq 0_{R[X]}$より、$M$は空でない。
+
+  定義より$M$は上に有界。
+
+  \thmref{自然数の上界と有限}と\thmref{有限全順序集合の最大元}より、$M$は最大元を持つ。
+}
+
+\dfn{多項式の次数}{
+  可換環$R$上の多項式環$R[X]$を考える。
+
+  $\forall \varphi \in R[X] \setminus \qty{0_{R[X]}}$について、\lemref{多項式の次数}より定まる自然数を次数と呼び、$\deg(\varphi)$と表す。
+}
+
+\cor{整域上の多項式の次数}{
+  整域$D$上の多項式環$D[X]$は整域である。さらに、以下が成り立つ。
+  \eqg*{
+    \forall f, g \in D[X] \setminus \qty{0_{D[X]}} \qty(f + g = 0_{D[X]} \land \deg(f + g) \leq \max \qty{\deg(f), \deg(g)}) \\*
+    \forall f, g \in D[X] \setminus \qty{0_{D[X]}} \qty(\deg(f g) = \deg(f) + \deg(g))
+  }
+}
+
+\dfn{次数既約}{
+  整域$D$上の多項式環$D[X]$について、多項式$f \in D[X]$が素元であるとき、$f$は次数既約であると呼ぶ。
+}
+
+\dfn{多項式の値}{
+  可換環$R$上の多項式環$R[X]$について、以下で定める写像$f \in \qty(R^R)^{R[X]}$が存在する。
+  \eq*{
+    \forall x \in R \qty(f(\varphi)(x) \coloneqq \sum_{n \in s(\deg \varphi)} \varphi(n) \times x^n)
+  }
+
+  $f(\varphi)(x)$を$\varphi(x)$と略記して、多項式の値と呼ぶ。
+}
+
+以降、多項式$\varphi$について、$\varphi(x)$と書くときは、特に断らない限り、\dfnref{多項式環}に基づく写像の値ではなく、\dfnref{多項式の値}多項式の値を表すものとする。
+
+\dfn{根}{
+  可換環$R$上の多項式環$R[X]$と、多項式$\varphi \in R[X]$を考える。
+
+  $\varphi(x) = 0_R$を満たす元$x \in R$を、多項式$\varphi$の根と呼ぶ。
+}

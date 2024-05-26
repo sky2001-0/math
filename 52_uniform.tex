@@ -1,0 +1,526 @@
+\lsection{一様空間}
+
+\lsubsection{近縁}
+
+\dfn{集合算}{
+  集合$X$と、集合$A, B \in \P \qty(X \times X)$について、以下で定める略記$A \circ B, A^{-1}$を考える。
+  \eqg*{
+    A \circ B \coloneqq \qty{\qty(x, z) \in X \times X \mid \exists y \in X \qty(\qty(x, y) \in A \land \qty(y, z) \in B)} \\*
+    A^{-1} \coloneqq \qty{\qty(x, y) \in X \times X \mid \qty(y, x) \in A}
+  }
+}
+
+\dfn{基本近縁系}{
+  空でない集合$X$について、以下を満たす集合系$\mathcal{V} \in \P \qty(\P \qty(X \times X))$を基本近縁系と呼ぶ。
+  \eqg*{
+    \mathcal{V} \neq \varnothing \\*
+    \forall V \in \mathcal{V} \forall x \in X \qty(\qty(x, x) \in V) \\*
+    \forall V_1, V_2 \in \mathcal{V} \exists V \in \mathcal{V} \qty(V \subset V_1 \cap V_2) \\*
+    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \circ W \subset V) \\*
+    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \subset V^{-1})
+  }
+}
+
+\lem{基本近縁系の三角性}{
+  空でない集合$X$の基本近縁系$\mathcal{V}$について、以下を満たす。
+  \eq*{
+    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \subset W^{-1} \circ W \subset \qty(W^{-1} \circ W) \circ W \subset V)
+  }
+}{
+  \dfnref{基本近縁系}第四式より$\exists S \in \mathcal{V} \qty(S \circ S \subset V)$であり、$\exists R \in \mathcal{V} \qty(R \circ R \subset S)$である。
+
+  \dfnref{基本近縁系}第五式より$\exists T \in \mathcal{V} \qty(T \subset R^{-1})$である。
+
+  \dfnref{基本近縁系}第三式より$\exists W \in \mathcal{V} \qty(W \subset S \cap T)$である。
+
+  ゆえに、$\qty(W^{-1} \circ W) \circ W \subset \qty(T^{-1} \circ T) \circ S \subset \qty(R \circ R) \circ S \subset S \circ S \subset V$\\*
+
+  \dfnref{基本近縁系}第二式より$\qty(z, z) \in W$であるので、その他の包含関係も成り立つ。
+}
+
+\dfn{近縁系}{
+  空でない集合$X$の基本近縁系$\mathcal{V}$について、以下で与える集合系$\mathcal{U}$を近縁系と呼ぶ。
+  \eq*{
+    \mathcal{U} \coloneqq \qty{U \in \P \qty(X \times X) \mid \exists V \in \mathcal{V} \qty(V \subset U)}
+  }
+}
+
+\lem{近縁系の一意性}{
+  空でない集合$X$の基本近縁系$\mathcal{V}$と集合系$\mathcal{V'} \in \P \qty(\P \qty(X \times X))$について、以下を満たすとき、$\mathcal{V'}$は基本近縁系である。
+  \eqg*{
+    \forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \qty(V \subset V') \\*
+    \forall V \in \mathcal{V} \exists V' \in \mathcal{V'} \qty(V' \subset V)
+  }
+
+  さらに\dfnref{近縁系}の定める近縁系$\mathcal{U}$と$\mathcal{U'}$は一致する。
+}{
+  第一式を考える。\dfnref{基本近縁系}第一式から$\exists V \in \mathcal{V}$より、仮定から$\exists V' \in \mathcal{V'}$\\*
+
+  第二式を考える。$\forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \forall x \in X \qty(\qty(x, x) \in V \subset V')$より成り立つ。\\*
+
+  第三式を考える。仮定より$\forall V'_1, V'_2 \in \mathcal{V'} \exists V_1, V_2 \in \mathcal{V} \qty(V_1 \cap V_2 \subset V'_1 \cap V'_2)$である。
+
+  \dfnref{基本近縁系}第三式より$\exists V \in \mathcal{V} \qty(V \subset V_1 \cap V_2)$であり、仮定より$\exists V' \in \mathcal{V'} \qty(V' \subset V \subset V'_1 \cap V'_2)$\\*
+
+  第四式を考える。$\forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W' \in \mathcal{V'} \qty(W' \circ W' \subset W \circ W \subset V \subset V')$である。\\*
+
+  第五式を考える。$\forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W' \in \mathcal{V'} \qty(W' \subset V' \subset V^{-1} \subset V'^{-1})$である。\\*
+
+  $\forall U \in \mathcal{U} \exists V \in \mathcal{V} \exists V' \in \mathcal{V'} \qty(V' \subset V \subset U)$である。ゆえに、$U \in \mathcal{U'}$である。
+
+  $\forall U' \in \mathcal{U'} \exists V' \in \mathcal{V'} \exists V \in \mathcal{V} \qty(V \subset V' \subset U')$である。ゆえに、$U' \in \mathcal{U}$である。
+}
+
+\lem{近縁系は基本近縁系}{
+  近縁系$\mathcal{U}$は基本近縁系である。さらに$\mathcal{U}$から\dfnref{近縁系}より定まる近縁系は、$\mathcal{U}$に一致する。
+}{
+  定義より$\forall U \in \mathcal{U} \exists V \in \mathcal{V} \qty(V \subset U)$である。
+
+  $\forall V \in \mathcal{V}$について、$V \in \mathcal{U}$である。
+
+  \lemref{近縁系の一意性}より成り立つ。
+}
+
+\lem{近縁系の開性}{
+  空でない集合$X$と、$X$の近縁系$\mathcal{U}$について、以下を満たす。
+  \eq*{
+    \forall U \in \mathcal{U} \exists V \in \mathcal{U} \forall \qty(x, y) \in V \exists W \in \mathcal{U} \qty(W[y] \subset V[x] \land V \subset U)
+  }
+}{
+  $V \coloneqq \qty{\qty(x, y) \in X \times X \mid \exists S \in \mathcal{U} \qty(S[x] \times S[y] \subset U)}$を考える。定義より$V \subset U$である。
+
+  \lemref{基本近縁系の三角性}より、$\exists T \in \mathcal{U} \qty(\qty(T^{-1} \circ T) \circ T \subset U)$である。
+
+  $\forall \qty(s, t) \in T$について、$\forall \qty(w, z) \in T[s] \times T[t] \qty(\qty(w, z) \in \qty(T^{-1} \circ T) \circ T \subset U)$であるので、$\qty(s, t) \in V$
+
+  $T \subset V$より、$V \in \mathcal{U}$である。\\*
+
+  $\forall \qty(x, y) \in V$について、$\exists S \in \mathcal{U} \qty(S[x] \times S[y] \subset U)$である。
+
+  \dfnref{基本近縁系}第四式より$\exists W \in \mathcal{U} \qty(W \circ W \in S)$である。
+
+  $\forall z \in W[y]$について$W[z] \subset S[y]$より、$W[x] \times W[z] \subset S[x] \times S[y] \subset U$、すなわち$z \in V[x]$である。
+}
+
+\dfn{一様空間}{
+  空でない集合$X$と、$X$上の近縁系$\mathcal{U}$について、順序対$\qty(X, \mathcal{U})$を一様空間と呼ぶ。または単に$X$と書き、一様空間と集合どちらも表すものとする。
+}
+
+\thm{基本近縁系から定まる位相}{
+  一様空間$\qty(X, \mathcal{U})$と近縁系$\mathcal{U}$を与える基本近縁系$\mathcal{V}$を考える。
+
+  $X$の任意の元$x$について、以下で定める集合系$\mathcal{B}(x)$は基本近傍系である。
+  \eq*{
+    \mathcal{B}(x) \coloneqq \qty{V[x] \coloneqq \qty{y \in X \mid \qty(x, y) \in V} \mid V \in \mathcal{V}}
+  }
+
+  さらに、$\mathcal{B}(x)$の与える近傍系$\mathcal{N}(x)$は、近縁系$\mathcal{U}$の与える基本近傍系$\mathcal{N'}(x)$に一致する。
+
+  この意味で、一様空間は位相空間である。
+}{
+  第一式を示す。\dfnref{基本近縁系}第一式から、$\exists V \in \mathcal{V} \qty(V[x] \in \mathcal{B}(x))$である。\\*
+
+  第二式を示す。\dfnref{基本近縁系}第二式から、$\forall V \in \mathcal{V} \qty(x \in V[x])$より成り立つ。\\*
+
+  第三式を示す。\dfnref{基本近縁系}第三式から$\forall B_1, B_2 \in \mathcal{B}(x) \exists V_1, V_2 \in \mathcal{V} \qty(B_1 = V_1[x] \land B_2 = V_2[x])$について、
+
+  $\exists V \in \mathcal{V} \qty(V[x] \subset (V_1 \cap V_2)[x] = B_1 \cap B_2 \land V[x] \in \mathcal{B}(x))$\\*
+
+  第四式を示す。$\forall B \in \mathcal{B}(x) \exists V \in \mathcal{V} \qty(B = V[x])$である。
+
+  \dfnref{基本近縁系}第四式から$\exists W \in \mathcal{V} \qty(W \circ W \subset V)$であり、$\exists C \coloneqq W[x] \in \mathcal{B}(x)$
+
+  $\forall y \in C \exists D = W[y] \in \mathcal{B}(y)$である。
+
+  $\forall z \in D \qty(\qty(x, y), \qty(y, z) \in W)$より$\qty(x, z) \in V$すなわち$z \in V[x] = B$である。
+  よって$D \subset B$となる。\\*
+
+  $\forall N \in \mathcal{N}(x)$について$\exists V \in \mathcal{V} \qty(V[x] \subset N)$であり、$U = V \cup \qty{\qty(x, y) \mid y \in N} \in \mathcal{U}$かつ$N = U[x]$であるので、$N \in \mathcal{N'}(x)$
+
+  $\forall N' \in \mathcal{N'}(x)$について$\exists U \in \P \qty(X \times X) \exists V \in \mathcal{V} \qty(V \subset U \land U[x] = N')$であり、$V[x] \subset U[x] = N' \in \mathcal{N}(x)$
+}
+
+\thmf{一様空間は$T_3$}{一様空間はT_3}{
+  一様空間$\qty(X, \mathcal{U})$は、$T_3$空間である。
+}{
+  $\forall x \in X \forall B \in \mathcal{B}(x)$を考える。
+
+  定義より$\exists U \in \mathcal{U} \qty(U[x] = B)$であり、\lemref{基本近縁系の三角性}より$\exists V \in \mathcal{U} \qty(V^{-1} \circ V \subset U)$
+
+  \dfnref{基本近縁系}第五式より、$\exists W \in \mathcal{U} \qty(W \subset V^{-1})$である。
+
+  $W[x] \in \mathcal{N}(x)$より、$\exists D \in \mathcal{B}(x) \qty(D \subset W[x])$である。\\*
+
+  $\forall y \in \bar{D}$について考える。
+
+  \thmref{閉包}より、$\exists z \in X \qty(z \in D \cap W[y] \subset W[x] \cap W[y])$である。
+
+  $\qty(x, z), \qty(y, z) \in W$より、$\qty(x, y) \in U$である。
+
+  したがって、$\bar{D} \subset U[x] = B$\\*
+
+  \thmref{Vietoris性}より成り立つ。
+}
+
+\dfn{一様連続}{
+  一様空間$\qty(X, \mathcal{U}), \qty(X', \mathcal{U'})$と写像$f \in \qty(X')^X$について、$f$が以下を満たすとき、$f$は一様連続であると呼ぶ。
+  \eq*{
+    \forall U' \in \mathcal{U'} \exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \in U')
+  }
+}
+
+\lem{基本近縁系と一様連続}{
+  一様空間$\qty(X, \mathcal{U}), \qty(X', \mathcal{U'})$と写像$f \in \qty(X')^X$と、$\mathcal{U}, \mathcal{U'}$を与える基本近縁系$\mathcal{V}, \mathcal{V'}$を考える。
+  このとき、以下の２つは同値である。
+  \begin{enumerate}
+    \item $f$は一様連続
+    \item $\forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \qty(\qty(x, y) \in V \rightarrow \qty(f(x), f(y)) \in V')$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  $\forall V' \in \mathcal{V'} \subset \mathcal{U'} \exists U \in \mathcal{U} \exists V \in \mathcal{V} \qty(\qty(x, y) \in V \subset U \rightarrow \qty(f(x), f(y)) \in V')$より明らか。\\*
+
+  $2. \rightarrow 1.$を示す。
+
+  $\forall U' \in \mathcal{U'} \exists V' \in \mathcal{V'} \exists V \in \mathcal{V} \subset \mathcal{U} \qty(\qty(x, y) \in V \rightarrow \qty(f(x), f(y)) \in V' \subset U')$より明らか。
+}
+
+\dfn{一様同型}{
+  一様空間$X, X'$と写像$f \in \qty(X')^X$について、$f$が全単射かつ$f$と$f^{-1}$がともに一様連続であるとき、$f$を一様同型写像と呼ぶ。
+
+  また、一様同型写像$f \in Y^X$が存在するとき、$X$と$Y$は一様同型であると呼ぶ。
+}
+
+\thm{一様連続は連続}{
+  一様空間$\qty(X, \mathcal{U}), \qty(X', \mathcal{U'})$について、一様連続な写像$f \in \qty(X')^X$は連続である。
+}{
+  $\forall x \in X \forall N' \in \mathcal{N}(f(x))$について、定義より$\exists U' \in \mathcal{U'} \qty(N' = U'[f(x)])$である。
+
+  一様連続の定義より$\exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \in U')$である。
+
+  今、$U[x] \in \mathcal{N}(x)$であり、$f(U[x]) \subset U'[f(x)] = N'$より点連続。
+
+  $\forall x \in X$で成り立つので、\thmref{連続と点連続}より示される。
+}
+
+\cor*{
+  一様同型写像は同相写像。
+}
+
+\lem*{
+  一様空間$\qty(X, \mathcal{U})$と、$X$の空でない部分集合$A$を考える。
+
+  $\mathcal{U}$を与える基本近縁系$\mathcal{V}$について、以下の集合系$\mathcal{V'}$は集合$A$の基本近縁系である。
+  \eq*{
+    \mathcal{V'} \coloneqq \qty{\qty(A \times A) \cap V \mid V \in \mathcal{V}}
+  }
+
+  さらに、$\mathcal{V'}$の与える近縁系と、$\mathcal{U}$からこの補題により与えられる基本近縁系$\mathcal{U'}$、この２つは一致する。
+}{
+  明らか。
+}
+
+\dfn{部分一様空間}{
+  一様空間$\qty(X, \mathcal{U})$と、$X$の空でない部分集合$A$を考える。\mlemref{0}の与える基本近縁系の与える近縁系$\mathcal{U'}$について、一様空間$\qty(A, \mathcal{U'})$を部分一様空間と呼ぶ。
+}
+
+
+\lsubsectionf{\textit{Cauchy}}{Cauchy}
+
+\dfnf{\textit{Cauchy}}{Cauchy}{
+  一様空間$\qty(X, \mathcal{U})$について、$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が以下を満たすとき、\textit{Cauchy}であると呼ぶ。
+  \eq*{
+    \forall U \in \mathcal{U} \exists \lambda_0 \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_\mu, x_\tau) \in U)
+  }
+}
+
+\lemf{基本近縁系と\textit{Cauchy}}{基本近縁系とCauchy}{
+  一様空間$\qty(X, \mathcal{U})$と$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$と、$\mathcal{U}$を与える$X$の基本近縁系$\mathcal{V}$を考える。
+  このとき、以下の２つは同値である。
+  \begin{enumerate}
+    \item $\qty(x_\lambda)_{\lambda \in \Lambda}$は\textit{Cauchy}
+    \item $\forall V \in \mathcal{V} \exists \lambda_0 \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_\mu, x_\tau) \in V)$
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$は、$\mathcal{V} \subset \mathcal{U}$より明らか。\\*
+
+  $2. \rightarrow 1.$を示す。
+
+  $\forall U \in \mathcal{U} \exists V \in \mathcal{V} \exists \lambda_0 \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_\mu, x_\tau) \in V \subset U)$
+}
+
+\cor*{
+  \textit{Cauchy}ネットの部分ネットは\textit{Cauchy}である。
+}
+
+\thmf{収束ネットは\textit{Cauchy}}{収束ネットはCauchy}{
+  収束するネットは\textit{Cauchy}である。
+}{
+  $\forall V \in \mathcal{V}$について、\lemref{基本近縁系の三角性}より$\exists W \in \mathcal{V} \qty(W^{-1} \circ W \subset V)$
+
+  \dfnref{収束}より$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset W[a])$
+
+  $a$に収束するとすると、$\forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(a, x_\mu), \qty(a, x_\tau) \in W)$であるので、$\qty(x_\lambda, x_\tau) \in V$
+}
+
+\lemf{収束する部分を持つ\textit{Cauchy}ネット}{収束する部分を持つCauchyネット}{
+  一様空間$X$と$X$上の\textit{Cauchy}ネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$a \in X$に収束する部分ネットを持つならば、$\qty(x_\lambda)_{\lambda \in \Lambda}$は$a$に収束する。
+}{
+  \dfnref{基本近縁系}第四式より$\forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \circ W \subset V)$
+
+  収束より、$\exists \mu_0 \in M \qty(\qty(x_{\lambda(\mu)})_{\mu \in M_{\succcurlyeq \mu_0}} \subset W[a])$
+
+  \textit{Cauchy}ネットより、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(\lambda_1, \lambda_2) \in W)$
+
+  \dfnref{部分ネット}より$\exists \mu_1 \in M \qty(\lambda_0 \preccurlyeq \lambda(\mu_1))$であり、有向集合より$\exists \mu_2 \in M \qty(\mu_0 \preccurlyeq \mu_2 \land \mu_1 \preccurlyeq \mu_2)$
+
+  よって$\lambda(\mu_2) \preccurlyeq \lambda$ならば$\qty(a, \lambda(\mu_2)), \qty(\lambda(\mu_2), \lambda) \in W$である。ゆえに$\qty(a, x_\lambda) \in V$すなわち$x_\lambda \in V[a]$
+}
+
+\dfn{完備}{
+  一様空間$X$について、$X$上の任意の\textit{Cauchy}なネットが収束するとき、$X$は完備であると呼ぶ。
+}
+
+\dfn{全有界}{
+  一様空間$\qty(X, \mathcal{U})$が以下を満たすとき、全有界であると呼ぶ。
+  \eq*{
+    \forall U \in \mathcal{U} \exists A \in \P(X) \qty(\abs{A} < \infty \land \bigcup \qty{U[x] \mid x \in A} = X)
+  }
+}
+
+\corf{\textit{Cauchy}列は全有界}{Cauchy列は全有界}{
+  \textit{Cauchy}列は全有界である。
+}
+
+\thm{ネットによる全有界の特徴づけ}{
+  一様空間$\qty(X, \mathcal{U})$と、近縁系$\mathcal{U}$を与える基本近縁系$\mathcal{V}$について、以下の４つは同値である。
+  \begin{enumerate}
+    \item $X$は全有界
+    \item $\forall V \in \mathcal{V} \exists A \in \P(X) \qty(\abs{A} < \infty \land \bigcup \qty{V[x] \mid x \in A} = X)$
+    \item $X$上の任意の普遍ネットは\textit{Cauchy}である。
+    \item $X$上の任意のネットは\textit{Cauchy}な部分ネットを持つ。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  $\mathcal{V} \subset \mathcal{U}$より明らか。\\*
+
+  $2. \rightarrow 3.$を示す。
+
+  $X$上の普遍ネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について考える。
+
+  \lemref{基本近縁系の三角性}より$\forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W^{-1} \circ W \subset V)$
+
+  全有界性より$\exists n \in \N \qty(n \neq 0 \land \bigcup \qty{W[x(m)] \mid m \in n} = X)$を得る。
+
+  普遍ネットの定義より$\forall m \in \N \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset W[x(m)] \lor \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset X \setminus W[x(m)])$である。
+
+  \thmref{有限有向集合の上界}より、$\qty{\lambda_0(m) \mid m \in n}$の上界$\lambda_1$が存在する。
+
+  $\forall m \in \N \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_1}} \subset X \setminus W[x(m)])$とすると、全有界の定義より矛盾。
+
+  背理法より、$\exists m \in \N \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_1}} \subset W[x(m)])$
+
+  ゆえに$\forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_1} \qty(\qty(x[m], x_\mu), \qty(x[m], x_\tau))$すなわち$\qty(x_\mu, x_\tau) \in V$\\*
+
+  $3. \rightarrow 4.$を示す。
+
+  仮定と\thmref{普遍部分ネットの存在}より明らか。\\*
+
+  $4. \rightarrow 1.$を示す。
+
+  全有界でないと仮定する。$X$の任意の有限部分$A$について、$\bigcup \qty{U[x] \mid x \in A} \neq X$となる近縁$U$が存在する。
+
+  $P \coloneqq \qty{A \in \P(X) \mid \abs{A} < \infty \land A \neq \varnothing}$について、$\qty(P, \subset)$は有向集合であり、
+
+  全有界でないことから$\forall A \in P \exists x \in X \setminus \bigcup \qty{U[x] \mid x \in A}$である。このようなネット$\qty(x_A)_{A \in P}$を考える。\\*
+
+  仮定より\textit{Cauchy}な部分ネット$\qty(x_{\varphi(\mu)})_{\mu \in M}$を持つ。
+
+  ゆえに$\exists \mu_0 \in M \forall \mu \in M_{\succcurlyeq \mu_0} \qty(x_{\varphi(\mu)} \in U[x_{\varphi(\mu_0)}])$である。
+
+  $\qty{x_{\varphi(\mu_0)}} \in P$であることと、\dfnref{部分ネット}と有向性より、$\exists \mu_1 \in M \qty(\mu_0 \preccurlyeq \mu_1 \land \qty{x_{\varphi(\mu_0)}} \subset \varphi(\mu_1))$となる。
+
+  すなわち、$x_{\varphi(\mu_1)} \in U[x_{\varphi(\mu_0)}] \subset \bigcup \qty{U[x] \mid x \in \varphi(\mu_1)}$であるが、このネットの定義に反する。\\*
+
+  背理法より示される。
+}
+
+\thmf{\textit{Heine-Borel}の被覆定理}{Heine-Borelの被覆定理}{
+  一様空間$\qty(X, \mathcal{U})$について、以下の２つは同値である。
+  \begin{enumerate}
+    \item $X$はコンパクトである。
+    \item $X$は全有界かつ完備である。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意の普遍ネットは収束するので、\thmref{収束ネットはCauchy}より\textit{Cauchy}である。
+
+  \thmref{ネットによる全有界の特徴づけ}より全有界である。\\*
+
+  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意の\textit{Cauchy}なネット$\qty(x_\lambda)_{\lambda \in \Lambda}$は収束する部分ネットを持つ。
+
+  \lemref{収束する部分を持つCauchyネット}より$\qty(x_\lambda)_{\lambda \in \Lambda}$は収束する。\\*
+
+  $2. \rightarrow 1.$を示す。
+
+  $X$上の任意のネットについて、全有界性から\thmref{ネットによる全有界の特徴づけ}より\textit{Cauchy}な部分ネットが存在して、完備性から収束する。\thmref{ネットによるコンパクトの特徴づけ}より示される。
+}
+
+\thmf{\textit{Heine-Cantor}の定理}{Heine-Cantorの定理}{
+  全有界な一様空間$\qty(X, \mathcal{U})$と、一様空間$\qty(X', \mathcal{U'})$について、連続写像$f \in \qty(X')^X$は一様連続である。
+}{
+  $\forall V' \in \mathcal{V'}$について、\lemref{基本近縁系の三角性}より$\exists W' \in \mathcal{V'} \qty(W'^{-1} \circ W' \subset V')$
+
+  \thmref{連続と点連続}から$\forall x \in X \exists V \in \mathcal{V} \qty(f(V[x]) \subset W'[f(x)])$である。
+
+  \dfnref{基本近縁系}第四式より$\exists W \in \mathcal{V} \qty(W \circ W \subset V)$
+
+  今、$\qty{W(V', x)[x] \mid x \in X}$は被覆である。
+
+  全有界性から$\exists Y \subset X \land \abs{Y} < \infty$であり$C \coloneqq \qty{W(V', x)[x] \mid x \in Y}$は被覆となる。
+
+  \dfnref{基本近縁系}第三式より$S \coloneqq \bigcap \qty{W(V', x) \mid x \in Y} \in \mathcal{V}$である。\\*
+
+  $\forall \qty(w, z) \in S(V')$について、$C$は被覆より$\exists y \in Y(V') \qty(w \in W(V', y)[y] \subset V(V', y)[y])$である。
+
+  $\qty(y, w), \qty(w, z) \in W(V', y)$であり、$\qty(y, z) \in V(V', y)$すなわち$z \in V(V', y)[y]$である。
+
+  $w, z \in V(V', y)[y]$より$f(w), f(z) \in f(V(V', y)[y]) \subset W'(V')[f(y)]$である。
+
+  したがって$\qty(f(y), f(w)), \qty(f(y), f(z)) \in W'$より$\qty(f(w), f(z)) \in V'$
+}
+
+
+\lsubsection{可算な一様構造}
+
+\dfn{可算一様空間}{
+  一様空間$X$が可算な基本近縁系$\mathcal{V}$もつとき、$\qty(X, \mathcal{U})$を可算一様空間と呼ぶ。
+}
+
+\lem{可算一様空間における基本近傍系の単調列}{
+  可算一様空間$\qty(X, \mathcal{U})$について、以下を満たす基本近縁系$\qty(V_n)_{n \in \N}$が存在する。
+  \eqg*{
+    \forall n \in \N \qty(\qty(V^{-1}_{s(n)} \circ V_{s(n)}) \circ V_{s(n)} \subset V_n) \\*
+    \forall n \in \N \forall \qty(x, y) \in V_n \exists m \in \N \qty(V_m[y] \subset V_n[x])
+  }
+}{
+  可算であるので、$\N$からの全射$\varphi$が存在するような基本近縁系$\mathcal{V}$が存在する。\\*
+
+  以下のように定めた$V_n$は条件を満たす。
+
+  まず$\varphi(0)$について、\lemref{近縁系の開性}の定める近縁を$V_0$とする。
+
+  次に$n \in \N \qty(V_n \in \mathcal{U})$として、\lemref{基本近縁系の三角性}の定める近縁を$W_n$とする。
+
+  ここで$W_n \cap \varphi(s(n))$は\dfnref{基本近縁系}第三式より近縁であるので、\lemref{近縁系の開性}の定める近縁が存在して$V_{s(n)}$とする。\\*
+
+  定義より、$\forall n \in \N \qty(V_n \in \mathcal{U})$である。\\*
+
+  定義と$\varphi$の全射性より、$\forall V \in \mathcal{V} \exists n \in \N \qty(V_n \subset \varphi(n) = V)$である。\\*
+
+  \lemref{近縁系の一意性}より、同じ近縁系を与える基本近縁系である。
+}
+
+\thm{可算一様空間の満たす性質}{
+  一様空間$\qty(X, \mathcal{U})$が可算一様ならば、以下の２つを満たす。
+  \begin{itemize}
+    \item $X$は第一可算
+    \item $X$は$T_4$
+  \end{itemize}
+}{
+  第一可算性を示す。\thmref{基本近縁系から定まる位相}より明らか。\\*
+
+  $T_4$であることを示す。$\forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing)$とする。
+
+  \lemref{可算一様空間における基本近傍系の単調列}の定める$\qty(V_n)_{n \in \N}$を考える。
+
+  \thmref{閉包}より、$\forall x_1 \in F_1 \exists n_1 \in \N \qty(V_{n_1}[x_1] \cap F_2 = \varnothing)$である。
+
+  同様に、$\forall x_2 \in F_2 \exists n_2 \in \N \qty(V_{n_2}[x_2] \cap F_1 = \varnothing)$である。
+
+  以下の集合$U_1, U_2$を考える。定義より明らかに$F_1 \subset U_1 \land F_2 \subset U_2 \land U_1, U_2 \in \mathcal{O}$である。
+  \eqg*{
+    U_1 \coloneqq \bigcup \qty{V_{s(s(n_1(x)))}[x] \mid x \in F_1} \\*
+    U_2 \coloneqq \bigcup \qty{V_{s(s(n_2(x)))}[x] \mid x \in F_2}
+  }
+
+  $\exists y \in U_1 \cap U_2$とすると、$\exists x_1 \in F_1 \exists x_2 \in F_2 \qty(y \in V_{s(s(n_1(x_1)))}[x_1] \cap V_{s(s(n_2(x_2)))}[x_2])$である。
+
+  $n_1(x_1) \leq n_2(x_2)$とする。
+
+  $\qty(x_1, y), \qty(x_2, y) \in V_{s(s(n_1(x_1)))}$より、$\qty(x_1, y), \qty(y, x_2) \in V_{s(n_1(x_1))}$であるので、$\qty(x_1, x_2) \in V_{n_1(x_1)}$である。
+
+  $x_2 \in V_{n_1(x_1)}[x_1] \cap F_2$より、$n_1$の定義に反する。\\*
+
+  $n_1(x_1) > n_2(x_2)$であるときも、同様に$n_1$の定義に反する。
+
+  したがって、$U_1 \cap U_2 = \varnothing$である。
+}
+
+\thm{可算一様空間について}{
+  可算一様空間$X$について、以下の３つは同値である。
+  \begin{enumerate}
+    \item $X$は第二可算
+    \item $X$は\textit{Lindel\"{o}f}
+    \item $X$は可分
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$は、\thmref{第二可算空間の満たす性質}より成り立つ。\\*
+
+  \lemref{可算一様空間における基本近傍系の単調列}の定める$\qty(V_n)_{n \in \N}$を考える。\\*
+
+  $2. \rightarrow 3.$を示す。
+
+  $\forall \qty(n, x) \in \N \times X$について、$\forall z \in V_n[x] \exists m \in \N \qty(V_m[z] \subset V_n[x])$であるので、$V_n[x] \in \mathcal{O}$である。
+
+  $n \in \N$について、集合系$D_n \coloneqq \qty{V_n[x] \mid x \in X}$
+
+  $D_n$は開被覆であるので、仮定より可算部分$Y_n$が存在して、$\qty{V_n[y] \mid y \in Y}$は開被覆である。\\*
+
+  $Y \coloneqq \bigcup \qty{Y_n \mid n \in \N}$を考える。\thmref{自然数の直積は可算}より$Y$は可算である。
+
+  $\forall x \in X \forall n \in \N$について、$Y_n$は開被覆より$\exists y \in Y_n \qty(x \in V_{s(n)}[y])$である。
+
+  ゆえに$y \in V_n[x] \cap Y$であるので、$x \in \bar{Y}$\\*
+
+  $3. \rightarrow 1.$を示す。仮定より$X$の可算部分$Y$が存在して、$\bar{Y} = X$である。
+
+  以下の集合$\mathcal{B}$を考える。
+  \eq*{
+    \mathcal{B} \coloneqq \qty{V_n[y] \mid \qty(n, y) \in \N \times Y}
+  }
+
+  \thmref{自然数の直積は可算}より、$\mathcal{B}$は可算。
+
+  $\forall \qty(n, y) \in \N \times Y$について、$\forall z \in V_n[y] \exists m \in \N \qty(V_m[z] \subset V_n[y])$であるので、$V_n[y] \in \mathcal{O}$である。\\*
+
+  $\forall O \in \mathcal{O} \forall x \in O$について、\thmref{基本近傍系の定める位相}より$\exists n \in \N \qty(V_n[x] \subset O)$である。
+
+  $x \in \bar{Y}$より$\exists y \in Y \qty(y \in V_{s(s(n))}[x])$である。
+
+  $V_{s(s(n))} \subset V_{s(n)}^{-1}$より、$x \in V_{s(n)}[y]$である。
+
+  $\forall z \in V_{s(n)}[y]$について$\qty(x, x), \qty(x, y), \qty(y, z) \in V_{s(n)}$より$\qty(x, z) \in V_n$、すなわち$V_{s(n)}[y] \subset V_n[x] \subset O$
+
+  \lemref{開集合系の一意性}より、$\mathcal{B}$は$\mathcal{O}$の開基である。
+}
+
+\thm{可算一様空間における完備}{
+  可算一様空間$X$について、$X$上の任意の\textit{Cauchy}列が収束するならば完備である。
+}{
+  \lemref{可算一様空間における基本近傍系の単調列}の主張する基本近縁系$\qty(V_n)_{n \in \N}$が存在する。
+
+  \textit{Cauchy}なネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$\forall n \in \N \exists \lambda_0(n) \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0(n)} \qty(\qty(x_\mu, x_\tau) \in V_{s(n)})$
+
+  $\qty(x_{\lambda_0(k)})_{k \in \N}$は\textit{Cauchy}な点列であるので、仮定より$\exists a \in X$に収束する。
+
+  すなわち$\exists l \in \N \forall k \in \N_{\geq l} \qty(\qty(a, x_{\lambda_0(k)}) \in V_{s(n)})$
+
+  $j \coloneqq \max \qty{l, n}$について$\forall \mu \in \Lambda_{\succcurlyeq \lambda_0(j)} \qty(\qty(a, x_{\lambda_0(j)}), \qty(x_{\lambda_0(j)}, x_\mu) \in V_{s(n)})$である。
+
+  したがって$\qty(a, x_\mu) \in V_n$
+}
+

@@ -1,0 +1,134 @@
+\lsection{測度論}
+
+\lsubsection{可測空間}
+
+\dfnf{$\sigma$-加法族}{sigma-加法族}{
+  空でない集合$X$について、以下を満たす集合系$\mathcal{S} \in \P \qty(\P(X))$を$\sigma$-加法族と呼ぶ。
+  \eqg*{
+    X \in \mathcal{S} \\*
+    \forall S \in \mathcal{S} \qty(X \setminus S \in \mathcal{S}) \\*
+    \forall A \in \P \qty(\mathcal{S}) \qty(\abs{A} \leq \aleph_0 \rightarrow \bigcup A \in \mathcal{S})
+  }
+}
+
+\lem*{
+  空でない集合$X$上の$\sigma$-加法族$\mathcal{S}$について、以下が成り立つ。
+  \eqg*{
+    \varnothing \in \mathcal{S} \\*
+    \forall S_1, S_2 \in \mathcal{S} \qty(S_1 \setminus S_2 \in \mathcal{S}) \\*
+    \forall A \in \P \qty(\mathcal{S}) \qty(\abs{A} \leq \aleph_0 \rightarrow \bigcap A \in \mathcal{S})
+  }
+}{
+  第一式を示す。\dfnref{sigma-加法族}第一式、第二式より$\varnothing = X \setminus X \in \mathcal{S}$\\*
+
+  第二式を示す。\dfnref{sigma-加法族}第二式、第三式より$S_1 \setminus S_2 = X \setminus \qty(\qty(X \setminus S_1) \cup S_2) \in \mathcal{S}$\\*
+
+  第三式を示す。$A = \varnothing$のとき$\bigcap A = \varnothing$よりすでに示した第一式より成り立つ。
+
+  $A \neq \varnothing$のとき、\thmref{De Morganの法則}と\dfnref{sigma-加法族}第二式、第三式より成り立つ。
+}
+
+\dfn{可測空間}{
+  空でない集合$X$と、$X$上の$\sigma$-加法族$\mathcal{S}$について、順序対$\qty(X, \mathcal{S})$を可測空間と呼ぶ。
+  または単に$X$と書き、可測空間と集合どちらも表すものとする。
+}
+
+\dfnf{\textit{Borel}集合族}{Borel集合族}{
+  位相空間$\qty(X, \mathcal{O})$について、以下で定める集合$\mathcal{B}_X$を\textit{Borel}集合族と呼ぶ。
+  \eq*{
+    \mathcal{B}_X = \bigcap \qty{\mathcal{S} \in \P \qty(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{O} \subset \mathcal{S}}
+  }
+}
+
+\thm*{
+  \textit{Borel}集合族は$\sigma$-加法族である。すなわち、位相空間は可測空間である。
+}{
+  $T \coloneqq \qty{\mathcal{S} \in \P \qty(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{O} \subset \mathcal{S}}$を考える。
+
+  $\P(X) \in T$より、$T \neq \varnothing$である。\\*
+
+  第一式を示す。$\forall \mathcal{S} \in T \qty(X \in \mathcal{S})$より、$X \in \bigcap T$である。
+
+  第二式を示す。$\forall S \in \bigcap T \forall \mathcal{S} \in T \qty(S \in \mathcal{S})$であるので、$X \setminus S \in \mathcal{S}$である。ゆえに、$X \setminus S \in \bigcap T$である。
+
+  第三式を示す。$\forall A \in \P(S) \qty(\abs{A} \leq \aleph_0)$を考える。$\forall \mathcal{S} \in T \qty(\bigcup A \in \mathcal{S})$であるので、$\bigcup A \in \bigcap T$である。
+}
+
+\dfn{可測写像}{
+  可測空間$\qty(X, \mathcal{S}), \qty(X', \mathcal{S'})$について、写像$f \in \qty(X')^X$が以下を満たすとき、$f$は可測写像であると呼ぶ。
+  \eq*{
+    \forall S' \in \mathcal{S'} \qty(f^{-1}(S') \in \mathcal{S})
+  }
+}
+
+\lem*{
+  連続写像$f \in \qty(X')^X$は可測写像である。
+}{
+  $\mathcal{T'} \coloneqq \qty{S' \in \mathcal{S'} \mid f^{-1}(S') \in \mathcal{S}}$を考える。$\mathcal{T'} \subset \mathcal{S'}$である。\\*
+
+  ここで、$X' \in \mathcal{S'} \land f^{-1}(X') = X \in \mathcal{S}$より、$X' \in \mathcal{T'}$である。
+
+  \thmref{原像の性質}より、$\forall T' \in \mathcal{T'} \qty(f^{-1}(X' \setminus T') = X' \setminus f^{-1}(T') \in \mathcal{S})$より、$X' \setminus T' \in \mathcal{T'}$である。
+
+  \thmref{原像の性質}より、$\forall A \in \P \qty(\mathcal{T'}) \qty(\abs{A} \leq \aleph_0)$について、$f^{-1}(\bigcup A) = \bigcup \qty{f^{-1}(T') \mid T' \in A} \in \mathcal{S}$より、$\bigcup A \in \mathcal{T'}$である。
+
+  ゆえに、$\mathcal{T'}$は$\sigma$-加法族である。\\*
+
+  連続より$\forall O' \in \mathcal{O'} \subset \mathcal{S'} \qty(f^{-1}(S') \in \mathcal{O} \subset \mathcal{S})$であるので、$\mathcal{O'} \subset \mathcal{T'}$である。
+
+  $\mathcal{S'}$は$\mathcal{O'}$を含む最小の$\sigma$-加法族であるので、$\mathcal{S'} \subset \mathcal{T'}$である。
+}
+
+\lem{指示関数}{
+  可測空間$\qty(X, \mathcal{S})$と、集合$E \in \mathcal{S}$を考える。
+
+  以下で定める写像$\chi_E \in \R^X$は可測である。
+  \eq*{
+    \chi_E(x) =
+    \begin{cases}
+      1 & \qty(x \in E) \\*
+      0 & \qty(x \notin E)
+    \end{cases}
+  }
+}{
+  $\R$の\textit{Borel}集合族$\mathcal{B}_{\R}$について、$\forall B \in \mathcal{B}_{\R}$を考える。
+
+  $0, 1 \in B$であるとき、$f^{-1}(B) = X \in \mathcal{S}$である。
+
+  $0 \in B \land 1 \notin B$であるとき、$f^{-1}(B) = X \setminus E \in \mathcal{S}$である。
+
+  $0 \notin B \land 1 \in B$であるとき、$f^{-1}(B) = E \in \mathcal{S}$である。
+
+  $0, 1 \notin B$であるとき、$f^{-1}(B) = \varnothing \in \mathcal{S}$である。
+}
+
+
+
+\lsubsection{拡大実数}
+
+\dfn{拡大実数}{
+  順序体$\R$について、以下を満たす２つの元$\infty, -\infty$を考える。
+  \eqg*{
+    \forall a \in \R \qty(-\infty < a \land a < \infty) \\*
+    \forall a \in \R \cup \qty{\infty} \qty(a + \infty = \infty) \\*
+    \forall a \in \R \cup \qty{-\infty} \qty(a + (-\infty) = -\infty)
+  }
+
+  このとき、集合$\bar{\R} \coloneqq \R \cup \qty{-\infty, \infty}$を拡大実数と呼ぶ。
+}
+
+
+\lsubsection{測度}
+
+\dfn{測度}{
+  可測空間$\qty(X, \mathcal{S})$について、以下を満たす写像$\mu \in \qty[0, \infty]^{\mathcal{S}}$を測度と呼ぶ。
+  \begin{itemize}
+    \item $\mu(\varnothing) = 0$
+    \item $\mathcal{S}$上の任意の非交叉列$\qty(S_n)_{n \in \N}$について、$\mu \qty(\bigcup \qty(S_n)_{n \in \N}) = \sum_{n = 0}^{\infty} \mu(S_n)$
+  \end{itemize}
+}
+
+\dfn{測度空間}{
+  可測空間$\qty(X, \mathcal{S})$と、$X$上の測度$\mu$について、順序対$\qty(\qty(X, \mathcal{S}), \mu)$を測度空間と呼ぶ。
+  または単に$X$と書き、測度空間と集合どちらも表すものとする。
+}

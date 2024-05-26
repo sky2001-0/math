@@ -1,0 +1,368 @@
+\lsection{代数}
+
+\lsubsection{マグマ}
+
+\dfn{二項演算}{
+  集合$X$について、写像$\cdot \in X^{X^2}$を、$X$上の二項演算、または$X$上の演算と呼ぶ。
+
+  $\cdot(a, b)$を誤解のない範囲で$a \cdot b$とも表す。
+}
+
+\dfn{マグマ}{
+  集合$M$と$M$上の演算$\cdot$について、順序対$\qty(M, \cdot)$をマグマと呼ぶ。または単に$M$と書き、マグマを表すものとする。
+}
+
+\dfn{可換マグマ}{
+  マグマ$\qty(M, +)$が以下を満たすとき、$M$を可換マグマと呼ぶ。可換であることを明示的に$+$で表す。
+  \eq*{
+    \forall x, y \in M \qty(x + y = y + x)
+  }
+}
+
+
+\lsubsection{マグマと準同型}
+
+\dfn{マグマ準同型}{
+  マグマ$\qty(M_1, \cdot_{M_1}), \qty(M_2, \cdot_{M_2})$について以下を満たす写像$\varphi \in M_2^{M_1}$が存在するとき、$\varphi$をマグマ準同型写像、または単にマグマ準同型と呼ぶ。
+  \eq*{
+    \forall x, y \in M_1 \qty(\varphi(x) \cdot_{M_2} \varphi(y) = \varphi(x \cdot_{M_1} y))
+  }
+
+  また、$\qty(M_1, \cdot_{M_1}) = \qty(M_2, \cdot_{M_2})$であるとき、マグマ自己準同型と呼ぶ。
+}
+
+\cor*{
+  マグマ$M_1, M_2, M_3$と、マグマ準同型$f \in M_2^{M_1}, g \in M_3^{M_2}$について、合成写像$g \circ f$はマグマ準同型である。
+}
+
+\dfn{埋め込み}{
+  単射なマグマ準同型を埋め込みと呼ぶ。
+}
+
+\dfn{マグマ同型}{
+  全単射なマグマ準同型写像を、マグマ同型写像、または単にマグマ同型と呼ぶ。
+}
+
+\cor*{
+  マグマ$M$について、恒等写像$\id_{M}$はマグマ同型である。
+}
+
+\dfn{マグマ準同型の全体}{
+  マグマ$M_1, M_2$について、$M_1$から$M_2$へのマグマ準同型写像全体のなす集合を、$\Hom(M_1, M_2)$と表す。
+
+  また、自己準同型写像の全体を$\End(M) \coloneqq \Hom(M, M)$と表す。
+}
+
+
+\lsubsection{マグマと準同型定理}
+
+\dfn{部分マグマ}{
+  マグマ$\qty(M, \cdot)$と、集合$S$、以下を満たす制限写像$\cdot$について、順序対$\qty(S, \cdot)$を$M$の部分マグマと呼ぶ。
+  \eq*{
+    S \subset M \land \forall x, y \in S \qty(x \cdot y \in S)
+  }
+}
+
+\cor*{
+  マグマ$M_1, M_2$と、マグマ準同型$f \in M_2^{M_1}$について、像$f(M_1)$は$M_2$の部分マグマである。
+}
+
+\dfn{商マグマ}{
+  マグマ$\qty(M, \cdot)$を考える。
+
+  \corref{直積集合と自明な同値関係}の意味で演算$\cdot$と両立する同値関係$\sim$について、\thmref{両立}より定める演算$\cdot'$が存在する。
+
+  このとき、マグマ$\qty(M / \sim, \cdot')$をマグマ$M$の商マグマと呼ぶ。
+}
+
+\cor*{
+  マグマ$\qty(M, \cdot)$と、その商マグマ$\qty(M / \sim, \cdot)$について、商写像$\qty[]$はマグマ準同型である。
+}
+
+\thm{マグマ準同型定理}{
+  マグマ$\qty(M_1, \cdot_{M_1}), \qty(M_2, \cdot_{M_2})$とマグマ準同型$f \in M_2^{M_1}$、および$f$に付随する同値関係$\sim_{f}$について、
+  マグマ同型$\bar{f} \in \qty(\Im(f), \cdot_{M_2})^\qty(M_1 / \sim_{f}, \cdot)$が存在する。
+}{
+  \thmref{標準分解}より全単射な$\bar{f}$が存在して、$f = \bar{f} \circ \qty[]$
+
+  ゆえに、
+  \eq*{
+    \bar{f} (\qty[x] \cdot \qty[y]) = \bar{f} (\qty[x \cdot_{M_1} y]) = f(x \cdot_{M_1} y) = f(x) \cdot_{M_2} f(y) = \bar{f} (\qty[x]) \cdot_{M_2} \bar{f} (\qty[x])
+  }
+
+  したがってマグマ準同型。
+}
+
+
+\lsubsection{半群}
+
+\dfn{半群}{
+  マグマ$\qty(S, \cdot)$が以下を満たすとき、半群と呼ぶ。
+  \eq*{
+    \forall x, y, z \in S \qty(\qty(x \cdot y) \cdot z = x \cdot \qty(y \cdot z))
+  }
+}
+
+\thm{一般結合法則}{
+  半群$\qty(S, \times)$について、$S$の$2$以上の$n \in \N$コの元の演算結果$a_0 \times a_1 \times \cdots \times a_{n - 1}$は、括弧の付け方によらず$\qty( \cdots \qty(a_0 \times a_1) \times \cdots \times a_{n - 1})$に等しい。
+}{
+  帰納的に示される。
+}
+
+\dfn{可換半群}{
+  半群が可換マグマであるとき、可換半群と呼ぶ。
+}
+
+\thm{一般交換法則}{
+  可換半群$\qty(S, +)$と点列$a \in S^n$を考える。任意の全単射$\sigma \in n^n$について、以下が成り立つ。
+  \eq*{
+    a_{\sigma(0)} + a_{\sigma(1)} + \cdots + a_{\sigma(n - 1)} = a_0 + a_1 + \cdots + a_{n - 1}
+  }
+}{
+  帰納的に示される。
+}
+
+\cor*{
+  半群の部分マグマは半群である。
+}
+
+\cor*{
+  半群の商マグマは半群である。
+}
+
+
+\lsubsection{モノイド}
+
+\dfn{モノイド}{
+  半群$\qty(M, \cdot)$が以下を満たすとき、モノイドと呼ぶ。
+  \eq*{
+    \exists e \in M \forall x \in M \qty(e \cdot x = x \cdot e = x)
+  }
+}
+
+\lem*{
+  上の定義の主張する$e$は群に対して一意に定まる。
+}{
+  $e_1, e_2$の二つが存在するとすると、直ちに矛盾する。
+  \eq*{
+    e_1 = e_1 e_2 = e_2
+  }
+}
+
+\dfn{単位元}{
+  \mlemref{0}より一意に定まる$e$をモノイドの単位元と呼ぶ。
+
+  モノイド$M$の単位元であることを明示するために、$e_M$とも表す。
+}
+
+\dfn{可逆元の全体}{
+  モノイド$\qty(M, \cdot)$について、集合$M^\times$を以下のように定義する。
+  \eq*{
+    M^\times = \qty{x \in M \mid \exists y \in M \qty(x \cdot y = y \cdot x = e)}
+  }
+
+  また、$M^\times$の元を可逆元と呼ぶ。
+}
+
+\lem*{
+  \dfnref{可逆元の全体}の主張する元$y$は元$x$に対して一意に定まる。
+}{
+  $y_1, y_2$の二つが存在するとすると、直ちに矛盾する。
+  \eq*{
+    y_1 = e \cdot y_1 = \qty(y_2 \cdot x) \cdot y_1 = y_2 \cdot \qty(x \cdot y_1) = y_2 \cdot e = y_2
+  }
+}
+
+\dfn{逆元}{
+  \mlemref{0}より一意に定まる$y$を元$x$の逆元と呼び、$x^{-1}$で表す。
+
+  さらに、$x \cdot y^{-1}$を$x / y$と略記する。
+}
+
+\cor*{
+  モノイド$M$とその単位元$e$について、
+  \eq*{
+    e^{-1} = e \land \forall x \in M^\times \qty(\qty(x^{-1})^{-1} = x)
+  }
+}
+
+\dfn{可換モノイド}{
+  モノイドが可換マグマであるとき、可換モノイドと呼ぶ。
+
+  可換モノイドの場合、可換であることを明示的に、単位元を$0$、逆元を$-x$、演算$x / y$を$x - y$とも表す。
+}
+
+
+\lsubsection{モノイドと準同型}
+
+\dfn{モノイド準同型}{
+  モノイド$M_1, M_2$について、マグマ準同型$\varphi \in M_2^{M_1}$が以下を満たすとき、$\varphi$をモノイド準同型写像、または単にモノイド準同型と呼ぶ。
+  \eq*{
+    \varphi(e_{M_1}) = e_{M_2}
+  }
+}
+
+\cor{モノイド準同型の合成}{
+  モノイド$M_1, M_2, M_3$と、モノイド準同型$f \in M_2^{M_1}, g \in M_3^{M_2}$について、合成写像$g \circ f$はモノイド準同型である。
+}
+
+\dfn{核}{
+  モノイド準同型$\varphi \in M_2^{M_1}$について、以下の原像を核と呼び、$\Ker(\varphi)$と表す。
+  \eq*{
+    \Ker(\varphi) \coloneqq \varphi^{-1}(\qty{e_{M_2}})
+  }
+}
+
+\dfn{モノイド同型}{
+  全単射なモノイド準同型写像を、モノイド同型写像、または単にモノイド同型と呼ぶ。
+}
+
+\thm{自己写像の全体}{
+  集合$X$について、順序対$\qty(X^X, \circ)$はモノイドである。
+}{
+  自明にマグマである。
+  \corref{写像の合成の結合法則}より、半群。
+
+  $\id_{X}$は単位元となるので、モノイドである。
+}
+
+\thm{自然数は可換モノイド}{
+  $\qty(\N, +)$は可換モノイドである。
+
+  $\qty(\N, \times)$は可換モノイドである。
+}{
+  \lemref{自然数の加法の結合法則}、\lemref{自然数の加法の単位元}、\lemref{自然数の加法の交換法則}より、$\qty(\N, +)$は可換モノイドである。\\*
+
+  \lemref{自然数の乗法の結合法則}、\lemref{自然数の乗法の単位元}、\lemref{自然数の乗法の交換法則}より、$\qty(\N, \times)$は可換モノイドである。
+}
+
+
+\lsubsection{モノイドと準同型定理}
+
+\dfn{部分モノイド}{
+  モノイド$M$の部分マグマ$A$が、モノイドをなすとき、$A$を部分モノイドと呼ぶ。
+}
+
+\cor{部分モノイドの判定}{
+  モノイド$M$の部分マグマ$A$について、$A$が部分モノイドであることは以下が成り立つことと必要十分である。
+  \eq*{
+    e \in A
+  }
+}
+
+\cor*{
+  モノイド$M$について、$M^\times$は部分モノイドである。
+}
+
+\cor*{
+  モノイド準同型$\varphi \in M_2^{M_1}$について、$\Ker(\varphi)$は$M$の部分モノイドである。
+}
+
+\cor*{
+  モノイドの商マグマはモノイドである。$\qty[e]$を単位元として持つ。
+}
+
+\thm{モノイド準同型定理}{
+  モノイド$M_1, M_2$と、モノイド準同型$f \in M_2^{M_1}$、$f$に付随する同値関係$\sim_{f}$について、モノイド同型$\bar{f} \in \Im(f)^{M_1 / \sim_{f}}$が存在する。
+}{
+  $\Im(f)$は$M_2$の部分モノイドである。
+
+  \thmref{マグマ準同型定理}より、得る$\bar{f}$はマグマ同型。
+
+  今、$\bar{f}(\qty[e_{M_1}]) = f(e_{M_1}) = e_{M_2}$であるので、示される。
+}
+
+\thm{自己準同型の全体}{
+  マグマ$M$について、順序対$\qty(\End(M), \circ)$はモノイド$\qty(X^X, \circ)$の部分モノイドである。
+}{
+  自明に部分である。
+
+  \corref{モノイド準同型の合成}よりマグマである。
+  \corref{写像の合成の結合法則}より、半群。
+
+  $\id_{X}$は単位元となるので、モノイドである。
+}
+
+
+\lsubsection{指数と総乗}
+
+\lem*{
+  モノイド$\qty(M, \cdot)$について、以下のように帰納的に定める部分写像$\prod$は$M^\N \times \N$について左全域的である。
+  \eqg*{
+    \forall \qty(x_m)_{m \in \N} \in M^\N \qty(\prod \qty(\qty(x_m)_{m \in \N}, 0) \coloneqq e) \\*
+    \forall \qty(x_m)_{m \in \N} \in M^\N \forall n \in \N \qty(\prod \qty(\qty(x_m)_{m \in \N}, s(n)) \coloneqq \prod \qty(\qty(x_m)_{m \in \N}, n) \cdot x_n)
+  }
+}{
+  $\forall \qty(\qty(x_m)_{m \in \N}, n) \in M^\N \times \N$に対して、$\prod \qty(\qty(x_m)_{m \in \N}, n)$が存在することを示す。
+
+  $n = 0$のとき定義より成り立つ。
+
+  ある$n$で成り立つとすると、定義より$\prod \qty(\qty(x_m)_{m \in \N}, s(n))$でも成り立つ。
+
+  \thmref{数学的帰納法}より、任意の$n$について示される。
+}
+
+\dfn{総乗記号}{
+  \mlemref{0}より定まる写像$\prod \in M^{M^\N \times \N}$を総乗記号と呼ぶ。
+
+  また、$\prod \qty(\qty(x_m)_{m \in \N}, n)$を誤解のない範囲で$\prod_{m \in n} x_m$と略記する。
+
+  書き直して再掲する。
+  \eqg*{
+    \forall \qty(x_m)_{m \in \N} \in M^\N \qty(\prod_{m \in 0} x_m \coloneqq e) \\*
+    \forall \qty(x_m)_{m \in \N} \in M^\N \forall n \in \N \qty(\prod_{m \in s(n)} x_m  \coloneqq \qty(\prod_{m \in n} x_m) \cdot x_n)
+  }
+
+  可換モノイドであるとき、可換であることを明示的に$\sum$を、$\prod$の代わりに用いる。
+}
+
+\dfn{総和記号}{
+  可換モノイド$\qty(M, +)$と、その部分集合$X$について、以下を満たすとする。ただし、$0$は単位元とする。
+  \eq*{
+    \exists A \in \P(X) \qty(\abs{A} < \infty \land \forall x \in X \setminus A \qty(x = 0))
+  }
+
+  このとき、全単射$\sigma \in A^\abs{A}$が存在する。集合についての総和記号を以下のように定義する。\thmref{一般交換法則}から一意に定まる。
+  \eq*{
+    \sum X \coloneqq \sum_{m \in \abs{A}} a_m
+  }
+}
+
+\dfn{指数}{
+  モノイド$M$について、以下の写像$\text{\textasciicircum } \in M^{M \times \N}$を指数と呼ぶ。
+  \eq*{
+    \text{\textasciicircum } \qty(x, n) \coloneqq \prod_{m \in n} x
+  }
+
+  指数$\text{\textasciicircum }$は、演算$\cdot$よりも先に計算される。
+
+  また、$\text{\textasciicircum } \qty(x, n)$を誤解のない範囲で$x^n$と略記する。
+}
+
+\lem{モノイド上の指数法則}{
+  モノイド$\qty(M, \cdot)$について、以下の２つのモノイド準同型が存在する。
+  \begin{enumerate}
+    \item $\forall x \in M$について、$\sigma \in M^\qty(\N, +)$であり、$\sigma(n) = x^n$
+    \item $\tau \in \End(M)^{\qty(\N, \times)}$であり、$\tau(n)(x) = x^n$
+  \end{enumerate}
+}{
+  $1.$を示す。
+
+  $x^{n + 0} = x^n = x^n \cdot 1_M = x^n \cdot x^0$である。
+
+  $x^{n + m} = x^n \cdot x^m$であるとき、$x^{n + s(m)} = x^{s(n + m)} = x^{n + m} \cdot x = x^n \cdot x^m \cdot x = x^n \cdot x^{s(m)}$である。
+
+  \thmref{数学的帰納法}より、任意の$m$について成り立つ。
+
+  $x^0 = 1_M$より単位元を保つので、モノイド準同型。\\*
+
+  $2.$を示す。
+
+  $x^{n \times 0} = x^0 = 1_M = \qty(x^n)^0$である。
+
+  $x^{n \times m} = \qty(x^n)^m$であるとき、$x^{n \times s(m)} = x^{n \times m + n} = x^{n \times m} \cdot x^n = \qty(x^n)^m \cdot x^n = \qty(x^n)^{s(m)}$である。
+
+  \thmref{数学的帰納法}より、任意の$m$について成り立つ。
+
+  $\tau(1)$は$\End(M)$の単位元であるので、モノイドである。
+}

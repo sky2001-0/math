@@ -1,0 +1,3 @@
+[submodule "tex_template"]
+	path = tex_template
+	url = git@github.com:sky2001-0/tex_template

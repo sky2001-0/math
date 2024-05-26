@@ -1,0 +1,401 @@
+\lsection{代数上の位相}
+
+\lsubsection{位相群}
+
+\dfn{位相群}{
+  群$\qty(G, \cdot)$と、$X$の開集合系$\mathcal{O}$が以下が成り立つとき、順序対$\qty(\qty(G, \cdot), \mathcal{O})$を位相群と呼ぶ。
+  \begin{enumerate}
+    \item $\cdot \in G^{G \times G}$が連続
+    \item $-1 \in G^G$が連続
+  \end{enumerate}
+}
+
+\dfn{部分位相群}{
+  位相群$\qty(\qty(G, \cdot), \mathcal{O})$の部分群$\qty(H, \cdot)$について、$\qty(\qty(H, +), \qty{H \cap O \mid O \in \mathcal{O}})$は位相群である。これを位相群$G$の部分位相群である。
+}
+
+\lem{位相群の収束ネットの積と逆}{
+  位相群$G$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}, \qty(y_\lambda)_{\lambda \in \Lambda}$が、$x, y \in G$に収束するならば、$\qty(x_\lambda y_\lambda)_{\lambda \in \Lambda}, \qty(x_\lambda^{-1})_{\lambda \in \Lambda}$は$x y, x^{-1}$に収束するネットである。
+}{
+  \dfnref{位相群}と\thmref{点連続と収束}より成り立つ。
+}
+
+\lem{位相群と連続写像}{
+  位相空間$X$と位相群$G$について、連続写像$f \in G^X, g \in G^X$を考える。
+
+  このとき、写像$f \cdot g \in G^X, \qty(f \cdot g) (x) = f(x) \cdot g(x)$と、写像$\hat{f} \in G^X, \hat{f}(x) 0 f(x)^{-1}$は連続である。
+}{
+  \dfnref{位相群}と\thmref{連続写像の合成}より成り立つ。
+}
+
+\thm{位相群と分離}{
+  位相群$G$について、以下の３つは同値である。このとき、$G$は\textit{Hausdorff}であると呼ぶ。
+  \begin{enumerate}
+    \item $G$は$T_2$空間
+    \item $G$は$T_1$空間
+    \item $\qty{e}$は閉集合
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$は明らか。\\*
+
+  $2. \rightarrow 3.$は、\thmref{Frechet性}より明らか。\\*
+
+  $3. \rightarrow 1.$を示す。
+
+  $\qty{\qty(x, x) \mid x \in G} = \cdot^{-1}(\qty{e}) \in \mathcal{O}$より\thmref{Hausdorff性}から示される。
+}
+
+\thm{位相群の左一様構造}{
+  位相群$G$と基本近傍系$\mathcal{B}(x)$について、以下で定める集合系$\mathcal{V}$は基本近縁系である。
+  \eq*{
+    \mathcal{V} \coloneqq \qty{\tilde{B} \coloneqq \qty{\qty(x, y) \in G \times G \mid x^{-1} y \in B} \mid B \in \mathcal{B}(e)}
+  }
+
+  さらに、基本近縁系$\mathcal{V}$の定める近傍系$\mathcal{N'}(x)$は、基本近傍系$\mathcal{B}(x)$の定める近傍系$\mathcal{N}(x)$に一致する。
+}{
+  \dfnref{基本近傍系}第一式から$\mathcal{V} \neq \varnothing$\\*
+
+  $\forall V \in \mathcal{V}$について\dfnref{基本近傍系}第二式から$\forall x \in G \forall B \in \mathcal{B}(e) \qty(x^{-1} x = e \in B)$である。ゆえに$\qty(x, x) \in V$\\*
+
+  $\forall V_1, V_2 \in \mathcal{V}$について、$\exists B_1, B_2 \in \mathcal{B}(e) \qty(V_1 = \tilde{B_1} \land V_2 = \tilde{B_2})$である。
+
+  \dfnref{基本近傍系}第三式より$\exists B \in \mathcal{B}(e) \qty(B \subset B_1 \cap B_2)$であり、定義より$\tilde{B} \subset V_1 \cap V_2 \land \tilde{B} \in \mathcal{V}$\\*
+
+  $\forall V \in \mathcal{V} \exists B \in \mathcal{B}(e) \qty(V = \tilde{B})$である。
+
+  \dfnref{位相群}第一式と\thmref{連続と点連続}より$\exists B_1, B_2 \in \mathcal{B}(e) \qty(\cdot(B_1 \times B_2) \subset B)$
+
+  \dfnref{基本近傍系}第三式より$\exists B' \in \mathcal{B}(e) \qty(\cdot(B' \times B') \subset \cdot(B_1 \times B_2) \subset B)$
+
+  定義より$\tilde{B'} \circ \tilde{B'} \subset \tilde{\cdot \qty(B' \times B')} \subset \tilde{B} = V$\\*
+
+  $\forall V \in \mathcal{V} \exists B \in \mathcal{B}(e) \qty(V = \tilde{B})$である。
+
+  \dfnref{位相群}第二式と\thmref{連続と点連続}より$\exists B' \in \mathcal{B}(e) \qty(-1(B') \subset B)$となるので、$\tilde{B'} \subset V^{-1}$\\*
+
+  $\mathcal{V}$の与える基本近傍系は$\mathcal{B'}(x) = \qty{\tilde{B}[x] \mid B \in \mathcal{B}(e)}$である。\\*
+
+  \dfnref{位相群}第一式と\lemref{直積と連続}より$\forall D \in \mathcal{B}(x) \exists B \in \mathcal{B}(e) \qty(\qty{x y \mid y \in B} \subset D)$
+
+  $\tilde{B}[x] = \qty{y \in G \mid x^{-1} y \in B} = \qty{x z \mid z \in B} \subset D$\\*
+
+  \dfnref{位相群}第一式と\lemref{直積と連続}より$\forall B \in \mathcal{B}(e) \exists D \in \mathcal{B}(x) \qty(\qty{x^{-1} y \mid y \in D} \subset B)$
+
+  $\tilde{B}[x] = \qty{y \in G \mid x^{-1} y \in B} \supset \qty{z \in G \mid x^{-1} z \in \qty{x^{-1} y \mid y \in D}} = D$
+
+  ゆえに\lemref{近傍系の一意性}より成り立つ。
+}
+
+\lemf{位相群の\textit{Cauchy}ネットの積}{位相群のCauchyネットの積}{
+  位相群$G$上の\textit{Cauchy}ネット$\qty(x_\lambda)_{\lambda \in \Lambda}, \qty(y_\lambda)_{\lambda \in \Lambda}$について、$\qty(x_\lambda y_\lambda)_{\lambda \in \Lambda}$は\textit{Cauchy}ネットである。
+}{
+  $\forall V \in \mathcal{V}$について、$\exists W \in \mathcal{V} \qty(W \circ W \subset V)$
+
+  \textit{Cauchy}より、$\exists \lambda_x \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in W)$かつ$\exists \lambda_y \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_y} \qty(\qty(y_{\lambda_1}, y_{\lambda_2}) \in W)$
+
+  有向性より、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}), \qty(y_{\lambda_1}, y_{\lambda_2}) \in W)$
+
+  \thmref{位相群の左一様構造}の定義より$\qty(x_{\lambda_1} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_1}), \qty(x_{\lambda_2} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_2}) \in W$より、$\qty(x_{\lambda_1} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_2}) \in V$
+}
+
+\lemf{可換位相群の\textit{Cauchy}ネットの逆}{可換位相群のCauchyネットの逆}{
+  可換位相群$G$上の\textit{Cauchy}ネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$\qty(x_\lambda^{-1})_{\lambda \in \Lambda}$は\textit{Cauchy}ネットである。
+}{
+  $\forall V \in \mathcal{V}$について、$\exists W \in \mathcal{V} \qty(W \subset V^{-1})$
+
+  \textit{Cauchy}より、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in W)$である。
+
+  $\qty(x_{\lambda_2}, x_{\lambda_1}) \in V$である。可換性と\thmref{位相群の左一様構造}の定義より$\qty(x_{\lambda_1}^{-1}, x_{\lambda_2}^{-1}) \in V$
+}
+
+\dfn{総和可能}{
+  \textit{Hausdorff}な可換位相群$G$について、$G$上の点列$\qty(x_n)_{n \in \N}$を考える。
+
+  点列$\qty(\sum_{m = 0}^n x_m)_{n \in \N}$が、$G$上の点$s$に収束するとき、点列$\qty(x_n)_{n \in \N}$は総和可能と呼ぶ。
+
+  このとき、$\sum_{m = 0}^\infty x_m \coloneqq s$と表記する。
+}
+
+
+\lsubsection{位相環}
+
+\dfn{位相環}{
+  環$\qty(\qty(R, +), \times)$と、$X$の開集合系$\mathcal{O}$が以下が成り立つとき、順序対$\qty(\qty(\qty(R, +), \times), \mathcal{O})$を位相環と呼ぶ。
+  \begin{enumerate}
+    \item $\qty(\qty(R, +), \mathcal{O})$は位相群
+    \item $\times \in R^{R \times R}$が連続
+  \end{enumerate}
+}
+
+\lem{位相環の条件}{
+  位相群$\qty(R, +)$について、$R$が位相環であることは、以下の３つを満たすことと同値である。
+  \begin{itemize}
+    \item $\times \in R^{R \times R}$は、$\qty(0_R, 0_R)$で連続。
+    \item $\forall x_0 \in R$について、$l \in R^R, l(x) = x_0 x$は、$0_R$で連続。
+    \item $\forall x_0 \in R$について、$r \in R^R, r(x) = x x_0$は、$0_R$で連続。
+  \end{itemize}
+}{
+  必要性は明らか。\\*
+
+  十分性を示す。
+
+  $\forall \qty(x_0, y_0) \in R \times R$について、$x y = x_0 y_0 + \qty(x - x_0) \qty(y - y_0) + \qty(x - x_0) y_0 + x_0 \qty(x - y)$より、$\qty(x_0, y_0)$で連続。
+}
+
+\lem{位相環の収束ネットの積}{
+  位相環$R$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}, \qty(y_\lambda)_{\lambda \in \Lambda}$が、$x, y \in R$に収束するならば、$\qty(x_\lambda y_\lambda)_{\lambda \in \Lambda}$は$x y$に収束するネットである。
+}{
+  \dfnref{位相環}と\thmref{点連続と収束}より成り立つ。
+}
+
+\lem{位相環と連続写像}{
+  位相空間$X$と位相環$R$について、連続写像$f \in R^X, g \in R^X$を考える。
+
+  このとき、写像$f \times g \in G^X, \qty(f \times g)(x) = f(x) \times g(x)$は連続である。
+}{
+  \dfnref{位相環}と\thmref{連続写像の合成}より成り立つ。
+}
+
+\dfn{位相体}{
+  体$\qty(\qty(F, +), \times)$と、$X$の開集合系$\mathcal{O}$が以下が成り立つとき、順序対$\qty(\qty(\qty(F, +), \times), \mathcal{O})$を位相体と呼ぶ。
+  \begin{enumerate}
+    \item $\qty(\qty(\qty(F, +), \times), \mathcal{O})$は位相環
+    \item $-1 \in \qty(F^\times)^{F^\times}$が連続
+  \end{enumerate}
+}
+
+\lem{位相体の収束ネットの逆}{
+  \textit{Hausdorff}な位相体$F$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が$x \in F^\times$に収束するならば、以下で定めるネット$\qty(y_\lambda)_{\lambda \in \Lambda}$は$1_F / x$に収束するネットである。
+  \eq*{
+    y_\lambda =
+    \begin{cases}
+      1_F / x_\lambda & \qty(x_\lambda \neq 0_F) \\*
+      0_F & \qty(x_\lambda = 0_F)
+    \end{cases}
+  }
+}{
+  \textit{Hausdorff}と収束の定義より$\exists B_0 \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(0_F \notin B_0 \land \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B_0)$
+
+  \dfnref{位相体}と\thmref{点連続と収束}より成り立つ。
+}
+
+
+\lsubsection{位相群としての順序群}
+
+\thm{順序群は位相群}{
+  順序群$\qty(\qty(G, +), \leq)$上の以下の２つの演算は連続である。
+  \begin{enumerate}
+    \item $+ \in G^{G \times G}$
+    \item $- \in G^G$
+  \end{enumerate}
+}{
+  \lemref{順序の開基}の定める開基$\mathcal{B}$を考える。\\*
+
+  $\forall \qty(x, y) \in G$について考える。
+
+  $G^+$が最小元$m$を持つならば$\qty{x} = \sqty{x - m, x + m} \in \mathcal{B}(x)$である。同様に$\qty{y} \in \mathcal{B}(y)$
+
+  $\forall B \in \mathcal{B}(x + y) \qty(+(\qty{x} \times \qty{y}) = \qty{x + y} \subset B)$
+
+  $G^+$が最小元を持たないならば$\forall B \in \mathcal{B}(x + y) \exists a, b \in G \qty(x + y \in \sqty{a, b} = B)$である。
+
+  \lemref{順序群の三角性}より$\exists g \in G^+ \qty(g + g \leq \min \qty{x + y - a, b - (x + y)})$である。
+
+  $B' \coloneqq \sqty{x - g, x + g} \times \sqty{y - g, y + g} \in \mathcal{B} \times \mathcal{B}$であり、$+(B') \subset B$
+
+  \thmref{連続と点連続}より成り立つ。\\*
+
+  $\forall B \coloneqq \sqty{a, b} \in \mathcal{B}$について考える。$f = -$とする。
+
+  $f^{-1}(B) = \sqty{-b, -a} \in \mathcal{B}$であるので連続。
+}
+
+\dfn{絶対値}{
+  順序群$G$について、以下で定める写像を絶対値と呼ぶ。
+  \eq*{
+    \abs{a} \coloneqq \max \qty{a, -a}
+  }
+}
+
+\lem{順序群のノルム}{
+  順序群$G$について、以下が成り立つ。
+  \eqg*{
+    \forall a \in G \qty(\abs{a} = 0_G \leftrightarrow a = 0_G) \\*
+    \forall a, b \in G \qty(\abs{a + b} \leq \abs{a} + \abs{b}) \\*
+    \forall a \in G \qty(\abs{a} = \abs{-a})
+  }
+}{
+  $g \coloneqq a, b \in G$について、$0_G \leq g \lor g < 0_G$で場合分けすることにより得る。
+}
+
+\cor*{
+  順序群$G$について以下が成り立つ。
+  \eq*{
+    \forall a \in G \qty(0_G \leq \abs{a})
+  }
+}
+
+\lem{絶対値は連続}{
+  順序群$\qty(\qty(G, +), \leq)$上の演算$\abs{}$は連続である。
+}{
+  \lemref{順序の開基}の定める開基$\mathcal{B}$を考える。
+
+  $\forall B \coloneqq \qty{x \in G \mid a < x \land x < b} \in \mathcal{B}$について考える。
+
+  $b \leq a \lor b < 0_G$ならば、$\abs{}^{-1}(B) = \abs{}^{-1}(\varnothing) = \varnothing \in \mathcal{O}$である。
+
+  $a < 0_G \leq b$であるとき、$\abs{}^{-1}(B) = \sqty{-b, b} \in \mathcal{B} \subset \mathcal{O}$である。
+
+  $0_G \leq a$であるとき、$\abs{}^{-1}(B) = \sqty{-b, -a} \cup \sqty{a, b} \in \mathcal{O}$である。
+
+  \lemref{開基と連続}より連続である。
+}
+
+\thm{順序群の一様構造}{
+  順序群$G$について、以下で定める集合系$\mathcal{V}$は基本近縁系である。
+  \eq*{
+    \mathcal{V} \coloneqq \qty{V_g \coloneqq \qty{\qty(x, y) \in G \times G \mid \abs{x - y} < g} \mid g \in G^+}
+  }
+
+  さらに、基本近縁系$\mathcal{V}$の定める近縁系$\mathcal{U'}$は、\thmref{位相群の左一様構造}の定める近縁系$\mathcal{U}$に一致する。
+}{
+	$\forall g \in G^+ \exists B \in \mathcal{B}(0_G) \qty(B = \sqty{-g, g} \land \tilde{B} \subset V_g)$である。
+
+	$\forall B \in \mathcal{B}(0_G)$について、$B = \sqty{a, b} \land a < 0_G < b$である。$g = \min \qty{-a, b} \in G^+$について、$V_g \subset \tilde{B}$である。
+
+	\lemref{近縁系の一意性}より成り立つ。
+}
+
+\thm{順序群では全有界ならば有界}{
+  順序群$G$の部分集合$A$について、$A$が全有界ならば有界である。
+}{
+  非自明性より$\exists g \in G^+$である。
+
+  全有界より$\exists Y \in \P(A) \qty(\abs{Y} < \infty \land A \subset \qty{B(g)[y] \mid y \in Y})$である。
+
+  \thmref{有限全順序集合の最大元}より$\exists u, d \in G \qty(u = \max Y \land d = \min Y)$である。
+
+  全有界性より$\forall a \in A \qty(d - g < a \land a < u + g)$
+}
+
+\thmf{$\epsilon$-$\delta$論法}{epsilon-delta論法}{
+  順序群$G$上の点列$\qty(a_n)_{n \in \N}$を考える。
+
+  $\qty(a_n)_{n \in \N}$が$r \in G$に収束することは、以下を満たすことと必要十分である。
+  \eq*{
+    \forall \epsilon \in G^+ \exists N \in \N \forall n \in \N \qty(N \leq n \rightarrow \abs{a_n - r} < \epsilon)
+  }
+
+  $\qty(a_n)_{n \in \N}$が\textit{Cauchy}であることは、以下を満たすことと必要十分である。
+  \eq*{
+    \forall \epsilon \in G^+ \exists N \in \N \forall n, m \in \N \qty(N \leq n \land N \leq m \rightarrow \abs{a_n - a_m} < \epsilon)
+  }
+}{
+  \thmref{順序群の一様構造}より明らか。
+}
+
+\lemf{順序群上の\textit{Cauchy}列の絶対値}{順序群上のCauchy列の絶対値}{
+  順序群$G$上の\textit{Cauchy}列$\qty(x_n)_{n \in \N}$について、$\qty(\abs{x_n})_{n \in \N}$は\textit{Cauchy}列となる。
+
+  さらに、$\qty(x_n)_{n \in \N}$が$a$に収束するとき、$\qty(\abs{x_n})_{n \in \N}$は$\abs{a}$に収束する。
+}{
+  \lemref{順序群のノルム}より$\abs{\abs{x_n} - \abs{x_m}} \leq \abs{x_n - x_m}$であるので\textit{Cauchy}列である。
+
+  \lemref{順序群のノルム}より$\abs{\abs{x_n} - \abs{a}} \leq \abs{\abs{x_n - a}} = \abs{x_n - a}$であるので、$\abs{a}$に収束する。
+}
+
+
+\lsubsection{位相環としての順序環}
+
+\thm{順序環のノルム}{
+  順序環$R$について、以下が成り立つ。
+  \eqg*{
+    \forall a \in G \qty(\abs{a} = 0_R \leftrightarrow a = 0_R) \\*
+    \forall a, b \in G \qty(\abs{a + b} \leq \abs{a} + \abs{b}) \\*
+    \forall a, b \in G \qty(\abs{a} \abs{b} = \abs{a b})
+  }
+}{
+  \lemref{順序群のノルム}より、第一式、第二式は成り立つ。
+
+  第三式について考える。$r \coloneqq a, b \in R$について、$0_R \leq r \lor r < 0_R$で場合分けすることにより得る。
+}
+
+\thm*{
+  順序環$R$は位相環である。すなわち、$R$上の以下の演算は連続である。
+  \begin{itemize}
+    \item $\times \in R^{R \times R}$
+  \end{itemize}
+}{
+  $\qty(0_R, 0_R)$について考える。
+
+  $\forall B \in \mathcal{B}(0_R) \exists a, b \in R \qty(0_R \in \sqty{a, b} = B)$である。
+
+  \lemref{順序環の三角性}より、$\exists r \in R^+ \qty(r \times r \leq \min \qty{-a, b})$である。
+
+  $B' \coloneqq \sqty{-r, r} \times \sqty{-r, r} \mathcal{B} \times \mathcal{B}$であり、$\times(B') \subset B$\\*
+
+  $\forall x_0 \in R$について、$f \in R^R, f(x) = x \times x_0$を考える。
+
+  $x_0 = 0_R$のとき、定値写像より連続。
+
+  $x_0 \neq 0_R$のとき、点$0_R$について考える。$\forall B \in \mathcal{B}(0_R) \exists a, b \in R \qty(0_R \in \sqty{a, b} = B)$である。
+
+  $r \coloneqq \min \qty{-a, b} / \abs{x_0}$について、$B' \coloneqq \sqty{-r, r}$であり、$f(B') \subset B$\\*
+
+  可換性と\lemref{位相環の条件}より位相環である。
+}
+
+\thm*{
+  順序体$F$は位相体である。すなわち、$F$上の以下の演算は連続である。
+  \begin{itemize}
+    \item $-1 \in \qty(F^\times)^{F^\times}$
+  \end{itemize}
+}{
+  開基$B = \sqty{a, b} \cap F^\times$を考える。
+
+  $B = \varnothing$のとき、${-1}^{-1}(B) = \varnothing \in \mathcal{O}$である。
+
+  $0 < a < b$のとき、${-1}^{-1}(B) = \sqty{1 / b, 1 / a} \in \mathcal{O}$である。
+
+  $0 = a < b$のとき、${-1}^{-1}(B) = \qty{x \in F \mid 1 / b < x} \in \mathcal{O}$である。
+
+  その他の場合も同様。ゆえに位相体である。
+}
+
+\lemf{順序体上の\textit{Cauchy}列の積}{順序体上のCauchy列の積}{
+  順序体$F$上の\textit{Cauchy}列$\qty(x_n)_{n \in \N}, \qty(y_n)_{n \in \N}$について、$\qty(x_n y_n)_{n \in \N}$は\textit{Cauchy}列となる。
+}{
+  \corref{Cauchy列は全有界}と\thmref{順序群では全有界ならば有界}より、2つの\textit{Cauchy}列は有界、すなわち$\exists K \in F^+ \forall n \in \N \qty(\abs{x_n} \leq K \land \abs{y_n} \leq K)$である。
+
+  $2_F \coloneqq 1_F + 1_F$として、$\forall \epsilon \in F^+$について、
+  \eqg*{
+    \forall n, m \in \N \qty(n, m > N_1(\epsilon \times 2_F^{-1} \times K^{-1}) \rightarrow \abs{x_n - x_m} < \epsilon \times 2_F^{-1} \times K^{-1}) \\*
+    \forall n, m \in \N \qty(n, m > N_2(\epsilon \times 2_F^{-1} \times K^{-1}) \rightarrow \abs{y_n - y_m} < \epsilon \times 2_F \times K^{-1}) \\*
+  }
+
+  ゆえに、
+  \eq*{
+    \forall n, m \in \N \qty(n, m > \max \qty{N_1(\epsilon \times 2_F^{-1} \times K^{-1}), N_2(\epsilon \times 2_F^{-1} \times K^{-1})} \rightarrow \abs{x_n y_n - x_m y_m} \leq \abs{x_n} \abs{y_n - y_m} + \abs{y_m} \abs{x_n - x_m} < \epsilon)
+  }
+}
+
+
+\lsubsection{有理数の位相と一様構造}
+
+\thmf{$\Q$は第二可算}{Qは第二可算}{
+  $\Q$は第二可算である。
+}{
+  $\mathcal{B} \coloneqq \qty{\sqty{a, b} \mid a, b \in \Q}$は開基である。
+
+  \thmref{自然数の直積は可算}より、$\mathcal{B}$は可算。
+}
+
+\thmf{$\Q$は完全不連結}{Qは完全不連結}{
+  $\Q$の部分$S$が２点以上を含むならば、$S$は連結でない。
+}{
+  $a, b \in S \qty(a < b)$とする。
+
+  $U \coloneqq \qty{x \in \Q \mid \qty(1 + \frac{x - a}{b - a})^2 < 2}$とする。$a \in U \land b \notin U$である。
+
+  $U$は開かつ閉集合より、成り立つ。
+}
