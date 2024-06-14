@@ -13,17 +13,17 @@
   可換環$R$について、以下の３つは同値である。
   \begin{enumerate}
     \item $a$は$b$の倍元
-    \item $a \in \aqty{b}$
-    \item $\aqty{a} \subset \aqty{b}$
+    \item $a \in \eval{b}$
+    \item $\eval{a} \subset \eval{b}$
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
 
-  $\exists c \in R \qty(a = c b)$より、$a \in \aqty{b}$である。\\*
+  $\exists c \in R \qty(a = c b)$より、$a \in \eval{b}$である。\\*
 
   $2. \rightarrow 3.$を示す。
 
-  $\forall a' \in \aqty{a} \exists c' \in R \qty(a' = c' a)$である。
+  $\forall a' \in \eval{a} \exists c' \in R \qty(a' = c' a)$である。
 
   仮定より$\exists c \in R \qty(a = c b)$である。ゆえに、$a' = \qty(c' c) b$\\*
 
@@ -31,7 +31,7 @@
 
   $a$は$b$の倍元でないとする。
 
-  $a \in \aqty{a} \setminus \aqty{b} \neq \varnothing$より、対偶法より満たす。
+  $a \in \eval{a} \setminus \eval{b} \neq \varnothing$より、対偶法より満たす。
 }
 
 \dfn{既約元}{
@@ -42,9 +42,9 @@
 }
 
 \dfn{単項イデアル}{
-  可換環$R$と、元$a \in R$について、以下で定まる集合$\aqty{a}$はイデアルである。
+  可換環$R$と、元$a \in R$について、以下で定まる集合$\eval{a}$はイデアルである。
   \eq*{
-    \aqty{a} \coloneqq \qty{r a \mid r \in R}
+    \eval{a} \coloneqq \qty{r a \mid r \in R}
   }
 
   このように構成されるイデアルを単項イデアルと呼ぶ。
@@ -53,7 +53,7 @@
 \cor*{
   可換環$R$と、元$a \in R$、イデアル$I$について、以下が成り立つ。
   \eq*{
-    a \in I \rightarrow \aqty{a} \subset I
+    a \in I \rightarrow \eval{a} \subset I
   }
 }
 
@@ -141,17 +141,17 @@
 }
 
 \dfn{素元}{
-  可換環$R$と元$a \in R \setminus \qty{0_R}$について、単項イデアル$\aqty{a}$が素イデアルとなるとき、$a$を素元と呼ぶ。
+  可換環$R$と元$a \in R \setminus \qty{0_R}$について、単項イデアル$\eval{a}$が素イデアルとなるとき、$a$を素元と呼ぶ。
 }
 
 \lem{整域の素元は可逆でない既約元}{
   整域$D$について、素元は可逆でない既約元である。
 }{
-  素元$a$が可逆とすると、$1_D = a^{-1} a \in \aqty{a}$であるので、$D = \aqty{a}$より素イデアルではない。背理法より可逆でない。\\*
+  素元$a$が可逆とすると、$1_D = a^{-1} a \in \eval{a}$であるので、$D = \eval{a}$より素イデアルではない。背理法より可逆でない。\\*
 
   素元$a$が既約元でないとする。$\exists x, y \in D \setminus D^\times \qty(x y = a)$
 
-  $x y = a \in \aqty{a}$であるので、素イデアルの定義から$\exists r \in D \qty(x = r a \lor y = r a)$である。
+  $x y = a \in \eval{a}$であるので、素イデアルの定義から$\exists r \in D \qty(x = r a \lor y = r a)$である。
 
   $x = r a$のとき、可換性から$a \qty(r y - 1_D) = 0_D$である。$D$は整域で$a \neq 0_D$より、$r y = 1_D$である。これは$y \notin D^\times$に反する。
 
@@ -194,7 +194,7 @@
 
   よって、$n = 1$である。すなわち$a = u p(0)$と表せる。
 
-  $\aqty{a} = \aqty{p(0)}$であるので、$a$は素元。
+  $\eval{a} = \eval{p(0)}$であるので、$a$は素元。
 }
 
 \dfn{単項イデアル整域}{
@@ -215,27 +215,27 @@
 }{
   $J \coloneqq \bigcup \qty{I_n \mid n \in \N}$はイデアルである。
 
-  単項イデアル整域であるので、$\exists a \in D \qty(\aqty{a} = J)$
+  単項イデアル整域であるので、$\exists a \in D \qty(\eval{a} = J)$
 
-  $a \in J$より、$\exists N \in \N \qty(a \in I_N)$より、$\aqty{a} \subset I_N$
+  $a \in J$より、$\exists N \in \N \qty(a \in I_N)$より、$\eval{a} \subset I_N$
 
-  $\forall N \in \N_{\geq N} \qty(\aqty{a} \subset I_N \subset I_n \subset J = \aqty{a})$
+  $\forall N \in \N_{\geq N} \qty(\eval{a} \subset I_N \subset I_n \subset J = \eval{a})$
 }
 
 \thm{PIDの素イデアルは極大イデアル}{
   単項イデアル整域$D$の素イデアルは極大イデアルである。
 }{
-  極大イデアルでない素イデアル$\aqty{a}$を考える。
+  極大イデアルでない素イデアル$\eval{a}$を考える。
 
-  このとき$\exists b \in D \qty(\aqty{a} \subsetneq \aqty{b} \neq D)$
+  このとき$\exists b \in D \qty(\eval{a} \subsetneq \eval{b} \neq D)$
 
-  $\exists c \in R \qty(a = c b)$である。$b \in \aqty{a}$のとき、$\aqty{a} = \aqty{b}$となり仮定に反する。
+  $\exists c \in R \qty(a = c b)$である。$b \in \eval{a}$のとき、$\eval{a} = \eval{b}$となり仮定に反する。
 
-  素イデアルの定義より$c \in \aqty{a}$であるので、$\exists d \in R \qty(c = d a)$
+  素イデアルの定義より$c \in \eval{a}$であるので、$\exists d \in R \qty(c = d a)$
 
   ゆえに$a \qty(b d - 1_D) = 0_D$であり、整域より$b d = 1_D$
 
-  よって$\aqty{b} = D$となり矛盾。
+  よって$\eval{b} = D$となり矛盾。
 
   背理法より示される。
 }
@@ -245,20 +245,20 @@
 }{
   素元分解できない$a \in D \setminus \qty{0_D}$が存在すると仮定する。
 
-  $1_R \in \aqty{a}$とすると、$a$は可逆元となり、素元分解できる。
-  ゆえに$\aqty{a} \neq D$である。\\*
+  $1_R \in \eval{a}$とすると、$a$は可逆元となり、素元分解できる。
+  ゆえに$\eval{a} \neq D$である。\\*
 
-  \thmref{極大左イデアルの存在}、\thmref{極大イデアルは素イデアル}と$D$が単項イデアル整域であることより、素元$p_1$が存在して$a \in \aqty{a} \subset \aqty{p_1}$
+  \thmref{極大左イデアルの存在}、\thmref{極大イデアルは素イデアル}と$D$が単項イデアル整域であることより、素元$p_1$が存在して$a \in \eval{a} \subset \eval{p_1}$
 
   ゆえに$\exists a_1 \in D \qty(a = a_1 p_1)$と書ける。$a \neq 0_D$より$a_1 \neq 0_D$
 
-  $\aqty{a} \supset \aqty{a_1}$とすると、$\exists b \in D \qty(a_1 = b a)$より$a_1 \qty(b p_1 - 1_R) = 0_R$であり、整域と$a_1 \neq 0_R$から$p_1 \in D^\times$
+  $\eval{a} \supset \eval{a_1}$とすると、$\exists b \in D \qty(a_1 = b a)$より$a_1 \qty(b p_1 - 1_R) = 0_R$であり、整域と$a_1 \neq 0_R$から$p_1 \in D^\times$
 
-  これは\lemref{整域の素元は可逆でない既約元}に反する。ゆえに$\aqty{a} \subsetneq \aqty{a_1}$
+  これは\lemref{整域の素元は可逆でない既約元}に反する。ゆえに$\eval{a} \subsetneq \eval{a_1}$
 
   $a$は素元分解できないので、$a_1$も素元分解でもない。\\*
 
-  帰納的にイデアル列$\aqty{a} \subset \aqty{a_1} \subset \cdots$がつくれるが、これは\thmref{PIDはNoether}に反する。
+  帰納的にイデアル列$\eval{a} \subset \eval{a_1} \subset \cdots$がつくれるが、これは\thmref{PIDはNoether}に反する。
 
   ゆえに素元分解可能である。\\*
 
@@ -275,9 +275,9 @@
 
   $a = u \prod_{m = 0}^{s(n)} p(m) = u' \prod_{m = 0}^{n'} p'(m)$とする。
 
-  $a \in \aqty{p(n)}$より、素イデアルの定義から$\exists k \in n' \qty(p'(k) \in \aqty{p(n)})$である。ゆえに$\aqty{p'(k)} \subset \aqty{p(n)}$
+  $a \in \eval{p(n)}$より、素イデアルの定義から$\exists k \in n' \qty(p'(k) \in \eval{p(n)})$である。ゆえに$\eval{p'(k)} \subset \eval{p(n)}$
 
-  \thmref{PIDの素イデアルは極大イデアル}より$\aqty{p'(k)} = \aqty{p(n)}$
+  \thmref{PIDの素イデアルは極大イデアル}より$\eval{p'(k)} = \eval{p(n)}$
 
   以下の$q \in \mathcal{P}(D)^{n'}$を考える。
   \eq*{
@@ -306,7 +306,7 @@
 }{
   イデアル$I$を考える。$0_D \in I$である。
 
-  $\qty{0_D} = I$であるとき、$\aqty{0_D} = I$
+  $\qty{0_D} = I$であるとき、$\eval{0_D} = I$
 
   $\qty{0_D} \subsetneq I$であるとき、$M \coloneqq \qty{f(i) \mid i \in I \setminus \qty{0_D}}$を考える。
 
@@ -316,9 +316,9 @@
 
   今、$r = i - m q \in I$であるため、$r \neq 0_R$とすると$m$の最小性に反する。
 
-  よって$r = 0_R$、すなわち$i \in \aqty{m}$
+  よって$r = 0_R$、すなわち$i \in \eval{m}$
 
-  $m \in I$より$\aqty{m} = I$
+  $m \in I$より$\eval{m} = I$
 }
 
 

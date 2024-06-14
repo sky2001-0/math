@@ -23,9 +23,9 @@
 }
 
 \dfn{巡回群}{
-	群$G$と元$a \in G$について、以下で定義する集合$\aqty{a}$は群をなす。これを巡回群と呼ぶ。
+	群$G$と元$a \in G$について、以下で定義する集合$\eval{a}$は群をなす。これを巡回群と呼ぶ。
 	\eq*{
-		\aqty{a} \coloneqq \qty{a^n \mid n \in \Z}
+		\eval{a} \coloneqq \qty{a^n \mid n \in \Z}
 	}
 }
 
@@ -55,10 +55,10 @@
 \thm{巡回群の位数}{
 	有限群$G$と元$g \in G$について、以下が成り立つ。
 	\eq*{
-		\ord(g) = \abs{\aqty{g}}
+		\ord(g) = \abs{\eval{g}}
 	}
 }{
-	写像$\tau \in \aqty{g}^{\ord(g)}, \tau(n) = g^n$を考える。
+	写像$\tau \in \eval{g}^{\ord(g)}, \tau(n) = g^n$を考える。
 
 	$\exists i, j \in \N \qty(i < j \land g^i = g^j)$ならば$g^{j - i} = e$より位数の最小性に反する。ゆえに単射。
 
