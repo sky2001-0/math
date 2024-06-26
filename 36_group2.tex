@@ -23,9 +23,9 @@
 }
 
 \dfn{巡回群}{
-	群$G$と元$a \in G$について、以下で定義する集合$\eval{a}$は群をなす。これを巡回群と呼ぶ。
+	群$G$と元$a \in G$について、以下で定義する集合$\ev{a}$は群をなす。これを巡回群と呼ぶ。
 	\eq*{
-		\eval{a} \coloneqq \qty{a^n \mid n \in \Z}
+		\ev{a} \coloneqq \qty{a^n \mid n \in \Z}
 	}
 }
 
@@ -55,10 +55,10 @@
 \thm{巡回群の位数}{
 	有限群$G$と元$g \in G$について、以下が成り立つ。
 	\eq*{
-		\ord(g) = \abs{\eval{g}}
+		\ord(g) = \abs{\ev{g}}
 	}
 }{
-	写像$\tau \in \eval{g}^{\ord(g)}, \tau(n) = g^n$を考える。
+	写像$\tau \in \ev{g}^{\ord(g)}, \tau(n) = g^n$を考える。
 
 	$\exists i, j \in \N \qty(i < j \land g^i = g^j)$ならば$g^{j - i} = e$より位数の最小性に反する。ゆえに単射。
 
@@ -111,7 +111,7 @@
 }
 
 \cor*{
-	互換$\tau \in T_n$について、$\tau \tau = \id_n$
+	互換$\tau \in T_n$について、$\tau \tau = \id{n}$
 }
 
 \thm{置換は互換の積}{
@@ -120,7 +120,7 @@
 		\forall \sigma \in \S_n \exists l \in \N \exists \tau \in T_n^l \qty(\sigma = \prod_{m \in l} \tau(m))
 	}
 }{
-	$n = 1$のとき、$\S_1 = \qty{\id_1}$より成り立つ。
+	$n = 1$のとき、$\S_1 = \qty{\id{1}}$より成り立つ。
 
 	ある$n$で成り立つとする。
 
@@ -138,15 +138,15 @@
 }
 
 \lem*{
-	$n \in \N_{\geq 1}$について、$\id_n$は奇数個の互換の積で表すことはできない。
+	$n \in \N_{\geq 1}$について、$\id{n}$は奇数個の互換の積で表すことはできない。
 }{
 	$n = 1$のとき明らか。\\*
 
 	$n \geq 2$のとき、奇数$l$個の互換の積で表すことができると仮定する。
 
-	$\id_n \notin T_n$より、1個の互換の積で恒等写像を表すことはできない。ゆえに、$l \geq 3$
+	$\id{n} \notin T_n$より、1個の互換の積で恒等写像を表すことはできない。ゆえに、$l \geq 3$
 
-	$\id_n$を互換の積で表すことができる最小の奇数$l$を考える。
+	$\id{n}$を互換の積で表すことができる最小の奇数$l$を考える。
 
 	互換２つの積について、左の項の第一成分は以下の規約で右の項のみに含まれるように変形できる。
 	\eq*{
@@ -155,15 +155,15 @@
 			\qty(i_2, j_2) \qty(i_1, j_1) & \qty(\qty{i_1, j_1} \cap \qty{i_2, j_2} = \varnothing) \\*
 			\qty(j_1, j_2) \qty(i_1, j_1) & \qty(i_1 = i_2 \land j_1 \neq j_2) \\*
 			\qty(i_2, j_1) \qty(i_1, i_2) & \qty(i_1 \neq i_2 \land j_1 = j_2) \\*
-			\id_n & \qty(\qty{i_1, j_1} = \qty{i_2, j_2})
+			\id{n} & \qty(\qty{i_1, j_1} = \qty{i_2, j_2})
 		\end{cases}
 	}
 
-	$l$個の互換の積である$\id_n$について、上の規約により第一番目の互換の第一成分$i$を右に移動させる。
+	$l$個の互換の積である$\id{n}$について、上の規約により第一番目の互換の第一成分$i$を右に移動させる。
 
 	このとき、$l$の最小性から４番目の場合とはならないため、帰納的に最も右の項のみに$i$が含まれるようにできる。
 
-	これは、$\id_n(i) = i$に反する。
+	これは、$\id{n}(i) = i$に反する。
 
 	背理法より示される。
 }
@@ -173,7 +173,7 @@
 }{
 	奇数$l_1$、偶数$l_0$を用いて、$\sigma = \prod_{m \in l_1} \tau_1(m) = \prod_{m \in l_2} \tau_2(m)$とする。
 
-	$\id_n = \prod_{m \in l_1} \tau_1(m) \times \prod_{m \in l_2} \tau_2(l_2 - 1 - m)$より、\mlemref{-1}に反する。
+	$\id{n} = \prod_{m \in l_1} \tau_1(m) \times \prod_{m \in l_2} \tau_2(l_2 - 1 - m)$より、\mlemref{-1}に反する。
 
 	背理法より示される。
 }
@@ -265,19 +265,19 @@
 
 	$\qty{i_1, j_1} \cap \qty{i_2, j_2} = \varnothing$のとき、$A_5 / N$の可換性より
 	\eq*{
-		\qty[\qty(i_1, j_1) \qty(i_2, j_2)] = \qty[\qty(i_1, j_2) \qty(j_1, j_2) \qty(i_1, j_2) \qty(j_1, i_2) \qty(j_1, j_2) \qty(j_1, i_2)] = \qty[\id_5]
+		\qty[\qty(i_1, j_1) \qty(i_2, j_2)] = \qty[\qty(i_1, j_2) \qty(j_1, j_2) \qty(i_1, j_2) \qty(j_1, i_2) \qty(j_1, j_2) \qty(j_1, i_2)] = \qty[\id{5}]
 	}
 
 	ゆえに、$\qty(i_1, j_1) \qty(i_2, j_2) \in N$\\*
 
 	$i_1 = i_2 \land j_1 \neq j_2$のとき、$\qty{k_1, k_2} = 5 \setminus \qty{i_1, j_1, j_2}$について、$A_5 / N$の可換性より、
 	\eq*{
-		\qty[\qty(i_1, j_1) \qty(i_1, j_2)] = \qty[\qty(i_1, j_1) \qty(i_1, k_1)] \qty[\qty(j_1, k_2) \qty(j_1, j_2)] \qty[\qty(i_1, k_1) \qty(i_1, j_1)] \qty[\qty(j_1, j_2) \qty(j_1, k_2)] = \qty[\id_5]
+		\qty[\qty(i_1, j_1) \qty(i_1, j_2)] = \qty[\qty(i_1, j_1) \qty(i_1, k_1)] \qty[\qty(j_1, k_2) \qty(j_1, j_2)] \qty[\qty(i_1, k_1) \qty(i_1, j_1)] \qty[\qty(j_1, j_2) \qty(j_1, k_2)] = \qty[\id{5}]
 	}
 
 	ゆえに、$\qty(i_1, j_1) \qty(i_1, j_2) \in N$\\*
 
-	$\qty{i_1, j_1} = \qty{i_2, j_2}$のとき、$\qty(i_1, j_1) \qty(i_1, j_2) = \id_5 \in N$\\*
+	$\qty{i_1, j_1} = \qty{i_2, j_2}$のとき、$\qty(i_1, j_1) \qty(i_1, j_2) = \id{5} \in N$\\*
 
 	\thmref{置換は互換の積}より、$A_5 = N$となる。
 
@@ -291,13 +291,13 @@
 
 	$n \in \N_{\geq 5}$について、$\S_n$は可解群ではない。
 }{
-	$\S_2 = \qty{\id_2, \qty(0, 1)}$は可換群である。ゆえに可解群である。\\*
+	$\S_2 = \qty{\id{2}, \qty(0, 1)}$は可換群である。ゆえに可解群である。\\*
 
-	$\S_3, A_3, \qty{\id_3}$は\dfnref{可解群}の主張する有限列である。ゆえに$\S_3$は可解群である。\\*
+	$\S_3, A_3, \qty{\id{3}}$は\dfnref{可解群}の主張する有限列である。ゆえに$\S_3$は可解群である。\\*
 
-	$V_4 \coloneqq \qty{\id_4, \qty(0, 1) \qty(2, 3), \qty(0, 2) \qty(1, 3), \qty(0, 3) \qty(1, 2)}$を考える。
+	$V_4 \coloneqq \qty{\id{4}, \qty(0, 1) \qty(2, 3), \qty(0, 2) \qty(1, 3), \qty(0, 3) \qty(1, 2)}$を考える。
 
-	$\S_4, A_4, V_4, \qty{\id_4}$は\dfnref{可解群}の主張する有限列である。ゆえに$\S_4$は可解群である。\\*
+	$\S_4, A_4, V_4, \qty{\id{4}}$は\dfnref{可解群}の主張する有限列である。ゆえに$\S_4$は可解群である。\\*
 
 	$n \in \N_{\geq 5}$について$\S_n$が可解群と仮定する。
 

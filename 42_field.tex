@@ -109,7 +109,7 @@
 \lem{次元}{
   体$F$について、$F$-加群$V$を考える。$V$の任意の基底$B_1, B_2$について、全単射$f \in B_2^{B_1}$が存在する。
 }{
-  $P \coloneqq \qty{\varphi \in \bigcup \qty{B_2^D \mid D \in \P(B_1) \land B_1 \cap B_2 \subset D} \mid \varphi \rvert_{B_1 \cap B_2} = \id_{B_1 \cap B_2} \land C(\varphi) \coloneqq \dom(\varphi) \cup \qty(B_2 \setminus \Im(\varphi)) \text{は一次独立}}$を考える。
+  $P \coloneqq \qty{\varphi \in \bigcup \qty{B_2^D \mid D \in \P(B_1) \land B_1 \cap B_2 \subset D} \mid \varphi \rvert_{B_1 \cap B_2} = \id{B_1 \cap B_2} \land C(\varphi) \coloneqq \dom(\varphi) \cup \qty(B_2 \setminus \Im(\varphi)) \text{は一次独立}}$を考える。
 
   ここで$p \in B_2^{B_1 \cap B_2}$について、$B_2$が基底であることから$p \in P$である。
 
@@ -134,7 +134,7 @@
 
   $\exists b' \in B_2 \setminus \Im(\sigma)$であるとする。このとき$b' \notin B_1$より、$b' \notin \dom(\sigma)$である。
 
-  $H \coloneqq \Span \qty(C(\sigma) \setminus \qty{b'})$を考える。一次独立性から$b' \notin H$
+  $H \coloneqq \Span(C(\sigma) \setminus \qty{b'})$を考える。一次独立性から$b' \notin H$
 
   ここで$B_1$は基底より、$\exists n \in \N \exists \qty(r_m, b_m)_{m \in \N} \in \qty(R \times B_1)^\N \qty(b' = \sum_{m \in n} r_m b_m)$と書ける。
 
@@ -247,7 +247,7 @@
 
   ここで、$E$は体すなわち整域より、$\Ker(\varphi)$は素イデアルである。
 
-  \thmref{体はED}と\thmref{EDはPID}より、$\eval{f} = \Ker(\varphi)$なる多項式$f \in F[X]$が存在する。
+  \thmref{体はED}と\thmref{EDはPID}より、$\ev{f} = \Ker(\varphi)$なる多項式$f \in F[X]$が存在する。
 
   定義より、$\Ker(\varphi) \neq \qty{0_{F[X]}}$であるので、$f$は素元。
 }
