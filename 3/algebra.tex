@@ -310,7 +310,7 @@
   書き直して再掲する。
   \eqg*{
     \forall \qty(x_m)_{m \in \N} \in M^\N \qty(\prod_{m \in 0} x_m \coloneqq e) \\*
-    \forall \qty(x_m)_{m \in \N} \in M^\N \forall n \in \N \qty(\prod_{m \in s(n)} x_m  \coloneqq \qty(\prod_{m \in n} x_m) \cdot x_n)
+    \forall \qty(x_m)_{m \in \N} \in M^\N \forall n \in \N \qty(\prod_{m \in s(n)} x_m \coloneqq \qty(\prod_{m \in n} x_m) \cdot x_n)
   }
 
   可換モノイドであるとき、可換であることを明示的に$\sum$を、$\prod$の代わりに用いる。
@@ -365,4 +365,15 @@
   \thmref{数学的帰納法}より、任意の$m$について成り立つ。
 
   $\tau(1)$は$\End(M)$の単位元であるので、モノイドである。
+}
+
+\lem{有限集合間の写像の全体}{
+  空でない有限集合$X, Y$について、$Y^X$は有限であり、以下が成り立つ。
+  \eq*{
+    \abs{Y^X} = \abs{Y}^\abs{X}
+  }
+}{
+  全単射$\sigma \in \qty(Y^X)^{Y^{\abs{X}}}$が存在する。
+
+  \lemref{自然数から集合への写像の全体}と\lemref{有限集合の直積}より、数学的帰納法を用いて$\abs{Y^{\abs{X}}} = \abs{Y}^{\abs{X}}$が成り立つ。
 }

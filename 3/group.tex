@@ -1,0 +1,417 @@
+\lsection{群論}
+
+\lsubsection{群}
+
+\dfn{群}{
+  モノイド$\qty(G, \cdot)$が以下を満たすとき、群と呼ぶ。
+  \eq*{
+    G = G^\times
+  }
+
+  以降、誤解のない範囲で、$x \cdot y$を$x y$と略記する。
+}
+
+\cor*{
+  モノイド$M$について、$M^\times$は群である。
+}
+
+\dfn{自明群}{
+  要素数が$1$の群を自明群と呼ぶ。
+}
+
+\dfn{可換群}{
+  群が可換マグマであるとき、可換群と呼ぶ。
+}
+
+\lem{群の条件}{
+  以下を満たすマグマ$G$は群である。
+  \eqg*{
+    \exists e \in G \forall x \in G \qty(x e = x) \\*
+    \forall x \in G \exists x' \in G \qty(x x' = e)
+  }
+}{
+  $e$が単位元であることを示す。
+  \eq*{
+    e x = e \qty(x e) = e \qty(x \qty(x' x'')) = e \qty(x x') x'' = e e x'' = \qty(x x') e x'' = x \qty(x' e) x'' = x x' x'' = x \qty(x' x'') = x e = x
+  }
+
+  左逆元であることを示す。
+  \eq*{
+    x' x = x' \qty(x e) = x' \qty(x \qty(x' x'')) = x' \qty(x x') x'' = x' e x'' = y z = e
+  }
+}
+
+\dfn{部分群}{
+  群$G$の部分モノイド$H$が以下を満たすとき、$H$は群となり、群$H$を群$G$の部分群と呼ぶ。
+  \eq*{
+    \forall x \in H \qty(x^{-1} \in H)
+  }
+}
+
+\lem{部分群の判定}{
+  群$G$の部分集合$H$が部分群であることは、以下と必要十分である。
+  \eq*{
+    H \neq \varnothing \land \forall x, y \in H \qty(x y^{-1} \in H)
+  }
+}{
+  必要性を示す。
+
+  空でないので、$\exists x \in H \qty(e = x x^{-1} \in H)$
+
+  ゆえに、$\forall x \in H \qty(x^{-1} = e x^{-1} \in H)$
+
+  したがって、$\forall x, y \in H \qty(x y = x \qty(y^{-1})^{-1} \in H)$
+
+  結合法則も自明に満たす。\\*
+
+  十分性を示す。
+
+  単位元の存在より、空でない。部分群より、$\forall y \in H \qty(y^{-1} \in H)$。ただちに、$\forall x, y \in H \qty(x y^{-1}) \in H$
+}
+
+\cor{群の共通部分}{
+  群$G$について、$A \in \P(G)$を考える。
+  
+  $\forall H \in A$について、$H$が$G$の部分群であるとき、$\bigcap A$は$G$の部分群である。
+}
+
+\cor*{
+  群の商マグマは群である。$\qty[x^{-1}]$を逆元として持つ。
+}
+
+
+\lsubsection{群と準同型}
+
+\dfn{群準同型}{
+  群$G_1, G_2$について以下を満たすモノイド準同型$\varphi \in G_2^{G_1}$が存在するとき、$\varphi$を群準同型写像、または単に群準同型と呼ぶ。
+  \eq*{
+    \forall x \in G_1 \qty(\varphi(x)^{-1} = \varphi(x^{-1}))
+  }
+}
+
+\lem{マグマ準同型は群準同型}{
+  群$G_1, G_2$について、マグマ準同型$\varphi \in G_2^{G_1}$は群準同型である。
+}{
+  モノイド準同型であることを示す。
+  \eqg*{
+    e' = \varphi(e) \varphi(e)^{-1} = \varphi(e) \varphi(e^{-1}) = \varphi(e e^{-1}) = \varphi(e)
+  }
+
+  群準同型であることを示す。
+  \eq*{
+    \varphi(x)^{-1}  = \varphi(e) \varphi(x)^{-1} = \varphi(x^{-1} x) \varphi(x)^{-1}  = \varphi(x^{-1}) \varphi(x) \varphi(x)^{-1} = \varphi(x^{-1}) \varphi(e) = \varphi(x^{-1})
+  }
+}
+
+\thm{群準同型の単射性}{
+  群準同型$\varphi \in G_2^{G_1}$が単射であることは、以下と必要十分である。
+  \eq*{
+    \Ker(\varphi) = \qty{e}
+  }
+}{
+  十分性は、単射性より示される。
+
+  必要性を示す。$\forall x, y \in G_1 \land \varphi(x) = \varphi(y)$について、
+  \eq*{
+    e' = \varphi(e) = \varphi(x) \varphi(x^{-1}) = \varphi(y) \varphi(x^{-1}) = \varphi(y x^{-1})
+  }
+
+  ゆえに$x y^{-1} \in \Ker(\varphi)$で、$x = y$。すなわち単射。
+}
+
+\dfn{群同型}{
+  群準同型$\varphi \in G_2^{G_1}$が全単射であるとき、これを群同型写像、または単に群同型と呼ぶ。
+
+  また、$G_1$から$G_2$への群同型写像が存在するとき、$G_1 \cong G_2$と表す。
+}
+
+\dfn{自己同型群}{
+  マグマ$M$について、$\End(M)^\times$をは群をなす。これを自己同型群と呼び、$\Aut(M)$と表す。
+}
+
+\thm{可換群上の準同型全体}{
+  可換群$G, H$について、$\Hom(G, H)$上の以下の演算$+'$を考える。このとき、順序対$\qty(\Hom(G, H), +')$は可換群をなす。
+  \eq*{
+    \qty(f +' g)(x) \coloneqq f(x) + g(x)
+  }
+}{
+  $H$が可換マグマであることから、$\Hom(G, H)$は可換マグマである。
+
+  写像$0_{\Hom(G, H)} \in H^G, 0_{\Hom(G, H)}(x) = 0_H$は群準同型であるので、単位元。
+
+  写像$f_{\text{minus}} \in H^G, f_{\text{minus}}(x) = -f(x)$は群準同型であるので、逆元。
+}
+
+
+\lsubsection{群の作用}
+
+\dfn{群の作用}{
+  群$\qty(G, \cdot)$について、$G$の集合$X$への写像$\varphi \in \qty(\qty(X^X)^\times, \circ)^\qty(G, \cdot)$が群準同型であるとき、群作用、または単に作用と呼ぶ。
+}
+
+\dfn{軌道}{
+  群$G$の集合$X$への作用$\varphi$と元$x \in X$について、以下の集合を$x$による$G$軌道と呼び、$\varphi(G, x)$で表す。
+  \eq*{
+    \varphi(G, x) \coloneqq \qty{\varphi(g, x) \mid g \in G}
+  }
+}
+
+\cor*{
+  群$G$の集合$X$への作用$\varphi$について、以下が成り立つ。
+  \eq*{
+    \forall x \in X \qty(x \in \varphi(G, x))
+  }
+}
+
+\dfn{群作用の軌道分解}{
+  群$G$の集合$X$への群作用$\varphi$について、以下で定義する同値関係$\sim_{\varphi(G)}$が与えられる。
+  \eq*{
+    \forall x, y \in X \qty(x \sim_{\varphi(G)} y \defiff \varphi(G, x) = \varphi(G, y))
+  }
+
+  $X / \sim_{\varphi(G)}$を、集合$X$の群作用$\varphi$による軌道分解と呼ぶ。
+}
+
+\lem{群作用の軌道分解}{
+  群$G$の集合$X$への群作用$\varphi$について、以下が成り立つ。
+  \eq*{
+    \forall x, y \in X \qty(x \in \varphi(G, y) \rightarrow x \sim_{\varphi(G)} y)
+  }
+}{
+  $\exists g \in G \qty(x = g y)$である。
+
+  $\forall w_x \in \varphi(G, x)$について$\exists g_x \in G \qty(w_x = g_x x)$であり、$w_x = \qty(g_x g) y \in \varphi(G, y)$であるので、$\varphi(G, x) \subset \varphi(G, y)$
+
+  $\forall w_y \in \varphi(G, y)$について$\exists g_y \in G \qty(w_y = g_y y)$であり、$w_y = \qty(g_y g^{-1}) x \in \varphi(G, x)$であるので、$\varphi(G, y) \subset \varphi(G, x)$
+}
+
+\lem*{
+  群$G$の$X$への群作用$\varphi$と、元$x \in X$について、以下で定める集合$\Stab(G, x)$を考える。
+	このとき、順序対$\qty(\Stab(G, x), \cdot)$は$G$の部分群である。
+  \eq*{
+    \Stab(G, x) \coloneqq \qty{g \in G \mid x = \varphi(g, x)}
+  }
+}{
+  群準同型より、$x = \varphi(g, x) = \varphi(h, x)$のとき、$x = \varphi(g, x) = \varphi(g, \varphi(h, x)) = \varphi(g h, x)$、ゆえに部分マグマ。
+
+  群準同型より、$\varphi(e, x) = \id{X}(x) = x$、ゆえに部分モノイド。
+
+  群準同型より、$\varphi(g, x) = x \rightarrow x = \varphi(g^{-1} g, x) = \varphi(g^{-1}, \varphi(g, x)) = \varphi(g^{-1}, x)$、ゆえに部分群。
+}
+
+\dfn{安定化部分群}{
+  \mlemref{0}で定める群$\Stab(G, x)$を、元$x$における$G$の安定化部分群と呼ぶ。
+}
+
+\dfn{群作用の不変部分}{
+  群$G$の$X$への群作用$\varphi$について、以下で定める集合$\Fix(G, X)$を、$G$による$X$の不変部分と呼ぶ。
+  \eq*{
+    \Fix(G, X) \coloneqq \qty{x \in X \mid \varphi(G, x) = \qty{x}}
+  }
+}
+
+\thm{類等式}{
+  群$G$の有限集合$X$への群作用$\varphi$について、$n \in \N$と点列$\qty(x_m)_{m \in n} \in X^n$が存在して、以下の２つが成り立つ。
+  \eqg*{
+    \abs{X} = \abs{\Fix(G, X)} + \sum_{m \in n} \abs{\varphi(G, x_m)} \\*
+    \forall m \in n \qty(\abs{\varphi(G, x_m)} > 1)
+  }
+}{
+  $X / \sim_{\varphi(G)}$は有限である。
+
+  また、$\forall a \in X / \sim_{\varphi(G)}$について、$\abs{a} < \infty \land \abs{a} \neq 0$である。
+
+  $\qty{a \in X / \sim_{\varphi(G)} \mid \abs{a} = 1} = \qty{\qty{x} \mid x \in \Fix(G, X)}$であることに注意して、成り立つ。
+}
+
+
+\lsubsection{部分群の群への作用}
+
+\dfn{右作用と左剰余類}{
+  群$G$とその部分群$H$について、以下で定める$H$の$G$への自明な作用$\varphi$が存在する。
+  \eq*{
+    \varphi(h, g) = g h
+  }
+
+  このような作用を右作用と呼び、\dfnref{群作用の軌道分解}から定まる同値類を、左剰余類と呼ぶ。
+
+  また、軌道分解$G / \sim_{\varphi(H)}$を左剰余集合と呼び、$G / H$と表記する。
+}
+
+\dfn{左作用と右剰余類}{
+  群$G$とその部分群$H$について、以下で定める$H$の$G$への自明な作用$\varphi$が存在する。
+  \eq*{
+    \varphi(h, g) = h g
+  }
+
+  このような作用を左作用と呼び、\dfnref{群作用の軌道分解}から定まる同値類を、右剰余類と呼ぶ。
+}
+
+\thm{軌道・安定化部分群定理}{
+  群$G$の$X$への群作用$\varphi$と元$x \in X$について、左剰余集合$G / \Stab(G, x)$を考える。
+	このとき、全単射$f \in \varphi(G, x)^{G / \Stab(G, x)}$が存在する。
+}{
+  写像$\hat{f}_{x} \in X^G, \hat{f}_x(g) = \varphi(g, x)$を考える。
+
+  今$\forall g, h \in G$について、$g \sim_{\hat{f}_{x}} h \leftrightarrow \varphi(h^{-1} g, x) = x \leftrightarrow h^{-1} g \in \Stab(G, x) \leftrightarrow g \sim_{\varphi(\Stab(G, x))} h$である。
+  
+  $\Im(\hat{f}_{x}) = \varphi(G, x)$であるので、\thmref{標準分解}より存在する。
+}
+
+\dfn{共役作用と共役類}{
+  群$G$とその部分群$H$について、以下で定める$H$の$G$への自明な作用$\varphi$が存在する。
+  \eq*{
+    \varphi(h, g) = h^{-1} g h
+  }
+
+  このような作用を共役作用と呼び、\dfnref{群作用の軌道分解}から定まる同値類を、共役類と呼ぶ。
+}
+
+
+\lsubsection{群と準同型定理}
+
+\dfn{正規部分群}{
+  群$G$とその部分群$H$について、以下を満たすとき、$H$を$G$の正規部分群と呼ぶ。
+  \eq*{
+    \forall g \in G \forall h \in H \qty(g^{-1} h g \in H)
+  }
+}
+
+\cor*{
+  核は正規部分群である。
+}
+
+\cor*{
+  可換群の部分群は正規部分群である。
+}
+
+\cor*{
+  群$G$の正規部分群$N$について、$N$の部分群$H$は、$G$の正規部分群である。
+}
+
+\cor*{
+  群$G$の部分群$H$と、$G$の正規部分群$N$について、$N \cap H$は$H$の正規部分群である。
+}
+
+\lem{正規部分群の定める同値関係}{
+  群$G$とその正規部分群$H$について、\dfnref{右作用と左剰余類}の定める$H$の$G$への自明な右作用$\varphi$を考える。
+  
+  $\varphi$が定める同値関係$\sim_{\varphi(H)}$は\corref{直積集合と自明な同値関係}の意味で演算と両立する同値関係である。
+}{
+  $x_1 \sim_{\varphi(H)} y_1, x_2 \sim_{\varphi(H)} y_2$であるとき、$\exists h_1, h_2 \in H \qty(y_1 = x_1 h_1 \land y_2 = x_2 h_2)$
+
+  正規部分群より、$\exists h \in H \qty(x_2^{-1} h_1 x_2 = h)$
+  \eq*{
+    y_1 y_2 = x_1 h_1 x_2 h_2 = x_1 x_2 x_2^{-1} h_1 x_2 h_2 = x_1 x_2 h h_2
+  }
+
+  \lemref{群作用の軌道分解}より、両立する。
+}
+
+\dfn{剰余群}{
+  群$G$とその正規部分群$H$について、\lemref{正規部分群の定める同値関係}の定める同値関係による商マグマを、剰余群と呼び、$G / H$と表す。
+
+  定義より、剰余群は左剰余集合である。
+}
+
+\thm{群準同型定理}{
+  群$G_1, G_2$と、群準同型$f \in G_2^{G_1}$、$f$に付随する同値関係$\sim_{f}$について、群同型$\bar{f} \in \Im(f)^{G_1 / \sim_{f}}$が存在する。
+
+  $G_1 / \sim_f = G_1 / \Ker(f)$であるため、$\bar{f} \in \Im(f)^{G_1 / \Ker(f)}$の形で書かれることが多い。
+}{
+  $\Im(f)$は$G_2$の部分群である。
+
+  \thmref{マグマ準同型定理}より、得る$\bar{f}$はマグマ同型。
+  \lemref{マグマ準同型は群準同型}より、群同型。
+}
+
+\lem{剰余群の部分群は部分群の剰余群}{
+  群$G$、$G$の正規部分群$N$、$G / N$の部分群$Z$を考える。
+  
+  このとき$G$の部分群$H$が存在して、$N$は$H$の正規部分群となり、$H / N = Z$が成り立つ。
+}{
+  商写像$\qty[]$の原像$H \coloneqq \qty[Z]^{-1}$を考えると、商写像の群準同型性より$H$は$G$の部分群である。
+  
+  $\qty[\qty{e_Z}]^{-1} = N$であるため、$N \subset H$である。ゆえに$N$は$H$の正規部分群である。
+
+  商写像は全射であるため、$H / N = \qty[\qty[Z]^{-1}] = Z$である。
+}
+
+\lem*{
+  群$G$と$G$から$G$への共役作用$\varphi_C$について、以下が成り立つ。
+  \eq*{
+    \Fix(G, G) = \qty{g \in G \mid \forall g' \in G \qty(g g' = g' g)} = \bigcap \qty{\Stab(G, g') \mid g' \in G}
+  }
+
+  また、$\Fix(G, G)$は正規部分群である。
+}{
+  $\Fix(G, G) = \qty{g \in G \mid \forall g' \in G \qty(\qty(g')^{-1} g g' = g)}$である。
+
+  $\bigcap \qty{\Stab(G, g') \mid g' \in G} = \qty{g \in G \mid \forall g' \in G \qty(g \in \Stab(G, g'))} = \qty{g \in G \mid \forall g' \in G \qty(\qty(g')^{-1} g g' = g)}$である。
+
+  ゆえに等号が成り立つ。
+
+  $\bigcap \qty{\Stab(G, g') \mid g' \in G}$より、$G$の部分群であり、定義より正規部分群である。
+}
+
+\dfn{群の中心}{
+  群$G$について、\mlemref{0}で定める正規部分群を、$G$の中心と呼ぶ。
+}
+
+\cor*{
+  群の中心は可換群である。
+}
+
+
+\lsubsection{有限群}
+
+\dfn{有限群}{
+  群$G$について、$G$が有限集合であるとき、$G$を有限群と呼ぶ。
+}
+
+\lem{Lagrangeの定理}{
+  有限群$G$と、$G$の部分群$H$、左剰余集合$G / H$について、以下が成り立つ。
+  \eq*{
+    \abs{G} = \abs{G / H} \abs{H}
+  }
+}{
+	商写像$\qty[]$は全射より、\thmref{全射と右逆写像}から右逆写像$r$を持つ。\\*
+
+	$\phi \in G^{G / H \times H}, \phi(\qty[g], h) = r(\qty[g]) h$を考える。
+
+	$\phi(\qty[g_1], h_1) = \phi(\qty[g_2], h_2)$であるとき、$r(\qty[g_2]) = r(\qty[g_1]) h_1 h_2^{-1}$より、\lemref{群作用の軌道分解}から$\qty[g_1] = \qty[g_2]$であって、ただちに$h_1 = h_2$
+
+	ゆえに$\phi$は単射。\\*
+
+	$\forall g \in G$について、$r(\qty[g])^{-1} g \in H$であるので、$g = \phi(\qty[g], r(\qty[g])^{-1} g)$と書ける。ゆえに$\phi$は全射。\\*
+
+	したがって、$\abs{G} = \abs{G / H \times H}$であり、\lemref{有限集合の直積}より成り立つ。
+}
+
+\thm{Lagrangeの定理}{
+  有限群$G$と、$G$の部分群$H$、さらに$H$の部分群$K$について、左剰余集合$G / H, G / K$を考える。
+	このとき、以下が成り立つ。
+  \eq*{
+    \abs{G / K} = \abs{G / H} \abs{H / K}
+  }
+}{
+	\lemref{Lagrangeの定理}より、$\abs{G / K} \abs{K} = \abs{G} = \abs{G / H} \abs{H} = \abs{G / H} \abs{H / K} \abs{K}$である。
+
+	$\abs{K} \neq 0$より、\lemref{自然数の乗法の簡約則}から成り立つ。
+}
+
+\lem{素数群作用の不変部分}{
+  有限群$G$の有限集合$X$への群作用$\varphi$を考える。
+  $\abs{G}$が素数であるとき、$\abs{X} - \abs{\Fix(G, X)}$は$\abs{G}$の倍数である。
+}{
+  \lemref{Lagrangeの定理}、\thmref{軌道・安定化部分群定理}より以下が成り立つ。
+  \eq*{
+    \forall x \in X \qty(\abs{G} = \abs{G / \Stab(G, x)} \abs{\Stab(G, x)} = \abs{\varphi(G, x)} \abs{\Stab(G, x)})
+  }
+
+  $\abs{G}$は素数より、$\abs{\varphi(G, x)} = 1 \lor \abs{\varphi(G, x)} = \abs{G}$である。
+
+  $W \coloneqq \bigsqcup \qty{\varphi(G, x) \mid x \in X \land \abs{\varphi(G, x)} = \abs{G}}$とする。
+
+  \thmref{類等式}より、$\abs{X} = \abs{\Fix(G, X)} + \abs{W}$であり、$\abs{W}$は$\abs{G}$の倍数であるため成り立つ。
+}

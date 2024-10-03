@@ -1,0 +1,192 @@
+\lsection{多項式}
+
+\lsubsection{多項式環}
+
+\dfn{多項式環}{
+  可換環$R$について、集合$R[X]$を以下のように定義する。
+  \eq*{
+    R[X] \coloneqq \qty{\varphi \in R^\N \mid \exists N \in \N \forall n \in \N_{\geq N} \qty(\varphi(n) = 0_R)}
+  }
+
+  ここで、$R[X]$上の加法$+$、乗法$\times$を以下のように定める。
+  \eqg*{
+    \forall n \in \N \qty(\qty(\varphi + \psi)(n) \coloneqq \varphi(n) + \psi(n)) \\*
+    \forall n \in \N \qty(\qty(\varphi \times \psi)(n) \coloneqq \sum_{k \in s(n)} \varphi(k) \times \psi(n - k))
+  }
+
+  \dfnref{多項式環}より定まる順序対$\qty(\qty(R[X], +), \times)$は可換環である。この環を多項式環と呼ぶ。
+
+  また、多項式環の元を多項式と呼ぶ。
+}
+
+\lem*{
+  以下で定義する写像$\gamma \in R[X]^R$を考える。
+  \eq*{
+    \gamma(a)(n) \coloneqq
+    \begin{cases}
+      a & \qty(n = 0) \\*
+      0_R & \qty(n \neq 0)
+    \end{cases}
+  }
+
+  このとき、$\gamma$は以下を満たす。
+  \begin{enumerate}
+    \item 単射
+    \item 加法、乗法について環準同型
+  \end{enumerate}
+}{
+  定義より明らか。
+}
+
+\cor*{
+  可換環$R$と、$R$の部分環$S$について、$S[X]$は$R[X]$の部分環である。
+}
+
+\lem*{
+  可換環$R$上の多項式環$R[X]$について、以下が成り立つ。
+  \eq*{
+    \forall \varphi \in R[X] \setminus \qty{0_{R[X]}} \exists N \in \N \qty(\varphi(N) \neq 0_R \land \forall n \in \N_{\geq N} \qty(\varphi(n) = 0_R))
+  }
+}{
+  $M \coloneqq \qty{n \in \N \mid \varphi(n) \neq 0_R}$とする。
+
+  $\varphi \neq 0_{R[X]}$より、$M$は空でない。
+
+  定義より$M$は上に有界。
+
+  \thmref{自然数の上界と有限}と\thmref{有限全順序集合の最大元}より、$M$は最大元を持つ。
+}
+
+\dfn{多項式の次数}{
+  可換環$R$上の多項式環$R[X]$を考える。
+
+  $\forall \varphi \in R[X] \setminus \qty{0_{R[X]}}$について、\mlemref{0}より定まる自然数を次数と呼び、$\deg(\varphi)$と表す。
+}
+
+\dfn{多項式の値}{
+  可換環$R$上の多項式環$R[X]$について、以下で定める写像$f \in \qty(R^R)^{R[X]}$が存在する。
+  \eq*{
+    \forall x \in R \qty(f(\varphi)(x) \coloneqq \sum_{n \in s(\deg(\varphi))} \varphi(n) \times x^n)
+  }
+
+  $f(\varphi)(x)$を$\varphi(x)$と略記して、多項式の値と呼ぶ。
+}
+
+\rem{多項式の値}{
+  以降、多項式$\varphi$について、$\varphi(x)$と書くときは、特に断らない限り、\dfnref{多項式環}に基づく写像の値ではなく、\dfnref{多項式の値}多項式の値を表すものとする。
+}
+
+\dfn{根}{
+  可換環$R$上の多項式環$R[X]$と、多項式$\varphi \in R[X]$を考える。
+
+  $\varphi(x) = 0_R$を満たす元$x \in R$を、多項式$\varphi$の根と呼ぶ。
+}
+
+\dfn{次数既約}{
+  整域$D$上の多項式環$D[X]$について、多項式$f \in D[X]$が素元であるとき、$f$は次数既約であると呼ぶ。
+}
+
+\cor{整域上の多項式の次数}{
+  整域$D$上の多項式環$D[X]$は整域である。さらに、以下が成り立つ。
+  \eqg*{
+    \forall f, g \in D[X] \setminus \qty{0_{D[X]}} \qty(f + g = 0_{D[X]} \land \deg(f + g) \leq \max \qty{\deg(f), \deg(g)}) \\*
+    \forall f, g \in D[X] \setminus \qty{0_{D[X]}} \qty(\deg(f g) = \deg(f) + \deg(g))
+  }
+}
+
+
+
+
+
+\lsubsection{体上の多項式}
+
+\thm{体上の多項式環はEuclid整域}{
+  体$F$上の多項式環$F[X]$はEuclid整域である。
+}{
+  $F$が整域であることから、\corref{整域上の多項式の次数}より$F[X]$は整域である。\\*
+
+  $f \in F[X], g \in F[X] \setminus \qty{0_{F[X]}}$を考える。
+
+  $f = 0_{F[X]}$について、$f = 0_{F[X]} \times g + 0_{F[X]}$である。\\*
+
+  $f \neq 0_{F[X]}$とする。
+
+  $\deg(f) < \deg(g)$について、$f = 0_{F[X]} \times g + f$が成り立つ。\\*
+
+  $\deg(f) \geq \deg(g)$とする。
+
+  $\deg(f) = 0$のとき$\deg(g) = 0$より、以下の$q$について、$f = q \times g + 0_{F[X]}$である。
+  \eq*{
+    q(n) = f(n) g(0)^{-1}
+  }
+
+  $n \geq \deg(f)$について成り立つとき、$s(n) = \deg(f)$でも成り立つことを示す。
+
+  以下の$h \in F[X]$を考える。
+  \eq*{
+    h(m) =
+    \begin{cases}
+      f(m) - f(\deg(f)) g(\deg(g))^{-1} g(m - \deg(f) + \deg(g)) & \qty(m \geq \deg(f) - \deg(g)) \\*
+      f(m) & \qty(m < \deg(f) - \deg(g))
+    \end{cases}
+  }
+
+  $h = 0_{F[X]}$のとき、以下の$q$について、$f = d g + 0_{F[X]}$で成り立つ。
+  \eq*{
+    d(m) =
+    \begin{cases}
+      f(\deg(f)) g(\deg(g))^{-1} & \qty(m = \deg(f) - \deg(g)) \\*
+      0_R & \qty(m \neq \deg(f) - \deg(g))
+    \end{cases}
+  }
+
+  $h \neq 0_{F[X]}$のとき、$\deg(h) \leq n$となる。帰納法の仮定より、$h = q g + r \land \deg(r) < \deg(g)$
+
+  ゆえに、$f = d g + h = \qty(d + q) g + r \land \deg(r) < \deg(g)$
+
+  \thmref{数学的帰納法}より成り立つ。\\*
+
+  \corref{整域上の多項式の次数}より、$\forall f, g \in F[X] \setminus \qty{0_{F[X]}} \qty(\deg(f) \leq \deg(f g))$より成り立つ。
+}
+
+\thm{剰余の定理}{
+  \thmref{体上の多項式環はEuclid整域}より、体$F$上の多項式環$F[X]$には除法が定義される。この除法は一意である。
+}{
+  体$F$と、$g \in F[X] \setminus \qty{0_{F[X]}}$を考える。
+
+  $q_1 g + r_1 = q_2 g + r_2 \land \qty(r_1 = 0_{F[X]} \lor \deg(r_1) < \deg(g)) \land \qty(r_2 = 0_{F[X]} \lor \deg(r_2) < \deg(g))$とする。
+
+  $\qty(q_1 - q_2) g = r_2 - r_1$である。
+
+  $r_2 \neq r_1$のとき、$deg(g) > \deg(r_2 - r_1) = \deg(q_1 - q_2) + \deg(g) \geq \deg(g)$より矛盾。
+
+  したがって$r_1 = r_2$である。整域より$q_1 = q_2$
+}
+
+\dfn{代数的}{
+  体$E$と、$E$の部分体$F$、元$x \in E$について、以下を満たすとき、元$x$が$F$上代数的と呼ぶ。
+  \eq*{
+    \exists f \in F[X] \setminus \qty{0_{F[X]}} \qty(f(x) = 0_E)
+  }
+}
+
+\thm{最小多項式}{
+  体$E$と、$E$の部分体$F$、$F$上代数的な元$x \in E$について、$x$を根に持つ次数既約な多項式$f$が存在する。
+}{
+  以下を満たす環準同型$\varphi \in E^{F[X]}$を考える。
+  \eq*{
+    \varphi(g) = g(x)
+  }
+
+  ここで、$E$は体すなわち整域より、$\Ker(\varphi)$は素イデアルである。
+
+  \thmref{体はED}と\thmref{EDはPID}より、$\ev{f} = \Ker(\varphi)$なる多項式$f \in F[X]$が存在する。
+
+  定義より、$\Ker(\varphi) \neq \qty{0_{F[X]}}$であるので、$f$は素元。
+}
+
+\dfn{代数的閉体}{
+  体$F$上の多項式環$F[X]$を考える。
+
+  $F[X]$の任意の次数既約な多項式$f$について、$\deg(f) = 1$であるとき、$F$を代数的閉体と呼ぶ。
+}

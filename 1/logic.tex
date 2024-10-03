@@ -12,7 +12,7 @@ $()$で定める順序を断りなく用いる。
 \lsubsection{命題と命題結合子}
 
 \dfn{命題}{
-  真偽が確定している言明のことを、命題と呼ぶ。
+  真偽が確定している言明を、命題と呼ぶ。
 }
 
 \dfn{否定}{
@@ -28,7 +28,8 @@ $()$で定める順序を断りなく用いる。
 }
 
 \dfn{含意}{
-  命題$\phi, \psi$について、$\phi \rightarrow \psi$は命題である。このとき、$\phi$を前件$\psi$を後件と呼ぶ。
+  命題$\phi, \psi$について、$\phi \rightarrow \psi$は命題である。
+  このとき、$\phi$を前件、$\psi$を後件と呼ぶ。
 
   $\phi$ならば$\psi$、$\phi$は$\psi$に十分、$\psi$は$\phi$に必要、と呼ぶ。\\*
 
@@ -39,11 +40,12 @@ $()$で定める順序を断りなく用いる。
     \item $\phi$が真であり、$\psi$が偽であるとき、$\phi \rightarrow \psi$は偽である。
   \end{itemize}
 
-  必要に応じて、$\psi \leftarrow \phi$の表記をすることがある。
+  $\phi \rightarrow \psi$の意味で、$\psi \leftarrow \phi$の表記をすることがある。
 }
 
 \rem{命題の定義記号}{
-  定義記号$\defiff$を導入する。これは左辺を用いて表現された命題は、全てその左辺と一致する部分を右辺に置き換えて理解するという意味である。
+  定義記号$\defiff$を導入する。
+  これは左辺を用いて表現された命題は、全てその左辺と一致する部分を右辺に置き換えて理解するという意味である。
 }
 
 \dfn{連言}{
@@ -82,10 +84,9 @@ $()$で定める順序を断りなく用いる。
 
 \dfn{トートロジー}{
 	命題結合子により結合されている命題$\psi$を考える。
-
 	結合されている各命題の真偽によらず、$\psi$が真となるような命題結合子の組み合わせを、トートロジーと呼ぶ。
 
-  $\top$で表す。
+  常に真である命題$\psi$を、$\top$で表す。
 }
 
 \dfn{矛盾}{
@@ -97,6 +98,7 @@ $()$で定める順序を断りなく用いる。
 
 \cor*{
   以下の全ては、トートロジーである。
+  （以下に述べるのは代表的な例であり、全てでないことに注意されたい。）
 
   命題$\phi, \psi, \chi$について、
   \begin{enumerate}
@@ -109,7 +111,7 @@ $()$で定める順序を断りなく用いる。
       \item $\phi \leftrightarrow \phi \land \phi$
       \item $\phi \leftrightarrow \phi \lor \phi$
     \end{itemize}
-    \item \textit{\L ukasiewicz}の第一公理
+    \item {\L}ukasiewiczの第一公理
     \begin{itemize}
       \item $\phi \rightarrow \qty(\psi \rightarrow \phi)$
     \end{itemize}
@@ -137,7 +139,7 @@ $()$で定める順序を断りなく用いる。
     \begin{itemize}
       \item $\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi) \rightarrow \qty(\phi \rightarrow \chi)$
     \end{itemize}
-    \item \textit{De Morgan}の法則
+    \item De Morganの法則
     \begin{itemize}
       \item $\lnot \phi \lor \lnot \psi \leftrightarrow \lnot \qty(\phi \land \psi)$
       \item $\lnot \phi \land \lnot \psi \leftrightarrow \lnot \qty(\phi \lor \psi)$
@@ -158,7 +160,7 @@ $()$で定める順序を断りなく用いる。
     \begin{itemize}
       \item $\phi \lor \lnot \phi$
     \end{itemize}
-    \item \textit{Peirce}則
+    \item Peirce則
     \begin{itemize}
       \item $\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \rightarrow \phi$
     \end{itemize}
@@ -176,18 +178,17 @@ $()$で定める順序を断りなく用いる。
     \end{itemize}
   \end{enumerate}
 }
-上に述べたのは、代表的なトートロジーであり、全てでないことに注意すること。
 
 
 \lsubsection{推論と推論規則}
 
-古典論理NKの推論規則を導入する。
+古典論理（NK）の推論規則を導入する。
 
 \dfn{演繹関係}{
   命題$\phi, \psi$について、
   演繹関係$\phi \vdash \psi$を「$\phi$から$\psi$が証明される」「$\phi$から$\psi$が推論される」と定義する。
 }
-命題$\phi$について、$\vdash \phi$「前提なく$\phi$が証明される」は$\phi$と略記されることもある。
+命題$\phi$について、$\vdash \phi$、すなわち「前提なく$\phi$が証明される」は$\phi$と略記されることがある。
 また、改行により演繹関係を表す場合もある。
 
 \axi{連言の導入則}{
@@ -220,15 +221,14 @@ $()$で定める順序を断りなく用いる。
   }
 }
 
-\axi{含意の導入則}{
+\axi{含意の導入則（演繹定理）}{
   命題$\phi, \psi, \chi$について、
   \eq*{
     \qty(\chi \land \phi \vdash \psi) \vdash \qty(\chi \vdash \qty(\phi \rightarrow \psi))
   }
 }
-いわゆる演繹定理である。
 
-\axi{含意の除去則}{
+\axi{含意の除去則（Modus Ponendo Ponens）}{
   命題$\phi, \psi$について、
   \eq*{
     \phi \land \qty(\phi \rightarrow \psi) \vdash \psi
@@ -243,21 +243,22 @@ $()$で定める順序を断りなく用いる。
   }
 }
 
-\axi{否定の除去則}{
+\axi{否定の除去則（二重否定の除去）}{
   命題$\phi$について、
   \eq*{
     \lnot \lnot \phi \vdash \phi
   }
 }
-二重否定除去である。
 
 
 \lsubsection{述語論理}
 
 \dfn{述語}{
-  一つないし複数の変項を持ち、その変項の全てが確定した時には命題となる言明。
+  一つないし複数の変項を持ち、その変項の全てが確定したときに命題となる言明を、述語と呼ぶ。
 
-  例えば、述語記号$\phi$と変項$x$を用いて$\phi(x)$で表す。述語記号の要求する変項の数をアリティと呼ぶ。
+  例えば、述語を表す記号（述語記号）$\phi$と変項$x$を用いて$\phi(x)$で表す。
+
+  述語記号が要求する変項の数を、その述語記号のアリティと呼ぶ。
 }
 
 \dfn{全称量化子}{
@@ -269,7 +270,13 @@ $()$で定める順序を断りなく用いる。
 }
 
 \dfn{等号}{
-  アリティ2の述語記号$=$を定める。$x = y$と表す。
+  アリティ2の述語記号$=$を定める。
+  $x = y$と表す。
+}
+
+\rem{変項の定義記号}{
+  定義記号$\coloneqq$を導入する。
+  これは左辺を用いて表現された変項は、全てその左辺と一致する部分を右辺に置き換えて理解するという意味である。
 }
 
 \axi{全称量化子の導入則}{
@@ -324,28 +331,29 @@ $()$で定める順序を断りなく用いる。
   }
 }
 
-\axi{等号の導入則}{
+\axi{等号の導入則（反射律）}{
   変項$x$について、
   \eq*{
     x = x
   }
 }
-いわゆる反射律である。
 
-\axi{等号の除去則}{
+\axi{等号の除去則（代入原理）}{
   述語記号$\phi$、変項$x, y$について、
   \eq*{
     \phi(x) \land x = y \vdash \phi(y)
   }
 }
-いわゆる代入原理である。
 
-\cor{等号の対称律}{
+\thm{等号の対称律}{
   \eq*{
     x = y \vdash y = x
   }
+}{
+  $x = x \land x = y$
+
+  左命題の左辺に、右命題から得る代入を行って、$y = x$を得る。
 }
-この証明は、等号の除去則が全てではなく一部の変項の除去のみで良いことを明示的に用いる。
 
 \cor{等号の推移律}{
   \eq*{

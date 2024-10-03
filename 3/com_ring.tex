@@ -9,6 +9,15 @@
   }
 }
 
+\dfn{単項イデアル}{
+  可換環$R$と、元$a \in R$について、以下で定まる集合$\ev{a}$はイデアルである。
+  \eq*{
+    \ev{a} \coloneqq \qty{r a \mid r \in R}
+  }
+
+  このように構成されるイデアルを単項イデアルと呼ぶ。
+}
+
 \lem{倍元と単項イデアル}{
   可換環$R$について、以下の３つは同値である。
   \begin{enumerate}
@@ -39,15 +48,6 @@
   \eq*{
     a \neq 0_R \land \forall x, y \in R \qty(x y = a \rightarrow x \in R^\times \lor y \in R^\times)
   }
-}
-
-\dfn{単項イデアル}{
-  可換環$R$と、元$a \in R$について、以下で定まる集合$\ev{a}$はイデアルである。
-  \eq*{
-    \ev{a} \coloneqq \qty{r a \mid r \in R}
-  }
-
-  このように構成されるイデアルを単項イデアルと呼ぶ。
 }
 
 \cor*{
@@ -113,9 +113,9 @@
 
   $R \setminus I$が部分モノイドであることから$1_R \notin I$である。ゆえに$R / I \neq \qty{0_R}$
 
-  $\forall a, b \in R$について、$\qty[a b] = \qty[a] \qty[b] = 0_{R / I}$とする。
+  $\forall a, b \in R \setminus I$について、モノイド性より$a b \in R \setminus I$、すなわち$\qty[a] \qty[b] = \qty[a b] \neq 0_{R / I}$である。
 
-  $R \setminus I$のモノイド性と対偶法より$\qty[a] = 0_{R / I} \lor \qty[b] = 0_{R / I}$である。\\*
+  ゆえに対偶法より、$\forall a, b \in R \qty(\qty[a] \qty[b] = 0_{R / I} \rightarrow \qty[a] = 0_{R / I} \lor \qty[b] = 0_{R / I})$である。\\*
 
   $3. \rightarrow 1.$を示す。
 
@@ -201,7 +201,7 @@
   整域$D$のイデアルが全て単項イデアルであるとき、$D$を単項イデアル整域、またはPID(principal ideal domain)と呼ぶ。
 }
 
-\thmf{PIDは\textit{Noether}}{PIDはNoether}{
+\thm{PIDはNoether}{
   単項イデアル整域$D$について、$\P(D)$上の以下を満たす点列$\qty(I_n)_{n \in \N}$を考える。
   \begin{itemize}
     \item $\forall n \in \N$について$I_n$はイデアル
@@ -256,9 +256,9 @@
 
   これは\lemref{整域の素元は可逆でない既約元}に反する。ゆえに$\ev{a} \subsetneq \ev{a_1}$
 
-  $a$は素元分解できないので、$a_1$も素元分解でもない。\\*
+  $a$は素元分解できないので、$a_1$も素元分解できない。\\*
 
-  帰納的にイデアル列$\ev{a} \subset \ev{a_1} \subset \cdots$がつくれるが、これは\thmref{PIDはNoether}に反する。
+  帰納的にイデアル列$\ev{a} \subsetneq \ev{a_1} \subsetneq \cdots$がつくれるが、これは\thmref{PIDはNoether}に反する。
 
   ゆえに素元分解可能である。\\*
 
@@ -293,8 +293,8 @@
   \thmref{数学的帰納法}より、任意の$n$について成り立つ。
 }
 
-\dfnf{\textit{Euclid}整域}{Euclid整域}{
-  整域$D$について、以下を満たす写像$f \in \N^{D \setminus \qty{0_D}}$が存在するとき、$D$を\textit{Euclid}整域と呼ぶ。
+\dfn{Euclid整域}{
+  整域$D$について、以下を満たす写像$f \in \N^{D \setminus \qty{0_D}}$が存在するとき、$D$をEuclid整域と呼ぶ。
   \eqg*{
     \forall a \in D \forall b \in D \setminus \qty{0_D} \exists q, r \in D \qty(a = b q + r \land \qty(r = 0_D \lor f(r) < f(b))) \\*
     \forall a, b \in D \setminus \qty{0_D} \qty(f(a) \leq f(a b))
@@ -302,7 +302,7 @@
 }
 
 \thm{EDはPID}{
-  \textit{Euclid}整域$D$は単項イデアル整域である。
+  Euclid整域$D$は単項イデアル整域である。
 }{
   イデアル$I$を考える。$0_D \in I$である。
 
@@ -322,94 +322,81 @@
 }
 
 
-\lsubsection{多項式環}
+\lsubsection{体}
 
-\dfn{多項式環}{
-  可換環$R$について、集合$R[X]$を以下のように定義する。
+\dfn{体}{
+  可換環$\qty(\qty(F, +), \times)$が以下を満たすとき、体と呼ぶ。
   \eq*{
-    R[X] \coloneqq \qty{\varphi \in R^\N \mid \exists N \in \N \forall n \in \N_{\geq N} \qty(\varphi(n) = 0_R)}
+    F^\times = F \setminus \qty{0_F}
   }
 
-  ここで、$R[X]$上の加法$+$、乗法$\times$を以下のように定める。
-  \eqg*{
-    \forall n \in \N \qty(\qty(\varphi + \psi)(n) \coloneqq \varphi(n) + \psi(n)) \\*
-    \forall n \in \N \qty(\qty(\varphi \times \psi)(n) \coloneqq \sum_{k \in s(n)} \varphi(k) \times \psi(n - k))
-  }
-
-  \dfnref{多項式環}より定まる順序対$\qty(\qty(R[X], +), \times)$は可換環である。この環を多項式環と呼ぶ。
-
-  また、多項式環の元を多項式と呼ぶ。
-}
-
-\lem*{
-  以下で定義する写像$\gamma \in R[X]^R$を考える。
-  \eq*{
-    \gamma(a)(n) \coloneqq
-    \begin{cases}
-      a & \qty(n = 0) \\*
-      0_R & \qty(n \neq 0)
-    \end{cases}
-  }
-
-  このとき、$\gamma$は以下を満たす。
-  \begin{enumerate}
-    \item 単射
-    \item 加法、乗法について環準同型
-  \end{enumerate}
-}{
-  定義より明らか。
+  さらに、$x \times y^{-1}$を$x / y$と略記する。
 }
 
 \cor*{
-  可換環$R$と、$R$の部分環$S$について、$S[X]$は$R[X]$の部分環である。
+  体は零環ではない。
 }
 
-\lem{多項式の次数}{
-  可換環$R$上の多項式環$R[X]$について、以下が成り立つ。
-  \eq*{
-    \forall \varphi \in R[X] \setminus \qty{0_{R[X]}} \exists N \in \N \qty(\varphi(N) \neq 0_R \land \forall n \in \N_{\geq N} \qty(\varphi(n) = 0_R))
-  }
+\dfn{部分体}{
+  体$F$の部分環$R$が、体をなすとき、体$R$を体$F$の部分体と呼ぶ。
+}
+
+\thm{体はED}{
+  体$F$はEuclid整域である。
 }{
-  $M \coloneqq \qty{n \in \N \mid \varphi(n) \neq 0_R}$とする。
+  まず、整域であることを示す。
 
-  $\varphi \neq 0_{R[X]}$より、$M$は空でない。
+  整域でないとすると、$\forall x, y \in F \qty(x y = 0_F \land x \neq 0_F \land y \neq 0_F)$である。
 
-  定義より$M$は上に有界。
+  $y = x^{-1} x y = x^{-1} 0_F = 0_F$より矛盾。ゆえに整域。
 
-  \thmref{自然数の上界と有限}と\thmref{有限全順序集合の最大元}より、$M$は最大元を持つ。
+  $\forall a \in F \forall b \in F \setminus \qty{0_F}$について、$q = a b^{-1} \land r = 0_F$として成り立つ。
 }
 
-\dfn{多項式の次数}{
-  可換環$R$上の多項式環$R[X]$を考える。
+\thm{極大イデアルと体}{
+  可換環$R$とイデアル$I$について、以下の２つは同値である。
+  \begin{enumerate}
+    \item $I$は極大イデアル
+    \item 剰余環$R / I$は体
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
 
-  $\forall \varphi \in R[X] \setminus \qty{0_{R[X]}}$について、\lemref{多項式の次数}より定まる自然数を次数と呼び、$\deg(\varphi)$と表す。
+  $\forall a \in R \qty(\qty[a] \neq 0_{R / I})$を考える。
+
+  $a \notin I$である。ここで、$J \coloneqq \qty{r a + i \mid \qty(r, i) \in R \times I}$を考える。
+
+  定義より$I \subset J$であり、$J$はイデアル。ゆえに$I$の極大性から$J = R$
+
+  したがって$\exists \qty(r, i) \in R \times I \qty(r a + i = 1_R)$である。
+
+  よって$1_{R / I} = \qty[1_R] = \qty[r a + i] = \qty[r] \qty[a] + \qty[i] = \qty[r] \qty[a]$より、$\qty[r] = \qty[a]^{-1}$\\*
+
+  $2. \rightarrow 1.$を示す。
+
+  $I$が極大イデアルでないとする。すなわちイデアル$J$が存在して、$I \subsetneq J \subsetneq R$である。
+
+  $\forall a \in J \setminus I$について、$\qty[a] \neq 0_{R / I}$である。
+
+  体であるので、$\exists b \in R \qty(\qty[b] \qty[a] = \qty[1_R])$である。
+
+  したがって$b a - 1_R \in I \subset J$である。ここで、$a \in J$より$b a \in J$
+
+  イデアルは加法について群をなすので$1_R = b a - \qty(b a - 1_R) \in J$である。したがって$J = R$となり矛盾。
 }
 
-\cor{整域上の多項式の次数}{
-  整域$D$上の多項式環$D[X]$は整域である。さらに、以下が成り立つ。
-  \eqg*{
-    \forall f, g \in D[X] \setminus \qty{0_{D[X]}} \qty(f + g = 0_{D[X]} \land \deg(f + g) \leq \max \qty{\deg(f), \deg(g)}) \\*
-    \forall f, g \in D[X] \setminus \qty{0_{D[X]}} \qty(\deg(f g) = \deg(f) + \deg(g))
-  }
-}
+\thm{体準同型は単射}{
+  体$F$、零環ではない環$R$について、環準同型$\varphi \in R^F$は単射である。
+}{
+  $\qty{0_F}$は、\thmref{極大イデアルと体}より、極大イデアルである。
 
-\dfn{次数既約}{
-  整域$D$上の多項式環$D[X]$について、多項式$f \in D[X]$が素元であるとき、$f$は次数既約であると呼ぶ。
-}
+  $\Ker(\varphi)$はイデアルであり、$\qty{0_F} \subset \Ker(\varphi)$である。
 
-\dfn{多項式の値}{
-  可換環$R$上の多項式環$R[X]$について、以下で定める写像$f \in \qty(R^R)^{R[X]}$が存在する。
-  \eq*{
-    \forall x \in R \qty(f(\varphi)(x) \coloneqq \sum_{n \in s(\deg \varphi)} \varphi(n) \times x^n)
-  }
+  ゆえに、$\Ker(\varphi) = \qty{0_F} \lor \Ker(\varphi) = F$
 
-  $f(\varphi)(x)$を$\varphi(x)$と略記して、多項式の値と呼ぶ。
-}
+  零環でない$R$について、$\varphi(1_F) = 1_R \neq 0_R$より、$1_R \notin \Ker(\varphi)$
 
-以降、多項式$\varphi$について、$\varphi(x)$と書くときは、特に断らない限り、\dfnref{多項式環}に基づく写像の値ではなく、\dfnref{多項式の値}多項式の値を表すものとする。
+  したがって、$\Ker(\varphi) = \qty{0_F}$
 
-\dfn{根}{
-  可換環$R$上の多項式環$R[X]$と、多項式$\varphi \in R[X]$を考える。
-
-  $\varphi(x) = 0_R$を満たす元$x \in R$を、多項式$\varphi$の根と呼ぶ。
+  \thmref{群準同型の単射性}より単射。
 }

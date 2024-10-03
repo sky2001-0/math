@@ -35,13 +35,11 @@
   }
 }
 
-\dfnf{\textit{Archimedes}の原理}{Archimedesの原理}{
-  順序群$G$が以下を満たすとき、$G$は\textit{Archimedes}的であると呼ぶ。
+\dfn{Archimedesの原理}{
+  順序群$G$が以下を満たすとき、$G$はArchimedes的であると呼ぶ。
   \eq*{
-    \forall x, y \in G^+ \exists n \in \Z^+ \qty(x < n y)
+    \forall x, y \in G^+ \exists n \in \N \qty(x < \sum_{m \in n} y)
   }
-
-  ただし$n y$の表記は、\thmref{Z-加群としての可換群}による。
 }
 
 \lem{順序群の三角性}{
@@ -65,6 +63,10 @@
   \eq*{
     \forall a, b \in R \qty(0_R < a \land 0_R < b \rightarrow 0_R < a \times b)
   }
+}
+
+\rem{可換な順序環}{
+  順序環を可換官として定義することは、一般的でないことに注意されたい。
 }
 
 \lem{順序環の性質}{

@@ -3,7 +3,7 @@
 \lsubsection{近縁}
 
 \dfn{集合算}{
-  集合$X$と、集合$A, B \in \P \qty(X \times X)$について、以下で定める略記$A \circ B, A^{-1}$を考える。
+  集合$X$と、集合$A, B \in \P(X \times X)$について、以下で定める略記$A \circ B, A^{-1}$を考える。
   \eqg*{
     A \circ B \coloneqq \qty{\qty(x, z) \in X \times X \mid \exists y \in X \qty(\qty(x, y) \in A \land \qty(y, z) \in B)} \\*
     A^{-1} \coloneqq \qty{\qty(x, y) \in X \times X \mid \qty(y, x) \in A}
@@ -11,7 +11,7 @@
 }
 
 \dfn{基本近縁系}{
-  空でない集合$X$について、以下を満たす集合系$\mathcal{V} \in \P \qty(\P \qty(X \times X))$を基本近縁系と呼ぶ。
+  空でない集合$X$について、以下を満たす集合系$\mathcal{V} \in \P(\P(X \times X))$を基本近縁系と呼ぶ。
   \eqg*{
     \mathcal{V} \neq \varnothing \\*
     \forall V \in \mathcal{V} \forall x \in X \qty(\qty(x, x) \in V) \\*
@@ -41,12 +41,12 @@
 \dfn{近縁系}{
   空でない集合$X$の基本近縁系$\mathcal{V}$について、以下で与える集合系$\mathcal{U}$を近縁系と呼ぶ。
   \eq*{
-    \mathcal{U} \coloneqq \qty{U \in \P \qty(X \times X) \mid \exists V \in \mathcal{V} \qty(V \subset U)}
+    \mathcal{U} \coloneqq \qty{U \in \P(X \times X) \mid \exists V \in \mathcal{V} \qty(V \subset U)}
   }
 }
 
 \lem{近縁系の一意性}{
-  空でない集合$X$の基本近縁系$\mathcal{V}$と集合系$\mathcal{V'} \in \P \qty(\P \qty(X \times X))$について、以下を満たすとき、$\mathcal{V'}$は基本近縁系である。
+  空でない集合$X$の基本近縁系$\mathcal{V}$と集合系$\mathcal{V'} \in \P(\P(X \times X))$について、以下を満たすとき、$\mathcal{V'}$は基本近縁系である。
   \eqg*{
     \forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \qty(V \subset V') \\*
     \forall V \in \mathcal{V} \exists V' \in \mathcal{V'} \qty(V' \subset V)
@@ -137,7 +137,7 @@
 
   $\forall N \in \mathcal{N}(x)$について$\exists V \in \mathcal{V} \qty(V[x] \subset N)$であり、$U = V \cup \qty{\qty(x, y) \mid y \in N} \in \mathcal{U}$かつ$N = U[x]$であるので、$N \in \mathcal{N'}(x)$
 
-  $\forall N' \in \mathcal{N'}(x)$について$\exists U \in \P \qty(X \times X) \exists V \in \mathcal{V} \qty(V \subset U \land U[x] = N')$であり、$V[x] \subset U[x] = N' \in \mathcal{N}(x)$
+  $\forall N' \in \mathcal{N'}(x)$について$\exists U \in \P(X \times X) \exists V \in \mathcal{V} \qty(V \subset U \land U[x] = N')$であり、$V[x] \subset U[x] = N' \in \mathcal{N}(x)$
 }
 
 \thmf{一様空間は$T_3$}{一様空間はT_3}{
@@ -226,20 +226,20 @@
 }
 
 
-\lsubsectionf{\textit{Cauchy}}{Cauchy}
+\lsubsection{Cauchy}
 
-\dfnf{\textit{Cauchy}}{Cauchy}{
-  一様空間$\qty(X, \mathcal{U})$について、$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が以下を満たすとき、\textit{Cauchy}であると呼ぶ。
+\dfn{Cauchy}{
+  一様空間$\qty(X, \mathcal{U})$について、$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が以下を満たすとき、Cauchyであると呼ぶ。
   \eq*{
     \forall U \in \mathcal{U} \exists \lambda_0 \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_\mu, x_\tau) \in U)
   }
 }
 
-\lemf{基本近縁系と\textit{Cauchy}}{基本近縁系とCauchy}{
+\lem{基本近縁系とCauchy}{
   一様空間$\qty(X, \mathcal{U})$と$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$と、$\mathcal{U}$を与える$X$の基本近縁系$\mathcal{V}$を考える。
   このとき、以下の２つは同値である。
   \begin{enumerate}
-    \item $\qty(x_\lambda)_{\lambda \in \Lambda}$は\textit{Cauchy}
+    \item $\qty(x_\lambda)_{\lambda \in \Lambda}$はCauchy
     \item $\forall V \in \mathcal{V} \exists \lambda_0 \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_\mu, x_\tau) \in V)$
   \end{enumerate}
 }{
@@ -251,11 +251,11 @@
 }
 
 \cor*{
-  \textit{Cauchy}ネットの部分ネットは\textit{Cauchy}である。
+  Cauchyネットの部分ネットはCauchyである。
 }
 
-\thmf{収束ネットは\textit{Cauchy}}{収束ネットはCauchy}{
-  収束するネットは\textit{Cauchy}である。
+\thm{収束ネットはCauchy}{
+  収束するネットはCauchyである。
 }{
   $\forall V \in \mathcal{V}$について、\lemref{基本近縁系の三角性}より$\exists W \in \mathcal{V} \qty(W^{-1} \circ W \subset V)$
 
@@ -264,14 +264,14 @@
   $a$に収束するとすると、$\forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(a, x_\mu), \qty(a, x_\tau) \in W)$であるので、$\qty(x_\lambda, x_\tau) \in V$
 }
 
-\lemf{収束する部分を持つ\textit{Cauchy}ネット}{収束する部分を持つCauchyネット}{
-  一様空間$X$と$X$上の\textit{Cauchy}ネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$a \in X$に収束する部分ネットを持つならば、$\qty(x_\lambda)_{\lambda \in \Lambda}$は$a$に収束する。
+\lem{収束する部分を持つCauchyネット}{
+  一様空間$X$と$X$上のCauchyネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$a \in X$に収束する部分ネットを持つならば、$\qty(x_\lambda)_{\lambda \in \Lambda}$は$a$に収束する。
 }{
   \dfnref{基本近縁系}第四式より$\forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \circ W \subset V)$
 
   収束より、$\exists \mu_0 \in M \qty(\qty(x_{\lambda(\mu)})_{\mu \in M_{\succcurlyeq \mu_0}} \subset W[a])$
 
-  \textit{Cauchy}ネットより、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(\lambda_1, \lambda_2) \in W)$
+  Cauchyネットより、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(\lambda_1, \lambda_2) \in W)$
 
   \dfnref{部分ネット}より$\exists \mu_1 \in M \qty(\lambda_0 \preccurlyeq \lambda(\mu_1))$であり、有向集合より$\exists \mu_2 \in M \qty(\mu_0 \preccurlyeq \mu_2 \land \mu_1 \preccurlyeq \mu_2)$
 
@@ -279,7 +279,7 @@
 }
 
 \dfn{完備}{
-  一様空間$X$について、$X$上の任意の\textit{Cauchy}なネットが収束するとき、$X$は完備であると呼ぶ。
+  一様空間$X$について、$X$上の任意のCauchyなネットが収束するとき、$X$は完備であると呼ぶ。
 }
 
 \dfn{全有界}{
@@ -289,8 +289,8 @@
   }
 }
 
-\corf{\textit{Cauchy}列は全有界}{Cauchy列は全有界}{
-  \textit{Cauchy}列は全有界である。
+\cor{Cauchy列は全有界}{
+  Cauchy列は全有界である。
 }
 
 \thm{ネットによる全有界の特徴づけ}{
@@ -298,8 +298,8 @@
   \begin{enumerate}
     \item $X$は全有界
     \item $\forall V \in \mathcal{V} \exists A \in \P(X) \qty(\abs{A} < \infty \land \bigcup \qty{V[x] \mid x \in A} = X)$
-    \item $X$上の任意の普遍ネットは\textit{Cauchy}である。
-    \item $X$上の任意のネットは\textit{Cauchy}な部分ネットを持つ。
+    \item $X$上の任意の普遍ネットはCauchyである。
+    \item $X$上の任意のネットはCauchyな部分ネットを持つ。
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
@@ -336,7 +336,7 @@
 
   全有界でないことから$\forall A \in P \exists x \in X \setminus \bigcup \qty{U[x] \mid x \in A}$である。このようなネット$\qty(x_A)_{A \in P}$を考える。\\*
 
-  仮定より\textit{Cauchy}な部分ネット$\qty(x_{\varphi(\mu)})_{\mu \in M}$を持つ。
+  仮定よりCauchyな部分ネット$\qty(x_{\varphi(\mu)})_{\mu \in M}$を持つ。
 
   ゆえに$\exists \mu_0 \in M \forall \mu \in M_{\succcurlyeq \mu_0} \qty(x_{\varphi(\mu)} \in U[x_{\varphi(\mu_0)}])$である。
 
@@ -347,7 +347,7 @@
   背理法より示される。
 }
 
-\thmf{\textit{Heine-Borel}の被覆定理}{Heine-Borelの被覆定理}{
+\thm{Heine-Borelの被覆定理}{
   一様空間$\qty(X, \mathcal{U})$について、以下の２つは同値である。
   \begin{enumerate}
     \item $X$はコンパクトである。
@@ -356,20 +356,20 @@
 }{
   $1. \rightarrow 2.$を示す。
 
-  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意の普遍ネットは収束するので、\thmref{収束ネットはCauchy}より\textit{Cauchy}である。
+  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意の普遍ネットは収束するので、\thmref{収束ネットはCauchy}よりCauchyである。
 
   \thmref{ネットによる全有界の特徴づけ}より全有界である。\\*
 
-  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意の\textit{Cauchy}なネット$\qty(x_\lambda)_{\lambda \in \Lambda}$は収束する部分ネットを持つ。
+  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意のCauchyなネット$\qty(x_\lambda)_{\lambda \in \Lambda}$は収束する部分ネットを持つ。
 
   \lemref{収束する部分を持つCauchyネット}より$\qty(x_\lambda)_{\lambda \in \Lambda}$は収束する。\\*
 
   $2. \rightarrow 1.$を示す。
 
-  $X$上の任意のネットについて、全有界性から\thmref{ネットによる全有界の特徴づけ}より\textit{Cauchy}な部分ネットが存在して、完備性から収束する。\thmref{ネットによるコンパクトの特徴づけ}より示される。
+  $X$上の任意のネットについて、全有界性から\thmref{ネットによる全有界の特徴づけ}よりCauchyな部分ネットが存在して、完備性から収束する。\thmref{ネットによるコンパクトの特徴づけ}より示される。
 }
 
-\thmf{\textit{Heine-Cantor}の定理}{Heine-Cantorの定理}{
+\thm{Heine-Cantorの定理}{
   全有界な一様空間$\qty(X, \mathcal{U})$と、一様空間$\qty(X', \mathcal{U'})$について、連続写像$f \in \qty(X')^X$は一様連続である。
 }{
   $\forall V' \in \mathcal{V'}$について、\lemref{基本近縁系の三角性}より$\exists W' \in \mathcal{V'} \qty(W'^{-1} \circ W' \subset V')$
@@ -464,7 +464,7 @@
   可算一様空間$X$について、以下の３つは同値である。
   \begin{enumerate}
     \item $X$は第二可算
-    \item $X$は\textit{Lindel\"{o}f}
+    \item $X$はLindel\"{o}f
     \item $X$は可分
   \end{enumerate}
 }{
@@ -509,13 +509,13 @@
 }
 
 \thm{可算一様空間における完備}{
-  可算一様空間$X$について、$X$上の任意の\textit{Cauchy}列が収束するならば完備である。
+  可算一様空間$X$について、$X$上の任意のCauchy列が収束するならば完備である。
 }{
   \lemref{可算一様空間における基本近傍系の単調列}の主張する基本近縁系$\qty(V_n)_{n \in \N}$が存在する。
 
-  \textit{Cauchy}なネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$\forall n \in \N \exists \lambda_0(n) \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0(n)} \qty(\qty(x_\mu, x_\tau) \in V_{s(n)})$
+  Cauchyなネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$\forall n \in \N \exists \lambda_0(n) \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0(n)} \qty(\qty(x_\mu, x_\tau) \in V_{s(n)})$
 
-  $\qty(x_{\lambda_0(k)})_{k \in \N}$は\textit{Cauchy}な点列であるので、仮定より$\exists a \in X$に収束する。
+  $\qty(x_{\lambda_0(k)})_{k \in \N}$はCauchyな点列であるので、仮定より$\exists a \in X$に収束する。
 
   すなわち$\exists l \in \N \forall k \in \N_{\geq l} \qty(\qty(a, x_{\lambda_0(k)}) \in V_{s(n)})$
 

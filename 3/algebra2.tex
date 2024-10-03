@@ -1,0 +1,364 @@
+\lsection{代数の補足}
+
+\lsubsection{置換と対称群}
+
+\dfn{置換}{
+	$n \in \N_{\geq 1}$について、全単射$\sigma \in n^n$を置換と呼ぶ。
+}
+
+\dfn{対称群}{
+	$n \in \N_{\geq 1}$について、置換の全体は群をなす。この群を$n$次対称群と呼び、$\qty(\S_n, \circ)$で表す。
+}
+
+\dfn{互換}{
+	$n \in \N_{\geq 2}$について、以下で表される置換$\tau$を互換と呼ぶ。
+	\eq*{
+		\exists i, j \in n \qty(i \neq j \land
+		\tau(m) =
+		\begin{cases}
+			j & \qty(m = i) \\*
+			i & \qty(m = j) \\*
+			m & \qty(\otherwise)
+		\end{cases}
+		)
+	}
+
+	誤解のない範囲で互換を$\qty(i, j)$と表す。
+
+	互換の全体を$T_n$とする。
+}
+
+\cor*{
+	互換$\qty(i, j) = \qty(j, i)$
+}
+
+\cor*{
+	互換$\tau \in T_n$について、$\tau \tau = \id{n}$
+}
+
+\thm{置換は互換の積}{
+	$n \in \N_{\geq 1}$について、以下が成り立つ。
+	\eq*{
+		\forall \sigma \in \S_n \exists l \in \N \exists \tau \in T_n^l \qty(\sigma = \prod_{m \in l} \tau(m))
+	}
+}{
+	$n = 1$のとき、$\S_1 = \qty{\id{1}}$より成り立つ。
+
+	ある$n$で成り立つとする。
+
+	$\sigma \in \S_{s(n)}$について、全単射より$\exists k \in s(n) \qty(\sigma(k) = n)$である。
+
+	$k = n$のとき、$\sigma \rvert_n \in \S_n$より互換の積として表せる。
+
+	互換$\tau \coloneqq \qty(k, n)$について、$\sigma' \coloneqq \tau \sigma$を考える。
+
+	$\sigma' \rvert_n \in \S_n$は帰納法の仮定より互換の積として表せる。
+
+	$\sigma = \tau \sigma'$より互換の積となる。
+
+	\thmref{数学的帰納法}より、任意の$n$について成り立つ。
+}
+
+\lem*{
+	$n \in \N_{\geq 1}$について、$\id{n}$は奇数個の互換の積で表すことはできない。
+}{
+	$n = 1$のとき明らか。\\*
+
+	$n \geq 2$のとき、奇数$l$個の互換の積で表すことができると仮定する。
+
+	$\id{n} \notin T_n$より、1個の互換の積で恒等写像を表すことはできない。ゆえに、$l \geq 3$
+
+	$\id{n}$を互換の積で表すことができる最小の奇数$l$を考える。
+
+	互換２つの積について、左の項の第一成分は以下の規約で右の項のみに含まれるように変形できる。
+	\eq*{
+		\qty(i_1, j_1) \qty(i_2, j_2) =
+		\begin{cases}
+			\qty(i_2, j_2) \qty(i_1, j_1) & \qty(\qty{i_1, j_1} \cap \qty{i_2, j_2} = \varnothing) \\*
+			\qty(j_1, j_2) \qty(i_1, j_1) & \qty(i_1 = i_2 \land j_1 \neq j_2) \\*
+			\qty(i_2, j_1) \qty(i_1, i_2) & \qty(i_1 \neq i_2 \land j_1 = j_2) \\*
+			\id{n} & \qty(\qty{i_1, j_1} = \qty{i_2, j_2})
+		\end{cases}
+	}
+
+	$l$個の互換の積である$\id{n}$について、上の規約により第一番目の互換の第一成分$i$を右に移動させる。
+
+	このとき、$l$の最小性から４番目の場合とはならないため、帰納的に最も右の項のみに$i$が含まれるようにできる。
+
+	これは、$\id{n}(i) = i$に反する。
+
+	背理法より示される。
+}
+
+\lem{置換の符号}{
+	$\forall \sigma \in \S_n$について、\thmref{置換は互換の積}の定める$l$（互換の個数）の偶奇は一意に定まる。
+}{
+	奇数$l_1$、偶数$l_0$を用いて、$\sigma = \prod_{m \in l_1} \tau_1(m) = \prod_{m \in l_2} \tau_2(m)$とする。
+
+	$\id{n} = \prod_{m \in l_1} \tau_1(m) \times \prod_{m \in l_2} \tau_2(l_2 - 1 - m)$より、\mlemref{-1}に反する。
+
+	背理法より示される。
+}
+
+\dfn{置換の符号}{
+	$\forall \sigma \in \S_n$について、\lemref{置換の符号}より定まる偶奇が存在する。
+
+	このとき、以下の写像$\sign \in \Z^{\S_n}$を定義する。
+	\eq*{
+		\sign(\sigma) =
+		\begin{cases}
+			1 & \qty(\text{偶数}) \\*
+			-1 & \qty(\text{奇数})
+		\end{cases}
+	}
+}
+
+\cor*{
+	$\sign \in \qty(\Z, \times)^{\S_n}$は群準同型である。
+}
+
+\dfn{交代群}{
+	$n \in \N_{\geq 1}$について、以下で定める$\S$の部分群$A_n$を、交代群と呼ぶ。
+	\eq*{
+		A_n \coloneqq \qty{\sigma \in \S_n \mid \sign(\sigma) = 1}
+	}
+}
+
+\lem{交代群は対称群の正規部分群}{
+	$n \in \N_{\geq 1}$について、交代群$A_n$は対称群$\S_n$の正規部分群である。
+}{
+	$\forall \sigma \in \S_n \forall \alpha \in A_n$について、$\sign(\sigma^{-1} \alpha \sigma) = \sign(\sigma)^{-1} \sign(\alpha) \sign(\sigma) = \sign(\alpha) = 1$より、$\sigma^{-1} \alpha \sigma \in A_n$
+}
+
+
+\lsubsection{可解群}
+
+\dfn{可解群}{
+	自明でない群$G$について、$n \in \N$と有限列$\qty(H_m)_{m \in s(n)}$が存在して以下を満たすとき、$G$を可解群と呼ぶ。
+	\begin{itemize}
+		\item $H_0 = G$
+		\item $H_{n} = \qty{e}$
+		\item $\forall m \in n$について、$H_{s(m)}$は$H_m$の正規部分群であり、剰余群$H_m / H_{s(m)}$が可換群
+	\end{itemize}
+}
+
+\cor*{
+	可換群は可解群である。
+}
+
+\lem{可解群の部分}{
+	可解群$G$の部分群$H$は可解群である。
+}{
+	$G$は可解群より、\dfnref{可解群}を満たす有限列$\qty(Z_m)_{m \in n}$が存在する。
+
+	有限列$Y_m \coloneqq Z_m \cap H$を考える。ただちに$Y_{s(m)}$は$Y_m$の正規部分群。
+
+	埋め込み$f \in Z_m^{Y_m}$と、商写像$\qty[] \in \qty(Z_m / Z_{s(m)})^{Z_m}$から、準同型$\qty[] \circ f \in \qty(Z_m / Z_{s(m)})^{Y_m}$を得る。
+
+	\thmref{群準同型定理}より、埋め込み$\bar{f} \in \qty(Z_m / Z_{s(m)})^{Y_m / Y_{s(m)}}$が存在する。
+
+	$Z_m / Z_{s(m)}$は可換群より、$Y_m / Y_{s(m)}$も可換群。したがって可解群。
+}
+
+\lem{可解群の拡大}{
+	群$G$と、$G$の正規部分群$N$について、$N, G / N$がともに可解群ならば、$G$は可解群である。
+}{
+	$G / N$は可解群より、\dfnref{可解群}を満たす有限列$\qty(Z_m)_{m \in n}$が存在する。
+
+	\lemref{剰余群の部分群は部分群の剰余群}より、有限列$\qty(H_m)_{m \in n}$で、$H_m / N = Z_m$かつ$H_{s(m)}$は$H_m$の正規部分群が成り立つ。
+
+	$H_m$上の\lemref{正規部分群の定める同値関係}の定める同値関係について、$a \sim_N b \rightarrow a \sim_{H_{s(m)}} b$である。
+
+	ゆえに自明な埋め込み$f \in \qty(H_m / N)^{H_m / H_{s(m)}}$が存在する。
+
+	$H_m / N$は可換群より、$H_m / H_{s(m)}$も可換群である。\\*
+
+	$N$は可解群であるため、\dfnref{可解群}を満たす有限列$\qty(I_m)_{m \in l}$が存在する。
+
+	よって、有限列$G = H_0, H_1, \cdots , H_{p(n)} = N = I_0, I_1, \cdots, I_{p(l)} = \qty{e}$が存在して\dfnref{可解群}を満たす。
+}
+
+\lem*{
+	交代群$A_5$は可解群ではない。
+}{
+	$A_5$を可解群とする。$A_5$の正規部分群$N$が存在して、$A_5 / N$は可換群となる。
+
+	$\forall i_1, j_1, i_2, j_2 \in 5 \qty(i_1 \neq j_1 \land i_2 \neq j_2)$を考える。\\*
+
+	$\qty{i_1, j_1} \cap \qty{i_2, j_2} = \varnothing$のとき、$A_5 / N$の可換性より
+	\eq*{
+		\qty[\qty(i_1, j_1) \qty(i_2, j_2)] = \qty[\qty(i_1, j_2) \qty(j_1, j_2) \qty(i_1, j_2) \qty(j_1, i_2) \qty(j_1, j_2) \qty(j_1, i_2)] = \qty[\id{5}]
+	}
+
+	ゆえに、$\qty(i_1, j_1) \qty(i_2, j_2) \in N$\\*
+
+	$i_1 = i_2 \land j_1 \neq j_2$のとき、$\qty{k_1, k_2} = 5 \setminus \qty{i_1, j_1, j_2}$について、$A_5 / N$の可換性より、
+	\eq*{
+		\qty[\qty(i_1, j_1) \qty(i_1, j_2)] = \qty[\qty(i_1, j_1) \qty(i_1, k_1)] \qty[\qty(j_1, k_2) \qty(j_1, j_2)] \qty[\qty(i_1, k_1) \qty(i_1, j_1)] \qty[\qty(j_1, j_2) \qty(j_1, k_2)] = \qty[\id{5}]
+	}
+
+	ゆえに、$\qty(i_1, j_1) \qty(i_1, j_2) \in N$\\*
+
+	$\qty{i_1, j_1} = \qty{i_2, j_2}$のとき、$\qty(i_1, j_1) \qty(i_1, j_2) = \id{5} \in N$\\*
+
+	\thmref{置換は互換の積}より、$A_5 = N$となる。
+
+	$\qty(0, 1) \qty(1, 2) \neq \qty(1, 2) \qty(0, 1)$より、$A_5$は可換群ではない。
+
+	ゆえに\dfnref{可解群}を満たす有限列は存在しない。
+}
+
+\thm{対称群と可解群}{
+	$n = 2, 3, 4$について、$\S_n$は可解群である。
+
+	$n \in \N_{\geq 5}$について、$\S_n$は可解群ではない。
+}{
+	$\S_2 = \qty{\id{2}, \qty(0, 1)}$は可換群である。ゆえに可解群である。\\*
+
+	$\S_3, A_3, \qty{\id{3}}$は\dfnref{可解群}の主張する有限列である。ゆえに$\S_3$は可解群である。\\*
+
+	$V_4 \coloneqq \qty{\id{4}, \qty(0, 1) \qty(2, 3), \qty(0, 2) \qty(1, 3), \qty(0, 3) \qty(1, 2)}$を考える。
+
+	$\S_4, A_4, V_4, \qty{\id{4}}$は\dfnref{可解群}の主張する有限列である。ゆえに$\S_4$は可解群である。\\*
+
+	$n \in \N_{\geq 5}$について$\S_n$が可解群と仮定する。
+
+	\lemref{可解群の部分}より$A_n$も可解群となり、さらに$A_5$が可解群となる。これは\mlemref{-1}に反する。
+
+	背理法より成り立つ。
+}
+
+
+\lsubsection{巡回群}
+
+\dfn{巡回群}{
+	群$G$について以下が成り立つとき、$G$を巡回群と呼ぶ。
+	\eq*{
+		\exists g \in G \qty(G = \qty{g^n \mid n \in \Z})
+	}
+}
+
+\cor*{
+	巡回群は可換群である。
+}
+
+\lem{位数}{
+	有限群$G$と元$g \in G$に対して、以下の集合は空でない。
+	\eq*{
+		\qty{n \in \N \mid g^n = e}
+	}
+}{
+	\thmref{鳩の巣原理}より、写像$\tau \in G^{s(\abs{G})}, \tau(n) = g^n$は単射でない。
+
+	よって、$\exists i, j \in s(\abs{G}) \qty(i < j \land g^i = g^j)$
+
+	したがって、$g^{j - i} = e$である。
+}
+
+\dfn{位数}{
+	\lemref{位数}と\thmref{最小値原理}より、有限群$G$と元$g \in G$に対して$g^n = e$とする最小の$n \in \N$が存在する。
+
+	これを元$g$の位数と呼び、$\ord(g)$と表す。
+}
+
+\lem{有限巡回群の位数}{
+	有限群$G$と元$g \in G$について、$G = \qty{g^n \mid n \in \Z}$であるとき、以下が成り立つ。
+	\eq*{
+		\ord(g) = \abs{G}
+	}
+}{
+	写像$\tau \in G^{\ord(g)}, \tau(n) = g^n$を考える。
+
+	$\exists i, j \in \N \qty(i < j \land g^i = g^j)$ならば$g^{j - i} = e$より位数の最小性に反する。ゆえに単射。
+
+	$\forall n \in \Z$について、\dfnref{自然数の除法}より$\exists q, r \in \N \qty(n = q \ord(g) + r \land r < \ord(g))$である。
+
+	よって$g^n = g^{q \ord(g) + r} = \qty(g^{\ord(g)})^q g^r = g^r$、ゆえに全射。
+}
+
+\lem{素数群は巡回群}{
+	有限群$G$について、$\abs{G}$が素数ならば$G$は巡回群である。
+}{
+	$\abs{G}$は素数より、$\exists g \in G \qty(g \neq e)$である。
+
+	今、$H \coloneqq \qty{g^n \mid n \in \N}$は$G$の部分群であり、$\abs{H} \geq 2$である。
+	\lemref{Lagrangeの定理}より、$\abs{H} = \abs{G}$である。
+
+	ゆえに、$G \setminus H = \varnothing$であるので$G = H$、すなわち$G$は巡回群である。
+}
+
+\lem{Cauchyの定理}{
+	有限群$G$について、$\abs{G}$が素数$p$の倍数であるならば、以下が成り立つ。
+	\eq*{
+		\exists g \in G \qty(\ord(g) = p)
+	}
+}{
+	集合$S \coloneqq \qty{\qty(x_n)_{n \in p} \in G^p \mid \Pi_{n \in p} x_n = e_G}$を考える。
+
+	$x_{p - 1} = \qty(\Pi_{n \in p - 1} x_n)^{-1}$であることに注目すると、全単射$S \ni \qty(x_n)_{n \in p} \mapsto \qty(x_n)_{n \in p - 1} \in G^{p - 1}$の存在から$\abs{S} = \abs{G}^{p - 1}$であり、特に$\abs{S}$は$p$の倍数である。
+
+	群$\S_p$の$S$への以下を満たす群作用$\varphi$を考える。
+	\eq*{
+		\varphi(\sigma, \qty(x_n)_{n \in p}) = \qty(x_{\sigma(n)})_{n \in p}
+	}
+
+	以下の$\sigma_0 \in \S_p$は、$\ord(\sigma_0) = p$を満たす。
+	\eqa*{
+		\sigma_0(n) =
+		\begin{cases}
+			n + 1 & \qty(n \in p - 1) \\*
+			0 & \qty(n = p - 1)
+		\end{cases}
+	}
+
+  今、$\S_p$の部分群$H \coloneqq \qty{\sigma_0^n \mid n \in p}$を考える。
+
+	\lemref{素数群作用の不変部分}より、$\abs{S} - \abs{\Fix(H, S)}$は$p$の倍数である。
+
+  今、$\abs{S}$は$p$の倍数より、$\abs{\Fix(H, S)}$も$p$の倍数であり、$\qty(e_G)_{n \in p} \in \Fix(H, S)$より、$\exists x \in \Fix(H, S) \setminus \qty{\qty(e_G)_{n \in p}}$である。
+
+  $\sigma_0(x) = x$であるため、$\exists g \in G \setminus \qty{e_G} \qty(x = \qty(g)_{n \in p})$である。
+}
+
+\thm{Sylowの存在定理}{
+	素数$p$と自然数$n$を考える。
+	有限群$G$について$\abs{G}$が$p^n$の倍数であるとき、$G$の部分群$H$が存在して$\abs{H} = p^n$が成り立つ。
+}{
+	$\abs{G}$が$p^n$の倍数である任意の有限群$G$について、満たす部分群$H$が存在することを数学的帰納法により示す。
+
+	$n = 0$のとき、$\qty{e_G}$は$G$の部分群である。\\*
+
+  ある$n$について成り立つとする。$\abs{G}$が$p^{s(n)}$の倍数となるような群$G$を考える。
+
+  $G$の$G$への共役作用$\varphi_C$と、$G$の中心$\Fix(G, G)$を考える。\\*
+	
+	$\abs{\Fix(G, G)}$が$p$の倍数でないとき、\thmref{類等式}より$\abs{G} = \abs{\Fix(G, G)} + \sum_{m \in n} \abs{\varphi(G, g_m)}$であるので、$\exists g \in G$であり$\abs{\varphi(G, g)}$は$p$の倍数ではない。
+
+	\thmref{軌道・安定化部分群定理}、\lemref{Lagrangeの定理}より、$\abs{G} = \abs{G / \Stab(G, g)} \abs{\Stab(G, g)} = \abs{\varphi(G, g)} \abs{\Stab(G, g)}$である。
+
+	ゆえに、$\abs{\Stab(G, g)}$は$p^{s(n)}$の倍数となる。\\*
+
+	$\abs{\Fix(G, G)}$が$p$の倍数であるときを考える。
+
+  \lemref{Cauchyの定理}より、$\Fix(G, G)$は部分群$N$を持って$\abs{N} = p$であり、$\Fix(G, G)$が$G$の正規部分群であることから、$N$は$G$の正規部分群である。
+
+	剰余群$G / N$について、\lemref{Lagrangeの定理}より$\abs{G} = \abs{G / N} \abs{N}$であり、$\abs{G / N}$は$p^n$の倍数であるので、仮定より部分群$K$が存在して、$\abs{K} = p^n$である。
+
+	\lemref{剰余群の部分群は部分群の剰余群}より、$G$の部分群$L$が存在して$L / N = K$であり、\lemref{Lagrangeの定理}より$\abs{L} = \abs{L / N} \abs{N} = \abs{K} \abs{N} = p^{s(n)}$
+}
+
+
+\lsubsection{代数の補足}
+
+\thmf{$\Z$-加群としての可換群}{Z-加群としての可換群}{
+  可換群$\qty(G, +)$を考える。以下で定める$\rho \in \End(G)^\Z$について、順序対$\qty(\qty(G, +), \rho)$は$\Z$-加群である。
+  \eq*{
+    \rho(n)(g) \coloneqq
+    \begin{cases}
+      \sum_{m \in n} g & \qty(0 \leq n) \\*
+      \sum_{m \in (-n)} (-g) & \qty(n < 0)
+    \end{cases}
+  }
+}{
+  正負の場合の場合分けを考えて、\lemref{モノイド上の指数法則}より、成り立つ。
+}

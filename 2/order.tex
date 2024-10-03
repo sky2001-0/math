@@ -227,7 +227,7 @@
 }
 
 
-\lsubsectionf{\textit{Zorn}の補題}{Zornの補題}
+\lsubsection{Zornの補題}
 
 \dfn{帰納的}{
   半順序集合$\qty(P, \preccurlyeq)$を考える。$P$の任意の空でない部分集合$A$について、順序対$\qty(A, \preccurlyeq)$が全順序集合ならば$A$が上に有界となるとき、$P$は帰納的であると呼ぶ。
@@ -292,7 +292,7 @@
 
   したがって、$T^* \in \mathcal{T}$である。\\*
 
-  $R \in \P \qty(T^*) \setminus \qty{\varnothing}$について、$\exists v \in U(R) \setminus U(T^*)$とする。
+  $R \in \P(T^*) \setminus \qty{\varnothing}$について、$\exists v \in U(R) \setminus U(T^*)$とする。
 
   $\exists w \in T^* \exists T \in \mathcal{T}_1 \qty(\lnot w \prec v \land w \in T)$より、$\exists T \in \mathcal{T}_1 \qty(v \in U(R) \setminus U(T))$
 
@@ -315,7 +315,7 @@
 
   今、$u$は定義より$T'$の最大元となるので、$T' \in \mathcal{T}$である。\\*
 
-  $S \in \P \qty(T') \setminus \qty{\varnothing}$について、$U(S) \setminus U(T') \neq \varnothing$とする。
+  $S \in \P(T') \setminus \qty{\varnothing}$について、$U(S) \setminus U(T') \neq \varnothing$とする。
 
   $u \in S$とすると、$U(S) = U(\qty{u}) = U(T')$より矛盾。したがって、$u \notin S$より、$S \subset T^*$を得る。
 
@@ -340,7 +340,7 @@
   $\forall R \in \mathcal{T}_0 \qty(T' \setminus R \subset U(R))$である。
 }
 
-\thmf{\textit{Zorn}の補題}{Zornの補題}{
+\thm{Zornの補題}{
   帰納的な半順序集合には極大元が存在する。
 }{
   極大元を持たないとすると、\mlemref{-1}より$T' \in \mathcal{T}_1$から$T' \subset \bigcup \mathcal{T}_1 = T^*$

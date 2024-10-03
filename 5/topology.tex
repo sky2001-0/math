@@ -3,7 +3,7 @@
 \lsubsection{位相}
 
 \dfn{開基}{
-  空でない集合$X$について、以下を満たす集合系$\mathcal{B} \in \P \qty(\P(X))$を開基と呼ぶ。
+  空でない集合$X$について、以下を満たす集合系$\mathcal{B} \in \P(\P(X))$を開基と呼ぶ。
   \eqg*{
     \forall x \in X \exists B \in \mathcal{B} \qty(x \in B) \\*
     \forall B_1, B_2 \in \mathcal{B} \forall x \in B_1 \cap B_2 \exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)
@@ -27,7 +27,7 @@
 }
 
 \lem{開集合系の一意性}{
-  集合$X$の開基$\mathcal{B}$と集合系$\mathcal{B'} \in \P \qty(\P(X))$について、以下を満たすとき、$\mathcal{B'}$は開基である。
+  集合$X$の開基$\mathcal{B}$と集合系$\mathcal{B'} \in \P(\P(X))$について、以下を満たすとき、$\mathcal{B'}$は開基である。
   \eqg*{
     \forall B' \in \mathcal{B'} \forall x \in B' \exists B \in \mathcal{B} \qty(x \in B \land B \subset B') \\*
     \forall B \in \mathcal{B} \forall x \in B \exists B' \in \mathcal{B'} \qty(x \in B' \land B' \subset B)
@@ -229,7 +229,7 @@
 \lsubsection{近傍}
 
 \dfn{基本近傍系}{
-  空でない集合$X$とその任意の点$x$について、以下を満たす集合系$\mathcal{B}(x) \in \P \qty(\P(X))$を基本近傍系と呼ぶ。
+  空でない集合$X$とその任意の点$x$について、以下を満たす集合系$\mathcal{B}(x) \in \P(\P(X))$を基本近傍系と呼ぶ。
   \eqg*{
     \mathcal{B}(x) \neq \varnothing \\*
     \forall B \in \mathcal{B}(x) \qty(x \in B) \\*
@@ -257,7 +257,7 @@
 }
 
 \lem{近傍系の一意性}{
-  空でない集合$X$の基本近傍系$\mathcal{B}(x)$と集合系$\mathcal{B'}(x) \in \P \qty(\P(X))$について、以下を満たすとき、$\mathcal{B'}(x)$は基本近傍系である。
+  空でない集合$X$の基本近傍系$\mathcal{B}(x)$と集合系$\mathcal{B'}(x) \in \P(\P(X))$について、以下を満たすとき、$\mathcal{B'}(x)$は基本近傍系である。
   \eqg*{
     \forall B' \in \mathcal{B'}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B') \\*
     \forall B \in \mathcal{B}(x) \exists B' \in \mathcal{B'}(x) \qty(B' \subset B)
@@ -514,7 +514,7 @@
   位相空間$X$について、以下が成り立つ。
   \eqg*{
     \forall A, B \in \P(X) \qty(A \subset B \rightarrow \bar{A} \subset \bar{B}) \\*
-    \forall D \in \P \qty(\P(X)) \qty(\bigcup \qty{\bar{A} \mid A \in D} \subset \bar{\bigcup D})
+    \forall D \in \P(\P(X)) \qty(\bigcup \qty{\bar{A} \mid A \in D} \subset \bar{\bigcup D})
   }
 }
 
@@ -622,7 +622,7 @@
   背理法より示される。
 }
 
-\thmf{\textit{Tychonoff}の定理}{Tychonoffの定理}{
+\thm{Tychonoffの定理}{
   コンパクトな位相空間$X, Y$について、位相空間$X \times Y$はコンパクトである。
 }{
   $X \times Y$上の普遍ネット$\qty(\qty(x_\lambda, y_\lambda))_{\lambda \in \Lambda}$を考える。
@@ -649,12 +649,12 @@
   \thmref{像の性質}、\corref{像と原像}から$f(X) = \bigcup \qty{f(f^{-1}(O')) \mid O' \in A'} \subset \bigcup \qty{O' \mid O' \in A'}$より$A'$は有限開被覆である。
 }
 
-\dfnf{\textit{Lindel\"{o}f}}{Lindelof}{
-  位相空間$X$について、その任意の開被覆が、開被覆となる可算部分集合を持つとき、$X$は\textit{Lindel\"{o}f}であると呼ぶ。
+\dfnf{Lindel\"{o}f}{Lindelof}{
+  位相空間$X$について、その任意の開被覆が、開被覆となる可算部分集合を持つとき、$X$はLindel\"{o}fであると呼ぶ。
 }
 
 \cor*{
-  位相空間$X$について、$X$がコンパクトならば$X$は\textit{Lindel\"{o}f}である。
+  位相空間$X$について、$X$がコンパクトならば$X$はLindel\"{o}fである。
 }
 
 \dfn{点列コンパクト}{
@@ -662,7 +662,7 @@
 }
 
 \thm*{
-  \textit{Lindel\"{o}f}で点列コンパクトな位相空間$X$は、コンパクトである。
+  Lindel\"{o}fで点列コンパクトな位相空間$X$は、コンパクトである。
 }{
   コンパクトでないと仮定する。その任意の有限部分集合が開被覆とならない$X$の開被覆$C$が存在する。
 
@@ -700,7 +700,7 @@
   }
 }
 
-\thmf{\textit{Fr\'{e}chet}性}{Frechet性}{
+\thm{Frechet性}{
   位相空間$X$と、開基$\mathcal{B}$について、以下の３つは同値である。
   \begin{enumerate}
     \item $X$は$T_1$空間
@@ -728,10 +728,8 @@
   ゆえに、$X \setminus \qty{x} \in \mathcal{N}(y)$である。
 }
 
-\thm*{
+\cor*{
   位相空間$X$が$T_1$空間ならば、$T_0$空間である。
-}{
-  明らか。
 }
 
 \dfnf{$T_2$空間}{T_2空間}{
@@ -741,7 +739,7 @@
   }
 }
 
-\thm*{
+\lemf{$T_2$ならば$T_1$}{T_2ならばT_1}{
   位相空間$X$が$T_2$空間ならば、$T_1$空間である。
 }{
   $\forall x, y \in X \qty(x \neq y)$を考える。$\exists N_x \in \mathcal{N}(x) \exists N_y \in \mathcal{N}(y) \qty(N_x \cap N_y = \varnothing)$
@@ -753,7 +751,7 @@
   $T_2$空間の部分空間は$T_2$空間である。
 }
 
-\thmf{\textit{Hausdorff}性}{Hausdorff性}{
+\thm{Hausdorff性}{
   位相空間$X$と、開基$\mathcal{B}$について、以下の５つは同値である。
   \begin{enumerate}
     \item $X$は$T_2$空間
@@ -830,7 +828,7 @@
   }
 }
 
-\thmf{\textit{Vietoris}性}{Vietoris性}{
+\thm{Vietoris性}{
   位相空間$X$と、開基$\mathcal{B}$について、以下の４つは同値である。
   \begin{enumerate}
     \item $X$は$T_3$空間
@@ -893,7 +891,7 @@
   }
 }
 
-\thmf{\textit{Tietze}性}{Tietze性}{
+\thm{Tietze性}{
   位相空間$\qty(X, \mathcal{O})$について、以下の３つは同値である。
   \begin{enumerate}
     \item $X$は$T_4$空間
@@ -932,14 +930,14 @@
   $T_4$空間の定義より、$T_3$空間である。
 }
 
-\thm*{
-  $T_3$空間$X$が\textit{Lindel\"{o}f}ならば、$X$は$T_4$空間である。
+\lemf{Lindel\"{o}fな$T_3$は$T_4$}{LindelofなT_3はT_4}{
+  $T_3$空間$X$がLindel\"{o}fならば、$X$は$T_4$空間である。
 }{
   $\forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing)$を考える。
 
   $\forall x \in F_1$について、$x \in X \setminus F_2$より、仮定から$\exists O_1(x) \in \mathcal{O} \qty(x \in O_1(x) \land \bar{O_1(x)} \cap F_2 = \varnothing)$
 
-  \textit{Lindel\"{o}f}より、$F_1$の可算部分$A_1$が存在して、$F_1 \subset \bigcup \qty{O_1(x) \mid x \in A_1}$
+  Lindel\"{o}fより、$F_1$の可算部分$A_1$が存在して、$F_1 \subset \bigcup \qty{O_1(x) \mid x \in A_1}$
 
   すなわち、写像$\varphi_1 \in \mathcal{O}^\N$が存在して、$F_1 \subset \bigcup \qty{\varphi_1(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_1(n)} \cap F_2 = \varnothing)$\\*
 
@@ -1049,7 +1047,7 @@
   ゆえに\lemref{近傍系の一意性}より、$\qty(B_n)_{n \in \N}$は$\mathcal{B}(x)$と同じ近傍系を与える基本近傍系である。
 }
 
-\thmf{\textit{Bolzano-Weierstrass}の定理}{Bolzano-Weierstrassの定理}{
+\thm{Bolzano-Weierstrassの定理}{
   第一可算でコンパクトな位相空間$X$は、点列コンパクトである。
 }{
   $X$上の点列$\qty(x_k)_{k \in \N}$について、$\qty(F_k)_{k \in \N}, F_k = \qty{x_l \mid l \in \N \land l \geq k} \in \P(X)$を考える。\\*
@@ -1099,7 +1097,7 @@
   位相空間$\qty(X, \mathcal{O})$が第二可算ならば、以下の３つを満たす。
   \begin{itemize}
     \item $X$は第一可算
-    \item $X$は\textit{Lindel\"{o}f}
+    \item $X$はLindel\"{o}f
     \item $X$は可分
   \end{itemize}
 }{
@@ -1107,7 +1105,7 @@
 
   \thmref{開基の定める基本近傍系}より、開基の部分となる基本近傍系をとれる。\\*
 
-  \textit{Lindel\"{o}f}性を示す。
+  Lindel\"{o}f性を示す。
 
   第二可算性より、点列$\qty(B_n)_{n \in \N}$が存在して$\qty{B_n \mid n \in \N}$は開基である。
 
@@ -1149,7 +1147,7 @@
     \mathcal{B} \coloneqq \qty{\sqty{a, b} \mid \qty(a, b) \in \hat{X} \times \hat{X}}
   }
 }{
-  $\forall B \in \mathcal{B} \qty(-\infty \notin B \land \infty \notin B)$であるので、$\mathcal{B} \in \P \qty(\P(X))$である。\\*
+  $\forall B \in \mathcal{B} \qty(-\infty \notin B \land \infty \notin B)$であるので、$\mathcal{B} \in \P(\P(X))$である。\\*
 
   第一式を示す。$\forall x \in X \qty(x \in \sqty{-\infty, \infty})$である。\\*
 

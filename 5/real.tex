@@ -3,7 +3,7 @@
 \lsubsection{実数の構成}
 
 \rem{実数の準備}{
-  $\Q$上の\textit{Cauchy}列全体の集合$A$を考える。
+  $\Q$上のCauchy列全体の集合$A$を考える。
 }
 
 \lem{実数の準備：前順序}{
@@ -40,7 +40,7 @@
     \forall N \in \N \exists n, m \in \N_{\geq N} \qty(\qty(x_n - y_n) - \qty(x_m - y_m) \geq \epsilon)
   }
 
-  $\qty(x_n - y_n)_{n \in \N}$は、\lemref{位相群のCauchyネットの積}より\textit{Cauchy}列であるので、
+  $\qty(x_n - y_n)_{n \in \N}$は、\lemref{位相群のCauchyネットの積}よりCauchy列であるので、
   \eq*{
     \forall \epsilon \in \Q^+ \exists N \in \N \forall n, m \in \N_{\geq N} \qty(\abs{\qty(x_n - y_n) - \qty(x_m - y_m)} < \epsilon)
   }
@@ -56,7 +56,7 @@
 }{
   右を示す。
 
-  \lemref{位相群のCauchyネットの積}より$\qty(x_l - y_l)_{l \in \N}$は\textit{Cauchy}的である。
+  \lemref{位相群のCauchyネットの積}より$\qty(x_l - y_l)_{l \in \N}$はCauchy的である。
 
   したがって$\exists N \in \N \forall m \in \N_{\geq N}$について、$\abs{\qty(x_n - y_n) - \qty(x_m - y_m)} < \epsilon / 2$
 
@@ -131,7 +131,7 @@
     \abs{\qty(x_n y_n) - \qty(x'_n y'_n)} = \abs{\qty(x_n - x'_n) y_n + x'_n \qty(y_n - y'_n)}
   }
 
-  ここで、\corref{Cauchy列は全有界}と\thmref{順序群では全有界ならば有界}より2つの\textit{Cauchy}列は有界で、\thmref{順序環のノルム}より、
+  ここで、\corref{Cauchy列は全有界}と\thmref{順序群では全有界ならば有界}より2つのCauchy列は有界で、\thmref{順序環のノルム}より、
   \eq*{
     \exists K \in \Q^+ \qty(\abs{\qty(x_n y_n) - \qty(x'_n y'_n)} \leq K \qty(\abs{x_n - x'_n} + \abs{y_n - y'_n}))
   }
@@ -143,10 +143,10 @@
   \lemref{実数の準備：両立}より定まる商マグマ$A / \sim_R$を実数と呼び、$\R$と表す。
   またその元も実数と呼ぶ。
 
-  定義より$\R$は可換体である。
+  定義より$\R$は体である。
 }
 
-\lem{実数の準備：可換体としての実数}{
+\lem{実数の準備：体としての実数}{
   可換環$\qty(\qty(\R, +), \times)$は体である。
 }{
   $x = \qty[\qty(x_n)_{n \in \N}]$について、以下の点列を考える。
@@ -164,7 +164,7 @@
   \eq*{
     \exists \epsilon \in \Q^+ \forall N \in \N \exists n \in \N_{\geq N} \qty(\epsilon \leq x_n)
   }
-  \textit{Cauchy}列であることより、
+  Cauchy列であることより、
   \eq*{
     \exists N \in \N \forall m \in \N_{\geq N} \qty(\abs{x_n - x_m} < \epsilon / 2)
   }
@@ -178,7 +178,7 @@
 
   $k, l \geq N$について、$\abs{y_k - y_l} = \abs{1 / x_k - 1 / x_l} \leq \abs{x_k - x_l} / \abs{x_k x_l}$
 
-  定義より、$\epsilon' \in \Q^+$に対して$k, l \geq N' \rightarrow \abs{x_k - x_l} < \epsilon' \epsilon^2 / 4$とする$N' > N$が存在するので\textit{Cauchy}\\*
+  定義より、$\epsilon' \in \Q^+$に対して$k, l \geq N' \rightarrow \abs{x_k - x_l} < \epsilon' \epsilon^2 / 4$とする$N' > N$が存在するのでCauchy\\*
 
   $x < 0$のときも同様に示される。
 }
@@ -209,7 +209,7 @@
     \exists \epsilon_1, \epsilon_2 \in \Q^+ \exists N \in \N \forall k \in \N_{\geq N} \qty(\epsilon_1 \leq x_k \land \epsilon_2 \leq y_k)
   }
 
-  $\qty(x_n y_n)_{n \in \N}$は\lemref{順序体上のCauchy列の積}より\textit{Cauchy}列であり、\lemref{実数の準備：前順序の補足}より$\lnot \qty(0)_{n \in \N} \succcurlyeq \qty(x_n y_n)_{n \in \N}$
+  $\qty(x_n y_n)_{n \in \N}$は\lemref{順序体上のCauchy列の積}よりCauchy列であり、\lemref{実数の準備：前順序の補足}より$\lnot \qty(0)_{n \in \N} \succcurlyeq \qty(x_n y_n)_{n \in \N}$
 
   \lemref{実数の準備：全順序}より示される。
 }
@@ -251,7 +251,7 @@
     \exists \epsilon \in \Q^+ \exists N \in \N \forall n \in \N_{\geq N} \qty(x_n - y_n \geq \epsilon)
   }
 
-  \textit{Cauchy}列の定義より、
+  Cauchy列の定義より、
   \eq*{
     \exists M \in \N \forall n, m \in \N_{\geq M} \qty(\abs{x_n - x_m} < \epsilon / 4 \land \abs{y_n - y_m} < \epsilon / 4)
   }
@@ -262,7 +262,7 @@
   }
 }
 
-\thmf{$\R$上の\textit{Archimedes}の原理}{R上のArchimedesの原理}{
+\thmf{$\R$上のArchimedesの原理}{R上のArchimedesの原理}{
   \eq*{
     \forall x \in \R \exists n \in \N \qty(n > x)
   }
@@ -307,7 +307,7 @@
 }{
   $f \in \P(\Q)^\R, f(r) = \qty{q \in \Q \mid q < r}$は\thmref{実数の有理数による近似}より単射である。\\*
 
-  以下で定める写像$g \in \qty[0, 1]^{\P(\N)}$を考える。
+  以下で定める写像$g \in \R^{\P(\N)}$を考える。
 
   $A \in \P(\N)$について以下の点列$\qty(y_m)_{m \in \N}$が与えられる。
   \eq*{
@@ -318,19 +318,34 @@
     \end{cases}
   }
 
-  $x_n \coloneqq \sum_{m = 0}^{n} \qty(y_m / 2^m)$とすると、$\qty(x_n)_{n \in \N}$は$\Q$上の\textit{Cauchy}列である。
+  $x_n \coloneqq \sum_{m = 0}^{n} \qty(y_m / 2^m)$とすると、$\qty(x_n)_{n \in \N}$は$\Q$上のCauchy列である。
 
-  $A$に対して$\qty[\qty(x_n)_{n \in \N}]$を定める写像$g$は単射である。
-
-  \mlemref{-1}より単射$\varphi$が存在して、単射$\varphi \circ g \in \R^{\P(\N)}$が存在する。\\*
+  $A$に対して$\qty[\qty(x_n)_{n \in \N}]$を定める写像$g$は単射である。\\*
 
   \thmref{Bernsteinの定理}より成り立つ。
 }
 
 \thm{実数の直積は連続体濃度}{
-  全単射$\sigma \in \R^{\R \times \R}$が存在する。
+  全単射$\sigma \in \R^{\R^2}$が存在する。
 }{
-  ??
+  $f \in \qty(\R^2)^\R, f(r) = \qty(r, 0)$は単射である。\\*
+
+  以下で定める写像$g \in \R^{\P(\N) \times \P(\N)}$を考える。
+
+  $\qty(A, B) \in \P(\N) \times \P(\N)$について以下の点列$\qty(y_m)_{m \in \N}$が与えられる。
+  \eq*{
+    y_m \coloneqq
+    \begin{cases}
+      1 & \qty(\qty(m \text{は偶数} \land m / 2 \in A) \lor \qty(m \text{は奇数} \land \qty(m - 1) / 2 \in B)) \\*
+      0 & \qty(\qty(m \text{は偶数} \land m / 2 \notin A) \lor \qty(m \text{は奇数} \land \qty(m - 1) / 2 \notin B))
+    \end{cases}
+  }
+
+  $x_n \coloneqq \sum_{m = 0}^{n} \qty(y_m / 2^m)$とすると、$\qty(x_n)_{n \in \N}$は$\Q$上のCauchy列である。
+
+  $\qty(A, B)$に対して$\qty[\qty(x_n)_{n \in \N}]$を定める写像$g$は単射である。\\*
+
+  \thmref{Bernsteinの定理}より成り立つ。
 }
 
 \thm{有界と全有界}{
@@ -355,24 +370,24 @@
 \lsubsection{実数の完備性}
 
 \lem*{
-  $\Q$上の\textit{Cauchy}列$\qty(x_m)_{m \in \N}$は以下を満たす。
+  $\Q$上のCauchy列$\qty(x_m)_{m \in \N}$は以下を満たす。
   \eq*{
     \forall \epsilon \in \Q^+ \exists N \in \N \forall n \in \N_{\geq N} \qty(\abs{x_n - \qty[\qty(x_m)_{m \in \N}]} < \epsilon)
   }
 }{
-  \textit{Cauchy}列より$\forall \epsilon \in \Q^+ \exists N \in \N \forall n, m \in \N_{\geq N} \qty(\epsilon - \abs{x_n - x_m} \geq \epsilon / 2)$
+  Cauchy列より$\forall \epsilon \in \Q^+ \exists N \in \N \forall n, m \in \N_{\geq N} \qty(\epsilon - \abs{x_n - x_m} \geq \epsilon / 2)$
 
   \lemref{実数の準備：前順序の補足}より$\abs{x_n - \qty[\qty(x_m)_{m \in \N}]} < \epsilon$
 }
 
 \lem*{
-  $\Q$上の\textit{Cauchy}列$\qty(x_m)_{m \in \N}$について、以下を満たす部分\textit{Cauchy}列$\qty(x_{N_0(m)})_{m \in \N}$を持つ。
+  $\Q$上のCauchy列$\qty(x_m)_{m \in \N}$について、以下を満たす部分Cauchy列$\qty(x_{N_0(m)})_{m \in \N}$を持つ。
   \eqg*{
     \qty(x_{N_0(m)})_{m \in \N} \sim_R \qty(x_m)_{m \in \N} \\*
     \forall n \in \N \qty(\abs{x_{N_0(n)} - \qty[\qty(x_m)_{m \in \N}]} < 1 / s(n))
   }
 }{
-  \textit{Cauchy}列より$\forall n \in \N \exists N \in \N \forall m, l \in \N_{\geq N} \qty(\abs{x_m - x_l} < 1 / \qty(2 s(n)))$である。
+  Cauchy列より$\forall n \in \N \exists N \in \N \forall m, l \in \N_{\geq N} \qty(\abs{x_m - x_l} < 1 / \qty(2 s(n)))$である。
 
   以下のような写像$N_0 \in \N^\N$を考える。
   \eqg*{
@@ -382,7 +397,7 @@
 
   ここから得る点列$\qty(x_{N_0(m)})_{m \in \N}$について考える。\\*
 
-  定義より部分列である。さらに\textit{Cauchy}列の部分列より\textit{Cauchy}列である。
+  定義より部分列である。さらにCauchy列の部分列よりCauchy列である。
 
   $\forall \epsilon \in \Q^+ \exists N_1 \in \N \forall n \in \N_{\geq N_1} \qty(\abs{x_n - x_{N_0(n)}} < \epsilon)$より第一式を満たす。\\*
 
@@ -395,9 +410,9 @@
 }
 
 \lem*{
-  $\R$上の\textit{Cauchy}列$\qty(\qty[\qty(x_{n, m})_{m \in \N}])_{n \in \N}$を考える。
+  $\R$上のCauchy列$\qty(\qty[\qty(x_{n, m})_{m \in \N}])_{n \in \N}$を考える。
 
-  このとき\mlemref{-1}の主張する$N_0$について、$\Q$上の点列$\qty(x_{n, N_0(n)})_{n \in \N}$は\textit{Cauchy}列である。
+  このとき\mlemref{-1}の主張する$N_0$について、$\Q$上の点列$\qty(x_{n, N_0(n)})_{n \in \N}$はCauchy列である。
 }{
   $\forall \epsilon \in \Q^+$を考える。
 
@@ -410,10 +425,10 @@
   $\abs{x_{n, N_0(n)} - x_{m, N_0(m)}} \leq \abs{x_{n, N_0(n)} - x_n} + \abs{x_n - x_m} + \abs{x_m - x_{m, N_0(m)}} < 2 / s(n) + \epsilon / 2 + 2 / s(m) \leq 4 / s(N) + \epsilon / 2 < \epsilon$である。
 }
 
-\lemf{$\R$上の\textit{Cauchy}列は収束する}{R上のCauchy列は収束する}{
-  $\R$上の\textit{Cauchy}列は収束する。
+\lemf{$\R$上のCauchy列は収束する}{R上のCauchy列は収束する}{
+  $\R$上のCauchy列は収束する。
 }{
-  $\R$上の\textit{Cauchy}列を考える。\mlemref{-2}より$\qty(\qty[\qty(x_{n, N_0(m)})_{m \in \N}])_{n \in \N}$と表せる。
+  $\R$上のCauchy列を考える。\mlemref{-2}より$\qty(\qty[\qty(x_{n, N_0(m)})_{m \in \N}])_{n \in \N}$と表せる。
 
   \mlemref{-1}より得る$y \coloneqq \qty[\qty(x_{n, N_0(n)})_{n \in \N}] \in \R$を考える。\\*
 
@@ -450,7 +465,7 @@
 }{
   $\forall \epsilon \in \R^+ \exists N \in \N \forall n, m \in \N_{\geq N} \qty(\abs{a_n - a_m} < b_N - a_N < \epsilon)$
 
-  よって、$\qty(a_n)_{n \in \N}$は\textit{Cauchy}列である。
+  よって、$\qty(a_n)_{n \in \N}$はCauchy列である。
 
   \thmref{実数の完備性}より$c \in \R$に収束する。
 
@@ -563,7 +578,7 @@
 
   \thmref{有界と全有界}より全有界。
 
-  $A$上の\textit{Cauchy}ネットは\thmref{実数の完備性}と\thmref{閉包}より$A$に収束する。
+  $A$上のCauchyネットは\thmref{実数の完備性}と\thmref{閉包}より$A$に収束する。
   すなわち$A$は完備である。
 
   \thmref{Heine-Borelの被覆定理}より成り立つ。\\*
@@ -575,7 +590,7 @@
 
   $A$が閉集合でないとすると、あるネットが存在して$\R \setminus A$に収束する。
 
-  収束ネットは\textit{Cauchy}より$A$は完備でない。
+  収束ネットはCauchyより$A$は完備でない。
 
   背理法より、$A$は閉集合である。
 }

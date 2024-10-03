@@ -7,6 +7,7 @@
   \eq*{
     \forall x, y \qty(R_G(x, y) \defiff \qty(x, y) \in G)
   }
+
   $R_G(x, y)$は誤解のない範囲において、$x R_G y$とも表す。
 
   また、二項関係は単に関係とも呼ぶ。
@@ -15,7 +16,7 @@
 \dfn{集合間の関係}{
   集合$X, Y, G$について、関係$R_G$が以下を満たすとき、$R_G$を$X$と$Y$の間の関係と呼ぶ。
   \eq*{
-    G \in \P \qty(X, Y)
+    G \in \P(X \times Y)
   }
 }
 
@@ -106,7 +107,7 @@
 \dfn{写像の全体}{
   集合$X, Y$について、集合$Y^X$を以下のように定める。
   \eq*{
-    Y^X \coloneqq \qty{\text{$\qty(\qty(X, Y), G)$の特徴づける写像} \mid G \in \P \qty(X \times Y) \land \text{$G$の特徴づける関係は、右一意的かつ$X$について左全域的}}
+    Y^X \coloneqq \qty{\text{$\qty(\qty(X, Y), G)$の特徴づける写像} \mid G \in \P(X \times Y) \land \text{$G$の特徴づける関係は、右一意的かつ$X$について左全域的}}
   }
 }
 
@@ -136,14 +137,16 @@
     \forall x, y \qty(\psi(x, y) \defiff y = f(x))
   }
 
-  $f$が写像であることから\axiref{置換の公理図式}の主張する集合$A$が存在する。これをより簡潔に以下のように表すものとする。
+  $f$が写像であることから\axiref{置換の公理図式}の主張する集合$A$が存在する。
+  これをより簡潔に以下のように表すものとする。
   \eq*{
     A = \qty{f(x) \mid x \in X}
   }
 }
 
 \dfn{恒等写像}{
-  集合$X$について、以下で定める集合系$\Delta$を考える。$\qty(\qty(X, X), \Delta)$により特徴づけられる写像$\id{X}$を恒等写像と呼ぶ。
+  集合$X$について、以下で定める集合系$\Delta$を考える。
+  $\qty(\qty(X, X), \Delta)$により特徴づけられる写像$\id{X}$を恒等写像と呼ぶ。
   \eq*{
     \Delta \coloneqq \qty{\qty(x, x) \mid x \in X}
   }
@@ -180,7 +183,8 @@
     Z \coloneqq \qty{\qty{\qty(x, y) \mid y \in Y \land \psi(x, y)} \mid x \in X}
   }
 
-  $Z$について\axiref{選択公理}の主張する集合$A$が存在する。$A$の特徴づける関係は、仮定より$X$について左全域的で、$A$の定義より右一意的である。
+  $Z$について\axiref{選択公理}の主張する集合$A$が存在する。
+  $A$の特徴づける関係は、仮定より$X$について左全域的で、$A$の定義より右一意的である。
 
   $\qty(\qty(X, Y), A)$により特徴づけられる写像$f$が存在する。
 }
@@ -198,8 +202,8 @@
   写像$f \in Y^X$について、以下が成り立つ。
   \eqg*{
     \forall A_1, A_2 \in \P(X) \qty(A_1 \subset A_2 \rightarrow f(A_1) \subset f(A_2)) \\*
-    \forall B \in \P \qty(\P(X)) \qty(f \qty(\bigcup B) = \bigcup \qty{f(A) \mid A \in B}) \\*
-    \forall B \in \P \qty(\P(X)) \qty(f \qty(\bigcap B) \subset \bigcap \qty{f(A) \mid A \in B}) \\*
+    \forall B \in \P(\P(X)) \qty(f \qty(\bigcup B) = \bigcup \qty{f(A) \mid A \in B}) \\*
+    \forall B \in \P(\P(X)) \qty(f \qty(\bigcap B) \subset \bigcap \qty{f(A) \mid A \in B}) \\*
     \forall A_1, A_2 \in \P(X) \qty(f(A_1) \setminus f(A_2) \subset f(A_1 \setminus A_2))
   }
 }{
@@ -214,6 +218,7 @@
     \exists x \in \bigcup B \qty(y = f(x)) \\*
     y \in f(\bigcup B)
   }
+
   上からも下からも成り立つので、\axiref{外延性の公理}より成り立つ。\\*
 
   第三式について、第二式を用いて、
@@ -255,8 +260,8 @@
   写像$f \in Y^X$について、以下が成り立つ。
   \eqg*{
     \forall A_1, A_2 \in \P(Y) \qty(A_1 \subset A_2 \rightarrow f^{-1}(A_1) \subset f^{-1}(A_2)) \\*
-    \forall B \in \P \qty(\P(Y)) \qty(f^{-1}(\bigcup B) = \bigcup \qty{f^{-1}(A) \mid A \in B}) \\*
-    \forall B \in \P \qty(\P(Y)) \qty(f^{-1}(\bigcap B) = \bigcap \qty{f^{-1}(A) \mid A \in B}) \\*
+    \forall B \in \P(\P(Y)) \qty(f^{-1}(\bigcup B) = \bigcup \qty{f^{-1}(A) \mid A \in B}) \\*
+    \forall B \in \P(\P(Y)) \qty(f^{-1}(\bigcap B) = \bigcap \qty{f^{-1}(A) \mid A \in B}) \\*
     \forall A_1, A_2 \in \P(Y) \qty(f^{-1}(A_1) \setminus f^{-1}(A_2) = f^{-1}(A_1 \setminus A_2))
   }
 }{
@@ -423,7 +428,7 @@
 
   ここから、$f$の逆写像を$f^{-1}$と表す。
 }{
-  逆写像$g, h$について、$g(y) = h \circ f \circ g (y) =  h(y)$。ゆえに一意。
+  逆写像$g, h$について、$g(y) = h \circ f \circ g (y) = h(y)$。ゆえに一意。
 }
 
 \cor*{
@@ -439,7 +444,7 @@
   全単射より、$\forall y \in A \exists x \in A \qty(y = f(x))$。ゆえに定義より明らか。
 }
 
-\thmf{\textit{Cantor}の対角線論法}{Cantorの対角線論法}{
+\thm{Cantorの対角線論法}{
   集合$A$について、単射$f \in A^{\P(A)}$は存在しない。
 }{
   存在するとする。

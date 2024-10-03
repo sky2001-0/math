@@ -1,6 +1,6 @@
 \documentclass[dvipdfmx]{jsarticle}
 
-\include{tex_template/template}
+\input{tex_template/template}
 
 \title{さんすうのーと}
 \author{わたし}
@@ -10,32 +10,46 @@
   \clearpage
 
   \tableofcontents
+  \clearpage
 
-  \include{00_intro}
-  \include{11_logic}
-  \include{21_set}
-  \include{22_map}
-  \include{23_order}
-  \include{24_natural}
-  \include{25_set2}
-  % \include{26_logic_with_natural}% in progress
-  \include{31_algebra}
-  \include{32_group}
-  \include{33_ring}
-  \include{34_com_ring}
-  \include{35_integer}
-  \include{36_group2}
-  \include{41_module}% in progress
-  \include{42_field}% in progress
-  \include{43_ord_algebra}
-  \include{44_rational}
-  \include{51_topology}
-  \include{52_uniform}
-  \include{53_top_algebra}
-  \include{54_real}
-  % \include{55_measure}
-  % \include{61_vector}
-  % \include{62_complex}
-  % \include{63_in_pro_vector}
-  % \include{64_function}
+  \input{intro}
+  \clearpage
+
+  \input{1/logic}
+  \clearpage
+  
+  \input{2/set}
+  \input{2/map}
+  \input{2/order}
+  \input{2/natural}
+  \input{2/set2}
+  % \input{2/logic_with_natural}% in progress
+  \clearpage
+  
+  \input{3/algebra}
+  \input{3/group}
+  \input{3/ring}
+  \input{3/com_ring}
+  \input{3/polynomial}
+  \input{3/module}
+  \input{3/ord_algebra}
+  \input{3/integer}
+  \input{3/rational}
+  \input{3/algebra2}
+  \clearpage
+
+  \clearpage
+
+  \input{5/topology}
+  \input{5/uniform}
+  \input{5/top_algebra}
+  \input{5/real}
+  % \input{5/measure}
+  \clearpage
+
+  % \input{6/vector}
+  % \input{6/complex}
+  % \input{6/in_pro_vector}
+  % \input{6/function}
+  \clearpage
 \end{document}

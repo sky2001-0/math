@@ -3,11 +3,11 @@
 \lsubsection{可測空間}
 
 \dfnf{$\sigma$-加法族}{sigma-加法族}{
-  空でない集合$X$について、以下を満たす集合系$\mathcal{S} \in \P \qty(\P(X))$を$\sigma$-加法族と呼ぶ。
+  空でない集合$X$について、以下を満たす集合系$\mathcal{S} \in \P(\P(X))$を$\sigma$-加法族と呼ぶ。
   \eqg*{
     X \in \mathcal{S} \\*
     \forall S \in \mathcal{S} \qty(X \setminus S \in \mathcal{S}) \\*
-    \forall A \in \P \qty(\mathcal{S}) \qty(\abs{A} \leq \aleph_0 \rightarrow \bigcup A \in \mathcal{S})
+    \forall A \in \P(\mathcal{S}) \qty(\abs{A} \leq \aleph_0 \rightarrow \bigcup A \in \mathcal{S})
   }
 }
 
@@ -16,7 +16,7 @@
   \eqg*{
     \varnothing \in \mathcal{S} \\*
     \forall S_1, S_2 \in \mathcal{S} \qty(S_1 \setminus S_2 \in \mathcal{S}) \\*
-    \forall A \in \P \qty(\mathcal{S}) \qty(\abs{A} \leq \aleph_0 \rightarrow \bigcap A \in \mathcal{S})
+    \forall A \in \P(\mathcal{S}) \qty(\abs{A} \leq \aleph_0 \rightarrow \bigcap A \in \mathcal{S})
   }
 }{
   第一式を示す。\dfnref{sigma-加法族}第一式、第二式より$\varnothing = X \setminus X \in \mathcal{S}$\\*
@@ -33,17 +33,17 @@
   または単に$X$と書き、可測空間と集合どちらも表すものとする。
 }
 
-\dfnf{\textit{Borel}集合族}{Borel集合族}{
-  位相空間$\qty(X, \mathcal{O})$について、以下で定める集合$\mathcal{B}_X$を\textit{Borel}集合族と呼ぶ。
+\dfn{Borel集合族}{
+  位相空間$\qty(X, \mathcal{O})$について、以下で定める集合$\mathcal{B}_X$をBorel集合族と呼ぶ。
   \eq*{
-    \mathcal{B}_X = \bigcap \qty{\mathcal{S} \in \P \qty(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{O} \subset \mathcal{S}}
+    \mathcal{B}_X = \bigcap \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{O} \subset \mathcal{S}}
   }
 }
 
 \thm*{
-  \textit{Borel}集合族は$\sigma$-加法族である。すなわち、位相空間は可測空間である。
+  Borel集合族は$\sigma$-加法族である。すなわち、位相空間は可測空間である。
 }{
-  $T \coloneqq \qty{\mathcal{S} \in \P \qty(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{O} \subset \mathcal{S}}$を考える。
+  $T \coloneqq \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{O} \subset \mathcal{S}}$を考える。
 
   $\P(X) \in T$より、$T \neq \varnothing$である。\\*
 
@@ -70,7 +70,7 @@
 
   \thmref{原像の性質}より、$\forall T' \in \mathcal{T'} \qty(f^{-1}(X' \setminus T') = X' \setminus f^{-1}(T') \in \mathcal{S})$より、$X' \setminus T' \in \mathcal{T'}$である。
 
-  \thmref{原像の性質}より、$\forall A \in \P \qty(\mathcal{T'}) \qty(\abs{A} \leq \aleph_0)$について、$f^{-1}(\bigcup A) = \bigcup \qty{f^{-1}(T') \mid T' \in A} \in \mathcal{S}$より、$\bigcup A \in \mathcal{T'}$である。
+  \thmref{原像の性質}より、$\forall A \in \P(\mathcal{T'}) \qty(\abs{A} \leq \aleph_0)$について、$f^{-1}(\bigcup A) = \bigcup \qty{f^{-1}(T') \mid T' \in A} \in \mathcal{S}$より、$\bigcup A \in \mathcal{T'}$である。
 
   ゆえに、$\mathcal{T'}$は$\sigma$-加法族である。\\*
 
@@ -91,7 +91,7 @@
     \end{cases}
   }
 }{
-  $\R$の\textit{Borel}集合族$\mathcal{B}_{\R}$について、$\forall B \in \mathcal{B}_{\R}$を考える。
+  $\R$のBorel集合族$\mathcal{B}_{\R}$について、$\forall B \in \mathcal{B}_{\R}$を考える。
 
   $0, 1 \in B$であるとき、$f^{-1}(B) = X \in \mathcal{S}$である。
 

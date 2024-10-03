@@ -10,9 +10,8 @@
 略記$\forall \in, \exists \in$を以下のように定義する。
 \eqa*{
   \forall x \in X \qty(p(x)) &\defiff \forall x \qty(x \in X \rightarrow p(x)) \\*
-  \exists x \in X \qty(p(x)) &\defiff \exists x \qty(x \in X \land p(x)) \\*
+  \exists x \in X \qty(p(x)) &\defiff \exists x \qty(x \in X \land p(x))
 }
-否定については、量化子の否定と同様の規則が課される。
 
 \dfn{集合}{
   本\secref{集合論}の全ての公理を満たすものを集合（set、集まりcollectionとは区別される）と呼ぶ。
@@ -21,15 +20,15 @@
 以下、変項は集合であり、集合は変項である。
 
 \dfn{要素}{
-  集合$x, X$について、$x \in X$であるとき、$x$は$X$の要素または元と言う。
+  集合$x, X$について、$x \in X$であるとき、$x$は$X$の要素または元と呼ぶ。
 }
 
 \dfn{集合系}{
-  集合を要素としている集合であることを強調したい時、この集合を集合系と呼ぶ。
+  集合を要素としている集合であることを強調したいとき、この集合を集合系と呼ぶ。
 }
 
 \dfn{包含}{
-  集合$X, Y$が以下を満たす時、$X$は$Y$の部分集合であると言い、$X \subset Y$と表す。
+  集合$X, Y$が以下を満たすとき、$X$は$Y$の部分集合であると呼び、$X \subset Y$と表す。
   \eq*{
     \forall X \forall Y \qty(X \subset Y \defiff \forall x \qty(x \in X \rightarrow x \in Y))
   }
@@ -104,12 +103,15 @@
 }
 
 \dfn{単集合}{
-  $x = y$を考えることで、集合$\qty{x, x}$が存在することが言える。\axiref{外延性の公理}から、$\qty{x}$と表記して良い。\\*
+  $x = y$を考えることで、集合$\qty{x, x}$が存在することが言える。
+  \axiref{外延性の公理}から、$\qty{x}$と表記して良い。
+
   このような単一の元からなる集合を単集合（singleton）と呼ぶ。
 }
 
 \dfn{順序対}{
-  \axiref{対の公理}から、$\qty{\qty{x}, \qty{x, y}}$が存在する。\\*
+  \axiref{対の公理}から、$\qty{\qty{x}, \qty{x, y}}$が存在する。
+
   このような集合を、順序対$\qty(x, y) \coloneqq \qty{\qty{x}, \qty{x, y}}$と呼ぶ。
 }
 
@@ -135,8 +137,9 @@
 }
 
 \dfn{和集合}{
-  集合系$X$について、\axiref{和集合の公理}の主張する集合$A$が存在して、これは\axiref{外延性の公理}から一意に定まる。\\*
+  集合系$X$について、\axiref{和集合の公理}の主張する集合$A$が存在して、これは\axiref{外延性の公理}から一意に定まる。
   このような集合Aを、和集合$\bigcup X$と呼ぶ。
+
   特に、$X = \qty{x, y}$のとき、この和集合を$x \cup y$とも表す。
 }
 
@@ -189,7 +192,8 @@
 }
 
 \dfn{冪集合}{
-  集合$X$について、\axiref{冪集合の公理}の主張する集合$A$が存在して、これは\axiref{外延性の公理}から一意に定まる。\\*
+  集合$X$について、\axiref{冪集合の公理}の主張する集合$A$が存在して、これは\axiref{外延性の公理}から一意に定まる。
+
   このような集合Aを、冪集合$\P(X)$と呼ぶ。
 }
 
@@ -241,7 +245,8 @@
 }
 
 \rem{集合の内包的定義１}{
-  \axiref{外延性の公理}より、\axiref{置換の公理図式}より主張される集合$A$は一意に定まる。\axiref{置換の公理図式}に基づく定義方法を、内包的定義と呼び以下のように表す。
+  \axiref{外延性の公理}より、\axiref{置換の公理図式}より主張される集合$A$は一意に定まる。
+  \axiref{置換の公理図式}に基づく定義方法を、内包的定義と呼び以下のように表す。
 
   \axiref{置換の公理図式}の前件を満たすアリティ2の述語記号$\psi$について、以下のように表す。
   \eq*{
@@ -255,7 +260,8 @@
     \forall X \exists A \forall t \qty(t \in A \leftrightarrow t \in X \land \psi(t))
   }
 }{
-  アリティ1の述語記号$P$を考える。排中律より、
+  アリティ1の述語記号$P$を考える。
+  排中律より、
   \eq*{
     \forall X \qty(\exists a \qty(a \in X \land P(a)) \lor \forall a \lnot \qty(a \in X \land P(a)))
   }
@@ -305,10 +311,14 @@
   \eq*{
     \bigcap X \coloneqq \qty{x \mid x \in \bigcup X \land \forall Y \qty(Y \in X \rightarrow x \in Y)}
   }
+
   特に、$X = \qty{x, y}$のとき、この共通集合を$x \cap y$とも表す。
 }
 
-共通集合のこの定義は一般的ではないことに注意せよ。
+\rem{共通集合の定義について}{
+  本ノートにおける共通集合の定義は一般的ではない。
+  注意せよ。
+}
 
 \thm{共通集合}{
   \eqg*{
@@ -324,7 +334,6 @@
     \forall X \forall x \qty(X = \varnothing \lor \exists Y \qty(Y \in X \land x \in Y)) \\*
     \forall X \forall x \qty(X = \varnothing \lor x \in \bigcup X)
   }
-  ゆえに示される。
 }
 
 \cor*{
@@ -373,7 +382,7 @@
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(\P(X) \cap \P(Y) = \P \qty(X \cap Y))
+    \forall X \forall Y \qty(\P(X) \cap \P(Y) = \P(X \cap Y))
   }
 }
 
@@ -433,6 +442,7 @@
     &\leftrightarrow \qty(x \in X \setminus \bigcup A \lor x \in \bigcup \qty{X \setminus Y \mid Y \in A}) \\*
     &\leftrightarrow x \in \bigcup \qty{X \setminus Y \mid Y \in A}
   }
+
   最後の変形には、第一の定理を用いた。
 }
 
@@ -445,21 +455,20 @@
 
 \lem*{
   \eq*{
-    \forall X \forall Y \forall x \forall y \qty(x \in X \land y \in Y \rightarrow \qty(x, y) \in \P \qty(\P \qty(X \cup Y)))
+    \forall X \forall Y \forall x \forall y \qty(x \in X \land y \in Y \rightarrow \qty(x, y) \in \P(\P(X \cup Y)))
   }
 }{
   \eqg*{
     x \in X \land y \in Y \\*
-    \qty{x} \in \P \qty(X \cup Y) \land \qty{x, y} \in \P \qty(X \cup Y) \\*
-    \qty(x, y) \in \P \qty(\P \qty(X \cup Y))
+    \qty{x} \in \P(X \cup Y) \land \qty{x, y} \in \P(X \cup Y) \\*
+    \qty(x, y) \in \P(\P(X \cup Y))
   }
-  よって従う。
 }
 
 \dfn{直積集合}{
   集合$X, Y$について、以下を満たす集合を$X$と$Y$の直積集合と呼ぶ。
   \eq*{
-    X \times Y \coloneqq \qty{z \in \P \qty(\P \qty(X \cup Y)) \mid \exists x \exists y \qty(x \in X \land y \in Y \land z = \qty(x, y))}
+    X \times Y \coloneqq \qty{z \in \P(\P(X \cup Y)) \mid \exists x \exists y \qty(x \in X \land y \in Y \land z = \qty(x, y))}
   }
 }
 
@@ -524,7 +533,6 @@
   \eq*{
     y \notin x \lor x \notin y
   }
-  示される。
 }
 
 \cor*{

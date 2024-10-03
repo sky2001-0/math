@@ -6,12 +6,13 @@
   群$\qty(G, \cdot)$と、$X$の開集合系$\mathcal{O}$が以下が成り立つとき、順序対$\qty(\qty(G, \cdot), \mathcal{O})$を位相群と呼ぶ。
   \begin{enumerate}
     \item $\cdot \in G^{G \times G}$が連続
-    \item $-1 \in G^G$が連続
+    \item 逆元を与える写像$-1 \in G^G$が連続
   \end{enumerate}
 }
 
 \dfn{部分位相群}{
-  位相群$\qty(\qty(G, \cdot), \mathcal{O})$の部分群$\qty(H, \cdot)$について、$\qty(\qty(H, +), \qty{H \cap O \mid O \in \mathcal{O}})$は位相群である。これを位相群$G$の部分位相群である。
+  位相群$\qty(\qty(G, \cdot), \mathcal{O})$の部分群$\qty(H, \cdot)$について、$\qty(\qty(H, +), \qty{H \cap O \mid O \in \mathcal{O}})$は位相群である。
+  これを位相群$G$の部分位相群と呼ぶ。
 }
 
 \lem{位相群の収束ネットの積と逆}{
@@ -23,20 +24,20 @@
 \lem{位相群と連続写像}{
   位相空間$X$と位相群$G$について、連続写像$f \in G^X, g \in G^X$を考える。
 
-  このとき、写像$f \cdot g \in G^X, \qty(f \cdot g) (x) = f(x) \cdot g(x)$と、写像$\hat{f} \in G^X, \hat{f}(x) 0 f(x)^{-1}$は連続である。
+  このとき、写像$f \cdot g \in G^X, \qty(f \cdot g) (x) = f(x) \cdot g(x)$と、写像$\hat{f} \in G^X, \hat{f}(x) = f(x)^{-1}$は連続である。
 }{
   \dfnref{位相群}と\thmref{連続写像の合成}より成り立つ。
 }
 
 \thm{位相群と分離}{
-  位相群$G$について、以下の３つは同値である。このとき、$G$は\textit{Hausdorff}であると呼ぶ。
+  位相群$G$について、以下の３つは同値である。このとき、$G$はHausdorffであると呼ぶ。
   \begin{enumerate}
     \item $G$は$T_2$空間
     \item $G$は$T_1$空間
     \item $\qty{e}$は閉集合
   \end{enumerate}
 }{
-  $1. \rightarrow 2.$は明らか。\\*
+  $1. \rightarrow 2.$は、\lemref{T_2ならばT_1}より明らか。\\*
 
   $2. \rightarrow 3.$は、\thmref{Frechet性}より明らか。\\*
 
@@ -86,30 +87,30 @@
   ゆえに\lemref{近傍系の一意性}より成り立つ。
 }
 
-\lemf{位相群の\textit{Cauchy}ネットの積}{位相群のCauchyネットの積}{
-  位相群$G$上の\textit{Cauchy}ネット$\qty(x_\lambda)_{\lambda \in \Lambda}, \qty(y_\lambda)_{\lambda \in \Lambda}$について、$\qty(x_\lambda y_\lambda)_{\lambda \in \Lambda}$は\textit{Cauchy}ネットである。
+\lem{位相群のCauchyネットの積}{
+  位相群$G$上のCauchyネット$\qty(x_\lambda)_{\lambda \in \Lambda}, \qty(y_\lambda)_{\lambda \in \Lambda}$について、$\qty(x_\lambda y_\lambda)_{\lambda \in \Lambda}$はCauchyネットである。
 }{
   $\forall V \in \mathcal{V}$について、$\exists W \in \mathcal{V} \qty(W \circ W \subset V)$
 
-  \textit{Cauchy}より、$\exists \lambda_x \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in W)$かつ$\exists \lambda_y \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_y} \qty(\qty(y_{\lambda_1}, y_{\lambda_2}) \in W)$
+  Cauchyより、$\exists \lambda_x \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in W)$かつ$\exists \lambda_y \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_y} \qty(\qty(y_{\lambda_1}, y_{\lambda_2}) \in W)$
 
   有向性より、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}), \qty(y_{\lambda_1}, y_{\lambda_2}) \in W)$
 
   \thmref{位相群の左一様構造}の定義より$\qty(x_{\lambda_1} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_1}), \qty(x_{\lambda_2} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_2}) \in W$より、$\qty(x_{\lambda_1} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_2}) \in V$
 }
 
-\lemf{可換位相群の\textit{Cauchy}ネットの逆}{可換位相群のCauchyネットの逆}{
-  可換位相群$G$上の\textit{Cauchy}ネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$\qty(x_\lambda^{-1})_{\lambda \in \Lambda}$は\textit{Cauchy}ネットである。
+\lem{可換位相群のCauchyネットの逆}{
+  可換位相群$G$上のCauchyネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$\qty(x_\lambda^{-1})_{\lambda \in \Lambda}$はCauchyネットである。
 }{
   $\forall V \in \mathcal{V}$について、$\exists W \in \mathcal{V} \qty(W \subset V^{-1})$
 
-  \textit{Cauchy}より、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in W)$である。
+  Cauchyより、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in W)$である。
 
   $\qty(x_{\lambda_2}, x_{\lambda_1}) \in V$である。可換性と\thmref{位相群の左一様構造}の定義より$\qty(x_{\lambda_1}^{-1}, x_{\lambda_2}^{-1}) \in V$
 }
 
 \dfn{総和可能}{
-  \textit{Hausdorff}な可換位相群$G$について、$G$上の点列$\qty(x_n)_{n \in \N}$を考える。
+  Hausdorffな可換位相群$G$について、$G$上の点列$\qty(x_n)_{n \in \N}$を考える。
 
   点列$\qty(\sum_{m = 0}^n x_m)_{n \in \N}$が、$G$上の点$s$に収束するとき、点列$\qty(x_n)_{n \in \N}$は総和可能と呼ぶ。
 
@@ -156,6 +157,12 @@
   \dfnref{位相環}と\thmref{連続写像の合成}より成り立つ。
 }
 
+\lem{位相環上の多項式}{
+  位相環$R$上の多項式$\varphi \in R[X]$について、式の値を与える$\varphi$は連続である。
+}{
+  定義より明らか。
+}
+
 \dfn{位相体}{
   体$\qty(\qty(F, +), \times)$と、$X$の開集合系$\mathcal{O}$が以下が成り立つとき、順序対$\qty(\qty(\qty(F, +), \times), \mathcal{O})$を位相体と呼ぶ。
   \begin{enumerate}
@@ -165,7 +172,7 @@
 }
 
 \lem{位相体の収束ネットの逆}{
-  \textit{Hausdorff}な位相体$F$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が$x \in F^\times$に収束するならば、以下で定めるネット$\qty(y_\lambda)_{\lambda \in \Lambda}$は$1_F / x$に収束するネットである。
+  Hausdorffな位相体$F$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が$x \in F^\times$に収束するならば、以下で定めるネット$\qty(y_\lambda)_{\lambda \in \Lambda}$は$1_F / x$に収束するネットである。
   \eq*{
     y_\lambda =
     \begin{cases}
@@ -174,7 +181,7 @@
     \end{cases}
   }
 }{
-  \textit{Hausdorff}と収束の定義より$\exists B_0 \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(0_F \notin B_0 \land \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B_0)$
+  Hausdorffと収束の定義より$\exists B_0 \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(0_F \notin B_0 \land \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B_0)$
 
   \dfnref{位相体}と\thmref{点連続と収束}より成り立つ。
 }
@@ -286,7 +293,7 @@
     \forall \epsilon \in G^+ \exists N \in \N \forall n \in \N \qty(N \leq n \rightarrow \abs{a_n - r} < \epsilon)
   }
 
-  $\qty(a_n)_{n \in \N}$が\textit{Cauchy}であることは、以下を満たすことと必要十分である。
+  $\qty(a_n)_{n \in \N}$がCauchyであることは、以下を満たすことと必要十分である。
   \eq*{
     \forall \epsilon \in G^+ \exists N \in \N \forall n, m \in \N \qty(N \leq n \land N \leq m \rightarrow \abs{a_n - a_m} < \epsilon)
   }
@@ -294,12 +301,12 @@
   \thmref{順序群の一様構造}より明らか。
 }
 
-\lemf{順序群上の\textit{Cauchy}列の絶対値}{順序群上のCauchy列の絶対値}{
-  順序群$G$上の\textit{Cauchy}列$\qty(x_n)_{n \in \N}$について、$\qty(\abs{x_n})_{n \in \N}$は\textit{Cauchy}列となる。
+\lem{順序群上のCauchy列の絶対値}{
+  順序群$G$上のCauchy列$\qty(x_n)_{n \in \N}$について、$\qty(\abs{x_n})_{n \in \N}$はCauchy列となる。
 
   さらに、$\qty(x_n)_{n \in \N}$が$a$に収束するとき、$\qty(\abs{x_n})_{n \in \N}$は$\abs{a}$に収束する。
 }{
-  \lemref{順序群のノルム}より$\abs{\abs{x_n} - \abs{x_m}} \leq \abs{x_n - x_m}$であるので\textit{Cauchy}列である。
+  \lemref{順序群のノルム}より$\abs{\abs{x_n} - \abs{x_m}} \leq \abs{x_n - x_m}$であるのでCauchy列である。
 
   \lemref{順序群のノルム}より$\abs{\abs{x_n} - \abs{a}} \leq \abs{\abs{x_n - a}} = \abs{x_n - a}$であるので、$\abs{a}$に収束する。
 }
@@ -362,10 +369,10 @@
   その他の場合も同様。ゆえに位相体である。
 }
 
-\lemf{順序体上の\textit{Cauchy}列の積}{順序体上のCauchy列の積}{
-  順序体$F$上の\textit{Cauchy}列$\qty(x_n)_{n \in \N}, \qty(y_n)_{n \in \N}$について、$\qty(x_n y_n)_{n \in \N}$は\textit{Cauchy}列となる。
+\lem{順序体上のCauchy列の積}{
+  順序体$F$上のCauchy列$\qty(x_n)_{n \in \N}, \qty(y_n)_{n \in \N}$について、$\qty(x_n y_n)_{n \in \N}$はCauchy列となる。
 }{
-  \corref{Cauchy列は全有界}と\thmref{順序群では全有界ならば有界}より、2つの\textit{Cauchy}列は有界、すなわち$\exists K \in F^+ \forall n \in \N \qty(\abs{x_n} \leq K \land \abs{y_n} \leq K)$である。
+  \corref{Cauchy列は全有界}と\thmref{順序群では全有界ならば有界}より、2つのCauchy列は有界、すなわち$\exists K \in F^+ \forall n \in \N \qty(\abs{x_n} \leq K \land \abs{y_n} \leq K)$である。
 
   $2_F \coloneqq 1_F + 1_F$として、$\forall \epsilon \in F^+$について、
   \eqg*{

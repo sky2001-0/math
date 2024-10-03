@@ -74,7 +74,7 @@
     \forall Z \qty(Z \in \qty{Z \in \P(X) \mid M(Z)}) \\*
     \forall Z \qty(M(Z) \land Z \subset X) \\*
     \forall Z \qty(M(Z \cap Y) \land Z \cap Y \subset X \cap Y) \\*
-    \forall Z \qty(Z \cap Y \in \qty{Z \in \P \qty(X \cap Y) \mid M(Z)})
+    \forall Z \qty(Z \cap Y \in \qty{Z \in \P(X \cap Y) \mid M(Z)})
   }
   ゆえに、
   \eqg*{
@@ -105,7 +105,7 @@
   }
 }
 
-\thmf{\textit{Peano}の公理}{Peanoの公理}{
+\thm{Peanoの公理}{
   以下の全てを満たす。
   \eqg*{
     0 \in \N \\*
@@ -723,4 +723,14 @@
 \cor*{
   任意の自然数$n$について、$0$は$n$の倍数であり、$1$は$n$の約数である。
   また、$n$は$n$の倍数でも約数でもある。
+}
+
+\dfn{偶奇}{
+	自然数$n$について、$2$で割った余りが$0$であるとき、$n$を偶数と呼ぶ。
+
+	そうでないとき、$n$を奇数と呼ぶ。
+}
+
+\dfn{素数}{
+	$2$以上の自然数$n$について、約数が$1$と$n$のみであるとき、$n$を素数と呼ぶ。
 }
