@@ -324,27 +324,29 @@
 	素数$p$と自然数$n$を考える。
 	有限群$G$について$\abs{G}$が$p^n$の倍数であるとき、$G$の部分群$H$が存在して$\abs{H} = p^n$が成り立つ。
 }{
-	$\abs{G}$が$p^n$の倍数である任意の有限群$G$について、満たす部分群$H$が存在することを数学的帰納法により示す。
+	$\abs{G}$が$p^n$の倍数である任意の有限群$G$について、満たす部分群$H$が存在することを$\abs{G}$についての数学的帰納法により示す。
 
-	$n = 0$のとき、$\qty{e_G}$は$G$の部分群である。\\*
+	$\abs{G} = 1$のとき、$\qty{e_G}$は$G$の部分群である。
 
-  ある$n$について成り立つとする。$\abs{G}$が$p^{s(n)}$の倍数となるような群$G$を考える。
+  ある$\abs{G}$未満の全ての自然数について成り立つとする。
 
   $G$の$G$への共役作用$\varphi_C$と、$G$の中心$\Fix(G, G)$を考える。\\*
 	
-	$\abs{\Fix(G, G)}$が$p$の倍数でないとき、\thmref{類等式}より$\abs{G} = \abs{\Fix(G, G)} + \sum_{m \in n} \abs{\varphi(G, g_m)}$であるので、$\exists g \in G$であり$\abs{\varphi(G, g)}$は$p$の倍数ではない。
+	$\abs{\Fix(G, G)}$が$p$の倍数でないとき、\thmref{類等式}より$\abs{G} = \abs{\Fix(G, G)} + \sum_m \abs{\varphi(G, g_m)}$であるので、$\exists g \in G$であり$\abs{\varphi(G, g)}$は$p$の倍数でない、かつ$1$でない。
 
 	\thmref{軌道・安定化部分群定理}、\lemref{Lagrangeの定理}より、$\abs{G} = \abs{G / \Stab(G, g)} \abs{\Stab(G, g)} = \abs{\varphi(G, g)} \abs{\Stab(G, g)}$である。
 
-	ゆえに、$\abs{\Stab(G, g)}$は$p^{s(n)}$の倍数となる。\\*
+	$\abs{\varphi(G, g)} > 1$より、$\abs{\Stab(G, g)}$は$p^n$の倍数であり、$\abs{G}$より小さい。
+	
+	仮定より$\Stab(G, g)$は部分群$H$を持ち、$\abs{H} = p^n$である。$H$は$G$の部分群でもある。\\*
 
 	$\abs{\Fix(G, G)}$が$p$の倍数であるときを考える。
 
   \lemref{Cauchyの定理}より、$\Fix(G, G)$は部分群$N$を持って$\abs{N} = p$であり、$\Fix(G, G)$が$G$の正規部分群であることから、$N$は$G$の正規部分群である。
 
-	剰余群$G / N$について、\lemref{Lagrangeの定理}より$\abs{G} = \abs{G / N} \abs{N}$であり、$\abs{G / N}$は$p^n$の倍数であるので、仮定より部分群$K$が存在して、$\abs{K} = p^n$である。
+	剰余群$G / N$について、\lemref{Lagrangeの定理}より$\abs{G} = \abs{G / N} \abs{N}$であり、$\abs{G / N}$は$p^{n - 1}$の倍数であるので、仮定より部分群$K$が存在して、$\abs{K} = p^{n - 1}$である。
 
-	\lemref{剰余群の部分群は部分群の剰余群}より、$G$の部分群$L$が存在して$L / N = K$であり、\lemref{Lagrangeの定理}より$\abs{L} = \abs{L / N} \abs{N} = \abs{K} \abs{N} = p^{s(n)}$
+	\lemref{剰余群の部分群は部分群の剰余群}より、$G$の部分群$L$が存在して$L / N = K$であり、\lemref{Lagrangeの定理}より$\abs{L} = \abs{L / N} \abs{N} = \abs{K} \abs{N} = p^n$
 }
 
 
