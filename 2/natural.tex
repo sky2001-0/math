@@ -32,7 +32,7 @@
 
 \lem*{
  \eq*{
-   \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(M(X)) \rightarrow M(\bigcap A))
+   \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(M(X)) \rightarrow M \qty(\bigcap A))
  }
 }{
   まず、以下が成り立つ。
@@ -110,9 +110,9 @@
   \eqg*{
     0 \in \N \\*
     \forall n \in \N \qty(s(n) \in N) \\*
-    \forall n \in \N \qty(S(n) \neq 0) \\*
-    \forall n, m \in \N \qty(S(n) = S(m) \rightarrow n = m) \\*
-    \forall E \qty(E \subset N \land 0 \in E \land \forall n \qty(n \in E \rightarrow S(n) \in E) \rightarrow E = \N)
+    \forall n \in \N \qty(s(n) \neq 0) \\*
+    \forall n, m \in \N \qty(s(n) = s(m) \rightarrow n = m) \\*
+    \forall E \qty(E \subset \N \land 0 \in E \land \forall n \qty(n \in E \rightarrow s(n) \in E) \rightarrow E = \N)
   }
 }{
   第一、第二の公理は自明。\\*
@@ -131,7 +131,7 @@
 
   $0 \in E \land \forall n \qty(n \in E \rightarrow s(n) \in E)$より、$E$は無限系譜である。
 
-  定理より、$\N = \bigcap \qty{Z \in \P(E) \mid M(Z)}$
+  定義より、$\N = \bigcap \qty{Z \in \P(E) \mid M(Z)}$
 
   $\forall n \qty(n \in \N \rightarrow n \in \bigcap \qty{Z \in \P(E) \mid M(Z)})$
 
@@ -143,7 +143,7 @@
 \thm{数学的帰納法}{
   アリティ1の述語記号$P$について、
   \eq*{
-    \forall n \qty(n \in \N \rightarrow P(n)) \leftrightarrow P(0) \land \forall n \qty(n \in \N \land P(n) \rightarrow P(s(n)))
+    \forall n \qty(n \in \N \rightarrow P(n)) \leftrightarrow P(0) \land \forall n \qty(n \in \N \land \qty(P(n) \rightarrow P(s(n))))
   }
 }{
   右は自明。\\*
@@ -304,7 +304,7 @@
 
   このとき、$\forall n \in \N \forall m \in \N \qty(m \leq n \rightarrow m \notin A)$を示す。
 
-  $n = 0$のとき、$n \in A$ならば仮定に反するので明らか。
+  $n = 0$のとき、$0 \in A$ならば仮定に反するので明らか。
 
   ある$n$で成り立つとする。$s(n) \in A$ならば$s(n)$は$A$の最小元となるので、$s(n) \notin A$。
 
@@ -732,5 +732,9 @@
 }
 
 \dfn{素数}{
-	$2$以上の自然数$n$について、約数が$1$と$n$のみであるとき、$n$を素数と呼ぶ。
+	約数をちょうど２つ持つ自然数を素数と呼ぶ。
+}
+
+\cor*{
+  素数$p$の約数は、$1$と$p$である。
 }

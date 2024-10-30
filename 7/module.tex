@@ -1,5 +1,132 @@
 \lsection{環上の加群}
 
+\lsubsection{環上の加群}
+
+\thm{可換群上の自己準同型全体}{
+  可換群$\qty(G, +)$について、$\End(G)$上の以下の演算$+'$を考える。このとき、順序対$\qty(\qty(\End(G), +'), \circ)$は環をなす。
+  \eq*{
+    \qty(f +' g)(x) \coloneqq f(x) + g(x)
+  }
+}{
+  \thmref{可換群上の準同型全体}より可換群をなす。
+
+  \thmref{自己準同型の全体}よりモノイドをなす。
+
+  準同型性から$f \circ \qty(g + h) (x) = f(g(x) + h(x)) = f(g(x)) + f(h(x)) = \qty(f \circ g + f \circ h) (x)$
+
+  右分配も同様に示せる。
+}
+
+\dfn{左加群}{
+  環$R$、可換群$\qty(V, +)$、\thmref{可換群上の自己準同型全体}の主張する環$\End(V)$について、作用$\rho \in \End(V)^R$が存在して環準同型であるとき、順序対$\qty(\qty(V, +), \rho)$を左$R$-加群と呼ぶ。
+  または単に$V$と書き、左$R$-加群を表すものとする。
+
+  作用の値$\rho(r)(x)$を$r x$と略記する。
+}
+
+\rem{左加群の補足}{
+  左$R$-加群$\qty(\qty(V, +), \rho)$は以下を満たす。$\forall a, b, c \in V \forall r, s \in R$とする。
+  \begin{enumerate}
+    \item $V$のマグマ性：$a + b \in V$
+    \item $V$の半群性：$a + \qty(b + c) = \qty(a + b) + c$
+    \item $V$のモノイド性：$\exists 0_V \coloneqq e$
+    \item $V$の群性：$\exists (-a)$
+    \item $V$の可換群性：$a + b = b + a$
+    \item 自己準同型性：$r \qty(a + b) = r a + r b$
+    \item $\rho$の群準同型性と$\End(V)$の定義：$\qty(r + s) a = r a + s a$
+    \item $\rho$のモノイド準同型性：$r \qty(s a) = \qty(r s) a$
+  \end{enumerate}
+}
+
+\dfn{加群}{
+  左$R$-加群について、$R$が可換環であるとき、$R$-加群と呼ぶ。
+}
+
+\lem{加群の性質}{
+  左$R$-加群$V$について、以下が成り立つ。
+  \eqg*{
+    \forall v \in V \qty(0_R v = 0_V) \\*
+    \forall r \in R \forall v \in V \qty(r (-v) = (-r) v = -(r v)) \\*
+    \forall r \in R \forall v \in V \qty(r v = (-r) (-v))
+  }
+}{
+  \lemref{環の性質}と同様に示される。
+}
+
+\dfn{線型}{
+  左$R$-加群$V_1, V_2$について、群準同型$f \in V_2^{V_1}$が以下を満たすとき、$f$を加群準同型写像または線型写像と呼ぶ。
+  \eq*{
+    \forall v \in V_1 \forall r \in R \qty(f(r v) = r f(v))
+  }
+}
+
+\dfn{加群同型}{
+  全単射な線型写像を、加群同型写像、または単に加群同型と呼ぶ。
+}
+
+\dfn{線型写像の全体}{
+  左$R$-加群$V, V'$について、$V$から$V'$への線型写像全体のなす集合は群をなす。
+  これを$\Hom_R(V, V')$と表す。
+
+  さらに$\End_R(V) \coloneqq \Hom_R(V, V)$、$\GL(V) \coloneqq \End_R(V)^\times$とする。
+}
+
+\dfn{部分加群}{
+  左$R$-加群$\qty(\qty(V, +), \rho)$と$V$の部分群$\qty(W, +)$について、以下が成り立つとき$\qty(\qty(W, +), \rho')$を$\qty(\qty(V, +), \rho)$の部分加群と呼ぶ。
+  \eq*{
+    \forall v \in W \forall r \in R \qty(r v \in W)
+  }
+}
+
+\dfn{商加群}{
+  左$R$-加群$\qty(\qty(V, +), \rho)$上の同値関係$\sim$を考える。
+
+  \corref{直積集合と自明な同値関係}の意味で演算$+$と$\sim$が両立かつ、$\forall r \in R$について写像$\rho(r)$が$\sim$と両立するとき、
+
+  \thmref{両立}より定める演算$+'$および環準同型$\rho'$が存在する。
+
+  このとき、左$R$-加群$\qty(\qty(V / \sim, +'), \rho')$を左$R$-加群$V$の商加群と呼ぶ。
+}
+
+\lem*{
+  左$R$-加群$V$とその部分加群$W$について、以下で定める関係$\sim$は\corref{直積集合と自明な同値関係}の意味で演算$+$と両立かつ、$\forall r \in R$について写像$\rho(r)$が$\sim$と両立する同値関係である。
+  \eq*{
+    \forall x, y \in V \qty(x \sim y \defiff x + (-y) \in W)
+  }
+}{
+  $\qty(W, +)$は$\qty(V, +)$の正規部分群であるため、\lemref{正規部分群の定める同値関係}より、$+$と両立する同値関係である。
+
+  $x + (-y) \in W$のとき、\lemref{加群の性質}より、$\forall r \in R \qty(r x + (-(r y)) = r x + r (-y) = r \qty(x + (-y)) \in W)$
+
+  ゆえに両立する。
+}
+
+\dfn{剰余加群}{
+  左$R$-加群$V$とその部分加群$W$について、\mlemref{0}の定める同値関係による剰余群を、剰余加群と呼び、$V / W$と表す。
+}
+
+\thm{加群の準同型定理}{
+  左$R$-加群$V_1, V_2$と、線型写像$f \in V_2^{V_1}$に付随する同値関係$\sim_f$について、加群同型$\bar{f} \in \Im(f)^{V / \sim_f}$が存在する。
+}{
+  $\Im(f)$は$V_2$の部分左加群である。
+
+  \thmref{群準同型定理}より、得る$\bar{f}$は群同型である。
+
+  今、$\bar{f}(\qty[r v]) = f(r v) = r f(v) = r \bar{f}([v])$であるので線型である。
+}
+
+\lem{左加群としての環}{
+  環$\qty(\qty(R, +), \times)$と、$R$の部分環$S$を考える。
+
+  以下で定める$\rho \in \End(R)^S$について、順序対$\qty(\qty(R, +), \rho)$は左$S$-加群である。
+  \eq*{
+    \forall s \in S \forall r \in R \qty(\rho(s) (r) \coloneqq s \times r)
+  }
+}{
+  環の分配法則、および積についての結合性から、$\rho$は環準同型である。
+}
+
+
 \lsubsection{自由加群}
 
 \dfn{線型包}{

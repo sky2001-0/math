@@ -1,4 +1,4 @@
-\lsection{集合論}
+\lsection{集合}
 
 述語記号$\in$を定義する。
 
@@ -14,7 +14,7 @@
 }
 
 \dfn{集合}{
-  本\secref{集合論}の全ての公理を満たすものを集合（set、集まりcollectionとは区別される）と呼ぶ。
+  本\secref{集合}の全ての公理を満たすものを集合（set、集まりcollectionとは区別される）と呼ぶ。
 }
 
 以下、変項は集合であり、集合は変項である。
@@ -503,7 +503,7 @@
 
 \axi{正則性の公理}{
   \eq*{
-    \forall X \qty(X \neq \varnothing \rightarrow \exists x \qty(x \in X \land \forall t \qty(t \in X \land t \notin x)))
+    \forall X \qty(X \neq \varnothing \rightarrow \exists x \qty(x \in X \land \forall t \qty(t \in X \rightarrow t \notin x)))
   }
 }
 
@@ -512,7 +512,7 @@
     \forall x \forall y \lnot \qty(x \in y \land y \in x)
   }
 }{
-  対の公理より、$\qty{x, y}$が存在する。
+  \axiref{対の公理}より、$\qty{x, y}$が存在する。
 
   \axiref{正則性の公理}より、
   \eq*{

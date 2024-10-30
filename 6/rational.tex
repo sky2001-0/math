@@ -197,3 +197,22 @@
 
   $n = s(a_1 b_2)$について、$a < n b$である。
 }
+
+\thmf{$\Q$は第二可算}{Qは第二可算}{
+  $\Q$は第二可算である。
+}{
+  $\mathcal{B} \coloneqq \qty{\sqty{a, b} \mid a, b \in \Q}$は開基である。
+
+  \thmref{自然数の直積は可算}より、$\mathcal{B}$は可算。
+}
+
+\thmf{$\Q$は完全不連結}{Qは完全不連結}{
+  $\Q$の部分$S$が２点以上を含むならば、$S$は連結でない。
+}{
+  $a, b \in S \qty(a < b)$とする。
+
+  $U \coloneqq \qty{x \in \Q \mid \qty(1 + \frac{x - a}{b - a})^2 < 2}$とする。$a \in U \land b \notin U$である。
+
+  $U$は開かつ閉集合より、成り立つ。
+}
+

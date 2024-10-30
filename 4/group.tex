@@ -1,4 +1,4 @@
-\lsection{群論}
+\lsection{群}
 
 \lsubsection{群}
 
@@ -37,7 +37,7 @@
 
   左逆元であることを示す。
   \eq*{
-    x' x = x' \qty(x e) = x' \qty(x \qty(x' x'')) = x' \qty(x x') x'' = x' e x'' = y z = e
+    x' x = x' \qty(x e) = x' \qty(x \qty(x' x'')) = x' \qty(x x') x'' = x' e x'' = x' x'' = e
   }
 }
 
@@ -363,55 +363,65 @@
 }
 
 
-\lsubsection{有限群}
+\lsubsection{半直積}
 
-\dfn{有限群}{
-  群$G$について、$G$が有限集合であるとき、$G$を有限群と呼ぶ。
+\lem*{
+	群$H, N$と、群準同型$\varphi \in \Aut(N)^H$について、以下で定義される$N \times H$上の演算$\cdot$を考える。
+	\eq*{
+		\qty(n_1, h_1) \cdot \qty(n_2, h_2) \coloneqq \qty(n_1 \varphi(h_1, n_2), h_1 h_2)
+	}
+
+	このとき、$\qty(N \times H, \cdot)$は群である。
+}{
+	半群であることは以下の通り。
+	\eqa*{
+		\qty(\qty(n_1, h_1) \cdot \qty(n_2, h_2)) \cdot \qty(n_3, h_3)
+		&= \qty(n_1 \varphi(h_1, n_2), h_1 h_2) \cdot \qty(n_3, h_3) \\*
+		&= \qty(n_1 \varphi(h_1, n_2) \varphi(h_1 h_2, n_3), h_1 h_2 h_3) \\*
+		&= \qty(n_1 \varphi(h_1, n_2) \varphi(h_1, \varphi(h_2, n_3)), h_1 h_2 h_3) \\*
+		&= \qty(n_1 \varphi(h_1, n_2 \varphi(h_2, n_3)), h_1 h_2 h_3) \\*
+		&= \qty(n_1, h_1) \qty(n_2 \varphi(h_2, n_3), h_2 h_3) \\*
+		&= \qty(n_1, h_1) \cdot \qty(\qty(n_2, h_2) \cdot \qty(n_3, h_3))
+	}
+
+	$e = \qty(1_N, 1_H)$は単位元である。\\*
+
+	$\qty(n, h)$の逆元は、$\qty(\varphi(h^{-1}, n^{-1}), h^{-1})$である。
 }
 
-\lem{Lagrangeの定理}{
-  有限群$G$と、$G$の部分群$H$、左剰余集合$G / H$について、以下が成り立つ。
-  \eq*{
-    \abs{G} = \abs{G / H} \abs{H}
-  }
-}{
-	商写像$\qty[]$は全射より、\thmref{全射と右逆写像}から右逆写像$r$を持つ。\\*
-
-	$\phi \in G^{G / H \times H}, \phi(\qty[g], h) = r(\qty[g]) h$を考える。
-
-	$\phi(\qty[g_1], h_1) = \phi(\qty[g_2], h_2)$であるとき、$r(\qty[g_2]) = r(\qty[g_1]) h_1 h_2^{-1}$より、\lemref{群作用の軌道分解}から$\qty[g_1] = \qty[g_2]$であって、ただちに$h_1 = h_2$
-
-	ゆえに$\phi$は単射。\\*
-
-	$\forall g \in G$について、$r(\qty[g])^{-1} g \in H$であるので、$g = \phi(\qty[g], r(\qty[g])^{-1} g)$と書ける。ゆえに$\phi$は全射。\\*
-
-	したがって、$\abs{G} = \abs{G / H \times H}$であり、\lemref{有限集合の直積}より成り立つ。
+\dfn{外部半直積}{
+	\mlemref{0}で定義される群を、$N, H$の$\varphi$による外部半直積と呼び、$N \rtimes_\varphi H$と表す。
 }
 
-\thm{Lagrangeの定理}{
-  有限群$G$と、$G$の部分群$H$、さらに$H$の部分群$K$について、左剰余集合$G / H, G / K$を考える。
-	このとき、以下が成り立つ。
-  \eq*{
-    \abs{G / K} = \abs{G / H} \abs{H / K}
-  }
-}{
-	\lemref{Lagrangeの定理}より、$\abs{G / K} \abs{K} = \abs{G} = \abs{G / H} \abs{H} = \abs{G / H} \abs{H / K} \abs{K}$である。
-
-	$\abs{K} \neq 0$より、\lemref{自然数の乗法の簡約則}から成り立つ。
+\cor*{
+	外部半直積$N \rtimes H$について、以下が成り立つ。
+	\eq*{
+		\forall \qty(n, h) \in N \rtimes H \qty(\qty(n, h) = \qty(n, 1_H) \cdot \qty(1_N, h))
+	}
 }
 
-\lem{素数群作用の不変部分}{
-  有限群$G$の有限集合$X$への群作用$\varphi$を考える。
-  $\abs{G}$が素数であるとき、$\abs{X} - \abs{\Fix(G, X)}$は$\abs{G}$の倍数である。
+\cor*{
+	外部半直積$N \rtimes H$について、以下で定義する$H'$は$N \rtimes_\varphi H$の部分群である。
+	\eq*{
+		H' \coloneqq \qty{\qty(1_N, h) \mid h \in H}
+	}
+}
+
+\lem*{
+	外部半直積$N \rtimes_\varphi H$について、以下で定義する$N'$は$N \rtimes_\varphi H$の正規部分群である。
+	\eq*{
+		N' \coloneqq \qty{\qty(n, 1_H) \mid n \in N}
+	}
 }{
-  \lemref{Lagrangeの定理}、\thmref{軌道・安定化部分群定理}より以下が成り立つ。
-  \eq*{
-    \forall x \in X \qty(\abs{G} = \abs{G / \Stab(G, x)} \abs{\Stab(G, x)} = \abs{\varphi(G, x)} \abs{\Stab(G, x)})
-  }
+	明らかに部分群である。\\*
 
-  $\abs{G}$は素数より、$\abs{\varphi(G, x)} = 1 \lor \abs{\varphi(G, x)} = \abs{G}$である。
+	$\forall n, n' \in N \forall h \in H$について、以下が成り立つ。
+	\eqa*{
+		\qty(n, h)^{-1} \qty(n', 1_H) \qty(n, h)
+		&= \qty(\varphi(h^{-1}, n^{-1}), h^{-1}) \qty(n' n, h) \\*
+		&= \qty(\varphi(h^{-1}, n^{-1}) \varphi(h^{-1}, n' n), h^{-1} h) \\*
+		&= \qty(\varphi(h^{-1}, n^{-1} n' n), 1_H)
+	}
 
-  $W \coloneqq \bigsqcup \qty{\varphi(G, x) \mid x \in X \land \abs{\varphi(G, x)} = \abs{G}}$とする。
-
-  \thmref{類等式}より、$\abs{X} = \abs{\Fix(G, X)} + \abs{W}$であり、$\abs{W}$は$\abs{G}$の倍数であるため成り立つ。
+	よって、正規部分群である。
 }

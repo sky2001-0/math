@@ -1,4 +1,193 @@
-\lsection{代数の補足}
+\lsection{群と整数}
+
+\thmf{$\Z$-加群としての可換群}{Z-加群としての可換群}{
+  可換群$\qty(G, +)$を考える。以下で定める$\rho \in \End(G)^\Z$について、順序対$\qty(\qty(G, +), \rho)$は$\Z$-加群である。
+  \eq*{
+    \rho(n)(g) \coloneqq
+    \begin{cases}
+      \sum_{m \in n} g & \qty(0 \leq n) \\*
+      \sum_{m \in (-n)} (-g) & \qty(n < 0)
+    \end{cases}
+  }
+}{
+  正負の場合の場合分けを考えて、\lemref{モノイド上の指数法則}より、成り立つ。
+}
+
+
+\lsubsection{有限群}
+
+\dfn{有限群}{
+  群$G$について、$G$が有限集合であるとき、$G$を有限群と呼ぶ。
+}
+
+\lem{Lagrangeの定理}{
+  有限群$G$と、$G$の部分群$H$、左剰余集合$G / H$について、以下が成り立つ。
+  \eq*{
+    \abs{G} = \abs{G / H} \abs{H}
+  }
+}{
+	商写像$\qty[]$は全射より、\thmref{全射と右逆写像}から右逆写像$r$を持つ。\\*
+
+	$\phi \in G^{G / H \times H}, \phi(\qty[g], h) = r(\qty[g]) h$を考える。
+
+	$\phi(\qty[g_1], h_1) = \phi(\qty[g_2], h_2)$であるとき、$r(\qty[g_2]) = r(\qty[g_1]) h_1 h_2^{-1}$より、\lemref{群作用の軌道分解}から$\qty[g_1] = \qty[g_2]$であって、ただちに$h_1 = h_2$
+
+	ゆえに$\phi$は単射。\\*
+
+	$\forall g \in G$について、$r(\qty[g])^{-1} g \in H$であるので、$g = \phi(\qty[g], r(\qty[g])^{-1} g)$と書ける。ゆえに$\phi$は全射。\\*
+
+	したがって、$\abs{G} = \abs{G / H \times H}$であり、\lemref{有限集合の直積}より成り立つ。
+}
+
+\thm{Lagrangeの定理}{
+  有限群$G$と、$G$の部分群$H$、さらに$H$の部分群$K$について、左剰余集合$G / H, G / K$を考える。
+	このとき、以下が成り立つ。
+  \eq*{
+    \abs{G / K} = \abs{G / H} \abs{H / K}
+  }
+}{
+	\lemref{Lagrangeの定理}より、$\abs{G / K} \abs{K} = \abs{G} = \abs{G / H} \abs{H} = \abs{G / H} \abs{H / K} \abs{K}$である。
+
+	$\abs{K} \neq 0$より、\lemref{自然数の乗法の簡約則}から成り立つ。
+}
+
+\lem{素数群作用の不変部分}{
+  有限群$G$の有限集合$X$への群作用$\varphi$を考える。
+  $\abs{G}$が素数であるとき、$\abs{X} - \abs{\Fix(G, X)}$は$\abs{G}$の倍数である。
+}{
+  \lemref{Lagrangeの定理}、\thmref{軌道・安定化部分群定理}より以下が成り立つ。
+  \eq*{
+    \forall x \in X \qty(\abs{G} = \abs{G / \Stab(G, x)} \abs{\Stab(G, x)} = \abs{\varphi(G, x)} \abs{\Stab(G, x)})
+  }
+
+  $\abs{G}$は素数より、$\abs{\varphi(G, x)} = 1 \lor \abs{\varphi(G, x)} = \abs{G}$である。
+
+  $W \coloneqq \bigsqcup \qty{\varphi(G, x) \mid x \in X \land \abs{\varphi(G, x)} = \abs{G}}$とする。
+
+  \thmref{類等式}より、$\abs{X} = \abs{\Fix(G, X)} + \abs{W}$であり、$\abs{W}$は$\abs{G}$の倍数であるため成り立つ。
+}
+
+
+\lsubsection{巡回群}
+
+\dfn{巡回群}{
+	群$G$について以下が成り立つとき、$G$を巡回群と呼ぶ。
+	\eq*{
+		\exists g \in G \qty(G = \qty{g^n \mid n \in \Z})
+	}
+}
+
+\cor*{
+	巡回群は可換群である。
+}
+
+\lem{位数}{
+	有限群$G$と元$g \in G$に対して、以下の集合は空でない。
+	\eq*{
+		\qty{n \in \N \mid g^n = e_G}
+	}
+}{
+	\thmref{鳩の巣原理}より、写像$\tau \in G^{s(\abs{G})}, \tau(n) = g^n$は単射でない。
+
+	よって、$\exists i, j \in s(\abs{G}) \qty(i < j \land g^i = g^j)$
+
+	したがって、$g^{j - i} = e_G$である。
+}
+
+\dfn{位数}{
+	\lemref{位数}と\thmref{最小値原理}より、有限群$G$と元$g \in G$に対して$g^n = e_G$とする最小の$n \in \N$が存在する。
+
+	これを元$g$の位数と呼び、$\ord(g)$と表す。
+}
+
+\lem{有限巡回群の位数}{
+	有限群$G$と元$g \in G$について、$G = \qty{g^n \mid n \in \Z}$であるとき、以下が成り立つ。
+	\eq*{
+		\ord(g) = \abs{G}
+	}
+}{
+	写像$\tau \in G^{\ord(g)}, \tau(n) = g^n$を考える。
+
+	$\exists i, j \in \N \qty(i < j \land g^i = g^j)$ならば$g^{j - i} = e_G$より位数の最小性に反する。ゆえに単射。
+
+	$\forall n \in \Z$について、\dfnref{自然数の除法}より$\exists q, r \in \N \qty(n = q \ord(g) + r \land r < \ord(g))$である。
+
+	よって$g^n = g^{q \ord(g) + r} = \qty(g^{\ord(g)})^q g^r = g^r$、ゆえに全射。
+}
+
+\lem{素数群は巡回群}{
+	有限群$G$について、$\abs{G}$が素数ならば$G$は巡回群である。
+}{
+	$\abs{G}$は素数より、$\exists g \in G \qty(g \neq e_G)$である。
+
+	今、$H \coloneqq \qty{g^n \mid n \in \N}$は$G$の部分群であり、$\abs{H} \geq 2$である。
+	\lemref{Lagrangeの定理}より、$\abs{H} = \abs{G}$である。
+
+	ゆえに、$G \setminus H = \varnothing$であるので$G = H$、すなわち$G$は巡回群である。
+}
+
+\lem{Cauchyの定理}{
+	有限群$G$について、$\abs{G}$が素数$p$の倍数であるならば、以下が成り立つ。
+	\eq*{
+		\exists g \in G \qty(\ord(g) = p)
+	}
+}{
+	集合$S \coloneqq \qty{\qty(x_n)_{n \in p} \in G^p \mid \Pi_{n \in p} x_n = e_G}$を考える。
+
+	$x_{p - 1} = \qty(\Pi_{n \in p - 1} x_n)^{-1}$であることに注目すると、全単射$S \ni \qty(x_n)_{n \in p} \mapsto \qty(x_n)_{n \in p - 1} \in G^{p - 1}$の存在から$\abs{S} = \abs{G}^{p - 1}$であり、特に$\abs{S}$は$p$の倍数である。
+
+	群$\S_p$の$S$への以下を満たす群作用$\varphi$を考える。
+	\eq*{
+		\varphi(\sigma, \qty(x_n)_{n \in p}) = \qty(x_{\sigma(n)})_{n \in p}
+	}
+
+	以下の$\sigma_0 \in \S_p$は、$\ord(\sigma_0) = p$を満たす。
+	\eqa*{
+		\sigma_0(n) =
+		\begin{cases}
+			n + 1 & \qty(n \in p - 1) \\*
+			0 & \qty(n = p - 1)
+		\end{cases}
+	}
+
+  今、$\S_p$の部分群$H \coloneqq \qty{\sigma_0^n \mid n \in p}$を考える。
+
+	\lemref{素数群作用の不変部分}より、$\abs{S} - \abs{\Fix(H, S)}$は$p$の倍数である。
+
+  今、$\abs{S}$は$p$の倍数より、$\abs{\Fix(H, S)}$も$p$の倍数であり、$\qty(e_G)_{n \in p} \in \Fix(H, S)$より、$\exists x \in \Fix(H, S) \setminus \qty{\qty(e_G)_{n \in p}}$である。
+
+  $\sigma_0(x) = x$であるため、$\exists g \in G \setminus \qty{e_G} \qty(x = \qty(g)_{n \in p})$である。
+}
+
+\thm{Sylowの存在定理}{
+	素数$p$と自然数$n$を考える。
+	有限群$G$について$\abs{G}$が$p^n$の倍数であるとき、$G$の部分群$H$が存在して$\abs{H} = p^n$が成り立つ。
+}{
+	$\abs{G}$が$p^n$の倍数である任意の有限群$G$について、満たす部分群$H$が存在することを$\abs{G}$についての数学的帰納法により示す。
+
+	$\abs{G} = 1$のとき、$\qty{e_G}$は$G$の部分群である。
+
+  ある$\abs{G}$未満の全ての自然数について成り立つとする。
+
+  $G$の$G$への共役作用$\varphi_C$と、$G$の中心$\Fix(G, G)$を考える。\\*
+	
+	$\abs{\Fix(G, G)}$が$p$の倍数でないとき、\thmref{類等式}より$\abs{G} = \abs{\Fix(G, G)} + \sum_m \abs{\varphi(G, g_m)}$であるので、$\exists g \in G$であり$\abs{\varphi(G, g)}$は$p$の倍数でない、かつ$1$でない。
+
+	\thmref{軌道・安定化部分群定理}、\lemref{Lagrangeの定理}より、$\abs{G} = \abs{G / \Stab(G, g)} \abs{\Stab(G, g)} = \abs{\varphi(G, g)} \abs{\Stab(G, g)}$である。
+
+	$\abs{\varphi(G, g)} > 1$より、$\abs{\Stab(G, g)}$は$p^n$の倍数であり、$\abs{G}$より小さい。
+	
+	仮定より$\Stab(G, g)$は部分群$H$を持ち、$\abs{H} = p^n$である。$H$は$G$の部分群でもある。\\*
+
+	$\abs{\Fix(G, G)}$が$p$の倍数であるときを考える。
+
+  \lemref{Cauchyの定理}より、$\Fix(G, G)$は部分群$N$を持って$\abs{N} = p$であり、$\Fix(G, G)$が$G$の正規部分群であることから、$N$は$G$の正規部分群である。
+
+	剰余群$G / N$について、\lemref{Lagrangeの定理}より$\abs{G} = \abs{G / N} \abs{N}$であり、$\abs{G / N}$は$p^{n - 1}$の倍数であるので、仮定より部分群$K$が存在して、$\abs{K} = p^{n - 1}$である。
+
+	\lemref{剰余群の部分群は部分群の剰余群}より、$G$の部分群$L$が存在して$L / N = K$であり、\lemref{Lagrangeの定理}より$\abs{L} = \abs{L / N} \abs{N} = \abs{K} \abs{N} = p^n$
+}
+
 
 \lsubsection{置換と対称群}
 
@@ -137,7 +326,7 @@
 	自明でない群$G$について、$n \in \N$と有限列$\qty(H_m)_{m \in s(n)}$が存在して以下を満たすとき、$G$を可解群と呼ぶ。
 	\begin{itemize}
 		\item $H_0 = G$
-		\item $H_{n} = \qty{e}$
+		\item $H_{n} = \qty{e_G}$
 		\item $\forall m \in n$について、$H_{s(m)}$は$H_m$の正規部分群であり、剰余群$H_m / H_{s(m)}$が可換群
 	\end{itemize}
 }
@@ -175,7 +364,7 @@
 
 	$N$は可解群であるため、\dfnref{可解群}を満たす有限列$\qty(I_m)_{m \in l}$が存在する。
 
-	よって、有限列$G = H_0, H_1, \cdots , H_{p(n)} = N = I_0, I_1, \cdots, I_{p(l)} = \qty{e}$が存在して\dfnref{可解群}を満たす。
+	よって、有限列$G = H_0, H_1, \cdots , H_{p(n)} = N = I_0, I_1, \cdots, I_{p(l)} = \qty{e_G}$が存在して\dfnref{可解群}を満たす。
 }
 
 \lem*{
@@ -226,141 +415,4 @@
 	\lemref{可解群の部分}より$A_n$も可解群となり、さらに$A_5$が可解群となる。これは\mlemref{-1}に反する。
 
 	背理法より成り立つ。
-}
-
-
-\lsubsection{巡回群}
-
-\dfn{巡回群}{
-	群$G$について以下が成り立つとき、$G$を巡回群と呼ぶ。
-	\eq*{
-		\exists g \in G \qty(G = \qty{g^n \mid n \in \Z})
-	}
-}
-
-\cor*{
-	巡回群は可換群である。
-}
-
-\lem{位数}{
-	有限群$G$と元$g \in G$に対して、以下の集合は空でない。
-	\eq*{
-		\qty{n \in \N \mid g^n = e}
-	}
-}{
-	\thmref{鳩の巣原理}より、写像$\tau \in G^{s(\abs{G})}, \tau(n) = g^n$は単射でない。
-
-	よって、$\exists i, j \in s(\abs{G}) \qty(i < j \land g^i = g^j)$
-
-	したがって、$g^{j - i} = e$である。
-}
-
-\dfn{位数}{
-	\lemref{位数}と\thmref{最小値原理}より、有限群$G$と元$g \in G$に対して$g^n = e$とする最小の$n \in \N$が存在する。
-
-	これを元$g$の位数と呼び、$\ord(g)$と表す。
-}
-
-\lem{有限巡回群の位数}{
-	有限群$G$と元$g \in G$について、$G = \qty{g^n \mid n \in \Z}$であるとき、以下が成り立つ。
-	\eq*{
-		\ord(g) = \abs{G}
-	}
-}{
-	写像$\tau \in G^{\ord(g)}, \tau(n) = g^n$を考える。
-
-	$\exists i, j \in \N \qty(i < j \land g^i = g^j)$ならば$g^{j - i} = e$より位数の最小性に反する。ゆえに単射。
-
-	$\forall n \in \Z$について、\dfnref{自然数の除法}より$\exists q, r \in \N \qty(n = q \ord(g) + r \land r < \ord(g))$である。
-
-	よって$g^n = g^{q \ord(g) + r} = \qty(g^{\ord(g)})^q g^r = g^r$、ゆえに全射。
-}
-
-\lem{素数群は巡回群}{
-	有限群$G$について、$\abs{G}$が素数ならば$G$は巡回群である。
-}{
-	$\abs{G}$は素数より、$\exists g \in G \qty(g \neq e)$である。
-
-	今、$H \coloneqq \qty{g^n \mid n \in \N}$は$G$の部分群であり、$\abs{H} \geq 2$である。
-	\lemref{Lagrangeの定理}より、$\abs{H} = \abs{G}$である。
-
-	ゆえに、$G \setminus H = \varnothing$であるので$G = H$、すなわち$G$は巡回群である。
-}
-
-\lem{Cauchyの定理}{
-	有限群$G$について、$\abs{G}$が素数$p$の倍数であるならば、以下が成り立つ。
-	\eq*{
-		\exists g \in G \qty(\ord(g) = p)
-	}
-}{
-	集合$S \coloneqq \qty{\qty(x_n)_{n \in p} \in G^p \mid \Pi_{n \in p} x_n = e_G}$を考える。
-
-	$x_{p - 1} = \qty(\Pi_{n \in p - 1} x_n)^{-1}$であることに注目すると、全単射$S \ni \qty(x_n)_{n \in p} \mapsto \qty(x_n)_{n \in p - 1} \in G^{p - 1}$の存在から$\abs{S} = \abs{G}^{p - 1}$であり、特に$\abs{S}$は$p$の倍数である。
-
-	群$\S_p$の$S$への以下を満たす群作用$\varphi$を考える。
-	\eq*{
-		\varphi(\sigma, \qty(x_n)_{n \in p}) = \qty(x_{\sigma(n)})_{n \in p}
-	}
-
-	以下の$\sigma_0 \in \S_p$は、$\ord(\sigma_0) = p$を満たす。
-	\eqa*{
-		\sigma_0(n) =
-		\begin{cases}
-			n + 1 & \qty(n \in p - 1) \\*
-			0 & \qty(n = p - 1)
-		\end{cases}
-	}
-
-  今、$\S_p$の部分群$H \coloneqq \qty{\sigma_0^n \mid n \in p}$を考える。
-
-	\lemref{素数群作用の不変部分}より、$\abs{S} - \abs{\Fix(H, S)}$は$p$の倍数である。
-
-  今、$\abs{S}$は$p$の倍数より、$\abs{\Fix(H, S)}$も$p$の倍数であり、$\qty(e_G)_{n \in p} \in \Fix(H, S)$より、$\exists x \in \Fix(H, S) \setminus \qty{\qty(e_G)_{n \in p}}$である。
-
-  $\sigma_0(x) = x$であるため、$\exists g \in G \setminus \qty{e_G} \qty(x = \qty(g)_{n \in p})$である。
-}
-
-\thm{Sylowの存在定理}{
-	素数$p$と自然数$n$を考える。
-	有限群$G$について$\abs{G}$が$p^n$の倍数であるとき、$G$の部分群$H$が存在して$\abs{H} = p^n$が成り立つ。
-}{
-	$\abs{G}$が$p^n$の倍数である任意の有限群$G$について、満たす部分群$H$が存在することを$\abs{G}$についての数学的帰納法により示す。
-
-	$\abs{G} = 1$のとき、$\qty{e_G}$は$G$の部分群である。
-
-  ある$\abs{G}$未満の全ての自然数について成り立つとする。
-
-  $G$の$G$への共役作用$\varphi_C$と、$G$の中心$\Fix(G, G)$を考える。\\*
-	
-	$\abs{\Fix(G, G)}$が$p$の倍数でないとき、\thmref{類等式}より$\abs{G} = \abs{\Fix(G, G)} + \sum_m \abs{\varphi(G, g_m)}$であるので、$\exists g \in G$であり$\abs{\varphi(G, g)}$は$p$の倍数でない、かつ$1$でない。
-
-	\thmref{軌道・安定化部分群定理}、\lemref{Lagrangeの定理}より、$\abs{G} = \abs{G / \Stab(G, g)} \abs{\Stab(G, g)} = \abs{\varphi(G, g)} \abs{\Stab(G, g)}$である。
-
-	$\abs{\varphi(G, g)} > 1$より、$\abs{\Stab(G, g)}$は$p^n$の倍数であり、$\abs{G}$より小さい。
-	
-	仮定より$\Stab(G, g)$は部分群$H$を持ち、$\abs{H} = p^n$である。$H$は$G$の部分群でもある。\\*
-
-	$\abs{\Fix(G, G)}$が$p$の倍数であるときを考える。
-
-  \lemref{Cauchyの定理}より、$\Fix(G, G)$は部分群$N$を持って$\abs{N} = p$であり、$\Fix(G, G)$が$G$の正規部分群であることから、$N$は$G$の正規部分群である。
-
-	剰余群$G / N$について、\lemref{Lagrangeの定理}より$\abs{G} = \abs{G / N} \abs{N}$であり、$\abs{G / N}$は$p^{n - 1}$の倍数であるので、仮定より部分群$K$が存在して、$\abs{K} = p^{n - 1}$である。
-
-	\lemref{剰余群の部分群は部分群の剰余群}より、$G$の部分群$L$が存在して$L / N = K$であり、\lemref{Lagrangeの定理}より$\abs{L} = \abs{L / N} \abs{N} = \abs{K} \abs{N} = p^n$
-}
-
-
-\lsubsection{代数の補足}
-
-\thmf{$\Z$-加群としての可換群}{Z-加群としての可換群}{
-  可換群$\qty(G, +)$を考える。以下で定める$\rho \in \End(G)^\Z$について、順序対$\qty(\qty(G, +), \rho)$は$\Z$-加群である。
-  \eq*{
-    \rho(n)(g) \coloneqq
-    \begin{cases}
-      \sum_{m \in n} g & \qty(0 \leq n) \\*
-      \sum_{m \in (-n)} (-g) & \qty(n < 0)
-    \end{cases}
-  }
-}{
-  正負の場合の場合分けを考えて、\lemref{モノイド上の指数法則}より、成り立つ。
 }

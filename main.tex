@@ -2,6 +2,8 @@
 
 \input{tex_template/template}
 
+\setcounter{section}{-1}
+
 \title{さんすうのーと}
 \author{わたし}
 
@@ -15,41 +17,52 @@
   \input{intro}
   \clearpage
 
+  % 論理
   \input{1/logic}
   \clearpage
-  
+
+  % 集合、写像、同値関係、順序、自然数
   \input{2/set}
   \input{2/map}
+  \input{2/relation}
   \input{2/order}
   \input{2/natural}
-  \input{2/set2}
+  \input{2/set_natural}
   % \input{2/logic_with_natural}% in progress
   \clearpage
-  
-  \input{3/algebra}
-  \input{3/group}
-  \input{3/ring}
-  \input{3/com_ring}
-  \input{3/polynomial}
-  \input{3/module}
-  \input{3/ord_algebra}
-  \input{3/integer}
-  \input{3/rational}
-  \input{3/algebra2}
+
+  % 位相
+  \input{3/topology}
+  \input{3/uniform}
   \clearpage
 
+  % 群論
+  \input{4/algebra}
+  \input{4/group}
+  \input{4/top_group} % in progress
   \clearpage
 
-  \input{5/topology}
-  \input{5/uniform}
-  \input{5/top_algebra}
-  \input{5/real}
-  % \input{5/measure}
+  % 環論
+  \input{5/ring}
+  % \input{4/module}
+  \input{5/com_ring}
+  \input{5/top_ring} % in progress
+  \input{5/integer}
+  \input{5/group_integer}
   \clearpage
+
+  % 体論と実数
+  \input{6/polynomial} % in progress
+  \input{6/field} % in progress
+  \input{6/rational}
+  \input{6/real}
+  % \input{6/complex} % in progress
+  \clearpage
+
+  % \input{6/measure}
+  % \clearpage
 
   % \input{6/vector}
-  % \input{6/complex}
   % \input{6/in_pro_vector}
   % \input{6/function}
-  \clearpage
 \end{document}
