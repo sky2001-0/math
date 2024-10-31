@@ -3,47 +3,27 @@
 \lsubsection{位相群}
 
 \dfn{位相群}{
-  群$\qty(G, \cdot)$と、$X$の開集合系$\mathcal{O}$が以下が成り立つとき、順序対$\qty(\qty(G, \cdot), \mathcal{O})$を位相群と呼ぶ。
+  群$\qty(G, \cdot)$と、$G$の開集合系$\mathcal{O}$を考える。
+  \dfnref{直積空間}の意味で、位相空間$G \times G$が与えられる。
+  
+  写像$\varphi \in G^{G \times G}, \varphi(x, y) = x \cdot y^{-1}$が連続であるとき、順序対$\qty(\qty(G, \cdot), \mathcal{O})$を位相群と呼ぶ。
+}
+
+\thm{位相群の自明な連続写像}{
+  位相群$\qty(G, \cdot)$について、以下を満たす。
   \begin{enumerate}
-    \item $\cdot \in G^{G \times G}$が連続
-    \item 逆元を与える写像$-1 \in G^G$が連続
-  \end{enumerate}
-}
-
-\dfn{部分位相群}{
-  位相群$\qty(\qty(G, \cdot), \mathcal{O})$の部分群$\qty(H, \cdot)$について、$\qty(\qty(H, \cdot), \qty{H \cap O \mid O \in \mathcal{O}})$は位相群である。
-  これを位相群$G$の部分位相群と呼ぶ。
-}
-
-\lem{位相群の収束ネットの積と逆}{
-  位相群$G$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}, \qty(y_\lambda)_{\lambda \in \Lambda}$が、$x, y \in G$に収束するならば、$\qty(x_\lambda y_\lambda)_{\lambda \in \Lambda}, \qty(x_\lambda^{-1})_{\lambda \in \Lambda}$は$x y, x^{-1}$に収束するネットである。
-}{
-  \dfnref{位相群}と\thmref{点連続と収束}より成り立つ。
-}
-
-\lem{位相群と連続写像}{
-  位相空間$X$と位相群$G$について、連続写像$f \in G^X, g \in G^X$を考える。
-
-  このとき、写像$f \cdot g \in G^X, \qty(f \cdot g) (x) = f(x) \cdot g(x)$と、写像$\hat{f} \in G^X, \hat{f}(x) = f(x)^{-1}$は連続である。
-}{
-  \dfnref{位相群}と\thmref{連続写像の合成}より成り立つ。
-}
-
-\thm{位相群と分離}{
-  位相群$G$について、以下の３つは同値である。このとき、$G$はHausdorffであると呼ぶ。
-  \begin{enumerate}
-    \item $G$は$T_2$空間
-    \item $G$は$T_1$空間
-    \item $\qty{e}$は閉集合
+    \item $\varphi_1 \in G^G, \varphi_1(x) = x^{-1}$は同相写像である。
+    \item $\varphi_2 \in G^{G \times G}, \varphi_2(x, y) = x \cdot y$は連続写像である。
+    \item $\forall a, b \in G$について、$\varphi_{a, b} \in G^G, \varphi_{a, b}(x) = a \cdot x \cdot y$は同相写像である。
   \end{enumerate}
 }{
-  $1. \rightarrow 2.$は、\lemref{T_2ならばT_1}より明らか。\\*
+  $x^{-1} = e_G \cdot x^{-1}$であるので、\lemref{直積と連続}より連続である。
 
-  $2. \rightarrow 3.$は、\thmref{Frechet性}より明らか。\\*
+  $\varphi_1$の逆写像は$\varphi_1$であるため、同相写像である。\\*
 
-  $3. \rightarrow 1.$を示す。
+  $x \cdot y = x \cdot \qty(y^{-1})^{-1}$であるため、連続である。\\*
 
-  $\qty{\qty(x, x) \mid x \in G} = \cdot^{-1}(\qty{e}) \in \mathcal{O}$より\thmref{Hausdorff性}から示される。
+  第一式から、\lemref{直積と連続}より連続である。
 }
 
 \thm{位相群の左一様構造}{
@@ -64,7 +44,7 @@
 
   $\forall V \in \mathcal{V} \exists B \in \mathcal{B}(e) \qty(V = \tilde{B})$である。
 
-  \dfnref{位相群}第一式と\thmref{連続と点連続}より$\exists B_1, B_2 \in \mathcal{B}(e) \qty(\cdot(B_1 \times B_2) \subset B)$
+  \thmref{位相群の自明な連続写像}第二と\thmref{連続と点連続}より$\exists B_1, B_2 \in \mathcal{B}(e) \qty(\cdot(B_1 \times B_2) \subset B)$
 
   \dfnref{基本近傍系}第三式より$\exists B' \in \mathcal{B}(e) \qty(\cdot(B' \times B') \subset \cdot(B_1 \times B_2) \subset B)$
 
@@ -72,47 +52,101 @@
 
   $\forall V \in \mathcal{V} \exists B \in \mathcal{B}(e) \qty(V = \tilde{B})$である。
 
-  \dfnref{位相群}第二式と\thmref{連続と点連続}より$\exists B' \in \mathcal{B}(e) \qty(-1(B') \subset B)$となるので、$\tilde{B'} \subset V^{-1}$\\*
+  \thmref{位相群の自明な連続写像}第一と\thmref{連続と点連続}より$\exists B' \in \mathcal{B}(e) \qty(-1(B') \subset B)$となるので、$\tilde{B'} \subset V^{-1}$\\*
 
   $\mathcal{V}$の与える基本近傍系は$\mathcal{B'}(x) = \qty{\tilde{B}[x] \mid B \in \mathcal{B}(e)}$である。\\*
 
-  \dfnref{位相群}第一式と\lemref{直積と連続}より$\forall D \in \mathcal{B}(x) \exists B \in \mathcal{B}(e) \qty(\qty{x y \mid y \in B} \subset D)$
+  \thmref{位相群の自明な連続写像}第二と\lemref{直積と連続}より$\forall D \in \mathcal{B}(x) \exists B \in \mathcal{B}(e) \qty(\qty{x y \mid y \in B} \subset D)$
 
   $\tilde{B}[x] = \qty{y \in G \mid x^{-1} y \in B} = \qty{x z \mid z \in B} \subset D$\\*
 
-  \dfnref{位相群}第一式と\lemref{直積と連続}より$\forall B \in \mathcal{B}(e) \exists D \in \mathcal{B}(x) \qty(\qty{x^{-1} y \mid y \in D} \subset B)$
+  \thmref{位相群の自明な連続写像}第二と\lemref{直積と連続}より$\forall B \in \mathcal{B}(e) \exists D \in \mathcal{B}(x) \qty(\qty{x^{-1} y \mid y \in D} \subset B)$
 
   $\tilde{B}[x] = \qty{y \in G \mid x^{-1} y \in B} \supset \qty{z \in G \mid x^{-1} z \in \qty{x^{-1} y \mid y \in D}} = D$
 
   ゆえに\lemref{近傍系の一意性}より成り立つ。
 }
 
-\lem{位相群のCauchyネットの積}{
-  位相群$G$上のCauchyネット$\qty(x_\lambda)_{\lambda \in \Lambda}, \qty(y_\lambda)_{\lambda \in \Lambda}$について、$\qty(x_\lambda y_\lambda)_{\lambda \in \Lambda}$はCauchyネットである。
+\cor*{
+  第一可算な位相群は、可算一様空間である。
+}
+
+\thm{位相群の自明な一様連続写像}{
+  位相群$\qty(G, \cdot)$について、以下を満たす。
+  \begin{enumerate}
+    \item $\varphi_1 \in G^G, \varphi_1(x) = x^{-1}$は一様同型写像である。
+    \item $\forall a, b \in G$について、$\varphi_{a, b} \in G^G, \varphi_{a, b}(x) = a \cdot x \cdot y$は一様同型写像である。
+  \end{enumerate}
 }{
+  $x^{-1} = e_G \cdot x^{-1}$であるので、\lemref{直積と連続}より連続である。
+
+  $\varphi_1$の逆写像は$\varphi_1$であるため、同相写像である。\\*
+
+  $x \cdot y = x \cdot \qty(y^{-1})^{-1}$であるため、連続である。\\*
+
+  第一式から、\lemref{直積と連続}より連続である。
+}
+
+\lemf{位相群は$T_3$}{位相群はT_3}{
+  位相群は$T_3$空間である。
+}{
+  \thmref{位相群の左一様構造}、\thmref{一様空間はT_3}より成り立つ。
+}
+
+\thm{位相群と分離}{
+  位相群$G$について、以下の３つは同値である。
+  このとき、$G$はHausdorffであると呼ぶ。
+  \begin{enumerate}
+    \item $G$は$T_2$空間
+    \item $G$は$T_1$空間
+    \item $\qty{e}$は閉集合
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$は、\lemref{T_2ならばT_1}より明らか。\\*
+
+  $2. \rightarrow 3.$は、\thmref{Frechet性}より明らか。\\*
+
+  $3. \rightarrow 1.$を示す。
+
+  $\qty{\qty(x, x) \mid x \in G} = \cdot^{-1}(\qty{e}) \in \mathcal{O}$より\thmref{Hausdorff性}から示される。
+}
+
+
+\lsubsection{可換位相群}
+
+\dfn{可換位相群}{
+  位相群$G$の群構造が可換群であるとき、$G$を可換位相群と呼ぶ。
+}
+
+\lem{可換位相群の一様的な特徴}{
+  可換位相群$G$について、以下を満たす。
+  \begin{enumerate}
+    \item $\varphi_1 \in G^G, \varphi_1(x) = x^{-1}$は一様同型写像である。
+    \item $G$上のCauchyネット$\qty(x_\lambda)_{\lambda \in \Lambda}, \qty(y_\lambda)_{\lambda \in \Lambda}$について、$\qty(x_\lambda y_\lambda)_{\lambda \in \Lambda}$はCauchyネットである。
+  \end{enumerate}
+}{
+  \thmref{位相群の左一様構造}の$\mathcal{V}$を考える。\\*
+
+  $\forall V \in \mathcal{V}$について、\lemref{基本近縁系の三角性}より$\exists W \in \mathcal{V} \qty(W \cup W^{-1} \subset V)$である。
+  
+  $\qty(x, y) \in W$について、可換性より$\qty(y^{-1}, x^{-1}) \in W$であるため、$\qty(x^{-1}, y^{-1}) \in V$となる。
+  
+  よって一様連続である。
+  $\varphi_1$の逆写像は$\varphi_1$であるため、一様同型写像である。\\*
+
   $\forall V \in \mathcal{V}$について、$\exists W \in \mathcal{V} \qty(W \circ W \subset V)$
 
   Cauchyより、$\exists \lambda_x \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in W)$かつ$\exists \lambda_y \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_y} \qty(\qty(y_{\lambda_1}, y_{\lambda_2}) \in W)$
 
   有向性より、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}), \qty(y_{\lambda_1}, y_{\lambda_2}) \in W)$
 
-  \thmref{位相群の左一様構造}の定義より$\qty(x_{\lambda_1} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_1}), \qty(x_{\lambda_2} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_2}) \in W$より、$\qty(x_{\lambda_1} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_2}) \in V$
-}
-
-\lem{可換位相群のCauchyネットの逆}{
-  可換位相群$G$上のCauchyネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$\qty(x_\lambda^{-1})_{\lambda \in \Lambda}$はCauchyネットである。
-}{
-  $\forall V \in \mathcal{V}$について、$\exists W \in \mathcal{V} \qty(W \subset V^{-1})$
-
-  Cauchyより、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in W)$である。
-
-  $\qty(x_{\lambda_2}, x_{\lambda_1}) \in V$である。可換性と\thmref{位相群の左一様構造}の定義より$\qty(x_{\lambda_1}^{-1}, x_{\lambda_2}^{-1}) \in V$
+  $\qty(x_{\lambda_1} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_1}), \qty(x_{\lambda_2} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_2}) \in W$より、$\qty(x_{\lambda_1} y_{\lambda_1}, x_{\lambda_2} y_{\lambda_2}) \in V$
 }
 
 \dfn{総和可能}{
   Hausdorffな可換位相群$G$について、$G$上の点列$\qty(x_n)_{n \in \N}$を考える。
 
-  点列$\qty(\sum_{m = 0}^n x_m)_{n \in \N}$が、$G$上の点$s$に収束するとき、点列$\qty(x_n)_{n \in \N}$は総和可能と呼ぶ。
+  点列$\qty(\sum_{m = 0}^n x_m)_{n \in \N}$が$G$上の点$s$に収束するとき、点列$\qty(x_n)_{n \in \N}$は総和可能と呼ぶ。
 
   このとき、$\sum_{m = 0}^\infty x_m \coloneqq s$と表記する。
 }
@@ -128,9 +162,10 @@
   }
 }
 
-\rem{順序群の定義}{
+\rem{可換全順序群}{
   一般の順序群の定義は、半順序（全順序とは限らない）と両立する（可換とは限らない）群構造である。
-  より強い意味で使っていることに注意されたい。
+
+  可換全順序群（群構造は可換群であり、半順序構造は全順序をなしている）を順序群と呼ぶことは、必ずしも一般的でないことに注意されたい。
 }
 
 \cor*{

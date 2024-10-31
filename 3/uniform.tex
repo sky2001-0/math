@@ -24,7 +24,7 @@
 \lem{基本近縁系の三角性}{
   空でない集合$X$の基本近縁系$\mathcal{V}$について、以下を満たす。
   \eq*{
-    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \subset W^{-1} \circ W \subset \qty(W^{-1} \circ W) \circ W \subset V)
+    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \cup W^{-1} \subset W^{-1} \circ W \subset \qty(W^{-1} \circ W) \circ W \subset V)
   }
 }{
   \dfnref{基本近縁系}第四式より$\exists S \in \mathcal{V} \qty(S \circ S \subset V)$であり、$\exists R \in \mathcal{V} \qty(R \circ R \subset S)$である。
@@ -222,7 +222,8 @@
 }
 
 \dfn{部分一様空間}{
-  一様空間$\qty(X, \mathcal{U})$と、$X$の空でない部分集合$A$を考える。\mlemref{0}の与える基本近縁系の与える近縁系$\mathcal{U'}$について、一様空間$\qty(A, \mathcal{U'})$を部分一様空間と呼ぶ。
+  一様空間$\qty(X, \mathcal{U})$と、$X$の空でない部分集合$A$を考える。
+  \mlemref{0}の与える基本近縁系の与える近縁系$\mathcal{U'}$について、一様空間$\qty(A, \mathcal{U'})$を部分一様空間と呼ぶ。
 }
 
 
@@ -254,6 +255,20 @@
   Cauchyネットの部分ネットはCauchyである。
 }
 
+\lem{一様連続とCauchy}{
+  一様空間$\qty(X, \mathcal{U}), \qty(X', \mathcal{U'})$と、一様連続写像$f \in \qty(X')^X$を考える。
+
+  このとき、$X$上のCauchyネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$\qty(f(x_\lambda))_{\lambda \in \Lambda}$はCauchyである。
+}{
+  $\forall U' \in \mathcal{U'}$を考える。
+  
+  一様連続性から、$\exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \subset U')$である。
+
+  Cauchyより、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in U)$である。
+
+  ゆえに$\qty(f(x_{\lambda_1}), f(x_{\lambda_2})) \in U'$である。
+}
+
 \thm{収束ネットはCauchy}{
   収束するネットはCauchyである。
 }{
@@ -276,10 +291,6 @@
   \dfnref{部分ネット}より$\exists \mu_1 \in M \qty(\lambda_0 \preccurlyeq \lambda(\mu_1))$であり、有向集合より$\exists \mu_2 \in M \qty(\mu_0 \preccurlyeq \mu_2 \land \mu_1 \preccurlyeq \mu_2)$
 
   よって$\lambda(\mu_2) \preccurlyeq \lambda$ならば$\qty(a, \lambda(\mu_2)), \qty(\lambda(\mu_2), \lambda) \in W$である。ゆえに$\qty(a, x_\lambda) \in V$すなわち$x_\lambda \in V[a]$
-}
-
-\dfn{完備}{
-  一様空間$X$について、$X$上の任意のCauchyなネットが収束するとき、$X$は完備であると呼ぶ。
 }
 
 \dfn{全有界}{
@@ -347,28 +358,6 @@
   背理法より示される。
 }
 
-\thm{Heine-Borelの被覆定理}{
-  一様空間$\qty(X, \mathcal{U})$について、以下の２つは同値である。
-  \begin{enumerate}
-    \item $X$はコンパクトである。
-    \item $X$は全有界かつ完備である。
-  \end{enumerate}
-}{
-  $1. \rightarrow 2.$を示す。
-
-  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意の普遍ネットは収束するので、\thmref{収束ネットはCauchy}よりCauchyである。
-
-  \thmref{ネットによる全有界の特徴づけ}より全有界である。\\*
-
-  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意のCauchyなネット$\qty(x_\lambda)_{\lambda \in \Lambda}$は収束する部分ネットを持つ。
-
-  \lemref{収束する部分を持つCauchyネット}より$\qty(x_\lambda)_{\lambda \in \Lambda}$は収束する。\\*
-
-  $2. \rightarrow 1.$を示す。
-
-  $X$上の任意のネットについて、全有界性から\thmref{ネットによる全有界の特徴づけ}よりCauchyな部分ネットが存在して、完備性から収束する。\thmref{ネットによるコンパクトの特徴づけ}より示される。
-}
-
 \thm{Heine-Cantorの定理}{
   全有界な一様空間$\qty(X, \mathcal{U})$と、一様空間$\qty(X', \mathcal{U'})$について、連続写像$f \in \qty(X')^X$は一様連続である。
 }{
@@ -391,6 +380,32 @@
   $w, z \in V(V', y)[y]$より$f(w), f(z) \in f(V(V', y)[y]) \subset W'(V')[f(y)]$である。
 
   したがって$\qty(f(y), f(w)), \qty(f(y), f(z)) \in W'$より$\qty(f(w), f(z)) \in V'$
+}
+
+\dfn{完備}{
+  一様空間$X$について、$X$上の任意のCauchyなネットが収束するとき、$X$は完備であると呼ぶ。
+}
+
+\thm{Heine-Borelの被覆定理}{
+  一様空間$\qty(X, \mathcal{U})$について、以下の２つは同値である。
+  \begin{enumerate}
+    \item $X$はコンパクトである。
+    \item $X$は全有界かつ完備である。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意の普遍ネットは収束するので、\thmref{収束ネットはCauchy}よりCauchyである。
+
+  \thmref{ネットによる全有界の特徴づけ}より全有界である。\\*
+
+  \thmref{ネットによるコンパクトの特徴づけ}より$X$上の任意のCauchyなネット$\qty(x_\lambda)_{\lambda \in \Lambda}$は収束する部分ネットを持つ。
+
+  \lemref{収束する部分を持つCauchyネット}より$\qty(x_\lambda)_{\lambda \in \Lambda}$は収束する。\\*
+
+  $2. \rightarrow 1.$を示す。
+
+  $X$上の任意のネットについて、全有界性から\thmref{ネットによる全有界の特徴づけ}よりCauchyな部分ネットが存在して、完備性から収束する。\thmref{ネットによるコンパクトの特徴づけ}より示される。
 }
 
 

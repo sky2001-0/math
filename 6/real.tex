@@ -40,7 +40,7 @@
     \forall N \in \N \exists n, m \in \N_{\geq N} \qty(\qty(x_n - y_n) - \qty(x_m - y_m) \geq \epsilon)
   }
 
-  $\qty(x_n - y_n)_{n \in \N}$は、\lemref{位相群のCauchyネットの積}よりCauchy列であるので、
+  $\qty(x_n - y_n)_{n \in \N}$は、\lemref{可換位相群の一様的な特徴}よりCauchy列であるので、
   \eq*{
     \forall \epsilon \in \Q^+ \exists N \in \N \forall n, m \in \N_{\geq N} \qty(\abs{\qty(x_n - y_n) - \qty(x_m - y_m)} < \epsilon)
   }
@@ -56,7 +56,7 @@
 }{
   右を示す。
 
-  \lemref{位相群のCauchyネットの積}より$\qty(x_l - y_l)_{l \in \N}$はCauchy的である。
+  \lemref{可換位相群の一様的な特徴}より$\qty(x_l - y_l)_{l \in \N}$はCauchyである。
 
   したがって$\exists N \in \N \forall m \in \N_{\geq N}$について、$\abs{\qty(x_n - y_n) - \qty(x_m - y_m)} < \epsilon / 2$
 
@@ -73,13 +73,13 @@
     \forall \qty(x_n)_{n \in \N}, \qty(y_n)_{n \in \N} \in A \qty(\qty(x_n)_{n \in \N} + \qty(y_n)_{n \in \N} \defiff \qty(x_n + y_n)_{n \in \N})
   }
 }{
-  \lemref{位相群のCauchyネットの積}よりマグマである。
+  \lemref{可換位相群の一様的な特徴}よりマグマである。
 
   結合法則は、有理数の可換体としての性質より明らか。
 
   $\qty(0)_{n \in \N}$は単位元である。
 
-  $\qty(x_n)_{n \in \N}$に対して、\lemref{可換位相群のCauchyネットの逆}より$\qty(-x_n)_{n \in \N}$は逆元である。
+  $\qty(x_n)_{n \in \N}$に対して、\lemref{可換位相群の一様的な特徴}より$\qty(-x_n)_{n \in \N}$は逆元である。
 
   交換法則は、有理数の可換体としての性質より明らか。
 }
@@ -124,7 +124,7 @@
 
   $\qty(x_n)_{n \in \N} \sim_R \qty(x'_n)_{n \in \N} \land \qty(y_n)_{n \in \N} \sim_R \qty(y'_n)_{n \in \N}$とする。
 
-  $\qty(x_n + y_n) - \qty(x'_n + y'_n) = \qty(x_n - x'_n) + \qty(y_n - y'_n)$であるので、\lemref{位相群の収束ネットの積と逆}より$0$に収束する。\\*
+  $\qty(x_n + y_n) - \qty(x'_n + y'_n) = \qty(x_n - x'_n) + \qty(y_n - y'_n)$であるので、$0$に収束する。\\*
 
   $\qty(x_n)_{n \in \N} \sim_R \qty(x'_n)_{n \in \N} \land \qty(y_n)_{n \in \N} \sim_R \qty(y'_n)_{n \in \N}$とする。
   \eq*{
