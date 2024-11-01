@@ -5,13 +5,13 @@
 \dfn{位相環}{
   環$\qty(\qty(R, +), \times)$と、$X$の開集合系$\mathcal{O}$が以下が成り立つとき、順序対$\qty(\qty(\qty(R, +), \times), \mathcal{O})$を位相環と呼ぶ。
   \begin{enumerate}
-    \item $\qty(\qty(R, +), \mathcal{O})$は位相群
+    \item $\qty(\qty(R, +), \mathcal{O})$は可換位相群
     \item $\times \in R^{R \times R}$が連続
   \end{enumerate}
 }
 
 \lem{位相環の条件}{
-  位相群$\qty(R, +)$について、$R$が位相環であることは、以下の３つを満たすことと同値である。
+  可換位相群$\qty(R, +)$について、$R$が位相環であることは、以下の３つ全てを満たすことと同値である。
   \begin{itemize}
     \item $\times \in R^{R \times R}$は、$\qty(0_R, 0_R)$で連続。
     \item $\forall x_0 \in R$について、$l \in R^R, l(x) = x_0 x$は、$0_R$で連続。
@@ -25,47 +25,10 @@
   $\forall \qty(x_0, y_0) \in R \times R$について、$x y = x_0 y_0 + \qty(x - x_0) \qty(y - y_0) + \qty(x - x_0) y_0 + x_0 \qty(x - y)$より、$\qty(x_0, y_0)$で連続。
 }
 
-\lem{位相環の収束ネットの積}{
-  位相環$R$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}, \qty(y_\lambda)_{\lambda \in \Lambda}$が、$x, y \in R$に収束するならば、$\qty(x_\lambda y_\lambda)_{\lambda \in \Lambda}$は$x y$に収束するネットである。
-}{
-  \dfnref{位相環}と\thmref{点連続と収束}より成り立つ。
-}
-
-\lem{位相環と連続写像}{
-  位相空間$X$と位相環$R$について、連続写像$f \in R^X, g \in R^X$を考える。
-
-  このとき、写像$f \times g \in G^X, \qty(f \times g)(x) = f(x) \times g(x)$は連続である。
-}{
-  \dfnref{位相環}と\thmref{連続写像の合成}より成り立つ。
-}
-
 \lem{位相環上の多項式}{
-  位相環$R$上の多項式$\varphi \in R[X]$について、式の値を与える$\varphi$は連続である。
+  可換位相環$R$上の多項式$\varphi \in R[X]$について、式の値を与える$\varphi$は連続である。
 }{
   定義より明らか。
-}
-
-\dfn{位相体}{
-  体$\qty(\qty(F, +), \times)$と、$X$の開集合系$\mathcal{O}$が以下が成り立つとき、順序対$\qty(\qty(\qty(F, +), \times), \mathcal{O})$を位相体と呼ぶ。
-  \begin{enumerate}
-    \item $\qty(\qty(\qty(F, +), \times), \mathcal{O})$は位相環
-    \item $-1 \in \qty(F^\times)^{F^\times}$が連続
-  \end{enumerate}
-}
-
-\lem{位相体の収束ネットの逆}{
-  Hausdorffな位相体$F$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が$x \in F^\times$に収束するならば、以下で定めるネット$\qty(y_\lambda)_{\lambda \in \Lambda}$は$1_F / x$に収束するネットである。
-  \eq*{
-    y_\lambda =
-    \begin{cases}
-      1_F / x_\lambda & \qty(x_\lambda \neq 0_F) \\*
-      0_F & \qty(x_\lambda = 0_F)
-    \end{cases}
-  }
-}{
-  Hausdorffと収束の定義より$\exists B_0 \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(0_F \notin B_0 \land \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B_0)$
-
-  \dfnref{位相体}と\thmref{点連続と収束}より成り立つ。
 }
 
 
@@ -82,7 +45,6 @@
   一般の順序環の定義は、半順序（全順序とは限らない）と両立する（可換とは限らない）環構造である。
 
   可換全順序環（環構造は可換環であり、半順序構造は全順序をなしている）を順序環と呼ぶことは、必ずしも一般的でないことに注意されたい。
-
 }
 
 \lem{順序環の性質}{
@@ -100,6 +62,14 @@
   $a^{-1} \leq 0_R$とすると、$0_R \leq a (-a^{-1}) = -1_R$ゆえに$1_R \leq 0_R$となりすでに示した第二式に矛盾。
 }
 
+\thm{順序環は整域}{
+  順序環は整域である。
+}{
+  整域でないとすると、$\exists a, b \in R \qty(a b = 0_R \land a \neq 0_R \land b \neq 0_R)$
+
+  $r \coloneqq a, b \in R$について、$0_R < r \lor r < 0_R$で場合分けすることにより矛盾を得る。背理法より示される。
+}
+
 \lem{順序環の三角性}{
   順序環$R$について、以下が成り立つ。
   \eq*{
@@ -111,48 +81,7 @@
   $0_R < r < 1_R$のとき、$r r < r$より、$r' = r$として成り立つ。
 }
 
-\thm{順序環は整域}{
-  順序環は整域である。
-}{
-  整域でないとすると、$\exists a, b \in R \qty(a b = 0_R \land a \neq 0_R \land b \neq 0_R)$
-
-  $r \coloneqq a, b \in R$について、$0_R < r \lor r < 0_R$で場合分けすることにより矛盾を得る。背理法より示される。
-}
-
-\dfn{順序体}{
-  順序環が体であるとき、順序体と呼ぶ。
-}
-
-\thm{順序体の稠密性}{
-  順序体$F$について、
-  \eq*{
-    \forall a, b \in F \qty(a < b \rightarrow \exists c \in F \qty(a < c \land c < b))
-  }
-}{
-  $a, b \in F$として、$0_F < 1_F + 1_F$より、
-  \eq*{
-    c \coloneqq \qty(a + b) \times \qty(1_F + 1_F)^{-1}
-  }
-  は条件を満たす。
-}
-
-
-\lsubsection{位相環としての順序環}
-
-\thm{順序環のノルム}{
-  順序環$R$について、以下が成り立つ。
-  \eqg*{
-    \forall a \in G \qty(\abs{a} = 0_R \leftrightarrow a = 0_R) \\*
-    \forall a, b \in G \qty(\abs{a + b} \leq \abs{a} + \abs{b}) \\*
-    \forall a, b \in G \qty(\abs{a} \abs{b} = \abs{a b})
-  }
-}{
-  \lemref{順序群のノルム}より、第一式、第二式は成り立つ。
-
-  第三式について考える。$r \coloneqq a, b \in R$について、$0_R \leq r \lor r < 0_R$で場合分けすることにより得る。
-}
-
-\thm*{
+\thm{順序環は位相環}{
   順序環$R$は位相環である。すなわち、$R$上の以下の演算は連続である。
   \begin{itemize}
     \item $\times \in R^{R \times R}$
@@ -177,7 +106,59 @@
   可換性と\lemref{位相環の条件}より位相環である。
 }
 
-\thm*{
+\thm{順序環のノルム}{
+  順序環$R$について、以下が成り立つ。
+  \eq*{
+    \forall a, b \in G \qty(\abs{a} \abs{b} = \abs{a b})
+  }
+}{
+  $r \coloneqq a, b \in R$について、$0_R \leq r \lor r < 0_R$で場合分けすることにより得る。
+}
+
+
+\lsubsection{位相体・順序体}
+
+\dfn{位相体}{
+  体$\qty(\qty(F, +), \times)$と、$X$の開集合系$\mathcal{O}$が以下が成り立つとき、順序対$\qty(\qty(\qty(F, +), \times), \mathcal{O})$を位相体と呼ぶ。
+  \begin{enumerate}
+    \item $\qty(\qty(\qty(F, +), \times), \mathcal{O})$は位相環
+    \item $-1 \in \qty(F^\times)^{F^\times}$が連続
+  \end{enumerate}
+}
+
+\lem{位相体の収束ネットの逆}{
+  Hausdorffな位相体$F$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が$x \in F^\times$に収束するならば、以下で定めるネット$\qty(y_\lambda)_{\lambda \in \Lambda}$は$1_F / x$に収束するネットである。
+  \eq*{
+    y_\lambda =
+    \begin{cases}
+      1_F / x_\lambda & \qty(x_\lambda \neq 0_F) \\*
+      0_F & \qty(x_\lambda = 0_F)
+    \end{cases}
+  }
+}{
+  Hausdorffと収束の定義より$\exists B_0 \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(0_F \notin B_0 \land \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B_0)$
+
+  \dfnref{位相体}と\thmref{点連続と収束}より成り立つ。
+}
+
+\dfn{順序体}{
+  順序環が体であるとき、順序体と呼ぶ。
+}
+
+\thm{順序体の稠密性}{
+  順序体$F$について、
+  \eq*{
+    \forall a, b \in F \qty(a < b \rightarrow \exists c \in F \qty(a < c \land c < b))
+  }
+}{
+  $a, b \in F$として、$0_F < 1_F + 1_F$より、
+  \eq*{
+    c \coloneqq \qty(a + b) \times \qty(1_F + 1_F)^{-1}
+  }
+  は条件を満たす。
+}
+
+\thm{順序体は位相体}{
   順序体$F$は位相体である。すなわち、$F$上の以下の演算は連続である。
   \begin{itemize}
     \item $-1 \in \qty(F^\times)^{F^\times}$

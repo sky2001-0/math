@@ -186,15 +186,8 @@
   順序群$G$が自明であることと、正錐が空であることは必要十分である。
 }
 
-\cor*{
+\lem{非自明な順序群は最大を持たない}{
   非自明な順序群$G$は、最大元と最小元を持たない。
-}
-
-\dfn{Archimedes}{
-  順序群$G$が以下を満たすとき、$G$はArchimedes的であると呼ぶ。
-  \eq*{
-    \forall x, y \in G^+ \exists n \in \N \qty(x < \sum_{m \in n} y)
-  }
 }
 
 \lem{順序群の三角性}{
@@ -211,31 +204,29 @@
 }
 
 \thm{順序群は位相群}{
-  順序群$\qty(\qty(G, +), \leq)$上の以下の２つの演算は連続である。
-  \begin{enumerate}
-    \item $+ \in G^{G \times G}$
-    \item $- \in G^G$
-  \end{enumerate}
+  順序群$\qty(\qty(G, +), \leq)$は位相群である。
 }{
-  \lemref{順序の開基}の定める開基$\mathcal{B}$を考える。\\*
+  順序群$G$が自明であるならば、明らか。
+  非自明な場合を考える。
 
-  $\forall \qty(x, y) \in G$について考える。
+  写像$\varphi \in G^{G \times G}, \varphi(x, y) = x - y$を考える。
 
-  $G^+$が最小元$m$を持つならば$\qty{x} = \sqty{x - m, x + m} \in \mathcal{B}(x)$である。同様に$\qty{y} \in \mathcal{B}(y)$
+  $\forall \qty(x, y) \in G \times G$における点連続性を考える。
+  
+  $\forall a, b \in G \qty(\varphi(x, y) \in \sqty{a, b})$を考える。\\*
 
-  $\forall B \in \mathcal{B}(x + y) \qty(+(\qty{x} \times \qty{y}) = \qty{x + y} \subset B)$
+  $G^+$が最小元$m$を持つとき、$\qty{x} = \sqty{x - m, x + m} \subset \sqty{a, b}$である。
+  同様に$\qty{y} \subset \sqty{a, b}$でもある。
 
-  $G^+$が最小元を持たないならば$\forall B \in \mathcal{B}(x + y) \exists a, b \in G \qty(x + y \in \sqty{a, b} = B)$である。
+  $\forall B \in \mathcal{B}(\varphi(x, y)) \qty(\varphi(\qty{x} \times \qty{y}) = \qty{\varphi(x, y)} \subset B)$である。\\*
 
-  \lemref{順序群の三角性}より$\exists g \in G^+ \qty(g + g \leq \min \qty{x + y - a, b - (x + y)})$である。
+  $G^+$が最小元を持たないとき、\lemref{順序群の三角性}より$\exists g \in G^+ \qty(g + g \leq \min \qty{\varphi(x, y) - a, b - \varphi(x, y)})$である。
 
-  $B' \coloneqq \sqty{x - g, x + g} \times \sqty{y - g, y + g} \in \mathcal{B} \times \mathcal{B}$であり、$+(B') \subset B$
+  ゆえに、$\varphi \qty(\sqty{x - g, x + g} \times \sqty{y - g, y + g}) \subset \sqty{a, b}$である。\\*
 
-  \thmref{連続と点連続}より成り立つ。\\*
+  \dfnref{順序空間}の定める開基$\mathcal{B}$について、\lemref{最大がない場合の順序の開基}、\lemref{非自明な順序群は最大を持たない}より、$\forall B \in \mathcal{B} \exists a, b \in G \qty(\sqty{a, b} = B)$である。
 
-  $\forall B \coloneqq \sqty{a, b} \in \mathcal{B}$について考える。$f = -$とする。
-
-  $f^{-1}(B) = \sqty{-b, -a} \in \mathcal{B}$であるので連続。
+  \thmref{連続と点連続}より$\varphi$は連続である。
 }
 
 \dfn{絶対値}{
@@ -263,22 +254,6 @@
   $g \coloneqq a, b \in G$について、$0_G \leq g \lor g < 0_G$で場合分けすることにより得る。
 }
 
-\lem{絶対値は連続}{
-  順序群$\qty(\qty(G, +), \leq)$上の演算$\abs{}$は連続である。
-}{
-  \lemref{順序の開基}の定める開基$\mathcal{B}$を考える。
-
-  $\forall B \coloneqq \qty{x \in G \mid a < x \land x < b} \in \mathcal{B}$について考える。
-
-  $b \leq a \lor b < 0_G$ならば、$\abs{}^{-1}(B) = \abs{}^{-1}(\varnothing) = \varnothing \in \mathcal{O}$である。
-
-  $a < 0_G \leq b$であるとき、$\abs{}^{-1}(B) = \sqty{-b, b} \in \mathcal{B} \subset \mathcal{O}$である。
-
-  $0_G \leq a$であるとき、$\abs{}^{-1}(B) = \sqty{-b, -a} \cup \sqty{a, b} \in \mathcal{O}$である。
-
-  \lemref{開基と連続}より連続である。
-}
-
 \thm{順序群の一様構造}{
   順序群$G$について、以下で定める集合系$\mathcal{V}$は基本近縁系である。
   \eq*{
@@ -287,11 +262,17 @@
 
   さらに、基本近縁系$\mathcal{V}$の定める近縁系$\mathcal{U'}$は、\thmref{位相群の左一様構造}の定める近縁系$\mathcal{U}$に一致する。
 }{
-	$\forall g \in G^+ \exists B \in \mathcal{B}(0_G) \qty(B = \sqty{-g, g} \land \tilde{B} \subset V_g)$である。
+	$\forall g \in G^+ \exists B \in \mathcal{B}(0_G) \qty(B = \sqty{-g, g} \land \tilde{B} = V_g)$である。
 
 	$\forall B \in \mathcal{B}(0_G)$について、$B = \sqty{a, b} \land a < 0_G < b$である。$g = \min \qty{-a, b} \in G^+$について、$V_g \subset \tilde{B}$である。
 
 	\lemref{近縁系の一意性}より成り立つ。
+}
+
+\lem{絶対値は一様連続}{
+  順序群$\qty(\qty(G, +), \leq)$上の絶対値$\abs{}$は一様連続である。
+}{
+  $\forall g \in G^+ \qty(\qty(\abs{x}, \abs{y}) \in V_g)$であるので、成り立つ。
 }
 
 \thm{順序群では全有界ならば有界}{
@@ -307,27 +288,24 @@
 }
 
 \thmf{$\epsilon$-$\delta$論法}{epsilon-delta論法}{
-  順序群$G$上の点列$\qty(a_n)_{n \in \N}$を考える。
+  順序群$G$上のネット$\qty(a_\lambda)_{\lambda \in \Lambda}$を考える。
 
-  $\qty(a_n)_{n \in \N}$が$r \in G$に収束することは、以下を満たすことと必要十分である。
+  $\qty(a_\lambda)_{\lambda \in \Lambda}$が$r \in G$に収束することは、以下を満たすことと必要十分である。
   \eq*{
-    \forall \epsilon \in G^+ \exists N \in \N \forall n \in \N \qty(N \leq n \rightarrow \abs{a_n - r} < \epsilon)
+    \forall \epsilon \in G^+ \exists \lambda_0 \in \Lambda \forall \lambda \in \Lambda_{\geq \lambda_0} \qty(\abs{a_\lambda - r} < \epsilon)
   }
 
-  $\qty(a_n)_{n \in \N}$がCauchyであることは、以下を満たすことと必要十分である。
+  $\qty(a_\lambda)_{\lambda \in \Lambda}$がCauchyであることは、以下を満たすことと必要十分である。
   \eq*{
-    \forall \epsilon \in G^+ \exists N \in \N \forall n, m \in \N \qty(N \leq n \land N \leq m \rightarrow \abs{a_n - a_m} < \epsilon)
+    \forall \epsilon \in G^+ \exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\geq \lambda_0} \qty(\abs{a_{\lambda_1} - a_{\lambda_2}} < \epsilon)
   }
 }{
   \thmref{順序群の一様構造}より明らか。
 }
 
-\lem{順序群上のCauchy列の絶対値}{
-  順序群$G$上のCauchy列$\qty(x_n)_{n \in \N}$について、$\qty(\abs{x_n})_{n \in \N}$はCauchy列となる。
-
-  さらに、$\qty(x_n)_{n \in \N}$が$a$に収束するとき、$\qty(\abs{x_n})_{n \in \N}$は$\abs{a}$に収束する。
-}{
-  \lemref{順序群のノルム}より$\abs{\abs{x_n} - \abs{x_m}} \leq \abs{x_n - x_m}$であるのでCauchy列である。
-
-  \lemref{順序群のノルム}より$\abs{\abs{x_n} - \abs{a}} \leq \abs{\abs{x_n - a}} = \abs{x_n - a}$であるので、$\abs{a}$に収束する。
+\dfn{Archimedes}{
+  順序群$G$が以下を満たすとき、$G$はArchimedes的であると呼ぶ。
+  \eq*{
+    \forall x, y \in G^+ \exists n \in \N \qty(x < \sum_{m \in n} y)
+  }
 }
