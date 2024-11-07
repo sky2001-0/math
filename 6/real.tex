@@ -318,7 +318,7 @@
     \end{cases}
   }
 
-  $x_n \coloneqq \sum_{m = 0}^{n} \qty(y_m / 2^m)$とすると、$\qty(x_n)_{n \in \N}$は$\Q$上のCauchy列である。
+  $x_n \coloneqq \sum_{m \in n} \qty(y_m / 2^m)$とすると、$\qty(x_n)_{n \in \N}$は$\Q$上のCauchy列である。
 
   $A$に対して$\qty[\qty(x_n)_{n \in \N}]$を定める写像$g$は単射である。\\*
 
@@ -341,7 +341,7 @@
     \end{cases}
   }
 
-  $x_n \coloneqq \sum_{m = 0}^{n} \qty(y_m / 2^m)$とすると、$\qty(x_n)_{n \in \N}$は$\Q$上のCauchy列である。
+  $x_n \coloneqq \sum_{m \in n} \qty(y_m / 2^m)$とすると、$\qty(x_n)_{n \in \N}$は$\Q$上のCauchy列である。
 
   $\qty(A, B)$に対して$\qty[\qty(x_n)_{n \in \N}]$を定める写像$g$は単射である。\\*
 
@@ -541,7 +541,8 @@
 }
 
 \thmf{$\R$は連結}{Rは連結}{
-  $\R$は連結である。また、$\R$上の区間は連結である。
+  $\R$は連結である。
+  また、$\R$上の区間は連結である。
 }{
   連結でないと仮定する。$\exists U, V \in \mathcal{O} \setminus \qty{\varnothing} \qty(U \cup V = \R \land U \cap V = \varnothing)$
 
@@ -598,8 +599,8 @@
 
 \lsubsection{実一変数関数}
 
-\dfn{関数}{
-  集合$X$について、写像$f \in X^\R$を関数と呼ぶ。
+\rem{実関数}{
+  写像$f \in Y^X$について、$Y \subset \R$であるとき、$f$を関数、または実関数と呼ぶことがある。
 }
 
 \thm{最大値の定理}{

@@ -168,7 +168,7 @@
 \dfn{素元分解}{
   整域$D$と元$a \in D$について、以下が成り立つとき、$a$は素元分解可能であると呼ぶ。
   \begin{itemize}
-    \item $\exists n \in \N \exists p \in \mathcal{P}(D)^n \exists u \in D^\times \qty(a = u \prod_{m = 0}^n p(m))$
+    \item $\exists n \in \N \exists p \in \mathcal{P}(D)^n \exists u \in D^\times \qty(a = u \prod_{m \in n} p(m))$
   \end{itemize}
 }
 
@@ -184,7 +184,7 @@
 }{
   可逆でない既約元$a \in D$を考える。
 
-  $a$は既約元より$a \neq 0_D$である。したがって、素元分解$a = u \prod_{m = 0}^n p(m)$ができる。
+  $a$は既約元より$a \neq 0_D$である。したがって、素元分解$a = u \prod_{m \in n} p(m)$ができる。
 
   $n = 0$とすると、$a = u$より可逆でないことに反する。
 
@@ -264,16 +264,16 @@
 
   一意性を示す。
 
-  $a = u \prod_{m = 0}^n p(m) = u' \prod_{m = 0}^{n'} p'(m)$とする。$n \leq l$とする。\\*
+  $a = u \prod_{m = 0}^n p(m) = u' \prod_{m \in n'} p'(m)$とする。$n \leq l$とする。\\*
 
-  $n = 0$のとき、$a = u = u' \prod_{m = 0}^{n'} p'(m)$である。
+  $n = 0$のとき、$a = u = u' \prod_{m \in n'} p'(m)$である。
 
-  $n' \neq 0$のとき、\lemref{整域の素元は可逆でない既約元}より$\prod_{m = 0}^{n'} p'(m)$は可逆でない。
+  $n' \neq 0$のとき、\lemref{整域の素元は可逆でない既約元}より$\prod_{m \in n'} p'(m)$は可逆でない。
   したがって$u$が可逆でなくなり仮定に反するので、$n' = 0$である。ゆえに一意。\\*
 
   ある$n \in \N$で一意とする。
 
-  $a = u \prod_{m = 0}^{s(n)} p(m) = u' \prod_{m = 0}^{n'} p'(m)$とする。
+  $a = u \prod_{m \in s(n)} p(m) = u' \prod_{m \in n'} p'(m)$とする。
 
   $a \in \ev{p(n)}$より、素イデアルの定義から$\exists k \in n' \qty(p'(k) \in \ev{p(n)})$である。ゆえに$\ev{p'(k)} \subset \ev{p(n)}$
 
@@ -288,7 +288,7 @@
     \end{cases}
   }
 
-  整域より$u \prod_{m = 0}^{n} p(m) = u'' \prod_{m = 0}^{n'} q(m)$が成り立つ。帰納法の仮定より一意。\\*
+  整域より$u \prod_{m \in n} p(m) = u'' \prod_{m \in n'} q(m)$が成り立つ。帰納法の仮定より一意。\\*
 
   \thmref{数学的帰納法}より、任意の$n$について成り立つ。
 }

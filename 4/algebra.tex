@@ -317,14 +317,14 @@
 }
 
 \dfn{総和記号}{
-  可換モノイド$\qty(M, +)$と、その部分集合$X$について、以下を満たすとする。ただし、$0$は単位元とする。
+  可換モノイド$\qty(M, +)$と、集合$X$、写像$f \in M^X$について、以下を満たすとする。ただし、$0$は単位元とする。
   \eq*{
-    \exists A \in \P(X) \qty(\abs{A} < \infty \land \forall x \in X \setminus A \qty(x = 0))
+    \exists A \in \P(X) \qty(\abs{A} < \infty \land \forall x \in X \setminus A \qty(f(x) = 0))
   }
 
   このとき、全単射$\sigma \in A^\abs{A}$が存在する。集合についての総和記号を以下のように定義する。\thmref{一般交換法則}から一意に定まる。
   \eq*{
-    \sum X \coloneqq \sum_{m \in \abs{A}} a_m
+    \sum_{x \in X} f(x) \coloneqq \sum_{m \in \abs{A}} f(a_m)
   }
 }
 

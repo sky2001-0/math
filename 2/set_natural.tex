@@ -252,8 +252,15 @@
   単射な写像$\varphi \in \N^\N$を用いて表せる部分ネット$\qty(x_{\varphi(m)})_{m \in \N}$を点列$\qty(x_n)_{n \in \N}$の部分列と呼ぶ。
 }
 
+\dfn{非交叉列}{
+  点列$\qty(x_n)_{n \in \N}$について以下が成り立つとき、$\qty(x_n)_{n \in \N}$を非交叉列と呼ぶ。
+  \eq*{
+    \forall n, m \in \N \qty(n \neq m \rightarrow x_n \cap x_m = \varnothing)
+  }
+}
+
 \dfn{単調列}{
-  全順序集合$X$上の点列$\qty(x_n)_{n \in \N}$について、以下のいずれかを満たす点列を単調列と呼ぶ。
+  半順序集合$X$上の点列$\qty(x_n)_{n \in \N}$について、以下のいずれかを満たす点列を単調列と呼ぶ。
   \eqg*{
     \forall n \in \N \qty(x_n < x_{s(n)}) \\*
     \forall n \in \N \qty(x_n \leq x_{s(n)}) \\*

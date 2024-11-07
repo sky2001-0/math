@@ -3,7 +3,7 @@
 \lsubsection{可測空間}
 
 \dfnf{$\sigma$-加法族}{sigma-加法族}{
-  空でない集合$X$について、以下を満たす集合系$\mathcal{S} \in \P(\P(X))$を$\sigma$-加法族と呼ぶ。
+  空でない集合$X$について、以下を満たす集合系$\mathcal{S} \in \P(\P(X))$を、$X$上の$\sigma$-加法族と呼ぶ。
   \eqg*{
     X \in \mathcal{S} \\*
     \forall S \in \mathcal{S} \qty(X \setminus S \in \mathcal{S}) \\*
@@ -11,7 +11,7 @@
   }
 }
 
-\lem*{
+\lemf{$\sigma$-加法族の性質}{sigma-加法族の性質}{
   空でない集合$X$上の$\sigma$-加法族$\mathcal{S}$について、以下が成り立つ。
   \eqg*{
     \varnothing \in \mathcal{S} \\*
@@ -28,30 +28,31 @@
   $A \neq \varnothing$のとき、\thmref{De Morganの法則}と\dfnref{sigma-加法族}第二式、第三式より成り立つ。
 }
 
+\lemf{$\sigma$-加法族の生成}{sigma-加法族の生成}{
+  空でない集合$X$と、集合族$\mathcal{T} \in \P(\P(X))$について、以下で定義される$\sigma(\mathcal{T})$は$X$上の$\sigma$-加法族である。
+  \eq*{
+    \sigma(\mathcal{T}) \coloneqq \bigcap \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{T} \subset \mathcal{S}}
+  }
+}{
+  $R \coloneqq \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{T} \subset \mathcal{S}}$とする。
+  
+  $\P(X) \in R$より、$R \neq \varnothing$である。\\*
+
+  第一式を示す。
+  $\forall \mathcal{S} \in R \qty(X \in \mathcal{S})$より、$X \in \bigcap R$である。
+
+  第二式を示す。
+  $\forall S \in \bigcap R \forall \mathcal{S} \in R \qty(S \in \mathcal{S})$であるので、$X \setminus S \in \mathcal{S}$である。
+  ゆえに、$X \setminus S \in \bigcap R$である。
+
+  第三式を示す。
+  $\forall A \in \P \qty(\bigcap R) \qty(\abs{A} \leq \aleph_0)$を考える。
+  $\forall \mathcal{S} \in R \qty(\bigcup A \in \mathcal{S})$であるので、$\bigcup A \in \bigcap R$である。
+}
+
 \dfn{可測空間}{
   空でない集合$X$と、$X$上の$\sigma$-加法族$\mathcal{S}$について、順序対$\qty(X, \mathcal{S})$を可測空間と呼ぶ。
   または単に$X$と書き、可測空間と集合どちらも表すものとする。
-}
-
-\dfn{Borel集合族}{
-  位相空間$\qty(X, \mathcal{O})$について、以下で定める集合$\mathcal{B}_X$をBorel集合族と呼ぶ。
-  \eq*{
-    \mathcal{B}_X = \bigcap \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{O} \subset \mathcal{S}}
-  }
-}
-
-\thm*{
-  Borel集合族は$\sigma$-加法族である。すなわち、位相空間は可測空間である。
-}{
-  $T \coloneqq \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{O} \subset \mathcal{S}}$を考える。
-
-  $\P(X) \in T$より、$T \neq \varnothing$である。\\*
-
-  第一式を示す。$\forall \mathcal{S} \in T \qty(X \in \mathcal{S})$より、$X \in \bigcap T$である。
-
-  第二式を示す。$\forall S \in \bigcap T \forall \mathcal{S} \in T \qty(S \in \mathcal{S})$であるので、$X \setminus S \in \mathcal{S}$である。ゆえに、$X \setminus S \in \bigcap T$である。
-
-  第三式を示す。$\forall A \in \P(S) \qty(\abs{A} \leq \aleph_0)$を考える。$\forall \mathcal{S} \in T \qty(\bigcup A \in \mathcal{S})$であるので、$\bigcup A \in \bigcap T$である。
 }
 
 \dfn{可測写像}{
@@ -61,70 +62,217 @@
   }
 }
 
-\lem*{
-  連続写像$f \in \qty(X')^X$は可測写像である。
+\lem{可測の条件}{
+  可測空間$\qty(X, \mathcal{S}), \qty(X', \mathcal{S'})$と集合族$\mathcal{T'} \in \P(\P(X'))$について、$\mathcal{S'} = \sigma(\mathcal{T'})$であるとする。
+
+  このとき、写像$f \in \qty(X')^X$が可測写像であることは、以下を満たすことと必要十分である。
+  \eq*{
+    \forall T' \in \mathcal{T'} \qty(f^{-1}(T') \in \mathcal{S})
+  }
 }{
-  $\mathcal{T'} \coloneqq \qty{S' \in \mathcal{S'} \mid f^{-1}(S') \in \mathcal{S}}$を考える。$\mathcal{T'} \subset \mathcal{S'}$である。\\*
+  十分性は、$\mathcal{T'} \subset \mathcal{S'}$より明らか。\\*
 
-  ここで、$X' \in \mathcal{S'} \land f^{-1}(X') = X \in \mathcal{S}$より、$X' \in \mathcal{T'}$である。
+  必要性を示す。
 
-  \thmref{原像の性質}より、$\forall T' \in \mathcal{T'} \qty(f^{-1}(X' \setminus T') = X' \setminus f^{-1}(T') \in \mathcal{S})$より、$X' \setminus T' \in \mathcal{T'}$である。
+  $\mathcal{Q'} \coloneqq \qty{S' \in \mathcal{S'} \mid f^{-1}(S') \in \mathcal{S}}$を考える。
+  $\mathcal{Q'} \subset \mathcal{S'}$である。
 
-  \thmref{原像の性質}より、$\forall A \in \P(\mathcal{T'}) \qty(\abs{A} \leq \aleph_0)$について、$f^{-1}(\bigcup A) = \bigcup \qty{f^{-1}(T') \mid T' \in A} \in \mathcal{S}$より、$\bigcup A \in \mathcal{T'}$である。
+  ここで、$X' \in \mathcal{S'} \land f^{-1}(X') = X \in \mathcal{S}$より、$X' \in \mathcal{Q'}$である。
 
-  ゆえに、$\mathcal{T'}$は$\sigma$-加法族である。\\*
+  \thmref{原像の性質}より、$\forall Q' \in \mathcal{Q'} \qty(f^{-1}(X' \setminus Q') = X' \setminus f^{-1}(Q') \in \mathcal{S})$より、$X' \setminus Q' \in \mathcal{Q'}$である。
 
-  連続より$\forall O' \in \mathcal{O'} \subset \mathcal{S'} \qty(f^{-1}(S') \in \mathcal{O} \subset \mathcal{S})$であるので、$\mathcal{O'} \subset \mathcal{T'}$である。
+  \thmref{原像の性質}より、$\forall A \in \P(\mathcal{Q'}) \qty(\abs{A} \leq \aleph_0)$について、$f^{-1}(\bigcup A) = \bigcup \qty{f^{-1}(Q') \mid Q' \in A} \in \mathcal{S}$より、$\bigcup A \in \mathcal{Q'}$である。
 
-  $\mathcal{S'}$は$\mathcal{O'}$を含む最小の$\sigma$-加法族であるので、$\mathcal{S'} \subset \mathcal{T'}$である。
+  ゆえに、$\mathcal{Q'}$は$\sigma$-加法族である。
+
+  定義より、$\mathcal{T'} \subset \mathcal{Q'}$であるので、$\mathcal{S'}$は$\mathcal{T'}$を含む最小の$\sigma$-加法族であるので、$\mathcal{S'} \subset \mathcal{Q'}$である。
+
+  よって、$\mathcal{S'} = \mathcal{Q'}$であるので、$\mathcal{Q'}$の定義より可測。
+}
+
+\lem*{
+  空でない集合$X$と、可測空間$\qty(X', \mathcal{S'})$、写像$f \in \qty(X')^X$を考える。
+
+  このとき、以下の集合系$\mathcal{S}$は$X$上の$\sigma$-加法族である。
+  \eq*{
+    \mathcal{S} \coloneqq \qty{f^{-1}(S') \mid S' \in \mathcal{S'}}
+  }
+}{
+  \thmref{原像の性質}より明らか。
+}
+
+\dfn{誘導可測空間}{
+  空でない集合$X$と、位相空間$\qty(X', \mathcal{O'})$、写像$f \in \qty(X')^X$について、\mlemref{0}より定まる$\sigma$-加法族$\mathcal{S}$が存在する。
+
+  可測空間$\qty(X, \mathcal{S})$を$f$に誘導された可測空間と呼ぶ。
+}
+
+\dfn{部分可測空間}{
+  可測空間$\qty(X, \mathcal{S})$と、$X$の空でない部分集合$A$を考える。
+
+  $f = \id{X} \rvert_A$に誘導された可測空間$\qty(A, \mathcal{O}_A)$を部分可測空間と呼ぶ。
+}
+
+\dfn{Borel集合族}{
+  位相空間$\qty(X, \mathcal{O})$について、以下で定める集合$\mathcal{B}_X$をBorel集合族と呼ぶ。
+  \eq*{
+    \mathcal{B}_X \coloneqq \sigma(\mathcal{O})
+  }
+
+  Borel集合族は$\sigma$-加法族であるので、位相空間は可測空間である。
+}
+
+\cor*{
+  連続写像$f \in \qty(X')^X$は可測写像である。
+}
+
+\cor*{
+  位相空間$\qty(X, \mathcal{O})$と、$X$の空でない部分集合$A$を考える。
+
+  部分空間$A$のBorel集合族は、可測空間$X$の部分可測空間$A$の$\sigma$-加法族と一致する。
+}
+
+
+\lsubsection{拡大実数への可測関数}
+
+\dfn{拡大実数}{
+  $\R$について、以下を満たす２つの元$\infty, -\infty$を考える。
+  \eqg*{
+    \forall a \in \R \cup \qty{\infty} \qty(-\infty < a \land a + \infty = \infty) \\*
+    \forall a \in \R \cup \qty{-\infty} \qty(a < \infty \land a + (-\infty) = -\infty) \\*
+    \forall a \in \R^+ \qty(a \times \infty = (-a) \times (-\infty) = \infty \land a \times (-\infty) = (-a) \times \infty = -\infty)
+  }
+
+  また、$+, \times$は、定義されている場合は可換であるとする。
+
+  このとき、集合$\bar{\R} \coloneqq \R \cup \qty{-\infty, \infty}$を拡大実数と呼ぶ。
+}
+
+\cor*{
+  $\bar{\R}$の空でない部分集合$A$について、上限を持つ。
+}
+
+\cor*{
+  $\bar{\R}$は$\qty[0, 1]$と同相である。
+}
+
+\rem{拡大実関数}{
+  写像$f \in Y^X$について、$Y \subset \bar{\R}$であるとき、$f$を関数、または拡大実関数と呼ぶことがある。
+}
+
+\lem{拡大実数への可測の特徴づけ}{
+  可測空間$\qty(X, \mathcal{S})$と、関数$f \in \bar{\R}^X$について、以下の５つは同値である。
+  \begin{enumerate}
+    \item $\forall a \in \R \qty(\qty{x \mid a < f(x)} \in \mathcal{S})$
+    \item $\forall a \in \R \qty(\qty{x \mid a \leq f(x)} \in \mathcal{S})$
+    \item $\forall a \in \R \qty(\qty{x \mid a > f(x)} \in \mathcal{S})$
+    \item $\forall a \in \R \qty(\qty{x \mid a \geq f(x)} \in \mathcal{S})$
+    \item $f$は可測
+  \end{enumerate}
+}{
+  $1. \to 2.$を示す。
+  \eq*{
+    \qty{x \mid a \leq f(x)} = \bigcap \qty{\qty{x \mid a - 1 / s(n) < f(x)} \mid n \in \N} \in \mathcal{S}
+  }\\*
+
+  $2. \to 3.$を示す。
+  \eq*{
+    \qty{x \mid a > f(x)} = X \setminus \qty{x \mid a \leq f(x)} \in \mathcal{S}
+  }\\*
+
+  $3. \to 4.$は、$1. \to 2.$と同様である。\\*
+
+  $4. \to 1.$は、$2. \to 3.$と同様である。\\*
+
+  $1. \to 5.$を示す。
+
+  $1. \to 3.$より、$\forall a \in \R \qty(f^{-1}(\R_{> a}) \in \mathcal{S} \land f^{-1}(\R_{< a}) \in \mathcal{S})$である。
+
+  \thmref{原像の性質}、\lemref{sigma-加法族の性質}より、$\forall a, b \in \R \qty(f^{-1}(\sqty{a, b}) = f^{-1}(\R_{> a} \cap \R_{< b}) = f^{-1}(\R_{> a}) \cap f^{-1}(\R_{< b}) \in \mathcal{S})$
+
+  ゆえに、\dfnref{順序空間}の定める開基$\mathcal{B}$について、$\forall B \in \mathcal{B} \qty(f^{-1}(B) \in \mathcal{S})$である。
+
+  \lemref{開基と連続}より$f$は連続であるので、可測。\\*
+
+  $5. \to 1.$を示す。
+  \dfnref{順序空間}の定める開集合系$\mathcal{O}$について、$\R_{< a} \in \mathcal{O} \subset \mathcal{B}_\R$より明らか。
+}
+
+\lem{可測関数の非負部分は可測}{
+  測度空間$\qty(\qty(X, \mathcal{S}), \mu)$と、可測関数$f \in \bar{\R}^X$を考える。
+
+  このとき、$f_\pm(x) \coloneqq \max \qty{\pm f(x), 0}$は可測関数である。
+}{
+  $\forall a \in R_{\geq 0}$について、$\qty{x \mid a < f_+(x)} = \qty{x \mid a < f(x)} \in \mathcal{S}$
+
+  $\forall a \in R_{< 0}$について、$\qty{x \mid a < f_+(x)} = X \in \mathcal{S}$
+
+  \lemref{拡大実数への可測の特徴づけ}より可測。\\*
+
+  $f_-$についても同様である。
+}
+
+\lem{可測関数列の上限は可測}{
+  可測空間$\qty(X, \mathcal{S})$と、可測関数の列$\qty(f_n)_{n \in \N} \in \qty(\bar{\R}^X)^\N$を考える。
+  このとき、以下で定義される関数$f \in \bar{\R}^X$は可測である。
+  \eq*{
+    f(x) \coloneqq \sup{f_n(x) \mid n \in \N}
+  }
+}{
+  $\forall a \in \R$について、\lemref{拡大実数への可測の特徴づけ}より、$\qty{x \mid a < f(x)} = \bigcup \qty{\qty{x \mid a < f_n(x)} \mid n \in \N} \in \mathcal{S}$である。
+
+  再び\lemref{拡大実数への可測の特徴づけ}を用いて、$f$は可測である。
 }
 
 \lem{指示関数}{
-  可測空間$\qty(X, \mathcal{S})$と、集合$E \in \mathcal{S}$を考える。
+  可測空間$\qty(X, \mathcal{S})$と、集合$S \in \mathcal{S}$を考える。
 
-  以下で定める写像$\chi_E \in \R^X$は可測である。
+  以下で定める関数$\chi_S \in \R^X$は可測である。
   \eq*{
-    \chi_E(x) =
+    \chi_S(x) \coloneqq
     \begin{cases}
-      1 & \qty(x \in E) \\*
-      0 & \qty(x \notin E)
+      1 & \qty(x \in S) \\*
+      0 & \qty(x \notin S)
     \end{cases}
   }
+
+  ここで定めた$\chi_E$を指示関数と呼ぶ。
 }{
   $\R$のBorel集合族$\mathcal{B}_{\R}$について、$\forall B \in \mathcal{B}_{\R}$を考える。
 
   $0, 1 \in B$であるとき、$f^{-1}(B) = X \in \mathcal{S}$である。
 
-  $0 \in B \land 1 \notin B$であるとき、$f^{-1}(B) = X \setminus E \in \mathcal{S}$である。
+  $0 \in B \land 1 \notin B$であるとき、$f^{-1}(B) = X \setminus S \in \mathcal{S}$である。
 
-  $0 \notin B \land 1 \in B$であるとき、$f^{-1}(B) = E \in \mathcal{S}$である。
+  $0 \notin B \land 1 \in B$であるとき、$f^{-1}(B) = S \in \mathcal{S}$である。
 
   $0, 1 \notin B$であるとき、$f^{-1}(B) = \varnothing \in \mathcal{S}$である。
 }
 
-
-
-\lsubsection{拡大実数}
-
-\dfn{拡大実数}{
-  順序体$\R$について、以下を満たす２つの元$\infty, -\infty$を考える。
+\lem{可測関数の近似}{
+  可測空間$\qty(X, \mathcal{S})$と、非負値可測関数$f \in \qty[0, \infty]^X$を考える。
+  このとき、以下を満たす非負値可測関数の列$\qty(f_n)_{n \in \N}$が存在する。
   \eqg*{
-    \forall a \in \R \qty(-\infty < a \land a < \infty) \\*
-    \forall a \in \R \cup \qty{\infty} \qty(a + \infty = \infty) \\*
-    \forall a \in \R \cup \qty{-\infty} \qty(a + (-\infty) = -\infty)
+    \forall x \in X \forall n, m \in \N \qty(n \leq m \rightarrow f_n(x) \leq f_m(x)) \\*
+    \forall x \in X \qty(f(x) = \sup{f_n(x) \mid n \in \N})
+  }
+}{
+  以下を考える。
+  \eq*{
+    f_n(x) \coloneqq n \chi_{\qty{y \in X \mid n \leq f(y)}}(x) + \sum_{k \in n \times 2^n} k / 2^n \times \chi_{\qty{y \in X \mid k \leq 2^n f(y) \land 2^n f(y) < s(k)}(x)}
   }
 
-  このとき、集合$\bar{\R} \coloneqq \R \cup \qty{-\infty, \infty}$を拡大実数と呼ぶ。
+  ???
 }
 
 
 \lsubsection{測度}
 
 \dfn{測度}{
-  可測空間$\qty(X, \mathcal{S})$について、以下を満たす写像$\mu \in \qty[0, \infty]^{\mathcal{S}}$を測度と呼ぶ。
+  可測空間$\qty(X, \mathcal{S})$について、以下を満たす可測関数$\mu \in \qty[0, \infty]^{\mathcal{S}}$を測度と呼ぶ。
   \begin{itemize}
     \item $\mu(\varnothing) = 0$
-    \item $\mathcal{S}$上の任意の非交叉列$\qty(S_n)_{n \in \N}$について、$\mu \qty(\bigcup \qty(S_n)_{n \in \N}) = \sum_{n = 0}^{\infty} \mu(S_n)$
+    \item $\mathcal{S}$上の任意の非交叉列$\qty(S_n)_{n \in \N}$について、$\displaystyle \mu \qty(\bigcup \qty{S_n \mid n \in \N}) = \sum_{n \in \N} \mu(S_n)$
   \end{itemize}
 }
 
@@ -132,3 +280,166 @@
   可測空間$\qty(X, \mathcal{S})$と、$X$上の測度$\mu$について、順序対$\qty(\qty(X, \mathcal{S}), \mu)$を測度空間と呼ぶ。
   または単に$X$と書き、測度空間と集合どちらも表すものとする。
 }
+
+\thm{測度}{
+  測度空間$\qty(\qty(X, \mathcal{S}), \mu)$は以下を満たす。
+  \begin{enumerate}
+    \item $\displaystyle \forall A, B \in \mathcal{S} \qty(A \subset B \rightarrow \mu(A) \leq \mu(B))$
+    \item $\displaystyle \forall \qty(S_n)_{n \in \N} \in \mathcal{S}^\N \qty(\mu \qty(\bigcup \qty{S_n \mid n \in \N}) \leq \sum_{n \in \N} \mu(S_n))$
+    \item $\qty(\mathcal{S}, \subset)$上の広義単調増加列$\qty(S_n)_{n \in \N}$について、$\displaystyle \mu \qty(\bigcup \qty{S_n \mid n \in \N}) = \sup{\mu(S_n) \mid n \in \N}$
+  \end{enumerate}
+}{
+  $1.$を示す。
+
+  $\mu(B) = \mu(A \cup \qty(B \setminus A)) = \mu(A) + \mu(B \setminus A) \geq \mu(A)$である。\\*
+
+  $2.$を示す。
+  $T_n \coloneqq S_n \setminus \bigcup \qty{S_m \mid m \in n}$とすると、$\qty(T_n)_{n \in \N}$は非交叉列である。
+
+  既に示した$1.$より、$\mu \qty(\bigcup \qty{S_n \mid n \in \N}) = \mu \qty(\bigcup \qty{T_n \mid n \in \N}) = \sum_{n \in \N} \mu(T_n) \leq \sum_{n \in \N} \mu(S_n)$である。\\*
+
+  $3.$を示す。
+  $T_0 = S_0, T_{s(n)} \coloneqq S_{s(n)} \setminus S_n$とすると、$\qty(T_n)_{n \in \N}$は非交叉列である。
+  \eq*{
+    \mu \qty(\bigcup \qty{S_n \mid n \in \N}) = \mu \qty(\bigcup \qty{T_n \mid n \in \N}) = \sum_{n \in \N} \mu(T_n) = \sup{\sum_{n \in m} \mu(T_n) \mid m \in \N} = \sup{\mu(S_m) \mid m \in \N}
+  }
+}
+
+\dfn{非負値可測関数の積分}{
+  測度空間$\qty(\qty(X, \mathcal{S}), \mu)$と、可測関数$f \in \qty[0, \infty]^X$を考える。
+
+  このとき、$f$の測度$\mu$による積分を以下で定義する。
+  \eqg*{
+    W \coloneqq \R_{\geq 0}^\N \times \qty{A \in \P \qty(\mathcal{S}) \mid \abs{A} < \aleph_0} \\*
+    \int_{x \in X} \dd{\mu} f(x) \coloneqq \sup{\sum_{j \in n} a_j \mu(S_j) \mid \qty(a, S) \in W \land \forall x \in X \qty(f(x) \geq \sum_{n \in \abs{S}} a_n \chi_{S_n}(x))}
+  }
+}
+
+\dfn{可測関数の積分}{
+  測度空間$\qty(\qty(X, \mathcal{S}), \mu)$と、可測関数$f \in \bar{\R}^X$を考える。
+
+  このとき、$f$の測度$\mu$による積分を以下で定義する。
+  \eq*{
+    \int_{x \in X} \dd{\mu} f(x) \coloneqq \int_{x \in X} \dd{\mu} f_+(x) - \int_{x \in X} \dd{\mu} f_-(x)
+  }
+
+  非負値可測関数については、\dfnref{非負値可測関数の積分}と同じ値を与える。
+}
+
+\thm{可測関数の積分}{
+  測度空間$\qty(\qty(X, \mathcal{S}), \mu)$について、以下が成り立つ。
+  \begin{enumerate}
+    \item 可測関数$f, g \in \bar{\R}^X$について、$\displaystyle \forall x \in X \qty(f(x) \leq g(x)) \rightarrow \int_{x \in X} \dd{\mu} f(x) \leq \int_{x \in X} \dd{\mu} g(x)$
+    \item 可測関数$f \in \bar{\R}^X$と$a \in \R \setminus \qty{0}$について、$\displaystyle a \int_{x \in X} \dd{\mu} f(x) = \int_{x \in X} \dd{\mu} \qty(a f(x))$
+    \item 可測関数$f, g \in \bar{\R}^X$について、$\displaystyle \int_{x \in X} \dd{\mu} \qty(f(x) + g(x)) = \int_{x \in X} \dd{\mu} f(x) + \int_{x \in X} \dd{\mu} g(x)$
+  \end{enumerate}
+}{
+  $1.$は、定義より明らか。\\*
+
+  $2.$???
+}
+
+\lem{単調収束定理}{
+  測度空間$\qty(\qty(X, \mathcal{S}), \mu)$について、以下が成り立つ可測関数列$\qty(f_n)_{n \in \N} \in \qty(\bar{\R}^X)^\N$を考える。
+  \begin{enumerate}
+    \item $\forall n \in \N \forall x \in X \qty(0 \leq f_n(x))$
+    \item $\forall n, m \in \N \forall x \in X \qty(n \leq m \rightarrow f_n(x) \leq f_m(x))$
+  \end{enumerate}
+  
+  このとき、以下が成り立つ。
+  \eq*{
+    \sup{\int_{x \in X} \dd{\mu} f_n(x) \mid n \in \N} = \int_{x \in X} \dd{\mu} \sup{f_n(x) \mid n \in \N}
+  }
+}{
+  $f(x) \coloneqq \sup{f_n(x) \mid n \in \N}$とする。
+
+  $\forall n \in \N$について、定義より$\forall x \in X \qty(f_n(x) \leq f(x))$であるので$\displaystyle \int_{x \in X} \dd{\mu} f_n(x) \leq \int_{x \in X} \dd{\mu} f(x)$である。
+
+  ゆえに、$\displaystyle \sup{\int_{x \in X} \dd{\mu} f_n(x) \mid n \in \N} \leq \int_{x \in X} \dd{\mu} f(x)$である。\\*
+
+  ???
+}
+
+\lem{Fatouの補題}{
+  測度空間$\qty(\qty(X, \mathcal{S}), \mu)$と非負値可測関数列$\qty(f_n)_{n \in \N} \in \qty(\qty[0, \infty]^X)^\N$について、。
+  \eq*{
+    \int_{x \in X} \dd{\mu} \sup{\inf{f_k(x) \mid k \in \N_{\geq n}} \mid n \in \N} \leq \sup{\inf{\int_{x \in X} \dd{\mu} f_k(x) \mid k \in \N_{\geq n}} \mid n \in \N}
+  }
+}{
+  ???
+}
+
+\dfn{可積分}{
+  測度空間$\qty(\qty(X, \mathcal{S}), \mu)$と可測関数$f \in \R^X$について、以下が成り立つとき、$f$は可積分であると言う。
+  \eq*{
+    \int_{x \in X} \dd{\mu} \abs{f(x)} < \infty
+  }
+}{
+  ???
+}
+
+\thm{Lebesgueの優収束定理}{
+  測度空間$\qty(\qty(X, \mathcal{S}), \mu)$について、以下が成り立つ可測関数列$\qty(f_n)_{n \in \N} \in \qty(\R^X)^\N$を考える。
+  \begin{enumerate}
+    \item $\displaystyle \forall x \in X \exists s \in \R \qty(s = \lim_{n \to \infty} f_n(x))$
+    \item 可積分な関数$h \in \qty[0, \infty]^X$が存在して、$\forall n \in \N \forall x \in X \qty(\abs{f_n(x)} \leq h(x))$である。
+  \end{enumerate}
+
+  このとき、$f_n$は全て可積分であり、$\displaystyle f(x) \coloneqq \lim_{n \to \infty} f_n(x)$も可積分であり、さらに以下を満たす。
+  \eq*{
+    \int_{x \in X} \dd{\mu} f(x) = \lim_{n \to \infty} \int_{x \in X} \dd{\mu} f_n(x)
+  }
+}{
+  ???
+}
+
+
+\lsubsection{確率}
+
+\dfn{確率測度}{
+  可測空間$\qty(\Omega, \mathcal{S})$について、以下を満たす測度$P$を確率測度と呼ぶ。
+  \begin{itemize}
+    \item $P(\Omega) = 1$
+  \end{itemize}
+}
+
+\dfn{確率空間}{
+  測度空間$\qty(\qty(\Omega, \mathcal{S}), P)$について、$P$が確率測度であるとき、測度空間$\qty(\qty(\Omega, \mathcal{S}), P)$を確率空間と呼ぶ。
+  または単に$\Omega$と書き、確率空間と集合どちらも表すものとする。
+}
+
+\cor*{
+  確率空間$\qty(\qty(\Omega, \mathcal{S}), P)$は以下を満たす。
+  \eq*{
+    \forall S \in \mathcal{S} \qty(P(S) \in \qty[0, 1])
+  }
+}
+
+\thm{確率測度}{
+  確率空間$\qty(\qty(\Omega, \mathcal{S}), P)$は以下を満たす。
+  \begin{enumerate}
+    \item $\displaystyle \forall S \in \mathcal{S} \qty(P(S) = 1 - P \qty(\Omega \setminus S))$
+    \item $n \in \N$について、$\displaystyle \forall \qty(S_m)_{m \in n} \in \mathcal{S}^\N \qty(P \qty(\bigcup \qty{S_m \mid m \in n}) = \sum_{A \in \P(n)} \qty(-1)^{\abs{A} + 1} P \qty(\qty{S_j \mid j \in A}))$
+  \end{enumerate}
+}{
+  $1.$を示す。
+
+  $P(S) = P(S) + P(\Omega \setminus S) - P(\Omega \setminus S) = P(\Omega) - P(\Omega \setminus S) = 1 - P(\Omega \setminus S)$である。\\*
+
+  $2.$を示す。
+  ??
+}
+
+\dfn{確率変数}{
+  確率空間$\qty(\qty(\Omega, \mathcal{S}), P)$を考える。
+  
+  関数$X \in \R^\Omega$が可測であるとき、$X$を確率変数と呼ぶ。
+}
+
+\dfn{分布関数}{
+  確率空間$\qty(\qty(\Omega, \mathcal{S}), P)$と確率変数の有限列$\qty(X_m)_{m \in n}$について、以下で定める$F \in \qty[0, 1]^{\qty(\R^n)}$を分布関数と呼ぶ。
+  \eq*{
+    F \qty(\qty(x_m)_{m \in n}) \coloneqq P \qty(\bigcap \qty{\qty{\omega \in \Omega \mid X_m(\omega) \leq x_m} \mid m \in n})
+  }
+}
+
