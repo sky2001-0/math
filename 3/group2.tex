@@ -1,18 +1,4 @@
-\lsection{群と整数}
-
-\thmf{$\Z$-加群としての可換群}{Z-加群としての可換群}{
-  可換群$\qty(G, +)$を考える。以下で定める$\rho \in \End(G)^\Z$について、順序対$\qty(\qty(G, +), \rho)$は$\Z$-加群である。
-  \eq*{
-    \rho(n)(g) \coloneqq
-    \begin{cases}
-      \sum_{m \in n} g & \qty(0 \leq n) \\*
-      \sum_{m \in (-n)} (-g) & \qty(n < 0)
-    \end{cases}
-  }
-}{
-  正負の場合の場合分けを考えて、\lemref{モノイド上の指数法則}より、成り立つ。
-}
-
+\lsection{様々な群}
 
 \lsubsection{有限群}
 
@@ -73,7 +59,7 @@
 \dfn{巡回群}{
 	群$G$について以下が成り立つとき、$G$を巡回群と呼ぶ。
 	\eq*{
-		\exists g \in G \qty(G = \qty{g^n \mid n \in \Z})
+		\exists n \in \N \exists g \in G \qty(G = \qty{g^m \mid m \in n})
 	}
 }
 
@@ -100,7 +86,7 @@
 	これを元$g$の位数と呼び、$\ord(g)$と表す。
 }
 
-\lem{有限巡回群の位数}{
+\lem{巡回群の位数}{
 	有限群$G$と元$g \in G$について、$G = \qty{g^n \mid n \in \Z}$であるとき、以下が成り立つ。
 	\eq*{
 		\ord(g) = \abs{G}
@@ -292,7 +278,7 @@
 \dfn{置換の符号}{
 	$\forall \sigma \in \S_n$について、\lemref{置換の符号}より定まる偶奇が存在する。
 
-	このとき、以下の写像$\sign \in \Z^{\S_n}$を定義する。
+	このとき、以下の写像$\sign \in \qty{-1, 1}^{\S_n}$を定義する。
 	\eq*{
 		\sign(\sigma) =
 		\begin{cases}
@@ -303,7 +289,16 @@
 }
 
 \cor*{
-	$\sign \in \qty(\Z, \times)^{\S_n}$は群準同型である。
+  $\qty{-1, 1}$上の乗法$+$を以下で導入する。
+  \eq*{
+    -1 \times -1 = 1 \times 1 = 1 \land -1 \times 1 = 1 \times -1 = -1
+  }
+
+  このとき$\qty(\qty{-1, 1}, \times)$は可換群であり、$\qty(\qty{-1, 1}, \times)^{\S_n}$は群準同型である。
+}
+
+\remf{$-1$}{-1}{
+	ここで定義した$-1$は、後で定義する$\Z$上の$-1$と同一視してよい。
 }
 
 \dfn{交代群}{

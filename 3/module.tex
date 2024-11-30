@@ -1,15 +1,15 @@
-\lsection{環上の加群}
+\lsection{加群}
 
 \lsubsection{環上の加群}
 
 \thm{可換群上の自己準同型全体}{
-  可換群$\qty(G, +)$について、$\End(G)$上の以下の演算$+'$を考える。このとき、順序対$\qty(\qty(\End(G), +'), \circ)$は環をなす。
+  可換群$\qty(V, +)$について、$\End(V)$上の以下の演算$+'$を考える。
+  このとき、順序対$\qty(\qty(\End(V), +'), \circ)$は環をなす。
   \eq*{
     \qty(f +' g)(x) \coloneqq f(x) + g(x)
   }
 }{
   \thmref{可換群上の準同型全体}より可換群をなす。
-
   \thmref{自己準同型の全体}よりモノイドをなす。
 
   準同型性から$f \circ \qty(g + h) (x) = f(g(x) + h(x)) = f(g(x)) + f(h(x)) = \qty(f \circ g + f \circ h) (x)$
@@ -38,83 +38,6 @@
   \end{enumerate}
 }
 
-\dfn{加群}{
-  左$R$-加群について、$R$が可換環であるとき、$R$-加群と呼ぶ。
-}
-
-\lem{加群の性質}{
-  左$R$-加群$V$について、以下が成り立つ。
-  \eqg*{
-    \forall v \in V \qty(0_R v = 0_V) \\*
-    \forall r \in R \forall v \in V \qty(r (-v) = (-r) v = -(r v)) \\*
-    \forall r \in R \forall v \in V \qty(r v = (-r) (-v))
-  }
-}{
-  \lemref{環の性質}と同様に示される。
-}
-
-\dfn{線型}{
-  左$R$-加群$V_1, V_2$について、群準同型$f \in V_2^{V_1}$が以下を満たすとき、$f$を加群準同型写像または線型写像と呼ぶ。
-  \eq*{
-    \forall v \in V_1 \forall r \in R \qty(f(r v) = r f(v))
-  }
-}
-
-\dfn{加群同型}{
-  全単射な線型写像を、加群同型写像、または単に加群同型と呼ぶ。
-}
-
-\dfn{線型写像の全体}{
-  左$R$-加群$V, V'$について、$V$から$V'$への線型写像全体のなす集合は群をなす。
-  これを$\Hom_R(V, V')$と表す。
-
-  さらに$\End_R(V) \coloneqq \Hom_R(V, V)$、$\GL(V) \coloneqq \End_R(V)^\times$とする。
-}
-
-\dfn{部分加群}{
-  左$R$-加群$\qty(\qty(V, +), \rho)$と$V$の部分群$\qty(W, +)$について、以下が成り立つとき$\qty(\qty(W, +), \rho')$を$\qty(\qty(V, +), \rho)$の部分加群と呼ぶ。
-  \eq*{
-    \forall v \in W \forall r \in R \qty(r v \in W)
-  }
-}
-
-\dfn{商加群}{
-  左$R$-加群$\qty(\qty(V, +), \rho)$上の同値関係$\sim$を考える。
-
-  \corref{直積集合と自明な同値関係}の意味で演算$+$と$\sim$が両立かつ、$\forall r \in R$について写像$\rho(r)$が$\sim$と両立するとき、
-
-  \thmref{両立}より定める演算$+'$および環準同型$\rho'$が存在する。
-
-  このとき、左$R$-加群$\qty(\qty(V / \sim, +'), \rho')$を左$R$-加群$V$の商加群と呼ぶ。
-}
-
-\lem*{
-  左$R$-加群$V$とその部分加群$W$について、以下で定める関係$\sim$は\corref{直積集合と自明な同値関係}の意味で演算$+$と両立かつ、$\forall r \in R$について写像$\rho(r)$が$\sim$と両立する同値関係である。
-  \eq*{
-    \forall x, y \in V \qty(x \sim y \defiff x + (-y) \in W)
-  }
-}{
-  $\qty(W, +)$は$\qty(V, +)$の正規部分群であるため、\lemref{正規部分群の定める同値関係}より、$+$と両立する同値関係である。
-
-  $x + (-y) \in W$のとき、\lemref{加群の性質}より、$\forall r \in R \qty(r x + (-(r y)) = r x + r (-y) = r \qty(x + (-y)) \in W)$
-
-  ゆえに両立する。
-}
-
-\dfn{剰余加群}{
-  左$R$-加群$V$とその部分加群$W$について、\mlemref{0}の定める同値関係による剰余群を、剰余加群と呼び、$V / W$と表す。
-}
-
-\thm{加群の準同型定理}{
-  左$R$-加群$V_1, V_2$と、線型写像$f \in V_2^{V_1}$に付随する同値関係$\sim_f$について、加群同型$\bar{f} \in \Im(f)^{V / \sim_f}$が存在する。
-}{
-  $\Im(f)$は$V_2$の部分左加群である。
-
-  \thmref{群準同型定理}より、得る$\bar{f}$は群同型である。
-
-  今、$\bar{f}(\qty[r v]) = f(r v) = r f(v) = r \bar{f}([v])$であるので線型である。
-}
-
 \lem{左加群としての環}{
   環$\qty(\qty(R, +), \times)$と、$R$の部分環$S$を考える。
 
@@ -126,8 +49,52 @@
   環の分配法則、および積についての結合性から、$\rho$は環準同型である。
 }
 
+\dfn{線型}{
+  左$R$-加群$V_1, V_2$について、群準同型$f \in V_2^{V_1}$が以下を満たすとき、$f$を加群準同型写像または線型写像と呼ぶ。
+  \eq*{
+    \forall v \in V_1 \forall r \in R \qty(f(r v) = r f(v))
+  }
+}
 
-\lsubsection{自由加群}
+\dfn{線型写像の全体}{
+  左$R$-加群$V, V'$について、$V$から$V'$への線型写像全体のなす集合は\thmref{可換群上の自己準同型全体}と同様の和、積について環をなす。
+  これを$\Hom_R(V, V')$と表す。
+
+  さらに$\End_R(V) \coloneqq \Hom_R(V, V)$、$\GL(V) \coloneqq \End_R(V)^\times$とする。
+}
+
+\dfn{直積加群}{
+  環$R$と、写像$V \in Z^\Lambda$を考える。$\forall \lambda \in \Lambda$について、$V(\lambda)$は左$R$-加群であるとする。
+
+  以下で定める順序対$\qty(\qty(\prod V, +), \rho)$は左加群である。
+  \eqg*{
+    \forall v_1, v_2 \in \prod V \forall \lambda \in \Lambda \qty(\qty(v_1 + v_2)(\lambda) \coloneqq v_1(\lambda) + v_2(\lambda)) \\*
+    \forall v \in \prod V \forall r \in R \forall \lambda \in \Lambda \qty(\qty(r v)(\lambda) \coloneqq r v(\lambda))
+  }
+
+  この左$R$-加群を$V$の直積加群または直積と呼ぶ。
+}
+
+\dfn{直和加群}{
+  環$R$と、写像$V \in Z^\Lambda$を考える。$\forall \lambda \in \Lambda$について、$V(\lambda)$は左$R$-加群であるとする。
+
+  以下で定める順序対$\qty(\qty(\bigoplus V, +), \rho)$は左加群である。
+  \eq*{
+    \bigoplus V \coloneqq \qty{v \in \prod V \mid \abs{\qty{\lambda \in \Lambda \mid v(\lambda) \neq 0_{V(\lambda)}}} < \infty}
+  }
+
+  この左$R$-加群を$V$の直積加群または直和と呼ぶ。
+}
+
+\cor*{
+  直和$\bigoplus V$は、直積$\prod V$の部分加群である。
+}
+
+\cor*{
+  $V \in Z^\Lambda$を考える。$\forall \lambda \in \Lambda$について、$V(\lambda)$は左$R$-加群であるとする。
+
+  $\abs{\Lambda} < \infty$ならば$\bigoplus V = \prod V$である。
+}
 
 \dfn{線型包}{
   左$R$-加群$V$について、$V$の部分集合$W$を考える。このとき、以下で定める集合$\Span W$は$V$の部分加群である。
@@ -135,7 +102,7 @@
     \Span W \coloneqq \qty{v \in V \mid \exists n \in \N \exists \qty(r_m, w_m)_{m \in \N} \in \qty(R \times W)^\N \qty(v = \sum_{m \in n} r_m w_m)}
   }
 
-  これを線型包と呼ぶ。
+  これを$W$の線型包と呼ぶ。
 }
 
 \dfn{生成系}{
@@ -171,8 +138,15 @@
   基底を持つ左$R$-加群を自由加群と呼ぶ。
 }
 
+
+\lsubsection{体上の加群}
+
+\dfn{線形空間}{
+  体$F$について、左$F$-加群を$F$-線形空間と呼ぶ。
+}
+
 \thm{基底の存在}{
-  体$F$について、$\qty{0_V}$でない$F$-加群$V$は自由加群である。
+  体$F$について、$\qty{0_V}$でない$F$-線形空間$V$は自由である。
 }{
   $\mathcal{S} \coloneqq \qty{S \in \P(V) \mid \text{$S$は一次独立}}$について$\qty(\mathcal{S}, \subset)$は半順序集合である。
 
@@ -196,7 +170,8 @@
 }
 
 \lem{次元}{
-  体$F$について、$F$-加群$V$を考える。$V$の任意の基底$B_1, B_2$について、全単射$f \in B_2^{B_1}$が存在する。
+  体$F$について、$F$-線形空間$V$を考える。
+  $V$の任意の基底$B_1, B_2$について、全単射$f \in B_2^{B_1}$が存在する。
 }{
   $P \coloneqq \qty{\varphi \in \bigcup \qty{B_2^D \mid D \in \P(B_1) \land B_1 \cap B_2 \subset D} \mid \varphi \rvert_{B_1 \cap B_2} = \id{B_1 \cap B_2} \land C(\varphi) \coloneqq \dom(\varphi) \cup \qty(B_2 \setminus \Im(\varphi)) \text{は一次独立}}$を考える。
 
@@ -246,108 +221,177 @@
   \thmref{Bernsteinの定理}より、全単射$f \in B_2^{B_1}$が存在する。
 }
 
+\dfn{有限次元線形空間}{
+  体$F$について、$F$-線形空間$V$を考える。
+
+  $V$について有限である基底$B$が存在するとき、$V$を$F$-有限次元線形空間と呼ぶ。
+}
+
 \dfn{次元}{
-  体$F$について、$F$-加群$V$について考える。
+  体$F$について、$F$-有限次元線形空間$V$を考える。
 
-  \thmref{基底の存在}より、$V$は基底$B$を持つ。$B$が有限であるとき、\lemref{次元}より、$V$の基底の要素数は一意に定まる。
-  この要素数を、$V$の次元と呼び、$\dim V$と表す。
+  \lemref{次元}より$V$の基底の要素数は一意に定まる。
+  この要素数を$V$の次元と呼び、$\dim V$と表す。
 }
 
 
-\lsubsection{加群の双対}
+\lsubsection{半線型写像}
 
-\lem*{
-  可換環$R$と、$R$-加群$\qty(V, \rho)$について、以下で定める順序対$\qty(\Hom_R(V, R), \rho')$は$R$-加群である。
+\rem{線形空間}{
+  本小節の内容は、環$R$に一般化して考えることができる。
+}
+
+\dfn{半線型写像}{
+  $F$-線形空間$V$について、群準同型$f \in V^V$を考える。
+
+  群準同型$\varphi \in \Aut(F)^{\S_n}$
+
+  ???
+
   \eq*{
-    \forall f \in \Hom_R(V, R) \forall r \in R \forall v \in V \qty(\rho'(r)(f) (v) \coloneqq f \circ \rho(r)(v))
-  }
-}{
-  \thmref{可換群上の準同型全体}より、$\Hom_R(V, R)$は可換群である。
-
-  $\rho$の環準同型性より、以下が成り立つ。
-  \eqa*{
-    \rho'(r + s)(f) (v)
-    &= f \circ \rho(r + s)(v) \\*
-    &= f \qty(\rho(r)(v) + \rho(s)(v)) \\*
-    &= f \circ \rho(r) (v) + f \circ \rho(s) (v) \\*
-    &= \qty(\rho'(r)(f) + \rho'(r)(g)) (v)
-  }
-
-  \eqa*{
-    \rho'(s r)(f) (v)
-    &= \rho'(r s)(f) (v) \\*
-    &= f \circ \rho(r s)(v) \\*
-    &= f \circ \rho(r) \circ \rho(s) (v) \\*
-    &= \rho'(r) (f) \circ \rho(s) (v) \\*
-    &= \rho'(s) \circ \rho'(r) (f) (v)
+    f(r v) = \varphi(\sigma, r) f(v)
   }
 }
 
-\dfn{双対加群}{
-  \mlemref{0}より定まる加群を$V$の双対と呼び、$V^*$で表す。
-}
 
-\dfn{標準双線型式}{
-  $R$-加群$V$について、以下で定まる写像$\braket{} \in R^{V^* \times V}$を標準双線形式と呼ぶ。
-  \eq*{
-    \forall \qty(f, x) \in V^* \times V \qty(\braket{f}{x} \coloneqq f(x))
-  }
-}
+% \dfn{加群}{
+%   左$R$-加群について、$R$が可換環であるとき、$R$-加群と呼ぶ。
+% }
 
-\rem{双対加群の補足}{
-  $R$-加群$V$は以下を満たす。$\forall x, y \in V \forall f, g \in V^* \forall r \in R$とする。
-  \begin{enumerate}
-    \item $f$の線型性：$\braket{f}{x + y} = \braket{f}{x} + \braket{f}{y}$
-    \item $f$の線型性：$\braket{f}{r x} = r \braket{f}{x}$
-    \item \thmref{可換群上の準同型全体}より：$\braket{f + g}{x} = \braket{f}{x} + \braket{g}{x}$
-    \item 双対加群の定義：$\braket{r f}{x} = r \braket{f}{x}$
-  \end{enumerate}
-}
+% \lem{加群の性質}{
+%   左$R$-加群$V$について、以下が成り立つ。
+%   \eqg*{
+%     \forall v \in V \qty(0_R v = 0_V) \\*
+%     \forall r \in R \forall v \in V \qty(r (-v) = (-r) v = -(r v)) \\*
+%     \forall r \in R \forall v \in V \qty(r v = (-r) (-v))
+%   }
+% }{
+%   \lemref{環の性質}と同様に示される。
+% }
 
-\dfn{双対写像}{
-  $R$-加群$V, W$を考える。線型写像$u \in W^V$について、以下で定まる写像$u^* \in \qty(V^*)^{W^*}$を双対写像と呼ぶ。
-  \eq*{
-    \forall f \in W^* \qty(u^*(f) \coloneqq f \circ u)
-  }
+% \dfn{線型}{
+%   左$R$-加群$V_1, V_2$について、群準同型$f \in V_2^{V_1}$が以下を満たすとき、$f$を加群準同型写像または線型写像と呼ぶ。
+%   \eq*{
+%     \forall v \in V_1 \forall r \in R \qty(f(r v) = r f(v))
+%   }
+% }
 
-  ゆえに、$\braket{f}{u(v)} = \braket{u^*(f)}{v}$が直ちに求まる。
-}
+% \dfn{加群同型}{
+%   全単射な線型写像を、加群同型写像、または単に加群同型と呼ぶ。
+% }
 
 
-\lsubsection{加群の積}
 
-\dfn{直積加群}{
-  環$R$と、写像$V \in Z^\Lambda$を考える。$\forall \lambda \in \Lambda$について、$V(\lambda)$は左$R$-加群であるとする。
+% \dfn{部分加群}{
+%   左$R$-加群$\qty(\qty(V, +), \rho)$と$V$の部分群$\qty(W, +)$について、以下が成り立つとき$\qty(\qty(W, +), \rho')$を$\qty(\qty(V, +), \rho)$の部分加群と呼ぶ。
+%   \eq*{
+%     \forall v \in W \forall r \in R \qty(r v \in W)
+%   }
+% }
 
-  以下で定める順序対$\qty(\qty(\prod V, +), \rho)$は左加群である。
-  \eqg*{
-    \forall v_1, v_2 \in \prod V \forall \lambda \in \Lambda \qty(\qty(v_1 + v_2)(\lambda) \coloneqq v_1(\lambda) + v_2(\lambda)) \\*
-    \forall v \in \prod V \forall r \in R \forall \lambda \in \Lambda \qty(\qty(r v)(\lambda) \coloneqq r v(\lambda))
-  }
+% \dfn{商加群}{
+%   左$R$-加群$\qty(\qty(V, +), \rho)$上の同値関係$\sim$を考える。
 
-  この左$R$-加群を$V$の直積加群または直積と呼ぶ。
-}
+%   \corref{直積集合と自明な同値関係}の意味で演算$+$と$\sim$が両立かつ、$\forall r \in R$について写像$\rho(r)$が$\sim$と両立するとき、
 
-\dfn{直和加群}{
-  環$R$と、写像$V \in Z^\Lambda$を考える。$\forall \lambda \in \Lambda$について、$V(\lambda)$は左$R$-加群であるとする。
+%   \thmref{両立}より定める演算$+'$および環準同型$\rho'$が存在する。
 
-  以下で定める順序対$\qty(\qty(\bigoplus V, +), \rho)$は左加群である。
-  \eq*{
-    \bigoplus V \coloneqq \qty{v \in \prod V \mid \abs{\qty{\lambda \in \Lambda \mid v(\lambda) \neq 0_{V(\lambda)}}} < \infty}
-  }
+%   このとき、左$R$-加群$\qty(\qty(V / \sim, +'), \rho')$を左$R$-加群$V$の商加群と呼ぶ。
+% }
 
-  この左$R$-加群を$V$の直積加群または直和と呼ぶ。
-}
+% \lem*{
+%   左$R$-加群$V$とその部分加群$W$について、以下で定める関係$\sim$は\corref{直積集合と自明な同値関係}の意味で演算$+$と両立かつ、$\forall r \in R$について写像$\rho(r)$が$\sim$と両立する同値関係である。
+%   \eq*{
+%     \forall x, y \in V \qty(x \sim y \defiff x + (-y) \in W)
+%   }
+% }{
+%   $\qty(W, +)$は$\qty(V, +)$の正規部分群であるため、\lemref{正規部分群の定める同値関係}より、$+$と両立する同値関係である。
 
-\cor*{
-  直和$\bigoplus V$は、直積$\prod V$の部分加群である。
-}
+%   $x + (-y) \in W$のとき、\lemref{加群の性質}より、$\forall r \in R \qty(r x + (-(r y)) = r x + r (-y) = r \qty(x + (-y)) \in W)$
 
-\cor*{
-  $V \in Z^\Lambda$を考える。$\forall \lambda \in \Lambda$について、$V(\lambda)$は左$R$-加群であるとする。
+%   ゆえに両立する。
+% }
 
-  $\abs{\Lambda} < \infty$ならば$\bigoplus V = \prod V$である。
-}
+% \dfn{剰余加群}{
+%   左$R$-加群$V$とその部分加群$W$について、\mlemref{0}の定める同値関係による剰余群を、剰余加群と呼び、$V / W$と表す。
+% }
+
+% \thm{加群の準同型定理}{
+%   左$R$-加群$V_1, V_2$と、線型写像$f \in V_2^{V_1}$に付随する同値関係$\sim_f$について、加群同型$\bar{f} \in \Im(f)^{V / \sim_f}$が存在する。
+% }{
+%   $\Im(f)$は$V_2$の部分左加群である。
+
+%   \thmref{群準同型定理}より、得る$\bar{f}$は群同型である。
+
+%   今、$\bar{f}(\qty[r v]) = f(r v) = r f(v) = r \bar{f}([v])$であるので線型である。
+% }
+
+
+% \lsubsection{加群の双対}
+
+% \lem*{
+%   可換環$R$と、$R$-加群$\qty(V, \rho)$について、以下で定める順序対$\qty(\Hom_R(V, R), \rho')$は$R$-加群である。
+%   \eq*{
+%     \forall f \in \Hom_R(V, R) \forall r \in R \forall v \in V \qty(\rho'(r)(f) (v) \coloneqq f \circ \rho(r)(v))
+%   }
+% }{
+%   \thmref{可換群上の準同型全体}より、$\Hom_R(V, R)$は可換群である。
+
+%   $\rho$の環準同型性より、以下が成り立つ。
+%   \eqa*{
+%     \rho'(r + s)(f) (v)
+%     &= f \circ \rho(r + s)(v) \\*
+%     &= f \qty(\rho(r)(v) + \rho(s)(v)) \\*
+%     &= f \circ \rho(r) (v) + f \circ \rho(s) (v) \\*
+%     &= \qty(\rho'(r)(f) + \rho'(r)(g)) (v)
+%   }
+
+%   \eqa*{
+%     \rho'(s r)(f) (v)
+%     &= \rho'(r s)(f) (v) \\*
+%     &= f \circ \rho(r s)(v) \\*
+%     &= f \circ \rho(r) \circ \rho(s) (v) \\*
+%     &= \rho'(r) (f) \circ \rho(s) (v) \\*
+%     &= \rho'(s) \circ \rho'(r) (f) (v)
+%   }
+% }
+
+% \dfn{双対加群}{
+%   \mlemref{0}より定まる加群を$V$の双対と呼び、$V^*$で表す。
+% }
+
+% \dfn{標準双線型式}{
+%   $R$-加群$V$について、以下で定まる写像$\braket{} \in R^{V^* \times V}$を標準双線形式と呼ぶ。
+%   \eq*{
+%     \forall \qty(f, x) \in V^* \times V \qty(\braket{f}{x} \coloneqq f(x))
+%   }
+% }
+
+% \rem{双対加群の補足}{
+%   $R$-加群$V$は以下を満たす。$\forall x, y \in V \forall f, g \in V^* \forall r \in R$とする。
+%   \begin{enumerate}
+%     \item $f$の線型性：$\braket{f}{x + y} = \braket{f}{x} + \braket{f}{y}$
+%     \item $f$の線型性：$\braket{f}{r x} = r \braket{f}{x}$
+%     \item \thmref{可換群上の準同型全体}より：$\braket{f + g}{x} = \braket{f}{x} + \braket{g}{x}$
+%     \item 双対加群の定義：$\braket{r f}{x} = r \braket{f}{x}$
+%   \end{enumerate}
+% }
+
+% \dfn{双対写像}{
+%   $R$-加群$V, W$を考える。線型写像$u \in W^V$について、以下で定まる写像$u^* \in \qty(V^*)^{W^*}$を双対写像と呼ぶ。
+%   \eq*{
+%     \forall f \in W^* \qty(u^*(f) \coloneqq f \circ u)
+%   }
+
+%   ゆえに、$\braket{f}{u(v)} = \braket{u^*(f)}{v}$が直ちに求まる。
+% }
+
+
+
+
+\begin{comment}
+
+\dfn{テンソル空間}{}
 
 \lem*{
   可換環$R$と、$R$-加群$V_1, V_2$、写像$A \in \qty{R}^{V_1 \times V_2}$を考える。
@@ -389,11 +433,6 @@
     \item $r \qty(x \otimes y) = \qty(r x) \otimes y = x \otimes \qty(r y)$
   \end{enumerate}
 }
-
-
-\begin{comment}
-
-\dfn{テンソル空間}{}
 
 \lsubsection{外積代数}
 

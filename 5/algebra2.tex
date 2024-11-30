@@ -1,0 +1,41 @@
+\lsection{代数の補足}
+
+\lsubsectionf{$\Z, \Q$から見る代数}{Z, Qから見る代数}
+
+\dfn{単生群}{
+	群$G$について以下が成り立つとき、$G$を単生群と呼ぶ。
+	\eq*{
+		\exists g \in G \qty(G = \qty{g^n \mid n \in \Z})
+	}
+}
+
+\thmf{$\Z$-加群としての可換群}{Z-加群としての可換群}{
+  可換群$\qty(G, +)$を考える。
+  以下で定める$\rho \in \End(G)^\Z$について、順序対$\qty(\qty(G, +), \rho)$は$\Z$-加群である。
+  \eq*{
+    \rho(n)(g) \coloneqq
+    \begin{cases}
+      \sum_{m \in n} g & \qty(0 \leq n) \\*
+      \sum_{m \in (-n)} (-g) & \qty(n < 0)
+    \end{cases}
+  }
+}{
+  正負の場合の場合分けを考えて、\lemref{モノイド上の指数法則}より、成り立つ。
+}
+
+\lemf{分数体$\Q$}{分数体Q}{
+	有理数$\Q$について、以下が成り立つ。
+	\eq*{
+		\forall q \in \Q \exists a, b \in \Z \qty(q = a / b)
+	}
+}{
+	$\Q$の定義（\secref{有理数}）より明らか。
+}
+
+
+\lsubsection{素体}
+
+
+% \lem{標数}{
+%   体$F$について、???
+% }

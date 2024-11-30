@@ -1,23 +1,21 @@
 \lsection{集合}
 
-述語記号$\in$を定義する。
-
-略記$\notin$を以下のように定義する。
-\eq*{
-  x \notin X \defiff \lnot \qty(x \in X)
-}
-
-略記$\forall \in, \exists \in$を以下のように定義する。
-\eqa*{
-  \forall x \in X \qty(p(x)) &\defiff \forall x \qty(x \in X \rightarrow p(x)) \\*
-  \exists x \in X \qty(p(x)) &\defiff \exists x \qty(x \in X \land p(x))
-}
-
 \dfn{集合}{
-  本\secref{集合}の全ての公理を満たすものを集合（set、集まりcollectionとは区別される）と呼ぶ。
-}
+  述語記号$\in$を定義する。
 
-以下、変項は集合であり、集合は変項である。
+  略記$\notin$を以下のように定義する。
+  \eq*{
+    x \notin X \defiff \lnot \qty(x \in X)
+  }
+
+  略記$\forall \in, \exists \in$を以下のように定義する。
+  \eqa*{
+    \forall x \in X \qty(p(x)) &\defiff \forall x \qty(x \in X \rightarrow p(x)) \\*
+    \exists x \in X \qty(p(x)) &\defiff \exists x \qty(x \in X \land p(x))
+  }
+
+  $\in$に関わる、本\secref{集合}の全ての公理を満たす変項を集合（set、集まりcollectionとは区別される）と呼ぶ。
+}
 
 \dfn{要素}{
   集合$x, X$について、$x \in X$であるとき、$x$は$X$の要素または元と呼ぶ。
@@ -300,6 +298,7 @@
   \eq*{
     A = \qty{t \mid t \in X \land \psi(t)}
   }
+
   または、以下のようにも表す。
   \eq*{
     A = \qty{t \in X \mid \psi(t)}

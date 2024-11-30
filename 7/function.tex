@@ -1,0 +1,36 @@
+\lsection{実関数論}
+
+\lsubsection{実一変数関数}
+
+\rem{実関数}{
+  写像$f \in Y^X$について、$Y \subset \R$であるとき、$f$を関数、または実関数と呼ぶことがある。
+}
+
+\thm{最大値の定理}{
+  空でないコンパクト空間$X$上で定義された連続関数$f \in \R^X$は最大値を持つ。
+}{
+  \thmref{コンパクト空間の連続像はコンパクト}より、$f(X)$はコンパクト。
+
+  \thmref{有界閉集合とコンパクト}より$f(X)$は有界閉集合である。したがって上に有界。
+
+  $f(X)$は空でないので、\thmref{上限の存在}より上限$\sup f(X)$が存在する。
+
+  閉集合より$\sup f(X) \in \bar{f(X)} = f(X)$であるので、$\exists x \in X \qty(f(x) = \sup f(X))$
+}
+
+\thm{中間値の定理}{
+  連結空間$X$上で定義された連続関数$f \in \R^X$について、以下が成り立つ。
+  \eq*{
+    \forall x_1, x_2 \in X \forall y \in \qty[f(x_1), f(x_2)] \exists x \in X \qty(f(x) = y)
+  }
+}{
+  $\exists x_1, x_2 \in X \exists y \in \qty[f(x_1), f(x_2)] \forall x \in X \qty(f(x) \neq y)$とする。
+
+  定義より、$y \in \sqty{f(x_1), f(x_2)}$
+
+  $R_1 \coloneqq \qty{r \in \R \mid r < y}, R_2 \coloneqq \qty{r \in \R \mid y < r}$は開集合であり、$R_1 \cup R_2 \supset f(X) \land R_1 \cap R_2 = \varnothing$である。
+
+  $f(x_1) \in R_1 \cap f(X) \neq \varnothing \land f(x_2) \in R_2 \cap f(X) \neq \varnothing$より$f(X)$は連結でない。
+
+  \thmref{連結空間の連続像は連結}より$f(X)$が連結であることに反する。背理法より示される。
+}
