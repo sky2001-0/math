@@ -3,44 +3,52 @@
 \lsubsection{自己関係}
 
 \dfn{自己関係}{
-  空でない集合$X$について、$X$と$X$の間の関係を、明示的に$X$上の自己関係、または単に$X$上の関係と呼ぶ。
+  関係$\qty(\qty(X, Y), G)$について、$X = Y$であるとき、$X$上の自己関係、または単に$X$上の関係と呼ぶ。
 }
 
 \dfn{反射的}{
-  空でない集合$X$上の関係$R$が反射的であるとは、以下を満たすことである。
+  集合$X$上の関係$\mathfrak{R}$が反射的であるとは、以下を満たすことである。
   \eq*{
-    \forall x \in X \qty(R(x, x))
+    \forall x \in X \qty(\mathfrak{R}(x, x))
   }
 }
 
 \dfn{対称的}{
-  空でない集合$X$上の関係$R$が対称的であるとは、以下を満たすことである。
+  集合$X$上の関係$\mathfrak{R}$が対称的であるとは、以下を満たすことである。
   \eq*{
-    \forall x, y \in X\qty(R(x, y) \rightarrow R(y, x))
+    \forall x, y \in X\qty(\mathfrak{R}(x, y) \rightarrow \mathfrak{R}(y, x))
   }
 }
 
 \dfn{反対称的}{
-  空でない集合$X$上の関係$R$が反対称的であるとは、以下を満たすことである。
+  集合$X$上の関係$\mathfrak{R}$が反対称的であるとは、以下を満たすことである。
   \eq*{
-    \forall x, y \in X \qty(R(x, y) \land R(y, x) \rightarrow x = y)
+    \forall x, y \in X \qty(\mathfrak{R}(x, y) \land \mathfrak{R}(y, x) \rightarrow x = y)
   }
 }
 
 \dfn{推移的}{
-  空でない集合$X$上の関係$R$が推移的であるとは、以下を満たすことである。
+  集合$X$上の関係$\mathfrak{R}$が推移的であるとは、以下を満たすことである。
   \eq*{
-    \forall x, y, z \in X \qty(R(x, y) \land R(y, z) \rightarrow R(x, z))
+    \forall x, y, z \in X \qty(\mathfrak{R}(x, y) \land \mathfrak{R}(y, z) \rightarrow \mathfrak{R}(x, z))
   }
+}
+
+\cor*{
+  $\varnothing$上の関係$\mathfrak{R}$は、反射的、対称的、反対称的、推移的である。
 }
 
 
 \lsubsection{前順序}
 
 \dfn{前順序}{
-  反射的かつ推移的な関係を、前順序と呼ぶ。
+  反射的かつ推移的な自己関係$\preccurlyeq \coloneqq \qty(\qty(X, X), G)$を、前順序と呼ぶ。
 
-  空でない集合$X$と$X$上の前順序$\preccurlyeq$について、順序対$\qty(X, \preccurlyeq)$を前順序集合と呼ぶ。または単に$X$と書き、前順序集合と集合どちらも表すものとする。
+  前順序であることを明示的に記号$\preccurlyeq$で表す。
+
+  \vskip\baselineskip
+
+  簡単のため、$\preccurlyeq \qty(x, y)$を$x \preccurlyeq y$でも表す。
 
   略記$\prec, \succcurlyeq, \succ$を以下のように定める。
   \eqg*{
@@ -48,41 +56,52 @@
     x \succcurlyeq y \defiff y \preccurlyeq x \\*
     x \succ y \defiff y \prec x
   }
+
+  順序対$\qty(X, \preccurlyeq)$を、前順序集合、または単に前順序と呼ぶ。
+}
+
+\rem{前順序の定義}{
+  より簡単に、$x \preccurlyeq y \defiff \cdots$の形式によって前順序を定義する。
 }
 
 \cor*{
+  前順序集合$X$について、以下が成り立つ。
   \eqg*{
-    x \preccurlyeq y \leftrightarrow x \prec y \lor x = y \\*
-    x \succcurlyeq y \leftrightarrow x \succ y \lor x = y
+    \forall x, y \in X \qty(x \preccurlyeq y \leftrightarrow x \prec y \lor x = y) \\*
+    \forall x, y \in X \qty(x \succcurlyeq y \leftrightarrow x \succ y \lor x = y)
   }
 }
 
 \dfn{上界}{
-  前順序集合$P$について、その部分集合$A$を考える。
+  前順序集合$X$について、その部分集合$A$を考える。
 
   $A$が上に有界であるとは、以下を満たすことである。
   \eq*{
-    \exists b \in P \forall a \in A \qty(a \preccurlyeq b)
+    \exists b \in X \forall a \in A \qty(a \preccurlyeq b)
   }
 
   このとき、$b$を$A$の上界と呼ぶ。
 }
 
 \dfn{下界}{
-  前順序集合$P$について、その部分集合$A$を考える。
+  前順序集合$X$について、その部分集合$A$を考える。
 
   $A$が下に有界であるとは、以下を満たすことである。
   \eq*{
-    \exists b \in P \forall a \in A \qty(b \preccurlyeq a)
+    \exists b \in X \forall a \in A \qty(b \preccurlyeq a)
   }
 
   このとき、$b$を$A$の下界と呼ぶ。
 }
 
 \dfn{有界}{
-  前順序集合$P$について、その部分集合$A$を考える。
+  前順序集合$X$について、その部分集合$A$を考える。
 
   $A$が有界であるとは、$A$が上に有界かつ下に有界であることである。
+}
+
+\cor*{
+  空でない前順序集合$X$について、$\varnothing$は有界である。
 }
 
 \dfn{有向集合}{
@@ -90,7 +109,7 @@
 }
 
 \dfn{上方集合}{
-  有向集合$\Lambda$とその元$\lambda_0 \in \Lambda$について、集合$\Lambda_{\succcurlyeq \lambda_0}, \Lambda_{\succ \lambda_0}$を以下のように定める。
+  有向集合$\Lambda$とその元$\lambda_0 \in \Lambda$について、集合$\Lambda_{\succcurlyeq \lambda_0}, \Lambda_{\succ \lambda_0}$を以下で定める。
   \eqg*{
     \Lambda_{\succcurlyeq \lambda_0} \coloneqq \qty{\lambda \in \Lambda \mid \lambda_0 \preccurlyeq \lambda} \\*
     \Lambda_{\succ \lambda_0} \coloneqq \qty{\lambda \in \Lambda \mid \lambda_0 \prec \lambda}
@@ -98,7 +117,7 @@
 }
 
 \dfn{前順序との両立}{
-  集合$X$と$X$上の前順序$\preccurlyeq_{X}$、集合$Y$と$Y$上の前順序$\preccurlyeq_{Y}$について、写像$f \in Y^X$が$\preccurlyeq_{X}, \preccurlyeq_{Y}$と両立するとは、以下を満たすことである。
+  集合$X$と$X$上の前順序$\preccurlyeq_{X}$、集合$Y$と$Y$上の前順序$\preccurlyeq_{Y}$について、写像$f \colon X \to Y$が$\preccurlyeq_{X}, \preccurlyeq_{Y}$と両立するとは、以下を満たすことである。
   \eq*{
     \forall x, y \in X \qty(x \preccurlyeq_{X} y \rightarrow f(x) \preccurlyeq_{Y} f(y))
   }
@@ -108,15 +127,18 @@
 \lsubsection{同値関係}
 
 \dfn{同値関係}{
-  対称的な前順序を、同値関係と呼ぶ。同値関係であることを明示的に記号$\sim$で表す。
+  対称的な前順序を、同値関係と呼ぶ。
+  同値関係であることを明示的に記号$\sim$で表す。
 }
 
 \cor*{
-  等号は同値関係である。集合$X$上の同値関係であることを明示的に、$=_X$で表す。
+  等号は同値関係である。
+  集合$X$上の同値関係であることを明示的に、$=_X$で表す。
 }
 
 \dfn{同値類}{
-  空でない集合$X$上で定義された同値関係$\sim$と、$X$の要素$a$について、以下で定義された集合を$a$の同値類と呼ぶ。この$a$を特に代表元と呼ぶ。
+  空でない集合$X$上で定義された同値関係$\sim$と、$X$の要素$a$について、以下で定める集合を$a$の同値類と呼び、$\qty[a]$で表す。
+  この$a$を特に代表元と呼ぶ。
   \eq*{
     \qty[a] \coloneqq \qty{x \in X \mid x \sim a}
   }
@@ -129,84 +151,71 @@
   }
 }
 
-\cor{直積集合と自明な同値関係}{
-  写像$A \in Z^\Lambda$について考える。
-
-  任意の$\lambda$について$A(\lambda)$上に同値関係$\sim_\lambda$が存在するとき、写像$A$の直積集合$\prod A$上の以下で定める関係$\sim$は、同値関係である。
-  \eq*{
-    f \sim f' \defiff \forall \lambda \in \Lambda \qty(f(\lambda) \sim_\lambda f'(\lambda))
-  }
-}
-
 \dfn{商集合}{
-  同値関係の定義された空でない集合$X$について、商集合を以下のように定める。
+  同値関係の定義された空でない集合$X$について、以下で定める集合を商集合と呼び、$X / \sim$で表す。
   \eq*{
-    X / \sim \coloneqq \qty{[x] \mid x \in X}
+    X / \sim \coloneqq \qty{\qty[x] \mid x \in X}
   }
 }
 
 \dfn{商写像}{
-  写像$\qty[] \in \qty(X / \sim)^X$を商写像と呼ぶ。
+  写像$\qty[] \colon X \to X / \sim$を商写像と呼ぶ。
 }
 
 \cor*{
   商写像は全射である。
 }
 
-\dfn{写像と同値関係の両立}{
-  空でない集合$X$と$X$上の同値関係$\sim_X$、集合$Y$と$Y$上の同値関係$\sim_Y$を考える。
-
-  写像$f \in Y^X$が同値関係$\sim_X, \sim_Y$と両立するとは、以下を満たすことである。
-  \eq*{
-    \forall x_1, x_2 \in X \qty(x_1 \sim x_2 \rightarrow f(x_1) \sim_Y f(x_2))
-  }
-}
-
 \dfn{写像に付随する同値関係}{
-  写像$f \in Y^X$について、以下で定める$X$上の関係$\sim_{f}$は同値関係であり、これを写像$f$に付随する同値関係と呼ぶ。
+  写像$f \colon X \to Y$について、以下で定める$X$上の関係$\sim_{f}$は同値関係であり、これを写像$f$に付随する同値関係と呼ぶ。
   \eq*{
-    x \sim_{f} y \defiff f(x) = f(y)
+    x \sim_f y \defiff f(x) = f(y)
   }
 }
 
 \cor*{
-  写像$f \in Y^X$について、$f$は$\sim_f, =_Y$と両立する。
+  写像$f \colon X \to Y$について、$f$は$\sim_f, =_Y$と両立する。
 }
 
 \thm{両立}{
-  空でない集合$X$と$X$上の同値関係$\sim_{X}$、空でない集合$Y$と$Y$上の同値関係$\sim_{Y}$について、写像$f \in Y^X$が$\sim_{X}, \sim_{Y}$と両立することは、以下と必要十分である。
+  空でない集合$X$上の同値関係$\sim_{X}$、集合$Y$上の同値関係$\sim_{Y}$について、
+  写像$f \colon X \to Y$が$\sim_{X}, \sim_{Y}$と両立することは、写像$h \colon X / \sim_{X} \to Y / \sim_{Y}$が存在して以下を満たすことと必要十分である。
   \eq*{
-    \exists h \in \qty(Y / \sim_{Y})^{X / \sim_{X}} \qty(\qty[]_{Y} \circ f = h \circ \qty[]_{X})
+    \qty[]_{Y} \circ f = h \circ \qty[]_{X}
   }
 
   さらに、上で定まる写像$h$は一意である。
 }{
   $\qty[]_{X}$は全射より、右逆写像$r$が存在する。
 
-  まず、必要性を示す。$h \coloneqq \qty[]_{Y} \circ f \circ r$を考える。
+  \vskip\baselineskip
 
-  今、仮定より以下を満たす。
+  まず、必要性を示す。
+  仮定より以下を満たす。
   \eq*{
     \forall x \in X / \sim_{X} \forall z, w \in x \qty(\qty[f(z)]_{Y} = \qty[f(w)]_{Y})
   }
 
-  ゆえに、$\qty[]_{Y} \circ f = h \circ \qty[]_{X}$を満たす。\\*
+  ゆえに$h \coloneqq \qty[]_{Y} \circ f \circ r$を考えると、$\qty[]_{Y} \circ f = h \circ \qty[]_{X}$を満たす。
 
-  十分性を示す。$\forall x, y \in X $について、$x \sim_{X} y$ならば、$\qty[f(x)]_{Y} = h(\qty[x]_{X}) = h(\qty[y]_{X}) = \qty[f(y)]_{Y}$
+  \vskip\baselineskip
 
-  よって、$f(x) \sim_{Y} f(y)$\\*
+  十分性を示す。
+  $\forall x, y \in X $について、$x \sim_{X} y$ならば、$\qty[f(x)]_{Y} = h(\qty[x]_{X}) = h(\qty[y]_{X}) = \qty[f(y)]_{Y}$である。
+  よって、$f(x) \sim_{Y} f(y)$
 
-  一意であることを示す。２つ存在すると仮定すると、$h \circ \qty[]_{X} = h' \circ \qty[]_{X}$
+  \vskip\baselineskip
 
-  右から$r$をかけて、$h = h'$。
+  一意であることを示す。
+  相異なる\num{2}つが存在すると仮定すると、$h \circ \qty[]_{X} = h' \circ \qty[]_{X}$である。
+  右から$r$をかけて、$h = h'$であり、矛盾する。
 }
 
 \thm{標準分解}{
-  写像$f \in Y^X$について、全単射$\bar{f} \in \Im(f)^{X / \sim_{f}}$が存在する。
+  写像$f \colon X \to Y$について、全単射$\bar{f} \colon X / \sim_{f} \to \Im(f)$が存在する。
 }{
-  \thmref{両立}より、写像$h \in Y^{X / \sim_{f}}$が存在して、$\Im(h) = \Im(f)$。
+  \thmref{両立}より、写像$\bar{f} \colon X / \sim_{f} \to Y$が存在して、$\Im(\bar{f}) = \Im(f)$である。
 
-  単射であることを示す。$h([x]) = h([y])$のとき、$f(x) = f(y)$より、$[x] = [y]$
-
-  写像$\bar{f} \in \Im(f)^{X / \sim_{f}}$は全射となる。
+  単射であることを示す。
+  $\bar{f}([x]) = \bar{f}([y])$のとき、$f(x) = f(y)$より、$[x] = [y]$である。
 }

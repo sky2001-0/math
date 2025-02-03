@@ -1,20 +1,20 @@
 \lsection{集合}
 
 \dfn{集合}{
-  述語記号$\in$を定義する。
+  述語記号$\in$を定める。
 
-  略記$\notin$を以下のように定義する。
+  略記$\notin$を以下で定める。
   \eq*{
     x \notin X \defiff \lnot \qty(x \in X)
   }
 
-  略記$\forall \in, \exists \in$を以下のように定義する。
+  略記$\forall \in, \exists \in$を以下で定める。
   \eqa*{
     \forall x \in X \qty(p(x)) &\defiff \forall x \qty(x \in X \rightarrow p(x)) \\*
     \exists x \in X \qty(p(x)) &\defiff \exists x \qty(x \in X \land p(x))
   }
 
-  $\in$に関わる、本\secref{集合}の全ての公理を満たす変項を集合（set、集まりcollectionとは区別される）と呼ぶ。
+  $\in$に関わる、全ての公理を満たす変項を集合（set、集まりcollectionとは区別される）と呼ぶ。
 }
 
 \dfn{要素}{
@@ -31,7 +31,7 @@
     \forall X \forall Y \qty(X \subset Y \defiff \forall x \qty(x \in X \rightarrow x \in Y))
   }
 
-  略記$\supset, \subsetneq, \supsetneq$を以下のように定義する。
+  略記$\supset, \subsetneq, \supsetneq$を以下で定める。
   \eqg*{
     \forall X \forall Y \qty(X \subsetneq Y \defiff X \subset Y \land X \neq Y) \\*
     \forall X \forall Y \qty(X \supset Y \defiff Y \subset X) \\*
@@ -40,7 +40,7 @@
 }
 
 
-\lsubsection{外延性の公理}
+\lsubsection{集合の構成}
 
 \axi{外延性の公理}{
   \eq*{
@@ -48,14 +48,15 @@
   }
 }
 
-\cor{相当の定義}{
+\cor{相等の定義}{
+  以下が成り立つ。
   \eq*{
     \forall X \forall Y \qty(X = Y \leftrightarrow \forall x \qty(x \in X \leftrightarrow x \in Y))
   }
 }
 
 \cor{包含の半順序性}{
-  以下を全て満たす。
+  以下が成り立つ。
   \eqg*{
     \forall X \qty(X \subset X) \\*
     \forall X \forall Y \qty(X \subset Y \land Y \subset X \rightarrow X = Y) \\*
@@ -65,15 +66,13 @@
 
 \rem{集合の外延的定義}{
   \axiref{外延性の公理}より、全ての要素を書き下せば集合は一意に定まる。
-  全ての要素を書き下す集合の定義方法を、外延的定義と呼ぶ。
-  具体的には、要素が$x, y, z$であり、かつそれのみである集合$X$に対して以下のような定義をする。
+  このような全ての要素を書き下す集合の定義方法を、外延的定義と呼ぶ。
+
+  例えば、要素が$x, y, z$であり、かつ、それのみである集合$X$に対して以下のような定義をする。
   \eq*{
     X = \qty{x, y, z}
   }
 }
-
-
-\lsubsection{空集合の公理}
 
 \axi{空集合の公理}{
   \eq*{
@@ -82,7 +81,10 @@
 }
 
 \dfn{空集合}{
-  \axiref{外延性の公理}から、\axiref{空集合の公理}が主張する集合が一意であることが言えて、空集合$\varnothing$と呼ぶ。外延的に$\qty{}$とも表す。
+  \axiref{外延性の公理}から、\axiref{空集合の公理}が主張する集合が一意に定まる。
+  この集合を空集合と呼び、$\varnothing$で表す。
+
+  外延的に$\qty{}$とも表す。
 }
 
 \cor*{
@@ -91,9 +93,6 @@
   }
 }
 
-
-\lsubsection{対の公理}
-
 \axi{対の公理}{
   \eq*{
     \forall x \forall y \exists A \forall t \qty(t \in A \leftrightarrow t = x \lor t = y)
@@ -101,32 +100,54 @@
 }
 
 \dfn{単集合}{
-  $x = y$を考えることで、集合$\qty{x, x}$が存在することが言える。
-  \axiref{外延性の公理}から、$\qty{x}$と表記して良い。
+  $x = y$を考えることで、集合$\qty{x, x}$が存在する。
+  この集合は、\axiref{外延性の公理}から、$\qty{x}$とも表せる。
 
   このような単一の元からなる集合を単集合（singleton）と呼ぶ。
 }
 
-\dfn{順序対}{
-  \axiref{対の公理}から、$\qty{\qty{x}, \qty{x, y}}$が存在する。
-
-  このような集合を、順序対$\qty(x, y) \coloneqq \qty{\qty{x}, \qty{x, y}}$と呼ぶ。
-}
-
-\cor{順序対の相等}{
+\axi{正則性の公理}{
   \eq*{
-    \forall x_1 \forall x_2 \forall y_1 \forall y_2 \qty(\qty(x_1, x_2) = \qty(y_1, y_2) \leftrightarrow x_1 = y_1 \land x_2 = y_2)
+    \forall X \qty(X \neq \varnothing \rightarrow \exists x \qty(x \in X \land \forall t \qty(t \in X \rightarrow t \notin x)))
   }
 }
 
-\cor{順序対の順序性}{
+\lem*{
   \eq*{
-    \forall x \forall y \qty(x \neq y \rightarrow \qty(x, y) \neq \qty(y, x))
+    \forall x \forall y \lnot \qty(x \in y \land y \in x)
+  }
+}{
+  \axiref{対の公理}より、$\qty{x, y}$が存在する。
+
+  \axiref{正則性の公理}より、
+  \eq*{
+    \exists z \qty(z \in \qty{x, y} \land \forall t \qty(t \in \qty{x, y} \land t \notin z))
+  }
+
+  よって、
+  \eq*{
+    \forall t \qty(t \in \qty{x, y} \land t \notin x) \lor \forall t \qty(t \in \qty{x, y} \land t \notin y)
+  }
+
+  ゆえに、
+  \eq*{
+    \qty(x \notin x \land y \notin x) \lor \qty(x \notin y \land y \notin y)
+  }
+
+  したがって、
+  \eq*{
+    y \notin x \lor x \notin y
+  }
+}
+
+\cor*{
+  \eq*{
+    \forall x \qty(x \notin x)
   }
 }
 
 
-\lsubsection{和集合の公理}
+\lsubsection{集合の和と冪}
 
 \axi{和集合の公理}{
   \eq*{
@@ -136,9 +157,9 @@
 
 \dfn{和集合}{
   集合系$X$について、\axiref{和集合の公理}の主張する集合$A$が存在して、これは\axiref{外延性の公理}から一意に定まる。
-  このような集合Aを、和集合$\bigcup X$と呼ぶ。
+  このような集合$A$を、$X$の和集合と呼び、$\bigcup X$で表す。
 
-  特に、$X = \qty{x, y}$のとき、この和集合を$x \cup y$とも表す。
+  和集合$\bigcup \qty{x, y}$を、簡単のために$x \cup y$とも表す。
 }
 
 \cor*{
@@ -171,18 +192,6 @@
   }
 }
 
-
-\lsubsection{無限の公理}
-
-\axi{無限の公理}{
-  \eq*{
-    \exists A \qty(\varnothing \in A \land \forall x \in A \qty(x \cup \qty{x} \in A))
-  }
-}
-
-
-\lsubsection{冪集合の公理}
-
 \axi{冪集合の公理}{
   \eq*{
     \forall X \exists A \forall t \qty(t \in A \leftrightarrow t \subset X)
@@ -191,8 +200,11 @@
 
 \dfn{冪集合}{
   集合$X$について、\axiref{冪集合の公理}の主張する集合$A$が存在して、これは\axiref{外延性の公理}から一意に定まる。
+  このような集合$A$を、冪集合と呼び、$\P(X)$で表す。
+}
 
-  このような集合Aを、冪集合$\P(X)$と呼ぶ。
+\rem{冪の要素と部分}{
+  $\forall x \in \P(X)$や$\exists x \in \P(X)$を、簡単のために、$\forall x \subset X$や$\exists x \subset X$とも表す。
 }
 
 \cor*{
@@ -233,10 +245,10 @@
 }
 
 
-\lsubsection{置換の公理}
+\lsubsection{集合の共通と差}
 
 \axi{置換の公理図式}{
-  アリティ2の述語記号$\psi$をパラメータとする以下の公理図式を考える。
+  アリティ\num{2}の述語記号$\psi$をパラメータとする以下の公理図式を考える。
   \eq*{
     \forall x \forall y \forall z \qty(\psi(x, y) \land \psi(x, z) \rightarrow y = z) \rightarrow \forall X \exists A \forall y \qty(y \in A \leftrightarrow \exists x \qty(x \in X \land \psi(x, y)))
   }
@@ -244,27 +256,29 @@
 
 \rem{集合の内包的定義１}{
   \axiref{外延性の公理}より、\axiref{置換の公理図式}より主張される集合$A$は一意に定まる。
-  \axiref{置換の公理図式}に基づく定義方法を、内包的定義と呼び以下のように表す。
-
-  \axiref{置換の公理図式}の前件を満たすアリティ2の述語記号$\psi$について、以下のように表す。
+  \axiref{置換の公理図式}に基づく定義方法を、内包的定義と呼び、\axiref{置換の公理図式}の前件を満たすアリティ\num{2}の述語記号$\psi$について、以下で表す。
   \eq*{
     A = \qty{y \mid \exists x \in X \qty(\psi(x, y))}
   }
 }
 
 \thm{分出の公理図式}{
-  アリティ1の述語記号$\psi$をパラメータとする以下の公理図式を考える。
+  アリティ\num{1}の述語記号$\psi$について、以下が成り立つ。
   \eq*{
     \forall X \exists A \forall t \qty(t \in A \leftrightarrow t \in X \land \psi(t))
   }
 }{
-  アリティ1の述語記号$P$を考える。
+  アリティ\num{1}の述語記号$P$を考える。
   排中律より、
   \eq*{
     \forall X \qty(\exists a \qty(a \in X \land P(a)) \lor \forall a \lnot \qty(a \in X \land P(a)))
   }
 
-  $\exists a \qty(a \in X \land P(a))$のとき、以下のようなアリティ2の述語記号$\psi$を考える。
+  $\forall a \lnot \qty(a \in X \land P(a))$のとき、$A = \varnothing$で示される。
+
+  \vskip\baselineskip
+
+  $\exists a \qty(a \in X \land P(a))$のとき、以下のようなアリティ\num{2}の述語記号$\psi$を考える。
   \eq*{
     \psi(x, y) \defiff \qty(P(x) \land y = x) \lor \qty(\lnot P(x) \land y = a)
   }
@@ -288,34 +302,32 @@
   \eq*{
     \exists A \forall t \qty(t \in A \leftrightarrow t \in X \land P(t))
   }
-
-  $\forall a \lnot \qty(a \in X \land P(a))$のとき、$A = \varnothing$で示される。
 }
 
 \rem{集合の内包的定義２}{
-  \axiref{外延性の公理}より、\thmref{分出の公理図式}より主張される集合は一意に定まる。
-  \thmref{分出の公理図式}に基づく定義方法も、内包的定義と呼び以下のように表す。
+  \axiref{外延性の公理}より、\thmref{分出の公理図式}より主張される集合$A$は一意に定まる。
+  \thmref{分出の公理図式}に基づく定義方法も、内包的定義と呼び、以下で表す。
   \eq*{
     A = \qty{t \mid t \in X \land \psi(t)}
   }
 
-  または、以下のようにも表す。
+  簡単のために、以下でも表す。
   \eq*{
     A = \qty{t \in X \mid \psi(t)}
   }
 }
 
 \dfn{共通集合}{
-  集合系$X$について、以下のように定義された集合を共通集合と呼ぶ。
+  集合系$X$について、以下で定める集合を、$X$の共通集合と呼び、$\bigcap X$で表す。
   \eq*{
     \bigcap X \coloneqq \qty{x \mid x \in \bigcup X \land \forall Y \qty(Y \in X \rightarrow x \in Y)}
   }
 
-  特に、$X = \qty{x, y}$のとき、この共通集合を$x \cap y$とも表す。
+  共通集合$\bigcap \qty{x, y}$を、簡単のために$x \cap y$とも表す。
 }
 
 \rem{共通集合の定義について}{
-  本ノートにおける共通集合の定義は、$\bigcap \varphi$の取り扱いにおいて一般的ではないことに注意されたい。
+  本ノートにおける共通集合の定義は、$\bigcap \varnothing$の取り扱いにおいて一般的ではないことに注意されたい。
 }
 
 \thm{共通集合}{
@@ -324,9 +336,10 @@
     X \neq \varnothing \rightarrow \bigcap X = \qty{x \mid \forall Y \qty(Y \in X \rightarrow x \in Y)}
   }
 }{
-  第1式は、定義より自明。
+  第一式は、定義より自明。
 
-  第2式について考える。以下が成り立つ。
+  第二式について考える。
+  以下が成り立つ。
   \eqg*{
     \forall X \forall x \forall Y \qty(Y \in X \rightarrow x \in Y) \\*
     \forall X \forall x \qty(X = \varnothing \lor \exists Y \qty(Y \in X \land x \in Y)) \\*
@@ -384,8 +397,20 @@
   }
 }
 
+\dfn{分割}{
+  集合$A$について、以下を満たす$A$の被覆$X$を$A$の分割と呼ぶ。
+  \eq*{
+    \forall x, y \in X \qty(x \neq y \rightarrow x \cap y = \varnothing)
+  }
+
+  明示的に以下で表す。
+  \eq*{
+    A = \bigsqcup X
+  }
+}
+
 \dfn{差集合}{
-  集合$X, Y$について、以下のように定義された集合を$X$と$Y$の差集合と呼ぶ。
+  集合$X, Y$について、以下で定める集合を、$X$と$Y$の差集合と呼び、$X \setminus Y$で表す。
   \eq*{
     X \setminus Y \coloneqq \qty{x \mid x \in X \land x \notin Y}
   }
@@ -393,7 +418,7 @@
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(X \setminus Y \subset X \land X \setminus Y \in \P(X))
+    \forall X \forall Y \qty(X \setminus Y \subset X)
   }
 }
 
@@ -417,6 +442,12 @@
   }
 }
 
+\cor*{
+  \eq*{
+    \forall X \forall Y \qty(X \subset Y \leftrightarrow X \setminus Y = \varnothing)
+  }
+}
+
 \thm{De Morganの法則}{
   集合$X$と空でない集合系$A$について、以下が成り立つ。
   \eqg*{
@@ -425,23 +456,50 @@
   }
 }{
   第一の定理を示す。
-  \eq*{
-    x \in X \setminus \bigcup A \leftrightarrow \qty(x \in X \land x \notin \bigcup A) \leftrightarrow \qty(x \in X \land \forall Y \qty(Y \in A \rightarrow x \notin Y)) \leftrightarrow \qty(x \in X \land \forall Y \qty(Y \in A \rightarrow x \notin X \setminus Y))
+  \eqa*{
+    x \in X \setminus \bigcup A
+    &\leftrightarrow x \in X \land x \notin \bigcup A \\*
+    &\leftrightarrow x \in X \land \forall Y \qty(Y \in A \rightarrow x \notin Y)
+    \leftrightarrow x \in X \land \forall Y \qty(Y \in A \rightarrow x \notin X \setminus Y)
   }
+
   $A \neq \varnothing$より、
   \eq*{
-    \leftrightarrow \qty(x \in X \land x \in \bigcap \qty{X \setminus Y \mid Y \in A}) \leftrightarrow x \in \bigcap \qty{X \setminus Y \mid Y \in A}
-  }\\*
+    \leftrightarrow x \in X \land x \in \bigcap \qty{X \setminus Y \mid Y \in A} \leftrightarrow x \in \bigcap \qty{X \setminus Y \mid Y \in A}
+  }
+
+  \vskip\baselineskip
 
   第二の定理を示す。
   \eqa*{
-    x \in X \setminus \bigcap A &\leftrightarrow \qty(x \in X \land x \notin \bigcap A) \leftrightarrow \qty(x \in X \land \qty(x \notin \bigcup A \lor \exists Y \qty(Y \in A \land x \notin Y))) \\*
-    &\leftrightarrow \qty(x \in X \setminus \bigcup A \lor \exists Y \qty(Y \in A \land x \in X \setminus Y)) \\*
-    &\leftrightarrow \qty(x \in X \setminus \bigcup A \lor x \in \bigcup \qty{X \setminus Y \mid Y \in A}) \\*
+    x \in X \setminus \bigcap A &\leftrightarrow x \in X \land x \notin \bigcap A
+    \leftrightarrow x \in X \land \qty(x \notin \bigcup A \lor \exists Y \qty(Y \in A \land x \notin Y)) \\*
+    &\leftrightarrow x \in X \setminus \bigcup A \lor \exists Y \qty(Y \in A \land x \in X \setminus Y) \\*
+    &\leftrightarrow x \in X \setminus \bigcup A \lor x \in \bigcup \qty{X \setminus Y \mid Y \in A} \\*
     &\leftrightarrow x \in \bigcup \qty{X \setminus Y \mid Y \in A}
   }
 
   最後の変形には、第一の定理を用いた。
+}
+
+
+\lsubsection{順序対と集合の直積}
+
+\dfn{順序対}{
+  \axiref{対の公理}から、$\qty{\qty{x}, \qty{x, y}}$が存在する。
+  このような集合を、順序対と呼び、$\qty(x, y)$で表す。
+}
+
+\cor{順序対の相等}{
+  \eq*{
+    \forall x_1 \forall x_2 \forall y_1 \forall y_2 \qty(\qty(x_1, x_2) = \qty(y_1, y_2) \leftrightarrow x_1 = y_1 \land x_2 = y_2)
+  }
+}
+
+\cor{順序対の順序性}{
+  \eq*{
+    \forall x \forall y \qty(x \neq y \rightarrow \qty(x, y) \neq \qty(y, x))
+  }
 }
 
 \cor{順序対の取り出し}{
@@ -464,7 +522,7 @@
 }
 
 \dfn{直積集合}{
-  集合$X, Y$について、以下を満たす集合を$X$と$Y$の直積集合と呼ぶ。
+  集合$X, Y$について、以下を満たす集合を$X$と$Y$の直積集合と呼び、$X \times Y$で表す。
   \eq*{
     X \times Y \coloneqq \qty{z \in \P(\P(X \cup Y)) \mid \exists x \exists y \qty(x \in X \land y \in Y \land z = \qty(x, y))}
   }
@@ -484,66 +542,48 @@
   }
 }
 
-\dfn{分割}{
-  集合$A$について、以下を満たす$A$の被覆$X$を$A$の分割と呼ぶ。
+
+\lsubsection{関係}
+
+\dfn{関係}{
+  集合$X, Y$と、集合系$G \subset \P(X, Y)$について、順序対$\mathfrak{R} \coloneqq \qty(\qty(X, Y), G)$を関係と呼ぶ。
+
+  \vskip\baselineskip
+
+  記号の濫用であるが、$\mathfrak{R}$を以下で定めるアリティ\num{2}の述語記号としても扱う。
   \eq*{
-    \forall x, y \in X \qty(x \neq y \rightarrow x \cap y = \varnothing)
-  }
-
-  分割であることを示すために、以下のような記号を用いる。
-  \eq*{
-    A = \bigsqcup X
-  }
-}
-
-
-\lsubsection{正則性の公理}
-
-\axi{正則性の公理}{
-  \eq*{
-    \forall X \qty(X \neq \varnothing \rightarrow \exists x \qty(x \in X \land \forall t \qty(t \in X \rightarrow t \notin x)))
+    \mathfrak{R}(x, y) \defiff \qty(x, y) \in G
   }
 }
 
-\lem*{
+\dfn{左一意的}{
+  関係$\mathfrak{R}$が以下を満たすとき、$\mathfrak{R}$は左一意的であると言う。
   \eq*{
-    \forall x \forall y \lnot \qty(x \in y \land y \in x)
-  }
-}{
-  \axiref{対の公理}より、$\qty{x, y}$が存在する。
-
-  \axiref{正則性の公理}より、
-  \eq*{
-    \exists z \qty(z \in \qty{x, y} \land \forall t \qty(t \in \qty{x, y} \land t \notin z))
-  }
-
-  よって、
-  \eq*{
-    \forall t \qty(t \in \qty{x, y} \land t \notin x) \lor \forall t \qty(t \in \qty{x, y} \land t \notin y)
-  }
-
-  ゆえに、
-  \eq*{
-    \qty(x \notin x \land y \notin x) \lor \qty(x \notin y \land y \notin y)
-  }
-
-  したがって、
-  \eq*{
-    y \notin x \lor x \notin y
+    \forall w, x \qty(\exists y \qty(\mathfrak{R}(w, y) \land \mathfrak{R}(x, y)) \rightarrow w = x)
   }
 }
 
-\cor*{
+\dfn{右一意的}{
+  関係$\mathfrak{R}$が以下を満たすとき、$\mathfrak{R}$は右一意的であると言う
   \eq*{
-    \forall x \qty(x \notin x)
+    \forall y, z \qty(\exists x \qty(\mathfrak{R}(x, y) \land \mathfrak{R}(x, z)) \rightarrow y = z)
   }
 }
 
+\dfn{一対一}{
+  関係$\mathfrak{R}$が左一意的かつ右一意的であるとき、$\mathfrak{R}$は一対一であると言う。
+}
 
-\lsubsection{選択公理}
-
-\axi{選択公理}{
+\dfn{左全域的}{
+  関係$\mathfrak{R} = \qty(\qty(X, Y), G)$が以下を満たすとき、$\mathfrak{R}$は左全域的であると言う。
   \eq*{
-    \forall X \qty(\varnothing \notin X \land \forall x \forall y \qty(x \in X \land y \in X \land x \neq y \rightarrow x \cap y = \varnothing) \rightarrow \exists A \forall x \qty(x \in X \rightarrow \exists t \qty(x \cap A = \qty{t})))
+    \forall x \in X \exists y \qty(\mathfrak{R}(x, y))
+  }
+}
+
+\dfn{右全域的}{
+  関係$\mathfrak{R} = \qty(\qty(X, Y), G)$が以下を満たすとき、$\mathfrak{R}$は右全域的であると言う。
+  \eq*{
+    \forall y \in Y \exists x \qty(\mathfrak{R}(x, y))
   }
 }

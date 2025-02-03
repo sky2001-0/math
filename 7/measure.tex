@@ -35,7 +35,7 @@
   }
 }{
   $R \coloneqq \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{T} \subset \mathcal{S}}$とする。
-  
+
   $\P(X) \in R$より、$R \neq \varnothing$である。\\*
 
   第一式を示す。
@@ -345,7 +345,7 @@
     \item $\forall n \in \N \forall x \in X \qty(0 \leq f_n(x))$
     \item $\forall n, m \in \N \forall x \in X \qty(n \leq m \rightarrow f_n(x) \leq f_m(x))$
   \end{enumerate}
-  
+
   このとき、以下が成り立つ。
   \eq*{
     \sup{\int_{x \in X} \dd{\mu} f_n(x) \mid n \in \N} = \int_{x \in X} \dd{\mu} \sup{f_n(x) \mid n \in \N}
@@ -432,7 +432,7 @@
 
 \dfn{確率変数}{
   確率空間$\qty(\qty(\Omega, \mathcal{S}), P)$を考える。
-  
+
   関数$X \in \R^\Omega$が可測であるとき、$X$を確率変数と呼ぶ。
 }
 
@@ -442,4 +442,3 @@
     F \qty(\qty(x_m)_{m \in n}) \coloneqq P \qty(\bigcap \qty{\qty{\omega \in \Omega \mid X_m(\omega) \leq x_m} \mid m \in n})
   }
 }
-

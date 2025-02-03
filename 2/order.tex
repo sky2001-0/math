@@ -5,11 +5,12 @@
 \dfn{半順序}{
   反対称的な前順序を、半順序と呼ぶ。
 
-  空でない集合$A$と$A$上の半順序$\preccurlyeq$について、順序対$\qty(A, \preccurlyeq)$を半順序集合と呼ぶ。または単に$A$と書き、半順序集合と集合どちらも表すものとする。
+  集合$P$上の半順序$\preccurlyeq$について、順序対$\qty(P, \preccurlyeq)$を半順序集合と呼ぶ。
+  または単に$P$と書き、半順序集合と集合どちらも表すものとする。
 }
 
 \cor*{
-  空でない集合$A$について、$\qty(A, \subset)$は半順序集合である。また、$\qty(A, \supset)$も半順序集合である。
+  集合$P$について、$\qty(P, \subset)$は半順序集合である。また、$\qty(P, \supset)$も半順序集合である。
 }
 
 \dfn{単調}{
@@ -17,64 +18,69 @@
 }
 
 \dfn{極大元}{
-  半順序集合$A$について、以下の元$b$を$A$の極大元と呼ぶ。
+  半順序集合$P$について、以下の元$b$を$P$の極大元と呼ぶ。
   \eq*{
-    b \in A \land \forall a \in A \qty(\lnot b \prec a)
+    b \in P \land \forall a \in P \qty(\lnot b \prec a)
   }
 }
 
 \dfn{最大元}{
-  半順序集合$A$について、以下の元$b$を$A$の最大元と呼ぶ。
+  半順序集合$P$について、以下の元$b$を$P$の最大元と呼ぶ。
   \eq*{
-    b \in A \land \forall a \in A \qty(a \preccurlyeq b)
+    b \in P \land \forall a \in P \qty(a \preccurlyeq b)
   }
 }
 
 \dfn{極小元}{
-  半順序集合$A$について、以下の元$b$を$A$の極小元と呼ぶ。
+  半順序集合$P$について、以下の元$b$を$P$の極小元と呼ぶ。
   \eq*{
-    b \in A \land \forall a \in A \qty(\lnot b \succ a)
+    b \in P \land \forall a \in P \qty(\lnot b \succ a)
   }
 }
 
 \dfn{最小元}{
-  半順序集合$A$について、以下の元$b$を$A$の最小元と呼ぶ。
+  半順序集合$P$について、以下の元$b$を$P$の最小元と呼ぶ。
   \eq*{
-    b \in A \land \forall a \in A \qty(a \succcurlyeq b)
+    b \in P \land \forall a \in P \qty(a \succcurlyeq b)
   }
 }
 
 \cor*{
-  半順序集合$A$の最大元は、極大元である。
+  半順序集合$P$の最大元は、極大元である。
 }
 
 \cor{最大元の一意性}{
-  半順序集合$A$の最大元は存在するならば一意である。これは半順序の反対称性から従う。
+  半順序集合$P$の最大元は存在するならば一意である。
+  これは半順序の反対称性から従う。
 
-  ここから、半順序集合$A$の最大元$b$を$\max{A} \coloneqq b$と表す。
+  ここから、半順序集合$P$の最大元$b$を$\max P \coloneqq b$と表す。
 }
 
 \cor*{
-  半順序集合$A$の最小元は、極小元である。
+  半順序集合$P$の最小元は、極小元である。
 }
 
 \cor{最小元の一意性}{
-  半順序集合$A$の最小元は存在するならば一意である。これは半順序の反対称性から従う。
+  半順序集合$P$の最小元は存在するならば一意である。
+  これは半順序の反対称性から従う。
 
-  ここから、半順序集合$A$の最小元$b$を$\min{A} \coloneqq b$と表す。
+  ここから、半順序集合$P$の最小元$b$を$\min P \coloneqq b$と表す。
 }
 
 \dfn{上限}{
   半順序集合$P$について、その部分集合$A$を考える。
 
-  \thmref{分出の公理図式}より定まる、$A$の上界全体の集合について、最小元が存在するとき、これを$A$の上限と呼び$\sup{A}$と表す。
+  \thmref{分出の公理図式}より定まる、$A$の上界全体の集合について、最小元が存在するとき、これを$A$の上限と呼び、$\sup A$で表す。
 }
 
 \dfn{下限}{
   半順序集合$P$について、その部分集合$A$を考える。
 
-  \thmref{分出の公理図式}より定まる、$A$の下界全体の集合について、最大元が存在するとき、これを$A$の下限と呼び$\inf{A}$と表す。
+  \thmref{分出の公理図式}より定まる、$A$の下界全体の集合について、最大元が存在するとき、これを$A$の下限と呼び、$\inf A$で表す。
 }
+
+
+\lsubsection{束}
 
 \dfn{束}{
   以下を満たす半順序集合$P$を束と呼ぶ。
@@ -88,12 +94,14 @@
 }
 
 \dfn{全順序}{
-  以下を満たす空でない集合$X$上の半順序$\preccurlyeq$を全順序と呼ぶ。全順序であることを明示的に記号$\leq$で表す。
+  集合$P$上の以下を満たす半順序$\preccurlyeq$を全順序と呼ぶ。
+  全順序であることを明示的に記号$\leq$で表す。
   \eq*{
-    \forall x, y \in X \qty(x \preccurlyeq y \lor y \preccurlyeq x)
+    \forall x, y \in P \qty(x \preccurlyeq y \lor y \preccurlyeq x)
   }
 
-  空でない集合$X$と$X$上の全順序$\leq$について、順序対$\qty(X, \leq)$を全順序集合と呼ぶ。または単に$X$と書き、全順序集合と集合どちらも表すものとする。
+  集合$P$上の全順序$\leq$について、順序対$\qty(P, \leq)$を全順序集合と呼ぶ。
+  または単に$P$と書き、全順序集合と集合どちらも表すものとする。
 
   略記$<, \geq, >$を以下のように定める。
   \eqg*{
@@ -104,7 +112,7 @@
 }
 
 \cor*{
-  全順序集合$A$の極大元は最大元であり、極小元は最小元である。
+  全順序集合$P$の極大元は最大元であり、極小元は最小元である。
 }
 
 \cor*{
@@ -125,122 +133,164 @@
 \lsubsection{Zornの補題}
 
 \dfn{帰納的}{
-  半順序集合$\qty(P, \preccurlyeq)$を考える。$P$の任意の空でない部分集合$A$について、順序対$\qty(A, \preccurlyeq)$が全順序集合ならば$A$が上に有界となるとき、$P$は帰納的であると呼ぶ。
+  空でない半順序集合$\qty(P, \preccurlyeq)$を考える。
+
+  $P$の任意の部分集合$A$について、順序対$\qty(A, \preccurlyeq)$が全順序集合ならば$A$が上に有界となるとき、$P$は帰納的であると言う。
 }
 
 \lem*{
-  帰納的な半順序集合$\qty(X, \preccurlyeq)$について、以下の集合$\mathcal{T}$、すなわち$X$の全順序部分集合の全体を考える。
+  帰納的な半順序集合$\qty(P, \preccurlyeq)$について、以下の集合系$\mathcal{M}$、すなわち$P$の全順序部分集合の全体を考える。
   \eq*{
-    \mathcal{T} \coloneqq \qty{T \in \P(X) \mid T \neq \varnothing \land \forall x, y \in T \qty(x \preccurlyeq y \lor y \preccurlyeq x)}
+    \mathcal{M} \coloneqq \qty{M \subset P \mid \forall x, y \in M \qty(x \preccurlyeq y \lor y \preccurlyeq x)}
   }
 
-  以下の写像$U \in \P(X)^{\mathcal{T}}$を考える。
+  このとき、$P$が極大元を持たないならば、以下を満たす写像$f \colon \mathcal{M} \to P$が存在する。
   \eq*{
-    \forall T \in \mathcal{T} \qty(U(T) \coloneqq \qty{u \in X \mid \forall t \in T \qty(t \prec u)})
+    \forall M \in \mathcal{M} \forall m \in M \qty(m \prec f(M))
   }
+}{
+  帰納的であることより、$\forall M \in \mathcal{M}$に対して上界$u$が存在する。
 
-  このとき、以下が成り立つ。
+  今、$u$は$P$の極大元ではないので、$\exists v \in P \qty(u \prec v)$である。
+  $\forall m \in M \qty(m \preccurlyeq u \prec v)$である。
+
+  \thmref{選択公理が与える写像}より存在する。
+}
+
+\dfn{タワー}{
+  極大元を持たない半順序集合$P$を考える。
+
+  \mlemref{0}で定めた集合系$\mathcal{M}$と写像$f$を考える。
+
+  以下を満たす集合系$\mathcal{T} \subset \mathcal{M}$を、$P$のタワーと呼ぶ。
   \eqg*{
-    \forall S \in \P(X) \forall T \in \mathcal{T} \qty(S \neq \varnothing \land S \subset T \rightarrow S \in \mathcal{T}) \\*
-    \forall T \in \mathcal{T} \qty(U(T) \cap T = \varnothing)
+    \varnothing \in \mathcal{T} \\*
+    \forall T \in \mathcal{T} \qty(T \cup \qty{f(T)} \in \mathcal{T}) \\*
+    \forall \mathcal{S} \subset \mathcal{T} \qty(\text{$\qty(\mathcal{S}, \subset)$は全順序集合} \rightarrow \bigcup \mathcal{S} \in \mathcal{T})
   }
-}{
-  第一式は明らか。\\*
-
-  第二式について考える。
-
-  $\exists u \in U(T) \cap T$であるならば、$\qty(u \prec u)$より矛盾。背理法より、成り立つ。
 }
 
 \lem*{
-  帰納的な半順序集合$X$が極大元を持たないならば、以下を満たす写像$f \in X^{\qty{U(T) \mid T \in \mathcal{T}}}$が存在する。
+  極大元を持たない半順序集合$P$について、以下の集合を考える。
   \eq*{
-    f(U) \in U
+    \mathcal{T}_0 \coloneqq \bigcap \qty{\mathcal{T} \subset \P(P) \mid \text{$\mathcal{T}$は$P$のタワー}}
   }
+
+  このとき、$\mathcal{T}_0$は$P$のタワーである。
 }{
-  帰納的であることより、$\forall T \in \mathcal{T}$に対して上界$u_T$が存在する。
+  $\mathcal{M}$は$P$のタワーであるので、$\qty{\mathcal{T} \subset \P(P) \mid \text{$\mathcal{T}$は$P$のタワー}} \neq \varnothing$である。
 
-  今、$u_T$は極大元でないので、$\exists v \in X \qty(u_T \prec v)$である。推移律から、$v \in U(T)$である。
-
-  $\forall U \in \qty{U(T) \mid T \in \mathcal{T}} \exists T \in \mathcal{T} \exists v \in X \qty(v \in U(T) \land U(T) = T)$であるので、\thmref{選択公理が与える写像}より存在する。
+  タワーの定義より、明らか。
 }
 
 \lem*{
-  帰納的な半順序集合$X$が極大元を持たないとき、以下の集合を考える。
-  \eqg*{
-    \mathcal{T}_0 \coloneqq \qty{T \in \mathcal{T} \mid \forall S \in \P(T) \setminus \qty{\varnothing} \qty(U(S) \setminus U(T) \neq \varnothing \rightarrow f(U(S)) \in T)} \\*
-    \mathcal{T}_1 \coloneqq \qty{T \in \mathcal{T}_0 \mid \forall S \in \mathcal{T}_0 \qty(T \setminus S \subset U(S))} \\*
-    T^* \coloneqq \bigcup \mathcal{T}_1
-  }
+  極大元を持たない半順序集合$P$を考える。
 
-  このとき、$T^* \in \mathcal{T}_1$である。
-}{
-  $\forall S \in \mathcal{T}_0$について、$\forall x \in T^* \setminus S \exists T \in \mathcal{T}_1 \qty(x \in T \setminus S \subset U(S))$である。
-
-  すなわち、$\forall S \in \mathcal{T}_0 \qty(T^* \setminus S \subset U(S))$\\*
-
-  $\forall x, y \in T^*$について、$\exists T \in \mathcal{T}_1 \subset \mathcal{T}_0 \subset \mathcal{T} \qty(x \in T)$である。
-
-  $y \in T$のとき、$x \preccurlyeq y \lor y \preccurlyeq x$である。
-
-  $y \notin T$のとき、$y \in T^* \setminus T \subset U(T)$より、$x \preccurlyeq y$である。
-
-  したがって、$T^* \in \mathcal{T}$である。\\*
-
-  $R \in \P(T^*) \setminus \qty{\varnothing}$について、$\exists v \in U(R) \setminus U(T^*)$とする。
-
-  $\exists w \in T^* \exists T \in \mathcal{T}_1 \qty(\lnot w \prec v \land w \in T)$より、$\exists T \in \mathcal{T}_1 \qty(v \in U(R) \setminus U(T))$
-
-  $y \in R \cap U(T)$とすると、$v \in U(R)$より$y \prec v$であり、推移律から$v \in U(T)$となり矛盾。したがって、$R \cap U(T) = \varnothing$である。
-
-  $R \setminus T = R \cap \qty(R \setminus T) \subset R \cap \qty(T^* \setminus T) \subset R \cap U(T) = \varnothing$より、$R \setminus T = \varnothing$、すなわち$R \subset T$である。
-
-  $T \in \mathcal{T}_0$より、$f(U(R)) \in T \subset T^*$である。したがって、$T^* \in \mathcal{T}_0$であり、ただちに$T^* \in \mathcal{T}_1$を得る。
-}
-
-\lem*{
-  帰納的な半順序集合$X$が極大元を持たないとき、\mlemref{-1}より$T^* \in \mathcal{T}$であるので、以下の集合を考える。
+  \mlemref{-2}で定めた$f$について、以下で定める写像$g \colon \mathcal{M} \to \mathcal{M}$を考える。
   \eq*{
-    T' \coloneqq T^* \cup \qty{f(U(T^*))}
+    g(M) \coloneqq M \cup \qty{f(M)}
   }
 
-  このとき、$T' \in \mathcal{T}_1$である。
+  このとき、\mlemref{-1}で定めた$\mathcal{T}_0$は、以下を満たす。
+  \eq*{
+    \forall T \in \mathcal{T}_0 \qty(\forall T' \in \mathcal{T}_0 \qty(T \subset T' \lor T' \subset T) \rightarrow \forall T' \in \mathcal{T}_0 \qty(T' \subset T \lor g(T) \subset T'))
+  }
 }{
-  簡単のため、$u \coloneqq f(U(T^*))$と置く。
+  前件を満たす$T$について、以下の集合系を考える。
+  \eq*{
+    \mathcal{T}_T \coloneqq \qty{T' \in \mathcal{T}_0 \mid T' \subset T \lor g(T) \subset T'}
+  }
 
-  今、$u$は定義より$T'$の最大元となるので、$T' \in \mathcal{T}$である。\\*
+  定義より、$\mathcal{T}_T \subset \mathcal{T}_0$である。
 
-  $S \in \P(T') \setminus \qty{\varnothing}$について、$U(S) \setminus U(T') \neq \varnothing$とする。
+  \vskip\baselineskip
 
-  $u \in S$とすると、$U(S) = U(\qty{u}) = U(T')$より矛盾。したがって、$u \notin S$より、$S \subset T^*$を得る。
+  今、$\varnothing \subset T$であるので、$\varnothing \in \mathcal{T}_T$である。
 
-  ゆえに、$U(T^*) \subset U(S)$であり、$U(S) \setminus U(T^*) \neq \varnothing$のとき、$f(U(S)) \in T^* \subset T'$を得る。
+  \vskip\baselineskip
 
-  $U(S) \subset U(T^*)$のとき、$U(S) = U(T^*)$より、$f(U(S)) = u \in T'$
+  $T' \in \mathcal{T}_T$を考える。
 
-  したがって、$T' \in \mathcal{T}_0$である。\\*
+  $g(T) \subset T'$であるとき、$g(T) \subset T' \subset g(T')$より、$g(T') \in \mathcal{T}_T$である。
 
-  $\forall R \in \mathcal{T}_0$について考える。
+  $T' \subset T$であるとき、$g(T') \subset T$ならば$g(T') \in \mathcal{T}_T$である。
 
-  $\exists v \in T^* \cap U(R)$のとき、$v \prec u$より$u \in U(R)$である。
+  $g(T') \setminus T \neq \varnothing$ならば、$g(T') \setminus T = \qty{f(T')}$であるため、$T = T'$である。
+  ゆえに、$g(T') = g(T) \in \mathcal{T}_T$である。
 
-  \mlemref{-1}より$T' \setminus R \subset \qty(T^* \setminus R) \cup \qty{u} \subset U(R)$を得る。
+  \vskip\baselineskip
 
-  $T^* \cap U(R) = \varnothing$のとき、\mlemref{-1}より$T^* \setminus R \subset U(R)$であるので$T^* \subset R$である。
+  $\mathcal{T}_T$の全順序部分$\mathcal{S}$を考える。
 
-  $R \in \mathcal{T}_0$より、$U(T^*) \subset U(R) \lor u = f(U(T^*)) \in R$、すなわち$u \in U(R) \cup R$となる。
+  $\mathcal{S} \subset \mathcal{T}_T \subset \mathcal{T}_0$より、タワーの定義から$\bigcup \mathcal{S} \in \mathcal{T}_0$である。
 
-  したがって、$T' \setminus R = \qty{u} \setminus R \subset U(R)$を得る。
+  $\forall S \in \mathcal{S} \qty(S \subset T)$ならば、$\bigcup \mathcal{S} \subset T$であり、$\bigcup \mathcal{S} \in \mathcal{T}_T$である。
 
-  $\forall R \in \mathcal{T}_0 \qty(T' \setminus R \subset U(R))$である。
+  $\exists S \in \mathcal{S} \qty(g(T) \subset S)$ならば、$g(T) \subset \bigcup \mathcal{S}$であり、$\bigcup \mathcal{S} \in \mathcal{T}_T$である。
+
+  \vskip\baselineskip
+
+  ゆえに$\mathcal{T}_T$は、$P$のタワーである。
+
+  よって、$\mathcal{T}_0 \subset \mathcal{T}_T$が成り立つので、$\mathcal{T}_0 = \mathcal{T}_T$である。
+
+  したがって後件を満たす。
+}
+
+\lem*{
+  極大元を持たない半順序集合$P$を考える。
+
+  \mlemref{-2}で定めた$\mathcal{T}_0$について、$\qty(\mathcal{T}_0, \subset)$は全順序集合である。
+}{
+  以下の集合系を考える。
+  \eq*{
+    \mathcal{T}_1 \coloneqq \qty{T \in \mathcal{T}_0 \mid \forall T' \in \mathcal{T}_0 \qty(T \subset T' \lor T' \subset T)}
+  }
+
+  定義より、$\mathcal{T}_1 \subset \mathcal{T}_0$である。
+
+  \vskip\baselineskip
+
+  今、$\varnothing \subset T$であるので、$\varnothing \in \mathcal{T}_1$である。
+
+  \vskip\baselineskip
+
+  $T \in \mathcal{T}_1$を考える。
+
+  \mlemref{-1}より、$\forall T' \in \mathcal{T}_0 \qty(T' \subset T \subset g(T) \lor g(T) \subset T')$であるため、$g(T) \in \mathcal{T}_1$である。
+
+  \vskip\baselineskip
+
+  $\mathcal{T}_1$の全順序部分$\mathcal{S}$を考える。
+
+  $\mathcal{S} \subset \mathcal{T}_1 \subset \mathcal{T}_0$より、タワーの定義から$\bigcup \mathcal{S} \in \mathcal{T}_0$である。
+
+  $\forall T' \in \mathcal{T}_0$を考える。
+
+  $\forall S \in \mathcal{S} \qty(S \subset T')$ならば、$\bigcup \mathcal{S} \subset T'$である。
+  $\exists S \in \mathcal{S} \qty(T' \subset S)$ならば、$T' \subset \bigcup \mathcal{S}$である。
+
+  ゆえに、$T' \subset \bigcup \mathcal{S} \lor \bigcup \mathcal{S} \subset T'$である。
+
+  したがって、$\bigcup \mathcal{S} \in \mathcal{T}_1$である。
+
+  \vskip\baselineskip
+
+  ゆえに$\mathcal{T}_1$は、$P$のタワーである。
+
+  よって、$\mathcal{T}_0 \subset \mathcal{T}_1$が成り立つので、$\mathcal{T}_0 = \mathcal{T}_1$である。
 }
 
 \thm{Zornの補題}{
   帰納的な半順序集合には極大元が存在する。
 }{
-  極大元を持たないとすると、\mlemref{-1}より$T' \in \mathcal{T}_1$から$T' \subset \bigcup \mathcal{T}_1 = T^*$
+  極大元を持たないと仮定する。
 
-  定義より$u \in T' \setminus T^*$であり、矛盾する。
+  \mlemref{-1}より$\qty(\mathcal{T}_0, \subset)$は全順序であるため、タワーの定義から$\bigcup \mathcal{T}_0 \in \mathcal{T}_0$である。
+
+  タワーの定義より$g(\bigcup \mathcal{T}_0) \in \mathcal{T}_0$であるので、から$f(\bigcup \mathcal{T}_0) \in \bigcup \mathcal{T}_0$である。
+
+  これは、\mlemref{-3}における$f$の定義に反する。
 
   背理法より示される。
 }
@@ -314,7 +364,9 @@
 
   $\varnothing \notin \mathcal{S}$より、$\mathcal{S}$はフィルターでありかつ$\mathcal{F}$の細分である。
 
-  ここで、$\mathcal{F}$は超フィルターであるので$X \setminus A \in \mathcal{S} = \mathcal{F}$\\*
+  ここで、$\mathcal{F}$は超フィルターであるので$X \setminus A \in \mathcal{S} = \mathcal{F}$
+
+  \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。
 
@@ -352,7 +404,9 @@
     \mathcal{F} \coloneqq \qty{F \in \P(X) \mid \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset F)}
   }
 }{
-  明らかに$\varnothing \notin \mathcal{F} \land X \in \mathcal{F}$である。\\*
+  明らかに$\varnothing \notin \mathcal{F} \land X \in \mathcal{F}$である。
+
+  \vskip\baselineskip
 
   $F_1, F_2 \in \mathcal{F}$について、定義より$\exists \lambda_1, \lambda_2 \subset \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_1}} \subset F_1 \land \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_2}} \subset F_2)$である。
 
@@ -385,7 +439,9 @@
 }{
   $M \coloneqq \qty{\qty(\lambda, F) \in \Lambda \times \mathcal{F'} \mid x_\lambda \in F}$を考える。
 
-  $M$上の前順序$\forall \qty(\lambda_1, F_1), \qty(\lambda_2, F_2) \in M \qty(\qty(\lambda_1, F_1) \preccurlyeq \qty(\lambda_2, F_2) \defiff \lambda_1 \preccurlyeq \lambda_2 \land F_1 \supset F_2)$を考える。\\*
+  $M$上の前順序$\forall \qty(\lambda_1, F_1), \qty(\lambda_2, F_2) \in M \qty(\qty(\lambda_1, F_1) \preccurlyeq \qty(\lambda_2, F_2) \defiff \lambda_1 \preccurlyeq \lambda_2 \land F_1 \supset F_2)$を考える。
+
+  \vskip\baselineskip
 
   $\qty(\lambda_1, F_1), \qty(\lambda_2, F_2) \in M$とする。
 
@@ -395,13 +451,17 @@
 
   \mlemref{-1}より$\exists \lambda_4 \in \Lambda \qty(\lambda_3 \preccurlyeq \lambda_4 \land x_{\lambda_4} \in F_1 \cap F_2)$
 
-  $\qty(\lambda_4, F_1 \cap F_2)$は、$\qty{\qty(\lambda_1, F_1), \qty(\lambda_2, F_2)}$の上界であるので、$M$は有向集合である。\\*
+  $\qty(\lambda_4, F_1 \cap F_2)$は、$\qty{\qty(\lambda_1, F_1), \qty(\lambda_2, F_2)}$の上界であるので、$M$は有向集合である。
+
+  \vskip\baselineskip
 
   ここで、写像$\varphi \in \Lambda^M$を$\varphi \qty(\lambda, F) \coloneqq \lambda$として定める。
 
   \mlemref{-1}より$\forall \lambda \in \Lambda \exists F \in \mathcal{F'} \exists \lambda_1 \in \Lambda \qty(\lambda \preccurlyeq \lambda_1 = \varphi(\lambda_1, F) \land \qty(\lambda_1, F) \in M)$である。
 
-  したがって、$\qty(x_{\varphi(\mu)})_{\mu \in M}$は部分ネットである。\\*
+  したがって、$\qty(x_{\varphi(\mu)})_{\mu \in M}$は部分ネットである。
+
+  \vskip\baselineskip
 
   今、\mlemref{-1}より$\forall F \in \mathcal{F'} \exists \lambda_0 \in \Lambda \qty(\qty(\lambda_0, F) \in M)$
 

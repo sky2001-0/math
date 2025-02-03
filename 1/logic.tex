@@ -1,9 +1,9 @@
 \lsection{論理学}
 
-\rem{論理における順序}{
+\rem{簡単のための記号の導入}{
   並列$,$を断りなく用いる。
 
-  $()$で定める順序を断りなく用いる。
+  $()$で定める優先順序を断りなく用いる。
 }
 
 
@@ -16,9 +16,11 @@
 \dfn{否定}{
   命題$\phi$について、$\lnot \phi$は命題である。
 
-  $\phi$でない、と呼ぶ。\\*
+  $\lnot \phi$を、「$\phi$でない」と呼ぶ。
 
-  以下の約束をすることにする。
+  \vskip\baselineskip
+
+  以下の約束をする。
   \begin{itemize}
     \item $\phi$が真であるとき、$\lnot \phi$は偽である。
     \item $\phi$が偽であるとき、$\lnot \phi$は真である。
@@ -27,78 +29,92 @@
 
 \dfn{含意}{
   命題$\phi, \psi$について、$\phi \rightarrow \psi$は命題である。
-  このとき、$\phi$を前件、$\psi$を後件と呼ぶ。
 
-  $\phi$ならば$\psi$、$\phi$は$\psi$に十分、$\psi$は$\phi$に必要、と呼ぶ。\\*
+  $\phi \rightarrow \psi$を、「$\phi$ならば$\psi$」、「$\phi$は$\psi$に十分」、「$\psi$は$\phi$に必要」と呼ぶ。
 
-  以下の約束をすることにする。
+  \vskip\baselineskip
+
+  以下の約束をする。
   \begin{itemize}
     \item $\phi$が偽であるとき、$\phi \rightarrow \psi$は真である。
     \item $\psi$が真であるとき、$\phi \rightarrow \psi$は真である。
     \item $\phi$が真であり、$\psi$が偽であるとき、$\phi \rightarrow \psi$は偽である。
   \end{itemize}
 
-  $\phi \rightarrow \psi$の意味で、$\psi \leftarrow \phi$の表記をすることがある。
+  このとき、$\phi$を前件、$\psi$を後件と呼ぶ。
 }
 
 \rem{命題の定義記号}{
   定義記号$\defiff$を導入する。
+
   これは左辺を用いて表現された命題は、全てその左辺と一致する部分を右辺に置き換えて理解するという意味である。
 }
 
+\dfn{左含意}{
+  命題$\phi, \psi$について、$\psi \leftarrow \phi$は、以下で定める命題である。
+  \eq*{
+    \psi \leftarrow \phi \defiff \phi \rightarrow \psi
+  }
+
+  同様に、「$\phi$ならば$\psi$」、「$\phi$は$\psi$に十分」、「$\psi$は$\phi$に必要」と呼ぶ。
+}
+
 \dfn{連言}{
-  命題$\phi, \psi$について、$\phi \land \psi$は以下で定義される命題である。
+  命題$\phi, \psi$について、$\phi \land \psi$は、以下で定める命題である。
   \eq*{
     \phi \land \psi \defiff \qty(\lnot \phi) \rightarrow \psi
   }
 
-  $\phi$かつ$\psi$、と呼ぶ。
+  $\phi \land \psi$を、「$\phi$かつ$\psi$」と呼ぶ。
 }
 
 \dfn{選言}{
-  命題$\phi, \psi$について、$\phi \lor \psi$は以下で定義される命題である。
+  命題$\phi, \psi$について、$\phi \lor \psi$は、以下で定める命題である。
   \eq*{
     \phi \lor \psi \defiff \lnot \qty(\qty(\lnot \phi) \land \qty(\lnot \psi))
   }
 
-  $\phi$または$\psi$、と呼ぶ。
+  $\phi \lor \psi$を、「$\phi$または$\psi$」と呼ぶ。
 }
 
 \dfn{同値}{
-  命題$\phi, \psi$について、$\phi \leftrightarrow \psi$は以下で定義される命題である。
+  命題$\phi, \psi$について、$\phi \leftrightarrow \psi$は、以下で定める命題である。
   \eq*{
     \phi \leftrightarrow \psi \defiff \qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \phi)
   }
 
-  $\phi$と$\psi$は同値、$\phi$と$\psi$は必要十分、と呼ぶ。
+  $\phi \leftrightarrow \psi$を、「$\phi$と$\psi$は同値」、「$\phi$と$\psi$は必要十分」と呼ぶ。
 }
 
-\rem{順序}{
-  特に$()$で定められていなければ、否定$\lnot$、連言$\land$、選言$\lor$、含意$\rightarrow$、同値$\leftrightarrow$の順で優先されるものとする。
+\dfn{命題結合子}{
+  否定$\lnot$、連言$\land$、選言$\lor$、含意$\rightarrow$、同値$\leftrightarrow$を、総称して命題結合子と呼ぶ。
+}
+
+\rem{命題結合子の優先順序}{
+  特に$()$で定められていなければ、以下に示す順序で優先されるものとする。
+  \begin{enumerate}
+    \item 否定$\lnot$
+    \item 連言$\land$
+    \item 選言$\lor$
+    \item 含意$\rightarrow$
+    \item 同値$\leftrightarrow$
+  \end{enumerate}
 }
 
 
-\lsubsection{トートロジー}
+\lsubsection{恒真命題}
 
-\dfn{トートロジー}{
+\dfn{恒真命題}{
 	命題結合子により結合されている命題$\psi$を考える。
-	結合されている各命題の真偽によらず、$\psi$が真となるような命題結合子の組み合わせを、トートロジーと呼ぶ。
-
-  常に真である命題$\psi$を、$\top$で表す。
+	結合されている各命題の真偽によらず、$\psi$が真となる命題を、恒真命題と呼ぶ。
 }
 
 \dfn{矛盾}{
-  命題$\bot$を以下のように定める。
-  \eq*{
-    \bot \defiff \lnot \top
-  }
+  偽である命題を矛盾と呼び、$\bot$で表す。
 }
 
 \cor*{
-  以下の全ては、トートロジーである。
-  （以下に述べるのは代表的な例であり、全てでないことに注意されたい。）
-
-  命題$\phi, \psi, \chi$について、
+  命題$\phi, \psi, \chi$について、以下に示す全ては恒真命題である。
   \begin{enumerate}
     \item 同一律
     \begin{itemize}
@@ -175,6 +191,8 @@
       \item $\qty(\phi \lor \psi) \land \lnot \phi \rightarrow \psi$
     \end{itemize}
   \end{enumerate}
+
+  当然これらは代表的な例であり、全てではない。
 }
 
 
@@ -184,25 +202,19 @@
   以降、古典論理（NK）の推論規則を導入する。
 }
 
-\dfn{演繹関係}{
-  命題$\phi, \psi$について、
-  演繹関係$\phi \vdash \psi$を「$\phi$から$\psi$が証明される」「$\phi$から$\psi$が推論される」と定義する。
-}
-
-\rem{演繹関係について}{
-  命題$\phi$について、$\vdash \phi$、すなわち「前提なく$\phi$が証明される」は$\phi$と略記されることがある。
-  また、改行により演繹関係を表す場合もある。
+\dfn{推論}{
+  命題$\phi, \psi$について、$\phi$から$\psi$が推論されるとき、$\phi \vdash \psi$で明示的に表す。
 }
 
 \axi{連言の導入則}{
-  命題$\phi, \psi, \chi$について、
+  命題$\phi, \psi, \chi$について、以下を定める。
   \eq*{
     \qty(\qty(\chi \vdash \phi), \qty(\chi \vdash \psi)) \vdash \qty(\chi \vdash \phi \land \psi)
   }
 }
 
 \axi{連言の除去則}{
-  命題$\phi, \psi$について、
+  命題$\phi, \psi$について、以下の\num{2}つを定める。
   \eqg*{
     \phi \land \psi \vdash \phi \\*
     \phi \land \psi \vdash \psi
@@ -210,7 +222,7 @@
 }
 
 \axi{選言の導入則}{
-  命題$\phi, \psi$について、
+  命題$\phi, \psi$について、以下の\num{2}つを定める。
   \eqg*{
     \phi \vdash \phi \lor \psi \\*
     \psi \vdash \phi \lor \psi
@@ -218,21 +230,21 @@
 }
 
 \axi{選言の除去則}{
-  命題$\phi, \psi, \chi$について、
+  命題$\phi, \psi, \chi$について、以下を定める。
   \eq*{
     \qty(\qty(\phi \vdash \chi), \qty(\psi \vdash \chi)) \vdash \qty(\phi \lor \psi \vdash \chi)
   }
 }
 
 \axi{含意の導入則（演繹定理）}{
-  命題$\phi, \psi, \chi$について、
+  命題$\phi, \psi, \chi$について、以下を定める。
   \eq*{
     \qty(\chi \land \phi \vdash \psi) \vdash \qty(\chi \vdash \qty(\phi \rightarrow \psi))
   }
 }
 
-\axi{含意の除去則（Modus Ponendo Ponens）}{
-  命題$\phi, \psi$について、
+\axi{含意の除去則（Modus Ponens）}{
+  命題$\phi, \psi$について、以下を定める。
   \eq*{
     \phi \land \qty(\phi \rightarrow \psi) \vdash \psi
   }
@@ -241,14 +253,14 @@
 }
 
 \axi{否定の導入則}{
-  命題$\phi, \psi$について、
+  命題$\phi, \psi$について、以下を定める。
   \eq*{
     \qty(\phi \land \psi \vdash \bot) \vdash \qty(\phi \vdash \lnot \psi)
   }
 }
 
 \axi{否定の除去則（二重否定の除去）}{
-  命題$\phi$について、
+  命題$\phi$について、以下を定める。
   \eq*{
     \lnot \lnot \phi \vdash \phi
   }
@@ -260,59 +272,57 @@
 \dfn{述語}{
   一つないし複数の変項を持ち、その変項の全てが確定したときに命題となる言明を、述語と呼ぶ。
 
-  例えば、述語を表す記号（述語記号）$\phi$と変項$x$を用いて$\phi(x)$で表す。
+  述語を表す記号である述語記号$\phi$と変項$x$を用いて$\phi(x)$で表す。
+
+  \vskip\baselineskip
 
   述語記号が要求する変項の数を、その述語記号のアリティと呼ぶ。
+}
+
+\rem{変項の定義記号}{
+  定義記号$\coloneqq$を導入する。
+
+  これは左辺を用いて表現された変項は、全てその左辺と一致する部分を右辺に置き換えて理解するという意味である。
 }
 
 \dfn{全称量化子}{
   述語$\phi(x)$について、$\forall x \qty(\phi(x))$は命題である。
 }
 
-\dfn{存在量化子}{
-  述語$\phi(x)$について、$\exists x \qty(\phi(x))$は命題である。
-}
-
-\dfn{等号}{
-  アリティ2の述語記号$=$を定める。
-  $x = y$と表す。
-}
-
-\rem{変項の定義記号}{
-  定義記号$\coloneqq$を導入する。
-  これは左辺を用いて表現された変項は、全てその左辺と一致する部分を右辺に置き換えて理解するという意味である。
-}
-
 \axi{全称量化子の導入則}{
-  変項$x$を出現させない述語$\psi$と述語記号$\phi$について、
+  変項$x$を出現させない述語$\psi$と述語記号$\phi$について、以下を定める。
   \eq*{
     \qty(\psi \vdash \phi(x)) \vdash \qty(\psi \vdash \forall x \qty(\phi(x)))
   }
 }
 
 \axi{全称量化子の除去則}{
-  述語記号$\phi$について、
+  述語記号$\phi$について、以下を定める。
   \eq*{
     \forall x \qty(\phi(x)) \vdash \phi(y)
   }
 }
 
+\dfn{存在量化子}{
+  述語$\phi(x)$について、$\exists x \qty(\phi(x))$は命題である。
+}
+
 \axi{存在量化子の導入則}{
-  述語記号$\phi$について、
+  述語記号$\phi$について、以下を定める。
   \eq*{
     \phi(y) \vdash \exists x \qty(\phi(x))
   }
 }
 
 \axi{存在量化子の除去則}{
-  述語記号$\phi$、変項$y$を出現させない述語$\psi$、命題$\chi$について、
+  述語記号$\phi$、変項$y$を出現させない述語$\psi$、命題$\chi$について、以下を定める。
   \eq*{
     \qty(\chi \land \phi(y) \vdash \psi) \vdash \qty(\chi \land \exists x \qty(\phi(x)) \vdash \psi)
   }
 }
 
 \cor{量化子と連言}{
-  述語記号$\phi$について、
+  述語記号$\phi$について、以下が成り立つ。
   \eqg*{
     \forall x \qty(\phi(x) \land \psi(x)) \leftrightarrow \forall x \qty(\phi(x)) \land \forall x \qty(\psi(x)) \\*
     \exists x \qty(\phi(x) \land \psi(x)) \rightarrow \exists x \qty(\phi(x)) \land \exists x \qty(\psi(x))
@@ -320,7 +330,7 @@
 }
 
 \cor{量化子と選言}{
-  述語記号$\phi$について、
+  述語記号$\phi$について、以下が成り立つ。
   \eqg*{
     \forall x \qty(\phi(x) \lor \psi(x)) \leftarrow \forall x \qty(\phi(x)) \lor \forall x \qty(\psi(x)) \\*
     \exists x \qty(\phi(x) \lor \psi(x)) \leftrightarrow \exists x \qty(\phi(x)) \lor \exists x \qty(\psi(x))
@@ -328,28 +338,35 @@
 }
 
 \cor{量化子と否定}{
-  述語記号$\phi$について、
+  述語記号$\phi$について、以下が成り立つ。
   \eqg*{
     \forall x \qty(\lnot \phi(x)) \leftrightarrow \lnot \exists x \qty(\phi(x)) \\*
     \exists x \qty(\lnot \phi(x)) \leftrightarrow \lnot \forall x \qty(\phi(x))
   }
 }
 
+\dfn{等号}{
+  アリティ\num{2}の述語記号$=$を定める。
+
+  $=\qty(x, y)$を、簡単のために$x = y$で表す。
+}
+
 \axi{等号の導入則（反射律）}{
-  変項$x$について、
+  変項$x$について、以下を定める。
   \eq*{
     x = x
   }
 }
 
 \axi{等号の除去則（代入原理）}{
-  述語記号$\phi$、変項$x, y$について、
+  述語記号$\phi$、変項$x, y$について、以下を定める。
   \eq*{
     \phi(x) \land x = y \vdash \phi(y)
   }
 }
 
-\thm{等号の対称律}{
+\lem{等号の対称律}{
+  変項$x, y$について、以下が成り立つ。
   \eq*{
     x = y \vdash y = x
   }
@@ -360,13 +377,14 @@
 }
 
 \cor{等号の推移律}{
+  変項$x, y, z$について、以下が成り立つ。
   \eq*{
     x = y \land y = z \vdash x = z
   }
 }
 
 \dfn{等号否定}{
-  略記$\neq$を以下のように定義する。
+  略記$\neq$を以下のように定める。
   \eq*{
     a \neq b \defiff \lnot \qty(a = b)
   }

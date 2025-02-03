@@ -2,100 +2,82 @@
 
 \lsubsection{自然数の構成}
 
+\axi{無限の公理}{
+  \eq*{
+    \exists A \qty(\varnothing \in A \land \forall x \in A \qty(x \cup \qty{x} \in A))
+  }
+}
+
 \dfn{無限系譜}{
   集合$X$が無限系譜であるとは、以下を満たすことである。
   \eq*{
     \varnothing \in X \land \forall x \qty(x \in X \rightarrow x \cup \qty{x} \in X)
   }
 
-  \axiref{無限の公理}より無限系譜は存在する。集合$X$が無限系譜であることをアリティ1の述語記号$M(X)$で表す。
+  \axiref{無限の公理}より無限系譜は存在する。
 }
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(M(X) \land M(Y) \rightarrow M(X \cap Y))
+    \forall X \forall Y \qty(M(X) \land M(Y) \rightarrow \text{$X \cap Y$は無限系譜である})
   }
 }
 
 \dfn{後者関数}{
-  無限系譜$X$について、以下のように定める写像$s \in X^X$を後者関数（successor）と呼ぶ。
+  無限系譜$X$について、以下のように定める写像$s \colon X \to X$を後者関数（successor）と呼ぶ。
   \eq*{
     s(x) \coloneqq x \cup \qty{x}
   }
 }
 
-\cor*{
-  \eq*{
-    \forall x \qty(x \in s(x) \land x \neq s(x))
-  }
-}
-
 \lem*{
- \eq*{
-   \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(M(X)) \rightarrow M \qty(\bigcap A))
- }
-}{
-  まず、以下が成り立つ。
+  以下が成り立つ。
   \eq*{
-    A \neq \varnothing \land \forall X \in A \qty(\varnothing \in X) \rightarrow \varnothing \in \bigcap A
+    \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(\text{$X$は無限系譜である}) \rightarrow \text{$\bigcap A$は無限系譜である})
   }
+}{
+  空でない$A$を考える。
 
-  次に、以下が成り立つ。$A \neq \varnothing$のとき、
-  $\forall x \in \bigcap A \forall X \in A$について、$x \in X$であり、無限系譜であることから$s(x) \in X$。ゆえに、$s(x) \in \bigcap A$
+  $\forall X \in A \qty(\varnothing \in X)$であるので、$\varnothing \in \bigcap A$である。
+
+  $\forall x \in \bigcap A$について、$\forall X \in A \qty(x \in X)$であり、無限系譜であることから$s(x) \in X$である。
+  ゆえに、$s(x) \in \bigcap A$
 
   よって、$\bigcap A$は無限系譜である。
 }
 
 \lem*{
+  無限系譜$X$について、以下で定める集合は無限系譜である。
   \eq*{
-    \forall X \qty(M(X) \rightarrow \exists Y \qty(M(Y) \land Y = \bigcap \qty{Z \in \P(X) \mid M(Z)}))
+    \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}
   }
 }{
-  \axiref{冪集合の公理}、および\thmref{分出の公理図式}より、
-  \eq*{
-    \exists Y \qty(Y = \bigcap \qty{Z \in \P(X) \mid M(Z)})
-  }
-  ここで$X \in \qty{Z \in \P(X) \mid M(Z)}$より、$\qty{Z \in \P(X) \mid M(Z)} \neq \varnothing$
+  $A \coloneqq \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とすると、
+  $X \in A$より、$A \neq \varnothing$である。
 
-  \mlemref{-1}より、$Y$は無限系譜である。
+  \mlemref{-1}より成り立つ。
 }
 
 \lem*{
-  \eq*{
-    \forall X \forall Y \qty(M(X) \land M(Y) \rightarrow \bigcap \qty{Z \in \P(X) \mid M(Z)} = \bigcap \qty{Z \in \P(Y) \mid M(Z)})
-  }
+  \mlemref{-1}で定める集合は、無限系譜$X$の取り方によらずに一意に定まる。
 }{
-  $\omega(X) \coloneqq \bigcap \qty{Z \in \P(X) \mid M(Z)}$とする。
+  $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とする。
 
-  \mlemref{-2}より、$M(X \cap Y)$で、$\omega(X) \subset \omega(X \cap Y)$
+  $X_1, X_2$の二つの無限系譜を考える。
 
-  今、
-  \eqg*{
-    \forall Z \qty(Z \in \qty{Z \in \P(X) \mid M(Z)}) \\*
-    \forall Z \qty(M(Z) \land Z \subset X) \\*
-    \forall Z \qty(M(Z \cap Y) \land Z \cap Y \subset X \cap Y) \\*
-    \forall Z \qty(Z \cap Y \in \qty{Z \in \P(X \cap Y) \mid M(Z)})
-  }
-  ゆえに、
-  \eqg*{
-    \forall z \forall Z \qty(z \in \omega(X \cap Y) \land Z \in \qty{Z \in \P(X) \mid M(Z)}) \\*
-    \forall z \forall Z \qty(z \in Z \cap Y) \\*
-    \forall z \forall Z \qty(z \in Z)
-  }
-  よって、
-  \eq*{
-    \forall z \qty(z \in \omega(X \cap Y) \rightarrow z \in \omega(X))
-  }
-  したがって、
-  \eq*{
-    \omega(X) = \omega(X \cap Y)
-  }
+  $X_1$の部分で無限系譜である$Y$を考える。
 
-  $Y$についても同様より、示される。
+  \mlemref{-2}より$X_2 \cap Y$も無限系譜であり、定義より$\omega(X_2) \subset X_2 \cap Y \subset Y$である。
+
+  任意の$Y$について成り立つので、$\omega(X_2) \subset \omega(X_1)$である。
+
+  同様に$\omega(X_1) \subset \omega(X_2)$であるため、示される。
 }
 
 \dfn{自然数}{
-  \mlemref{0}より、無限系譜$X$の取り方によらず$\bigcap \qty{Z \in \P(X) \mid M(Z)}$が一意に定まり、これを自然数$\N$（または$\omega$）と呼ぶ。誤解のない範囲で、自然数$\N$の要素も自然数と呼ぶ。
+  \mlemref{0}より、無限系譜$X$の取り方によらず$\omega(X)$が一意に定まる。
+  これを自然数$\N$（または$\omega$）と呼ぶ。
+  誤解のない範囲で、自然数$\N$の要素も自然数と呼ぶ。
 }
 
 \dfn{数字}{
@@ -115,9 +97,13 @@
     \forall E \qty(E \subset \N \land 0 \in E \land \forall n \qty(n \in E \rightarrow s(n) \in E) \rightarrow E = \N)
   }
 }{
-  第一、第二の公理は自明。\\*
+  第一、第二の公理は、無限系譜であることより明らか。
 
-  第三の公理は$n \in s(n)$と、空集合は要素を持たないことから示される。\\*
+  \vskip\baselineskip
+
+  第三の公理は$n \in s(n)$と、空集合は要素を持たないことから示される。
+
+  \vskip\baselineskip
 
   第四の公理を示す。
 
@@ -125,34 +111,36 @@
 
   よって、$\qty(n = m \lor n \in m) \land \qty(m = n \lor m \in n)$
 
-  \axiref{正則性の公理}より示される。\\*
+  \axiref{正則性の公理}より示される。
+
+  \vskip\baselineskip
 
   第五の公理を示す。
 
+  前件より、$E \subset \N$である。
+
   $0 \in E \land \forall n \qty(n \in E \rightarrow s(n) \in E)$より、$E$は無限系譜である。
 
-  定義より、$\N = \bigcap \qty{Z \in \P(E) \mid M(Z)}$
-
-  $\forall n \qty(n \in \N \rightarrow n \in \bigcap \qty{Z \in \P(E) \mid M(Z)})$
-
-  すなわち、$\forall n \qty(n \in \N \rightarrow n \in E)$
-
-  今、$E \subset \N$は仮定より、示される。
+  定義より$\N = \omega(E) \subset E$である。
 }
 
 \thm{数学的帰納法}{
   アリティ1の述語記号$P$について、
   \eq*{
-    \forall n \qty(n \in \N \rightarrow P(n)) \leftrightarrow P(0) \land \forall n \qty(n \in \N \land \qty(P(n) \rightarrow P(s(n))))
+    \forall n \qty(n \in \N \rightarrow P(n)) \leftrightarrow P(0) \land \forall n \qty\Big(n \in \N \land \qty\big(P(n) \rightarrow P(s(n))))
   }
 }{
-  右は自明。\\*
+  右は明らか。
+
+  \vskip\baselineskip
 
   左は、$E = \qty{n \in \N \mid P(n)}$として\thmref{Peanoの公理}第五式から示される。
 }
 
 \dfn{前者関数}{
-  後者関数$s$は、\thmref{Peanoの公理}の第四式より単射であるため、左逆写像を持つ。これを前者関数$p \in \N^{\N \setminus \qty{0}}$と呼ぶ。
+  後者関数$s$は、\thmref{Peanoの公理}の第四式より単射であるため、左逆写像を持つ。
+
+  これを前者関数$p \in \N \setminus \qty{0} \to \N$と呼ぶ。
 }
 
 \lem*{
@@ -209,7 +197,9 @@
   $0$は空集合より、$\lnot \qty(n \in 0) \land \lnot \qty(n \subsetneq 0)$
   ゆえに、$n \subsetneq 0 \leftrightarrow n \in 0$
 
-  ある$m$で成り立つとする。\\*
+  ある$m$で成り立つとする。
+
+  \vskip\baselineskip
 
   左について、仮定より、
   \eqg*{
@@ -219,11 +209,15 @@
     n \subsetneq m \lor n = m \\*
     n \subset m
   }
+
   $m \notin m$より、
   \eq*{
     n \subsetneq m \cup \qty{m} = s(m)
   }
-  \thmref{数学的帰納法}より、左が成り立つ。\\*
+
+  \thmref{数学的帰納法}より、左が成り立つ。
+
+  \vskip\baselineskip
 
   右について、既に示した左を用いて、
   \eqg*{
@@ -232,18 +226,21 @@
     \bot \\*
     n \subsetneq s(m) \rightarrow m \notin n
   }
+
   ゆえに、
   \eqg*{
     n \subsetneq s(m) = m \cup \qty{m} \\*
     n \subset m \\*
     n \subsetneq m \lor n = m
   }
+
   選言の一つ目について、仮定より、
   \eqg*{
     n \subsetneq m \\*
     n \in m \\*
     n \in s(m)
   }
+
   選言の二つ目について、
   \eq*{
     n = m \rightarrow n \in s(m)
@@ -706,7 +703,7 @@
 }
 
 \dfn{自然数の除法}{
-  \mlemref{-1}、\mlemref{0}より、以下の写像$\divisionsymbol \in \qty(\N \times \N)^{\N \times \qty(\N \setminus \qty{0})}$を定義できる。
+  \mlemref{-1}、\mlemref{0}より、以下の写像$\divisionsymbol \colon \N \times \qty(\N \setminus \qty{0}) \to \N \times \N$を定義できる。
   \eq*{
     a \divisionsymbol b = q \cdots r \defiff a = b q + r
   }

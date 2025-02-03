@@ -3,22 +3,24 @@
 \lsubsection{有限}
 
 \dfn{有限集合}{
-  集合$X$について、ある自然数$n \in \N$が存在して全単射$f \in X^n$が構成できるとき、$X$を有限集合と呼ぶ。
+  集合$X$について、ある自然数$n \in \N$が存在して全単射$f \colon n \to X$が構成できるとき、$X$を有限集合と呼ぶ。
   または、単に$X$は有限であると呼ぶ。
 }
 
 \lem{全射と要素数}{
   $\forall n, m \in \N$について、$n$から$m$への全射が存在するならば、$m \leq n$
 }{
-  $n = 0$のとき、$m \neq 0$ならば全射が存在しない。$m = 0$より示される。\\*
+  $n = 0$のとき、$m \neq 0$ならば全射が存在しない。$m = 0$より示される。
 
-  ある$n$で成り立つとき、全射$f \in m^{s(n)}$が存在することを考える。
+  \vskip\baselineskip
+
+  ある$n$で成り立つとき、全射$f \colon s(n) \to m$が存在することを考える。
 
   $0^{s(n)} = \varnothing$より、$m \neq 0$である。
 
   $\exists k \in n \qty(f(k) = f(n))$のとき、自明な全射$f \rvert_n$を構成できて、仮定より$m \leq n \leq s(n)$
 
-  $\forall k \in n \qty(f(k) \neq f(n))$のとき、以下のような全射$g \in p(m)^n$を構成できる。
+  $\forall k \in n \qty(f(k) \neq f(n))$のとき、以下のような全射$g \colon n \to p(m)$を構成できる。
   \eq*{
     g(x) =
     \begin{cases}
@@ -27,7 +29,9 @@
     \end{cases}
   }
 
-  仮定より$p(m) \leq n$より、$m = s(p(m)) \leq s(n)$\\*
+  仮定より$p(m) \leq n$より、$m = s(p(m)) \leq s(n)$
+
+  \vskip\baselineskip
 
   \thmref{数学的帰納法}より、任意の$n$について成り立つ。
 }
@@ -47,7 +51,7 @@
 }
 
 \lem*{
-  有限集合$X$について、全単射$f \in X^n$が構成できる自然数$n \in \N$は一意に定まる。
+  有限集合$X$について、全単射$f \colon n \to X$が構成できる自然数$n \in \N$は一意に定まる。
 }{
   \lemref{全射と要素数}、\lemref{単射と要素数}より、背理法より示される。
 }
@@ -62,14 +66,16 @@
   自然数$n$と集合$A$について、以下の２つは同値である。
   \begin{enumerate}
     \item $A$は有限集合であり、$\abs{A} \leq n$
-    \item 単射$f \in n^A$が存在する。
+    \item 単射$f \colon A \to n$が存在する。
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
 
-  全単射$f_1 \in \abs{A}^A$が存在して、単射$f_2 \in n^{\abs{A}}$が存在する。
+  全単射$f_1 \colon A \to \abs{A}$が存在して、単射$f_2 \colon \abs{A} \to n$が存在する。
 
-  ゆえに、単射$f_2 \circ f_1 \in n^A$が存在する。\\*
+  ゆえに、単射$f_2 \circ f_1 \colon A \to n$が存在する。
+
+  \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。
 
@@ -77,13 +83,14 @@
 
   ある$n$について成り立つとする。
 
-  $\forall a \in A \qty(f(a) \neq n)$のとき、自明な単射$\tilde{f} \in n^A$が存在する。よって$\abs{A} \leq n \leq s(n)$
+  $\forall a \in A \qty(f(a) \neq n)$のとき、自明な単射$\tilde{f} \colon A \to n$が存在する。
+  よって$\abs{A} \leq n \leq s(n)$
 
-  $\exists a \in A \qty(f(a) = n)$のとき、単射$\tilde{f} \in n^{A \setminus \qty{a}}$が構成できる。
+  $\exists a \in A \qty(f(a) = n)$のとき、単射$\tilde{f} \colon A \setminus \qty{a} \to n$が構成できる。
 
-  仮定より$\exists m \in \N \qty(m \leq n)$であり、全単射$g \in m^{A \setminus \qty{a}}$が存在する。
+  仮定より$\exists m \in \N \qty(m \leq n)$であり、全単射$g \colon A \setminus \qty{a} \to m$が存在する。
 
-  ここで、以下のような全単射$h \in s(m)^A$を構成できる。
+  ここで、以下のような全単射$h \colon A \to s(m)$を構成できる。
   \eq*{
     h(x) =
     \begin{cases}
@@ -98,17 +105,17 @@
 \lem{有限集合の部分}{
   有限集合$X$について、$X$の部分$Y$は有限であり、$\abs{Y} \leq \abs{X}$である。
 }{
-  単射$f \in X^Y, f(y) = y$と、$n \in \N$で全単射$g \in n^X$が存在する。
+  単射$f \colon Y \to X, f(y) = y$と、$n \in \N$で全単射$g \colon X \to n$が存在する。
 
-  ゆえに、単射$g \circ f \in n^Y$が存在して、\lemref{単射と有限}より成り立つ。
+  ゆえに、単射$g \circ f \colon Y \to n$が存在して、\lemref{単射と有限}より成り立つ。
 }
 
 \lem{有限集合の像}{
-  有限集合$X$、集合$Y$、写像$f \in Y^X$について、像$f(X)$は有限であり、$\abs{f(X)} \leq \abs{X}$である。
+  有限集合$X$、集合$Y$、写像$f \colon X \to Y$について、像$f(X)$は有限であり、$\abs{f(X)} \leq \abs{X}$である。
 }{
-  \thmref{全射と右逆写像}より、$f \in f(X)^X$は右逆写像すなわち単射$f^{-1} \in X^{f(X)}$を持つ。
+  \thmref{全射と右逆写像}より、$f \colon X \to f(X)$は右逆写像すなわち単射$f^{-1} \colon f(X) \to X$を持つ。
 
-  $n \in \N$と全単射$g \in n^X$が存在するので、単射$g \circ f^{-1} \in n^{f(X)}$が存在して、\lemref{単射と有限}より成り立つ。
+  $n \in \N$と全単射$g \colon X \to n$が存在するので、単射$g \circ f^{-1} \colon f(X) \to n$が存在して、\lemref{単射と有限}より成り立つ。
 }
 
 \lem{有限集合の商}{
@@ -123,9 +130,9 @@
     \abs{X \cup Y} = \abs{X} + \abs{Y}
   }
 }{
-  $X, Y$は有限より、全単射$f \in X^\abs{X}, f' \in Y^\abs{Y}$が存在する。
+  $X, Y$は有限より、全単射$f \colon \abs{X} \to X, f' \colon \abs{Y} \to Y$が存在する。
 
-  ゆえに、以下のような全単射$g \in \qty(X \cup Y)^{\abs{X} + \abs{Y}}$を構成できる。
+  ゆえに、以下のような全単射$g \colon \abs{X} + \abs{Y} \to X \cup Y$を構成できる。
   \eq*{
     g(x) =
     \begin{cases}
@@ -141,7 +148,7 @@
     \abs{X \cup Y} + \abs{X \cap Y} = \abs{X} + \abs{Y}
   }
 }{
-  単射$f \in X^{X \cap Y}$が構成できるので、\lemref{単射と有限}より$X \cap Y$は有限集合である。
+  単射$f \colon X \cap Y \to X$が構成できるので、\lemref{単射と有限}より$X \cap Y$は有限集合である。
 
   \lemref{有限集合の和}より、$\abs{X} = \abs{X \cap Y} + \abs{X \setminus Y}$
 
@@ -158,7 +165,7 @@
     \abs{X \times Y} = \abs{X} \times \abs{Y}
   }
 }{
-  全単射$x \in X^{\abs{X}}$が存在する。
+  全単射$x \colon \abs{X} \to X$が存在する。
 
 	$\forall n \in \abs{X}$について、$Z_n \coloneqq \qty{\qty(x(n), y) \mid y \in Y}$を考えると、$\abs{Z_n} = \abs{Y}$である。
 
@@ -212,9 +219,9 @@
 
   $s(n)$が上界で、$n$が上界でないとき、$s(n) \in A$である。
 
-  仮定より、$\exists m \in \N$で、全単射$f_0 \in \qty(A \setminus \qty{s(n)})^m$が存在する。
+  仮定より、$\exists m \in \N$で、全単射$f_0 \colon m \to A \setminus \qty{s(n)}$が存在する。
 
-  したがって、以下のような全単射$f \in A^{s(m)}$を構成できる。
+  したがって、以下のような全単射$f \colon s(m) \to A$を構成できる。
   \eq*{
     f(x) =
     \begin{cases}
@@ -230,7 +237,7 @@
 \lsubsection{可算}
 
 \dfn{可算}{
-  集合$X$について、$X$が空集合または全射$f \in X^\N$が存在するとき、$X$を可算集合と呼ぶ。
+  集合$X$について、$X$が空集合または全射$f \colon \N \to X$が存在するとき、$X$を可算集合と呼ぶ。
   または、単に$X$は可算であると呼ぶ。
 
   また、集合$X$が可算集合であることを主張するときは、アリティ1の述語記号$\abs{X} \leq \aleph_0$を用いる。
@@ -272,11 +279,11 @@
 }
 
 \thm{無限集合は可算部分を含む}{
-  有限でない集合$X$について、単射$a \in X^\N$が存在する。
+  有限でない集合$X$について、単射$a \colon \N \to X$が存在する。
 }{
   $\forall A \in \P(X) \setminus \qty{\varnothing} \exists a \in A \qty(a \in A)$である。
 
-  \thmref{選択公理が与える写像}より定まる写像$f \in X^{\P(X) \setminus \qty{\varnothing}}, f(X) \in A$を考える。
+  \thmref{選択公理が与える写像}より定まる写像$f \colon \P(X) \setminus \qty{\varnothing} \to X, f(X) \in A$を考える。
 
   $X$は空でないので、$\exists a_0 \in X$である。
 
@@ -286,13 +293,13 @@
 
   定義より$\forall n, m \in \N \qty(a_n \neq a_m)$
 
-  単射$a \in X^\N$を持つ。
+  単射$a \colon \N \to X$を持つ。
 }
 
 \thm{自然数の直積は可算}{
   $\N \times \N$は可算である。
 }{
-  全単射$\varphi \in \N^{\N \times \N}, \varphi \qty(n, m) = \qty(\qty(n + m) \times \qty(n + m + 1)) \divisionsymbol 2 + n$が存在する。
+  全単射$\varphi \colon \N \times \N \to \N, \varphi \qty(n, m) = \qty(\qty(n + m) \times \qty(n + m + 1)) \divisionsymbol 2 + n$が存在する。
 
   ただし、$a \divisionsymbol b$を除算の商を表すものとする。
 }
@@ -301,7 +308,7 @@
 \lsubsection{集合と写像}
 
 \lem*{
-  集合$X$について、自然な全単射$\sigma \in \qty(2^X)^{\P(X)}$が存在する。
+  集合$X$について、自然な全単射$\sigma \colon \P(X) \to 2^X$が存在する。
 }{
   $x \in X$について、以下のように$\sigma$を定める。
   \eq*{
@@ -321,9 +328,9 @@
 }
 
 \lem{自然数から集合への写像の全体}{
-  集合$X$と$n \in \N_{\geq 1}$について、全単射$\sigma \in \qty(X^{s(n)})^{X^n \times X}$が存在する。
+  集合$X$と$n \in \N_{\geq 1}$について、全単射$\sigma \colon X^n \times X \to X^{s(n)}$が存在する。
 
-  また、全単射$\sigma' \in \qty(X^1)^X$が存在する。
+  また、全単射$\sigma' \colon X \to X^1$が存在する。
 }{
   以下で定める$\sigma$は全単射である。
   \eq*{
@@ -341,7 +348,7 @@
 }
 
 \thm*{
-  集合$X, Y, Z$について、自然な全単射$\sigma \in \qty(X \times \qty(Y \times Z))^\qty(\qty(X \times Y) \times Z)$が存在する。
+  集合$X, Y, Z$について、自然な全単射$\sigma \colon \qty(X \times Y) \times Z \to X \times \qty(Y \times Z)$が存在する。
 }{
   $\sigma \qty(\qty(x, y), z) = \qty(x, \qty(y, z))$は全単射である。
 }
@@ -367,14 +374,18 @@
       f(x) & \qty(x \in C) \\*
       g^{-1}(x) & \qty(x \in A \setminus C)
     \end{cases}
-  }\\*
+  }
+
+  \vskip\baselineskip
 
   単射でないと仮定すると、$x \in C_n \land y \in A \setminus C$について、
   \eq*{
     h(x) = h(y) \rightarrow g(f(x)) = y \in C_{s(n)}
   }
 
-  矛盾するので、背理法より単射。\\*
+  矛盾するので、背理法より単射。
+
+  \vskip\baselineskip
 
   $D \coloneqq \bigcup \qty{C_{s(n)} \mid n \in \N}$について、$D \subset g(B)$であり、\thmref{像の性質}より、
   \eq*{
@@ -395,7 +406,7 @@
 }
 
 \thm{濃度の比較可能定理}{
-  集合$A, B$について、単射$f \in B^A$または単射$f' \in A^B$が存在する。
+  集合$A, B$について、単射$f \colon A \to B$または単射$f' \colon B \to A$が存在する。
 }{
   以下で定義する半順序集合$\qty(\mathcal{M}, \subset)$を考える。
   \eq*{
