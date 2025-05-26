@@ -256,7 +256,7 @@
 }
 
 \dfn{点列の部分列}{
-  単射な写像$\varphi \in \N^\N$を用いて表せる部分ネット$\qty(x_{\varphi(m)})_{m \in \N}$を点列$\qty(x_n)_{n \in \N}$の部分列と呼ぶ。
+  単射な写像$\varphi \colon \N \to \N$を用いて表せる部分ネット$\qty(x_{\varphi(m)})_{m \in \N}$を点列$\qty(x_n)_{n \in \N}$の部分列と呼ぶ。
 }
 
 \dfn{非交叉列}{
@@ -281,7 +281,7 @@
 \thm{無限集合は可算部分を含む}{
   有限でない集合$X$について、単射$a \colon \N \to X$が存在する。
 }{
-  $\forall A \in \P(X) \setminus \qty{\varnothing} \exists a \in A \qty(a \in A)$である。
+  $\forall A \subset X \setminus \qty{\varnothing} \exists a \in A \qty(a \in A)$である。
 
   \thmref{選択公理が与える写像}より定まる写像$f \colon \P(X) \setminus \qty{\varnothing} \to X, f(X) \in A$を考える。
 
@@ -305,7 +305,7 @@
 }
 
 
-\lsubsection{集合と写像}
+\lsubsection{濃度の比較}
 
 \lem*{
   集合$X$について、自然な全単射$\sigma \colon \P(X) \to 2^X$が存在する。
@@ -366,7 +366,7 @@
 
   点列の値域全体の和集合$C \coloneqq \bigcup \qty{C_n \mid n \in \N}$を考える。
 
-  今、\thmref{De Morganの法則}より$A \setminus C \subset g(B)$と、$g$の単射性から、以下のような写像$h \in B^A$が構成できる。
+  今、\thmref{De Morganの法則}より$A \setminus C \subset g(B)$と、$g$の単射性から、以下のような写像$h \colon A \to B$が構成できる。
 
   \eq*{
     h(x) \coloneqq
@@ -410,7 +410,7 @@
 }{
   以下で定義する半順序集合$\qty(\mathcal{M}, \subset)$を考える。
   \eq*{
-    \mathcal{M} \coloneqq \qty{G \in \P(X \times Y) \mid \forall \qty(x_1, y_1), \qty(x_2, y_2) \in G \qty(x_1 = x_2 \leftrightarrow y_1 = y_2)}
+    \mathcal{M} \coloneqq \qty{G \subset A \times B \mid \forall \qty(x_1, y_1), \qty(x_2, y_2) \in G \qty(x_1 = x_2 \leftrightarrow y_1 = y_2)}
   }
 
   $\mathcal{M}$の全順序部分$C$を考える。
@@ -421,19 +421,21 @@
 
   ゆえに、$\bigcup C \in \mathcal{M}$は上界である。
 
-  したがって、$\mathcal{M}$は帰納的である。\\*
+  したがって、$\mathcal{M}$は帰納的である。
+
+  \vskip\baselineskip
 
   \thmref{Zornの補題}より、極大元$G_0$が存在する。
 
-  $G_0$によって特徴づけられる二項関係$R_0$を考える。
+  二項関係$\mathfrak{R}_0 \coloneqq \qty(\qty(X, Y), G_0)$を考える。
 
-  $\exists \qty(x, y) \in \qty(A \setminus \dom(R)) \times \qty(B \setminus \ran(R))$とする。
+  $\exists \qty(x, y) \in \qty(A \setminus \dom(\mathfrak{R}_0)) \times \qty(B \setminus \ran(\mathfrak{R}_0))$とする。
 
   このとき、$G_1 = \qty{\qty(x, y)} \cup G_0 \in \mathcal{M}$となるので、$G_0$の極大性に反する。\\*
 
-  ゆえに、$A = \dom(R) \lor B = \ran(R)$である。
+  ゆえに、$A = \dom(\mathfrak{R}_0) \lor B = \ran(\mathfrak{R}_0)$である。
 
-  $A = \dom(R)$のとき、$G_0$の特徴づける写像は単射である。
+  $A = \dom(\mathfrak{R}_0)$のとき、$\mathfrak{R}_0$は写像であり、$\mathcal{M}$の定義より単射である。
 
-  $B = \ran(R)$のとき、$G_0$の特徴づける写像は全射である。\thmref{全射と右逆写像}より単射な右逆写像が存在する。
+  $B = \ran(\mathfrak{R}_0)$のとき、$\qty(\qty(B, A), \qty{\qty(y, x) \in Y \times X \mid \qty(x, y) \in G_0})$は写像であり、$\mathcal{M}$の定義より単射である。
 }

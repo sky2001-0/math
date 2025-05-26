@@ -166,20 +166,10 @@
   商写像は全射である。
 }
 
-\dfn{写像に付随する同値関係}{
-  写像$f \colon X \to Y$について、以下で定める$X$上の関係$\sim_{f}$は同値関係であり、これを写像$f$に付随する同値関係と呼ぶ。
-  \eq*{
-    x \sim_f y \defiff f(x) = f(y)
-  }
-}
+\thm{well-definedな写像}{
+  空でない集合$X$上の同値関係$\sim_{X}$、集合$Y$上の同値関係$\sim_{Y}$について、写像$f \colon X \to Y$を考える。
 
-\cor*{
-  写像$f \colon X \to Y$について、$f$は$\sim_f, =_Y$と両立する。
-}
-
-\thm{両立}{
-  空でない集合$X$上の同値関係$\sim_{X}$、集合$Y$上の同値関係$\sim_{Y}$について、
-  写像$f \colon X \to Y$が$\sim_{X}, \sim_{Y}$と両立することは、写像$h \colon X / \sim_{X} \to Y / \sim_{Y}$が存在して以下を満たすことと必要十分である。
+  $f$が$\sim_{X}, \sim_{Y}$と両立することは、写像$h \colon X / \sim_{X} \to Y / \sim_{Y}$が存在して以下を満たすことと必要十分である。
   \eq*{
     \qty[]_{Y} \circ f = h \circ \qty[]_{X}
   }
@@ -211,10 +201,21 @@
   右から$r$をかけて、$h = h'$であり、矛盾する。
 }
 
+\dfn{写像に付随する同値関係}{
+  写像$f \colon X \to Y$について、以下で定める$X$上の関係$\sim_{f}$は同値関係であり、これを写像$f$に付随する同値関係と呼ぶ。
+  \eq*{
+    x \sim_f y \defiff f(x) = f(y)
+  }
+}
+
+\cor*{
+  写像$f \colon X \to Y$について、$f$は$\sim_f, =_Y$と両立する。
+}
+
 \thm{標準分解}{
   写像$f \colon X \to Y$について、全単射$\bar{f} \colon X / \sim_{f} \to \Im(f)$が存在する。
 }{
-  \thmref{両立}より、写像$\bar{f} \colon X / \sim_{f} \to Y$が存在して、$\Im(\bar{f}) = \Im(f)$である。
+  \thmref{well-definedな写像}より、写像$\bar{f} \colon X / \sim_{f} \to Y$が存在して、$\Im(\bar{f}) = \Im(f)$である。
 
   単射であることを示す。
   $\bar{f}([x]) = \bar{f}([y])$のとき、$f(x) = f(y)$より、$[x] = [y]$である。

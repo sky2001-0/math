@@ -62,7 +62,7 @@
 \dfn{写像の全体}{
   集合$X, Y$について、$Y^X$で表す集合を以下で定める。
   \eq*{
-    Y^X \coloneqq \qty{\qty(\qty(X, Y), G) \mid \exists G \qty(\text{$\qty(\qty(X, Y), G)$は写像})}
+    Y^X \coloneqq \qty{\qty(\qty(X, Y), G) \mid G \subset X \times Y \land \qty(\text{$\qty(\qty(X, Y), G)$は写像})}
   }
 
   また$Y^X$は、$\Map(X, Y)$とも表す。
@@ -98,7 +98,7 @@
     \Delta \coloneqq \qty{\qty(x, x) \mid x \in X}
   }
 
-  写像$\qty(\qty(X, X), \Delta)$を恒等写像と呼び、$\id{X}$で表す。
+  写像$\qty(\qty(X, X), \Delta)$を恒等写像と呼び、$\id_X$で表す。
 }
 
 \dfn{合成写像}{
@@ -306,7 +306,7 @@
 \dfn{左逆写像}{
   写像$f \colon X \to Y$について、以下を満たす写像$g \colon Y \to X$を左逆写像と呼ぶ。
   \eq*{
-    g \circ f = \id{X}
+    g \circ f = \id_X
   }
 }
 
@@ -340,7 +340,7 @@
 \dfn{右逆写像}{
   写像$f \colon X \to Y$について、以下を満たす写像$g \colon Y \to X$を右逆写像と呼ぶ。
   \eq*{
-    f \circ g = \id{Y}
+    f \circ g = \id_Y
   }
 }
 
@@ -423,13 +423,14 @@
 
   以下の集合$Y$を考える。
   \eq*{
-    Y \coloneqq \qty{f(X) \mid X \in \P(A) \land f(X) \notin X}
+    Y \coloneqq \qty{f(X) \mid X \subset A \land f(X) \notin X}
   }
-  このとき$Y \in \P(A)$である。
+
+  このとき$Y \subset A$である。
 
   $f(Y) \notin Y$とすると、定義より$f(Y) \in Y$。ゆえに矛盾。
 
-  $f(Y) \in Y$とすると、$f$の単射性より$Y \in \P(A) \land f(Y) \notin Y$。ゆえに矛盾。
+  $f(Y) \in Y$とすると、$f$の単射性より$Y \subset A \land f(Y) \notin Y$。ゆえに矛盾。
 
   背理法より示される。
 }

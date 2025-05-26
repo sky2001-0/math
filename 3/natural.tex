@@ -19,7 +19,7 @@
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(M(X) \land M(Y) \rightarrow \text{$X \cap Y$は無限系譜である})
+    \forall X \forall Y \qty(\text{$X$は無限系譜である} \land \text{$Y$は無限系譜である} \rightarrow \text{$X \cap Y$は無限系譜である})
   }
 }
 
@@ -63,7 +63,7 @@
 }{
   $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とする。
 
-  $X_1, X_2$の二つの無限系譜を考える。
+  $X_1, X_2$の\num{2}つの無限系譜を考える。
 
   $X_1$の部分で無限系譜である$Y$を考える。
 
@@ -268,7 +268,6 @@
   $n = 0$について、$\forall m \qty(n \leq m)$である。
 
   ある$n \in \N$で成り立つとすると、
-
   $m \leq n$のとき、$m \leq n \leq s(n)$
 
   $n \leq m \land \lnot \qty(m \leq n)$すなわち$n \leq m \land n \neq m$のとき、\lemref{後者と順序}より、$s(n) \leq m$
@@ -283,13 +282,13 @@
 }{
   $n < m \land s(m) \leq s(n)$を仮定する。
 
-  $m < s(m)$であるので、$m < s(n)$
-
+  $m < s(m)$であるので、$m < s(n)$、
   ゆえに、$m \in s(n) = n \cup \qty{n}$
 
   したがって、$m \in n \lor m = n$
 
-  \lemref{自然数の順序の要素のよる特徴づけ}より、$m \leq n$。矛盾する。
+  \lemref{自然数の順序の要素のよる特徴づけ}より、$m \leq n$。
+  矛盾する。
 
   背理法より示される。
 }
@@ -729,7 +728,7 @@
 }
 
 \dfn{素数}{
-	約数をちょうど２つ持つ自然数を素数と呼ぶ。
+	約数をちょうど\num{2}つ持つ自然数を素数と呼ぶ。
 }
 
 \cor*{

@@ -3,7 +3,7 @@
 \lsubsection{位相}
 
 \dfn{開基}{
-  空でない集合$X$について、以下を満たす集合系$\mathcal{B} \in \P(\P(X))$を開基と呼ぶ。
+  空でない集合$X$について、以下を満たす集合系$\mathcal{B} \subset \P(X)$を開基と呼ぶ。
   \eqg*{
     \forall x \in X \exists B \in \mathcal{B} \qty(x \in B) \\*
     \forall B_1, B_2 \in \mathcal{B} \forall x \in B_1 \cap B_2 \exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)
@@ -13,7 +13,7 @@
 \dfn{開集合系}{
   空でない集合$X$の開基$\mathcal{B}$について、以下で与える集合系$\mathcal{O}$を開集合系と呼ぶ。
   \eq*{
-    \mathcal{O} \coloneqq \qty{O \in \P(X) \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subset O)}
+    \mathcal{O} \coloneqq \qty{O \subset X \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subset O)}
   }
 
   また、$\mathcal{O}$の要素を開集合と呼ぶ。
@@ -27,15 +27,17 @@
 }
 
 \lem{開集合系の一意性}{
-  集合$X$の開基$\mathcal{B}$と集合系$\mathcal{B'} \in \P(\P(X))$について、以下を満たすとき、$\mathcal{B'}$は開基である。
+  集合$X$の開基$\mathcal{B}$と集合系$\mathcal{B'} \subset \P(X)$について、以下を満たすとき、$\mathcal{B'}$は開基である。
   \eqg*{
     \forall B' \in \mathcal{B'} \forall x \in B' \exists B \in \mathcal{B} \qty(x \in B \land B \subset B') \\*
     \forall B \in \mathcal{B} \forall x \in B \exists B' \in \mathcal{B'} \qty(x \in B' \land B' \subset B)
   }
 
-  さらに$\mathcal{B}$の定める開集合系と、$\mathcal{B'}$の定める開集合系、この２つは一致する。
+  さらに$\mathcal{B}$の定める開集合系と、$\mathcal{B'}$の定める開集合系、この\num{2}つは一致する。
 }{
-  第一式を考える。\dfnref{開基}第一式から$\exists B \in \mathcal{B}$であり、$\exists x \in X$より、仮定から$\exists B' \in \mathcal{B'}$\\*
+  第一式を考える。\dfnref{開基}第一式から$\exists B \in \mathcal{B}$であり、$\exists x \in X$より、仮定から$\exists B' \in \mathcal{B'}$
+
+  \vskip\baselineskip
 
   第二式を考える。仮定より$\forall B'_1, B'_2 \in \mathcal{B'} \forall x \in B'_1 \cap B'_2 \exists B_1, B_2 \in \mathcal{B} \qty(x \in B_1 \cap B_2 \subset B'_1 \cap B'_2)$である。
 
@@ -51,18 +53,24 @@
   \eqg*{
     X \in \mathcal{O} \\*
     \forall O_1, O_2 \in \mathcal{O} \qty(O_1 \cap O_2 \in \mathcal{O}) \\*
-    \forall A \in \P(\mathcal{O}) \qty(\bigcup A \in \mathcal{O})
+    \forall A \subset \mathcal{O} \qty(\bigcup A \in \mathcal{O})
   }
 }{
   第一式を示す。
 
-  \dfnref{開基}第一式より、$\forall x \in X \exists B \in \mathcal{B} \qty(x \in B \land B \subset X)$であるので、$X \in \mathcal{O}$\\*
+  \dfnref{開基}第一式より、$\forall x \in X \exists B \in \mathcal{B} \qty(x \in B \land B \subset X)$であるので、$X \in \mathcal{O}$
 
-  第二式を示す。$O_1, O_2 \in \mathcal{O}$について、$\forall x \in O_1 \cap O_2 \exists B_1, B_2 \in \mathcal{B} \qty(x \in B_1 \cap B_2 \land B_1 \cap B_2 \subset O_1 \cap O_2)$
+  \vskip\baselineskip
 
-  \dfnref{開基}第二式より、$\exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)$であるので、$O_1 \cap O_2 \in \mathcal{O}$\\*
+  第二式を示す。
+  $O_1, O_2 \in \mathcal{O}$について、$\forall x \in O_1 \cap O_2 \exists B_1, B_2 \in \mathcal{B} \qty(x \in B_1 \cap B_2 \land B_1 \cap B_2 \subset O_1 \cap O_2)$
 
-  第三式を示す。$A \in \P(\mathcal{O})$について、$\forall x \in \bigcup A \exists O \in \mathcal{O} \exists B \in \mathcal{B} \qty(x \in B \land B \subset O \land O \subset \bigcup A)$であるので$\bigcup A \in \mathcal{O}$
+  \dfnref{開基}第二式より、$\exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)$であるので、$O_1 \cap O_2 \in \mathcal{O}$
+
+  \vskip\baselineskip
+
+  第三式を示す。
+  $A \subset \mathcal{O}$について、$\forall x \in \bigcup A \exists O \in \mathcal{O} \exists B \in \mathcal{B} \qty(x \in B \land B \subset O \land O \subset \bigcup A)$であるので$\bigcup A \in \mathcal{O}$
 }
 
 \lem{開集合系の公理を満たす集合系}{
@@ -70,7 +78,9 @@
 
   このとき$\mathcal{O}$は開基であり、さらに、$\mathcal{O}$の定める開集合系$\mathcal{O'}$は$\mathcal{O}$に一致する。
 }{
-  \thmref{開集合系の公理}第一式、第二式より、開基である。\\*
+  \thmref{開集合系の公理}第一式、第二式より、開基である。
+
+  \vskip\baselineskip
 
   \dfnref{開集合系}より$\mathcal{O} \subset \mathcal{O'}$を得る。
 
@@ -87,21 +97,23 @@
 }
 
 \dfn{連続}{
-  位相空間$\qty(X, \mathcal{O}), \qty(X', \mathcal{O'})$について、写像$f \in \qty(X')^X$が以下を満たすとき、$f$は連続であると呼ぶ。
+  位相空間$\qty(X, \mathcal{O}), \qty(X', \mathcal{O'})$について、写像$f \colon X \to X'$が以下を満たすとき、$f$は連続であると呼ぶ。
   \eq*{
     \forall O' \in \mathcal{O'} \qty(f^{-1}(O') \in \mathcal{O})
   }
 }
 
 \lem{開基と連続}{
-  位相空間$\qty(X, \mathcal{O}), \qty(X', \mathcal{O'})$と$X'$の開基$\mathcal{B'}$、および写像$f \in \qty(X')^X$を考える。
-  このとき、以下の２つは同値である。
+  位相空間$\qty(X, \mathcal{O}), \qty(X', \mathcal{O'})$と$X'$の開基$\mathcal{B'}$、および写像$f \colon X \to X'$を考える。
+  このとき、以下の\num{2}つは同値である。
   \begin{enumerate}
     \item $f$は連続。
     \item $\forall B' \in \mathcal{B'} \qty(f^{-1}(B') \in \mathcal{O})$
   \end{enumerate}
 }{
-  $1. \rightarrow 2.$は、$\mathcal{B} \subset \mathcal{O}$より明らか。\\*
+  $1. \rightarrow 2.$は、$\mathcal{B} \subset \mathcal{O}$より明らか。
+
+  \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。$O' \in \mathcal{O'}$について考える。
 
@@ -113,26 +125,26 @@
 }
 
 \thm{連続写像の合成}{
-  位相空間$X, Y, Z$について、写像$f \in Y^X, g \in Z^Y$がともに連続であるとき、合成$g \circ f$は連続である。
+  位相空間$X_1, X_2, X_3$について、写像$f \colon X_1 \to X_2, g \colon X_2 \to X_3$がともに連続であるとき、合成$g \circ f$は連続である。
 }{
-  $\forall O_Z \in \mathcal{O}_Z \qty(g^{-1}(O_Z) \in \mathcal{O}_Y)$であり、$f^{-1}(g^{-1}(O_Z)) \in \mathcal{O}_X$である。
+  $\forall O_3 \in \mathcal{O}_3 \qty(g^{-1}(O_3) \in \mathcal{O}_2)$であり、$f^{-1}(g^{-1}(O_3)) \in \mathcal{O}_1$である。
 }
 
 \dfn{同相}{
-  位相空間$X, X'$と写像$f \in \qty(X')^X$について、$f$が全単射かつ$f$と$f^{-1}$がともに連続であるとき、$f$を同相写像と呼ぶ。
+  位相空間$X, X'$と写像$f \colon X \to X'$について、$f$が全単射かつ$f$と$f^{-1}$がともに連続であるとき、$f$を同相写像と呼ぶ。
 
-  また、同相写像$f \in Y^X$が存在するとき、$X$と$Y$は位相同型または同相であると呼ぶ。
+  また、同相写像$f \colon X \to X'$が存在するとき、$X$と$X'$は位相同型または同相であると呼ぶ。
 }
 
 \cor*{
-  位相空間$X$について、$\id{X}$は同相写像である。
+  位相空間$X$について、$\id_X$は同相写像である。
 }
 
 
 \lsubsection{誘導位相}
 
 \lem*{
-  空でない集合$X$と、位相空間$\qty(X', \mathcal{O'})$、$\mathcal{O'}$を与える$X$の開基$\mathcal{B'}$、写像$f \in \qty(X')^X$を考える。
+  空でない集合$X$と、位相空間$\qty(X', \mathcal{O'})$、$\mathcal{O'}$を与える$X$の開基$\mathcal{B'}$、写像$f \colon X \to X'$を考える。
 
   このとき、以下の集合系$\mathcal{B}$は$X$の開基である。
   \eq*{
@@ -141,7 +153,9 @@
 
   さらに、$\mathcal{B}$の与える開集合系$\mathcal{O}_1$と、$\mathcal{O'}$からこの補題により与える開基$\mathcal{O}_2$は一致する。
 }{
-  第一式を考える。$\forall x \in X$について、\dfnref{開基}第一式より$\exists B' \in \mathcal{B'} \qty(f(x) \in B')$であるので、$x \in f^{-1}(B')$\\*
+  第一式を考える。$\forall x \in X$について、\dfnref{開基}第一式より$\exists B' \in \mathcal{B'} \qty(f(x) \in B')$であるので、$x \in f^{-1}(B')$
+
+  \vskip\baselineskip
 
   第二式を考える。$\forall B'_1, B'_2 \in \mathcal{B'}$について考える。
 
@@ -149,7 +163,9 @@
 
   ゆえに\dfnref{開基}第二式より$\exists B' \in \mathcal{B'} \qty(f(x) \in B' \land B' \subset B'_1 \cap B'_2)$である。
 
-  \thmref{原像の性質}より$x \in f^{-1}(B') \land f^{-1}(B') \subset f^{-1}(B'_1 \cap B'_2) = f^{-1}(B'_1) \cap f^{-1}(B'_2)$\\*
+  \thmref{原像の性質}より$x \in f^{-1}(B') \land f^{-1}(B') \subset f^{-1}(B'_1 \cap B'_2) = f^{-1}(B'_1) \cap f^{-1}(B'_2)$
+
+  \vskip\baselineskip
 
   \lemref{開集合系の公理を満たす集合系}を用いて、$\mathcal{O}_2$が開集合であることを示す。
 
@@ -157,9 +173,11 @@
 
   第二式を考える。\thmref{原像の性質}と\thmref{開集合系の公理}第二式より$\forall O'_1, O'_2 \in \mathcal{O'} \qty(f^{-1}(O'_1) \cap f^{-1}(O'_2) = f^{-1}(O'_1 \cap O'_2) \in \mathcal{O}_2)$
 
-  第三式を考える。\thmref{原像の性質}と\thmref{開集合系の公理}第三式より$\forall A' \in \P(\mathcal{O'}) \qty(\bigcup  \qty{f^{-1}(O') \mid O' \in A'} = f^{-1}(\bigcup A') \in \mathcal{O}_2)$
+  第三式を考える。\thmref{原像の性質}と\thmref{開集合系の公理}第三式より$\forall A' \subset \mathcal{O'} \qty(\bigcup  \qty{f^{-1}(O') \mid O' \in A'} = f^{-1}(\bigcup A') \in \mathcal{O}_2)$
 
-  ゆえに$\mathcal{O}_2$は開集合系である。\\*
+  ゆえに$\mathcal{O}_2$は開集合系である。
+
+  \vskip\baselineskip
 
   $\forall B' \in \mathcal{B'} \forall x \in f^{-1}(B') \qty(f^{-1}(B') \in \mathcal{O}_2 \land x \in f^{-1}(B'))$である。
 
@@ -171,7 +189,7 @@
 }
 
 \dfn{誘導空間}{
-  空でない集合$X$と、位相空間$\qty(X', \mathcal{O'})$、写像$f \in \qty(X')^X$について、\mlemref{0}より定まる開集合系$\mathcal{O}$が存在する。
+  空でない集合$X$と、位相空間$\qty(X', \mathcal{O'})$、写像$f \colon X \to X'$について、\mlemref{0}より定まる開集合系$\mathcal{O}$が存在する。
 
   位相空間$\qty(X, \mathcal{O})$を$f$に誘導された位相空間と呼ぶ。
 }
@@ -179,7 +197,7 @@
 \dfn{部分空間}{
   位相空間$\qty(X, \mathcal{O})$と、$X$の空でない部分集合$A$を考える。
 
-  $f = \id{X} \rvert_A$に誘導された位相空間$\qty(A, \mathcal{O}_A)$を部分空間と呼ぶ。
+  $f = \id_X \rvert_A$に誘導された位相空間$\qty(A, \mathcal{O}_A)$を部分空間と呼ぶ。
 }
 
 \lem*{
@@ -187,18 +205,22 @@
 
   このとき、$\mathcal{B}_1 \times \mathcal{B}_2$は$X_1 \times X_2$の開基である。
 
-  さらに、$\mathcal{B}_1, \mathcal{B}_2$の与える開集合系と、$\mathcal{O}_1, \mathcal{O}_2$からこの補題により与える開基の定める開集合系、この２つは一致する。
+  さらに、$\mathcal{B}_1, \mathcal{B}_2$の与える開集合系と、$\mathcal{O}_1, \mathcal{O}_2$からこの補題により与える開基の定める開集合系、この\num{2}つは一致する。
 }{
   第一式を考える。
 
-  \dfnref{開基}第一式より$\forall \qty(x_1, x_2) \in X_1 \times X_2 \exists \qty(B_1, B_2) \in \mathcal{B}_1 \times \mathcal{B}_2 \qty(x_1 \in B_1 \land x_2 \in B_2)$である。\\*
+  \dfnref{開基}第一式より$\forall \qty(x_1, x_2) \in X_1 \times X_2 \exists \qty(B_1, B_2) \in \mathcal{B}_1 \times \mathcal{B}_2 \qty(x_1 \in B_1 \land x_2 \in B_2)$である。
+
+  \vskip\baselineskip
 
   第二式を考える。
   $\forall \qty(B_{11}, B_{21}), \qty(B_{12}, B_{22}) \in \mathcal{B}_1 \times \mathcal{B}_2 \forall \qty(x_1, x_2) \in \qty(B_{11} \cap B_{12}, B_{21} \cap B_{22})$を考える。
 
   \dfnref{開基}第二式より$\exists B_1 \in \mathcal{B}_1 \exists B_2 \in \mathcal{B}_2 \qty(x_1 \in B_1 \subset B_{11} \cap B_{12} \land x_2 \in B_2 \subset B_{21} \cap B_{22})$
 
-  $\qty(B_{11} \cap B_{12}, B_{21} \cap B_{22}) = \qty(B_{11}, B_{21}) \cap \qty(B_{12}, B_{22})$であるので成り立つ。\\*
+  $\qty(B_{11} \cap B_{12}, B_{21} \cap B_{22}) = \qty(B_{11}, B_{21}) \cap \qty(B_{12}, B_{22})$であるので成り立つ。
+
+  \vskip\baselineskip
 
   $\mathcal{B}_1 \times \mathcal{B}_2 \subset \mathcal{O}_1 \times \mathcal{O}_2$である。
 
@@ -216,9 +238,9 @@
 }
 
 \lem{直積と連続}{
-  位相空間$\qty(X_1, \mathcal{O}_1), \qty(X_2, \mathcal{O}_2), \qty(Y, \mathcal{O})$について、連続写像$f \in Y^{X_1 \times X_2}$を考える。
+  位相空間$\qty(X_1, \mathcal{O}_1), \qty(X_2, \mathcal{O}_2), \qty(Y, \mathcal{O})$について、連続写像$f \colon X_1 \times X_2 \to Y$を考える。
 
-  このとき、$\forall w \in X_1$について写像$f_w \in Y^{X_2}, f_w(x) = f(w, x)$は連続である。
+  このとき、$\forall w \in X_1$について写像$f_w \colon X_2 \to Y, f_w(x) = f(w, x)$は連続である。
 }{
   $\forall O \in \mathcal{O}$について、$f_w^{-1}(O) = \qty{x \in X_2 \mid f(w, x) \in O}$である。
 
@@ -233,7 +255,7 @@
 \lsubsection{近傍}
 
 \dfn{基本近傍系}{
-  空でない集合$X$とその任意の点$x$について、以下を満たす集合系$\mathcal{B}(x) \in \P(\P(X))$を基本近傍系と呼ぶ。
+  空でない集合$X$とその任意の点$x$について、以下を満たす集合系$\mathcal{B}(x) \subset \P(X)$を基本近傍系と呼ぶ。
   \eqg*{
     \mathcal{B}(x) \neq \varnothing \\*
     \forall B \in \mathcal{B}(x) \qty(x \in B) \\*
@@ -249,7 +271,7 @@
 \dfn{近傍系}{
   空でない集合$X$の基本近傍系$\mathcal{B}(x)$について、以下で与える集合系$\mathcal{N}(x)$を近傍系と呼ぶ。
   \eq*{
-    \mathcal{N}(x) \coloneqq \qty{N \in \P(X) \mid \exists B \in \mathcal{B}(x) \qty(B \subset N)}
+    \mathcal{N}(x) \coloneqq \qty{N \subset X \mid \exists B \in \mathcal{B}(x) \qty(B \subset N)}
   }
 }
 
@@ -261,19 +283,25 @@
 }
 
 \lem{近傍系の一意性}{
-  空でない集合$X$の基本近傍系$\mathcal{B}(x)$と集合系$\mathcal{B'}(x) \in \P(\P(X))$について、以下を満たすとき、$\mathcal{B'}(x)$は基本近傍系である。
+  空でない集合$X$の基本近傍系$\mathcal{B}(x)$と集合系$\mathcal{B'}(x) \subset \P(X)$について、以下を満たすとき、$\mathcal{B'}(x)$は基本近傍系である。
   \eqg*{
     \forall B' \in \mathcal{B'}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B') \\*
     \forall B \in \mathcal{B}(x) \exists B' \in \mathcal{B'}(x) \qty(B' \subset B)
   }
 
-  さらに$\mathcal{B}(x)$の定める近傍系と、$\mathcal{B'}(x)$の定める近傍系、この２つは一致する。
+  さらに$\mathcal{B}(x)$の定める近傍系と、$\mathcal{B'}(x)$の定める近傍系、この\num{2}つは一致する。
 }{
-  第一式を考える。\dfnref{基本近傍系}第一式から$\exists B \in \mathcal{B}(x)$より、仮定から$\exists B' \in \mathcal{B'}(x)$\\*
+  第一式を考える。\dfnref{基本近傍系}第一式から$\exists B \in \mathcal{B}(x)$より、仮定から$\exists B' \in \mathcal{B'}(x)$
 
-  第二式を考える。\dfnref{基本近傍系}第二式より$\forall B' \in \mathcal{B'}(x) \exists B \in \mathcal{B}(x) \qty(x \in B \subset B')$\\*
+  \vskip\baselineskip
 
-  第三式を考える。\dfnref{基本近傍系}第三式より$\forall B'_1, B'_2 \in \mathcal{B'}(x) \exists B_1, B_2, B \in \mathcal{B}(x) \exists B' \in \mathcal{B'}(x) \qty(B' \subset B \subset B_1 \cap B_2 \subset B'_1 \cap B'_2)$\\*
+  第二式を考える。\dfnref{基本近傍系}第二式より$\forall B' \in \mathcal{B'}(x) \exists B \in \mathcal{B}(x) \qty(x \in B \subset B')$
+
+  \vskip\baselineskip
+
+  第三式を考える。\dfnref{基本近傍系}第三式より$\forall B'_1, B'_2 \in \mathcal{B'}(x) \exists B_1, B_2, B \in \mathcal{B}(x) \exists B' \in \mathcal{B'}(x) \qty(B' \subset B \subset B_1 \cap B_2 \subset B'_1 \cap B'_2)$
+
+  \vskip\baselineskip
 
   第四式を考える。仮定より$\forall B' \in \mathcal{B'}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B')$である。
 
@@ -281,7 +309,9 @@
 
   仮定より$\exists C' \in \mathcal{B'}(x) \qty(C' \subset C)$より、$\forall y \in C' \exists D \in \mathcal{B}(y) \qty(D \subset B)$である。
 
-  仮定より$\exists D' \in \mathcal{B'}(y) \qty(D' \subset D)$であり、$D' \subset D \subset B' \subset B$より成り立つ。\\*
+  仮定より$\exists D' \in \mathcal{B'}(y) \qty(D' \subset D)$であり、$D' \subset D \subset B' \subset B$より成り立つ。
+
+  \vskip\baselineskip
 
   $\forall N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \exists B' \in \mathcal{B'}(x) \qty(B' \subset B \subset N)$である。ゆえに、$N \in \mathcal{N'}(x)$である。
 
@@ -306,17 +336,25 @@
     \mathcal{B}(x) \coloneqq \qty{B \in \mathcal{B} \mid x \in B}
   }
 
-  さらに$\mathcal{B}(x)$の与える近傍系と、$\mathcal{O}$からこの定理の与える基本近傍系$\mathcal{B'}(x)$が与える近傍系、この２つは一致する。
+  さらに$\mathcal{B}(x)$の与える近傍系と、$\mathcal{O}$からこの定理の与える基本近傍系$\mathcal{B'}(x)$が与える近傍系、この\num{2}つは一致する。
 }{
-  第一式を考える。\dfnref{開基}第一式と定義より成り立つ。\\*
+  第一式を考える。\dfnref{開基}第一式と定義より成り立つ。
 
-  第二式は定義より明らか。\\*
+  \vskip\baselineskip
+
+  第二式は定義より明らか。
+
+  \vskip\baselineskip
 
   第三式を考える。\dfnref{開基}第二式より$\exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)$が成り立つ。
 
-  ゆえに、$B \in \mathcal{B}(x)$\\*
+  ゆえに、$B \in \mathcal{B}(x)$
 
-  第四式を考える。定義より$B = B' = D$として成り立つ。\\*
+  \vskip\baselineskip
+
+  第四式を考える。定義より$B = B' = D$として成り立つ。
+
+  \vskip\baselineskip
 
   $\mathcal{B} \subset \mathcal{O}$より、$\mathcal{B}(x) \subset \mathcal{B'}(x)$である。
 
@@ -331,28 +369,36 @@
 
   このとき、以下の集合$\mathcal{O}$は$X$の開基であり、かつ$\mathcal{O}$の定める開集合系は$\mathcal{O}$である。
   \eq*{
-    \mathcal{O} \coloneqq \qty{O \in \P(X) \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subset O)}
+    \mathcal{O} \coloneqq \qty{O \subset X \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subset O)}
   }
 
-  さらに$\mathcal{O}$と、$\mathcal{N}(x)$からこの定理の与える開集合系$\mathcal{O'}$、この２つは一致する。
+  さらに$\mathcal{O}$と、$\mathcal{N}(x)$からこの定理の与える開集合系$\mathcal{O'}$、この\num{2}つは一致する。
 }{
-  \lemref{開集合系の公理を満たす集合系}を用いて示す。\\*
+  \lemref{開集合系の公理を満たす集合系}を用いて示す。
 
-  第一式を考える。\dfnref{基本近傍系}第一式より$\forall x \in X \exists B \in \mathcal{B}(x) \qty(B \subset X)$であるので、$X \in \mathcal{O}$\\*
+  \vskip\baselineskip
+
+  第一式を考える。\dfnref{基本近傍系}第一式より$\forall x \in X \exists B \in \mathcal{B}(x) \qty(B \subset X)$であるので、$X \in \mathcal{O}$
+
+  \vskip\baselineskip
 
   第二式を考える。$O_1, O_2 \in \mathcal{O}$とする。
 
   $\forall x \in O_1 \cap O_2$について、定義より$\exists B_1, B_2 \in \mathcal{B}(x) \qty(B_1 \cap B_2 \subset O_1 \cap O_2)$である。
 
-  \dfnref{基本近傍系}第三式より$\exists B \in \mathcal{B} \qty(B \subset B_1 \cap B_2 \subset O_1 \cap O_2)$であるので、$O_1 \cap O_2 \in \mathcal{N}(x)$である。\\*
+  \dfnref{基本近傍系}第三式より$\exists B \in \mathcal{B} \qty(B \subset B_1 \cap B_2 \subset O_1 \cap O_2)$であるので、$O_1 \cap O_2 \in \mathcal{N}(x)$である。
 
-  第三式を考える。$A \in \P(\mathcal{O})$を考える。
+  \vskip\baselineskip
+
+  第三式を考える。$A \subset \mathcal{O}$を考える。
 
   $A = \varnothing$のとき、$\bigcup A = \bigcup \varnothing = \varnothing \in \mathcal{O}$より成り立つ。
 
   $A \neq \varnothing$のとき、$\forall x \in \bigcup A$について、$\exists O \in \mathcal{O} \qty(x \in O \subset \bigcup A)$である。
 
-  定義より$\exists B \in \mathcal{B}(x) \qty(B \subset O \subset \bigcup A)$である。定義より示される。\\*
+  定義より$\exists B \in \mathcal{B}(x) \qty(B \subset O \subset \bigcup A)$である。定義より示される。
+
+  \vskip\baselineskip
 
   $\forall x \in X \qty(\mathcal{B}(x) \subset \mathcal{N}(x))$より、$\mathcal{O} \subset \mathcal{O'}$である。
 
@@ -360,25 +406,33 @@
 }
 
 \lem*{
-  空でない集合$X$を考える。\\*
+  空でない集合$X$を考える。
 
-  開基$\mathcal{B}$の定める開集合系$\mathcal{O}$と、\thmref{開基の定める基本近傍系}と\thmref{基本近傍系の定める位相}により定まる開集合系$\mathcal{O'}$は、一致する。\\*
+  \vskip\baselineskip
 
-  基本近傍系$\mathcal{B}(x)$について、\thmref{基本近傍系の定める位相}と\thmref{開基の定める基本近傍系}の定める基本近傍系$\mathcal{B'}(x)$を考える。
+  $X$の開基$\mathcal{B}$の定める開集合系$\mathcal{O}$と、\thmref{開基の定める基本近傍系}と\thmref{基本近傍系の定める位相}により定まる開集合系$\mathcal{O'}$は、一致する。
+
+  \vskip\baselineskip
+
+  $X$の基本近傍系$\mathcal{B}(x)$について、\thmref{基本近傍系の定める位相}と\thmref{開基の定める基本近傍系}の定める基本近傍系$\mathcal{B'}(x)$を考える。
 
   $\mathcal{B}(x)$の定める近傍系と、$\mathcal{B'}(x)$の定める近傍系は、一致する。
 }{
   以下より一致する。
   \eq*{
-    \mathcal{O'} = \qty{O \in \P(X) \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subset O)} = \qty{O \in \P(X) \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subset O)} = \mathcal{O}
-  }\\*
+    \mathcal{O'} = \qty{O \subset X \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subset O)} = \qty{O \subset X \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subset O)} = \mathcal{O}
+  }
+
+  \vskip\baselineskip
 
   定義より、以下である。
   \eq*{
-    \mathcal{B'}(x) = \qty{B' \in \P(X) \mid x \in B' \land \forall y \in B' \exists D \in \mathcal{B}(y) \qty(D \subset B')}
+    \mathcal{B'}(x) = \qty{B' \subset X \mid x \in B' \land \forall y \in B' \exists D \in \mathcal{B}(y) \qty(D \subset B')}
   }
 
-  $\forall B' \in \mathcal{B'}(x)$について、\dfnref{基本近傍系}第二式より$x \in B'$であるので、定義から$\exists B \in \mathcal{B}(x) \qty(B \subset B')$である。\\*
+  $\forall B' \in \mathcal{B'}(x)$について、\dfnref{基本近傍系}第二式より$x \in B'$であるので、定義から$\exists B \in \mathcal{B}(x) \qty(B \subset B')$である。
+
+  \vskip\baselineskip
 
   $\forall B \in \mathcal{B}(x)$について、$B' \coloneqq \qty{y \in X \mid \exists E \in \mathcal{B}(y) \qty(E \subset B)}$を考える。
   定義より$B' \subset B$であり、$x \in B'$である。
@@ -387,7 +441,9 @@
 
   定義より$z \in B'$である。したがって$C \subset B'$である。
 
-  よって$B' \subset B$である。\\*
+  よって$B' \subset B$である。
+
+  \vskip\baselineskip
 
   \lemref{近傍系の一意性}より成り立つ。
 }
@@ -407,13 +463,15 @@
 
 \lem{基本近傍系と収束}{
   位相空間$X$と$X$上の点$a$と、$\mathcal{N}(a)$を与える$X$の基本近傍系$\mathcal{B}(a)$、および$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$を考える。
-  このとき、以下の２つは同値である。
+  このとき、以下の\num{2}つは同値である。
   \begin{enumerate}
     \item $\qty(x_\lambda)_{\lambda \in \Lambda}$は$a$に収束する。
     \item $\forall B \in \mathcal{B}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B)$
   \end{enumerate}
 }{
-  $1. \rightarrow 2.$は、$\mathcal{B}(a) \subset \mathcal{N}(a)$より明らか。\\*
+  $1. \rightarrow 2.$は、$\mathcal{B}(a) \subset \mathcal{N}(a)$より明らか。
+
+  \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。
 
@@ -421,18 +479,18 @@
 }
 
 \dfn{点連続}{
-  位相空間$X, X'$と点$x \in X$、写像$f \in \qty(X')^X$について、以下を満たすとき、写像$f$は点$x$で連続であると言う。
+  位相空間$X, X'$と点$x \in X$、写像$f \colon X \to X'$について、以下を満たすとき、写像$f$は点$x$で連続であると言う。
   \eq*{
     \forall N' \in \mathcal{N}(f(x)) \exists N \in \mathcal{N}(x) \qty(f(N) \subset N')
   }
 }
 
 \cor*{
-  位相空間$X_1, X_2, X_3$と点$x \in X_1$、写像$f \in X_2^{X_1}, g \in X_3^{X_2}$について、$f$は点$x$で連続であり、$g$が点$f(x)$で連続であるとき、合成写像$g \circ f$は点$x$で連続である。
+  位相空間$X_1, X_2, X_3$と点$x \in X_1$、写像$f \colon X_1 \to X_2, g \colon X_2 \to X_3$について、$f$は点$x$で連続であり、$g$が点$f(x)$で連続であるとき、合成写像$g \circ f$は点$x$で連続である。
 }
 
 \thm{点連続と収束}{
-  位相空間$X, X'$と点$x \in X$、写像$f \in \qty(X')^X$と、近傍系$\mathcal{N}(x)$を与える基本近傍系$\mathcal{B}(x)$について、以下の３つは同値である。
+  位相空間$X, X'$と点$x \in X$、写像$f \colon X \to X'$と、近傍系$\mathcal{N}(x)$を与える基本近傍系$\mathcal{B}(x)$について、以下の３つは同値である。
   \begin{enumerate}
     \item $f$が$x$で連続
     \item $\forall B' \in \mathcal{B}(f(x)) \exists B \in \mathcal{B}(x) \qty(f(B) \subset B')$
@@ -442,30 +500,37 @@
   $1. \rightarrow 2.$を示す。
   \eq*{
     \forall B' \in \mathcal{B}(f(x)) \subset \mathcal{N}(f(x)) \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(f(B) \subset f(N) \subset B')
-  }\\*
+  }
+
+  \vskip\baselineskip
 
   $2. \rightarrow 3.$を示す。
   \eq*{
     \forall B' \in \mathcal{B}(f(x)) \exists B \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(\qty(f(x_\lambda))_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \in f(B) \subset B')
-  }\\*
+  }
+
+  \vskip\baselineskip
 
   $3. \rightarrow 1.$を示す。$f$が$x$で連続でないと仮定する。
   \eq*{
     \exists N' \in \mathcal{N}(f(x)) \forall N \in \mathcal{N}(x) \exists y \in N \qty(f(y) \notin N')
   }
-  \thmref{選択公理が与える写像}より、写像$g \in X^{\mathcal{N}(x)}, f(g(N)) \notin N'$が存在して、$\qty(\mathcal{N}(x), \supset)$は\corref{有向集合としての基本近傍系}より有向集合である。
+
+  \thmref{選択公理が与える写像}より、写像$g \colon \mathcal{N}(x) \to X, f(g(N)) \notin N'$が存在して、$\qty(\mathcal{N}(x), \supset)$は\corref{有向集合としての基本近傍系}より有向集合である。
 
   今、$g$から構成されるネットは、順序を包含で定義したことから$x$に収束するが、$f \circ g$から構成されるネットは$f(x)$に収束しない。背理法より示される。
 }
 
 \thm{連続と点連続}{
-  位相空間$\qty(X, \mathcal{O}), \qty(X', \mathcal{O})$と写像$f \in \qty(X')^X$について、以下の２つは同値である。
+  位相空間$\qty(X, \mathcal{O}), \qty(X', \mathcal{O})$と写像$f \colon X \to X'$について、以下の\num{2}つは同値である。
   \begin{enumerate}
     \item $f$は$X$上の任意の点$x$で連続
     \item $f$は連続
   \end{enumerate}
 }{
-  $\mathcal{O}, \mathcal{O'}$を与える開基$\mathcal{B}, \mathcal{B'}$を考える。\\*
+  $\mathcal{O}, \mathcal{O'}$を与える開基$\mathcal{B}, \mathcal{B'}$を考える。
+
+  \vskip\baselineskip
 
   $1. \rightarrow 2.$を示す。
 
@@ -473,7 +538,9 @@
 
   $\forall x \in f^{-1}(B')$について、$B' \in \mathcal{B}(f(x))$であるので点連続性から$\exists B \in \mathcal{B}(x) \qty(f(B) \subset B')$となる。
 
-  \corref{像と原像}より$B \subset f^{-1}(f(B)) \subset f^{-1}(B')$であるので、\thmref{基本近傍系の定める位相}より、$f^{-1}(B')$は開集合である。\\*
+  \corref{像と原像}より$B \subset f^{-1}(f(B)) \subset f^{-1}(B')$であるので、\thmref{基本近傍系の定める位相}より、$f^{-1}(B')$は開集合である。
+
+  \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。
 
@@ -490,7 +557,7 @@
 \dfn{閉集合系}{
   位相空間$\qty(X, \mathcal{O})$について、以下を満たす集合系$\mathcal{F}$を閉集合系と呼ぶ。
   \eq*{
-    \mathcal{F} \coloneqq \qty{F \in \P(X) \mid X \setminus F \in \mathcal{O}}
+    \mathcal{F} \coloneqq \qty{F \subset X \mid X \setminus F \in \mathcal{O}}
   }
 
   また、$\mathcal{F}$の要素を閉集合と呼ぶ。
@@ -500,7 +567,7 @@
   位相空間$X$について、閉集合系$\mathcal{F}$は以下を満たす。
   \eqg*{
     \varnothing, X \in \mathcal{F} \\*
-    \forall A \in \P(\mathcal{F}) \qty(A \neq \varnothing \rightarrow \bigcap A \in \mathcal{F}) \\*
+    \forall A \subset \mathcal{F} \qty(A \neq \varnothing \rightarrow \bigcap A \in \mathcal{F}) \\*
     \forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cup F_2 \in \mathcal{F})
   }
 }{
@@ -517,8 +584,8 @@
 \cor*{
   位相空間$X$について、以下が成り立つ。
   \eqg*{
-    \forall A, B \in \P(X) \qty(A \subset B \rightarrow \bar{A} \subset \bar{B}) \\*
-    \forall D \in \P(\P(X)) \qty(\bigcup \qty{\bar{A} \mid A \in D} \subset \bar{\bigcup D})
+    \forall A, B \subset X \qty(A \subset B \rightarrow \bar{A} \subset \bar{B}) \\*
+    \forall D \subset \P(X) \qty(\bigcup \qty{\bar{A} \mid A \in D} \subset \bar{\bigcup D})
   }
 }
 
@@ -539,9 +606,13 @@
 
   $X \setminus O \in \mathcal{F}$であり、$A \subset X \setminus N \subset X \setminus O$
 
-  $x \in \bar{A}$とすると、$x \in X \setminus O$となり矛盾。背理法より示される。\\*
+  $x \in \bar{A}$とすると、$x \in X \setminus O$となり矛盾。背理法より示される。
 
-  $2. \rightarrow 3.$は$\mathcal{B}(x) \subset \mathcal{N}(x)$より明らか。\\*
+  \vskip\baselineskip
+
+  $2. \rightarrow 3.$は$\mathcal{B}(x) \subset \mathcal{N}(x)$より明らか。
+
+  \vskip\baselineskip
 
   $3. \rightarrow 4.$を考える。
 
@@ -549,7 +620,9 @@
 
   \corref{有向集合としての基本近傍系}より、$\qty(\mathcal{B}(x), \supset)$は有向集合である。
 
-  ネット$\qty(y_B)_{B \in \mathcal{B}(x)}$は、順序を包含で定義したことから$x$に収束する。\\*
+  ネット$\qty(y_B)_{B \in \mathcal{B}(x)}$は、順序を包含で定義したことから$x$に収束する。
+
+  \vskip\baselineskip
 
   $4. \rightarrow 1.$を考える。
 
@@ -574,7 +647,7 @@
 \lem{コンパクトの言い換え}{
   コンパクトな位相空間について、以下が成り立つ。
   \eq*{
-    \forall A \in \P(\mathcal{F}) \qty(A \neq \varnothing \land \bigcap A = \varnothing \rightarrow \exists A' \in \P(A) \qty(A' \neq \varnothing \land \bigcap A' = \varnothing \land \abs{A'} < \infty))
+    \forall A \subset \mathcal{F} \qty(A \neq \varnothing \land \bigcap A = \varnothing \rightarrow \exists A' \subset A \qty(A' \neq \varnothing \land \bigcap A' = \varnothing \land \abs{A'} < \infty))
   }
 }{
   コンパクトの定義と\thmref{De Morganの法則}より成り立つ。
@@ -591,31 +664,39 @@
   $1. \rightarrow 2.$を示す。
 
   $X$上の普遍ネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、
-  $F \coloneqq \bigcap \qty{\bar{\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}}} \mid \lambda \in \Lambda}$を考える。\\*
+  $F \coloneqq \bigcap \qty{\bar{\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}}} \mid \lambda \in \Lambda}$を考える。
+
+  \vskip\baselineskip
 
   $F = \varnothing$とすると、\lemref{コンパクトの言い換え}より$\exists n \in \N \qty(n > 0 \land \bigcap \qty{\bar{\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda(m)}}} \mid m < n} = \varnothing)$である。
 
   ここで\thmref{有限有向集合の上界}から$\exists \mu' \in \Lambda \forall m \in n \qty(\mu' \succcurlyeq \lambda_m)$であり、$x_{\mu'} \in \bigcap \qty{\bar{\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}}} \mid m \leq n}$より反する。
 
-  背理法より$\exists a \in F$である。\\*
+  背理法より$\exists a \in F$である。
+
+  \vskip\baselineskip
 
   $\forall \lambda \in \Lambda \qty(a \in \bar{\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}}})$であるので、閉包の定義より$\forall N \in \mathcal{N}(a) \forall \lambda \in \Lambda \qty(N \cap \qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}} \neq \varnothing)$である。
 
   すなわち、$\forall N \in \mathcal{N}(a) \forall \lambda \in \Lambda \exists \mu \in \Lambda \qty(\lambda \preccurlyeq \mu \land x_\mu \in N)$
 
-  普遍ネットの定義とあわせて、$\forall N \in \mathcal{N}(a) \exists \lambda \in \Lambda \qty(\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}} \subset N)$\\*
+  普遍ネットの定義とあわせて、$\forall N \in \mathcal{N}(a) \exists \lambda \in \Lambda \qty(\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}} \subset N)$
+
+  \vskip\baselineskip
 
   $2. \rightarrow 3.$を示す。
 
-  仮定と\thmref{普遍部分ネットの存在}より明らか。\\*
+  仮定と\thmref{普遍部分ネットの存在}より明らか。
+
+  \vskip\baselineskip
 
   $3. \rightarrow 1.$を示す。
 
-  コンパクトでないと仮定する。その任意の有限部分集合が開被覆とならない$X$の開被覆$C$が存在する。
+  コンパクトでないと仮定する。
+  その任意の有限部分集合が開被覆とならない$X$の開被覆$C$が存在する。
 
-  $P \coloneqq \qty{A \in \P(C) \mid \abs{A} < \infty \land A \neq \varnothing}$について$\qty(P, \subset)$は有向集合であり、
-
-  コンパクトでないことから$\forall A \in P \exists x \in X \setminus \bigcup A$である。このようなネット$\qty(x_A)_{A \in P}$を考える。\\*
+  $P \coloneqq \qty{A \subset C \mid \abs{A} < \infty \land A \neq \varnothing}$について$\qty(P, \subset)$は有向集合であり、コンパクトでないことから$\forall A \in P \exists x \in X \setminus \bigcup A$である。
+  このようなネット$\qty(x_A)_{A \in P}$を考える。
 
   仮定より、$a \in X$に収束する部分ネット$\qty(x_{\varphi(\mu)})_{\mu \in M}$を持つ。
 
@@ -639,7 +720,7 @@
 }
 
 \thm{コンパクト空間の連続像はコンパクト}{
-  コンパクトな位相空間$\qty(X, \mathcal{O})$と、位相空間$\qty(X', \mathcal{O'})$について、連続写像$f \in \qty(X')^X$を考える。
+  コンパクトな位相空間$\qty(X, \mathcal{O})$と、位相空間$\qty(X', \mathcal{O'})$について、連続写像$f \colon X \to X'$を考える。
   このとき、像$f(X)$はコンパクトである。
 }{
   $f(X)$の任意の開被覆$C'$について、$C \coloneqq \qty{f^{-1}(O') \mid O' \in C'}$を考える。
@@ -648,7 +729,7 @@
 
   $\forall x \in X \exists O' \in C' \qty(f(x) \in O')$より、$C$は$X$の開被覆である。
 
-  コンパクト性から、$\exists A' \in \P(C') \qty(\abs{A'} < \infty \land X = \bigcup \qty{f^{-1}(O') \mid O' \in A'})$
+  コンパクト性から、$\exists A' \subset C' \qty(\abs{A'} < \infty \land X = \bigcup \qty{f^{-1}(O') \mid O' \in A'})$
 
   \thmref{像の性質}、\corref{像と原像}から$f(X) = \bigcup \qty{f(f^{-1}(O')) \mid O' \in A'} \subset \bigcup \qty{O' \mid O' \in A'}$より$A'$は有限開被覆である。
 }
@@ -717,13 +798,15 @@
     \forall x, y \in X \qty(x \neq y \rightarrow \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(y \in X \setminus N \subset X \setminus B))
   }
 
-  よって示される。\\*
+  \vskip\baselineskip
 
   $2. \rightarrow 3.$を示す。
 
   $2.$より、$\forall y \in X \qty(x \neq y \rightarrow \exists B \in B(y) \qty(x \notin B))$である。
 
-  $X \setminus \qty{x} = \bigcup \qty{B \mid y \in X}$より成り立つ。\\*
+  $X \setminus \qty{x} = \bigcup \qty{B \mid y \in X}$より成り立つ。
+
+  \vskip\baselineskip
 
   $3. \rightarrow 1.$を示す。
 
@@ -770,24 +853,27 @@
     \forall x, y \in X \qty(x \neq y \rightarrow \exists N_x \in \mathcal{N}(x) \exists N_y \in \mathcal{N}(y) \exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y \subset N_x \cap N_y = \varnothing))
   }
 
-  よって示される。\\*
+  \vskip\baselineskip
 
   $2. \rightarrow 3.$を示す。
 
-  ２点$x, y \in X \qty(x \neq y)$に収束するとする仮定する。
+  \num{2}点$x, y \in X \qty(x \neq y)$に収束するとする仮定する。
 
   仮定より$\exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y = \varnothing)$
 
   \lemref{基本近傍系と収束}より$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B_x \cap B_y)$
 
-  これは矛盾する。背理法より示される。\\*
+  これは矛盾する。背理法より示される。
 
-  $3. \rightarrow 1.$を示す。$T_2$でないとすると、
+  \vskip\baselineskip
+
+  $3. \rightarrow 1.$を示す。
+  $T_2$でないとすると、
   \eq*{
     \exists x, y \in X \qty(x \neq y \land \forall N_x \in \mathcal{N}(x) \forall N_y \in \mathcal{N}(y) \exists z \in X \qty(z \in N_x \cap N_y))
   }
 
-  \thmref{選択公理が与える写像}より、写像$g \in X^{\mathcal{N}(x) \times \mathcal{N}(y)}, g \qty(\qty(N_x, N_y)) \in N_x \cap N_y$が存在する。
+  \thmref{選択公理が与える写像}より、写像$g \colon \mathcal{N}(x) \times \mathcal{N}(y) \to X, g \qty(\qty(N_x, N_y)) \in N_x \cap N_y$が存在する。
 
   $\mathcal{N}(x) \times \mathcal{N}(y)$上の半順序を以下のように定義する。
   \eq*{
@@ -796,25 +882,33 @@
 
   \corref{有向集合としての基本近傍系}より、$\qty(\mathcal{N}(x) \times \mathcal{N}(y), \preccurlyeq)$は有向集合である。
 
-  $g$の与えるネットは、順序を包含で定義したことから、$x$と$y$の双方に収束する。対偶法より示される。\\*
+  $g$の与えるネットは、順序を包含で定義したことから、$x$と$y$の双方に収束する。対偶法より示される。
+
+  \vskip\baselineskip
 
   $2. \rightarrow 4.$を示す。
 
   $\forall \qty(x, y) \in \qty(X \times X) \setminus \Delta$について、$\exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y = \varnothing)$である。
 
-  よって$B_x \times B_y \subset \qty(X \times X) \setminus \Delta$であるので、$\qty(X \times X) \setminus \Delta$は開集合である。\\*
+  よって$B_x \times B_y \subset \qty(X \times X) \setminus \Delta$であるので、$\qty(X \times X) \setminus \Delta$は開集合である。
+
+  \vskip\baselineskip
 
   $4. \rightarrow 2.$を示す。
 
   $\forall \qty(x, y) \in \qty(X \times X) \setminus \Delta$について、$\exists B_x, B_y \in \mathcal{B} \qty(\qty(x, y) \in B_x \times B_y \subset \qty(X \times X) \setminus \Delta)$である。
 
-  よって、$B_x \in \mathcal{B}(x) \land B_y \in \mathcal{B}(y) \land B_x \cap B_y = \varnothing$である。\\*
+  よって、$B_x \in \mathcal{B}(x) \land B_y \in \mathcal{B}(y) \land B_x \cap B_y = \varnothing$である。
+
+  \vskip\baselineskip
 
   $2. \rightarrow 5.$を示す。
 
   $\forall x, y \in X \qty(x \neq y \rightarrow \exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \subset X \setminus B_y \in \mathcal{F}))$
 
-  よって$\bar{B_x} \subset X \setminus B_y$であるので、$y \notin \bar{B_x}$\\*
+  よって$\bar{B_x} \subset X \setminus B_y$であるので、$y \notin \bar{B_x}$
+
+  \vskip\baselineskip
 
   $5. \rightarrow 2.$を示す。
 
@@ -849,7 +943,9 @@
 
   ここで$O_x \in \mathcal{N}(x)$であるので、$\exists D \in \mathcal{B}(x) \qty(D \subset O_x)$である。
 
-  $D \subset O_x \subset X \setminus O_F$であるので、閉包の定義より$\bar{D} \subset X \setminus O_F \subset X \setminus \qty(X \setminus B) = B$\\*
+  $D \subset O_x \subset X \setminus O_F$であるので、閉包の定義より$\bar{D} \subset X \setminus O_F \subset X \setminus \qty(X \setminus B) = B$
+
+  \vskip\baselineskip
 
   $2. \rightarrow 3.$を示す。
 
@@ -861,17 +957,22 @@
 
   $O_F \coloneqq X \setminus \bar{D}$とすると、$X \setminus D \in \mathcal{F}$より、$\bar{O_F} \subset X \setminus D \subset X \setminus \bar{E}$
 
-  $O_x \coloneqq E$として成り立つ。\\*
+  $O_x \coloneqq E$として成り立つ。
+
+  \vskip\baselineskip
 
   $3. \rightarrow 4.$を示す。
 
-  $A \coloneqq \qty{\bar{O} \mid O \in \mathcal{O} \land F \subset O}$とする。$X \in A$より、$X \neq \varnothing$である。
+  $A \coloneqq \qty{\bar{O} \mid O \in \mathcal{O} \land F \subset O}$とする。
+  $X \in A$より、$X \neq \varnothing$である。
 
   定義より$F \subset \bigcap A$である。
 
   $\forall x \in X \setminus F$について、仮定より$\exists O_F \in \mathcal{O} \qty(F \subset O_F \land x \notin \bar{O_F})$であるので、$x \notin \bigcap A$
 
-  ゆえに、$X \setminus F \subset X \setminus \bigcap A$\\*
+  ゆえに、$X \setminus F \subset X \setminus \bigcap A$
+
+  \vskip\baselineskip
 
   $4. \rightarrow 1.$を示す。
 
@@ -907,13 +1008,17 @@
 
   $X \setminus O \in \mathcal{F}$から、仮定より$\exists U, U' \in \mathcal{O} \qty(F \subset U \land X \setminus O \subset U' \land U \cap U' = \varnothing)$である。
 
-  $U \subset X \setminus U' \in \mathcal{F}$であるので、$\bar{U} \subset X \setminus U' \subset X \setminus \qty(X \setminus O) = O$\\*
+  $U \subset X \setminus U' \in \mathcal{F}$であるので、$\bar{U} \subset X \setminus U' \subset X \setminus \qty(X \setminus O) = O$
+
+  \vskip\baselineskip
 
   $2. \rightarrow 3.$を示す。
 
   $X \setminus O_1 \subset O_2 \land X \setminus O_1 \in \mathcal{F}$より、仮定より$\exists U \in \mathcal{O} \qty(X \setminus O_1 \subset U \land \bar{U} \subset O_2)$
 
-  $X \setminus U \subset X \setminus \qty(X \setminus O_1) = O_1 \land \qty(X \setminus U) \cup \bar{U} = X$より示される。\\*
+  $X \setminus U \subset X \setminus \qty(X \setminus O_1) = O_1 \land \qty(X \setminus U) \cup \bar{U} = X$より示される。
+
+  \vskip\baselineskip
 
   $3. \rightarrow 1.$を示す。
 
@@ -943,9 +1048,13 @@
 
   Lindel\"{o}fより、$F_1$の可算部分$A_1$が存在して、$F_1 \subset \bigcup \qty{O_1(x) \mid x \in A_1}$
 
-  すなわち、写像$\varphi_1 \in \mathcal{O}^\N$が存在して、$F_1 \subset \bigcup \qty{\varphi_1(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_1(n)} \cap F_2 = \varnothing)$\\*
+  すなわち、写像$\varphi_1 \colon \N \to \mathcal{O}$が存在して、$F_1 \subset \bigcup \qty{\varphi_1(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_1(n)} \cap F_2 = \varnothing)$
 
-  同様に、写像$\varphi_2 \in \mathcal{O}^\N$が存在して、$F_2 \subset \bigcup \qty{\varphi_2(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_2(n)} \cap F_1 = \varnothing)$\\*
+  \vskip\baselineskip
+
+  同様に、写像$\varphi_2 \colon \N \to \mathcal{O}$が存在して、$F_2 \subset \bigcup \qty{\varphi_2(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_2(n)} \cap F_1 = \varnothing)$
+
+  \vskip\baselineskip
 
   以下に定める集合$U_1, U_2$は定義より開集合である。
   \eqa*{
@@ -977,20 +1086,24 @@
   \begin{enumerate}
     \item $X$は連結でない
     \item $\exists U, V \in \mathcal{O} \setminus \qty{\varnothing} \qty(X = U \cup V \land U \cap V = \varnothing)$
-    \item $\exists A, B \in \P(X) \setminus \qty{\varnothing} \qty(X = A \cup B \land A \cap \bar{B} = \varnothing \land \bar{A} \cap B = \varnothing)$
+    \item $\exists A, B \subset X \setminus \qty{\varnothing} \qty(X = A \cup B \land A \cap \bar{B} = \varnothing \land \bar{A} \cap B = \varnothing)$
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を考える。
 
   開集合、閉集合の定義より$\mathcal{O} \cap \mathcal{F} \supset \qty{\varnothing, X}$であるので、非連結ならば$\exists U \in \mathcal{O} \cap \mathcal{F} \setminus \qty{\varnothing, X}$である。
 
-  $V \coloneqq X \setminus U \in \mathcal{O} \setminus \qty{\varnothing}$より成り立つ。\\*
+  $V \coloneqq X \setminus U \in \mathcal{O} \setminus \qty{\varnothing}$より成り立つ。
+
+  \vskip\baselineskip
 
   $2. \rightarrow 3.$を考える。
 
   $V = X \setminus U \land U = X \setminus V$より、$U, V \in \mathcal{F}$である。
 
-  したがって、$U \cap \bar{V} = \bar{U} \cap V = U \cap V = \varnothing$である。\\*
+  したがって、$U \cap \bar{V} = \bar{U} \cap V = U \cap V = \varnothing$である。
+
+  \vskip\baselineskip
 
   $3. \rightarrow 1.$を考える。
 
@@ -1002,7 +1115,7 @@
 }
 
 \thm{連結空間の連続像は連結}{
-  連結な位相空間$\qty(X, \mathcal{O})$と、位相空間$\qty(X', \mathcal{O'})$について、連続写像$f \in \qty(X')^X$を考える。
+  連結な位相空間$\qty(X, \mathcal{O})$と、位相空間$\qty(X', \mathcal{O'})$について、連続写像$f \colon X \to X'$を考える。
   このとき、像$f(X)$は連結である。
 }{
   $f(X)$が連結でないと仮定する。
@@ -1042,11 +1155,15 @@
     B_{s(n)} \coloneqq B_n \cap \varphi(s(n))
   }
 
-  定義と$\varphi$の全射性より、$\forall B \in \mathcal{B}(x) \exists n \in \N \qty(B_n \subset \varphi(n) = B)$である。\\*
+  定義と$\varphi$の全射性より、$\forall B \in \mathcal{B}(x) \exists n \in \N \qty(B_n \subset \varphi(n) = B)$である。
+
+  \vskip\baselineskip
 
   $\varphi(0) \subset B_0$である。$\exists B \in \mathcal{B} \qty(B \subset B_n)$とすると、$\exists B' \in \mathcal{B}(x) \qty(B' \subset B \cap \varphi(s(n)) \subset B_{s(n)})$
 
-  \thmref{数学的帰納法}より、$\forall n \in \N \exists B \in \mathcal{B}(x) \qty(B \subset B_n)$である。\\*
+  \thmref{数学的帰納法}より、$\forall n \in \N \exists B \in \mathcal{B}(x) \qty(B \subset B_n)$である。
+
+  \vskip\baselineskip
 
   ゆえに\lemref{近傍系の一意性}より、$\qty(B_n)_{n \in \N}$は$\mathcal{B}(x)$と同じ近傍系を与える基本近傍系である。
 }
@@ -1054,15 +1171,19 @@
 \thm{Bolzano-Weierstrassの定理}{
   第一可算でコンパクトな位相空間$X$は、点列コンパクトである。
 }{
-  $X$上の点列$\qty(x_k)_{k \in \N}$について、$\qty(F_k)_{k \in \N}, F_k = \qty{x_l \mid l \in \N \land l \geq k} \in \P(X)$を考える。\\*
+  $X$上の点列$\qty(x_k)_{k \in \N}$について、$\qty(F_k)_{k \in \N}, F_k = \qty{x_l \mid l \in \N \land l \geq k} \subset X$を考える。
+
+  \vskip\baselineskip
 
   $\bigcap \qty{\bar{F_k} \mid k \in \N} = \varnothing$とすると、\lemref{コンパクトの言い換え}より$\exists n \in \N \qty(n > 0 \land \bigcap \qty{\bar{F_{k_m}} \mid m \leq n} = \varnothing)$である。
 
-  $x_{s(k_n)} \in \bigcap \qty{\bar{F_k} \mid k \in \N}$であるので反する。背理法より$\bigcap \qty{\bar{F_k} \mid k \in \N} \neq \varnothing$を得る。\\*
+  $x_{s(k_n)} \in \bigcap \qty{\bar{F_k} \mid k \in \N}$であるので反する。背理法より$\bigcap \qty{\bar{F_k} \mid k \in \N} \neq \varnothing$を得る。
+
+  \vskip\baselineskip
 
   $\exists a \in X \forall k \in \N \qty(a \in \bar{F_k})$であるので、\lemref{第一可算空間における基本近傍系の単調列}の点列$\qty(B_n)_{n \in \N}$を用いて$\forall j \in \N \qty(F_k \cap B_j(a) \neq \varnothing)$である。
 
-  ここで、以下の写像$\varphi \in \N^\N$を考える。
+  ここで、以下の写像$\varphi \colon \N \to \N$を考える。
   \eqg*{
     x_{\varphi(0)} \in B_0(a) \\*
     x_{\varphi(s(n))} \in F_{s(\varphi(n))} \cap B_n(a)
@@ -1072,19 +1193,21 @@
 }
 
 \thm{第一可算空間における点連続と収束}{
-  第一可算な位相空間$X$、位相空間$X'$、点$x \in X$、写像$f \in \qty(X')^X$について、以下の２つは同値である。
+  第一可算な位相空間$X$、位相空間$X'$、点$x \in X$、写像$f \colon X \to X'$について、以下の\num{2}つは同値である。
   \begin{enumerate}
     \item $f$が$x$で連続
     \item $x$に収束する任意の点列$\qty(x_n)_{n \in \N}$について、点列$\qty(f(x_n))_{n \in \N}$は$f(x)$に収束する。
   \end{enumerate}
 }{
-  $1. \rightarrow 2.$は、\thmref{点連続と収束}と、点列がネットであることより明らか。\\*
+  $1. \rightarrow 2.$は、\thmref{点連続と収束}と、点列がネットであることより明らか。
+
+  \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。\lemref{第一可算空間における基本近傍系の単調列}の与える基本近傍系を$\qty(B_n)_{n \in \N}$とする。
   \eq*{
     \exists N' \in \mathcal{N}(f(x)) \forall n \in \N \exists y \in B_n(x) \qty(f(y) \notin N')
   }
-  \thmref{選択公理が与える写像}より、写像$g \in X^\N, g(n) \in B_n(x) \setminus f^{-1}(N')$が存在する。
+  \thmref{選択公理が与える写像}より、写像$g \colon \N \to X, g(n) \in B_n(x) \setminus f^{-1}(N')$が存在する。
 
   今、$g$から構成される点列は$x$に収束するが、$f \circ g$から構成される点列は$f(x)$に収束しない。
 }
@@ -1115,11 +1238,14 @@
 
   開被覆$C$について、\dfnref{開集合系}より$\forall x \in X \exists O \in C \exists n \in \N \qty(x \in B_n \land B_n \subset O)$
 
-  \thmref{選択公理が与える写像}より$n(x)$を考える。このとき、$\qty{B_{n(x)} \mid x \in \N} = \qty{B_m \mid m \in \Im(n)}$は開被覆である。
+  \thmref{選択公理が与える写像}より$n(x)$を考える。
+  このとき、$\qty{B_{n(x)} \mid x \in \N} = \qty{B_m \mid m \in \Im(n)}$は開被覆である。
 
   $\forall m \in \Im(n) \exists O \in C \qty(B_m \subset O)$より\thmref{選択公理が与える写像}の与える$O(m)$が与えられて、$C' \coloneqq \qty{O(m) \mid m \in \Im(n)}$とする。
 
-  今、$X = \bigcup \qty{B_m \mid m \in \Im(n)} \subset \bigcup C' \subset X$より、$C'$は開被覆であり、定義より$C$の可算部分である。\\*
+  今、$X = \bigcup \qty{B_m \mid m \in \Im(n)} \subset \bigcup C' \subset X$より、$C'$は開被覆であり、定義より$C$の可算部分である。
+
+  \vskip\baselineskip
 
   可分性を示す。
 
@@ -1140,7 +1266,7 @@
 \lsubsection{順序位相}
 
 \lem{順序の開基}{
-  空でない全順序集合$\qty(X, \leq)$について、以下を満たす新たな２元$\infty, -\infty$を加えた集合$\hat{X}$を考える。
+  空でない全順序集合$\qty(X, \leq)$について、以下を満たす新たな\num{2}元$\infty, -\infty$を加えた集合$\hat{X}$を考える。
   \eqg*{
     \forall x \in X \qty(-\infty < x \land x < \infty) \\*
     \hat{X} \coloneqq X \cup \qty{\infty, -\infty}
@@ -1151,9 +1277,13 @@
     \mathcal{B} \coloneqq \qty{\sqty{a, b} \mid \qty(a, b) \in \hat{X} \times \hat{X}}
   }
 }{
-  $\forall B \in \mathcal{B} \qty(-\infty \notin B \land \infty \notin B)$であるので、$\mathcal{B} \in \P(\P(X))$である。\\*
+  $\forall B \in \mathcal{B} \qty(-\infty \notin B \land \infty \notin B)$であるので、$\mathcal{B} \subset \P(X)$である。
 
-  第一式を示す。$\forall x \in X \qty(x \in \sqty{-\infty, \infty})$である。\\*
+  \vskip\baselineskip
+
+  第一式を示す。$\forall x \in X \qty(x \in \sqty{-\infty, \infty})$である。
+
+  \vskip\baselineskip
 
   第二式を示す。$\forall a_1, b_1, a_2, b_2 \in \hat{X}$について、$\sqty{a_1, b_1} \cap \sqty{a_2, b_2} = \sqty{\max \qty{a_1, a_2}, \min \qty{b_1, b_2}} \in \mathcal{B}$である。
 }
@@ -1164,7 +1294,7 @@
     \mathcal{B'} \coloneqq \qty{\sqty{a, b} \mid \qty(a, b) \in X \times X}
   }
 
-  このとき、\lemref{順序の開基}から得る開集合系と、$\mathcal{B'}$の定める開集合系、この２つは一致する。
+  このとき、\lemref{順序の開基}から得る開集合系と、$\mathcal{B'}$の定める開集合系、この\num{2}つは一致する。
 }
 
 \dfn{順序空間}{
@@ -1174,7 +1304,7 @@
 \lem*{
   順序空間$\qty(X, \mathcal{O})$について、開区間は開集合であり、閉区間は閉集合である。
 }{
-  定義より開区間は開集合である。\\*
+  定義より開区間は開集合である。
 
   閉区間$\qty[a, b]$を考える。$X \setminus \qty[a, b] = \sqty{-\infty, a} \cup \sqty{b, \infty} \in \mathcal{O}$より成り立つ。
 }
@@ -1204,15 +1334,21 @@
 \thm{順序空間は正規}{
   順序空間は$T_1$空間かつ$T_4$空間である。
 }{
-  $\forall x \in X$について、\mlemref{-2}より$\qty{x} = \qty[x, x] \in \mathcal{F}$である。\thmref{Frechet性}より、$T_1$である。\\*
+  $\forall x \in X$について、\mlemref{-2}より$\qty{x} = \qty[x, x] \in \mathcal{F}$である。\thmref{Frechet性}より、$T_1$である。
+
+  \vskip\baselineskip
 
   $\forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing)$として、$\forall x \in F_1$について考える。
 
   $x \notin F_2$より\mlemref{-1}の条件を満たす$a_x, b_x \in \hat{X}$が存在する。
 
-  ここで、$U \coloneqq \bigcup \qty{\sqty{a_x, b_x} \mid x \in F_1}$を考える。明らかに$F_1 \subset U \land U \in \mathcal{O}$である。\\*
+  ここで、$U \coloneqq \bigcup \qty{\sqty{a_x, b_x} \mid x \in F_1}$を考える。明らかに$F_1 \subset U \land U \in \mathcal{O}$である。
 
-  $\forall y \in F_2$を考える。$y \notin F_1 = \bar{F_1}$より、$\exists \qty(c, d) \in \hat{X} \times \hat{X} \qty(\sqty{c, d} \cap F_1 = \varnothing)$である。\\*
+  \vskip\baselineskip
+
+  $\forall y \in F_2$を考える。$y \notin F_1 = \bar{F_1}$より、$\exists \qty(c, d) \in \hat{X} \times \hat{X} \qty(\sqty{c, d} \cap F_1 = \varnothing)$である。
+
+  \vskip\baselineskip
 
   $F'_1 \coloneqq \qty{x \in F_1 \mid x < y \land \sqty{a_x, b_x} \cap \sqty{c, d} \neq \varnothing}$とする。
 
@@ -1224,7 +1360,9 @@
   $\exists x \in X \qty(F'_1 = \qty{x})$のときを考える。
   \mlemref{-1}第四式より$b_x < y$である。$a' \coloneqq b_x$とする。
 
-  $F'_1 = \varnothing$であるとき、$a' \coloneqq c$とする。\\*
+  $F'_1 = \varnothing$であるとき、$a' \coloneqq c$とする。
+
+  \vskip\baselineskip
 
   同様に$b'$を定めると、$y \notin U$より$y \in \sqty{a', b'} \land \sqty{a', b'} \cap U = \varnothing$である。\thmref{閉包}より$y \notin \bar{U}$
 

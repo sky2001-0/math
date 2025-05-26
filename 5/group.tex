@@ -62,7 +62,9 @@
 
   したがって、$\forall x, y \in H \qty(x y = x \qty(y^{-1})^{-1} \in H)$
 
-  結合法則も自明に満たす。\\*
+  結合法則も自明に満たす。
+
+  \vskip\baselineskip
 
   十分性を示す。
 
@@ -70,27 +72,28 @@
 }
 
 \cor{群の共通部分}{
-  群$G$について、$A \in \P(G)$を考える。
-  
-  $\forall H \in A$について、$H$が$G$の部分群であるとき、$\bigcap A$は$G$の部分群である。
+  群$G$について、$A \subset G$を考える。
+
+  $\forall H \in A$について$H$が$G$の部分群であるとき、$\bigcap A$は$G$の部分群である。
 }
 
 \cor*{
-  群の商マグマは群である。$\qty[x^{-1}]$を逆元として持つ。
+  群の商マグマは群である。
+  $\qty[x^{-1}]$を逆元として持つ。
 }
 
 
 \lsubsection{群と準同型}
 
 \dfn{群準同型}{
-  群$G_1, G_2$について以下を満たすモノイド準同型$\varphi \in G_2^{G_1}$が存在するとき、$\varphi$を群準同型写像、または単に群準同型と呼ぶ。
+  群$G_1, G_2$について以下を満たすモノイド準同型$\varphi \colon G_1 \to G_2$が存在するとき、$\varphi$を群準同型写像、または単に群準同型と呼ぶ。
   \eq*{
     \forall x \in G_1 \qty(\varphi(x)^{-1} = \varphi(x^{-1}))
   }
 }
 
 \lem{マグマ準同型は群準同型}{
-  群$G_1, G_2$について、マグマ準同型$\varphi \in G_2^{G_1}$は群準同型である。
+  群$G_1, G_2$について、マグマ準同型$\varphi \colon G_1 \to G_2$は群準同型である。
 }{
   モノイド準同型であることを示す。
   \eqg*{
@@ -104,23 +107,25 @@
 }
 
 \thm{群準同型の単射性}{
-  群準同型$\varphi \in G_2^{G_1}$が単射であることは、以下と必要十分である。
+  群準同型$\varphi \colon G_1 \to G_2$が単射であることは、以下と必要十分である。
   \eq*{
     \Ker(\varphi) = \qty{e}
   }
 }{
   十分性は、単射性より示される。
 
-  必要性を示す。$\forall x, y \in G_1 \land \varphi(x) = \varphi(y)$について、
+  必要性を示す。
+  $\forall x, y \in G_1 \land \varphi(x) = \varphi(y)$について、
   \eq*{
     e' = \varphi(e) = \varphi(x) \varphi(x^{-1}) = \varphi(y) \varphi(x^{-1}) = \varphi(y x^{-1})
   }
 
-  ゆえに$x y^{-1} \in \Ker(\varphi)$で、$x = y$。すなわち単射。
+  ゆえに$x y^{-1} \in \Ker(\varphi)$で、$x = y$。
+  すなわち単射。
 }
 
 \dfn{群同型}{
-  群準同型$\varphi \in G_2^{G_1}$が全単射であるとき、これを群同型写像、または単に群同型と呼ぶ。
+  群準同型$\varphi \colon G_1 \to G_2$が全単射であるとき、これを群同型写像、または単に群同型と呼ぶ。
 
   また、$G_1$から$G_2$への群同型写像が存在するとき、$G_1 \cong G_2$と表す。
 }
@@ -138,16 +143,16 @@
 }{
   $H$が可換マグマであることから、$\Hom(G, H)$は可換マグマである。
 
-  写像$0_{\Hom(G, H)} \in H^G, 0_{\Hom(G, H)}(x) = 0_H$は群準同型であるので、単位元。
+  写像$0_{\Hom(G, H)} \colon G \to H, 0_{\Hom(G, H)}(x) = 0_H$は群準同型であるので、単位元。
 
-  写像$f_{\text{minus}} \in H^G, f_{\text{minus}}(x) = -f(x)$は群準同型であるので、逆元。
+  写像$f_{\text{minus}} \colon G \to H, f_{\text{minus}}(x) = -f(x)$は群準同型であるので、逆元。
 }
 
 
 \lsubsection{群の作用}
 
 \dfn{群の作用}{
-  群$\qty(G, \cdot)$について、$G$の集合$X$への写像$\varphi \in \qty(\qty(X^X)^\times, \circ)^\qty(G, \cdot)$が群準同型であるとき、群作用、または単に作用と呼ぶ。
+  群$\qty(G, \cdot)$について、$G$から、集合$X$上の全単射の全体への写像$\varphi \colon \qty(G, \cdot) \to \qty(\qty(X^X)^\times, \circ)$が群準同型であるとき、群作用、または単に作用と呼ぶ。
 }
 
 \dfn{軌道}{
@@ -188,14 +193,14 @@
 
 \lem*{
   群$G$の$X$への群作用$\varphi$と、元$x \in X$について、以下で定める集合$\Stab(G, x)$を考える。
-	このとき、順序対$\qty(\Stab(G, x), \cdot)$は$G$の部分群である。
+	このとき、以下で定める順序対$\qty(\Stab(G, x), \cdot)$は$G$の部分群である。
   \eq*{
     \Stab(G, x) \coloneqq \qty{g \in G \mid x = \varphi(g, x)}
   }
 }{
   群準同型より、$x = \varphi(g, x) = \varphi(h, x)$のとき、$x = \varphi(g, x) = \varphi(g, \varphi(h, x)) = \varphi(g h, x)$、ゆえに部分マグマ。
 
-  群準同型より、$\varphi(e, x) = \id{X}(x) = x$、ゆえに部分モノイド。
+  群準同型より、$\varphi(e, x) = \id_X(x) = x$、ゆえに部分モノイド。
 
   群準同型より、$\varphi(g, x) = x \rightarrow x = \varphi(g^{-1} g, x) = \varphi(g^{-1}, \varphi(g, x)) = \varphi(g^{-1}, x)$、ゆえに部分群。
 }
@@ -212,7 +217,7 @@
 }
 
 \thm{類等式}{
-  群$G$の有限集合$X$への群作用$\varphi$について、$n \in \N$と点列$\qty(x_m)_{m \in n} \in X^n$が存在して、以下の２つが成り立つ。
+  群$G$の有限集合$X$への群作用$\varphi$について、$n \in \N$と点列$\qty(x_m)_{m \in n} \in X^n$が存在して、以下の\num{2}つが成り立つ。
   \eqg*{
     \abs{X} = \abs{\Fix(G, X)} + \sum_{m \in n} \abs{\varphi(G, x_m)} \\*
     \forall m \in n \qty(\abs{\varphi(G, x_m)} > 1)
@@ -250,12 +255,12 @@
 
 \thm{軌道・安定化部分群定理}{
   群$G$の$X$への群作用$\varphi$と元$x \in X$について、左剰余集合$G / \Stab(G, x)$を考える。
-	このとき、全単射$f \in \varphi(G, x)^{G / \Stab(G, x)}$が存在する。
+	このとき、全単射$f \colon G / \Stab(G, x) \to \varphi(G, x)$が存在する。
 }{
-  写像$\hat{f}_{x} \in X^G, \hat{f}_x(g) = \varphi(g, x)$を考える。
+  写像$\hat{f}_{x} \colon G \to X, \hat{f}_x(g) = \varphi(g, x)$を考える。
 
   今$\forall g, h \in G$について、$g \sim_{\hat{f}_{x}} h \leftrightarrow \varphi(h^{-1} g, x) = x \leftrightarrow h^{-1} g \in \Stab(G, x) \leftrightarrow g \sim_{\varphi(\Stab(G, x))} h$である。
-  
+
   $\Im(\hat{f}_{x}) = \varphi(G, x)$であるので、\thmref{標準分解}より存在する。
 }
 
@@ -296,8 +301,8 @@
 
 \lem{正規部分群の定める同値関係}{
   群$G$とその正規部分群$H$について、\dfnref{右作用と左剰余類}の定める$H$の$G$への自明な右作用$\varphi$を考える。
-  
-  $\varphi$が定める同値関係$\sim_{\varphi(H)}$は\corref{直積集合と自明な同値関係}の意味で演算と両立する同値関係である。
+
+  $\varphi$が定める同値関係$\sim_{\varphi(H)}$は演算と両立する同値関係である。
 }{
   $x_1 \sim_{\varphi(H)} y_1, x_2 \sim_{\varphi(H)} y_2$であるとき、$\exists h_1, h_2 \in H \qty(y_1 = x_1 h_1 \land y_2 = x_2 h_2)$
 
@@ -311,14 +316,18 @@
 
 \dfn{剰余群}{
   群$G$とその正規部分群$H$について、\lemref{正規部分群の定める同値関係}の定める同値関係による商マグマを、剰余群と呼び、$G / H$と表す。
+}
 
+\cor*{
   定義より、剰余群は左剰余集合である。
+
+  さらに、右剰余集合である。
 }
 
 \thm{群準同型定理}{
-  群$G_1, G_2$と、群準同型$f \in G_2^{G_1}$、$f$に付随する同値関係$\sim_{f}$について、群同型$\bar{f} \in \Im(f)^{G_1 / \sim_{f}}$が存在する。
+  群$G_1, G_2$と、群準同型$f \colon G_1 \to G_2$、$f$に付随する同値関係$\sim_{f}$について、群同型$\bar{f} \colon G_1 / \sim_{f} \to \Im(f)$が存在する。
 
-  $G_1 / \sim_f = G_1 / \Ker(f)$であるため、$\bar{f} \in \Im(f)^{G_1 / \Ker(f)}$の形で書かれることが多い。
+  $G_1 / \sim_f = G_1 / \Ker(f)$であるため、$\bar{f} \colon G_1 / \Ker(f) \to \Im(f)$の形で書かれることが多い。
 }{
   $\Im(f)$は$G_2$の部分群である。
 
@@ -328,11 +337,11 @@
 
 \lem{剰余群の部分群は部分群の剰余群}{
   群$G$、$G$の正規部分群$N$、$G / N$の部分群$Z$を考える。
-  
+
   このとき$G$の部分群$H$が存在して、$N$は$H$の正規部分群となり、$H / N = Z$が成り立つ。
 }{
   商写像$\qty[]$の原像$H \coloneqq \qty[Z]^{-1}$を考えると、商写像の群準同型性より$H$は$G$の部分群である。
-  
+
   $\qty[\qty{e_Z}]^{-1} = N$であるため、$N \subset H$である。ゆえに$N$は$H$の正規部分群である。
 
   商写像は全射であるため、$H / N = \qty[\qty[Z]^{-1}] = Z$である。
@@ -344,7 +353,7 @@
     \Fix(G, G) = \qty{g \in G \mid \forall g' \in G \qty(g g' = g' g)} = \bigcap \qty{\Stab(G, g') \mid g' \in G}
   }
 
-  また、$\Fix(G, G)$は正規部分群である。
+  また、$\Fix(G, G)$は$G$の正規部分群である。
 }{
   $\Fix(G, G) = \qty{g \in G \mid \forall g' \in G \qty(\qty(g')^{-1} g g' = g)}$である。
 
@@ -364,10 +373,39 @@
 }
 
 
+\lsubsection{群の生成}
+
+\dfn{群の生成}{
+  群$G$の部分集合$S$について、$S$が生成する部分群を以下で定めて、$\ev{S}$で表す。
+  \eq*{
+    \ev{S} \coloneqq \bigcap \qty{H \subset G \mid S \subset H \land \text{$H$は$G$の部分群}}
+  }
+}
+
+\rem{生成する集合が単集合であるときの略記}{
+  群$G$と元$g \in G$について、$\qty{g}$が生成する部分群$\ev{\qty{g}}$を、誤解がない範囲で単に$\ev{g}$で表す。
+}
+
+\dfn{群の生成系}{
+  群$G$の部分集合$S$について、$G = \ev{S}$であるとき、$S$を$G$の生成系と呼ぶ。
+}
+
+\dfn{単生群}{
+  群$G$について、以下を満たすとき、$G$を単生群と呼ぶ。
+  \eq*{
+    \exists g \in G \qty(G = \ev{g})
+  }
+}
+
+\cor*{
+  単生群は可換群である。
+}
+
+
 \lsubsection{半直積}
 
 \lem*{
-	群$H, N$と、群準同型$\varphi \in \Aut(N)^H$について、以下で定義される$N \times H$上の演算$\cdot$を考える。
+	群$H, N$と、群準同型$\varphi \colon H \to \Aut(N)$について、$N \times H$上の以下で定義される演算$\cdot$を考える。
 	\eq*{
 		\qty(n_1, h_1) \cdot \qty(n_2, h_2) \coloneqq \qty(n_1 \varphi(h_1, n_2), h_1 h_2)
 	}
@@ -385,9 +423,11 @@
 		&= \qty(n_1, h_1) \cdot \qty(\qty(n_2, h_2) \cdot \qty(n_3, h_3))
 	}
 
-	$e = \qty(1_N, 1_H)$は単位元である。\\*
+	$e = \qty(e_N, e_H)$は単位元である。
 
-	$\qty(n, h)$の逆元は、$\qty(\varphi(h^{-1}, n^{-1}), h^{-1})$である。
+  \vskip\baselineskip
+
+  $\qty(n, h)$の逆元は、$\qty(\varphi(h^{-1}, n^{-1}), h^{-1})$である。
 }
 
 \dfn{外部半直積}{
@@ -397,31 +437,33 @@
 \cor*{
 	外部半直積$N \rtimes H$について、以下が成り立つ。
 	\eq*{
-		\forall \qty(n, h) \in N \rtimes H \qty(\qty(n, h) = \qty(n, 1_H) \cdot \qty(1_N, h))
+		\forall \qty(n, h) \in N \rtimes H \qty(\qty(n, h) = \qty(n, e_H) \cdot \qty(e_N, h))
 	}
 }
 
 \cor*{
 	外部半直積$N \rtimes H$について、以下で定義する$H'$は$N \rtimes_\varphi H$の部分群である。
 	\eq*{
-		H' \coloneqq \qty{\qty(1_N, h) \mid h \in H}
+		H' \coloneqq \qty{\qty(e_N, h) \mid h \in H}
 	}
 }
 
 \lem*{
 	外部半直積$N \rtimes_\varphi H$について、以下で定義する$N'$は$N \rtimes_\varphi H$の正規部分群である。
 	\eq*{
-		N' \coloneqq \qty{\qty(n, 1_H) \mid n \in N}
+		N' \coloneqq \qty{\qty(n, e_H) \mid n \in N}
 	}
 }{
-	明らかに部分群である。\\*
+	明らかに部分群である。
 
-	$\forall n, n' \in N \forall h \in H$について、以下が成り立つ。
+  \vskip\baselineskip
+
+  $\forall n, n' \in N \forall h \in H$について、以下が成り立つ。
 	\eqa*{
-		\qty(n, h)^{-1} \qty(n', 1_H) \qty(n, h)
+		\qty(n, h)^{-1} \qty(n', e_H) \qty(n, h)
 		&= \qty(\varphi(h^{-1}, n^{-1}), h^{-1}) \qty(n' n, h) \\*
 		&= \qty(\varphi(h^{-1}, n^{-1}) \varphi(h^{-1}, n' n), h^{-1} h) \\*
-		&= \qty(\varphi(h^{-1}, n^{-1} n' n), 1_H)
+		&= \qty(\varphi(h^{-1}, n^{-1} n' n), e_H)
 	}
 
 	よって、正規部分群である。

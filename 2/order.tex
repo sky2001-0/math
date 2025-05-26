@@ -14,7 +14,9 @@
 }
 
 \dfn{単調}{
-  半順序と両立する写像を単調である、または広義単調であると呼ぶ。
+  半順序$\preccurlyeq$と両立する写像を単調である、または広義単調であると呼ぶ。
+
+  特に、$\prec$と両立する写像を、狭義単調であると呼ぶ。
 }
 
 \dfn{極大元}{
@@ -70,13 +72,13 @@
 \dfn{上限}{
   半順序集合$P$について、その部分集合$A$を考える。
 
-  \thmref{分出の公理図式}より定まる、$A$の上界全体の集合について、最小元が存在するとき、これを$A$の上限と呼び、$\sup A$で表す。
+  $A$の上界全体の集合に最小元が存在するとき、これを$A$の上限と呼び、$\sup A$で表す。
 }
 
 \dfn{下限}{
   半順序集合$P$について、その部分集合$A$を考える。
 
-  \thmref{分出の公理図式}より定まる、$A$の下界全体の集合について、最大元が存在するとき、これを$A$の下限と呼び、$\inf A$で表す。
+  $A$の下界全体の集合に最大元が存在するとき、これを$A$の下限と呼び、$\inf A$で表す。
 }
 
 
@@ -91,6 +93,25 @@
 
 \cor*{
   束は有向集合である。
+}
+
+\lem{分配不等式}{
+  束$P$について、以下が成り立つ。
+  \eqg*{
+    \sup{x, \inf{y, z}} \preccurlyeq \inf{\sup{x, y}, \sup{x, z}} \\*
+    \inf{x, \sup{y, z}} \succcurlyeq \sup{\inf{x, y}, \inf{x, z}}
+  }
+}{
+  $x$は$\qty{\sup{x, y}, \sup{x, z}}$の下界であるので、$x \preccurlyeq \inf{\sup{x, y}, \sup{x, z}}$である。
+
+  $\inf{y, z}$は、$\qty{y, z}$の下界であり、推移性より$\qty{\sup{x, y}, \sup{x, z}}$の下界である。
+  ゆえに、$\inf{y, z} \preccurlyeq \inf{\sup{x, y}, \sup{x, z}}$である。
+
+  よって$\inf{\sup{x, y}, \sup{x, z}}$は、$\qty{x, \inf{y, z}}$の上界である。
+
+  したがって第一式が成り立つ。
+
+  第二式も同様に成り立つ。
 }
 
 \dfn{全順序}{
@@ -299,7 +320,7 @@
 \lsubsection{フィルターとネット}
 
 \dfn{フィルター}{
-  半順序集合$\qty(P, \preccurlyeq)$と$P$の空でない部分集合$F$について、以下を満たすとき$F$を$P$のフィルターと呼ぶ。
+  半順序集合$\qty(P, \preccurlyeq)$と$P$の空でない部分集合$F$について、以下を満たすとき、$F$を$P$のフィルターと呼ぶ。
   \eqg*{
     \forall x, y \in F \exists z \in F \qty(z \preccurlyeq x \land z \preccurlyeq y) \\*
     \forall x \in F \forall y \in P \qty(x \preccurlyeq y \rightarrow y \in F)
@@ -311,7 +332,7 @@
 }
 
 \dfn{細分}{
-  半順序集合$P$上のフィルター$F, G$に対して、$F \subset G$であるとき、$G$は$F$の細分であると呼ぶ。
+  半順序集合$P$のフィルター$F, G$に対して、$F \subset G$であるとき、$G$は$F$の細分であると呼ぶ。
 }
 
 \dfn{超フィルター}{
@@ -319,16 +340,18 @@
 }
 
 \thm{超フィルターの存在}{
-  任意のフィルターに対して、その細分である超フィルターが存在する。
+  半順序集合$P$のフィルター$F$について、その細分である超フィルターが存在する。
 }{
-  フィルター$F$に対して、その細分の全体$\mathcal{F}$を考える。
-  半順序集合$\qty(\mathcal{F}, \subset)$を考える。
+  $F$の細分の全体$\mathcal{F}$と半順序集合$\qty(\mathcal{F}, \subset)$を考える。
 
-  $\mathcal{F}$の全順序部分集合$A$に対して、$\bigcup A \in \mathcal{F}$である。
+  $\mathcal{F}$の空でない全順序部分集合$A$について、上界$\bigcup A \in \mathcal{F}$が存在する。
+
+  $\mathcal{F}$の全順序部分集合$\varnothing$について、$F$は上界である。
 
   ゆえに、$\mathcal{F}$は帰納的である。
 
-  \thmref{Zornの補題}より極大元が存在する。これは超フィルターである。
+  \thmref{Zornの補題}より極大元が存在する。
+  これは超フィルターである。
 }
 
 \dfn{集合におけるフィルター}{
@@ -347,20 +370,21 @@
   集合$X$のフィルター$\mathcal{F}$について、以下の２つは同値である。
   \begin{enumerate}
     \item $\mathcal{F}$は超フィルターである
-    \item $\forall A \in \P(X) \qty(A \in \mathcal{F} \lor X \setminus A \in \mathcal{F})$
+    \item $\forall A \subset X \qty(A \in \mathcal{F} \lor X \setminus A \in \mathcal{F})$
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
 
   $A \in \mathcal{F}$のとき明らかであるので、$A \notin \mathcal{F}$のときを考える。
 
-  $\mathcal{S} \coloneqq \qty{S \in \P(X) \mid A \cup S \in \mathcal{F}}$について、定義より$\mathcal{F} \subset \mathcal{S} \land X \setminus A \in \mathcal{S}$である。
+  $\mathcal{S} \coloneqq \qty{S \subset X \mid A \cup S \in \mathcal{F}}$について、定義より$\mathcal{F} \subset \mathcal{S} \land X \setminus A \in \mathcal{S}$である。
 
   今、$\forall S_1, S_2 \in \mathcal{S}$について、$A \cup \qty(S_1 \cap S_2) = \qty(A \cup S_1) \cap \qty(A \cup S_2) \in \mathcal{F}$より、$S_1 \cap S_2 \in \mathcal{S}$である。
 
-  $S \in \mathcal{S} \land T \in \P(X) \land S \subset T$とすると、$A \cup S \in \mathcal{F} \rightarrow A \cup T \in \mathcal{F}$より$T \in \mathcal{S}$
+  $S \in \mathcal{S} \land T \subset X \land S \subset T$とすると、$A \cup S \in \mathcal{F} \rightarrow A \cup T \in \mathcal{F}$より$T \in \mathcal{S}$
 
-  $A \cup X = X \in \mathcal{F}$より、$X \in \mathcal{S}$である。すなわち、$\mathcal{S} \neq \varnothing$
+  $A \cup X = X \in \mathcal{F}$より、$X \in \mathcal{S}$である。
+  すなわち、$\mathcal{S} \neq \varnothing$
 
   $\varnothing \notin \mathcal{S}$より、$\mathcal{S}$はフィルターでありかつ$\mathcal{F}$の細分である。
 
@@ -384,7 +408,7 @@
 }
 
 \dfn{部分ネット}{
-  集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$と有向集合$M$について、写像$\varphi \in \Lambda^M$が以下を満たすとき、$\qty(x_{\varphi(\mu)})_{\mu \in M}$を$\qty(x_\lambda)_{\lambda \in \Lambda}$の部分ネットと呼ぶ。
+  集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$と有向集合$M$について、写像$\varphi \colon M \to \Lambda$が以下を満たすとき、$\qty(x_{\varphi(\mu)})_{\mu \in M}$を$\qty(x_\lambda)_{\lambda \in \Lambda}$の部分ネットと呼ぶ。
   \eqg*{
     \forall \mu_1, \mu_2 \in M \qty(\mu_1 \preccurlyeq \mu_2 \rightarrow \varphi(\mu_1) \preccurlyeq \varphi(\mu_2)) \\*
     \forall \lambda \in \Lambda \exists \mu \in M \qty(\lambda \preccurlyeq \varphi(\mu))
@@ -394,14 +418,14 @@
 \dfn{普遍}{
   集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が以下を満たすとき、$\qty(x_\lambda)_{\lambda \in \Lambda}$は普遍であると呼ぶ。
   \eq*{
-    \forall A \in \P(X) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset A \lor \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset X \setminus A)
+    \forall A \subset X \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset A \lor \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset X \setminus A)
   }
 }
 
 \thm{ネットの定めるフィルター}{
   集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、以下で定める集合系$\mathcal{F}$は$X$のフィルターである。
   \eq*{
-    \mathcal{F} \coloneqq \qty{F \in \P(X) \mid \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset F)}
+    \mathcal{F} \coloneqq \qty{F \subset X \mid \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset F)}
   }
 }{
   明らかに$\varnothing \notin \mathcal{F} \land X \in \mathcal{F}$である。
@@ -412,7 +436,9 @@
 
   $\Lambda$が有向集合であることから、$\exists \lambda_3 \in \Lambda \qty(\lambda_1 \preccurlyeq \lambda_3 \land \lambda_2 \preccurlyeq \lambda_3)$であり、$\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_3}} \subset F_1 \cap F_2$。
 
-  ゆえに$F_1 \cap F_2 \in \mathcal{F}$である。\\*
+  ゆえに$F_1 \cap F_2 \in \mathcal{F}$である。
+
+  \vskip\baselineskip
 
   $\forall F \in \mathcal{F} \forall G \subset \P(X)$について、$F \subset G$ならば定義より明らかに$G \in \mathcal{F}$
 }
@@ -435,7 +461,7 @@
 \thm{フィルターの定める部分ネット}{
   集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$と、\thmref{ネットの定めるフィルター}の定めるフィルター$\mathcal{F}$について考える。
 
-  $\mathcal{F}$の任意の細分$\mathcal{F'}$に対して、ある部分ネット$\qty(x_{\varphi(\mu)})_{\mu \in M}$が存在して、その部分ネットの\thmref{ネットの定めるフィルター}から定まるフィルターは$\mathcal{F'}$の細分となる。
+  $\mathcal{F}$の任意の細分$\mathcal{F'}$に対して、ある部分ネット$\qty(x_{\varphi(\mu)})_{\mu \in M}$が存在して、\thmref{ネットの定めるフィルター}から定まるその部分ネットのフィルターは$\mathcal{F'}$の細分となる。
 }{
   $M \coloneqq \qty{\qty(\lambda, F) \in \Lambda \times \mathcal{F'} \mid x_\lambda \in F}$を考える。
 
@@ -455,7 +481,7 @@
 
   \vskip\baselineskip
 
-  ここで、写像$\varphi \in \Lambda^M$を$\varphi \qty(\lambda, F) \coloneqq \lambda$として定める。
+  ここで、写像$\varphi \colon M \to \Lambda, \varphi \qty(\lambda, F) \coloneqq \lambda$を定める。
 
   \mlemref{-1}より$\forall \lambda \in \Lambda \exists F \in \mathcal{F'} \exists \lambda_1 \in \Lambda \qty(\lambda \preccurlyeq \lambda_1 = \varphi(\lambda_1, F) \land \qty(\lambda_1, F) \in M)$である。
 
@@ -467,7 +493,7 @@
 
   $\forall \qty(\lambda', F') \in M$について、$\qty(\lambda_0, F) \preccurlyeq \qty(\lambda', F')$ならば、$x_{\lambda'} \in F' \subset F$となる。
 
-  よって、$F \in \qty{F \in \P(X) \mid \exists \mu_0 \in M \qty(\qty(x_{\varphi(\mu)})_{\mu \in M_{\succcurlyeq \mu_0}} \subset F)}$
+  よって、$F \in \qty{F \subset X \mid \exists \mu_0 \in M \qty(\qty(x_{\varphi(\mu)})_{\mu \in M_{\succcurlyeq \mu_0}} \subset F)}$
 }
 
 \thm{普遍部分ネットの存在}{

@@ -1,4 +1,4 @@
-\lsection{可換環}
+\lsection{整域}
 
 \lsubsection{倍元と約元}
 
@@ -10,7 +10,7 @@
 }
 
 \dfn{単項イデアル}{
-  可換環$R$と、元$a \in R$について、以下で定まる集合$\ev{a}$はイデアルである。
+  可換環$R$と、元$a \in R$について、以下で定める集合$\ev{a}$はイデアルである。
   \eq*{
     \ev{a} \coloneqq \qty{r a \mid r \in R}
   }
@@ -90,6 +90,17 @@
     R \neq I \land \forall a, b \in R \qty(a b \in I \rightarrow a \in I \lor b \in I)
   }
 }
+
+問題。
+
+  $\P(\R)$上の演算$+, \times$を以下で定めると、$\P(\R)$は可換環をなす。
+  \eqg*{
+    A + B \coloneqq \qty(A \cup B) \setminus \qty(A \cap B) \\*
+    A \times B \coloneqq A \cap B
+  }
+
+  このとき、多項式環の剰余環$\P(\R)[X] / \ev{\Q X + \Z}$は整域であるか？
+
 
 \cor*{
   整域$D$のイデアル$\qty{0_D}$は素イデアルである。
@@ -294,7 +305,7 @@
 }
 
 \dfn{Euclid整域}{
-  整域$D$について、以下を満たす写像$f \in \N^{D \setminus \qty{0_D}}$が存在するとき、$D$をEuclid整域と呼ぶ。
+  整域$D$について、以下を満たす写像$f \colon D \setminus \qty{0_D} \to \N$が存在するとき、$D$をEuclid整域と呼ぶ。
   \eqg*{
     \forall a \in D \forall b \in D \setminus \qty{0_D} \exists q, r \in D \qty(a = b q + r \land \qty(r = 0_D \lor f(r) < f(b))) \\*
     \forall a, b \in D \setminus \qty{0_D} \qty(f(a) \leq f(a b))
