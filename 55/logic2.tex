@@ -1,0 +1,124 @@
+\thm{完全性定理}{
+  命題$\phi$について、$\models \phi$ならば$\vdash \phi$である。
+}{
+  $\models \phi$にもかかわらず$\nvdash \phi$と仮定する。
+
+  このとき、$\lnot \phi$は矛盾を導かないため、$\lnot \phi$は無矛盾である。
+
+  $\Gamma_0 = \{\lnot \phi\}$ とおく。Zorn の補題を用いて、$\Gamma_0$ を含む最大無矛盾集合 $\Gamma$ を構成する。
+
+  任意の文$\psi$について、$\psi \in \Gamma$ であるか $\lnot \psi \in \Gamma$ である。
+  また、$\Gamma$ が閉包性を持つ：もし $\psi, \psi \rightarrow \chi \in \Gamma$ ならば $\chi \in \Gamma$。
+
+  命題変項$p$について、$v(p) = \text{真}$ と定めるのは $p \in \Gamma$ の場合のみとする。
+  命題結合子については意味論の定義に従って拡張する。
+
+  任意の文$\psi$について、$\psi \in \Gamma$ ならば $v(\psi) = \text{真}$、
+  $\lnot \psi \in \Gamma$ ならば $v(\psi) = \text{偽}$ であることを構造帰納法で示す。
+
+  $\lnot \phi \in \Gamma$ なので、補題より $v(\phi) = \text{偽}$。
+  これは $\models \phi$ に反する。したがって仮定 $\nvdash \phi$ は誤りである。
+
+  よって $\models \phi$ ならば $\vdash \phi$ である。
+}
+
+
+\lsubsection{Lindenbaum 拡張による完全性（Zorn を用いない可算言語版）}
+
+\dfn{導出の慣例}{
+  有限集合$\Gamma = \{\phi_1,\ldots,\phi_n\}$からの導出を
+  \[
+    \Gamma \vdash \psi \defiff \phi_1 \land \cdots \land \phi_n \vdash \psi
+  \]
+  と略記する。特に空集合からの導出は $\vdash \psi$ と書く。
+}
+
+\dfn{（無）矛盾集合}{
+  式の集合$\Gamma$が\textbf{無矛盾}であるとは $\Gamma \nvdash \bot$ をいう。
+  無矛盾でないとき\textbf{矛盾}であるという。
+}
+
+\rem{前提追加と否定導入}{
+  既出の\thmref{否定の導入則}と\axiref{演繹定理}から、
+  $\Gamma \cup \{\phi\} \vdash \bot$ ならば $\Gamma \vdash \lnot \phi$ である。
+  逆に $\Gamma \vdash \lnot \phi$ なら $\Gamma \cup \{\phi\} \vdash \bot$ である。
+}
+
+\lem{二者択一補題}{
+  無矛盾な$\Gamma$と任意の式$\phi$について、
+  $\Gamma \cup \{\phi\}$ と $\Gamma \cup \{\lnot \phi\}$ の少なくとも一方は無矛盾である。
+}{
+  もし両方が矛盾だとすると、
+  $\Gamma \cup \{\phi\} \vdash \bot$ かつ $\Gamma \cup \{\lnot \phi\} \vdash \bot$。
+  \thmref{否定の導入則}より $\Gamma \vdash \lnot \phi$ および $\Gamma \vdash \lnot\lnot \phi$。
+  \axi{二重否定の除去}から $\Gamma \vdash \phi$ も従うので、\thmref{無矛盾律}より $\Gamma \vdash \bot$。
+  これは $\Gamma$ の無矛盾性に反する。
+}
+
+\lem{Lindenbaum 拡張（可算版）}{
+  命題変項と記号が可算個であると仮定する。
+  無矛盾な集合$\Gamma_0$と、全ての式の可算列挙 $\{\theta_0,\theta_1,\ldots\}$ に対し、
+  次で定める列$\Gamma_n$は
+  \[
+    \Gamma_{n+1} \coloneqq
+    \begin{cases}
+      \Gamma_n \cup \{\theta_n\} & \text{if } \Gamma_n \cup \{\theta_n\} \text{ が無矛盾},\\
+      \Gamma_n \cup \{\lnot\theta_n\} & \text{otherwise},
+    \end{cases}
+  \]
+  なる極限 $\Gamma^\ast \coloneqq \bigcup_{n\in\mathbb{N}} \Gamma_n$ を与え、
+  $\Gamma^\ast$ は無矛盾で、さらに任意の式$\phi$について $\phi \in \Gamma^\ast$ または $\lnot \phi \in \Gamma^\ast$ を満たす。
+}{
+  （無矛盾性）任意の有限部分集合$\Delta \subseteq \Gamma^\ast$はある段階$\Gamma_N$に含まれる。
+  帰納で各段階での選択に\lemref{二者択一補題}を用いたから、各$\Gamma_n$は無矛盾。
+  よって $\Gamma^\ast$ の任意有限部分は無矛盾であり、\remref{前提追加と否定導入}より $\Gamma^\ast \nvdash \bot$。
+
+  （決定性）各$\theta_n$について構成時に$\theta_n$か$\lnot\theta_n$のいずれかを必ず加えている。
+}
+
+\lem{閉包性と決定性}{
+  上の $\Gamma^\ast$ について次が成り立つ。
+  \begin{enumerate}
+    \item （閉包性）$\psi \in \Gamma^\ast$ かつ $\psi \rightarrow \chi \in \Gamma^\ast$ ならば $\chi \in \Gamma^\ast$。
+    \item （決定性）任意の式$\psi$について、$\psi \in \Gamma^\ast$ または $\lnot\psi \in \Gamma^\ast$。
+  \end{enumerate}
+}{
+  \num{2}は\lemref{Lindenbaum 拡張（可算版）}で示した。
+  \num{1}について、もし $\chi \notin \Gamma^\ast$ なら決定性より $\lnot \chi \in \Gamma^\ast$。
+  すると $\psi,\,\psi\rightarrow\chi,\,\lnot\chi$ を含む有限集合が得られるが、
+  \thmref{Modus Ponens} と \thmref{無矛盾律}から矛盾である。
+}
+
+\dfn{真理値割当}{
+  $\Gamma^\ast$ に対し、命題変項$p$の割当$v$を
+  \[
+    v(p)=\text{真} \;\defiff\; p \in \Gamma^\ast
+  \]
+  と定め、$\lnot,\land,\lor,\rightarrow$ の意味論的定義（\subsecref{意味論}）に従って拡張する。
+}
+
+\lem{Truth Lemma}{
+  任意の式$\psi$について、
+  \[
+    \psi \in \Gamma^\ast \;\Longrightarrow\; v(\psi)=\text{真},
+    \qquad
+    \lnot\psi \in \Gamma^\ast \;\Longrightarrow\; v(\psi)=\text{偽}.
+  \]
+}{
+  構造帰納法。
+  変項は定義そのもの。
+  帰納段階は結合子ごとに、\lemref{閉包性と決定性}（特に閉包性）と意味論の定義を用いればよい。
+  例えば含意の場合、$\psi\rightarrow\chi \in \Gamma^\ast$ で $v(\psi)=\text{真}$ なら $\psi\in\Gamma^\ast$、
+  閉包性より $\chi\in\Gamma^\ast$、帰納法の仮定から $v(\chi)=\text{真}$、よって $v(\psi\rightarrow\chi)=\text{真}$。
+  否定・連言・選言も同様。
+}
+
+\thm{命題論理の完全性定理（可算版）}{
+  任意の式$\phi$について、$\models \phi$ ならば $\vdash \phi$。
+}{
+  反証法。$\models \phi$ だが $\nvdash \phi$ と仮定する。
+  すると $\{\lnot\phi\}$ は無矛盾（さもなくば \remref{前提追加と否定導入} と \axiref{二重否定の除去} から $\vdash \phi$）。
+  \lemref{Lindenbaum 拡張（可算版）} を $\Gamma_0=\{\lnot\phi\}$ に適用して $\Gamma^\ast$ を得る。
+  すると $\lnot\phi \in \Gamma^\ast$ なので \lemref{Truth Lemma} より $v(\phi)=\text{偽}$ となる割当 $v$ が存在。
+  これは $\models \phi$ に反する。よって $\vdash \phi$。
+}

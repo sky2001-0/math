@@ -1,215 +1,62 @@
-\lsection{論理学}
+\lsection{記号論理学}
 
-\rem{簡単のための記号の導入}{
-  並列$,$を断りなく用いる。
-
-  $()$で定める優先順序を断りなく用いる。
-}
-
-
-\lsubsection{命題と命題結合子}
+\lsubsection{命題}
 
 \dfn{命題}{
   真偽が確定している言明を、命題と呼ぶ。
 }
 
-\dfn{否定}{
-  命題$\phi$について、$\lnot \phi$は命題である。
-
-  $\lnot \phi$を、「$\phi$でない」と呼ぶ。
-
-  \vskip\baselineskip
-
-  以下の約束をする。
-  \begin{itemize}
-    \item $\phi$が真であるとき、$\lnot \phi$は偽である。
-    \item $\phi$が偽であるとき、$\lnot \phi$は真である。
-  \end{itemize}
-}
-
-\dfn{含意}{
-  命題$\phi, \psi$について、$\phi \rightarrow \psi$は命題である。
-
-  $\phi \rightarrow \psi$を、「$\phi$ならば$\psi$」、「$\phi$は$\psi$に十分」、「$\psi$は$\phi$に必要」と呼ぶ。
-
-  \vskip\baselineskip
-
-  以下の約束をする。
-  \begin{itemize}
-    \item $\phi$が偽であるとき、$\phi \rightarrow \psi$は真である。
-    \item $\psi$が真であるとき、$\phi \rightarrow \psi$は真である。
-    \item $\phi$が真であり、$\psi$が偽であるとき、$\phi \rightarrow \psi$は偽である。
-  \end{itemize}
-
-  このとき、$\phi$を前件、$\psi$を後件と呼ぶ。
-}
-
-\rem{命題の定義記号}{
-  定義記号$\defiff$を導入する。
-
-  これは左辺を用いて表現された命題は、全てその左辺と一致する部分を右辺に置き換えて理解するという意味である。
-}
-
-\dfn{左含意}{
-  命題$\phi, \psi$について、$\psi \leftarrow \phi$は、以下で定める命題である。
-  \eq*{
-    \psi \leftarrow \phi \defiff \phi \rightarrow \psi
-  }
-
-  同様に、「$\phi$ならば$\psi$」、「$\phi$は$\psi$に十分」、「$\psi$は$\phi$に必要」と呼ぶ。
-}
-
-\dfn{連言}{
-  命題$\phi, \psi$について、$\phi \land \psi$は、以下で定める命題である。
-  \eq*{
-    \phi \land \psi \defiff \qty(\lnot \phi) \rightarrow \psi
-  }
-
-  $\phi \land \psi$を、「$\phi$かつ$\psi$」と呼ぶ。
-}
-
-\dfn{選言}{
-  命題$\phi, \psi$について、$\phi \lor \psi$は、以下で定める命題である。
-  \eq*{
-    \phi \lor \psi \defiff \lnot \qty(\qty(\lnot \phi) \land \qty(\lnot \psi))
-  }
-
-  $\phi \lor \psi$を、「$\phi$または$\psi$」と呼ぶ。
-}
-
-\dfn{同値}{
-  命題$\phi, \psi$について、$\phi \leftrightarrow \psi$は、以下で定める命題である。
-  \eq*{
-    \phi \leftrightarrow \psi \defiff \qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \phi)
-  }
-
-  $\phi \leftrightarrow \psi$を、「$\phi$と$\psi$は同値」、「$\phi$と$\psi$は必要十分」と呼ぶ。
-}
-
-\dfn{命題結合子}{
-  否定$\lnot$、連言$\land$、選言$\lor$、含意$\rightarrow$、同値$\leftrightarrow$を、総称して命題結合子と呼ぶ。
-}
-
-\rem{命題結合子の優先順序}{
-  特に$()$で定められていなければ、以下に示す順序で優先されるものとする。
-  \begin{enumerate}
-    \item 否定$\lnot$
-    \item 連言$\land$
-    \item 選言$\lor$
-    \item 含意$\rightarrow$
-    \item 同値$\leftrightarrow$
-  \end{enumerate}
-}
-
-
-\lsubsection{恒真命題}
-
-\dfn{恒真命題}{
-	命題結合子により結合されている命題$\psi$を考える。
-	結合されている各命題の真偽によらず、$\psi$が真となる命題を、恒真命題と呼ぶ。
+\dfn{解釈}{
+  各命題のそれぞれに真偽を対応させる対応関係を、解釈と呼ぶ。
 }
 
 \dfn{矛盾}{
-  偽である命題を矛盾と呼び、$\bot$で表す。
-}
-
-\cor*{
-  命題$\phi, \psi, \chi$について、以下に示す全ては恒真命題である。
-  \begin{enumerate}
-    \item 同一律
-    \begin{itemize}
-      \item $\phi \rightarrow \phi$
-    \end{itemize}
-    \item 冪等律
-    \begin{itemize}
-      \item $\phi \leftrightarrow \phi \land \phi$
-      \item $\phi \leftrightarrow \phi \lor \phi$
-    \end{itemize}
-    \item {\L}ukasiewiczの第一公理
-    \begin{itemize}
-      \item $\phi \rightarrow \qty(\psi \rightarrow \phi)$
-    \end{itemize}
-    \item 結合律
-    \begin{itemize}
-      \item $\phi \land \qty(\psi \land \chi) \leftrightarrow \qty(\phi \land \psi) \land \chi$
-      \item $\phi \lor \qty(\psi \lor \chi) \leftrightarrow \qty(\phi \lor \psi) \lor \chi$
-    \end{itemize}
-    \item 交換律
-    \begin{itemize}
-      \item $\phi \land \psi \leftrightarrow \psi \land \phi$
-      \item $\phi \lor \psi \leftrightarrow \psi \lor \phi$
-    \end{itemize}
-    \item 吸収律
-    \begin{itemize}
-      \item $\phi \lor \qty(\phi \land \psi) \leftrightarrow \phi$
-      \item $\phi \land \qty(\phi \lor \psi) \leftrightarrow \phi$
-    \end{itemize}
-    \item 分配律
-    \begin{itemize}
-      \item $\phi \lor \qty(\psi \land \chi) \leftrightarrow \qty(\phi \lor \psi) \land \qty(\phi \lor \chi)$
-      \item $\phi \land \qty(\psi \lor \chi) \leftrightarrow \qty(\phi \land \psi) \lor \qty(\phi \land \chi)$
-    \end{itemize}
-    \item 推移律
-    \begin{itemize}
-      \item $\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi) \rightarrow \qty(\phi \rightarrow \chi)$
-    \end{itemize}
-    \item De Morganの法則
-    \begin{itemize}
-      \item $\lnot \phi \lor \lnot \psi \leftrightarrow \lnot \qty(\phi \land \psi)$
-      \item $\lnot \phi \land \lnot \psi \leftrightarrow \lnot \qty(\phi \lor \psi)$
-    \end{itemize}
-    \item 無矛盾律
-    \begin{itemize}
-      \item $\lnot \qty(\phi \land \lnot \phi)$
-    \end{itemize}
-    \item 不条理則
-    \begin{itemize}
-      \item $\bot \rightarrow \phi$
-    \end{itemize}
-    \item 二重否定除去
-    \begin{itemize}
-      \item $\lnot \lnot \phi \leftrightarrow \phi$
-    \end{itemize}
-    \item 排中律
-    \begin{itemize}
-      \item $\phi \lor \lnot \phi$
-    \end{itemize}
-    \item Peirce則
-    \begin{itemize}
-      \item $\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \rightarrow \phi$
-    \end{itemize}
-    \item 背理法
-    \begin{itemize}
-      \item $\qty(\phi \land \lnot \psi \rightarrow \bot) \rightarrow \qty(\phi \rightarrow \psi)$
-    \end{itemize}
-    \item 対偶法
-    \begin{itemize}
-      \item $\qty(\phi \rightarrow \psi) \leftrightarrow \qty(\lnot \psi \rightarrow \lnot \phi)$
-    \end{itemize}
-    \item 選言三段論法
-    \begin{itemize}
-      \item $\qty(\phi \lor \psi) \land \lnot \phi \rightarrow \psi$
-    \end{itemize}
-  \end{enumerate}
-
-  当然これらは代表的な例であり、全てではない。
+  あらゆる解釈において偽を与える命題を、矛盾と呼ぶ。
 }
 
 
-\lsubsection{推論と推論規則}
-
-\rem{古典論理}{
-  以降、古典論理（NK）の推論規則を導入する。
-}
+\lsubsection{命題結合子と推論規則}
 
 \dfn{推論}{
-  命題$\phi, \psi$について、$\phi$から$\psi$が推論されるとき、$\phi \vdash \psi$で明示的に表す。
+  命題$\phi, \psi$について、$\phi$から$\psi$が推論されることを、$\phi \vdash \psi$で表す。
+
+  このとき、$\phi$を前提、$\psi$を帰結と呼ぶ。
+}
+
+\rem{命題論理の推論体系}{
+  ここでは推論を行う上で許される規則として、
+  後述する\axiref{同一律}、\axiref{カット規則}、\axiref{連言の導入則}、\axiref{連言の除去則}、\axiref{演繹定理}、\axiref{Modus Ponens}、\axiref{二重否定の除去}を与える。
+}
+
+\rem{命題の結合順序}{
+  \num{1}つまたは\num{2}つの命題から新たな命題を作り出す記号は、命題結合子と呼ばれる。
+
+  複数の命題結合子がある場合には結合される順序により与えられる命題が変わるため、厳密さのために$()$によって結合順序を定める。
+}
+
+\axi{同一律}{
+  命題$\phi$について、以下を定める。
+  \eq*{
+    \phi \vdash \phi
+  }
+}
+
+\axi{カット規則}{
+  命題$\phi, \psi, \chi$について、以下を定める。
+  \eq*{
+    \phi \vdash \psi \text{ と } \psi \vdash \chi \text{ から、 } \phi \vdash \chi
+  }
+}
+
+\dfn{連言}{
+  命題$\phi, \psi$について、$\phi \land \psi$は命題である。
+  「$\phi$かつ$\psi$」と呼ぶ。
 }
 
 \axi{連言の導入則}{
   命題$\phi, \psi, \chi$について、以下を定める。
   \eq*{
-    \qty(\qty(\chi \vdash \phi), \qty(\chi \vdash \psi)) \vdash \qty(\chi \vdash \phi \land \psi)
+    \chi \vdash \phi \text{ と } \chi \vdash \psi \text{ から、 } \chi \vdash \phi \land \psi
   }
 }
 
@@ -221,127 +68,658 @@
   }
 }
 
-\axi{選言の導入則}{
-  命題$\phi, \psi$について、以下の\num{2}つを定める。
-  \eqg*{
-    \phi \vdash \phi \lor \psi \\*
-    \psi \vdash \phi \lor \psi
-  }
+\dfn{含意}{
+  命題$\phi, \psi$について、$\phi \rightarrow \psi$は命題である。
+  「$\phi$ならば$\psi$」と呼ぶ。
 }
 
-\axi{選言の除去則}{
+\axi{演繹定理}{
   命題$\phi, \psi, \chi$について、以下を定める。
   \eq*{
-    \qty(\qty(\phi \vdash \chi), \qty(\psi \vdash \chi)) \vdash \qty(\phi \lor \psi \vdash \chi)
+    \phi \land \psi \vdash \chi \text{ から、 } \phi \vdash \psi \rightarrow \chi
   }
 }
 
-\axi{含意の導入則（演繹定理）}{
-  命題$\phi, \psi, \chi$について、以下を定める。
-  \eq*{
-    \qty(\chi \land \phi \vdash \psi) \vdash \qty(\chi \vdash \qty(\phi \rightarrow \psi))
-  }
-}
-
-\axi{含意の除去則（Modus Ponens）}{
+\axi{Modus Ponens}{
   命題$\phi, \psi$について、以下を定める。
   \eq*{
     \phi \land \qty(\phi \rightarrow \psi) \vdash \psi
   }
-
-  含意の導入、除去則より、演繹と含意を似たような意味で扱うことができる。
 }
 
-\axi{否定の導入則}{
-  命題$\phi, \psi$について、以下を定める。
+\axi{二重否定の除去}{
+  命題$\phi$について、以下を定める。
   \eq*{
-    \qty(\phi \land \psi \vdash \bot) \vdash \qty(\phi \vdash \lnot \psi)
+    \qty(\phi \rightarrow \bot) \rightarrow \bot \vdash \phi
   }
 }
 
-\axi{否定の除去則（二重否定の除去）}{
-  命題$\phi$について、以下を定める。
+
+\lsubsection{いくつかの重要な定理}
+
+\thm{連言の交換}{
+  命題$\phi, \psi$について、以下が成り立つ。
   \eq*{
-    \lnot \lnot \phi \vdash \phi
+    \phi \land \psi \vdash \psi \land \phi
+  }
+}{
+  \axiref{連言の除去則}より、$\phi \land \psi \vdash \psi$
+
+  \axiref{連言の除去則}より、$\phi \land \psi \vdash \phi$
+
+  \num{1}、\num{2}行目と\axiref{連言の導入則}より、$\phi \land \psi \vdash \psi \land \phi$
+}
+
+\thm{連言の結合}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eqg*{
+    \qty(\phi \land \psi) \land \chi \vdash \phi \land \qty(\psi \land \chi) \\*
+    \phi \land \qty(\psi \land \chi) \vdash \qty(\phi \land \psi) \land \chi
+  }
+}{
+  \axiref{連言の除去則}より、$\qty(\phi \land \psi) \land \chi \vdash \phi \land \psi$
+
+  \axiref{連言の除去則}より、$\phi \land \psi \vdash \phi$
+
+  \axiref{連言の除去則}より、$\phi \land \psi \vdash \psi$
+
+  \num{1}、\num{2}行目と\axiref{カット規則}より、$\qty(\phi \land \psi) \land \chi \vdash \phi$
+
+  \num{1}、\num{3}行目と\axiref{カット規則}より、$\qty(\phi \land \psi) \land \chi \vdash \psi$
+
+  \axiref{連言の除去則}より、$\qty(\phi \land \psi) \land \chi \vdash \chi$
+
+  \num{5}、\num{6}行目と\axiref{連言の導入則}より、$\qty(\phi \land \psi) \land \chi \vdash \psi \land \chi$である。
+
+  \num{4}、\num{7}行目と\axiref{連言の導入則}より、$\qty(\phi \land \psi) \land \chi \vdash \phi \land \qty(\psi \land \chi)$である。
+
+  \vskip\baselineskip
+
+  逆も同様。
+}
+
+\thm{連言の冪等}{
+  命題$\phi$について、以下が成り立つ。
+  \eq*{
+    \phi \vdash \phi \land \phi
+  }
+}{
+  \axiref{同一律}より$\phi \vdash \phi$
+
+  \num{1}行目と\axiref{連言の導入則}より成り立つ。
+}
+
+\thm{含意の推移}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eq*{
+    \qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi) \vdash \phi \rightarrow \chi
+  }
+}{
+  \axiref{連言の除去則}より、$\qty(\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi)) \land \phi \vdash \phi$
+
+  \axiref{連言の除去則}より、$\qty(\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi)) \land \phi \vdash \qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi)$
+
+  \axiref{連言の除去則}より、$\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi) \vdash \phi \rightarrow \psi$
+
+  \num{2}、\num{3}行目と\axiref{カット規則}より、$\qty(\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi)) \land \phi \vdash \phi \rightarrow \psi$
+
+  \num{1}、\num{4}行目と\axiref{連言の導入則}より、$\qty(\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi)) \land \phi \vdash \phi \land \qty(\phi \rightarrow \psi)$
+
+  \axiref{Modus Ponens}より、$\phi \land \qty(\phi \rightarrow \psi) \vdash \psi$
+
+  \num{5}、\num{6}行目と\axiref{カット規則}より、$\qty(\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi)) \land \phi \vdash \psi$
+
+  \axiref{連言の除去則}より、$\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi) \vdash \psi \rightarrow \chi$
+
+  \num{2}、\num{8}行目と\axiref{カット規則}より、$\qty(\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi)) \land \phi \vdash \psi \rightarrow \chi$
+
+  \num{7}、\num{9}行目と\axiref{連言の導入則}より、$\qty(\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi)) \land \phi \vdash \psi \land \qty(\psi \rightarrow \chi)$
+
+  \axiref{Modus Ponens}より、$\psi \land \qty(\psi \rightarrow \chi) \vdash \chi$
+
+  \num{10}、\num{11}行目と\axiref{カット規則}より、$\qty(\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi)) \land \phi \vdash \chi$
+
+  \axiref{演繹定理}より、$\qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \chi) \vdash \phi \rightarrow \chi$
+}
+
+\thm{逆演繹定理}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eq*{
+    \phi \vdash \psi \rightarrow \chi \text{ から、 } \phi \land \psi \vdash \chi
+  }
+}{
+  \axiref{連言の除去則}より、$\phi \land \psi \vdash \phi$
+
+  \num{1}行目、所与の推論と\axiref{カット規則}より、$\phi \land \psi \vdash \psi \rightarrow \chi$
+
+  \axiref{連言の除去則}より、$\phi \land \psi \vdash \psi$
+
+  \num{2}、\num{3}行目と\axiref{連言の導入則}より、$\phi \land \psi \vdash \psi \land \qty(\psi \rightarrow \chi)$
+
+  \axiref{Modus Ponens}より、$\psi \land \qty(\psi \rightarrow \chi) \vdash \chi$
+
+  \num{4}、\num{5}行目と\axiref{カット規則}より、$\phi \land \psi \vdash \chi$
+}
+
+\thmf{{\L}ukasiewiczの第一公理}{Lukasiewiczの第一公理}{
+  命題$\phi, \psi$について、以下が成り立つ。
+  \eq*{
+    \phi \vdash \psi \rightarrow \phi
+  }
+}{
+  \axiref{連言の除去則}より、$\phi \land \psi \vdash \phi$
+
+  \num{1}行目と\axiref{演繹定理}より、$\phi \vdash \psi \rightarrow \phi$
+}
+
+\thm{無矛盾律}{
+  命題$\phi$について、以下が成り立つ。
+  \eq*{
+    \phi \land \qty(\phi \rightarrow \bot) \vdash \bot
+  }
+}{
+  \axiref{Modus Ponens}より成り立つ。
+}
+
+\thm{不条理則}{
+  命題$\phi$について、以下が成り立つ。
+  \eq*{
+    \bot \vdash \phi
+  }
+}{
+  \axiref{連言の除去則}より、$\bot \land \qty(\phi \rightarrow \bot) \vdash \bot$
+
+  \num{1}行目と\axiref{演繹定理}より、$\bot \vdash \qty(\phi \rightarrow \bot) \rightarrow \bot$
+
+  \axiref{二重否定の除去}より、$\qty(\phi \rightarrow \bot) \rightarrow \bot \vdash \phi$
+
+  \num{2}、\num{3}行目と\axiref{カット規則}より、$\bot \vdash \phi$
+}
+
+\thm{Peirce則}{
+  命題$\phi, \psi$について、以下が成り立つ。
+  \eq*{
+    \qty(\phi \rightarrow \psi) \rightarrow \phi \vdash \phi
+  }
+}{
+  \axiref{連言の除去則}より、$\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \land \qty(\phi \rightarrow \bot) \vdash \phi \rightarrow \bot$
+
+  \thmref{無矛盾律}より、$\qty(\phi \rightarrow \bot) \land \phi \vdash \bot$
+
+  \thmref{不条理則}より、$\bot \vdash \psi$
+
+  \num{2}、\num{3}行目と\axiref{カット規則}より、$\qty(\phi \rightarrow \bot) \land \phi \vdash \psi$
+
+  \num{4}行目と\axiref{演繹定理}より、$\phi \rightarrow \bot \vdash \phi \rightarrow \psi$
+
+  \num{1}、\num{5}行目と\axiref{カット規則}より、$\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \land \qty(\phi \rightarrow \bot) \vdash \phi \rightarrow \psi$
+
+  \axiref{連言の除去則}より、$\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \land \qty(\phi \rightarrow \bot) \vdash \qty(\phi \rightarrow \psi) \rightarrow \phi$
+
+  \num{6}、\num{7}行目と\axiref{連言の導入則}より、$\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \land \qty(\phi \rightarrow \bot) \vdash \qty(\phi \rightarrow \psi) \land \qty(\qty(\phi \rightarrow \psi) \rightarrow \phi)$
+
+  \axiref{Modus Ponens}より、$\qty(\phi \rightarrow \psi) \land \qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \vdash \phi$
+
+  \num{8}、\num{9}行目と\axiref{カット規則}より、$\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \land \qty(\phi \rightarrow \bot) \vdash \phi$
+
+  \num{1}、\num{10}行目と\axiref{連言の導入則}より、$\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \land \qty(\phi \rightarrow \bot) \vdash \phi \land \qty(\phi \rightarrow \bot)$
+
+  \num{2}、\num{11}行目と\axiref{カット規則}より、$\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \land \qty(\phi \rightarrow \bot) \vdash \bot$
+
+  \num{12}行目と\axiref{演繹定理}より、$\qty(\qty(\phi \rightarrow \psi) \rightarrow \phi) \vdash \qty(\phi \rightarrow \bot) \rightarrow \bot$
+
+  \axiref{二重否定の除去}より、$\qty(\phi \rightarrow \bot) \rightarrow \bot \vdash \phi$
+
+  \num{13}、\num{14}行目と\axiref{カット規則}より、$\qty(\phi \rightarrow \psi) \rightarrow \phi \vdash \phi$
+}
+
+\thm{背理法}{
+  命題$\phi, \psi$について、以下が成り立つ。
+  \eq*{
+    \phi \land \qty(\psi \rightarrow \bot) \vdash \bot \text{ から、 } \phi \vdash \psi
+  }
+}{
+  所与の推論と\axiref{演繹定理}より、$\phi \vdash \qty(\psi \rightarrow \bot) \rightarrow \bot$
+
+  \axiref{二重否定の除去}より、$\qty(\psi \rightarrow \bot) \rightarrow \bot \vdash \psi$
+
+  \num{1}、\num{2}行目と\axiref{カット規則}より、$\phi \vdash \psi$
+}
+
+\thm{対偶法}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eq*{
+    \chi \land \qty(\psi \rightarrow \bot) \vdash \phi \rightarrow \bot \text{ から、 } \chi \land \phi \vdash \psi
+  }
+}{
+  \thmref{連言の結合}から、$\qty(\phi \land \chi) \land \qty(\psi \rightarrow \bot) \vdash \phi \land \qty(\chi \land \qty(\psi \rightarrow \bot))$
+
+  所与の推論と\thmref{逆演繹定理}から、$\phi \land \qty(\chi \land \qty(\psi \rightarrow \bot)) \vdash \bot$
+
+  \num{1}, \num{2}行目と\axiref{カット規則}より、$\qty(\phi \land \chi) \land \qty(\psi \rightarrow \bot) \vdash \bot$
+
+  \num{3}行目と\thmref{背理法}より、$\phi \land \chi \vdash \psi$
+
+  \thmref{連言の交換}より、$\chi \land \phi \vdash \phi \land \chi$
+
+  \num{4}、\num{5}行目と\axiref{カット規則}より、$\chi \land \phi \vdash \psi$
+}
+
+
+\lsubsection{同値}
+
+\rem{命題の定義記号}{
+  定義記号$\defiff$を導入する。
+
+  これは左辺を用いて表現された命題は、議論において全てその左辺と一致する部分を右辺に置き換えて理解するという意味である。
+
+  以降に定義する述語の定義にも同様に用いる。
+}
+
+\dfn{同値}{
+  新たな命題結合子$\leftrightarrow$を定める。
+
+  命題$\phi, \psi$について、命題$\phi \leftrightarrow \psi$を以下で定める。
+  \eq*{
+    \phi \leftrightarrow \psi \defiff \qty(\phi \rightarrow \psi) \land \qty(\psi \rightarrow \phi)
+  }
+
+  「$\phi$と$\psi$は必要十分」と呼ぶ。
+}
+
+\lem{連言における命題の代入原理}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eq*{
+    \qty(\phi \land \chi) \land \qty(\phi \leftrightarrow \psi) \vdash \psi \land \chi
+  }
+}{
+  明らか。
+}
+
+\lem{含意の前件における命題の代入原理}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eq*{
+    \qty(\phi \rightarrow \chi) \land \qty(\phi \leftrightarrow \psi) \vdash \psi \rightarrow \chi
+  }
+}{
+  \thmref{含意の推移}より明らか。
+}
+
+\lem{含意の後件における命題の代入原理}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eq*{
+    \qty(\chi \rightarrow \phi) \land \qty(\phi \leftrightarrow \psi) \vdash \chi \rightarrow \psi
+  }
+}{
+  \thmref{含意の推移}より明らか。
+}
+
+\thm{命題の代入原理}{
+  命題$\phi, \psi$と、$\land, \rightarrow$によって$\ldots$と結合される命題$P$について、以下が成り立つ。
+  \eq*{
+    P(\phi, \ldots) \land \qty(\phi \leftrightarrow \psi) \vdash P(\psi, \ldots)
+  }
+}{
+  \lemref{連言における命題の代入原理}、\lemref{含意の前件における命題の代入原理}、\lemref{含意の後件における命題の代入原理}から、帰納的に成り立つ。
+}
+
+
+\lsubsection{いくつかの命題結合子と重要な定理}
+
+\dfn{定理}{
+  新たな命題$\top$を以下で定める。
+  \eq*{
+    \top \defiff \bot \rightarrow \bot
+  }
+}
+
+\rem{定理からの帰結}{
+  命題$\phi$について、簡単のために$\top \vdash \phi$を$\vdash \phi$で表す。
+}
+
+\dfn{左含意}{
+  新たな命題結合子$\leftarrow$を定める。
+
+  命題$\phi, \psi$について、命題$\phi \leftarrow \psi$を以下で定める。
+  \eq*{
+    \phi \leftarrow \psi \defiff \psi \rightarrow \phi
+  }
+}
+
+\dfn{否定}{
+  新たな命題結合子$\lnot$を定める。
+
+  命題$\phi$について、命題$\lnot \phi$を以下で定める。
+  \eq*{
+    \lnot \phi \defiff \phi \rightarrow \bot
+  }
+}
+
+\dfn{選言}{
+  新たな命題結合子$\lor$を定める。
+
+  命題$\phi, \psi$について、命題$\phi \lor \psi$を以下で定める。
+  \eq*{
+    \phi \lor \psi \defiff \lnot \phi \rightarrow \psi
+  }
+}
+
+\rem{命題結合子の優先順序}{
+  結合の順序は以下で定めるものとする。
+  \begin{enumerate}
+    \item 否定$\lnot$
+    \item 連言$\land$
+    \item 選言$\lor$
+    \item 含意$\rightarrow$
+    \item 左含意$\leftarrow$
+    \item 同値$\leftrightarrow$
+  \end{enumerate}
+
+  ただし$()$がある場合は、その中を先に結合する。
+}
+
+\thm{定理は全てに導かれる}{
+  命題$\phi$について、以下が成り立つ。
+  \eq*{
+    \phi \vdash \top
+  }
+}{
+  明らか。
+}
+
+\thm{否定の導入則}{
+  命題$\phi, \chi$について、以下が成り立つ。
+  \eq*{
+    \chi \land \phi \vdash \bot \text{ から、 } \chi \vdash \lnot \phi
+  }
+}{
+  \axiref{演繹定理}より明らか。
+}
+
+\thm{選言の導入則}{
+  命題$\phi, \psi$について、以下の\num{2}つが成り立つ。
+  \eqg*{
+    \phi \vdash \phi \lor \psi \\*
+    \psi \vdash \phi \lor \psi
+  }
+}{
+  第一式を示す。
+
+  \thmref{無矛盾律}と\thmref{不条理則}より、$\phi \land \lnot \phi \vdash \psi$
+
+  \axiref{演繹定理}より成り立つ。
+
+  \vskip\baselineskip
+
+  第二式は、\thmref{Lukasiewiczの第一公理}より明らか。
+}
+
+\thm{選言の除去則}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eq*{
+    \phi \vdash \chi \text{ と } \psi \vdash \chi \text{ から、 } \phi \lor \psi \vdash \chi
+  }
+}{
+  $\phi \vdash \chi$から$\lnot \chi \land \phi \vdash \bot$であるので、$\lnot \chi \vdash \lnot \phi$である。
+
+  $\qty(\phi \lor \psi) \land \lnot \chi \vdash \psi$である。
+
+  $\psi \vdash \chi$から、$\qty(\phi \lor \psi) \land \lnot \chi \vdash \bot$であるので、$\phi \lor \psi \vdash \lnot \lnot \chi$である。
+
+  二重否定を除去して成り立つ。
+}
+
+\thm{選言の交換}{
+  命題$\phi, \psi$について、以下が成り立つ。
+  \eq*{
+    \phi \lor \psi \vdash \psi \lor \phi
+  }
+}{
+  明らか。
+}
+
+\thm{連言の結合}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eqg*{
+    \qty(\phi \lor \psi) \lor \chi \vdash \phi \lor \qty(\psi \lor \chi) \\*
+    \phi \lor \qty(\psi \lor \chi) \vdash \qty(\phi \lor \psi) \lor \chi
+  }
+}{
+  略。
+}
+
+\thm{選言の冪等}{
+  命題$\phi$について、以下が成り立つ。
+  \eq*{
+    \phi \vdash \phi \lor \phi
+  }
+}{
+  \thmref{選言の導入則}より明らか。。
+}
+
+\thm{選言三段論法}{
+  命題$\phi, \psi$について、以下が成り立つ。
+  \eq*{
+    \qty(\phi \lor \psi) \land \lnot \phi \vdash \psi
+  }
+}{
+  明らか。
+}
+
+\thm{吸収律}{
+  命題$\phi, \psi$について、以下が成り立つ。
+  \eqg*{
+    \phi \lor \qty(\phi \land \psi) \vdash \phi \\*
+    \phi \vdash \phi \land \qty(\phi \lor \psi)
+  }
+}{
+  略。
+}
+
+\thm{分配律}{
+  命題$\phi, \psi, \chi$について、以下が成り立つ。
+  \eqg*{
+    \vdash \phi \lor \qty(\psi \land \chi) \leftrightarrow \qty(\phi \lor \psi) \land \qty(\phi \lor \chi) \\*
+    \vdash \phi \land \qty(\psi \lor \chi) \leftrightarrow \qty(\phi \land \psi) \lor \qty(\phi \land \chi)
+  }
+}{
+  略。
+}
+
+\thm{De Morganの法則}{
+  命題$\phi, \psi$について、以下が成り立つ。
+  \eqg*{
+    \vdash \lnot \phi \lor \lnot \psi \leftrightarrow \lnot \qty(\phi \land \psi) \\*
+    \vdash \lnot \phi \land \lnot \psi \leftrightarrow \lnot \qty(\phi \lor \psi)
+  }
+}{
+  略。
+}
+
+\thm{排中律}{
+  命題$\phi$について、以下が成り立つ。
+  \eq*{
+    \vdash \phi \lor \lnot \phi
+  }
+}{
+  明らか。
+}
+
+
+\lsubsection{意味論}
+
+\dfn{恒真命題}{
+	あらゆる解釈において真を与える命題を、恒真命題と呼ぶ。
+}
+
+\dfn{意味論的同値}{
+  命題$\phi, \psi$について、あらゆる解釈においてその真偽が一致するとき、$\phi$と$\psi$は意味論的に同値であると言う。
+}
+
+\dfn{論理的帰結}{
+  命題$\phi, \psi$について、$\phi$が真であるあらゆる解釈において$\psi$が真であるとき、$\phi \models \psi$で表す。
+
+  特に$\psi$が恒真命題であるとき、$\models \psi$で表す。
+}
+
+\dfn{健全性}{
+  ある推論体系（推論規則と命題結合子の解釈）を考える。
+
+  あらゆる命題$\phi$について、この推論体系が以下を満たすとき、その推論体系は健全であるという。
+  \eq*{
+    \vdash \phi \text{ から、 } \models \phi
+  }
+}
+
+\dfn{完全性}{
+  ある推論体系（推論規則と命題結合子の解釈）を考える。
+
+  あらゆる命題$\phi$について、この推論体系が以下を満たすとき、その推論体系は完全であるという。
+  \eq*{
+    \models \phi \text{ から、 } \vdash \phi
   }
 }
 
 
 \lsubsection{述語論理}
 
-\dfn{述語}{
-  一つないし複数の変項を持ち、その変項の全てが確定したときに命題となる言明を、述語と呼ぶ。
+\rem{述語論理の推論体系}{
+  ここでは推論を行う上で許される規則として、
+  後述する\axiref{全称の導入則}、\axiref{全称の除去則}を加える。
+}
 
-  述語を表す記号である述語記号$\phi$と変項$x$を用いて$\phi(x)$で表す。
+\dfn{個体}{
+  学問における対象を、個体と呼ぶ。
+
+  個体を表す記号を項と呼び、各項のそれぞれに個体を対応させる対応関係を、解釈と呼ぶ。
+}
+
+\dfn{議論領域}{
+  議論領域とは、個体の全体である。
+}
+
+\dfn{述語}{
+  \num{0}個以上の個体の列について、その全てが確定したときに命題となる言明を、述語と呼ぶ。
+
+  述語を表す記号である述語記号$\phi$と、個体を表す記号である項の列$x, \ldots$を用いて$\phi(x, \ldots)$で表す。
 
   \vskip\baselineskip
 
-  述語記号が要求する変項の数を、その述語記号のアリティと呼ぶ。
-}
-
-\rem{変項の定義記号}{
-  定義記号$\coloneqq$を導入する。
-
-  これは左辺を用いて表現された変項は、全てその左辺と一致する部分を右辺に置き換えて理解するという意味である。
+  述語が要求する個体の数を、その述語のアリティと呼ぶ。
 }
 
 \dfn{全称量化子}{
-  述語$\phi(x)$について、$\forall x \qty(\phi(x))$は命題である。
+  量化子$\forall$を定める。
+
+  アリティ\num{1}の述語$\phi$について、$\forall x \qty(\phi(x))$は命題である。
 }
 
-\axi{全称量化子の導入則}{
-  変項$x$を出現させない述語$\psi$と述語記号$\phi$について、以下を定める。
+\axi{全称の導入則}{
+  項$x$、項$x$を出現させない命題$\phi$、アリティ\num{1}の述語$\psi$について、以下を定める。
   \eq*{
-    \qty(\psi \vdash \phi(x)) \vdash \qty(\psi \vdash \forall x \qty(\phi(x)))
+    \phi \vdash \psi(x) \text{ から、 } \phi \vdash \forall x \qty(\psi(x))
   }
 }
 
-\axi{全称量化子の除去則}{
-  述語記号$\phi$について、以下を定める。
+\axi{全称の除去則}{
+  項$y$とアリティ\num{1}の述語$\phi$について、以下を定める。
   \eq*{
     \forall x \qty(\phi(x)) \vdash \phi(y)
   }
 }
 
-\dfn{存在量化子}{
-  述語$\phi(x)$について、$\exists x \qty(\phi(x))$は命題である。
+
+\lsubsection{述語論理におけるいくつかの重要な概念と定理}
+
+\thm{健全性定理}{
+  \subsecref{命題結合子と推論規則}、\subsecref{述語論理}により得られる推論は健全である。
+}{
+  $\phi \land \psi$は、$\phi$と$\psi$がともに真であるときに真であるとして、そうでないときは偽とする。
+
+  $\phi \rightarrow \psi$は、$\phi$が真で$\psi$が偽であるときに偽であるとして、そうでないときは真とする。
+
+  $\forall x \qty(\phi(x))$は、議論領域上のあらゆる$x$について$\phi(x)$が真であるときに真であるとして、そうでないときは偽とする。
+
+  このとき各推論規則は、真の前提から真の帰結を与える。
 }
 
-\axi{存在量化子の導入則}{
-  述語記号$\phi$について、以下を定める。
+\dfn{存在量化子}{
+  量化子$\exists$を定める。
+
+  アリティ\num{1}の述語$\phi$について、存在量化子$\exists$を以下で定める。
+  \eq*{
+    \exists x \qty(\phi(x)) \defiff \lnot \forall x \qty(\lnot \phi(x))
+  }
+}
+
+\thm{存在の導入則}{
+  アリティ\num{1}の述語$\phi$について、以下が成り立つ。
   \eq*{
     \phi(y) \vdash \exists x \qty(\phi(x))
   }
+}{
+  $\forall x \qty(\lnot \phi(x))$を仮定する。
+
+  全称の除去則より$\lnot \phi(y)$であり、前提より$\phi(y)$であるので、矛盾。
+
+  \thmref{背理法}より、$\lnot \forall x \qty(\lnot \phi(x))$を得る。
 }
 
-\axi{存在量化子の除去則}{
-  述語記号$\phi$、変項$y$を出現させない述語$\psi$、命題$\chi$について、以下を定める。
+\thm{存在の除去則}{
+  アリティ\num{1}の述語$\phi$、項$x$を出現させない命題$\psi, \chi$について、以下を定める。
   \eq*{
-    \qty(\chi \land \phi(y) \vdash \psi) \vdash \qty(\chi \land \exists x \qty(\phi(x)) \vdash \psi)
+    \chi \land \phi(x) \vdash \psi \text{ から、 } \chi \land \exists y \qty(\phi(y)) \vdash \psi
   }
+}{
+  \axiref{演繹定理}より、$\chi \vdash \phi(x) \rightarrow \psi$である。
+
+  $\lnot \psi$を仮定する。
+
+  $\phi(x)$を仮定すると、前提$\chi$より矛盾するので、\thmref{背理法}より$\lnot \phi(x)$である。
+
+  $\chi, \lnot \psi$は項$x$を出現させないので、$\forall x \qty(\lnot \psi(x))$である。
+
+  $\exists y \qty(\phi(y)) \defiff \lnot \forall x \qty(\lnot \phi(x))$であるため、矛盾する。
+
+  \thmref{背理法}より$\psi$を得る。
 }
 
-\cor{量化子と連言}{
-  述語記号$\phi$について、以下が成り立つ。
+\thm{量化子と連言}{
+  アリティ\num{1}の述語$\phi, \psi$について、以下が成り立つ。
   \eqg*{
-    \forall x \qty(\phi(x) \land \psi(x)) \leftrightarrow \forall x \qty(\phi(x)) \land \forall x \qty(\psi(x)) \\*
-    \exists x \qty(\phi(x) \land \psi(x)) \rightarrow \exists x \qty(\phi(x)) \land \exists x \qty(\psi(x))
+    \vdash \forall x \qty(\phi(x) \land \psi(x)) \leftrightarrow \forall x \qty(\phi(x)) \land \forall x \qty(\psi(x)) \\*
+    \exists x \qty(\phi(x) \land \psi(x)) \vdash \exists x \qty(\phi(x)) \land \exists x \qty(\psi(x))
   }
+}{
+  略。
 }
 
-\cor{量化子と選言}{
-  述語記号$\phi$について、以下が成り立つ。
+\thm{量化子と選言}{
+  アリティ\num{1}の述語$\phi, \psi$について、以下が成り立つ。
   \eqg*{
-    \forall x \qty(\phi(x) \lor \psi(x)) \leftarrow \forall x \qty(\phi(x)) \lor \forall x \qty(\psi(x)) \\*
-    \exists x \qty(\phi(x) \lor \psi(x)) \leftrightarrow \exists x \qty(\phi(x)) \lor \exists x \qty(\psi(x))
+    \forall x \qty(\phi(x)) \lor \forall x \qty(\psi(x)) \vdash \forall x \qty(\phi(x) \lor \psi(x)) \\*
+    \vdash \exists x \qty(\phi(x) \lor \psi(x)) \leftrightarrow \exists x \qty(\phi(x)) \lor \exists x \qty(\psi(x))
   }
+}{
+  略。
 }
 
-\cor{量化子と否定}{
-  述語記号$\phi$について、以下が成り立つ。
+\thm{量化子と否定}{
+  アリティ\num{1}の述語$\phi$について、以下が成り立つ。
   \eqg*{
-    \forall x \qty(\lnot \phi(x)) \leftrightarrow \lnot \exists x \qty(\phi(x)) \\*
-    \exists x \qty(\lnot \phi(x)) \leftrightarrow \lnot \forall x \qty(\phi(x))
+    \vdash \forall x \qty(\lnot \phi(x)) \leftrightarrow \lnot \exists x \qty(\phi(x)) \\*
+    \vdash \exists x \qty(\lnot \phi(x)) \leftrightarrow \lnot \forall x \qty(\phi(x))
+  }
+}{
+  定義より明らか。
+}
+
+\dfn{一意存在量化子}{
+  量化子$\exists!$を定める。
+
+  アリティ\num{1}の述語$\phi$について、存在量化子$\exists!$を以下で定める。
+  \eq*{
+    \exists! x \qty(\phi(x)) \defiff \exists x \qty(\phi(x)) \land \forall y, z \qty(\phi(y) \land \phi(z) \rightarrow y = z)
   }
 }
 
@@ -351,41 +729,106 @@
   $=\qty(x, y)$を、簡単のために$x = y$で表す。
 }
 
-\axi{等号の導入則（反射律）}{
-  変項$x$について、以下を定める。
+\axi{等号の反射律}{
+  項$x$について、以下を定める。
   \eq*{
-    x = x
+    \vdash x = x
   }
 }
 
-\axi{等号の除去則（代入原理）}{
-  述語記号$\phi$、変項$x, y$について、以下を定める。
+\axi{等号の代入原理}{
+  アリティ\num{1}の述語$\phi$、項$x, y$について、以下を定める。
   \eq*{
     \phi(x) \land x = y \vdash \phi(y)
   }
 }
 
-\lem{等号の対称律}{
-  変項$x, y$について、以下が成り立つ。
+\thm{等号の対称律}{
+  項$x, y$について、以下が成り立つ。
   \eq*{
     x = y \vdash y = x
   }
 }{
-  $x = x \land x = y$
+  $x = x \land x = y$である。
 
   左命題の左辺に、右命題から得る代入を行って、$y = x$を得る。
 }
 
-\cor{等号の推移律}{
-  変項$x, y, z$について、以下が成り立つ。
+\thm{等号の推移律}{
+  項$x, y, z$について、以下が成り立つ。
   \eq*{
     x = y \land y = z \vdash x = z
   }
+}{
+  明らか。
 }
 
 \dfn{等号否定}{
-  略記$\neq$を以下のように定める。
+  アリティ\num{2}の述語記号$\neq$を定める。
+
+  項$x, y$について、以下で定める。
   \eq*{
-    a \neq b \defiff \lnot \qty(a = b)
+    \neq \qty(x, y) \defiff \lnot \qty(x = y)
+  }
+
+  $\neq \qty(x, y)$を、簡単のために$x \neq y$で表す。
+}
+
+\rem{項の定義記号}{
+  定義記号$\coloneqq$を導入する。
+
+  これは左辺にある項は、議論において全てその左辺と一致する項を右辺に置き換えて理解するという意味である。
+
+  以降に定義する関数クラスの定義にも同様に用いる。
+}
+
+
+\lsubsection{類と関数クラス}
+
+\dfn{類}{
+  アリティ\num{1}の述語$\bm{A}$を、類と呼ぶ。
+
+  類であることを強調するために、$\bm{A}(x)$を$x \in \bm{A}$と書く。
+}
+
+\rem{類についての略記}{
+  略記$\forall ,$と$\exists ,$を、アリティ\num{2}の述語$\phi$について、以下で定める。
+  \eqa*{
+    \forall x, y \qty(\phi(x, y)) &\defiff \forall x \forall y \qty(\phi(x, y)) \\*
+    \exists x, y \qty(\phi(x, y)) &\defiff \exists x \exists y \qty(\phi(x, y))
+  }
+
+  これは、\num{3}個以上についても同様に定める。
+
+  略記$\forall \in, \exists \in$を、類$X$とアリティ\num{1}の述語$\phi$について、以下で定める。
+  \eqa*{
+    \forall x \in X \qty(\phi(x)) &\defiff \forall x \qty(x \in X \rightarrow \phi(x)) \\*
+    \exists x \in X \qty(\phi(x)) &\defiff \exists x \qty(x \in X \land \phi(x))
+  }
+}
+
+\rem{類は個体ではない}{
+  類は個体ではない（ある制限のもとで類を個体とみなすことはできる、集合論など）。
+
+  そのため、類の類を定義することはできない。
+}
+
+\dfn{関数クラス}{
+  以下を満たす述語$\phi$を考える。
+  \eq*{
+    \forall x \ldots \exists! y \qty(\phi(x, \ldots, y))
+  }
+
+  この対応関係を関数クラスと呼び、関数クラスを表す記号である関数記号$F$と項の列$x, \ldots$を用いて、$y$を$F(x, \ldots)$で表す。
+
+  要求する$x, \ldots$の個数を、関数クラス$F$のアリティと定める。
+}
+
+\dfn{恒等関数}{
+  アリティ\num{1}の関数記号$\id$を定める。
+
+  項$x$について、以下で定める。
+  \eq*{
+    \id(x) \coloneqq x
   }
 }

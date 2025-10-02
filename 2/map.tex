@@ -1,8 +1,47 @@
 \lsection{写像}
 
-\axi{選択公理}{
+\lsubsection{関係}
+
+\dfn{関係}{
+  集合$X, Y$と、集合系$G \subset X \times Y$について、順序対$\mathfrak{R} \coloneqq \qty(\qty(X, Y), G)$を関係と呼ぶ。
+
+  \vskip\baselineskip
+
+  記号の濫用であるが、$\mathfrak{R}$を以下で定めるアリティ\num{2}の述語としても扱う。
   \eq*{
-    \forall X \qty(\varnothing \notin X \land \forall x \forall y \qty(x \in X \land y \in X \land x \neq y \rightarrow x \cap y = \varnothing) \rightarrow \exists A \forall x \qty(x \in X \rightarrow \exists t \qty(x \cap A = \qty{t})))
+    \mathfrak{R}(x, y) \defiff \qty(x, y) \in G
+  }
+}
+
+\dfn{左一意的}{
+  関係$\mathfrak{R}$が以下を満たすとき、$\mathfrak{R}$は左一意的であると言う。
+  \eq*{
+    \forall w, x \qty(\exists y \in Y \qty(\mathfrak{R}(w, y) \land \mathfrak{R}(x, y)) \rightarrow w = x)
+  }
+}
+
+\dfn{右一意的}{
+  関係$\mathfrak{R}$が以下を満たすとき、$\mathfrak{R}$は右一意的であると言う
+  \eq*{
+    \forall y, z \qty(\exists x \in X \qty(\mathfrak{R}(x, y) \land \mathfrak{R}(x, z)) \rightarrow y = z)
+  }
+}
+
+\dfn{一対一}{
+  関係$\mathfrak{R}$が左一意的かつ右一意的であるとき、$\mathfrak{R}$は一対一であると言う。
+}
+
+\dfn{左全域的}{
+  関係$\mathfrak{R} = \qty(\qty(X, Y), G)$が以下を満たすとき、$\mathfrak{R}$は左全域的であると言う。
+  \eq*{
+    \forall x \in X \exists y \in Y \qty(\mathfrak{R}(x, y))
+  }
+}
+
+\dfn{右全域的}{
+  関係$\mathfrak{R} = \qty(\qty(X, Y), G)$が以下を満たすとき、$\mathfrak{R}$は右全域的であると言う。
+  \eq*{
+    \forall y \in Y \exists x \in X \qty(\mathfrak{R}(x, y))
   }
 }
 
@@ -22,19 +61,11 @@
   $f(x)$を$x$での$f$の値と呼ぶ。
 }
 
-\rem{写像の構成的な定義}{
-  集合$X, Y$と、$X$の要素$x$から$Y$の要素$y$を対応させる規則$f$を考えると、
-  順序対$\qty(\qty(X, Y), \qty{\qty(x, f(x)) \mid x \in X})$は写像である。
+\rem{関数クラスによる写像の定義}{
+  集合$X, Y$と、関数クラス$F$について、
+  順序対$\qty(\qty(X, Y), \qty{\qty(x, F(x)) \mid x \in X})$は写像である。
 
-  このとき、記号の濫用であるが、この写像を$f$で表す。
-
-  より簡単に、$f \colon X \to Y, f(x) \coloneqq \cdots$の形式によって写像を定義する。
-}
-
-\rem{部分写像}{
-  左全域性が担保されていない写像を部分写像と呼ぶ。
-
-  この場合においても、写像の構成的な定義と同様の定義方法が行える。
+  このとき、記号の濫用であるが、この写像を$F$で表す。
 }
 
 \rem{集合の内包的定義３}{
@@ -51,21 +82,73 @@
   }
 }
 
-\dfn{写像の定義域と終域}{
+\dfn{恒等写像}{
+  集合$X$について、以下で定める集合系$\Delta$を考える。
+  \eq*{
+    \Delta \coloneqq \qty{\qty(x, x) \mid x \in X}
+  }
+
+  写像$\qty(\qty(X, X), \Delta)$を恒等写像と呼び、$\id_X$で表す。
+}
+
+\cor*{
+  集合$X, Y$について、以下が成り立つ。
+  \eq*{
+    X = Y \leftrightarrow \id_X = \id_Y
+  }
+}
+
+\dfn{合成写像}{
+  写像$f = \qty(\qty(X, Y), G_f), g = \qty(\qty(Y, Z), G_g)$について、以下で定める集合系$G$を考える。
+  \eq*{
+    G \coloneqq \qty{\qty(x, z) \mid \exists y \in Y \qty(y = f(x) \land z = g(y))}
+  }
+
+  関係$\qty(\qty(X, Z), G)$は写像であり、これを$f$と$g$の合成写像、または単に合成と呼び、$g \circ f$で表す。
+}
+
+\cor{写像の合成の結合法則}{
+  写像$f = \qty(\qty(X, Y), G_f), g = \qty(\qty(Y, Z), G_g), h = \qty(\qty(Z, W), G_h)$について、以下が成り立つ。
+  \eq*{
+    \qty(h \circ g) \circ f = h \circ \qty(g \circ f)
+  }
+}
+
+\rem{写像は射}{
   写像$f = \qty(\qty(X, Y), G)$を考える。
+  $\dom(f)$を$\id_X$、$\cod(f)$を$\id_Y$として、合成を\dfnref{合成写像}で定義すると、写像は射の公理をみたす。
 
-  $X$を定義域と呼び、$\dom(f)$で表す。
+  ここで、記号の濫用であるが、$X$を$\dom(f)$、$Y$を$\cod(f)$とも表す。
+}
 
-  $Y$を終域と呼び、$\ran(f)$で表す。
+\dfn{集合の圏}{
+  写像を射とみなすと、写像であることは、圏となる。
+  この圏を、集合の圏と呼び、$\mathbf{Set}$と表す。
+}
+
+\rem{写像の相等}{
+  写像の相等は、集合の相等により定義される。
+
+  これは次のように言い換えることができる。
+  写像$f, g$について、$f = g$とは、以下を満たすことである。
+  \eq*{
+    \dom(f) = \dom(g) \land \cod(f) = \cod(g) \land \forall x \in \dom(f) \qty(f(x) = g(x))
+  }
+}
+
+\cor*{
+  集合$X, Y$について、$\Hom_{\mathbf{Set}}(X, Y)$は集合である。
 }
 
 \dfn{写像の全体}{
-  集合$X, Y$について、$Y^X$で表す集合を以下で定める。
+  $X$から$Y$への写像の全体$\Map(X, Y)$を以下で定める。
   \eq*{
-    Y^X \coloneqq \qty{\qty(\qty(X, Y), G) \mid G \subset X \times Y \land \qty(\text{$\qty(\qty(X, Y), G)$は写像})}
+    \Map(X, Y) \coloneqq \Hom_{\mathbf{Set}}(X, Y)
   }
 
-  また$Y^X$は、$\Map(X, Y)$とも表す。
+  また、$Y^X$とも表す。
+
+  $f \in \Map(X, Y)$を、簡単のため、$f \colon X \to Y$とも表記する。
 }
 
 \cor*{
@@ -77,43 +160,25 @@
 }
 
 \dfn{空写像}{
-  定義域が空集合である写像は、一意に定まる。
+  始域が空集合である写像は、一意に定まる。
 
   このような写像を空写像と呼ぶ。
 }
 
+\dfn{包含写像}{
+  集合$X$と、その部分$A$について、以下で定める関係$i_{A, X}$は写像である。
+  \eq*{
+    i_{A, X} \coloneqq \qty(\qty(A, X), \qty{\qty(x, x) \mid x \in A})
+  }
+
+  この$i_{A, X}$を部分写像と呼ぶ。
+}
 
 \dfn{制限写像}{
-  写像$f = \qty(\qty(X, Y), G)$と、$X$の部分$A$について、以下で定める集合系$G_A$を考える。
+  写像$f = \qty(\qty(X, Y), G)$と、$X$の部分$A$について、
+  以下で定める写像$f \rvert_A$を、$f$の$A$への制限写像、または単に制限と呼ぶ。
   \eq*{
-    G_A \coloneqq \qty{\qty(x, y) \in G \mid x \in A}
-  }
-
-  写像$\qty(\qty(A, Y), G_A)$を、$f$の$A$への制限写像、または単に制限と呼び、$f \rvert_A$で表す。
-}
-
-\dfn{恒等写像}{
-  集合$X$について、以下で定める集合系$\Delta$を考える。
-  \eq*{
-    \Delta \coloneqq \qty{\qty(x, x) \mid x \in X}
-  }
-
-  写像$\qty(\qty(X, X), \Delta)$を恒等写像と呼び、$\id_X$で表す。
-}
-
-\dfn{合成写像}{
-  写像$f \colon X \to Y, g \colon Y \to Z$について、以下で定める集合系$G$を考える。
-  \eq*{
-    G \coloneqq \qty{\qty(x, z) \mid \exists y \in Y \qty(y = f(x) \land z = g(y))}
-  }
-
-  写像$\qty(\qty(X, Z), G)$を$f$と$g$の合成写像、または単に合成と呼び、$g \circ f$で表す。
-}
-
-\cor{写像の合成の結合法則}{
-  写像$f \colon X \to Y, g \colon Y \to Z, h \colon Z \to W$について、以下が成り立つ。
-  \eq*{
-    \qty(h \circ g) \circ f = h \circ \qty(g \circ f)
+    f \rvert_A \coloneqq f \circ i_{A, X}
   }
 }
 
@@ -135,9 +200,21 @@
     Z \coloneqq \qty{\qty{\qty(x, y) \mid y \in Y \land \psi(x, y)} \mid x \in X}
   }
 
-  $Z$について\axiref{選択公理}の主張する集合$A$が存在する。
+  $Z$について\axiref{選択の公理}の主張する集合$A$が存在する。
 
   関係$\qty(\qty(X, Y), A)$は、仮定より$X$について左全域的で、$A$の定義より右一意的である。
+}
+
+\thm{選択関数の存在}{
+  任意の集合$X$について、写像$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が存在して、以下が成り立つ。
+  \eq*{
+    \forall x \in X \setminus \qty{\varnothing} \qty(f(x) \in x)
+  }
+}{
+  $\forall x \in X \setminus \qty{\varnothing}$について、$\exists y \qty(y \in x)$である。
+  この$y$は、$y \in x$より、$y \in \bigcup X$である。
+
+  ゆえに、\thmref{選択公理が与える写像}より存在する。
 }
 
 
@@ -271,14 +348,48 @@
 
 \lsubsection{単射と全射}
 
-\dfn{単射}{
-  写像$f$が左一意的であるとき、$f$は単射であると言う。
+\lem{単射}{
+  写像$f$について、以下の\num{3}つは同値である。
+  \begin{enumerate}
+    \item $f$が左簡約可能（$f$が単射）
+    \item $f$が左一意的
+    \item $f$が、空写像または左可逆
+  \end{enumerate}
+}{
+  $1. \to 2.$を示す。
 
-  単射な写像を、単に単射と呼ぶ。
+  $f$が空写像であるとき、左一意的である。
+  $f$が空写像でないときを考える。
+
+  $x \in \dom(f)$について、写像$g_x \colon \qty{\varnothing} \to \dom(f), g(\varnothing) \coloneqq x$を考える。
+
+  $f(x) = f(y)$であるとき、$f \circ g_x = f \circ g_y$であり、左簡約可能より$g_x = g_y$、すなわち$x = y$である。
+
+  \vskip\baselineskip
+
+  $2. \to 3.$を示す。
+  左一意的かつ空写像でないならば、左可逆であることを示す。
+
+  空でないので$\exists x_0 \in \dom(f)$より、以下で定める集合$G$が存在する。
+  \eq*{
+    G \coloneqq \qty{\qty(y, x) \in \cod(f) \times \dom(f) \mid y = f(x)} \cup \qty{\qty(y, x_0) \mid y \in \cod(f) \setminus \Im(f)}
+  }
+
+  写像$g \coloneqq \qty(\qty(\cod(f), \dom(f)), G)$は、定義より$f$の左逆写像となる。
+
+  \vskip\baselineskip
+
+  $3. \to 1.$を示す。
+
+  $f$が空写像であるときを考える。
+
+  $f$に右から合成可能、すなわち、終域を空集合とする写像は、$g_0 \colon \varnothing \to \varnothing$のみであるので、左簡約可能である。
+
+  $f$が左可逆であるとき、左可逆ならば左簡約可能であるため、明らか。
 }
 
 \cor*{
-  単射$f \colon X \to Y, g \colon Y \to Z$について、$g \circ f$は単射である。
+  包含写像は単射である。
 }
 
 \lem*{
@@ -287,132 +398,48 @@
   $g(A) \coloneqq \qty{f(x) \mid x \in A}$で定義する写像は、単射である。
 }
 
-\dfn{全射}{
-  写像$f$が右全域的であるとき、$f$は全射であると言う。
-
-  全射な写像を、単に全射と呼ぶ。
-}
-
-\dfn{全単射}{
-  写像$f$が、単射かつ全射であるとき、$f$は全単射であると言う。
-
-  全単射な写像を、単に全単射と呼ぶ。
-}
-
-\cor*{
-  恒等写像は全単射である。
-}
-
-\dfn{左逆写像}{
-  写像$f \colon X \to Y$について、以下を満たす写像$g \colon Y \to X$を左逆写像と呼ぶ。
-  \eq*{
-    g \circ f = \id_X
-  }
-}
-
-\cor*{
-  左逆写像は全射である。
-}
-
-\thm{単射と左逆写像}{
-  空でない集合$X$と、写像$f \colon X \to Y$について、$f$が単射であることは、写像$f$が左逆写像$g$を持つことと同値である。
+\lem{全射}{
+  写像$f$について、以下の\num{3}つは同値である。
+  \begin{enumerate}
+    \item $f$が右簡約可能（$f$が全射）
+    \item $f$が右全域的
+    \item $f$が右可逆
+  \end{enumerate}
 }{
-  必要性を示す。
+  $1. \to 2.$を示す。
 
-  空でないので$\exists x_0 \in X$より、以下で定める集合$G$が存在する。
-  \eq*{
-    G \coloneqq \qty{\qty(y, x) \in Y \times X \mid y = f(x)} \cup \qty{\qty(y, x_0) \mid y \in Y \setminus \Im(f)}
-  }
+  右全域的でないとすると、$\exists y \in Y \forall x \in X \qty(f(x) \neq y)$である。
 
-  写像$g \coloneqq \qty(\qty(Y, X), G)$は、定義より$f$の左逆写像となる。
+  $g, h \in \Map(Y, \qty{\varnothing, \qty{\varnothing}})$について、$g(y) = \varnothing, h(y) = \qty{\varnothing}$であり、
+  $\forall w \in Y \setminus \qty{y} \qty(g(w) = h(w))$とする。
+
+  $g \circ f = h \circ f$であるが、$g \neq h$であり、右簡約可能ではない。
+
+  対偶法より示される。
 
   \vskip\baselineskip
 
-  十分性を示す。
+  $2. \to 3.$を示す。
 
-  単射でない、すなわち$\exists x, y \in X \qty(x \neq y \land f(x) = f(y))$とする。
-
-  定義より、$x = g(f(x)) = g(f(y)) = y$であるので矛盾。
-
-  背理法より示される。
-}
-
-\dfn{右逆写像}{
-  写像$f \colon X \to Y$について、以下を満たす写像$g \colon Y \to X$を右逆写像と呼ぶ。
-  \eq*{
-    f \circ g = \id_Y
-  }
-}
-
-\cor*{
-  右逆写像は単射である。
-}
-
-\thm{全射と右逆写像}{
-  写像$f \colon X \to Y$について、$f$が全射であることは、写像$f$が右逆写像$g$を持つことと同値である。
-}{
-  必要性を示す。
   \thmref{選択公理が与える写像}の与える写像は、右逆写像である。
 
   \vskip\baselineskip
 
-  十分性を示す。
+  $3. \to 1.$は、右可逆ならば右簡約可能であるため、明らか。
+}
 
-  全射でないとすると、$\exists y \in Y \forall x \in X \qty(f(x) \neq y)$で仮定に反する。
-
-  背理法より示される。
+\dfn{全単射}{
+  写像$f$が同型射であるとき、$f$を全単射と呼ぶ。
 }
 
 \dfn{逆写像}{
-  写像$f \colon X \to Y$について、写像$g \colon Y \to X$が$f$の左逆写像かつ右逆写像であるとき、逆写像と呼ぶ。
-}
-
-\cor*{
-  逆写像は全単射である。
-}
-
-\thm{全単射と逆写像}{
-  写像$f \colon X \to Y$について、$f$が全単射であることは、写像$f$が逆写像$g$を持つことと同値である。
-}{
-  必要性を示す。$f$は全射より、$\Im(f) = Y$
-
-  以下のような集合系$G$が存在する。
-  \eq*{
-    G \coloneqq \qty{\qty(y, x) \in Y \times X \mid y = f(x)}
-  }
-
-  写像$g = \qty(\qty(Y, X), G)$は定義より$f$の逆写像となる。
-
-  \vskip\baselineskip
-
-  十分性を示す。
-
-  $X$が空のとき、逆写像を持つので$Y$は空である。
-  ゆえに全単射。
-
-  $X$が空でないとき、\thmref{単射と左逆写像}と\thmref{全射と右逆写像}より$f$は全単射。
-}
-
-\lem*{
-  写像$f \colon X \to Y$について、$f$の逆写像が存在するならば、一意に定まる。
-
-  ここから、$f$の逆写像を$f^{-1}$で表す。
-}{
-  逆写像$g, h$について、$g(y) = h \circ f \circ g (y) = h(y)$である。
-  ゆえに一意。
-}
-
-\cor*{
-  全単射$f \colon X \to Y$について、
-  \eq*{
-    \qty(f^{-1})^{-1} = f
-  }
+  写像$f$の逆射を逆写像と呼ぶ。
 }
 
 \lem*{
   全単射$f \colon X \to Y$と$Y$の部分集合$A$について、原像$f^{-1}(A)$と逆写像の像$f^{-1}(A)$は一致する。
 }{
-  全単射より、$\forall y \in A \exists x \in A \qty(y = f(x))$。
+  全単射より、$\forall y \in A \exists x \in X \qty(y = f(x))$である。
   定義より明らか。
 }
 

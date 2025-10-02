@@ -1,42 +1,80 @@
-\lsection{集合}
+\lsection{集合論}
+
+\lsubsection{集合論の述語}
 
 \dfn{集合}{
-  述語記号$\in$を定める。
+  集合論では、\num{9}つの公理（
+    \axiref{外延性の公理}、\axiref{空集合の公理}、\axiref{対の公理}、\axiref{正則性の公理}、\axiref{無限の公理}、\axiref{和集合の公理}、\axiref{冪集合の公理}、\axiref{置換の公理図式}、\axiref{選択の公理}
+  ）が与えられる。
 
-  略記$\notin$を以下で定める。
+  項を集合と呼ぶ。
+}
+
+\dfn{所属}{
+  アリティ\num{2}の述語記号$\in$を定める。
+
+  $\in \qty(x, y)$を、簡単のために$x \in y$で表す。
+}
+
+\rem{集合は類}{
+  集合$y$について、$\in \qty(, y)$はアリティ\num{1}の述語、すなわち類となる。
+
+  ここで、類の$\in$と、所属の$\in$は同一視される。
+
+  一方で、類に対して対応する集合を一般には与えることができない点に注意されたい。
+}
+
+\dfn{所属否定}{
+  集合$x, X$について、述語記号$\notin$を以下で定める。
   \eq*{
-    x \notin X \defiff \lnot \qty(x \in X)
+    \notin \qty(x, X) \defiff \lnot \qty(x \in X)
   }
 
-  略記$\forall \in, \exists \in$を以下で定める。
-  \eqa*{
-    \forall x \in X \qty(p(x)) &\defiff \forall x \qty(x \in X \rightarrow p(x)) \\*
-    \exists x \in X \qty(p(x)) &\defiff \exists x \qty(x \in X \land p(x))
-  }
-
-  $\in$に関わる、全ての公理を満たす変項を集合（set、集まりcollectionとは区別される）と呼ぶ。
+  $\notin \qty(x, X)$を、簡単のために$x \notin X$で表す。
 }
 
 \dfn{要素}{
   集合$x, X$について、$x \in X$であるとき、$x$は$X$の要素または元と呼ぶ。
 }
 
-\dfn{集合系}{
-  集合を要素としている集合であることを強調したいとき、この集合を集合系と呼ぶ。
+\rem{集合系}{
+  その要素に要素があることを強調したいとき、この集合を集合系と呼ぶ。
 }
 
 \dfn{包含}{
-  集合$X, Y$が以下を満たすとき、$X$は$Y$の部分集合であると呼び、$X \subset Y$と表す。
+  集合$X, Y$について、アリティ\num{2}の述語記号$\subset$を以下で定める。
   \eq*{
-    \forall X \forall Y \qty(X \subset Y \defiff \forall x \qty(x \in X \rightarrow x \in Y))
+    \subset \qty(X, Y) \defiff \forall x \qty(x \in X \rightarrow x \in Y)
   }
 
-  略記$\supset, \subsetneq, \supsetneq$を以下で定める。
-  \eqg*{
-    \forall X \forall Y \qty(X \subsetneq Y \defiff X \subset Y \land X \neq Y) \\*
-    \forall X \forall Y \qty(X \supset Y \defiff Y \subset X) \\*
-    \forall X \forall Y \qty(X \supsetneq Y \defiff Y \subsetneq X)
+  $\subset \qty(X, Y)$を、簡単のために$X \subset Y$で表す。
+}
+
+\dfn{真包含}{
+  集合$X, Y$について、アリティ\num{2}の述語記号$\subsetneq$を以下で定める。
+  \eq*{
+    \subsetneq \qty(X, Y) \defiff X \subset Y \land X \neq Y
   }
+
+  $\subsetneq \qty(X, Y)$を、簡単のために$X \subsetneq Y$で表す。
+}
+
+\dfn{左包含}{
+  集合$X, Y$について、アリティ\num{2}の述語記号$\supset$を以下で定める。
+  \eq*{
+    \supset \qty(X, Y) \defiff Y \subset X
+  }
+
+  $\supset \qty(X, Y)$を、簡単のために$X \supset Y$で表す。
+}
+
+\dfn{左真包含}{
+  集合$X, Y$について、アリティ\num{2}の述語記号$\supsetneq$を以下で定める。
+  \eq*{
+    \supsetneq \qty(X, Y) \defiff Y \subsetneq X
+  }
+
+  $\supsetneq \qty(X, Y)$を、簡単のために$X \supsetneq Y$で表す。
 }
 
 
@@ -108,13 +146,13 @@
 
 \axi{正則性の公理}{
   \eq*{
-    \forall X \qty(X \neq \varnothing \rightarrow \exists x \qty(x \in X \land \forall t \qty(t \in X \rightarrow t \notin x)))
+    \forall X \qty(X \neq \varnothing \rightarrow \exists x \qty(x \in X \land \forall y \qty(y \in X \rightarrow y \notin x)))
   }
 }
 
 \lem*{
   \eq*{
-    \forall x \forall y \lnot \qty(x \in y \land y \in x)
+    \forall x \forall y \qty(x \notin y \lor y \notin x)
   }
 }{
   \axiref{対の公理}より、$\qty{x, y}$が存在する。
@@ -146,12 +184,18 @@
   }
 }
 
+\axi{選択の公理}{
+  \eq*{
+    \forall X \qty(\varnothing \notin X \land \forall x \forall y \qty(x \in X \land y \in X \land x \neq y \rightarrow x \cap y = \varnothing) \rightarrow \exists A \forall x \qty(x \in X \rightarrow \exists t \qty(x \cap A = \qty{t})))
+  }
+}
+
 
 \lsubsection{集合の和と冪}
 
 \axi{和集合の公理}{
   \eq*{
-    \forall X \exists A \forall t \qty(t \in A \leftrightarrow \exists Y \qty(t \in Y \land Y \in X))
+    \forall X \exists A \forall t \qty(t \in A \leftrightarrow \exists B \qty(t \in B \land B \in X))
   }
 }
 
@@ -203,13 +247,23 @@
   このような集合$A$を、冪集合と呼び、$\P(X)$で表す。
 }
 
-\rem{冪の要素と部分}{
-  $\forall x \in \P(X)$や$\exists x \in \P(X)$を、簡単のために、$\forall x \subset X$や$\exists x \subset X$とも表す。
+\rem{包含される量化子についての略記}{
+  略記$\forall \subset, \exists \subset$を以下で定める。
+  \eqa*{
+    \forall x \subset X \qty(p(x)) &\defiff \forall x \in \P(X) \qty(p(x)) \\*
+    \exists x \subset X \qty(p(x)) &\defiff \exists x \in \P(X) \qty(p(x))
+  }
 }
 
 \cor*{
   \eq*{
     \forall X \qty(\varnothing \in \P(X) \land X \in \P(X))
+  }
+}
+
+\cor*{
+  \eq*{
+    \forall X \qty(\P(X) \notin X)
   }
 }
 
@@ -245,12 +299,12 @@
 }
 
 
-\lsubsection{集合の共通と差}
+\lsubsection{集合の置換}
 
 \axi{置換の公理図式}{
   アリティ\num{2}の述語記号$\psi$をパラメータとする以下の公理図式を考える。
   \eq*{
-    \forall x \forall y \forall z \qty(\psi(x, y) \land \psi(x, z) \rightarrow y = z) \rightarrow \forall X \exists A \forall y \qty(y \in A \leftrightarrow \exists x \qty(x \in X \land \psi(x, y)))
+    \forall x \forall y \forall z \qty(\psi(x, y) \land \psi(x, z) \rightarrow y = z) \rightarrow \forall X \exists A \forall t \qty(t \in A \leftrightarrow \exists x \qty(x \in X \land \psi(x, t)))
   }
 }
 
@@ -330,20 +384,9 @@
   本ノートにおける共通集合の定義は、$\bigcap \varnothing$の取り扱いにおいて一般的ではないことに注意されたい。
 }
 
-\thm{共通集合}{
-  \eqg*{
-    \bigcap \varnothing = \varnothing \\*
-    X \neq \varnothing \rightarrow \bigcap X = \qty{x \mid \forall Y \qty(Y \in X \rightarrow x \in Y)}
-  }
-}{
-  第一式は、定義より自明。
-
-  第二式について考える。
-  以下が成り立つ。
-  \eqg*{
-    \forall X \forall x \forall Y \qty(Y \in X \rightarrow x \in Y) \\*
-    \forall X \forall x \qty(X = \varnothing \lor \exists Y \qty(Y \in X \land x \in Y)) \\*
-    \forall X \forall x \qty(X = \varnothing \lor x \in \bigcup X)
+\cor*{
+  \eq*{
+    \bigcap \varnothing = \varnothing
   }
 }
 
@@ -476,10 +519,11 @@
     \leftrightarrow x \in X \land \qty(x \notin \bigcup A \lor \exists Y \qty(Y \in A \land x \notin Y)) \\*
     &\leftrightarrow x \in X \setminus \bigcup A \lor \exists Y \qty(Y \in A \land x \in X \setminus Y) \\*
     &\leftrightarrow x \in X \setminus \bigcup A \lor x \in \bigcup \qty{X \setminus Y \mid Y \in A} \\*
+    &\leftrightarrow x \in \bigcap \qty{X \setminus Y \mid Y \in A} \lor x \in \bigcup \qty{X \setminus Y \mid Y \in A} \\*
     &\leftrightarrow x \in \bigcup \qty{X \setminus Y \mid Y \in A}
   }
 
-  最後の変形には、第一の定理を用いた。
+  最後から\num{2}行目への変形には、第一の定理を用いた。
 }
 
 
@@ -543,47 +587,68 @@
 }
 
 
-\lsubsection{関係}
+\lsubsection{無限系譜}
 
-\dfn{関係}{
-  集合$X, Y$と、集合系$G \subset X \times Y$について、順序対$\mathfrak{R} \coloneqq \qty(\qty(X, Y), G)$を関係と呼ぶ。
-
-  \vskip\baselineskip
-
-  記号の濫用であるが、$\mathfrak{R}$を以下で定めるアリティ\num{2}の述語記号としても扱う。
+\axi{無限の公理}{
   \eq*{
-    \mathfrak{R}(x, y) \defiff \qty(x, y) \in G
+    \exists A \qty(\varnothing \in A \land \forall x \qty(x \in A \rightarrow x \cup \qty{x} \in A))
   }
 }
 
-\dfn{左一意的}{
-  関係$\mathfrak{R}$が以下を満たすとき、$\mathfrak{R}$は左一意的であると言う。
+\dfn{無限系譜}{
+  集合$X$が無限系譜であるとは、以下を満たすことである。
   \eq*{
-    \forall w, x \qty(\exists y \qty(\mathfrak{R}(w, y) \land \mathfrak{R}(x, y)) \rightarrow w = x)
+    \varnothing \in X \land \forall x \qty(x \in X \rightarrow x \cup \qty{x} \in X)
+  }
+
+  \axiref{無限の公理}より無限系譜は存在する。
+}
+
+\cor*{
+  \eq*{
+    \forall X \forall Y \qty(\text{$X$は無限系譜である} \land \text{$Y$は無限系譜である} \rightarrow \text{$X \cap Y$は無限系譜である})
   }
 }
 
-\dfn{右一意的}{
-  関係$\mathfrak{R}$が以下を満たすとき、$\mathfrak{R}$は右一意的であると言う
+\lem*{
+  以下が成り立つ。
   \eq*{
-    \forall y, z \qty(\exists x \qty(\mathfrak{R}(x, y) \land \mathfrak{R}(x, z)) \rightarrow y = z)
+    \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(\text{$X$は無限系譜である}) \rightarrow \text{$\bigcap A$は無限系譜である})
   }
+}{
+  空でない$A$を考える。
+
+  $\forall X \in A \qty(\varnothing \in X)$であるので、$\varnothing \in \bigcap A$である。
+
+  $\forall x \in \bigcap A$について、$\forall X \in A \qty(x \in X)$であり、無限系譜であることから$x \cup \qty{x} \in X$である。
+
+  ゆえに、$x \cup \qty{x} \in \bigcap A$である。
+
+  よって、$\bigcap A$は無限系譜である。
 }
 
-\dfn{一対一}{
-  関係$\mathfrak{R}$が左一意的かつ右一意的であるとき、$\mathfrak{R}$は一対一であると言う。
+\lem*{
+  無限系譜$X$について、以下で定める集合は無限系譜である。
+  \eq*{
+    \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}
+  }
+}{
+  $A \coloneqq \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とすると、
+  $X \in A$より、$A \neq \varnothing$である。
+
+  \mlemref{-1}より成り立つ。
 }
 
-\dfn{左全域的}{
-  関係$\mathfrak{R} = \qty(\qty(X, Y), G)$が以下を満たすとき、$\mathfrak{R}$は左全域的であると言う。
-  \eq*{
-    \forall x \in X \exists y \qty(\mathfrak{R}(x, y))
-  }
-}
+\lem{最小無限系譜の一意性}{
+  \mlemref{-1}で定める集合は、無限系譜$X$の取り方によらずに一意に定まる。
+}{
+  $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とする。
 
-\dfn{右全域的}{
-  関係$\mathfrak{R} = \qty(\qty(X, Y), G)$が以下を満たすとき、$\mathfrak{R}$は右全域的であると言う。
-  \eq*{
-    \forall y \in Y \exists x \qty(\mathfrak{R}(x, y))
-  }
+  $X_1, X_2$の\num{2}つの無限系譜を考える。
+
+  \mlemref{-2}より$X_1 \cap X_2$も無限系譜であり、定義より$\omega(X_2) \subset X_1 \cap X_2 \subset X_1$である。
+
+  定義より、$\omega(X_1) \subset \omega(X_2)$である。
+
+  同様に$\omega(X_1) \supset \omega(X_2)$であるため、示される。
 }

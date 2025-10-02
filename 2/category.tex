@@ -1,0 +1,914 @@
+\lsection{圏論}
+
+\lsubsection{射の公理}
+
+\rem{対象と恒等射の同一視}{
+  本ノートでは、対象を恒等射と同一視するという、少数派の視点をとることに注意されたい。
+}
+
+\dfn{射}{
+  圏論では、\num{6}つの公理（
+    \axiref{始域は冪等}、\axiref{終域は冪等}、\axiref{対象}、\axiref{合成射の始域と終域}、\axiref{合成射の結合}、\axiref{対象は恒等射}
+  ）が与えられる。
+
+  項を射と呼ぶ。
+}
+
+\dfn{始域}{
+  アリティ\num{1}の関数記号$\dom()$を考える。
+
+  射$f$について、$\dom(f)$を$f$の始域と呼ぶ。
+}
+
+\axi{始域は冪等}{
+  \eq*{
+    \forall f \qty(\dom(\dom(f)) = \dom(f))
+  }
+}
+
+\dfn{終域}{
+  アリティ\num{1}の関数記号$\cod()$を考える。
+
+  射$f$について、$\cod(f)$を$f$の終域と呼ぶ。
+}
+
+\axi{終域は冪等}{
+  \eq*{
+    \forall f \qty(\cod(\cod(f)) = \cod(f))
+  }
+}
+
+\axi{対象}{
+  \eq*{
+    \forall f \qty(f = \dom(f) \leftrightarrow f = \cod(f))
+  }
+}
+
+\dfn{合成}{
+  アリティ\num{2}の関数記号$\circ \qty()$を考える。
+
+  $\circ \qty(f, g)$を、簡単のために$g \circ f$で表す。
+
+  射$f, g$について、$g \circ f$を$f$と$g$の合成と呼ぶ。
+}
+
+\dfn{可合成}{
+  アリティ\num{2}の述語記号$\Comp()$を、以下で定める。
+  \eq*{
+    \Comp(f, g) \defiff \cod(f) = \dom(g)
+  }
+}
+
+\axi{合成射の始域と終域}{
+  \eq*{
+    \forall f, g \qty(\Comp(f, g) \rightarrow \dom(g \circ f) = \dom(f) \land \cod(g \circ f) = \cod(g))
+  }
+}
+
+\axi{合成射の結合}{
+  \eq*{
+    \forall f, g, h \qty(\Comp(f, g) \land \Comp(g, h) \rightarrow h \circ \qty(g \circ f) = \qty(h \circ g) \circ f)
+  }
+}
+
+\axi{対象は恒等射}{
+  \eq*{
+    \forall f \qty(f = f \circ \dom(f) \land f = \cod(f) \circ f)
+  }
+}
+
+\dfn{対象}{
+  以下を満たす射$a$を、恒等射、または、対象と呼ぶ。
+  \eq*{
+    a = \dom(a)
+  }
+}
+
+
+\lsubsection{双対}
+
+\dfn{反対射}{
+  射$f$について、以下を満たすアリティ\num{1}の関数記号$\opp$を考える。
+  簡単のために、$\opp(f)$を$f^\opp$で表す。
+  \eqg*{
+    \forall f \qty(\qty(f^\opp)^\opp = f) \\*
+    \forall f \qty(\dom(f^\opp) = \cod(f)^\opp) \\*
+    \forall f \qty(\cod(f^\opp) = \dom(f)^\opp) \\*
+    \forall f, g \qty(\Comp(f, g) \rightarrow f^\opp \circ g^\opp = \qty(g \circ f)^\opp)
+  }
+}
+
+\dfn{反対圏}{
+  圏$\bm{C}$について、以下で定める類$\bm{C}^\opp$は圏である。
+  \eq*{
+    f \in \bm{C}^\opp \defiff f^\opp \in \bm{C}
+  }
+}
+
+\dfn{反対関手}{
+  $\bm{C}$から$\bm{D}$への関手$F$について、以下で定める$\bm{C}^\opp$から$\bm{D}^\opp$への関手を、$F^\opp$で表す。
+  \eq*{
+    F^\opp(f) \coloneqq \qty(F(f^\opp))^\opp
+  }
+}
+
+\rem{双対性}{
+  圏論における命題は、$\dom()$と$\cod()$を入れ替えて、合成$g \circ f$を$f \circ g$に置き換えても、その真偽は変わらない。
+
+  より簡単に言えば、$\bm{C}$で成り立つ命題は、$\bm{C}^\opp$でも成り立つ。
+}
+
+
+\lsubsection{圏と関手}
+
+\dfn{圏}{
+  類$\bm{C}$が圏であるとは、以下を満たすことである。
+  \eqg*{
+    \forall f \in \bm{C} \qty(\dom(f) \in \bm{C} \land \cod(f) \in \bm{C}) \\*
+    \forall f, g \in \bm{C} \qty(\Comp(f, g) \rightarrow g \circ f \in \bm{C})
+  }
+}
+
+\dfn{対象の類}{
+  以下で定める類$\Obj_{\bm{C}}$を、圏$\bm{C}$の対象の類と呼ぶ。
+  \eq*{
+    f \in \Obj_{\bm{C}} \defiff f \in \bm{C} \land f = \dom(f)
+  }
+}
+
+\dfn{離散圏}{
+  圏$\bm{C}$が離散であるとは、以下を満たすことである。
+  \eq*{
+    \forall f \qty(f \in \bm{C} \leftrightarrow f \in \Obj_{\bm{C}})
+  }
+
+  このとき、$\bm{C}$を離散圏と呼ぶ。
+}
+
+\dfn{Hom類}{
+  圏$\bm{C}$と、$\bm{C}$の対象$a, b$について、類$\Hom_{\bm{C}}(a, b)$を以下で定める。
+  \eq*{
+    f \in \Hom_{\bm{C}}(a, b) \defiff f \in \bm{C} \land \dom(f) = a \land \cod(f) = b
+  }
+}
+
+\dfn{End類}{
+  圏$\bm{C}$と、$\bm{C}$の対象$a$について、類$\End_{\bm{C}}(a)$を以下で定める。
+  \eq*{
+    f \in \End_{\bm{C}}(a) \defiff f \in \Hom_{\bm{C}}(a, a)
+  }
+}
+
+\dfn{関手}{
+  アリティ\num{1}の関数記号$F$が、圏$\bm{C}$から圏$\bm{D}$への関手であるとは、以下の\num{3}つを満たすことである。
+  \eqg*{
+    \forall f \in \bm{C} \qty(F(f) \in \bm{D}) \\*
+    \forall f \in \bm{C} \qty\Big(\dom(F(f)) = F(\dom(f)) \land \cod(F(f)) = F(\cod(f))) \\*
+    \forall f, g \in \bm{C} \qty\Big(\Comp(f, g) \rightarrow F(g \circ f) = F(g) \circ F(f))
+  }
+}
+
+\cor*{
+  圏$\bm{C}, \bm{D}$について、$\bm{C}$から$\bm{D}$への関手$F$を考える。
+  このとき、以下が成り立つ。
+  \eq*{
+    \forall a \in \Obj_{\bm{C}} \qty(a = \dom(a) \rightarrow F(a) = \dom(F(a)))
+  }
+}
+
+\cor*{
+  圏$\bm{C}, \bm{D}$について、$\bm{C}$から$\bm{D}$への関手$F$を考える。
+  このとき、以下が成り立つ。
+  \eq*{
+    \forall f \in \bm{C} \qty(\text{$f$が同型射} \rightarrow \text{$F(f)$が同型射})
+  }
+}
+
+\dfn{関手の相等}{
+  圏$\bm{C}$から圏$\bm{D}$への関手$F, F^\prime$について、以下を満たすとき、$F = F^\prime$と書く。
+  \eq*{
+    \forall f \in \bm{C} \qty(F(f) = F^\prime(f))
+  }
+}
+
+\dfn{関手の合成}{
+  圏$\bm{C}, \bm{D}, \bm{E}$を考える。
+
+  $\bm{C}$から$\bm{D}$への関手$F$と、$\bm{D}$から$\bm{E}$への関手$G$について、以下で示すアリティ\num{1}の関数記号$H$は、$\bm{C}$から$\bm{E}$への関手である。
+  \eq*{
+    H(f) \coloneqq G(F(f))
+  }
+
+  この$H$を、$F$と$G$の合成と呼び、$G \circ F$で表す。
+}
+
+\dfn{恒等関手}{
+  圏$\bm{C}$について、関数記号$\id$は、$\bm{C}$から$\bm{C}$への関手である。
+
+  圏論において、$\id$を恒等関手と呼ぶ。
+  また、$\bm{C}$から$\bm{C}$への恒等関手であることを、明示的に$\id_{\bm{C}}$で表す。
+}
+
+\dfn{圏同型}{
+  圏$\bm{C}, \bm{D}$を考える。
+
+  $\bm{C}$から$\bm{D}$への関手$F$と、$\bm{D}$から$\bm{C}$への関手$G$が存在して、以下が成り立つとき、$\bm{C}$と$\bm{D}$は圏同型であると言う。
+  \eq*{
+    G \circ F = \id_{\bm{C}} \land F \circ G = \id_{\bm{D}}
+  }
+}
+
+
+\lsubsection{簡約と逆}
+
+\dfn{左簡約可能}{
+  圏$\bm{C}$と、$\bm{C}$の射$f$について、以下を満たすとき、$f$は$\bm{C}$において左簡約可能であるという。
+  \eq*{
+    \forall g, h \in \bm{C} \qty(\Comp(g, f) \land \Comp(h, f) \land f \circ g = f \circ h \rightarrow g = h)
+  }
+
+  左簡約可能な射を単射と呼ぶ。
+}
+
+\dfn{右簡約可能}{
+  圏$\bm{C}$と、$\bm{C}$の射$f$について、$f^\opp$が$\bm{C}^\opp$で左簡約可能であるとき、$f$は$\bm{C}$において右簡約可能であるという。
+
+  右簡約可能な射を全射と呼ぶ。
+}
+
+\dfn{左可逆}{
+  圏$\bm{C}$と、$\bm{C}$の射$f$について、以下を満たすとき、$f$は$\bm{C}$において左可逆であるという。
+  \eq*{
+    \exists g \in \bm{C} \qty(\Comp(g, f) \land g \circ f = \dom(f))
+  }
+}
+
+\cor*{
+  圏$\bm{C}$について、$\bm{C}$において左可逆な射は、$\bm{C}$において左簡約可能である。
+}
+
+\dfn{右可逆}{
+  圏$\bm{C}$と、$\bm{C}$の射$f$について、$f^\opp$が$\bm{C}^\opp$で左可逆であるとき、$f$は$\bm{C}$において右可逆であるという。
+}
+
+\cor*{
+  圏$\bm{C}$について、$\bm{C}$において右可逆な射は、$\bm{C}$において右簡約可能である。
+}
+
+\cor*{
+  圏$\bm{C}$と、$\bm{C}$の射$f, g$について、$\Comp(f, g)$であるとする。
+  このとき、以下が成り立つ。
+  \begin{enumerate}
+    \item $f, g$がともに$\bm{C}$において左簡約可能ならば、$g \circ f$は$\bm{C}$において左簡約可能である。
+    \item $f, g$がともに$\bm{C}$において右簡約可能ならば、$g \circ f$は$\bm{C}$において右簡約可能である。
+    \item $f, g$がともに$\bm{C}$において左可逆ならば、$g \circ f$は$\bm{C}$において左可逆である。
+    \item $f, g$がともに$\bm{C}$において右可逆ならば、$g \circ f$は$\bm{C}$において右可逆である。
+  \end{enumerate}
+}
+
+\cor*{
+  圏$\bm{C}$と、$\bm{C}$の射$f, g$について、$\Comp(f, g)$であるとする。
+  このとき、以下が成り立つ。
+  \begin{enumerate}
+    \item $g \circ f$が$\bm{C}$において左簡約可能ならば、$f$は$\bm{C}$において左簡約可能である。
+    \item $g \circ f$が$\bm{C}$において右簡約可能ならば、$g$は$\bm{C}$において右簡約可能である。
+  \end{enumerate}
+}
+
+\dfn{逆射}{
+  射$f$について、以下を満たす射$g$を$f$の逆射と呼ぶ。
+  \eq*{
+    \Comp(f, g) \land \Comp(g, f) \land g \circ f = \dom(f) \land f \circ g = \cod(f)
+  }
+}
+
+\lem{逆射の一意性}{
+  射$g, h$が$f$の逆射であるとき、$g = h$である。
+}{
+  以下より成り立つ。
+
+  $g = g \circ \dom(g) = g \circ \cod(f) = g \circ f \circ h = \dom(f) \circ h = \cod(h) \circ h = h$より、成り立つ。
+}
+
+\rem{逆射}{
+  $f$の逆射は、\lemref{逆射の一意性}より一意に定まるので、これを$f^{-1}$と表す。
+}
+
+\cor*{
+  逆射を持つ射$f$について、以下が成り立つ。
+  \eq*{
+    \qty(f^{-1})^{-1} = f
+  }
+}
+
+\lem{同型射}{
+  圏$\bm{C}$と、$\bm{C}$の射$f$について、以下の\num{2}つは同値である。
+  \begin{enumerate}
+    \item $f$は、$\bm{C}$に逆射を持つ。
+    \item $f$は、$\bm{C}$において、左可逆かつ右可逆である。
+  \end{enumerate}
+}{
+  $1. \to 2.$は明らか。
+
+  \vskip\baselineskip
+
+  $2. \to 1.$を示す。
+
+  左可逆より、射$g$が存在して$g \circ f = \dom(f)$であり、右可逆より、射$h$が存在して$f \circ h = \cod(f)$である。
+
+  $g = g \circ (f \circ h) = \qty(g \circ f) \circ h = h$であるので、$g = h$
+
+  ゆえに、$g$は$f \circ g = \cod(f)$を満たす。
+}
+
+\dfn{同型射}{
+  圏$\bm{C}$について、$\bm{C}$において左可逆かつ右可逆な射を、$\bm{C}$の同型射と呼ぶ。
+}
+
+\cor{恒等射は同型射}{
+  圏$\bm{C}$について、$\bm{C}$の恒等射$f$の逆射は自身であり、ゆえに$f$は$\bm{C}$の同型射である。
+}
+
+
+\lsubsection{自然変換}
+
+\dfn{自然変換}{
+  圏$\bm{C}, \bm{D}$と、$\bm{C}$から$\bm{D}$への関手$F, F^\prime$を考える。
+
+  アリティ\num{1}の関数記号$\eta$が、$F$から$F^\prime$への自然変換であるとは、以下の\num{3}つ全てを満たすことである。
+  \eqg*{
+    \forall a \in \Obj_{\bm{C}} \qty(\eta(a) \in \bm{D}) \\*
+    \forall f \in \bm{C} \qty\Big(\Comp(\eta(\dom(f)), F^\prime(f)) \land \Comp(F(f), \eta(\cod(f)))) \\*
+    \forall f \in \bm{C} \qty\Big(F^\prime(f) \circ \eta(\dom(f)) = \eta(\cod(f)) \circ F(f))
+  }
+}
+
+\begin{center}
+  \begin{minipage}{0.15\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      a \ar[r, "f"] & b \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.25\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      F(a) \ar[r, "F(f)"] \ar[d, "\eta(a)"'] & F(b) \ar[d, "\eta(b)"] \\
+      F^\prime(a) \ar[r, "F^\prime(f)"'] & F^\prime(b) \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{自然変換の相等}{
+  圏$\bm{C}$から圏$\bm{D}$への関手$F, F^\prime$を考える。
+
+  $F$から$F^\prime$への自然変換$\eta, \theta$について、以下を満たすとき、$\eta = \theta$と書く。
+  \eq*{
+    \forall a \in \Obj_{\bm{C}} \qty(\eta(a) = \theta(a))
+  }
+}
+
+\dfn{恒等な自然変換}{
+  圏$\bm{C}, \bm{D}$と、$\bm{C}$から$\bm{D}$への関手$F$について、関数記号$F$は、$F$から$F$への自然変換である。
+
+  $F$が自然変換であることを明示的に、関手$F$に対する恒等な自然変換$F$と呼ぶ。
+}
+
+\dfn{自然同型}{
+  圏$\bm{C}, \bm{D}$と、$\bm{C}$から$\bm{D}$への関手$F, F^\prime$を考える。
+
+  $F$から$F^\prime$への自然変換$\eta$が自然同型であるとは、以下を満たすことである。
+  \eq*{
+    \forall a \in \Obj_{\bm{C}} \qty(\text{$\eta(a)$は同型射})
+  }
+}
+
+\cor{恒等な自然変換は自然同型}{
+  関手$F$に対する恒等な自然変換$F$は、$F$から$F$への自然同型である。
+}
+
+\dfn{自然変換の垂直合成}{
+  圏$\bm{C}, \bm{D}$と、$\bm{C}$から$\bm{D}$への関手$F, F^\prime, F^{\prime \prime}$を考える。
+
+  $F$から$F^\prime$への自然変換$\eta$と$F^\prime$から$F^{\prime \prime}$への自然変換$\theta$について、
+  以下で定義するアリティ\num{1}の関数記号$\theta \circ \eta$は$F$から$F^{\prime \prime}$への自然変換である。
+  \eq*{
+    \qty(\theta \circ \eta)(a) \coloneqq \theta(a) \circ \eta(a)
+  }
+
+  $\theta \circ \eta$を、$\eta$と$\theta$の垂直合成と呼ぶ。
+}
+
+\begin{center}
+  \begin{minipage}{0.15\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      a \ar[r, "f"] & b \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.25\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      F(a) \ar[r, "F(f)"] \ar[d, "\eta(a)"'] \ar[dd, bend right=60, red, "\qty(\theta \circ \eta)(a)"'] & F(b) \ar[d, "\eta(b)"] \ar[dd, bend left=60, red, "\qty(\theta \circ \eta)(b)"] \\
+      F^\prime(a) \ar[r, "F^\prime(f)"'] \ar[d, "\theta(a)"'] & F^\prime(b) \ar[d, "\theta(b)"] \\
+      F^{\prime \prime}(a) \ar[r, "F^{\prime \prime}(f)"'] & F^{\prime \prime}(b) \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{自然変換の水平合成}{
+  圏$\bm{C}, \bm{D}, \bm{E}$と、$\bm{C}$から$\bm{D}$への関手$F, F^\prime$、$\bm{D}$から$\bm{E}$への関手$G, G^\prime$を考える。
+
+  $F$から$F^\prime$への自然変換$\eta$と、$G$から$G^\prime$への自然変換$\theta$について、以下で定義するアリティ\num{1}の関数記号$\theta * \eta$は$G \circ F$から$G^\prime \circ F^\prime$への自然変換である。
+  \eq*{
+    \qty(\theta * \eta)(a) \coloneqq \theta(F^\prime(a)) \circ G(\eta(a))
+  }
+
+  $\theta * \eta$を、$\eta$と$\theta$の水平合成と呼ぶ。
+}
+
+\begin{center}
+  \begin{minipage}{0.15\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      a \ar[r, "f"] & b \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.25\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      F(a) \ar[r, "F(f)"] \ar[d, "\eta(a)"'] & F(b) \ar[d, "\eta(b)"] \\
+      F^\prime(a) \ar[r, "F^\prime(f)"'] & F^\prime(b) \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.5\linewidth}
+    $\bm{E}$ \\
+    \begin{tikzcd}
+      & G^\prime(F(a)) \ar[rr, "G^\prime(F(f))"] \ar[dd] & & G^\prime(F(b)) \ar[dd, "G^\prime(\eta(b))"] \\
+      G(F(a)) \ar[rr, crossing over, "G(F(f))"] \ar[dd, "G(\eta(a))"'] \ar[ur, "\theta(F(a))"] \ar[rd, "\qty(\theta * \eta)(a)", red] & & G(F(b)) \ar[ur, "\theta(F(b))"'] \ar[rd, "\qty(\theta * \eta)(b)", red] \\
+      & G^\prime(F^\prime(a)) \ar[rr] & & G^\prime(F^\prime(b)) \\
+      G(F^\prime(a)) \ar[rr, "G(F^\prime(f))"'] \ar[ur, "\theta(F^\prime(a))"] & & G(F^\prime(b)) \ar[from=uu, crossing over, "G(\eta(b))"] \ar[ur, "\theta(F^\prime(b))"'] \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\lem*{
+  圏$\bm{C}, \bm{D}, \bm{E}$と、$\bm{C}$から$\bm{D}$への関手$F, F^\prime$、$\bm{D}$から$\bm{E}$への関手$G, G^\prime$を考える。
+
+  $F$から$F^\prime$への自然変換$\eta$と、$G$から$G^\prime$への自然変換$\theta$について、以下が成り立つ。
+  \eq*{
+    \forall a \in \bm{C} \qty\Big(\theta(F^\prime(a)) \circ G(\eta(a)) = G^\prime(\eta(a)) \circ \theta(F(a)))
+  }
+}{
+  $\theta$は$G$から$G^\prime$への自然変換であるので、明らか。
+}
+
+\thm{相互交換法則}{
+  圏$\bm{C}, \bm{D}, \bm{E}$と、$\bm{C}$から$\bm{D}$への関手$F, F^\prime, F^{\prime \prime}$、$\bm{D}$から$\bm{E}$への関手$G, G^\prime, G^{\prime \prime}$を考える。
+
+  $F$から$F^\prime$への自然変換$\sigma$、$F^\prime$から$F^{\prime \prime}$への自然変換$\tau$、$G$から$G^\prime$への自然変換$\eta$、$G^\prime$から$G^{\prime \prime}$への自然変換$\theta$について、以下が成り立つ。
+  \eq*{
+    \qty(\theta \circ \eta) * \qty(\tau \circ \sigma) = \qty(\theta * \tau) \circ \qty(\eta * \sigma)
+  }
+}{
+  $\bm{C}$の任意の対象$a$について、以下が成り立つ。
+  \eqa*{
+    \qty(\qty(\theta \circ \eta) * \qty(\tau \circ \sigma))(a)
+    &= \qty(\theta \circ \eta)\qty(F^{\prime \prime}(a)) \circ G \qty(\qty(\tau \circ \sigma)(a)) \\*
+    &= \theta\qty(F^{\prime \prime}(a)) \circ \eta\qty(F^{\prime \prime}(a)) \circ G\qty(\tau(a)) \circ G \qty(\sigma(a)) \\*
+    &= \theta\qty(F^{\prime \prime}(a)) \circ G^\prime\qty(\tau(a)) \circ \eta\qty(F^\prime(a)) \circ G \qty(\sigma(a)) \\*
+    &= \qty(\theta * \tau)(a) \circ \qty(\eta * \sigma)(a) \\*
+    &= \qty(\qty(\theta * \tau) \circ \qty(\eta * \sigma))(a)
+  }
+
+  ただし第二行から第三行へは、$\eta$が$G$から$G^\prime$への自然変換であることを用いた。
+}
+
+\begin{center}
+  \begin{minipage}{0.5\linewidth}
+    $\bm{E}$ \\
+    \begin{tikzcd}
+      G(F(a)) \ar[r, "\eta(F(a))"] \ar[d, "G(\sigma(a))"'] \ar[dd, bend right=90, red, "G\qty((\tau \circ \sigma)(a))"'] \ar[rd, red, "(\eta * \sigma) (a)"] & G^\prime(F(a)) \ar[r, "\theta(F(a))"] \ar[d, "G^\prime(\sigma(a))"] & G^{\prime \prime}(F(a)) \ar[d, "G^{\prime \prime}(\sigma(a))"] \\
+      G(F^\prime(a)) \ar[r, "\eta(F^\prime(a))"] \ar[d, "G(\tau(a))"'] & G^\prime(F^\prime(a)) \ar[r, "\theta(F^\prime(a))"] \ar[d, "G^\prime(\tau(a))"] \ar[rd, red, "(\theta * \tau) (a)"] & G^{\prime \prime}(F^\prime(a)) \ar[d, "G^{\prime \prime}(\tau(a))"] \\
+      G(F^{\prime \prime}(a)) \ar[r, "\eta(F^{\prime \prime}(a))"'] \ar[rr, bend right, red, "\qty(\theta \circ \eta) \qty(F^{\prime \prime} (a))"'] & G^\prime(F^{\prime \prime}(a)) \ar[r, "\theta(F^{\prime \prime}(a))"'] & G^{\prime \prime}(F^{\prime \prime}(a)) \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{圏同値}{
+  圏$\bm{C}, \bm{D}$を考える。
+
+  $\bm{C}$から$\bm{D}$への関手$F$と、$\bm{D}$から$\bm{C}$への関手$G$が存在して、
+  $\id_{\bm{C}}$から$G \circ F$への自然同型$\eta$と、$\id_{\bm{D}}$から$F \circ G$への自然同型$\theta$が存在するとき、
+  $\bm{C}$と$\bm{D}$は圏同値であると言う。
+}
+
+\begin{center}
+  \begin{minipage}{0.4\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      a \ar[r, "f"] \ar[d, bend left, "\eta(a)"] & b \ar[d, bend left, "\eta(b)"] \\
+      (G \circ F) (a) \ar[r, "(G \circ F) (f)"] \ar[u, bend left, "\eta(a)^{-1}"] & (G \circ F) (b) \ar[u, bend left, "\eta(b)^{-1}"] \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.4\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      c \ar[r, "g"] \ar[d, bend left, "\theta(c)"] & d \ar[d, bend left, "\theta(d)"] \\
+      (F \circ G) (c) \ar[r, "(F \circ G) (g)"] \ar[u, bend left, "\theta(c)^{-1}"] & (F \circ G) (d) \ar[u, bend left, "\theta(d)^{-1}"] \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\cor{圏同型ならば圏同値}{
+  圏$\bm{C}, \bm{D}$について、$\bm{C}$と$\bm{D}$が圏同型ならば、$\bm{C}$と$\bm{D}$は圏同値である。
+}
+
+
+\lsubsection{さまざまな圏}
+
+\dfnf{圏$\bm{1}$}{圏1}{
+  \num{1}つの対象からなる離散圏を、$\bm{1}$で表す。
+}
+
+\dfnf{圏$\bm{2}$}{圏2}{
+  \num{2}つの対象からなる離散圏を、$\bm{2}$で表す。
+}
+
+\dfnf{圏$\bm{\rightrightarrows}$}{並行射からなる圏}{
+  以下を満たす相異なる\num{4}つの射$a, b, f, g$からなる圏を、$\bm{\rightrightarrows}$で表す。
+  \eqg*{
+    a = \dom(a) \land b = \dom(b) \\*
+    a = \dom(f) \land b = \cod(f) \\*
+    a = \dom(g) \land b = \cod(g)
+  }
+}
+
+\dfnf{圏$\bm{\rightarrow \leftarrow}$}{並行射からなる圏}{
+  以下を満たす相異なる\num{5}つの射$a, b, c, f, g$からなる圏を、$\bm{\rightarrow \leftarrow}$で表す。
+  \eqg*{
+    a = \dom(a) \land b = \dom(b) \land c = \dom(c) \\*
+    a = \dom(f) \land c = \cod(f) \\*
+    b = \dom(g) \land c = \cod(g)
+  }
+}
+
+\rem{集合は離散圏}{
+  集合$A$について、その要素を対象とみなすと、集合$A$の要素であることは圏となる。
+}
+
+\dfn{小さい圏}{
+  圏$\bm{C}$について、集合$C$が存在して、以下を満たすとき、$\bm{C}$は小さいと呼ぶ。
+  \eq*{
+    \forall c \qty(c \in \bm{C} \leftrightarrow c \in C)
+  }
+}
+
+\rem{自然変換は射}{
+  圏$\bm{D}$から圏$\bm{C}$への関手$F, G$について、$F$から$G$への自然変換$\eta$を考える。
+
+  $\dom(\eta)$を$F$に対する恒等な自然変換$F$、$\cod(\eta)$を$G$に対する恒等な自然変換$G$として、合成を垂直合成で定義すると、
+  自然変換は射の公理をみたす。
+}
+
+\dfn{関手圏}{
+  圏$\bm{C}, \bm{D}$について、自然変換を射とみなすと、
+  $\bm{D}$から$\bm{C}$への関手間の自然変換であることは、圏となる。
+
+  この圏を、$\bm{D}$から$\bm{C}$への関手圏と呼び、$\Func(\bm{D}, \bm{C})$または$\bm{C}^{\bm{D}}$と表す。
+}
+
+\cor{関手圏の双対}{
+  $\Func(\bm{D}, \bm{C})^\opp$と$\Func(\bm{D}^\opp, \bm{C}^\opp)$は圏同型である。
+}
+
+\dfn{対角関手}{
+  圏$\bm{C}, \bm{D}$について、$\bm{C}$から$\Func(\bm{D}, \bm{C})$への以下で定める関手$\Delta$を考える。
+  \eq*{
+    \Delta(f)(g) \coloneqq f
+  }
+
+  このように定めた関手$\Delta$を対角関手と呼ぶ。
+}
+
+
+\lsubsection{普遍}
+
+\dfn{普遍射}{
+  圏$\bm{C}, \bm{D}$と、$\bm{D}$から$\bm{C}$への関手$F$、$\bm{C}$の対象$a$を考える。
+
+  $F$から$a$への普遍射とは、$\bm{D}$の対象$x$と圏$\bm{C}$の射$u$の組であって、以下の\num{2}つを満たすものである。
+  \eqg*{
+    \dom(u) = F(x) \land \cod(u) = a \\*
+    \forall y \in \Obj_{\bm{D}} \forall f \in \bm{C} \qty\Big(\dom(f) = F(y) \land \cod(f) = a \rightarrow \exists! g \in \bm{D} \qty\big(\dom(g) = y \land \cod(g) = x \land f = u \circ F(g)))
+  }
+}
+
+\begin{center}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      y \ar[r, "g", dotted, red] & x \\
+      & \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      F(y) \ar[r, "F(g)", dotted] \ar[dr, "f"'] & F(x) \ar[d, "u"] \\
+      & a \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\lem{普遍射の一意性}{
+  $\bm{D}$から$\bm{C}$への関手$F$、$\bm{C}$の対象$a$について、$x, u$と$x^\prime, u^\prime$が$F$から$a$への普遍射であるとする。
+
+  このとき、以下を満たす。
+  \eq*{
+    \exists! h \in \bm{D} \qty(\dom(h) = x^\prime \land \cod(h) = x \land u^\prime = u \circ F(h))
+  }
+
+  さらに上で与える$h$は同型射であり、その逆射$h^{-1}$は$u = u^\prime \circ F(h^{-1})$を満たす。
+}{
+  $x, u$は普遍射であるので、$x^\prime, u^\prime$について定義より、
+  $\bm{D}$の射$g$であって$\dom(g) = x^\prime \land \cod(g) = x \land u^\prime = u \circ F(g)$なる射が一意に存在する。
+
+  同様に$x^\prime, u^\prime$は普遍射であるので、$x, u$について定義より、
+  $\bm{D}$の射$g^\prime$であって$\dom(g^\prime) = x \land \cod(g^\prime) = x^\prime \land u = u^\prime \circ F(g^\prime)$なる射が一意に存在する。
+
+  ゆえに、$u = u^\prime \circ F(g^\prime) = u \circ F(g) \circ F(g^\prime) = u \circ F(g \circ g^\prime)$が成り立つ。
+
+  $x, u$は普遍射であるので、$x, u$について定義より、
+  $\bm{D}$の射$i$であって$\dom(i) = x \land \cod(i) = x \land u = u \circ F(i)$なる射が一意に存在する。
+
+  $x, g \circ g^\prime$は$i$の条件を満たすので、$i = x = g \circ g^\prime$
+
+  同様に、$x^\prime = g^\prime \circ g$である。
+
+  したがって、$g^\prime$は$g$の逆射である。
+}
+
+\dfn{極限}{
+  圏$\bm{C}, \bm{D}$と、$\bm{C}$から$\Func(\bm{D}, \bm{C})$への対角関手$\Delta$を考える。
+
+  $\bm{D}$から$\bm{C}$への関手$X$について、$\Delta$から$X$への普遍射を$X$の極限と呼ぶ。
+}
+
+\dfn{積}{
+  離散圏$\bm{J}$、圏$\bm{C}$と、$\bm{J}$から$\bm{C}$への関手$X$を考える。
+
+  このとき、$X$の極限を$X$の積と呼ぶ。
+  Xの積$x, u$について、この$x$を$\prod X$と表す。
+}
+
+\begin{center}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      Y \ar[r, "q", dotted, red] \ar[dr, "p_j"'] & \prod X \ar[d, "u_j"] \\
+      & X_j \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\Func(\bm{J}, \bm{C})$ \\
+    \begin{tikzcd}
+      \Delta(Y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta \qty(\prod X) \ar[d, "u"] \\
+      & X \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{終対象}{
+  圏$\bm{C}$を考える。
+
+  $\bm{C}$から圏$\bm{1}$への関手は一意に定まる。
+  これを$U$とすると、$U$から$\ast$への普遍射$x, u$は、$u = \ast$となる。
+
+  この$x$を、$\bm{C}$の終対象と呼ぶ。
+}
+
+\begin{center}
+  \begin{minipage}{0.2\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      y \ar[r, "g", dotted, red] & x \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.2\linewidth}
+    $\bm{1}$ \\
+    \begin{tikzcd}
+      \ast \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{引き戻し}{
+  圏$\bm{C}$と、$\bm{C}$の射$f^\prime, g^\prime$を考える。
+  $\cod(f^\prime) = \cod(g^\prime)$とする。
+
+  圏$\bm{\rightarrow \leftarrow}$（対象ではない射を$f, g$とする）から$\bm{C}$への関手$X$であって、以下を満たす$X$を考える。
+  \eq*{
+    X(f) = f^\prime \land X(g) = g^\prime
+  }
+
+  このとき$X$の極限を、$f^\prime, g^\prime$の引き戻しと呼ぶ。
+}
+
+\begin{center}
+  \begin{minipage}{0.2\linewidth}
+    $\bm{\rightarrow \leftarrow}$ \\
+    \begin{tikzcd}
+      & b \ar[d, "g"] \\
+      a \ar[r, "f"'] & c
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.4\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      & Y \ar[dd, "q", red, dotted] \ar[dddl, "p(a)"'] \ar[ddrr, "p(b)"] \ar[dddr, "p(c)"] & & \\
+      & & & \\
+      & x \ar[ld, "u(a)"'] \ar[rr, "u(b)"] \ar[rd, "u(c)"'] & & X(b) \ar[ld, "g^\prime = X(g)"] \\
+      X(a) \ar[rr, "f^\prime = X(f)"'] & & X(c) & \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.2\linewidth}
+    $\Func(\bm{\rightarrow \leftarrow}, \bm{C})$ \\
+    \begin{tikzcd}
+      \Delta(Y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta(x) \ar[d, "u"] \\
+      & X
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{等化子}{
+  圏$\bm{C}$と、$\bm{C}$の射$f^\prime, g^\prime$を考える。
+  $\dom(f^\prime) = \dom(g^\prime) \land \cod(f^\prime) = \cod(g^\prime)$とする。
+
+  このとき$f^\prime, g^\prime$の引き戻し$x, u$を、$f^\prime, g^\prime$の等化子と呼び、この$x$を$\Eq(f^\prime, g^\prime)$で表す。
+}
+
+\begin{center}
+  \begin{minipage}{0.2\linewidth}
+    $\bm{\rightrightarrows}$ \\
+    \begin{tikzcd}
+      a \ar[r, "f"', bend right] \ar[r, "g", bend left] & b \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.45\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      & Y \ar[dd, "q", red, dotted] \ar[dddl, "p(a)"'] \ar[ddrr, "p(a)"] \ar[dddr, "p(b)"] & & \\
+      & & & \\
+      & \Eq(f^\prime, g^\prime) \ar[ld, "u(a)"'] \ar[rr, "u(a)"] \ar[rd, "u(b)"'] & & X(a) \ar[ld, "g^\prime = X(g)"] \\
+      X(a) \ar[rr, "f^\prime = X(f)"'] & & X(b) & \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.25\linewidth}
+    $\Func(\bm{\rightrightarrows}, \bm{C})$ \\
+    \begin{tikzcd}
+      \Delta(Y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta\qty(\Eq(X(f), X(g))) \ar[d, "u"] \\
+      & X \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\lem*{
+  $f$と$g$の等化子$\Eq(f, g), u$について、$u\qty(\dom(f))$は単射である。
+}{
+  $\cod(h_1) = \cod(h_2) = \Eq(X(f), X(g))$なる射$h_1, h_2$を考える。
+
+  $u\qty(\dom(f)) \circ h_1 = u\qty(\dom(f)) \circ h_2$について、
+}
+
+\dfn{余普遍射}{
+  圏$\bm{C}, \bm{D}$と、$\bm{D}$から$\bm{C}$への関手$F$、$\bm{C}$の対象$a$を考える。
+
+  $a$から$F$への余普遍射とは、$F^\opp$から$a$への普遍射$x, u$について、$x, u^\opp$である。
+}
+
+\begin{center}
+  \begin{minipage}{0.15\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      y & x \ar[l, "g"', dotted, red] \\
+      &
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.15\linewidth}
+    $\bm{D}^\opp$ \\
+    \begin{tikzcd}
+      y \ar[r, "g^\opp", dotted, red] & x \\
+      &
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{C}^\opp$ \\
+    \begin{tikzcd}
+      F^\opp(y) \ar[rr, "F^\opp(g^\opp)", dotted] \ar[drr, "f"'] & & F^\opp(x) \ar[d, "u"] \\
+      & & a
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      F(y) & & F(x) \ar[ll, "F(g)"', dotted] \\
+      & & a \ar[u, "u^\opp"'] \ar[ull, "f^\opp"]
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{余極限}{
+  圏$\bm{C}, \bm{D}$と、$\bm{C}$から$\Func(\bm{D}, \bm{C})$への対角関手$\Delta$を考える。
+
+  $\bm{D}$から$\bm{C}$への関手$X$について、$X$から$\Delta$への余普遍射を$X$の余極限と呼ぶ。
+}
+
+\dfn{和}{
+  離散圏$\bm{J}$、圏$\bm{C}$と、$\bm{C}$から$\Func(\bm{J}, \bm{C})$への対角関手$\Delta$を考える。
+
+  $\bm{J}$から$\bm{C}$への関手$X$について、$X$から$\Delta$への余普遍射を$X$の和と呼ぶ。
+}
+
+\dfn{始対象}{
+  圏$\bm{C}$と、圏$\bm{1}$を考える。
+
+  $\bm{C}$から$\bm{1}$への関手は一意に定まる。
+  これを$U$とすると、$\ast$から$U$への余普遍射は、\dfnref{余普遍射}の条件を満たす$x$と$\ast$の組となる。
+
+  この$x$を、$\bm{C}$の始対象と呼ぶ。
+}
+
+
+\lsubsection{随伴}
+
+\dfn{左随伴関手}{
+  圏$\bm{C}, \bm{D}$を考える。
+
+  $\bm{D}$から$\bm{C}$への関手$F$が左随伴関手であるとは、$\bm{C}$の任意の対象$a$について、$F$から$a$への普遍射が存在することである。
+}
+
+\dfn{右随伴関手}{
+  圏$\bm{C}, \bm{D}$を考える。
+
+  $\bm{C}$から$\bm{D}$への関手$G$が右随伴関手であるとは、$G^\opp$が左随伴関手であることである。
+}
+
+\rem{左右の随伴の存在}{
+  左随伴の存在から右随伴の存在を導くには、（もちろん右から左も同様であるが、）圏論的な選択公理を導入しなければならない。
+
+  これを回避するために、そもそも左右の随伴が存在することを前提にする立場をとる。
+}
+
+\dfn{随伴}{
+  圏$\bm{C}, \bm{D}$と、$\bm{D}$から$\bm{C}$への関手$F$、$\bm{C}$から$\bm{D}$への関手$G$を考える。
+
+  $\id_{\bm{D}}$から$G \circ F$への自然変換$\eta$と、$F \circ G$から$\id_{\bm{C}}$への自然変換$\theta$が存在して、以下を満たすならば、$F, G$は随伴であると呼ぶ。
+  \eqg*{
+    F = \qty(\theta * F) \circ \qty(F * \eta) \\*
+    G = \qty(G * \theta) \circ \qty(\eta * G)
+  }
+
+  このとき、$F$を$G$の左随伴、$G$を$F$の右随伴と呼ぶ。
+}
+
+\begin{center}
+  \begin{minipage}{0.3\linewidth}
+    $\Func(\bm{D}, \bm{C})$ \\
+    \begin{tikzcd}
+      F \ar[rr, "F * \eta"] \ar[drr, "F"'] & & F \circ G \circ F \ar[d, "\theta * F"] \\
+      & & F
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\Func(\bm{C}, \bm{D})$ \\
+    \begin{tikzcd}
+      G \ar[rr, "\eta * G"] \ar[drr, "G"'] & & G \circ F \circ G \ar[d, "G * \theta"] \\
+      & & G
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\cor*{
+  \corref{関手圏の双対}より、$F, G$が随伴ならば、$G^\opp, F^\opp$は随伴である。
+}
+
+\lem{随伴は随伴関手}{
+  圏$\bm{C}, \bm{D}$と、$\bm{D}$から$\bm{C}$への関手$F$、$\bm{C}$から$\bm{D}$への関手$G$を考える。
+
+  $F, G$が随伴ならば、$F$は左随伴関手であり、$G$は右随伴関手である。
+}{
+  双対性から、$F$が左随伴関手であることを示せば十分である。
+
+  $\bm{C}$の任意の対象$a$について、$G(a), \eta(a)$が$F$から$a$への普遍射となることを示す。
+
+  ???
+}
+
+\lem{左随伴は余極限を保存する}{
+  圏$\bm{J}, \bm{C}, \bm{D}$と、$\bm{J}$から$\bm{D}$への関手$X$、$\bm{D}$から$\bm{C}$への左随伴関手$F$を考える。
+
+  $\qty(x, u)$が$X$の余極限であるならば、$\qty(F(x), F * u)$は$F \circ X$の余極限である。
+}{
+  $F$は左随伴であるため、$\bm{C}$の対象$c$について、$\qty(G(c), \epsilon(c))$は普遍射である。
+}

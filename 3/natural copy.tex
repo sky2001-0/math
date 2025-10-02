@@ -1,61 +1,27 @@
 \lsection{自然数}
 
-\lsubsection{自然数の公理}
+\lsubsection{自然数の構成}
 
-\dfn{自然数}{
-  自然数論では、\num{3}つの公理（
-    \axiref{零の存在}、\axiref{後者関数は単射}、\axiref{数学的帰納法}
-  ）が与えられる。
-
-  項を自然数と呼ぶ。
-}
-
-\dfn{零}{
-  アリティ\num{0}の函数記号$0$を考える。
-}
-
-\dfn{後者}{
-  アリティ\num{1}の函数記号$s$を考える。
-
-  自然数$n$について、$s(n)$を$n$の後者と呼ぶ。
-}
-
-\axi{零は後者ではない}{
+\axi{無限の公理}{
   \eq*{
-    \forall n \qty(s(n) \neq 0)
+    \exists A \qty(\varnothing \in A \land \forall x \in A \qty(x \cup \qty{x} \in A))
   }
 }
 
-\axi{後者は単射}{
+\dfn{無限系譜}{
+  集合$X$が無限系譜であるとは、以下を満たすことである。
   \eq*{
-    \forall n, m \qty(s(n) = s(m) \rightarrow n = m)
+    \varnothing \in X \land \forall x \qty(x \in X \rightarrow x \cup \qty{x} \in X)
   }
+
+  \axiref{無限の公理}より無限系譜は存在する。
 }
 
-\axi{数学的帰納法}{
-  アリティ\num{1}の述語記号$\psi$について、以下が成り立つ。
+\cor*{
   \eq*{
-    \psi(0) \land \forall k \qty(\psi(k) \rightarrow \psi(s(k))) \rightarrow \forall n \qty(\psi(n))
+    \forall X \forall Y \qty(\text{$X$は無限系譜である} \land \text{$Y$は無限系譜である} \rightarrow \text{$X \cap Y$は無限系譜である})
   }
 }
-
-
-% \lsubsection{自然数の構成}
-
-% \dfn{無限系譜}{
-%   集合$X$が無限系譜であるとは、以下を満たすことである。
-%   \eq*{
-%     \varnothing \in X \land \forall x \qty(x \in X \rightarrow x \cup \qty{x} \in X)
-%   }
-
-%   \axiref{無限の公理}より無限系譜は存在する。
-% }
-
-% \cor*{
-%   \eq*{
-%     \forall X \forall Y \qty(\text{$X$は無限系譜である} \land \text{$Y$は無限系譜である} \rightarrow \text{$X \cap Y$は無限系譜である})
-%   }
-% }
 
 \dfn{後者関数}{
   無限系譜$X$について、以下のように定める写像$s \colon X \to X$を後者関数（successor）と呼ぶ。
@@ -64,49 +30,49 @@
   }
 }
 
-% \lem*{
-%   以下が成り立つ。
-%   \eq*{
-%     \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(\text{$X$は無限系譜である}) \rightarrow \text{$\bigcap A$は無限系譜である})
-%   }
-% }{
-%   空でない$A$を考える。
+\lem*{
+  以下が成り立つ。
+  \eq*{
+    \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(\text{$X$は無限系譜である}) \rightarrow \text{$\bigcap A$は無限系譜である})
+  }
+}{
+  空でない$A$を考える。
 
-%   $\forall X \in A \qty(\varnothing \in X)$であるので、$\varnothing \in \bigcap A$である。
+  $\forall X \in A \qty(\varnothing \in X)$であるので、$\varnothing \in \bigcap A$である。
 
-%   $\forall x \in \bigcap A$について、$\forall X \in A \qty(x \in X)$であり、無限系譜であることから$s(x) \in X$である。
-%   ゆえに、$s(x) \in \bigcap A$
+  $\forall x \in \bigcap A$について、$\forall X \in A \qty(x \in X)$であり、無限系譜であることから$s(x) \in X$である。
+  ゆえに、$s(x) \in \bigcap A$
 
-%   よって、$\bigcap A$は無限系譜である。
-% }
+  よって、$\bigcap A$は無限系譜である。
+}
 
-% \lem*{
-%   無限系譜$X$について、以下で定める集合は無限系譜である。
-%   \eq*{
-%     \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}
-%   }
-% }{
-%   $A \coloneqq \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とすると、
-%   $X \in A$より、$A \neq \varnothing$である。
+\lem*{
+  無限系譜$X$について、以下で定める集合は無限系譜である。
+  \eq*{
+    \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}
+  }
+}{
+  $A \coloneqq \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とすると、
+  $X \in A$より、$A \neq \varnothing$である。
 
-%   \mlemref{-1}より成り立つ。
-% }
+  \mlemref{-1}より成り立つ。
+}
 
-% \lem*{
-%   \mlemref{-1}で定める集合は、無限系譜$X$の取り方によらずに一意に定まる。
-% }{
-%   $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とする。
+\lem*{
+  \mlemref{-1}で定める集合は、無限系譜$X$の取り方によらずに一意に定まる。
+}{
+  $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とする。
 
-%   $X_1, X_2$の\num{2}つの無限系譜を考える。
+  $X_1, X_2$の\num{2}つの無限系譜を考える。
 
-%   $X_1$の部分で無限系譜である$Y$を考える。
+  $X_1$の部分で無限系譜である$Y$を考える。
 
-%   \mlemref{-2}より$X_2 \cap Y$も無限系譜であり、定義より$\omega(X_2) \subset X_2 \cap Y \subset Y$である。
+  \mlemref{-2}より$X_2 \cap Y$も無限系譜であり、定義より$\omega(X_2) \subset X_2 \cap Y \subset Y$である。
 
-%   任意の$Y$について成り立つので、$\omega(X_2) \subset \omega(X_1)$である。
+  任意の$Y$について成り立つので、$\omega(X_2) \subset \omega(X_1)$である。
 
-%   同様に$\omega(X_1) \subset \omega(X_2)$であるため、示される。
-% }
+  同様に$\omega(X_1) \subset \omega(X_2)$であるため、示される。
+}
 
 \dfn{自然数}{
   \mlemref{0}より、無限系譜$X$の取り方によらず$\omega(X)$が一意に定まる。

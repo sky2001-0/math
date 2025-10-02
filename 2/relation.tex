@@ -35,7 +35,14 @@
 }
 
 \cor*{
-  $\varnothing$上の関係$\mathfrak{R}$は、反射的、対称的、反対称的、推移的である。
+  $\varnothing$上の関係は一意に定まり、それは、反射的、対称的、反対称的、推移的である。
+}
+
+\dfn{完全}{
+  集合$X$上の関係$\mathfrak{R}$が完全であるとは、以下を満たすことである。
+  \eq*{
+    \forall x, y \in X \qty(\mathfrak{R}(x, y) \lor \mathfrak{R}(y, x))
+  }
 }
 
 
@@ -57,11 +64,11 @@
     x \succ y \defiff y \prec x
   }
 
-  順序対$\qty(X, \preccurlyeq)$を、前順序集合、または単に前順序と呼ぶ。
+  組$\qty(X, \preccurlyeq)$を、前順序集合、または単に前順序と呼ぶ。
 }
 
 \rem{前順序の定義}{
-  より簡単に、$x \preccurlyeq y \defiff \cdots$の形式によって前順序を定義する。
+  より簡単に、$x \preccurlyeq y \defiff \cdots$の形式によって述語として前順序を定義できる。
 }
 
 \cor*{
@@ -105,7 +112,10 @@
 }
 
 \dfn{有向集合}{
-  前順序集合$\Lambda$について、任意の二元$\lambda, \mu \in \Lambda$から成る集合$\qty{\lambda, \mu}$が上に有界であるとき、前順序集合$\Lambda$を有向集合と呼ぶ。
+  前順序集合$\Lambda$が以下を満たすとき、$\Lambda$を有向集合と呼ぶ。
+  \eq*{
+    \forall \lambda, \mu \in \Lambda \qty(\text{$\qty{\lambda, \mu}$ は上に有界})
+  }
 }
 
 \dfn{上方集合}{
@@ -116,11 +126,22 @@
   }
 }
 
-\dfn{前順序との両立}{
-  集合$X$と$X$上の前順序$\preccurlyeq_{X}$、集合$Y$と$Y$上の前順序$\preccurlyeq_{Y}$について、写像$f \colon X \to Y$が$\preccurlyeq_{X}, \preccurlyeq_{Y}$と両立するとは、以下を満たすことである。
+\dfn{単調}{
+  前順序集合$\qty(X, \preccurlyeq_{X}), \qty(Y, \preccurlyeq_{Y})$と、写像$f \colon X \to Y$について、以下を満たすとき、$f$は単調であるという。
   \eq*{
     \forall x, y \in X \qty(x \preccurlyeq_{X} y \rightarrow f(x) \preccurlyeq_{Y} f(y))
   }
+}
+
+\dfn{狭義単調}{
+  前順序集合$\qty(X, \preccurlyeq_{X}), \qty(Y, \preccurlyeq_{Y})$と、写像$f \colon X \to Y$について、以下を満たすとき、$f$は単調であるという。
+  \eq*{
+    \forall x, y \in X \qty(x \prec_{X} y \rightarrow f(x) \prec_{Y} f(y))
+  }
+}
+
+\cor*{
+  狭義単調な写像は、単調である。
 }
 
 
