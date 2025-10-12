@@ -419,12 +419,12 @@
 \dfn{自然変換の水平合成}{
   圏$\bm{C}, \bm{D}, \bm{E}$と、$\bm{C}$から$\bm{D}$への関手$F, F^\prime$、$\bm{D}$から$\bm{E}$への関手$G, G^\prime$を考える。
 
-  $F$から$F^\prime$への自然変換$\eta$と、$G$から$G^\prime$への自然変換$\theta$について、以下で定義するアリティ\num{1}の関数記号$\theta * \eta$は$G \circ F$から$G^\prime \circ F^\prime$への自然変換である。
+  $F$から$F^\prime$への自然変換$\eta$と、$G$から$G^\prime$への自然変換$\theta$について、以下で定義するアリティ\num{1}の関数記号$\theta \ast \eta$は$G \circ F$から$G^\prime \circ F^\prime$への自然変換である。
   \eq*{
-    \qty(\theta * \eta)(a) \coloneqq \theta(F^\prime(a)) \circ G(\eta(a))
+    \qty(\theta \ast \eta)(a) \coloneqq \theta(F^\prime(a)) \circ G(\eta(a))
   }
 
-  $\theta * \eta$を、$\eta$と$\theta$の水平合成と呼ぶ。
+  $\theta \ast \eta$を、$\eta$と$\theta$の水平合成と呼ぶ。
 }
 
 \begin{center}
@@ -445,7 +445,7 @@
     $\bm{E}$ \\
     \begin{tikzcd}
       & G^\prime(F(a)) \ar[rr, "G^\prime(F(f))"] \ar[dd] & & G^\prime(F(b)) \ar[dd, "G^\prime(\eta(b))"] \\
-      G(F(a)) \ar[rr, crossing over, "G(F(f))"] \ar[dd, "G(\eta(a))"'] \ar[ur, "\theta(F(a))"] \ar[rd, "\qty(\theta * \eta)(a)", red] & & G(F(b)) \ar[ur, "\theta(F(b))"'] \ar[rd, "\qty(\theta * \eta)(b)", red] \\
+      G(F(a)) \ar[rr, crossing over, "G(F(f))"] \ar[dd, "G(\eta(a))"'] \ar[ur, "\theta(F(a))"] \ar[rd, "\qty(\theta \ast \eta)(a)", red] & & G(F(b)) \ar[ur, "\theta(F(b))"'] \ar[rd, "\qty(\theta \ast \eta)(b)", red] \\
       & G^\prime(F^\prime(a)) \ar[rr] & & G^\prime(F^\prime(b)) \\
       G(F^\prime(a)) \ar[rr, "G(F^\prime(f))"'] \ar[ur, "\theta(F^\prime(a))"] & & G(F^\prime(b)) \ar[from=uu, crossing over, "G(\eta(b))"] \ar[ur, "\theta(F^\prime(b))"'] \\
     \end{tikzcd}
@@ -468,17 +468,17 @@
 
   $F$から$F^\prime$への自然変換$\sigma$、$F^\prime$から$F^{\prime \prime}$への自然変換$\tau$、$G$から$G^\prime$への自然変換$\eta$、$G^\prime$から$G^{\prime \prime}$への自然変換$\theta$について、以下が成り立つ。
   \eq*{
-    \qty(\theta \circ \eta) * \qty(\tau \circ \sigma) = \qty(\theta * \tau) \circ \qty(\eta * \sigma)
+    \qty(\theta \circ \eta) \ast \qty(\tau \circ \sigma) = \qty(\theta \ast \tau) \circ \qty(\eta \ast \sigma)
   }
 }{
   $\bm{C}$の任意の対象$a$について、以下が成り立つ。
   \eqa*{
-    \qty(\qty(\theta \circ \eta) * \qty(\tau \circ \sigma))(a)
+    \qty(\qty(\theta \circ \eta) \ast \qty(\tau \circ \sigma))(a)
     &= \qty(\theta \circ \eta)\qty(F^{\prime \prime}(a)) \circ G \qty(\qty(\tau \circ \sigma)(a)) \\*
     &= \theta\qty(F^{\prime \prime}(a)) \circ \eta\qty(F^{\prime \prime}(a)) \circ G\qty(\tau(a)) \circ G \qty(\sigma(a)) \\*
     &= \theta\qty(F^{\prime \prime}(a)) \circ G^\prime\qty(\tau(a)) \circ \eta\qty(F^\prime(a)) \circ G \qty(\sigma(a)) \\*
-    &= \qty(\theta * \tau)(a) \circ \qty(\eta * \sigma)(a) \\*
-    &= \qty(\qty(\theta * \tau) \circ \qty(\eta * \sigma))(a)
+    &= \qty(\theta \ast \tau)(a) \circ \qty(\eta \ast \sigma)(a) \\*
+    &= \qty(\qty(\theta \ast \tau) \circ \qty(\eta \ast \sigma))(a)
   }
 
   ただし第二行から第三行へは、$\eta$が$G$から$G^\prime$への自然変換であることを用いた。
@@ -488,8 +488,8 @@
   \begin{minipage}{0.5\linewidth}
     $\bm{E}$ \\
     \begin{tikzcd}
-      G(F(a)) \ar[r, "\eta(F(a))"] \ar[d, "G(\sigma(a))"'] \ar[dd, bend right=90, red, "G\qty((\tau \circ \sigma)(a))"'] \ar[rd, red, "(\eta * \sigma) (a)"] & G^\prime(F(a)) \ar[r, "\theta(F(a))"] \ar[d, "G^\prime(\sigma(a))"] & G^{\prime \prime}(F(a)) \ar[d, "G^{\prime \prime}(\sigma(a))"] \\
-      G(F^\prime(a)) \ar[r, "\eta(F^\prime(a))"] \ar[d, "G(\tau(a))"'] & G^\prime(F^\prime(a)) \ar[r, "\theta(F^\prime(a))"] \ar[d, "G^\prime(\tau(a))"] \ar[rd, red, "(\theta * \tau) (a)"] & G^{\prime \prime}(F^\prime(a)) \ar[d, "G^{\prime \prime}(\tau(a))"] \\
+      G(F(a)) \ar[r, "\eta(F(a))"] \ar[d, "G(\sigma(a))"'] \ar[dd, bend right=90, red, "G\qty((\tau \circ \sigma)(a))"'] \ar[rd, red, "(\eta \ast \sigma) (a)"] & G^\prime(F(a)) \ar[r, "\theta(F(a))"] \ar[d, "G^\prime(\sigma(a))"] & G^{\prime \prime}(F(a)) \ar[d, "G^{\prime \prime}(\sigma(a))"] \\
+      G(F^\prime(a)) \ar[r, "\eta(F^\prime(a))"] \ar[d, "G(\tau(a))"'] & G^\prime(F^\prime(a)) \ar[r, "\theta(F^\prime(a))"] \ar[d, "G^\prime(\tau(a))"] \ar[rd, red, "(\theta \ast \tau) (a)"] & G^{\prime \prime}(F^\prime(a)) \ar[d, "G^{\prime \prime}(\tau(a))"] \\
       G(F^{\prime \prime}(a)) \ar[r, "\eta(F^{\prime \prime}(a))"'] \ar[rr, bend right, red, "\qty(\theta \circ \eta) \qty(F^{\prime \prime} (a))"'] & G^\prime(F^{\prime \prime}(a)) \ar[r, "\theta(F^{\prime \prime}(a))"'] & G^{\prime \prime}(F^{\prime \prime}(a)) \\
     \end{tikzcd}
   \end{minipage}
@@ -544,7 +544,7 @@
   }
 }
 
-\dfnf{圏$\bm{\rightarrow \leftarrow}$}{並行射からなる圏}{
+\dfnf{圏$\bm{\rightarrow \leftarrow}$}{スパン圏}{
   以下を満たす相異なる\num{5}つの射$a, b, c, f, g$からなる圏を、$\bm{\rightarrow \leftarrow}$で表す。
   \eqg*{
     a = \dom(a) \land b = \dom(b) \land c = \dom(c) \\*
@@ -558,10 +558,7 @@
 }
 
 \dfn{小さい圏}{
-  圏$\bm{C}$について、集合$C$が存在して、以下を満たすとき、$\bm{C}$は小さいと呼ぶ。
-  \eq*{
-    \forall c \qty(c \in \bm{C} \leftrightarrow c \in C)
-  }
+  圏$\bm{C}$について、集合$A$が存在して、$A$と$\bm{C}$が圏同型であるとき、$\bm{C}$は小さいと呼ぶ。
 }
 
 \rem{自然変換は射}{
@@ -585,7 +582,7 @@
 \dfn{対角関手}{
   圏$\bm{C}, \bm{D}$について、$\bm{C}$から$\Func(\bm{D}, \bm{C})$への以下で定める関手$\Delta$を考える。
   \eq*{
-    \Delta(f)(g) \coloneqq f
+    \Delta(c)(d) \coloneqq c
   }
 
   このように定めた関手$\Delta$を対角関手と呼ぶ。
@@ -767,7 +764,7 @@
   \begin{minipage}{0.25\linewidth}
     $\Func(\bm{\rightrightarrows}, \bm{C})$ \\
     \begin{tikzcd}
-      \Delta(Y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta\qty(\Eq(X(f), X(g))) \ar[d, "u"] \\
+      \Delta(Y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta\qty(\Eq(f^\prime, g^\prime)) \ar[d, "u"] \\
       & X \\
     \end{tikzcd}
   \end{minipage}
@@ -854,19 +851,13 @@
   $\bm{C}$から$\bm{D}$への関手$G$が右随伴関手であるとは、$G^\opp$が左随伴関手であることである。
 }
 
-\rem{左右の随伴の存在}{
-  左随伴の存在から右随伴の存在を導くには、（もちろん右から左も同様であるが、）圏論的な選択公理を導入しなければならない。
-
-  これを回避するために、そもそも左右の随伴が存在することを前提にする立場をとる。
-}
-
 \dfn{随伴}{
   圏$\bm{C}, \bm{D}$と、$\bm{D}$から$\bm{C}$への関手$F$、$\bm{C}$から$\bm{D}$への関手$G$を考える。
 
   $\id_{\bm{D}}$から$G \circ F$への自然変換$\eta$と、$F \circ G$から$\id_{\bm{C}}$への自然変換$\theta$が存在して、以下を満たすならば、$F, G$は随伴であると呼ぶ。
   \eqg*{
-    F = \qty(\theta * F) \circ \qty(F * \eta) \\*
-    G = \qty(G * \theta) \circ \qty(\eta * G)
+    F = \qty(\theta \ast F) \circ \qty(F \ast \eta) \\*
+    G = \qty(G \ast \theta) \circ \qty(\eta \ast G)
   }
 
   このとき、$F$を$G$の左随伴、$G$を$F$の右随伴と呼ぶ。
@@ -876,14 +867,14 @@
   \begin{minipage}{0.3\linewidth}
     $\Func(\bm{D}, \bm{C})$ \\
     \begin{tikzcd}
-      F \ar[rr, "F * \eta"] \ar[drr, "F"'] & & F \circ G \circ F \ar[d, "\theta * F"] \\
+      F \ar[rr, "F \ast \eta"] \ar[drr, "F"'] & & F \circ G \circ F \ar[d, "\theta \ast F"] \\
       & & F
     \end{tikzcd}
   \end{minipage}
   \begin{minipage}{0.3\linewidth}
     $\Func(\bm{C}, \bm{D})$ \\
     \begin{tikzcd}
-      G \ar[rr, "\eta * G"] \ar[drr, "G"'] & & G \circ F \circ G \ar[d, "G * \theta"] \\
+      G \ar[rr, "\eta \ast G"] \ar[drr, "G"'] & & G \circ F \circ G \ar[d, "G \ast \theta"] \\
       & & G
     \end{tikzcd}
   \end{minipage}
@@ -898,17 +889,170 @@
 
   $F, G$が随伴ならば、$F$は左随伴関手であり、$G$は右随伴関手である。
 }{
+  随伴であるので、\dfnref{随伴}を満たす自然変換$\eta, \theta$が存在する。
+
   双対性から、$F$が左随伴関手であることを示せば十分である。
 
-  $\bm{C}$の任意の対象$a$について、$G(a), \eta(a)$が$F$から$a$への普遍射となることを示す。
+  \vskip\baselineskip
 
-  ???
+  $\bm{C}$の任意の対象$a$について、$G(a), \theta(a)$が$F$から$a$への普遍射となることを示す。
+
+  $\bm{D}$の対象$y$と、$\bm{C}$の射$f$であって$\dom(f) = F(y) \land \cod(f) = a$を満たすものを考える。
+
+  このとき、$g \coloneqq G(f) \circ \eta(y)$を考えると、$\theta$の自然性と$F = \qty(\theta \ast F) \circ \qty(F \ast \eta)$より、以下が成り立つ。
+  \eqa*{
+    \theta(a) \circ F(g)
+    &= \theta(a) \circ \qty(F \circ G)(f) \circ \qty(F \ast \eta)(y) \\*
+    &= f \circ \qty(\theta \ast F)(y) \circ \qty(F \ast \eta)(y) \\*
+    &= f \circ F(y) \\*
+    &= f
+  }
+
+  \vskip\baselineskip
+
+  次に、$\bm{D}$の射$g^\prime, \dom(g^\prime) = y \land \cod(g^\prime) = G(a)$が存在して、$f = \theta(a) \circ F(g^\prime)$であるとする。
+
+  このとき、$G = \qty(G \ast \theta) \circ \qty(\eta \ast G)$と$\eta$の自然性より、以下が成り立つ。
+  \eqa*{
+    g^\prime
+    &= G(a) \circ g^\prime \\*
+    &= \qty(G \ast \theta)(a) \circ \qty(\eta \ast G)(a) \circ g^\prime \\*
+    &= \qty(G \ast \theta)(a) \circ \qty(G \circ F)(g^\prime) \circ \eta(y) \\*
+    &= G \qty(\theta(a) \circ F(g^\prime)) \circ \eta(y) \\*
+    &= G(f) \circ \eta(y) \\*
+    &= g
+  }
+
+  ゆえに一意である。
 }
+
+\begin{center}
+  \begin{minipage}{0.45\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      & y \ar[dd, "\eta(y)"] \ar[rrdd, "g = G(f) \circ \eta(y)", red, dotted] & & \\
+      & & & \\
+      & \qty(G \circ F)(y) \ar[rr, "G(f)"] & & G(a) \\
+      & & & \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.45\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      & F(y) \ar[dd, "\qty(F \ast \eta)(y)"] \ar[dddl, "F(y)"'] \ar[dddr, "f"] \ar[rrdd, "F(g)", dotted] & & \\
+      & & & \\
+      & \qty(F \circ G \circ F)(y) \ar[ld, "\qty(\theta \ast F)(y)"] \ar[rr, "\qty(F \circ G)(f)"] & & \qty(F \circ G)(a) \ar[ld, "\theta(a)"] \\
+      F(y) \ar[rr, "f"'] & & a & \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
 
 \lem{左随伴は余極限を保存する}{
-  圏$\bm{J}, \bm{C}, \bm{D}$と、$\bm{J}$から$\bm{D}$への関手$X$、$\bm{D}$から$\bm{C}$への左随伴関手$F$を考える。
+  圏$\bm{J}, \bm{C}, \bm{D}$と、$\bm{J}$から$\bm{D}$への関手$X$、$\bm{D}$から$\bm{C}$への関手$F$、$\bm{C}$から$\bm{D}$への関手$G$を考える。
+  $F, G$は随伴であるとする。
 
-  $\qty(x, u)$が$X$の余極限であるならば、$\qty(F(x), F * u)$は$F \circ X$の余極限である。
+  $\qty(x, u)$が$X$の余極限であるならば、$\qty(F(x), F \ast u)$は$F \circ X$の余極限である。
 }{
-  $F$は左随伴であるため、$\bm{C}$の対象$c$について、$\qty(G(c), \epsilon(c))$は普遍射である。
+  随伴であるので、\dfnref{随伴}を満たす自然変換$\eta, \theta$が存在する。
+
+  $\bm{D}$から$\Func(\bm{J}, \bm{D})$への対角関手を$\Delta_{\bm{D}}$、$\bm{C}$から$\Func(\bm{J}, \bm{C})$への対角関手を$\Delta_{\bm{C}}$とする。
+
+  \vskip\baselineskip
+
+  $\bm{C}$の対象$y$と、$F \circ X$から$\Delta_{\bm{C}}(y)$への自然変換$f$を考える。
+
+  \lemref{随伴は随伴関手}より、$G(y), \theta(y)$は、$F$から$y$への普遍射である。
+
+  したがって$\bm{J}$の任意の対象$j$について、$\theta(y) \circ F(w(j)) = f(j)$を満たす射$w(j)$が一意に存在する。
+
+  ここで、$f$は$F \circ X$から$\Delta_{\bm{C}}(y)$への自然性であるので、$\bm{J}$の任意の対象$j, j^\prime$について以下が成り立つ。
+  \eqa*{
+    \theta(y) \circ F(w(j^\prime) \circ X(i))
+    &= \theta(y) \circ F(w(j^\prime)) \circ \qty(F \circ X)(i) \\*
+    &= f(j^\prime) \circ \qty(F \circ X)(i) \\*
+    &= f(j) \\*
+    &= \theta(y) \circ F(w(j))
+  }
+
+  一意性より、$w(j^\prime) \circ X(i) = w(j)$である。
+  よって、$w$は$X$から$\Delta_{\bm{D}}$への自然変換である。
+
+  $x, u$は$X$から$\Delta_{\bm{D}}$への余普遍射であるので、$w = \Delta_{\bm{D}}(h) \circ u$を満たす$\bm{D}$の射$h$が一意に存在する。
+
+  ここで、$g \coloneqq \theta(y) \circ F(h)$とすると、$\bm{J}$の任意の対象$j$について以下が成り立つ。
+  \eqa*{
+    g \circ \qty(F \ast u)(j)
+    &= \theta(y) \circ F(h) \circ \qty(F \ast u)(j) \\*
+    &= \theta(y) \circ F(h \circ u(j)) \\*
+    &= \theta(y) \circ \qty(F \ast w)(j) \\*
+    &= f(j)
+  }
+
+  したがって、$\Delta_{\bm{C}}(g) \circ \qty(F \ast u) = f$である。
+
+  \vskip\baselineskip
+
+  次に、$\bm{C}$の射$g^\prime$が存在して、$\Delta_{\bm{C}}(g^\prime) \circ \qty(F \ast u) = f$であるとする。
+
+  $G(y), \theta(y)$は$F$から$y$への普遍射であるため、$g^\prime = \theta(y) \circ F(h^\prime)$を満たす$\bm{D}$の射$h^\prime$が一意に存在する。
+
+  $\bm{J}$の任意の対象$j$について、以下が成り立つ。
+  \eqa*{
+    \theta(y) \circ F\qty(h \circ u(j))
+    &= f(j) \\*
+    &= g^\prime(j) \circ \qty(F \ast u)(j) \\*
+    &= \theta(y) \circ F(h^\prime) \circ \qty(F \ast u)(j) \\*
+    &= \theta(y) \circ F\qty(h^\prime \circ u(j))
+  }
+
+  再び$G(y), \theta(y)$は$F$から$y$への普遍射であるため、一意性より$h \circ u(j) = h^\prime \circ u(j)$である。
+  ゆえに、$\Delta_{\bm{D}}(h^\prime) \circ u = \Delta_{\bm{D}}(h) \circ u$である。
+
+  $x, u$は、$X$の余極限であるため、一意性より$h = h^\prime$である。
+  したがって、$g = g^\prime$である。
 }
+
+\begin{center}
+  \begin{minipage}{0.25\linewidth}
+    $\bm{J}$ \\
+    \begin{tikzcd}
+      & & \\
+      j \ar[rr, "i"] & & j^\prime \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      G(y) & & \\
+      & x \ar[lu, "h"'] & \\
+      X(j) \ar[uu, "w(j)"] \ar[rr, "X(i)"'] \ar[ru, "u(j)"] & & X(j^\prime) \ar[lu, "u(j^\prime)"'] \ar[lluu, "w(j^\prime)"', bend right=50] \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      & \qty(F \circ G)(y) \ar[ld, "\theta(y)"'] & \\
+      y & & F(x) \ar[lu, "F(h)"'] \ar[ll, "g"', red, dotted, near start] \\
+      & \qty(F \circ X)(j) \ar[lu, "f(j)"] \ar[uu, "\qty(F \ast w)(j)", near start] \ar[ru, "\qty(F \ast u)(j)"'] & \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\begin{center}
+  \begin{minipage}{0.35\linewidth}
+    $\Func(\bm{J}, \bm{D})$ \\
+    \begin{tikzcd}
+      \Delta_{\bm{D}}\qty(G(y)) & \\
+      & \Delta_{\bm{D}}(x) \ar[lu, "\Delta_{\bm{D}}(h)"'] \\
+      X \ar[ru, "u"'] \ar[uu, "w"] & \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.35\linewidth}
+    $\Func(\bm{J}, \bm{C})$ \\
+    \begin{tikzcd}
+      & \Delta_{\bm{C}}\qty(\qty(F \circ G)(y)) \ar[ld, "\Delta_{\bm{C}}\qty(\theta(y))"'] & \\
+      \Delta_{\bm{C}}(y) & & \Delta_{\bm{C}}\qty(F(x)) \ar[lu, "\Delta_{\bm{C}}\qty(F(h))"'] \ar[ll, "\Delta_{\bm{C}}(g)"', dotted, near start] \\
+      & F \circ X \ar[lu, "f"] \ar[uu, "F \ast w", near start] \ar[ru, "F \ast u"'] & \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}

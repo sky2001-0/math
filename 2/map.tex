@@ -114,18 +114,6 @@
   }
 }
 
-\rem{写像は射}{
-  写像$f = \qty(\qty(X, Y), G)$を考える。
-  $\dom(f)$を$\id_X$、$\cod(f)$を$\id_Y$として、合成を\dfnref{合成写像}で定義すると、写像は射の公理をみたす。
-
-  ここで、記号の濫用であるが、$X$を$\dom(f)$、$Y$を$\cod(f)$とも表す。
-}
-
-\dfn{集合の圏}{
-  写像を射とみなすと、写像であることは、圏となる。
-  この圏を、集合の圏と呼び、$\mathbf{Set}$と表す。
-}
-
 \rem{写像の相等}{
   写像の相等は、集合の相等により定義される。
 
@@ -134,6 +122,38 @@
   \eq*{
     \dom(f) = \dom(g) \land \cod(f) = \cod(g) \land \forall x \in \dom(f) \qty(f(x) = g(x))
   }
+}
+
+\dfn{包含写像}{
+  集合$X$と、その部分$A$について、以下で定める関係$\iota_{A, X}$は写像である。
+  \eq*{
+    \iota_{A, X} \coloneqq \qty(\qty(A, X), \qty{\qty(x, x) \mid x \in A})
+  }
+
+  この$\iota_{A, X}$を部分写像と呼ぶ。
+}
+
+\dfn{制限写像}{
+  写像$f = \qty(\qty(X, Y), G)$と、$X$の部分$A$について、
+  以下で定める写像$f \rvert_A$を、$f$の$A$への制限写像、または単に制限と呼ぶ。
+  \eq*{
+    f \rvert_A \coloneqq f \circ \iota_{A, X}
+  }
+}
+
+
+\lsubsection{集合と写像の圏}
+
+\rem{写像は射}{
+  写像$f = \qty(\qty(X, Y), G)$を考える。
+  $\dom(f)$を$\id_X$、$\cod(f)$を$\id_Y$として、合成を\dfnref{合成写像}で定義すると、写像は射の公理をみたす。
+
+  ここで、記号の濫用であるが、$X$を$\dom(f)$、$Y$を$\cod(f)$とも表す。
+}
+
+\dfn{集合と写像の圏}{
+  写像を射とみなすと、写像であることは、圏となる。
+  この圏を、集合と写像の圏と呼び、$\mathbf{Set}$と表す。
 }
 
 \cor*{
@@ -165,56 +185,12 @@
   このような写像を空写像と呼ぶ。
 }
 
-\dfn{包含写像}{
-  集合$X$と、その部分$A$について、以下で定める関係$i_{A, X}$は写像である。
-  \eq*{
-    i_{A, X} \coloneqq \qty(\qty(A, X), \qty{\qty(x, x) \mid x \in A})
-  }
+\thm{集合と写像の圏は完備かつ余完備}{
+  任意の小さい圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への任意の関手$X$を考える。
 
-  この$i_{A, X}$を部分写像と呼ぶ。
-}
-
-\dfn{制限写像}{
-  写像$f = \qty(\qty(X, Y), G)$と、$X$の部分$A$について、
-  以下で定める写像$f \rvert_A$を、$f$の$A$への制限写像、または単に制限と呼ぶ。
-  \eq*{
-    f \rvert_A \coloneqq f \circ i_{A, X}
-  }
-}
-
-\thm{選択公理が与える写像}{
-  集合$X, Y$とアリティ\num{2}の述語記号$\psi$について、$\forall x \in X \exists y \in Y \qty(\psi(x, y))$が成り立つとする。
-
-  このとき、以下を満たす写像$f \colon X \to Y$が存在する。
-  \eq*{
-    \forall x \in X \forall y \in Y \qty(f(x) = y \rightarrow \psi(x, y))
-  }
+  このとき、$X$の極限と余極限が存在する。
 }{
-  $X = \varnothing$のとき、空写像が存在する。
-
-  \vskip\baselineskip
-
-  $X \neq \varnothing$のときを考える。
-  以下の集合$Z$を考える。
-  \eq*{
-    Z \coloneqq \qty{\qty{\qty(x, y) \mid y \in Y \land \psi(x, y)} \mid x \in X}
-  }
-
-  $Z$について\axiref{選択の公理}の主張する集合$A$が存在する。
-
-  関係$\qty(\qty(X, Y), A)$は、仮定より$X$について左全域的で、$A$の定義より右一意的である。
-}
-
-\thm{選択関数の存在}{
-  任意の集合$X$について、写像$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が存在して、以下が成り立つ。
-  \eq*{
-    \forall x \in X \setminus \qty{\varnothing} \qty(f(x) \in x)
-  }
-}{
-  $\forall x \in X \setminus \qty{\varnothing}$について、$\exists y \qty(y \in x)$である。
-  この$y$は、$y \in x$より、$y \in \bigcup X$である。
-
-  ゆえに、\thmref{選択公理が与える写像}より存在する。
+  ???
 }
 
 
@@ -346,7 +322,42 @@
 }
 
 
-\lsubsection{単射と全射}
+\lsubsection{選択と単射、全射}
+
+\thm{選択公理が与える写像}{
+  集合$X, Y$とアリティ\num{2}の述語記号$\psi$について、$\forall x \in X \exists y \in Y \qty(\psi(x, y))$が成り立つとする。
+
+  このとき、以下を満たす写像$f \colon X \to Y$が存在する。
+  \eq*{
+    \forall x \in X \forall y \in Y \qty(f(x) = y \rightarrow \psi(x, y))
+  }
+}{
+  $X = \varnothing$のとき、空写像が存在する。
+
+  \vskip\baselineskip
+
+  $X \neq \varnothing$のときを考える。
+  以下の集合$Z$を考える。
+  \eq*{
+    Z \coloneqq \qty{\qty{\qty(x, y) \mid y \in Y \land \psi(x, y)} \mid x \in X}
+  }
+
+  $Z$について\axiref{選択の公理}の主張する集合$A$が存在する。
+
+  関係$\qty(\qty(X, Y), A)$は、仮定より$X$について左全域的で、$A$の定義より右一意的である。
+}
+
+\thm{選択関数の存在}{
+  任意の集合$X$について、写像$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が存在して、以下が成り立つ。
+  \eq*{
+    \forall x \in X \setminus \qty{\varnothing} \qty(f(x) \in x)
+  }
+}{
+  $\forall x \in X \setminus \qty{\varnothing}$について、$\exists y \qty(y \in x)$である。
+  この$y$は、$y \in x$より、$y \in \bigcup X$である。
+
+  ゆえに、\thmref{選択公理が与える写像}より存在する。
+}
 
 \lem{単射}{
   写像$f$について、以下の\num{3}つは同値である。
