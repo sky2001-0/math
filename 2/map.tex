@@ -148,7 +148,7 @@
   写像$f = \qty(\qty(X, Y), G)$を考える。
   $\dom(f)$を$\id_X$、$\cod(f)$を$\id_Y$として、合成を\dfnref{合成写像}で定義すると、写像は射の公理をみたす。
 
-  ここで、記号の濫用であるが、$X$を$\dom(f)$、$Y$を$\cod(f)$とも表す。
+  ここで、記号の濫用であるが、$\id_X$をして$X$を表し、$X$をして$\id_X$を表す。
 }
 
 \dfn{集合と写像の圏}{
@@ -157,18 +157,17 @@
 }
 
 \cor*{
-  集合$X, Y$について、$\Hom_{\mathbf{Set}}(X, Y)$は集合である。
+  集合$X, Y$について、$\Hom_{\mathbf{Set}}(X, Y)$は以下を満たす。
+  \eq*{
+    f \in \Hom_{\mathbf{Set}}(X, Y) \leftrightarrow f \in \qty{\qty(\qty(X, Y), G) \mid G \subset X \times Y \land \text{$G$は右一意かつ左全域}}
+  }
 }
 
 \dfn{写像の全体}{
-  $X$から$Y$への写像の全体$\Map(X, Y)$を以下で定める。
+  記号の濫用であるが、$X$から$Y$への写像全体がなす集合を、$\Hom_{\mathbf{Set}}(X, Y)$で表す。
   \eq*{
-    \Map(X, Y) \coloneqq \Hom_{\mathbf{Set}}(X, Y)
+    \Hom_{\mathbf{Set}}(X, Y) \coloneqq \qty{\qty(\qty(X, Y), G) \mid G \subset X \times Y \land \text{$G$は右一意かつ左全域}}
   }
-
-  また、$Y^X$とも表す。
-
-  $f \in \Map(X, Y)$を、簡単のため、$f \colon X \to Y$とも表記する。
 }
 
 \cor*{
@@ -180,17 +179,149 @@
 }
 
 \dfn{空写像}{
-  始域が空集合である写像は、一意に定まる。
+  終域を$Y$としたとき、始域が空集合である写像は、一意に定まる。
 
   このような写像を空写像と呼ぶ。
 }
 
-\thm{集合と写像の圏は完備かつ余完備}{
+\dfn{小さい圏}{
+  圏$\bm{C}$について、以下を満たす圏$C$が存在して、$\bm{C}$と$C$が圏同型であるとき、$\bm{C}$を小さいと呼ぶ。
+  \begin{enumerate}
+    \item \dfnref{圏}を満たす写像からなる集合$C^\prime$が存在して、$f \in C \leftrightarrow f \in C^\prime$である。
+  \end{enumerate}
+
+  このとき、誤解のない範囲において、$C^\prime$を$\bm{C}$で表す。
+}
+
+\cor*{
+  小さい圏$\bm{J}$について、$\Obj_{\bm{J}}$は小さい。
+}
+
+\thm{集合と写像の圏は完備}{
   任意の小さい圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への任意の関手$X$を考える。
 
-  このとき、$X$の極限と余極限が存在する。
+  このとき、$X$の極限が存在する。
 }{
-  ???
+  $\forall j \in \Obj_{\bm{J}}$について、$X(j)$が恒等射すなわち集合とすることに注意して、
+  集合$P$を以下で定める。
+  \eq*{
+    P \coloneqq \qty{\pi \in \Hom_{\mathbf{Set}}\qty(\Obj_{\bm{J}}, \bigcup \qty{X(j) \mid j \in \Obj_{\bm{J}}}) \mid \forall j \in \Obj_{\bm{J}} \qty(\pi(j) \in X(j))}
+  }
+
+  さらに、集合$L$を以下で定める。
+  \eq*{
+    L \coloneqq \qty{\pi \in P \mid \forall j, j^\prime \in \Obj_{\bm{J}} \forall i \in \Hom_{\bm{J}}(j, j^\prime) \qty\big(X(i)(\pi(j)) = \pi(j^\prime))}
+  }
+
+  $\mathbf{Set}$から$\Func(\Obj_{\bm{J}}, \mathbf{Set})$への対角関手$\Delta$について、
+  以下で定める関数記号$u$を考える。
+  \eq*{
+    u(j)(\pi) \coloneqq \pi(j)
+  }
+
+  $u$は、$\bm{J}$の射$i \colon j \to j^\prime$について$\forall \pi \in L \qty(\qty(X(i) \circ u(j))(\pi) = X(i)(u(j)(\pi)) = X(i)(\pi(j)) = \pi(j^\prime) = u(j^\prime)(\pi))$を満たすので、
+  $\Delta(L)$から$X$への自然変換である。
+
+  \vskip\baselineskip
+
+  このとき、$L, u$が極限となることを示す。
+
+  集合$Y$と、$\Delta(Y)$から$X$への自然変換$f$を考える。
+
+  このとき、写像$g \colon Y \to P$を以下で定める。
+  \eq*{
+    g(y)(j) \coloneqq f(j)(y)
+  }
+
+  $f$が自然変換であるので、$\forall y \in Y \qty(g(y) \in L)$となる。
+  ゆえに、$g \colon Y \to L$として再定義する。
+
+  写像$f$を、$x \mapsto f(x)$と表す。
+
+  $\bm{J}$の任意の対象$j$について、$\qty(u(j) \circ g)(y) = u(j)(g(y)) = g(y)(j) = f(j)(y)$である。
+
+  よって、$f = u \circ \Delta(g)$が成り立つ。
+
+  \vskip\baselineskip
+
+  $g^\prime \colon Y \to L$が存在して、$f = u \circ \Delta(g^\prime)$が成り立つとする。
+
+  $g \neq g^\prime$とする。
+  写像の相等より$\exists y \in Y \qty(g(y) \neq g^\prime(y))$であり、
+  再び写像の相等より$\exists j \in \Obj_{\bm{J}} \exists y \in Y \qty(g(y)(j) \neq g^\prime(y)(j))$である。
+
+  $g$の定義より、$\exists j \in \Obj_{\bm{J}} \exists y \in Y \qty(g^\prime(y)(j) \neq f(j)(y))$である。
+
+  ゆえに、$\qty(u(j) \circ g^\prime)(y) = u(j)(g^\prime(y)) = g^\prime(y)(j) \neq f(j)(y)$であり、$f \neq u \circ \Delta(g^\prime)$となって反する。
+
+  したがって、$g = g^\prime$である。
+}
+
+% \thm{集合と写像の圏は余完備}{
+%   任意の小さい圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への任意の関手$X$を考える。
+
+%   このとき、$X$の余極限が存在する。
+% }{
+%   $\forall j \in \Obj_{\bm{J}}$について、$X(j)$が恒等射すなわち集合とすることに注意して、
+%   集合$P$を以下で定める。
+%   \eq*{
+%     P \coloneqq \qty{\qty(j, x) \in \Obj_{\bm{J}} \times \bigcup \qty{X(j) \mid j \in \Obj_{\bm{J}}} \mid x \in X(j)}
+%   }
+
+%   ???
+% }
+
+
+\lsubsection{選択}
+
+\thm{選択公理が与える写像}{
+  集合$X, Y$とアリティ\num{2}の述語記号$\psi$について、$\forall x \in X \exists y \in Y \qty(\psi(x, y))$が成り立つとする。
+
+  このとき、以下を満たす写像$f \colon X \to Y$が存在する。
+  \eq*{
+    \forall x \in X \forall y \in Y \qty(f(x) = y \rightarrow \psi(x, y))
+  }
+}{
+  $X = \varnothing$のとき、空写像が存在する。
+
+  \vskip\baselineskip
+
+  $X \neq \varnothing$のときを考える。
+  以下の集合$Z$を考える。
+  \eq*{
+    Z \coloneqq \qty{\qty{\qty(x, y) \mid y \in Y \land \psi(x, y)} \mid x \in X}
+  }
+
+  $Z$について\axiref{選択の公理}の主張する集合$A$が存在する。
+
+  関係$\qty(\qty(X, Y), A)$は、仮定より$X$について左全域的で、$A$の定義より右一意的である。
+}
+
+\thm{選択関数の存在}{
+  任意の集合$X$について、写像$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が存在して、以下が成り立つ。
+  \eq*{
+    \forall x \in X \setminus \qty{\varnothing} \qty(f(x) \in x)
+  }
+}{
+  $\forall x \in X \setminus \qty{\varnothing}$について、$\exists y \qty(y \in x)$である。
+  この$y$は、$y \in x$より、$y \in \bigcup X$である。
+
+  ゆえに、\thmref{選択公理が与える写像}より存在する。
+}
+
+\thm{非空からなる積は非空}{
+  空でない集合$J$から$\mathbf{Set}$への関手$X$について、以下が成り立つ。
+  \eq*{
+    \forall j \in J \qty(X(j) \neq \varnothing) \rightarrow \prod X \neq \varnothing
+  }
+}{
+  $Z \coloneqq \qty{X(j) \mid j \in J}$について、定義より$Z \neq \varnothing \land \varnothing \notin Z$である。
+
+  \thmref{選択関数の存在}より、写像$f \colon Z \to \bigcup Z$が存在して、$\forall z \in Z \qty(f(z) \in z)$である。
+
+  写像$g \colon J \to \bigcup Z$を$g(j) \coloneqq f(X(j))$で定義すると、$\forall j \in J \qty(f(j) \in X(j))$であるので、$f \in \prod X$である。
+
+  ゆえに、$\prod X \neq \varnothing$である。
 }
 
 
@@ -322,42 +453,7 @@
 }
 
 
-\lsubsection{選択と単射、全射}
-
-\thm{選択公理が与える写像}{
-  集合$X, Y$とアリティ\num{2}の述語記号$\psi$について、$\forall x \in X \exists y \in Y \qty(\psi(x, y))$が成り立つとする。
-
-  このとき、以下を満たす写像$f \colon X \to Y$が存在する。
-  \eq*{
-    \forall x \in X \forall y \in Y \qty(f(x) = y \rightarrow \psi(x, y))
-  }
-}{
-  $X = \varnothing$のとき、空写像が存在する。
-
-  \vskip\baselineskip
-
-  $X \neq \varnothing$のときを考える。
-  以下の集合$Z$を考える。
-  \eq*{
-    Z \coloneqq \qty{\qty{\qty(x, y) \mid y \in Y \land \psi(x, y)} \mid x \in X}
-  }
-
-  $Z$について\axiref{選択の公理}の主張する集合$A$が存在する。
-
-  関係$\qty(\qty(X, Y), A)$は、仮定より$X$について左全域的で、$A$の定義より右一意的である。
-}
-
-\thm{選択関数の存在}{
-  任意の集合$X$について、写像$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が存在して、以下が成り立つ。
-  \eq*{
-    \forall x \in X \setminus \qty{\varnothing} \qty(f(x) \in x)
-  }
-}{
-  $\forall x \in X \setminus \qty{\varnothing}$について、$\exists y \qty(y \in x)$である。
-  この$y$は、$y \in x$より、$y \in \bigcup X$である。
-
-  ゆえに、\thmref{選択公理が与える写像}より存在する。
-}
+\lsubsection{単射と全射}
 
 \lem{単射}{
   写像$f$について、以下の\num{3}つは同値である。

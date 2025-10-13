@@ -152,6 +152,10 @@
   }
 }
 
+\rem{射の域の明示}{
+  $f \in \Hom_{\bm{C}}(a, b)$を、簡単のため、$\bm{C}$の射$f \colon a \to b$、と表記する。
+}
+
 \dfn{End類}{
   圏$\bm{C}$と、$\bm{C}$の対象$a$について、類$\End_{\bm{C}}(a)$を以下で定める。
   \eq*{
@@ -445,9 +449,9 @@
     $\bm{E}$ \\
     \begin{tikzcd}
       & G^\prime(F(a)) \ar[rr, "G^\prime(F(f))"] \ar[dd] & & G^\prime(F(b)) \ar[dd, "G^\prime(\eta(b))"] \\
-      G(F(a)) \ar[rr, crossing over, "G(F(f))"] \ar[dd, "G(\eta(a))"'] \ar[ur, "\theta(F(a))"] \ar[rd, "\qty(\theta \ast \eta)(a)", red] & & G(F(b)) \ar[ur, "\theta(F(b))"'] \ar[rd, "\qty(\theta \ast \eta)(b)", red] \\
+      G(F(a)) \ar[rr, crossing over, "G(F(f))", near end] \ar[dd, "G(\eta(a))"'] \ar[ur, "\theta(F(a))"] \ar[rd, "\qty(\theta \ast \eta)(a)", red] & & G(F(b)) \ar[ur, "\theta(F(b))"] \ar[rd, "\qty(\theta \ast \eta)(b)", red] \\
       & G^\prime(F^\prime(a)) \ar[rr] & & G^\prime(F^\prime(b)) \\
-      G(F^\prime(a)) \ar[rr, "G(F^\prime(f))"'] \ar[ur, "\theta(F^\prime(a))"] & & G(F^\prime(b)) \ar[from=uu, crossing over, "G(\eta(b))"] \ar[ur, "\theta(F^\prime(b))"'] \\
+      G(F^\prime(a)) \ar[rr, "G(F^\prime(f))"'] \ar[ur, "\theta(F^\prime(a))", near end] & & G(F^\prime(b)) \ar[from=uu, crossing over, "G(\eta(b))", near end] \ar[ur, "\theta(F^\prime(b))"'] \\
     \end{tikzcd}
   \end{minipage}
 \end{center}
@@ -485,12 +489,14 @@
 }
 
 \begin{center}
-  \begin{minipage}{0.5\linewidth}
+  \begin{minipage}{0.8\linewidth}
     $\bm{E}$ \\
     \begin{tikzcd}
-      G(F(a)) \ar[r, "\eta(F(a))"] \ar[d, "G(\sigma(a))"'] \ar[dd, bend right=90, red, "G\qty((\tau \circ \sigma)(a))"'] \ar[rd, red, "(\eta \ast \sigma) (a)"] & G^\prime(F(a)) \ar[r, "\theta(F(a))"] \ar[d, "G^\prime(\sigma(a))"] & G^{\prime \prime}(F(a)) \ar[d, "G^{\prime \prime}(\sigma(a))"] \\
-      G(F^\prime(a)) \ar[r, "\eta(F^\prime(a))"] \ar[d, "G(\tau(a))"'] & G^\prime(F^\prime(a)) \ar[r, "\theta(F^\prime(a))"] \ar[d, "G^\prime(\tau(a))"] \ar[rd, red, "(\theta \ast \tau) (a)"] & G^{\prime \prime}(F^\prime(a)) \ar[d, "G^{\prime \prime}(\tau(a))"] \\
-      G(F^{\prime \prime}(a)) \ar[r, "\eta(F^{\prime \prime}(a))"'] \ar[rr, bend right, red, "\qty(\theta \circ \eta) \qty(F^{\prime \prime} (a))"'] & G^\prime(F^{\prime \prime}(a)) \ar[r, "\theta(F^{\prime \prime}(a))"'] & G^{\prime \prime}(F^{\prime \prime}(a)) \\
+      G(F(a)) \ar[rr, "\eta(F(a))"] \ar[dd, "G(\sigma(a))"'] \ar[dddd, bend right=90, red, "G\qty((\tau \circ \sigma)(a))"'] \ar[rrdd, red, "(\eta \ast \sigma) (a)"] & & G^\prime(F(a)) \ar[rr, "\theta(F(a))"] \ar[dd, "G^\prime(\sigma(a))"] & & G^{\prime \prime}(F(a)) \ar[dd, "G^{\prime \prime}(\sigma(a))"] \\
+      & & & & \\
+      G(F^\prime(a)) \ar[rr, "\eta(F^\prime(a))"] \ar[dd, "G(\tau(a))"'] & & G^\prime(F^\prime(a)) \ar[rr, "\theta(F^\prime(a))"] \ar[dd, "G^\prime(\tau(a))"] \ar[rrdd, red, "(\theta \ast \tau) (a)"] & & G^{\prime \prime}(F^\prime(a)) \ar[dd, "G^{\prime \prime}(\tau(a))"] \\
+      & & & & \\
+      G(F^{\prime \prime}(a)) \ar[rr, "\eta(F^{\prime \prime}(a))"'] \ar[rrrr, bend right, red, "\qty(\theta \circ \eta) \qty(F^{\prime \prime} (a))"'] & & G^\prime(F^{\prime \prime}(a)) \ar[rr, "\theta(F^{\prime \prime}(a))"'] & & G^{\prime \prime}(F^{\prime \prime}(a)) \\
     \end{tikzcd}
   \end{minipage}
 \end{center}
@@ -536,29 +542,15 @@
 }
 
 \dfnf{圏$\bm{\rightrightarrows}$}{並行射からなる圏}{
-  以下を満たす相異なる\num{4}つの射$a, b, f, g$からなる圏を、$\bm{\rightrightarrows}$で表す。
-  \eqg*{
-    a = \dom(a) \land b = \dom(b) \\*
-    a = \dom(f) \land b = \cod(f) \\*
-    a = \dom(g) \land b = \cod(g)
-  }
+  \num{2}つの対象$a, b$と、\num{2}つの射$f \colon a \to b, g \colon a \to b$からなる圏を、$\bm{\rightrightarrows}$で表す。
 }
 
-\dfnf{圏$\bm{\rightarrow \leftarrow}$}{スパン圏}{
-  以下を満たす相異なる\num{5}つの射$a, b, c, f, g$からなる圏を、$\bm{\rightarrow \leftarrow}$で表す。
-  \eqg*{
-    a = \dom(a) \land b = \dom(b) \land c = \dom(c) \\*
-    a = \dom(f) \land c = \cod(f) \\*
-    b = \dom(g) \land c = \cod(g)
-  }
+\dfnf{圏$\bm{\leftarrow \rightarrow}$}{スパンの圏}{
+  \num{3}つの対象$a, b, c$と、\num{2}つの射$f \colon c \to a, g \colon c \to b$からなる圏を、$\bm{\leftarrow \rightarrow}$で表す。
 }
 
-\rem{集合は離散圏}{
-  集合$A$について、その要素を対象とみなすと、集合$A$の要素であることは圏となる。
-}
-
-\dfn{小さい圏}{
-  圏$\bm{C}$について、集合$A$が存在して、$A$と$\bm{C}$が圏同型であるとき、$\bm{C}$は小さいと呼ぶ。
+\dfnf{圏$\bm{\rightarrow \leftarrow}$}{コスパンの圏}{
+  圏$\qty(\bm{\leftarrow \rightarrow})^\opp$を、$\bm{\rightarrow \leftarrow}$で表す。
 }
 
 \rem{自然変換は射}{
@@ -596,8 +588,8 @@
 
   $F$から$a$への普遍射とは、$\bm{D}$の対象$x$と圏$\bm{C}$の射$u$の組であって、以下の\num{2}つを満たすものである。
   \eqg*{
-    \dom(u) = F(x) \land \cod(u) = a \\*
-    \forall y \in \Obj_{\bm{D}} \forall f \in \bm{C} \qty\Big(\dom(f) = F(y) \land \cod(f) = a \rightarrow \exists! g \in \bm{D} \qty\big(\dom(g) = y \land \cod(g) = x \land f = u \circ F(g)))
+    u \in \Hom_{\bm{C}}\qty(F(x), a) \\*
+    \forall y \in \Obj_{\bm{D}} \forall f \in \Hom_{\bm{C}}\qty(F(y), a) \exists! g \in \Hom_{\bm{D}}(y, x) \qty(f = u \circ F(g))
   }
 }
 
@@ -623,21 +615,21 @@
 
   このとき、以下を満たす。
   \eq*{
-    \exists! h \in \bm{D} \qty(\dom(h) = x^\prime \land \cod(h) = x \land u^\prime = u \circ F(h))
+    \exists! h \in \Hom_{\bm{D}}(x^\prime, x) \qty(u^\prime = u \circ F(h))
   }
 
   さらに上で与える$h$は同型射であり、その逆射$h^{-1}$は$u = u^\prime \circ F(h^{-1})$を満たす。
 }{
   $x, u$は普遍射であるので、$x^\prime, u^\prime$について定義より、
-  $\bm{D}$の射$g$であって$\dom(g) = x^\prime \land \cod(g) = x \land u^\prime = u \circ F(g)$なる射が一意に存在する。
+  $\bm{D}$の射$g \colon x^\prime \to x$であって$u^\prime = u \circ F(g)$なる射が一意に存在する。
 
   同様に$x^\prime, u^\prime$は普遍射であるので、$x, u$について定義より、
-  $\bm{D}$の射$g^\prime$であって$\dom(g^\prime) = x \land \cod(g^\prime) = x^\prime \land u = u^\prime \circ F(g^\prime)$なる射が一意に存在する。
+  $\bm{D}$の射$g^\prime \colon x \to x^\prime$であって$u = u^\prime \circ F(g^\prime)$なる射が一意に存在する。
 
   ゆえに、$u = u^\prime \circ F(g^\prime) = u \circ F(g) \circ F(g^\prime) = u \circ F(g \circ g^\prime)$が成り立つ。
 
   $x, u$は普遍射であるので、$x, u$について定義より、
-  $\bm{D}$の射$i$であって$\dom(i) = x \land \cod(i) = x \land u = u \circ F(i)$なる射が一意に存在する。
+  $\bm{D}$の射$i \colon x \to x$であって$u = u \circ F(i)$なる射が一意に存在する。
 
   $x, g \circ g^\prime$は$i$の条件を満たすので、$i = x = g \circ g^\prime$
 
@@ -709,7 +701,7 @@
     X(f) = f^\prime \land X(g) = g^\prime
   }
 
-  このとき$X$の極限を、$f^\prime, g^\prime$の引き戻しと呼ぶ。
+  このとき、$X$の極限を、$f^\prime, g^\prime$の引き戻しと呼ぶ。
 }
 
 \begin{center}
@@ -742,7 +734,7 @@
   圏$\bm{C}$と、$\bm{C}$の射$f^\prime, g^\prime$を考える。
   $\dom(f^\prime) = \dom(g^\prime) \land \cod(f^\prime) = \cod(g^\prime)$とする。
 
-  このとき$f^\prime, g^\prime$の引き戻し$x, u$を、$f^\prime, g^\prime$の等化子と呼び、この$x$を$\Eq(f^\prime, g^\prime)$で表す。
+  このとき、$f^\prime, g^\prime$の引き戻し$x, u$を、$f^\prime, g^\prime$の等化子と呼び、この$x$を$\Eq(f^\prime, g^\prime)$で表す。
 }
 
 \begin{center}
@@ -770,7 +762,7 @@
   \end{minipage}
 \end{center}
 
-\lem*{
+\lem{等化子から得る単射}{
   $f$と$g$の等化子$\Eq(f, g), u$について、$u\qty(\dom(f))$は単射である。
 }{
   $\cod(h_1) = \cod(h_2) = \Eq(X(f), X(g))$なる射$h_1, h_2$を考える。
@@ -822,9 +814,9 @@
 }
 
 \dfn{和}{
-  離散圏$\bm{J}$、圏$\bm{C}$と、$\bm{C}$から$\Func(\bm{J}, \bm{C})$への対角関手$\Delta$を考える。
+  離散圏$\bm{J}$、圏$\bm{C}$と、$\bm{J}$から$\bm{C}$への関手$X$を考える。
 
-  $\bm{J}$から$\bm{C}$への関手$X$について、$X$から$\Delta$への余普遍射を$X$の和と呼ぶ。
+  このとき、$X$の余極限を$X$の和と呼ぶ。
 }
 
 \dfn{始対象}{
@@ -834,6 +826,31 @@
   これを$U$とすると、$\ast$から$U$への余普遍射は、\dfnref{余普遍射}の条件を満たす$x$と$\ast$の組となる。
 
   この$x$を、$\bm{C}$の始対象と呼ぶ。
+}
+
+\dfn{押し出し}{
+  圏$\bm{C}$と、$\bm{C}$の射$f^\prime, g^\prime$を考える。
+  $\dom(f^\prime) = \dom(g^\prime)$とする。
+
+  圏$\bm{\leftarrow \rightarrow}$（対象ではない射を$f, g$とする）から$\bm{C}$への関手$X$であって、以下を満たす$X$を考える。
+  \eq*{
+    X(f) = f^\prime \land X(g) = g^\prime
+  }
+
+  このとき、$X$の余極限を、$f^\prime, g^\prime$の押し出しと呼ぶ。
+}
+
+\dfn{余等化子}{
+  圏$\bm{C}$と、$\bm{C}$の射$f^\prime, g^\prime$を考える。
+  $\dom(f^\prime) = \dom(g^\prime) \land \cod(f^\prime) = \cod(g^\prime)$とする。
+
+  このとき、$f^\prime, g^\prime$の押し出し$x, u$を、$f^\prime, g^\prime$の余等化子と呼ぶ。
+}
+
+\lem{余等化子から得る全射}{
+  $f$と$g$の余等化子$x, u$について、$u\qty(\cod(f))$は全射である。
+}{
+  \lemref{等化子から得る単射}より、双対性から明らか。
 }
 
 
@@ -897,7 +914,7 @@
 
   $\bm{C}$の任意の対象$a$について、$G(a), \theta(a)$が$F$から$a$への普遍射となることを示す。
 
-  $\bm{D}$の対象$y$と、$\bm{C}$の射$f$であって$\dom(f) = F(y) \land \cod(f) = a$を満たすものを考える。
+  $\bm{D}$の対象$y$と、$\bm{C}$の射$f \colon F(y) \to a$を考える。
 
   このとき、$g \coloneqq G(f) \circ \eta(y)$を考えると、$\theta$の自然性と$F = \qty(\theta \ast F) \circ \qty(F \ast \eta)$より、以下が成り立つ。
   \eqa*{
@@ -910,7 +927,7 @@
 
   \vskip\baselineskip
 
-  次に、$\bm{D}$の射$g^\prime, \dom(g^\prime) = y \land \cod(g^\prime) = G(a)$が存在して、$f = \theta(a) \circ F(g^\prime)$であるとする。
+  次に、$\bm{D}$の射$g^\prime \colon y \to G(a)$が存在して、$f = \theta(a) \circ F(g^\prime)$であるとする。
 
   このとき、$G = \qty(G \ast \theta) \circ \qty(\eta \ast G)$と$\eta$の自然性より、以下が成り立つ。
   \eqa*{
