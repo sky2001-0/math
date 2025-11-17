@@ -148,7 +148,7 @@
   写像$f = \qty(\qty(X, Y), G)$を考える。
   $\dom(f)$を$\id_X$、$\cod(f)$を$\id_Y$として、合成を\dfnref{合成写像}で定義すると、写像は射の公理をみたす。
 
-  ここで、記号の濫用であるが、$\id_X$をして$X$を表し、$X$をして$\id_X$を表す。
+  ここで記号の濫用であるが、$\id_X$をして$X$を表し、$X$をして$\id_X$を表す。
 }
 
 \dfn{集合と写像の圏}{
@@ -173,103 +173,66 @@
 \cor*{
   以下が成り立つ。
   \eqg*{
-    \forall Y \qty(Y^\varnothing = \qty{\qty(\qty(\varnothing, Y), \varnothing)}) \\*
-    \forall X \qty(X \neq \varnothing \rightarrow \varnothing^X = \varnothing)
+    \forall Y \qty(\Hom_{\mathbf{Set}}(\varnothing, Y) = \qty{\qty(\qty(\varnothing, Y), \varnothing)}) \\*
+    \forall X \qty(X \neq \varnothing \rightarrow \Hom_{\mathbf{Set}}(X, \varnothing) = \varnothing)
   }
 }
 
-\dfn{空写像}{
-  終域を$Y$としたとき、始域が空集合である写像は、一意に定まる。
+\cor*{
+  単集合は$\mathbf{Set}$の終対象である。
+}
 
-  このような写像を空写像と呼ぶ。
+\cor*{
+  空集合は$\mathbf{Set}$の始対象である。
+}
+
+\dfn{空写像}{
+  空集合は$\mathbf{Set}$の始対象であるので、終域$Y$について、始域が空集合である写像は一意に定まる。
+
+  この写像を$Y$の空写像と呼ぶ。
+}
+
+\cor*{
+  写像$f, g \colon X \to Y$を考える。
+
+  以下を満たす$\Eq(f, g), u$は、$f, g$の等価子である。
+  \eqg*{
+    \Eq(f, g) \coloneqq \qty{x \in X \mid f(x) = g(x)} \\*
+    u(\dom(f)) \coloneqq \iota_{\Eq(f, g), \dom(f)}
+  }
 }
 
 \dfn{小さい圏}{
-  圏$\bm{C}$について、以下を満たす圏$C$が存在して、$\bm{C}$と$C$が圏同型であるとき、$\bm{C}$を小さいと呼ぶ。
-  \begin{enumerate}
-    \item \dfnref{圏}を満たす写像からなる集合$C^\prime$が存在して、$f \in C \leftrightarrow f \in C^\prime$である。
-  \end{enumerate}
-
-  このとき、誤解のない範囲において、$C^\prime$を$\bm{C}$で表す。
+  圏$\bm{C}$について、集合$C$が存在して以下を満たすとき、$\bm{C}$を小さいと呼ぶ。
+  \eqg*{
+    \forall f \in \bm{C} \qty(f \in \mathbf{Set}) \\*
+    \forall c \in \Obj_{\bm{C}} \qty(c \in C)
+  }
 }
 
 \cor*{
   小さい圏$\bm{J}$について、$\Obj_{\bm{J}}$は小さい。
 }
 
-\thm{集合と写像の圏は完備}{
-  任意の小さい圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への任意の関手$X$を考える。
+\cor*{
+  小さい離散圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への関手$X$を考える。
 
-  このとき、$X$の極限が存在する。
-}{
-  $\forall j \in \Obj_{\bm{J}}$について、$X(j)$が恒等射すなわち集合とすることに注意して、
-  集合$P$を以下で定める。
-  \eq*{
-    P \coloneqq \qty{\pi \in \Hom_{\mathbf{Set}}\qty(\Obj_{\bm{J}}, \bigcup \qty{X(j) \mid j \in \Obj_{\bm{J}}}) \mid \forall j \in \Obj_{\bm{J}} \qty(\pi(j) \in X(j))}
+  このとき、以下で定める$\prod X, \pi$は$X$の積である。
+  \eqg*{
+    \prod X \coloneqq \qty{f \in \Hom_{\mathbf{Set}}\qty(\bm{J}, \bigcup \qty{X(j) \mid j \in \bm{J}}) \mid \forall j \in \bm{J} \qty(f(j) \in X(j))} \\*
+    \pi(j)(f) \coloneqq f(j)
   }
-
-  さらに、集合$L$を以下で定める。
-  \eq*{
-    L \coloneqq \qty{\pi \in P \mid \forall j, j^\prime \in \Obj_{\bm{J}} \forall i \in \Hom_{\bm{J}}(j, j^\prime) \qty\big(X(i)(\pi(j)) = \pi(j^\prime))}
-  }
-
-  $\mathbf{Set}$から$\Func(\Obj_{\bm{J}}, \mathbf{Set})$への対角関手$\Delta$について、
-  以下で定める関数記号$u$を考える。
-  \eq*{
-    u(j)(\pi) \coloneqq \pi(j)
-  }
-
-  $u$は、$\bm{J}$の射$i \colon j \to j^\prime$について$\forall \pi \in L \qty(\qty(X(i) \circ u(j))(\pi) = X(i)(u(j)(\pi)) = X(i)(\pi(j)) = \pi(j^\prime) = u(j^\prime)(\pi))$を満たすので、
-  $\Delta(L)$から$X$への自然変換である。
-
-  \vskip\baselineskip
-
-  このとき、$L, u$が極限となることを示す。
-
-  集合$Y$と、$\Delta(Y)$から$X$への自然変換$f$を考える。
-
-  このとき、写像$g \colon Y \to P$を以下で定める。
-  \eq*{
-    g(y)(j) \coloneqq f(j)(y)
-  }
-
-  $f$が自然変換であるので、$\forall y \in Y \qty(g(y) \in L)$となる。
-  ゆえに、$g \colon Y \to L$として再定義する。
-
-  写像$f$を、$x \mapsto f(x)$と表す。
-
-  $\bm{J}$の任意の対象$j$について、$\qty(u(j) \circ g)(y) = u(j)(g(y)) = g(y)(j) = f(j)(y)$である。
-
-  よって、$f = u \circ \Delta(g)$が成り立つ。
-
-  \vskip\baselineskip
-
-  $g^\prime \colon Y \to L$が存在して、$f = u \circ \Delta(g^\prime)$が成り立つとする。
-
-  $g \neq g^\prime$とする。
-  写像の相等より$\exists y \in Y \qty(g(y) \neq g^\prime(y))$であり、
-  再び写像の相等より$\exists j \in \Obj_{\bm{J}} \exists y \in Y \qty(g(y)(j) \neq g^\prime(y)(j))$である。
-
-  $g$の定義より、$\exists j \in \Obj_{\bm{J}} \exists y \in Y \qty(g^\prime(y)(j) \neq f(j)(y))$である。
-
-  ゆえに、$\qty(u(j) \circ g^\prime)(y) = u(j)(g^\prime(y)) = g^\prime(y)(j) \neq f(j)(y)$であり、$f \neq u \circ \Delta(g^\prime)$となって反する。
-
-  したがって、$g = g^\prime$である。
 }
 
-% \thm{集合と写像の圏は余完備}{
-%   任意の小さい圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への任意の関手$X$を考える。
+\cor*{
+  小さい離散圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への関手$X$を考える。
 
-%   このとき、$X$の余極限が存在する。
-% }{
-%   $\forall j \in \Obj_{\bm{J}}$について、$X(j)$が恒等射すなわち集合とすることに注意して、
-%   集合$P$を以下で定める。
-%   \eq*{
-%     P \coloneqq \qty{\qty(j, x) \in \Obj_{\bm{J}} \times \bigcup \qty{X(j) \mid j \in \Obj_{\bm{J}}} \mid x \in X(j)}
-%   }
-
-%   ???
-% }
+  このとき、以下で定める$x, u$は$X$の和である。
+  \eqg*{
+    x \coloneqq \bigcup \qty{\qty{\qty(j, x) \mid x \in X(j)} \mid j \in \bm{J}} \\*
+    u(j)(x) \coloneqq \qty(j, x)
+  }
+}
 
 
 \lsubsection{選択}
