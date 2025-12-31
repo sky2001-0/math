@@ -11,7 +11,7 @@
 }
 
 \dfn{矛盾}{
-  あらゆる解釈において偽を与える命題を、矛盾と呼ぶ。
+  あらゆる解釈において偽を与える命題を、矛盾と呼び、$\bot$で表す。
 }
 
 
@@ -611,7 +611,7 @@
 \dfn{全称量化子}{
   量化子$\forall$を定める。
 
-  アリティ\num{1}の述語$\phi$について、$\forall x \qty(\phi(x))$は命題である。
+  項$x$を出現させないアリティ\num{1}の述語$\phi$について、$\forall x \qty(\phi(x))$は命題である。
 }
 
 \axi{全称の導入則}{
@@ -622,7 +622,7 @@
 }
 
 \axi{全称の除去則}{
-  項$y$とアリティ\num{1}の述語$\phi$について、以下を定める。
+  項$y$、項$x$を出現させないアリティ\num{1}の述語$\phi$について、以下を定める。
   \eq*{
     \forall x \qty(\phi(x)) \vdash \phi(y)
   }
@@ -646,14 +646,14 @@
 \dfn{存在量化子}{
   量化子$\exists$を定める。
 
-  アリティ\num{1}の述語$\phi$について、存在量化子$\exists$を以下で定める。
+  項$x$を出現させないアリティ\num{1}の述語$\phi$について、存在量化子$\exists$を以下で定める。
   \eq*{
     \exists x \qty(\phi(x)) \defiff \lnot \forall x \qty(\lnot \phi(x))
   }
 }
 
 \thm{存在の導入則}{
-  アリティ\num{1}の述語$\phi$について、以下が成り立つ。
+  項$x$を出現させないアリティ\num{1}の述語$\phi$について、以下が成り立つ。
   \eq*{
     \phi(y) \vdash \exists x \qty(\phi(x))
   }
@@ -677,11 +677,9 @@
 
   $\phi(x)$を仮定すると、前提$\chi$より矛盾するので、\thmref{背理法}より$\lnot \phi(x)$である。
 
-  $\chi, \lnot \psi$は項$x$を出現させないので、$\forall x \qty(\lnot \psi(x))$である。
+  $\chi, \lnot \psi$は項$x$を出現させないので、$\forall x \qty(\lnot \phi(x))$である。
 
-  $\exists y \qty(\phi(y)) \defiff \lnot \forall x \qty(\lnot \phi(x))$であるため、矛盾する。
-
-  \thmref{背理法}より$\psi$を得る。
+  $\exists y \qty(\phi(y))$を仮定すると、$\exists y \qty(\phi(y)) \defiff \lnot \forall x \qty(\lnot \phi(x))$であるため矛盾するので、\thmref{背理法}より$\psi$を得る。
 }
 
 \thm{量化子と連言}{

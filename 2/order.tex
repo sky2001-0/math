@@ -9,85 +9,47 @@
   または単に$P$と書き、半順序集合と集合どちらも表すものとする。
 }
 
+\rem{狭義半順序による定義}{
+  集合$P$上の半順序$\preccurlyeq$について、誤解のない範囲において順序対$\qty(P, \prec)$で半順序集合を表すものとする。
+}
+
 \cor*{
   集合$P$について、$\qty(P, \subset)$は半順序集合である。また、$\qty(P, \supset)$も半順序集合である。
 }
 
-\dfn{単調}{
-  半順序$\preccurlyeq$と両立する写像を単調である、または広義単調であると呼ぶ。
-
-  特に、$\prec$と両立する写像を、狭義単調であると呼ぶ。
-}
-
 \dfn{極大元}{
-  半順序集合$P$について、以下の元$b$を$P$の極大元と呼ぶ。
+  半順序集合$P$について、$P$の元$b$を$P$の極大元と呼ぶ。
   \eq*{
-    b \in P \land \forall a \in P \qty(\lnot b \prec a)
-  }
-}
-
-\dfn{最大元}{
-  半順序集合$P$について、以下の元$b$を$P$の最大元と呼ぶ。
-  \eq*{
-    b \in P \land \forall a \in P \qty(a \preccurlyeq b)
+    \forall a \in P \qty(\lnot b \prec a)
   }
 }
 
 \dfn{極小元}{
-  半順序集合$P$について、以下の元$b$を$P$の極小元と呼ぶ。
+  半順序集合$P$について、$P$の元$b$を$P$の極小元と呼ぶ。
   \eq*{
-    b \in P \land \forall a \in P \qty(\lnot b \succ a)
-  }
-}
-
-\dfn{最小元}{
-  半順序集合$P$について、以下の元$b$を$P$の最小元と呼ぶ。
-  \eq*{
-    b \in P \land \forall a \in P \qty(a \succcurlyeq b)
+    \forall a \in P \qty(\lnot b \succ a)
   }
 }
 
 \cor*{
-  半順序集合$P$の最大元は、極大元である。
+  半順序集合$P$について、最大元は極大元であり、最小元は極小元である。
 }
 
-\cor{最大元の一意性}{
-  半順序集合$P$の最大元は存在するならば一意である。
-  これは半順序の反対称性から従う。
-
-  ここから、半順序集合$P$の最大元$b$を$\max P \coloneqq b$と表す。
+\cor{半順序における諸概念}{
+  半順序が誘導する圏$P$について、同型射は恒等射である。
+  したがって、以下が成り立つ。
+  \begin{enumerate}
+    \item $P$の最大元は、存在するならば一意である。これを、$\max P$で表す。
+    \item $P$の最小元は、存在するならば一意である。これを、$\min P$で表す。
+    \item $P$の部分$A$について、$A$の下限は、存在するならば一意である。これを、$\inf A$で表す。
+    \item $P$の部分$A$について、$A$の上限は、存在するならば一意である。これを、$\sup A$で表す。
+  \end{enumerate}
 }
-
-\cor*{
-  半順序集合$P$の最小元は、極小元である。
-}
-
-\cor{最小元の一意性}{
-  半順序集合$P$の最小元は存在するならば一意である。
-  これは半順序の反対称性から従う。
-
-  ここから、半順序集合$P$の最小元$b$を$\min P \coloneqq b$と表す。
-}
-
-\dfn{上限}{
-  半順序集合$P$について、その部分集合$A$を考える。
-
-  $A$の上界全体の集合に最小元が存在するとき、これを$A$の上限と呼び、$\sup A$で表す。
-}
-
-\dfn{下限}{
-  半順序集合$P$について、その部分集合$A$を考える。
-
-  $A$の下界全体の集合に最大元が存在するとき、これを$A$の下限と呼び、$\inf A$で表す。
-}
-
-
-\lsubsection{束}
 
 \dfn{束}{
-  以下を満たす半順序集合$P$を束と呼ぶ。
+  以下を満たす半順序集合$L$を束と呼ぶ。
   \eq*{
-    \forall x, y \in P \exists z, w \in P \qty(z = \sup{x, y} \land w = \inf{x, y})
+    \forall x, y \in L \exists z, w \in L \qty(z = \sup{x, y} \land w = \inf{x, y})
   }
 }
 
@@ -96,10 +58,10 @@
 }
 
 \lem{分配不等式}{
-  束$P$について、以下が成り立つ。
+  束$L$について、以下が成り立つ。
   \eqg*{
-    \sup{x, \inf{y, z}} \preccurlyeq \inf{\sup{x, y}, \sup{x, z}} \\*
-    \inf{x, \sup{y, z}} \succcurlyeq \sup{\inf{x, y}, \inf{x, z}}
+    \forall x, y, z \in L \qty(\sup{x, \inf{y, z}} \preccurlyeq \inf{\sup{x, y}, \sup{x, z}}) \\*
+    \forall x, y, z \in L \qty(\inf{x, \sup{y, z}} \succcurlyeq \sup{\inf{x, y}, \inf{x, z}})
   }
 }{
   $x$は$\qty{\sup{x, y}, \sup{x, z}}$の下界であるので、$x \preccurlyeq \inf{\sup{x, y}, \sup{x, z}}$である。
@@ -111,15 +73,26 @@
 
   したがって第一式が成り立つ。
 
+  \vskip\baselineskip
+
   第二式も同様に成り立つ。
 }
 
+\dfn{完備束}{
+  束$L$について、$L$の任意の部分が上限と下限を持つとき、$L$を完備束と呼ぶ。
+}
+
+\cor*{
+  空でない完備束$L$は最大元と最小元を持つ。
+}
+
+\cor*{
+  集合$X$について、$\qty(\P(X), \subset)$は完備束である。
+}
+
 \dfn{全順序}{
-  集合$P$上の以下を満たす半順序$\preccurlyeq$を全順序と呼ぶ。
+  完全な半順序を、全順序と呼ぶ。
   全順序であることを明示的に記号$\leq$で表す。
-  \eq*{
-    \forall x, y \in P \qty(x \preccurlyeq y \lor y \preccurlyeq x)
-  }
 
   集合$P$上の全順序$\leq$について、順序対$\qty(P, \leq)$を全順序集合と呼ぶ。
   または単に$P$と書き、全順序集合と集合どちらも表すものとする。
@@ -150,177 +123,726 @@
   開区間、閉区間をまとめて区間と呼ぶ。
 }
 
+\dfn{整列集合}{
+  全順序集合$\qty(S, \leq)$について、$S$の任意の空でない部分が最小元を持つとき、$S$を整列集合と呼ぶ。
+}
 
-\lsubsection{Zornの補題}
+\cor*{
+  整列集合$\qty(S, \leq)$とその部分$A$について、$\qty(A, \leq)$は整列集合である。
+}
 
-\dfn{帰納的}{
-  空でない半順序集合$\qty(P, \preccurlyeq)$を考える。
 
-  $P$の任意の部分集合$A$について、順序対$\qty(A, \preccurlyeq)$が全順序集合ならば$A$が上に有界となるとき、$P$は帰納的であると言う。
+\lsubsection{順序数}
+
+\dfn{順序数}{
+  以下が成り立つ集合$\alpha$を考える。
+  \eq*{
+    \forall x \in \alpha \qty(x \subset \alpha)
+  }
+
+  このとき$\qty(\alpha, \in)$が整列集合であるとき、$\alpha$を順序数と呼ぶ。
 }
 
 \lem*{
-  帰納的な半順序集合$\qty(P, \preccurlyeq)$について、以下の集合系$\mathcal{M}$、すなわち$P$の全順序部分集合の全体を考える。
-  \eq*{
-    \mathcal{M} \coloneqq \qty{M \subset P \mid \forall x, y \in M \qty(x \preccurlyeq y \lor y \preccurlyeq x)}
-  }
-
-  このとき、$P$が極大元を持たないならば、以下を満たす写像$f \colon \mathcal{M} \to P$が存在する。
-  \eq*{
-    \forall M \in \mathcal{M} \forall m \in M \qty(m \prec f(M))
-  }
+  空でない順序数$\alpha$について、$\varnothing \in \alpha$である。
 }{
-  帰納的であることより、$\forall M \in \mathcal{M}$に対して上界$u$が存在する。
+  $\varnothing \notin \alpha$とする。
 
-  今、$u$は$P$の極大元ではないので、$\exists v \in P \qty(u \prec v)$である。
-  $\forall m \in M \qty(m \preccurlyeq u \prec v)$である。
+  整列集合より、最小元$\min \alpha$が存在する。
 
-  \thmref{選択公理が与える写像}より存在する。
+  $\min \alpha \neq \varnothing$より、$\exists \beta \qty(\beta \in \min \alpha)$である。
+
+  $\min \alpha \subset \alpha$であるので、$\beta \in \alpha$より最小性に反する。
 }
 
-\dfn{タワー}{
-  極大元を持たない半順序集合$P$を考える。
+\lem{順序数の元は順序数}{
+  順序数$\alpha$について、$\alpha$の元$\beta$は順序数である。
 
-  \mlemref{0}で定めた集合系$\mathcal{M}$と写像$f$を考える。
+  特に、$\beta = \alpha_{< \beta}$が成り立つ。
+}{
+  $\beta \subset \alpha$より、$\in$は狭義全順序である。
 
-  以下を満たす集合系$\mathcal{T} \subset \mathcal{M}$を、$P$のタワーと呼ぶ。
-  \eqg*{
-    \varnothing \in \mathcal{T} \\*
-    \forall T \in \mathcal{T} \qty(T \cup \qty{f(T)} \in \mathcal{T}) \\*
-    \forall \mathcal{S} \subset \mathcal{T} \qty(\text{$\qty(\mathcal{S}, \subset)$は全順序集合} \rightarrow \bigcup \mathcal{S} \in \mathcal{T})
-  }
+  $\beta$の任意の空でない部分は、$\alpha$の空でない部分であるので、$\qty(\beta, \in)$は整列集合である。
+
+  \vskip\baselineskip
+
+  $\gamma \in \beta$について、$\gamma \in \beta \subset \alpha$であるため、$\gamma \in \alpha$である。
+
+  $\delta \in \gamma$を考えると、同様に$\delta \in \alpha$である。
+
+  今、推移的であるため、$\delta \in \gamma \land \gamma \in \beta \rightarrow \delta \in \beta$である。
+
+  任意の$\delta \in \gamma$について成り立つので、$\gamma \subset \beta$である。
+
+  \vskip\baselineskip
+
+  定義より、$\alpha_{< \beta} = \qty{x \in \alpha \mid x \in \beta} = \alpha \cap \beta$である。
+
+  $\beta \in \alpha$より$\beta \subset \alpha$であるので、$\alpha \cap \beta = \beta$である。
 }
 
-\lem*{
-  極大元を持たない半順序集合$P$について、以下の集合を考える。
-  \eq*{
-    \mathcal{T}_0 \coloneqq \bigcap \qty{\mathcal{T} \subset \P(P) \mid \text{$\mathcal{T}$は$P$のタワー}}
-  }
-
-  このとき、$\mathcal{T}_0$は$P$のタワーである。
-}{
-  $\mathcal{M}$は$P$のタワーであるので、$\qty{\mathcal{T} \subset \P(P) \mid \text{$\mathcal{T}$は$P$のタワー}} \neq \varnothing$である。
-
-  タワーの定義より、明らか。
+\cor*{
+  空集合は順序数である。
 }
 
-\lem*{
-  極大元を持たない半順序集合$P$を考える。
+\cor*{
+  順序数$\alpha, \beta$について、$\alpha \cap \beta$は順序数である。
+}
 
-  \mlemref{-2}で定めた$f$について、以下で定める写像$g \colon \mathcal{M} \to \mathcal{M}$を考える。
-  \eq*{
-    g(M) \coloneqq M \cup \qty{f(M)}
-  }
+\cor*{
+  順序数$\alpha$について、$\alpha^+$は順序数である。
+}
 
-  このとき、\mlemref{-1}で定めた$\mathcal{T}_0$は、以下を満たす。
-  \eq*{
-    \forall T \in \mathcal{T}_0 \qty(\forall T' \in \mathcal{T}_0 \qty(T \subset T' \lor T' \subset T) \rightarrow \forall T' \in \mathcal{T}_0 \qty(T' \subset T \lor g(T) \subset T'))
-  }
-}{
-  前件を満たす$T$について、以下の集合系を考える。
-  \eq*{
-    \mathcal{T}_T \coloneqq \qty{T' \in \mathcal{T}_0 \mid T' \subset T \lor g(T) \subset T'}
-  }
-
-  定義より、$\mathcal{T}_T \subset \mathcal{T}_0$である。
-
-  \vskip\baselineskip
-
-  今、$\varnothing \subset T$であるので、$\varnothing \in \mathcal{T}_T$である。
-
-  \vskip\baselineskip
-
-  $T' \in \mathcal{T}_T$を考える。
-
-  $g(T) \subset T'$であるとき、$g(T) \subset T' \subset g(T')$より、$g(T') \in \mathcal{T}_T$である。
-
-  $T' \subset T$であるとき、$g(T') \subset T$ならば$g(T') \in \mathcal{T}_T$である。
-
-  $g(T') \setminus T \neq \varnothing$ならば、$g(T') \setminus T = \qty{f(T')}$であるため、$T = T'$である。
-  ゆえに、$g(T') = g(T) \in \mathcal{T}_T$である。
-
-  \vskip\baselineskip
-
-  $\mathcal{T}_T$の全順序部分$\mathcal{S}$を考える。
-
-  $\mathcal{S} \subset \mathcal{T}_T \subset \mathcal{T}_0$より、タワーの定義から$\bigcup \mathcal{S} \in \mathcal{T}_0$である。
-
-  $\forall S \in \mathcal{S} \qty(S \subset T)$ならば、$\bigcup \mathcal{S} \subset T$であり、$\bigcup \mathcal{S} \in \mathcal{T}_T$である。
-
-  $\exists S \in \mathcal{S} \qty(g(T) \subset S)$ならば、$g(T) \subset \bigcup \mathcal{S}$であり、$\bigcup \mathcal{S} \in \mathcal{T}_T$である。
-
-  \vskip\baselineskip
-
-  ゆえに$\mathcal{T}_T$は、$P$のタワーである。
-
-  よって、$\mathcal{T}_0 \subset \mathcal{T}_T$が成り立つので、$\mathcal{T}_0 = \mathcal{T}_T$である。
-
-  したがって後件を満たす。
+\cor*{
+  集合$\alpha$について、$\qty(\alpha^+, \in)$が順序数ならば$\qty(\alpha, \in)$は順序数である。
 }
 
 \lem*{
-  極大元を持たない半順序集合$P$を考える。
-
-  \mlemref{-2}で定めた$\mathcal{T}_0$について、$\qty(\mathcal{T}_0, \subset)$は全順序集合である。
+  順序数$\alpha, \beta$について、以下の\num{2}つは同値である。
+  \begin{enumerate}
+    \item $\alpha \in \beta$
+    \item $\alpha \subsetneq \beta$
+  \end{enumerate}
 }{
-  以下の集合系を考える。
+  $1. \to 2.$を示す。
+
+  順序数の定義より$\alpha \subset \beta$である。
+
+  $\alpha = \beta$とすると、$\alpha \in \alpha$より\corref{自己所属の禁止}に反する。
+
+  ゆえに、$\alpha \subsetneq \beta$である。
+
+  \vskip\baselineskip
+
+  $2. \to 1.$を示す。
+
+  $\beta = \varnothing$のとき、明らか。
+
+  $\beta \neq \varnothing$について、$\beta \setminus \alpha$は整列集合の空でない部分であるので、$\min\qty(\beta \setminus \alpha)$が存在する。
+  これを$\gamma$とする。
+
+  定義より、$\gamma \in \beta \setminus \alpha$すなわち$\gamma \notin \alpha$である。
+
+  \vskip\baselineskip
+
+  任意の$x \in \gamma$について、$\gamma \subset \beta$より$x \in \beta$である。
+
+  $x \notin \alpha$とすると、$x \in \beta \setminus \alpha$より、$\gamma = x \lor \gamma \in x$であり、\lemref{循環所属の禁止}に反する。
+
+  ゆえに$x \in \alpha$であるので、$\gamma \subset \alpha$である。
+
+  \vskip\baselineskip
+
+  任意の$y \in \alpha$について、$\alpha \subset \beta$より$y \in \beta$であるため、$\beta$が全順序より$y \in \gamma \lor y = \gamma \lor \gamma \in y$である。
+
+  $y = \gamma$のとき、$\gamma \in \alpha$であるが$\gamma$の定義に反する。
+
+  $\gamma \in y$ならば、$y \in \alpha$より、$\gamma \in \alpha$となり、同様に反する。
+
+  ゆえに$y \in \gamma$であるので、$\alpha \subset \gamma$である。
+
+  \vskip\baselineskip
+
+  したがって$\alpha = \gamma$であり、$\gamma \in \beta$より成り立つ。
+}
+
+\lem{順序数の比較可能性}{
+  順序数$\alpha, \beta$について、以下が成り立つ。
   \eq*{
-    \mathcal{T}_1 \coloneqq \qty{T \in \mathcal{T}_0 \mid \forall T' \in \mathcal{T}_0 \qty(T \subset T' \lor T' \subset T)}
+    \alpha \subset \beta \lor \beta \subset \alpha
   }
 
-  定義より、$\mathcal{T}_1 \subset \mathcal{T}_0$である。
+  \mlemref{-1}より特に以下が成り立つ。
+  \eq*{
+    \alpha \in \beta \lor \alpha = \beta \lor \beta \in \alpha
+  }
+}{
+  成り立たないとすると、$\alpha \cap \beta \subsetneq \alpha \land \alpha \cap \beta \subsetneq \beta$である。
+
+  \mlemref{-1}より、$\alpha \cap \beta \in \alpha \land \alpha \cap \beta \in \beta$である。
+
+  したがって、$\alpha \cap \beta \in \alpha \cap \beta$となるが、\corref{自己所属の禁止}に反する。
+}
+
+\lem{順序数からなる整列集合}{
+  集合$A$について、その元が全て順序数ならば、$\qty(A, \in)$は整列集合である。
+}{
+  \lemref{順序数の比較可能性}より、$\qty(A, \in)$は全順序集合である。
+
+  $A$の空でない部分$B$を考える。
+
+  空でないので、$b \in B$が存在する。
+
+  $b \cap B = \varnothing$のとき、$b = \min B$である。
+
+  $b \cap B \neq \varnothing$のとき、$b \cap B \subset b$であり、$b$は整列集合であるため、$\min(b \cap B)$が存在する。
+  これは、$B$の最小元である。
+}
+
+\lem*{
+  順序数$\alpha$について、以下が成り立つ。
+  \eq*{
+    \forall \beta \in \alpha \qty(\beta^+ \in \alpha \lor \beta^+ = \alpha)
+  }
+}{
+  $\beta \in \alpha \land \beta^+ \notin \alpha$とする。
+
+  \mlemref{-2}より、$\beta \in \alpha$から$\beta \subsetneq \alpha$すなわち$\beta \subset \alpha \land \beta \neq \alpha$を得る。
+
+  \lemref{順序数の比較可能性}より、$\alpha \subset \beta^+$を得る。
+
+  \lemref{後続と包含}より、$\alpha = \beta \lor \alpha = \beta^+$であるので、$\beta \neq \alpha$から$\alpha = \beta^+$である。
+}
+
+\lem{順序数の類別}{
+  順序数$\alpha$について、以下が成り立つ。
+  \eq*{
+    \exists \beta \qty(\alpha = \beta^+) \lor \alpha = \bigcup \alpha
+  }
+}{
+  第一命題について$\forall \beta \qty(\alpha \neq \beta^+) \rightarrow \alpha = \bigcup \alpha$を示すことで示す。
 
   \vskip\baselineskip
 
-  今、$\varnothing \subset T$であるので、$\varnothing \in \mathcal{T}_1$である。
+  任意の$x \in \bigcup \alpha$について、$\exists \beta \in \alpha \qty(x \in \beta)$であり、$\beta \subset \alpha$から$x \in \alpha$である。
+
+  ゆえに、$\bigcup \alpha \subset \alpha$である。
 
   \vskip\baselineskip
 
-  $T \in \mathcal{T}_1$を考える。
+  任意の$x \in \alpha$について、\mlemref{-1}より$x^+ \in \alpha \lor x^+ = \alpha$であり、仮定より$x^+ \neq \alpha$であるので、$x^+ \in \alpha$である。
 
-  \mlemref{-1}より、$\forall T' \in \mathcal{T}_0 \qty(T' \subset T \subset g(T) \lor g(T) \subset T')$であるため、$g(T) \in \mathcal{T}_1$である。
+  $x \in x^+ \land x^+ \in \alpha$より、$\exists \beta \in \alpha \qty(x \in \beta)$すなわち$x \in \bigcup \alpha$である。
+
+  したがって$\alpha \subset \bigcup \alpha$である。
+}
+
+\thm{超限帰納法}{
+  以下が成り立つアリティ\num{1}の述語記号$\psi$を考える。
+  \eq*{
+    \forall \beta \qty\Big(\text{$\beta$が順序数} \rightarrow \qty\Big(\forall \gamma \in \beta \qty(\psi(\gamma)) \rightarrow \psi(\beta)))
+  }
+
+  このとき任意の順序数$\alpha$について、$\psi(\alpha)$が成り立つ。
+}{
+  ある順序数$\alpha$が存在して、成り立たないとする。
+
+  $A \coloneqq \qty{\beta \in \alpha^+ \mid \lnot \psi(\beta)}$とする。
+
+  $A$は順序数$\alpha^+$の部分であり、$\alpha \in A$より$A$は空でない。
+  ゆえに最小元$\min A$が存在する。
+
+  $\min A \subset \alpha^+$と、最小性より$\forall \gamma \in \min A \qty(\psi(\gamma))$である。
+
+  仮定より$\psi(\min \alpha)$が成り立つので、反する。
+}
+
+\thm{超限再帰}{
+  順序数$\alpha$と集合$A$について、写像$G \colon \bigcup \qty{A^\xi \mid \xi \in \alpha} \to A$が与えられている。
+
+  このとき、以下を満たす写像$f \colon \alpha \to A$は一意に定まる。
+  \eq*{
+    \forall \xi \in \alpha \qty(f(\xi) = G(f \circ \iota_{\xi, \alpha}))
+  }
+}{
+  順序数$\beta \subset \alpha$について、以下を満たす写像$f_\beta \colon \beta \to A$の存在して、これが一意であることを示す。
+  \eq*{
+    \forall \xi \in \beta \qty(f_\beta(\xi) = G(f_\beta \circ \iota_{\xi, \beta}))
+  }
 
   \vskip\baselineskip
 
-  $\mathcal{T}_1$の全順序部分$\mathcal{S}$を考える。
+  $\beta = \varnothing$のとき、空写像$f_\varnothing \colon \varnothing \to A$は条件を満たす。
 
-  $\mathcal{S} \subset \mathcal{T}_1 \subset \mathcal{T}_0$より、タワーの定義から$\bigcup \mathcal{S} \in \mathcal{T}_0$である。
-
-  $\forall T' \in \mathcal{T}_0$を考える。
-
-  $\forall S \in \mathcal{S} \qty(S \subset T')$ならば、$\bigcup \mathcal{S} \subset T'$である。
-  $\exists S \in \mathcal{S} \qty(T' \subset S)$ならば、$T' \subset \bigcup \mathcal{S}$である。
-
-  ゆえに、$T' \subset \bigcup \mathcal{S} \lor \bigcup \mathcal{S} \subset T'$である。
-
-  したがって、$\bigcup \mathcal{S} \in \mathcal{T}_1$である。
+  空写像は一意であるので、$f_\varnothing$は一意である。
 
   \vskip\baselineskip
 
-  ゆえに$\mathcal{T}_1$は、$P$のタワーである。
+  $\beta = \gamma^+$なる順序数$\gamma$が存在するとき、$\xi \in \beta$について$f_\xi$が一意に存在するとする。
 
-  よって、$\mathcal{T}_0 \subset \mathcal{T}_1$が成り立つので、$\mathcal{T}_0 = \mathcal{T}_1$である。
+  このとき、以下で定める$f_\beta \colon \beta \to A$を考える。
+  \begin{enumerate}
+    \item $\xi \in \gamma$について$f_\beta(\xi) = f_\gamma(\xi)$
+    \item $f_\beta(\gamma) = G(f_\gamma)$
+  \end{enumerate}
+
+  $\xi \in \gamma$について、$f_\gamma$の条件と定義より$f_\beta(\xi) = f_\gamma(\xi) = G(f_\gamma \circ \iota_{\xi, \gamma}) = G(f_\beta \circ \iota_{\xi, \beta})$である。
+
+  また、定義より$f_\beta(\gamma) = G(f_\gamma) = G(f_\beta \circ \iota_{\gamma, \beta})$である。
+
+  ゆえに条件を満たす。
+
+  $f_\beta^\prime$も成り立つとすると、条件と$f_\gamma$の一意性より$f_\beta^\prime \circ \iota_{\gamma, \beta} = f_\gamma = f_\beta \circ \iota_{\gamma, \beta}$である。
+
+  また、条件より$f_\beta^\prime(\gamma) = G(f_\beta^\prime \circ \iota_{\gamma, \beta}) = G(f_\gamma) = f_\beta(\gamma)$である。
+
+  ゆえに$f_\beta = f_\beta^\prime$である。
+
+  \vskip\baselineskip
+
+  空でない$\beta$について$\beta = \bigcup \beta$であり、任意の$\xi \in \beta$について$f_\xi$が一意に存在するとする。
+
+  このとき、以下で定める$f_\beta \colon \beta \to A$を考える。
+  \begin{enumerate}
+    \item $\xi \in \beta$について$f_\beta(\xi) = f_{\xi^+}(\xi)$
+  \end{enumerate}
+
+  $\xi \in \beta$について、$\exists \gamma \in \xi \qty(f_\xi(\gamma) \neq \qty(f_\beta \circ \iota_{\xi, \beta})(\gamma))$とする。
+
+  $\gamma^+ \in \beta$より$f_{\gamma^+}$の一意性から$f_{\gamma^+} = f_\xi \circ \iota_{\gamma^+, \xi}$であり、定義より$\qty(f_\beta \circ \iota_{\xi, \beta})(\gamma) = f_{\gamma^+}(\gamma)$であるので、一致する。
+
+  ゆえに、$f_\xi = f_\beta \circ \iota_{\xi, \beta}$である。
+
+  $f_{\xi^+}$の条件と$f_\xi$の一意性より$f_\beta(\xi) = f_{\xi^+}(\xi) = G(f_{\xi^+} \circ \iota_{\xi, \xi^+}) = G(f_\xi) = G(f_\beta \circ \iota_{\xi, \beta})$である。
+
+  $f_\beta^\prime$が成り立ちとすると、$\gamma \in \beta$について、条件と$f_\gamma$の一意性から$f_\beta(\gamma) = G(f_\beta \circ \iota_{\gamma, \beta}) = G(f_\gamma) = G(f_\beta^\prime \circ \iota_{\gamma, \beta}) = f_\beta^\prime(\gamma)$であるので、$f_\beta = f_\beta^\prime$である。
+
+  \vskip\baselineskip
+
+  \thmref{超限帰納法}より成り立つ。
+}
+
+
+\lsubsection{いくつかの重要な定理}
+
+\lem{整列集合の自己単調単射は増大}{
+  整列集合$\qty(S, \leq)$と、狭義単調写像$f \colon S \to S$について、以下が成り立つ。
+  \eq*{
+    \forall x \in S \qty(x \leq f(x))
+  }
+}{
+  $A \coloneqq \qty{x \in X \mid f(x) < x}$を考える。
+
+  $A \neq \varnothing$とすると、定義より$\min A$が存在する。
+
+  $A$の定義より$f(\min A) < \min A$であり、狭義単調より$f(f(\min A)) < f(\min A)$であるので、
+  $f(\min A) \in A$であり、$\min A \leq f(\min A)$である。
+  これは反する。
+}
+
+\lem{切片からの狭義単調は存在しない}{
+  空でない整列集合$\qty(S, \leq)$と$a \in S$について、狭義単調な$f \colon X_{< a} \to X$は存在しない。
+}{
+  存在するとする。
+
+  $\iota_{X_{< a}, X}$は狭義単調より、$\iota_{X_{< a}, X} \circ f$は狭義単調である。
+
+  \lemref{整列集合の自己単調単射は増大}より、$a \leq \qty(\iota_{X_{< a}, X} \circ f)(a)$である。
+
+  $\iota_{X_{< a}, X}$は包含写像より、$\forall x \in S \qty(\iota_{X_{< a}, X}(x) < a)$より反する。
+}
+
+\cor*{
+  順序数$\alpha, \beta$について、$\alpha \neq \beta$ならば、任意の写像$f \colon \alpha \to \beta$は順序同型とならない。
+}
+
+\lem{整列集合は順序型を持つ}{
+  整列集合$W$について、$W$と順序同型な順序数が一意に存在する。
+}{
+  \lemref{順序数の比較可能性}、\lemref{順序数の元は順序数}、\lemref{切片からの狭義単調は存在しない}より、存在すれば一意である。
+
+  \vskip\baselineskip
+
+  存在することを示す。
+
+  以下で定める集合$X$を考える。
+  \eq*{
+    X \coloneqq \qty{w \in W \mid \text{ある順序数$\alpha$が存在して、順序同型$\alpha \to W_{< w}$が存在する。}}
+  }
+
+  一意性と\axiref{置換公理}より、集合$A$が存在して、以下を満たす。
+  \eq*{
+    A = \qty{\alpha \mid w \in X \land \text{順序同型$\alpha \to W_{< w}$が存在する。}}
+  }
+
+  \lemref{順序数からなる整列集合}より、$\qty(A, \in)$は整列集合である。
+
+  $\alpha \in A$について、定義よりある$w \in X$が存在して順序同型$f \colon \alpha \to W_{< w}$が存在する。
+
+  任意の$\beta \in \alpha$について、写像$f \circ \iota_{\beta, \alpha} \colon \beta \to W_{< f(\beta)}$が順序同型であるため、$\beta \in A$である。
+
+  ゆえに、$\alpha \subset A$である。
+
+  したがって、$A$は順序数である。
+
+  \vskip\baselineskip
+
+  順序同型を与える写像$\varphi \colon \qty(X, \leq) \to \qty(A, \in)$は、明らかに単調であり、\lemref{切片からの狭義単調は存在しない}より全単射である。
+  すなわち順序同型である。
+
+  $W \neq X$とする。
+
+  $x \coloneqq \min(W \setminus X)$について$X = W_{< x}$であるので、上の議論より$x \in X$となり反する。
+
+  したがって、$W = X$である。
+}
+
+\lem{Hartogsの補題}{
+  集合$X$について、順序数$\alpha$が存在して、任意の写像$f \colon \alpha \to X$が単射とならない。
+}{
+  $W \coloneqq \qty{\qty(S, R) \mid S \subset X \land R \subset S \times S \land \text{$\qty(S, R)$は整列集合}}$を考える。
+
+  \lemref{整列集合は順序型を持つ}と\axiref{置換公理}より、以下で定める集合$A$が存在する。
+  \eq*{
+    A \coloneqq \qty{\text{$w$と順序同型な順序数} \mid w \in W}
+  }
+
+  \lemref{順序数からなる整列集合}より、$\qty(A, \in)$は整列集合である。
+
+  $\alpha \in A$を考えると、$S \subset X$について整列集合$\qty(S, R)$が存在して、順序同型$f \colon \qty(\alpha, \in) \to \qty(S, R)$が存在する。
+
+  任意の$\beta \in \alpha$について、$f \circ \iota_{\beta, \alpha} \colon \beta \to \Im(f)$は順序同型であるので、$\beta \in A$である。
+
+  ゆえに、$\alpha \subset A$である。
+
+  したがって、$A$は順序数である。
+
+  \vskip\baselineskip
+
+  順序数$\gamma$について、単射$g \colon \gamma \to X$が存在するとする。
+
+  このとき、$g$の左逆写像$h$を用いて、$\Im(f)$上に以下の整列順序$\leq$を定義できる。
+  \eq*{
+    x < y \defiff h(x) \in h(y)
+  }
+
+  ゆえに、$\gamma \in A$である。
+
+  したがって、$\alpha \notin A$ならば、単射$\alpha \to X$は存在しない。
+
+  \vskip\baselineskip
+
+  $A \notin A$より、単射$A \to X$は存在しない。
+}
+
+\thm{Bourbaki-Wittの定理}{
+  空でない半順序集合$\qty(P, \preccurlyeq)$について、$P$の任意の空でない全順序部分が上限を持つとする。
+
+  以下を満たす写像$f \colon P \to P$を考える。
+  \eq*{
+    \forall x \in P \qty(x \preccurlyeq f(x))
+  }
+
+  このとき、以下を満たす。
+  \eq*{
+    \exists x_1 \in P \qty(x_1 = f(x_1))
+  }
+}{
+  \lemref{Hartogsの補題}より、$P$への単射が構成できない順序数$\alpha$が存在する。
+
+  $P$は空でないので、$\exists x_0 \in P$である。
+
+  以下で与える写像$G \colon \qty{\bigcup P^\xi \mid \xi \in \alpha} \to P$を考える。
+  \eq*{
+    G(h) \coloneqq
+    \begin{cases}
+      x_0 & \dom(h) = \varnothing \\
+      f(h(\beta)) & \exists \beta \qty(\beta^+ = \dom(h)) \\
+      \sup \Im(h) & \dom(h) = \bigcup \dom(h) \land \text{$\qty(\Im(h), \preccurlyeq)$は全順序} \\
+      x_0 & \otherwise \\
+    \end{cases}
+  }
+
+  \thmref{超限再帰}より、以下を満たす$g \colon \alpha \to P$が一意に定まる。
+  \eq*{
+    \forall \xi \in \alpha \qty(g(\xi) = G(g \circ \iota_{\xi, \alpha}))
+  }
+
+  \vskip\baselineskip
+
+  $\forall \eta \in \alpha \forall \xi \in \eta \qty(g(\xi) \preccurlyeq g(\eta))$を超限帰納法で示す。
+
+  $\eta = \varnothing$のとき、明らか。
+
+  $\exists \beta \qty(\eta = \beta^+)$のとき、以下が成り立つ。
+  \eq*{
+    g(\beta) \preccurlyeq f(g(\beta)) = f\qty(\qty(g \circ \iota_{\beta^+, \alpha})(\beta)) = G(g \circ \iota_{\beta^+, \alpha}) = g(\beta^+) = g(\eta)
+  }
+
+  仮定より$\forall \xi \in \beta \qty(g(\xi) \preccurlyeq g(\beta))$であるので、
+  $\forall \xi \in \eta \qty(g(\xi) \preccurlyeq g(\eta))$
+
+  $\eta = \bigcup \eta \land \eta \neq \varnothing$のときを考える。
+
+  仮定より、$\Im(g \circ \iota_{\eta, \alpha})$は全順序である。
+
+  ゆえに、$g(\eta) = G(g \circ \iota_{\eta, \alpha}) = \sup \Im(g \circ \iota_{\eta, \alpha})$であるので、
+  $\forall \xi \in \eta \qty(g(\xi) \preccurlyeq g(\eta))$である。
+
+  \thmref{超限帰納法}より成り立つ。
+
+  \vskip\baselineskip
+
+  $\alpha$の定義より、$g \colon \alpha \to P$は単射ではない。
+
+  ゆえに、$\exists \beta, \gamma \in \alpha \qty(\beta \in \gamma \land g(\beta) = g(\gamma))$である。
+
+  $\beta^+ \in \gamma \lor \beta^+ = \gamma$より、$g(\beta) \preccurlyeq g(\beta^+) \preccurlyeq g(\gamma)$であるので、$g(\beta) = g(\beta^+)$である。
+
+  したがって、$g(\beta) = g(\beta^+) = f(g(\beta))$である。
+}
+
+\lem{Amannの不動点定理}{
+  空でない半順序集合$\qty(P, \preccurlyeq)$について、$P$の任意の空でない全順序部分が上限を持つとする。
+
+  以下を満たす単調写像$f \colon P \to P$を考える。
+  \eq*{
+    \exists x_0 \in P \qty(x_0 \preccurlyeq f(x_0))
+  }
+
+  このとき、以下の集合$S$について、$\qty(S, \preccurlyeq)$は最小元を持つ。
+  \eq*{
+    S = \qty{x \in P_{\succcurlyeq x_0} \mid x = f(x)}
+  }
+}{
+  $M \coloneqq \qty{x \in P_{\succcurlyeq x_0} \mid x \preccurlyeq f(x)}$を考える。
+
+  $x_0 \in M$より、$M \neq \varnothing$である。
+
+  $x \in M$について、$x_0 \preccurlyeq x \preccurlyeq f(x)$より、単調性から$x_0 \preccurlyeq f(x) \preccurlyeq f(f(x))$である。
+  ゆえに$f(x) \in M$である。
+
+  \vskip\baselineskip
+
+  $M$の空でない全順序部分$C$について、仮定より$\sup C \in P$が存在する。
+
+  $\exists c_0 \in C \qty(x_0 \preccurlyeq c_0 \preccurlyeq \sup C)$より、$x_0 \preccurlyeq \sup C$である。
+
+  $\forall c \in C \qty(c \preccurlyeq \sup C)$より、$\forall c \in C \qty(c \preccurlyeq f(c) \preccurlyeq f(\sup C))$である。
+
+  ゆえに$f(\sup C)$は$C$の上界であるので、$\sup C \preccurlyeq f(\sup C)$である。
+
+  したがって、$\sup C \in M$である。
+
+  \vskip\baselineskip
+
+  よって、$\qty(M, \preccurlyeq)$は空でない半順序集合であり、任意の空でない全順序部分が$M$に上限を持つ。
+
+  また、以下で定める$g \colon M \to M$が存在して、$\forall x \in M \qty(x \preccurlyeq g(x))$である。
+  \eq*{
+    g(x) \coloneqq f(x)
+  }
+
+  \thmref{Bourbaki-Wittの定理}より、$\exists x \in M \qty(x = g(x) = f(x))$である。
+
+  したがって、$S$は非空集合である。
+
+  \vskip\baselineskip
+
+  $N \coloneqq \qty{x \in M \mid \forall y \in S \qty(x \preccurlyeq y)}$を考える。
+
+  $x_0 \in N$より、$N \neq \varnothing$である。
+
+  $x \in N$について、$f(x) \in f(N) \subset f(M) \subset M$である。
+
+  $\forall y \in S \qty(x \preccurlyeq y)$より、単調性から$\forall y \in P_{\succcurlyeq x_0} \qty(y = f(y) \rightarrow f(x) \preccurlyeq f(y) = y)$である。
+
+  したがって、$f(x) \in N$である。
+
+  \vskip\baselineskip
+
+  $N$の空でない全順序部分$C$について、$N \subset M$より$\sup C \in M$が存在する。
+
+  $C \subset N$より、任意の$y \in S$について、$\forall c \in C \qty(c \preccurlyeq y)$すなわち$y$は$C$の上界である。
+
+  ゆえに$\sup C \preccurlyeq y$である。
+
+  したがって、$\sup C \in N$である。
+
+  \vskip\baselineskip
+
+  よって、$\qty(N, \preccurlyeq)$は空でない半順序集合であり、任意の空でない全順序部分が$N$に上限を持つ。
+
+  また、以下で定める$h \colon N \to N$が存在して、$\forall x \in N \qty(x \preccurlyeq h(x))$である。
+  \eq*{
+    h(x) \coloneqq f(x)
+  }
+
+  \thmref{Bourbaki-Wittの定理}より、$\exists x_1 \in N \qty(x_1 = h(x_1) = f(x_1))$である。
+
+  $x_1 \in N$より、$x_1$は$S$の最小元である。
+}
+
+\thm{Knaster-Tarskiの不動点定理}{
+  完備束$\qty(L, \preccurlyeq)$と、単調写像$f \colon L \to L$を考える。
+
+  このとき、以下の集合$S$について、$\qty(S, \preccurlyeq)$は空でない完備束である。
+  \eq*{
+    S = \qty{x \in L \mid x = f(x)}
+  }
+}{
+  完備束は最小元を持つので、$\min L \preccurlyeq f(\min L)$である。
+
+  完備性から\lemref{Amannの不動点定理}より、$S$は最小元を持つ。
+
+  同様に、$S$は最大元を持つ。
+
+  \vskip\baselineskip
+
+  $S$の部分集合$A$について、完備性より$\sup A \in L$が存在する。
+
+  \lemref{単調像と上限}より、$\sup A = \sup f(A) \preccurlyeq f(\sup A)$である。
+
+  $P \coloneqq \qty{x \in L \mid \forall a \in A \qty(a \preccurlyeq x) \land f(x) \preccurlyeq x}$を考える。
+
+  $\max S \in P$より、$P$は空ではない。
+
+  $\inf P$
+
+  ???
+
+  したがって、$\sup A = f(\sup A)$であるので、$\sup A \in S$である。
+
+  \vskip\baselineskip
+
+  同様に$\inf A \in L$である。
+}
+
+\thmf{Cantor-Schr\"{o}der-Bernsteinの定理}{Cantor-Schroder-Bernsteinの定理}{
+  集合$A, B$について、単射$f \colon A \to B$と単射$g \colon B \to A$が存在するならば、全単射$h \colon A \to B$が存在する。
+}{
+  $B$が空のとき、$f$の存在から$A$も空となり、空写像が条件を満たす。
+
+  \vskip\baselineskip
+
+  $B$が空でないとする。
+
+  以下の写像$F \colon \P(A) \to \P(A)$を考える。
+  \eq*{
+    F(X) \coloneqq A \setminus g\qty(B \setminus f(X))
+  }
+
+  $X \subset Y \subset A$について、\lemref{像の性質}より$f(X) \subset f(Y)$であり、$B \setminus f(X) \supset B \setminus f(Y)$であり、
+  \lemref{像の性質}より$g\qty(B \setminus f(X)) \supset g\qty(B \setminus f(Y))$であり、$F(X) \subset F(Y)$である。
+
+  ゆえに、$F$は完備束$\qty(\P(A), \subset)$上の単調写像である。
+
+  \thmref{Knaster-Tarskiの不動点定理}より、$\exists X_0 \subset A \qty(X_0 = F(X_0))$である。
+
+  $g$は空写像でない単射より\lemref{単射}から左逆写像$g^{-1}$を持つため、以下の写像$h \colon A \to B$が存在する。
+  \eq*{
+    h(x) \coloneqq
+    \begin{cases}
+      f(x) & \qty(x \in X_0) \\*
+      g^{-1}(x) & \qty(x \notin X_0)
+    \end{cases}
+  }
+
+  \vskip\baselineskip
+
+  $h(x) = h(y)$とする。
+
+  $x \in X_0 \land y \notin X_0$のとき、$h(x) \in f(X_0) \land h(y) \in B \setminus f(X_0)$より、$h(x) \neq h(y)$となるので、$x, y \in X_0 \lor x, y \notin X_0$である。
+
+  $x, y \in X_0$のとき、$f$の単射性から$x = y$である。
+
+  $x, y \notin X_0$のとき、$x, y \in g\qty(B \setminus f(X_0))$より$\exists x^\prime, y^\prime \in B \qty(x = g(x^\prime) \land y = g(y^\prime))$である。
+
+  $x = g(x^\prime) = g(g^{-1}(g(x^\prime))) = g(g^{-1}(x)) = g(g^{-1}(y)) = g(g^{-1}(g(y^\prime))) = g(y^\prime) = y$である。
+
+  したがって、$h$は単射である。
+
+  \vskip\baselineskip
+
+  $z \in f(X_0)$について、$\exists z_0 \in X_0 \qty(z = f(z_0) = h(z_0))$である。
+
+  $z \notin f(X_0)$について、$g(z) \notin X_0$であり、$g(z) \in g(B \setminus f(X_0)) = A \setminus X_0$より、$z = g^{-1}(g(z)) = h(g(z))$である。
+
+  ゆえに$h$は全射である。
+}
+
+
+\lsubsection{順序と選択}
+
+\lem*{
+  空でない半順序集合$\qty(P, \preccurlyeq)$について、以下で定める半順序集合$\qty(M, \subset)$を考える。
+  \eq*{
+    M \coloneqq \qty{C \subset P \mid C \neq \varnothing \land \text{$\qty(C, \preccurlyeq)$は全順序集合}}
+  }
+
+  このとき、$M \neq \varnothing$であり、$M$の任意の空でない全順序部分$A$は上限$\bigcup A$を$M$に持つ。
+}{
+  空でないので、$\exists x \qty(x \in P)$であり、$\qty{x} \in M$より、$M \neq \varnothing$である。
+
+  \vskip\baselineskip
+
+  $\bigcup A \in M$を示す。
+
+  $x, y \in \bigcup A$について、定義より$P$の全順序部分$C_x, C_y$が存在して$x \in C_x \land y \in C_y$である。
+
+  $A$は全順序集合より、$C_x \subset C_y \lor C_y \subset C_x$である。
+
+  $C_x \subset C_y$であるとき、$x, y \in C_y$より、$x \preccurlyeq y \lor y \preccurlyeq x$である。
+
+  $C_y \subset C_x$であるときも同様である。
+
+  \vskip\baselineskip
+
+  $A \neq \varnothing$より$\bigcup A \neq \varnothing$である。
+
+  $\bigcup A$は$A$の上界であり、$A$の任意の上界$U$について、$\forall C \in A \qty(C \subset U)$から$\bigcup A \subset U$であるため、$\bigcup A$は$A$の上限である。
 }
 
 \thm{Zornの補題}{
-  帰納的な半順序集合には極大元が存在する。
+  空でない半順序集合$\qty(P, \preccurlyeq)$について、$P$の任意の空でない全順序部分が上界を持つとする。
+
+  このとき、$P$は極大元を持つ。
 }{
-  極大元を持たないと仮定する。
+  $M \coloneqq \qty{C \subset P \mid C \neq \varnothing \land \text{$\qty(C, \preccurlyeq)$は全順序集合}}$を考える。
 
-  \mlemref{-1}より$\qty(\mathcal{T}_0, \subset)$は全順序であるため、タワーの定義から$\bigcup \mathcal{T}_0 \in \mathcal{T}_0$である。
+  \mlemref{-1}より、半順序集合$\qty(M, \subset)$は空でないかつ任意の空でない全順序部分は上限を持つ。
 
-  タワーの定義より$g(\bigcup \mathcal{T}_0) \in \mathcal{T}_0$であるので、から$f(\bigcup \mathcal{T}_0) \in \bigcup \mathcal{T}_0$である。
+  \vskip\baselineskip
 
-  これは、\mlemref{-3}における$f$の定義に反する。
+  $M$が極大元を持たないとする。
 
-  背理法より示される。
+  このとき$\forall C \in M \exists C^\prime \in M \qty(C \subsetneq C^\prime)$である。
+
+  \lemref{選択公理が与える写像}より、$f \colon M \to M$であって、$\forall C \in M \qty(C \subsetneq f(C))$が存在する。
+
+  \thmref{Bourbaki-Wittの定理}より、$\exists C_0 \in M \qty(C_0 = f(C_0))$であるが、$f$の定義より反する。
+
+  ゆえに、$M$は極大元を持つ。
+
+  \vskip\baselineskip
+
+  $M$の極大元$C_1$について、上界$u$が存在する。
+
+  $u$が極大元でない、すなわち$\exists a \in P \qty(u \prec a)$とする。
+
+  $a$は$C_1$の上界であるので、$\qty(C_1 \cup \qty{a}, \preccurlyeq)$は空でない全順序集合である。
+
+  $a \in C_1$とすると、$u$が$C_1$の上界であることに反するので、$a \notin C_1$である。
+
+  ゆえに$C_1 \subsetneq C_1 \cup \qty{a}$となり、$C_1$の極大性に反する。
+
+  したがって、$u$は極大元である。
+}
+
+\thm{整列可能定理}{
+  集合$X$について、$X$上の自己関係$\leq$が存在して、$\qty(X, \leq)$は整列集合となる。
+}{
+  ???
+}
+
+\thm{濃度の比較可能定理}{
+  集合$A, B$について、単射$f \colon A \to B$または単射$g \colon B \to A$のいずれかが存在する。
+}{
+  \thmref{整列可能定理}と\lemref{整列集合は順序型を持つ}より、順序数$\alpha, \beta$が存在して、
+  全単射$\psi_a \colon \alpha \to A, \psi_b \colon \beta \to B$が存在する。
+
+  \lemref{順序数の比較可能性}より、$\alpha \subset \beta \lor \beta \subset \alpha$である。
+
+  $\alpha \subset \beta$のとき、$\psi_b \circ \iota_{\alpha, \beta} \circ \psi_a^{-1}$は$A$から$B$への単射である。
+
+  $\beta \subset \alpha$も同様である。
 }
 
 
 \lsubsection{フィルターとネット}
 
 \dfn{フィルター}{
-  半順序集合$\qty(P, \preccurlyeq)$と$P$の空でない部分集合$F$について、以下を満たすとき、$F$を$P$のフィルターと呼ぶ。
+  半順序集合$\qty(P, \preccurlyeq)$について、以下の\num{2}つを満たす$P$の空でない部分$F$を、$P$のフィルターと呼ぶ。
   \eqg*{
     \forall x, y \in F \exists z \in F \qty(z \preccurlyeq x \land z \preccurlyeq y) \\*
     \forall x \in F \forall y \in P \qty(x \preccurlyeq y \rightarrow y \in F)

@@ -34,15 +34,45 @@
   }
 }
 
-\cor*{
-  $\varnothing$上の関係は一意に定まり、それは、反射的、対称的、反対称的、推移的である。
-}
-
 \dfn{完全}{
   集合$X$上の関係$\mathfrak{R}$が完全であるとは、以下を満たすことである。
   \eq*{
-    \forall x, y \in X \qty(\mathfrak{R}(x, y) \lor \mathfrak{R}(y, x))
+    \forall x, y \in X \qty(x \neq y \rightarrow \mathfrak{R}(x, y) \lor \mathfrak{R}(y, x))
   }
+}
+
+\cor*{
+  $\varnothing$上の関係は一意に定まり、それは、反射的、対称的、反対称的、推移的、完全である。
+}
+
+\dfn{写像が誘導する自己関係}{
+  写像$f \colon X \to Y$と、$Y$上の自己関係$\mathfrak{R}_Y$を考える。
+
+  このとき、以下で定める$X$上の自己関係$\mathfrak{R}_X$を考える。
+  \eq*{
+    \mathfrak{R}_X(x, y) \defiff \mathfrak{R}_Y(f(x), f(y))
+  }
+
+  この$\mathfrak{R}_X$を、$f$が$\mathfrak{R}_Y$から誘導する自己関係と呼ぶ。
+}
+
+\rem{包含写像が誘導する自己関係}{
+  集合$X$上の自己関係$\mathfrak{R}$について、特に明示しなければ$X$の部分$A$の自己関係を、包含写像が誘導する自己関係で定めるものとする。
+}
+
+\cor{写像が誘導する自己関係}{
+  写像$f \colon X \to Y$と、$Y$上の自己関係$\mathfrak{R}_Y$を考える。
+
+  $f$が$\mathfrak{R}_Y$から誘導する自己関係$\mathfrak{R}_X$を考える。
+
+  このとき、以下が成り立つ。
+  \begin{enumerate}
+    \item $\mathfrak{R}_Y$が反射的ならば、$\mathfrak{R}_X$は反射的である。
+    \item $\mathfrak{R}_Y$が対称的ならば、$\mathfrak{R}_X$は対称的である。
+    \item $f$が単射かつ$\mathfrak{R}_Y$が反対称的ならば、$\mathfrak{R}_X$は反対称的である。
+    \item $\mathfrak{R}_Y$が推移的ならば、$\mathfrak{R}_X$は推移的である。
+    \item $\mathfrak{R}_Y$が完全ならば、$\mathfrak{R}_X$は完全である。
+  \end{enumerate}
 }
 
 
@@ -57,18 +87,20 @@
 
   簡単のため、$\preccurlyeq \qty(x, y)$を$x \preccurlyeq y$でも表す。
 
-  略記$\prec, \succcurlyeq, \succ$を以下のように定める。
-  \eqg*{
-    x \prec y \defiff x \preccurlyeq y \land x \neq y \\*
-    x \succcurlyeq y \defiff y \preccurlyeq x \\*
-    x \succ y \defiff y \prec x
-  }
-
   組$\qty(X, \preccurlyeq)$を、前順序集合、または単に前順序と呼ぶ。
 }
 
 \rem{前順序の定義}{
   より簡単に、$x \preccurlyeq y \defiff \cdots$の形式によって述語として前順序を定義できる。
+}
+
+\dfn{前順序に関わるいくつかの述語}{
+  アリティ\num{2}の述語$\prec, \succcurlyeq, \succ$を以下のように定める。
+  \eqg*{
+    x \prec y \defiff x \preccurlyeq y \land x \neq y \\*
+    x \succcurlyeq y \defiff y \preccurlyeq x \\*
+    x \succ y \defiff y \prec x
+  }
 }
 
 \cor*{
@@ -118,11 +150,18 @@
   }
 }
 
+\dfn{共終}{
+  前順序集合$X$について、$X$の部分$A$が以下を満たすとき、$A$を共終な部分と呼ぶ。
+  \eq*{
+    \forall x \in X \exists a \in A \qty(x \preccurlyeq a)
+  }
+}
+
 \dfn{上方集合}{
-  有向集合$\Lambda$とその元$\lambda_0 \in \Lambda$について、集合$\Lambda_{\succcurlyeq \lambda_0}, \Lambda_{\succ \lambda_0}$を以下で定める。
+  前順序集合$X$とその元$x_0 \in X$について、集合$X_{\succcurlyeq x_0}, X_{\succ x_0}$を以下で定める。
   \eqg*{
-    \Lambda_{\succcurlyeq \lambda_0} \coloneqq \qty{\lambda \in \Lambda \mid \lambda_0 \preccurlyeq \lambda} \\*
-    \Lambda_{\succ \lambda_0} \coloneqq \qty{\lambda \in \Lambda \mid \lambda_0 \prec \lambda}
+    X_{\succcurlyeq x_0} \coloneqq \qty{x \in X \mid x_0 \preccurlyeq x} \\*
+    X_{\succ x_0} \coloneqq \qty{x \in X \mid x_0 \prec x}
   }
 }
 
@@ -133,8 +172,12 @@
   }
 }
 
+\cor*{
+  単調な$f \colon X \to Y, g \colon Y \to Z$について、$g \circ f$は単調である。
+}
+
 \dfn{狭義単調}{
-  前順序集合$\qty(X, \preccurlyeq_{X}), \qty(Y, \preccurlyeq_{Y})$と、写像$f \colon X \to Y$について、以下を満たすとき、$f$は単調であるという。
+  前順序集合$\qty(X, \preccurlyeq_{X}), \qty(Y, \preccurlyeq_{Y})$と、写像$f \colon X \to Y$について、以下を満たすとき、$f$は狭義単調であるという。
   \eq*{
     \forall x, y \in X \qty(x \prec_{X} y \rightarrow f(x) \prec_{Y} f(y))
   }
@@ -142,6 +185,109 @@
 
 \cor*{
   狭義単調な写像は、単調である。
+}
+
+
+\lsubsection{前順序と圏論}
+
+\dfn{前順序集合の圏}{
+  単調写像を射とみなすと、単調写像であることは圏となる。
+
+  この圏を前順序集合の圏と呼び、$\mathbf{Ord}$で表す。
+}
+
+\dfn{順序同型}{
+  $\mathbf{Ord}$の同型射を順序同型と呼ぶ。
+}
+
+\cor*{
+  順序同型ならば狭義単調である。
+}
+
+\dfn{前順序が誘導する圏}{
+  前順序集合$\qty(X, \preccurlyeq), \preccurlyeq = \qty(\qty(X, X), G)$について、$G$の元$\qty(x, y)$を考える。
+  $\dom(\qty(x, y)) = \qty(x, x), \cod(\qty(x, y)) = \qty(y, y)$として、合成を$\qty(y, z) \circ \qty(x, y) = \qty(x, z)$で定義すると、
+  $G$は圏となる。
+
+  このように定める圏$G$を、前順序$X$が誘導する圏と呼ぶ。
+
+  誤解のない範囲で、前順序$X$が誘導する圏を前順序集合$X$で表す。
+
+  ここで記号の濫用であるが、$\qty(x, x)$をして$x$を表し、$x$をして$\qty(x, x)$を表す。
+}
+
+\cor*{
+  前順序が誘導する圏$X$について、以下が成り立つ。
+  \eq*{
+    \forall x, y \in X \forall f, g \in \Hom_X(x, y) \qty(f = g)
+  }
+}
+
+\dfn{最大元}{
+  前順序集合$X$について、$X$の終対象が存在するならば、この終対象$m$を$X$の最大元と呼ぶ。
+
+  すなわち、以下である。
+  \eq*{
+    \forall x \in X \qty(x \preccurlyeq m)
+  }
+}
+
+\dfn{最小元}{
+  前順序集合$X$について、$X$の始対象が存在するならば、この始対象$m$を$X$の最小元と呼ぶ。
+
+  すなわち、以下である。
+  \eq*{
+    \forall x \in X \qty(m \preccurlyeq x)
+  }
+}
+
+\dfn{下限}{
+  前順序集合$X$について、その部分集合$A$を考える。
+
+  離散圏$A$から前順序が誘導する圏$X$への関手$\id$について、この積$x, u$が存在するならば、$x$を$A$の下限と呼ぶ。
+
+  すなわち、以下である。
+  \eq*{
+    \forall a \in A \qty(x \preccurlyeq a) \land \forall x^\prime \in X \qty(\forall a \in A \qty(x^\prime \preccurlyeq a) \rightarrow x^\prime \preccurlyeq x)
+  }
+}
+
+\dfn{上限}{
+  前順序集合$X$について、その部分集合$A$を考える。
+
+  離散圏$A$から前順序が誘導する圏$X$への関手$\id$について、この和$x, u$が存在するならば、$x$を$A$の上限と呼ぶ。
+
+  すなわち、以下である。
+  \eq*{
+    \forall a \in A \qty(a \preccurlyeq x) \land \forall x^\prime \in X \qty(\forall a \in A \qty(a \preccurlyeq x^\prime) \rightarrow x \preccurlyeq x^\prime)
+  }
+}
+
+\lem{単調像と上限}{
+  前順序集合$X, Y$について、単調写像$f \colon X \to Y$を考える。
+
+  $X$の部分$A$について、$A$の上限$x$と、$f(A)$の上限$y$が存在するとする。
+
+  このとき、以下が成り立つ。
+  \eq*{
+    y \preccurlyeq f(x)
+  }
+}{
+  $x$は上限より、$\forall a \in A \qty(a \preccurlyeq x)$であり、単調性より$\forall a \in A \qty(f(a) \preccurlyeq f(x))$である。
+
+  ゆえに、$f(x)$は$f(A)$の上界であるので、$f(x) \preccurlyeq \sup f(A) = y$である。
+}
+
+\dfn{射影系}{
+  前順序集合$\Lambda$と圏$\bm{C}$について、$\Lambda^\opp$から$\bm{C}$への関手$X$を、射影系と呼ぶ。
+}
+
+\dfn{射影極限}{
+  射影系$X$ついて、$X$の極限を射影極限と呼ぶ。
+}
+
+\dfn{帰納極限}{
+  射影系$X$ついて、$X$の余極限を帰納極限と呼ぶ。
 }
 
 
@@ -157,87 +303,122 @@
   集合$X$上の同値関係であることを明示的に、$=_X$で表す。
 }
 
-\dfn{同値類}{
-  空でない集合$X$上で定義された同値関係$\sim$と、$X$の要素$a$について、以下で定める集合を$a$の同値類と呼び、$\qty[a]$で表す。
-  この$a$を特に代表元と呼ぶ。
-  \eq*{
-    \qty[a] \coloneqq \qty{x \in X \mid x \sim a}
-  }
+\dfn{写像が誘導する同値関係}{
+  写像$f \colon X \to Y$について、$f$が$=_Y$から誘導する自己関係は同値関係である。
+
+  この同値関係を、写像$f$が誘導する同値関係と呼ぶ。
 }
 
 \cor*{
-  空でない集合$X$上で定義された同値関係$\sim$について、以下が成り立つ。
+  写像$f \colon X \to Y$について、$f$が誘導する同値関係$\sim_f$を考える。
+
+  $\sim_f = \qty(\qty(X, X), G)$について、$G, \qty(\pi_0, \pi_1)$は$f$の核対である。
+
+  ただし、$\pi_0(\qty(x, y)) = x, \pi_1(\qty(x, y)) = y$とする。
+}
+
+\dfn{同値類}{
+  集合$X$上の同値関係$\sim$と、$X$の要素$a$について、集合$X_{\sim a}$を$a$の同値類と呼ぶ。
+}
+
+\cor*{
+  集合$X$上の同値関係$\sim$について、以下が成り立つ。
   \eq*{
-    X = \bigsqcup \qty{\qty[x] \mid x \in X}
+    X = \bigsqcup \qty{X_{\sim x} \mid x \in X}
   }
 }
 
 \dfn{商集合}{
-  同値関係の定義された空でない集合$X$について、以下で定める集合を商集合と呼び、$X / \sim$で表す。
+  集合$X$上の同値関係$\sim$について、以下で定める集合を商集合と呼び、$X / \sim$で表す。
   \eq*{
-    X / \sim \coloneqq \qty{\qty[x] \mid x \in X}
+    X / \sim \coloneqq \qty{X_{\sim x} \mid x \in X}
   }
 }
 
 \dfn{商写像}{
-  写像$\qty[] \colon X \to X / \sim$を商写像と呼ぶ。
-}
-
-\cor*{
-  商写像は全射である。
-}
-
-\thm{well-definedな写像}{
-  空でない集合$X$上の同値関係$\sim_{X}$、集合$Y$上の同値関係$\sim_{Y}$について、写像$f \colon X \to Y$を考える。
-
-  $f$が$\sim_{X}, \sim_{Y}$と両立することは、写像$h \colon X / \sim_{X} \to Y / \sim_{Y}$が存在して以下を満たすことと必要十分である。
+  集合$X$上の同値関係$\sim$について、以下で定める写像$\pi$を$\sim$の商写像と呼ぶ。
   \eq*{
-    \qty[]_{Y} \circ f = h \circ \qty[]_{X}
+    \pi(x) \coloneqq X_{\sim x}
+  }
+}
+
+\lem{集合の圏における余等化子の存在}{
+  写像$f, g \colon X \to Y$について、
+  積$Y \times Y, \pi$が存在するので、一意な射$q$が存在して$f = \pi(0) \circ q \land g = \pi(1) \circ q$である。
+
+  以下の集合$G$を考える。
+  \eq*{
+    G \coloneqq \bigcap \qty{G^\prime \in Y \times Y \mid \Im(q) \subset G^\prime \land \text{$\qty(\qty(Y, Y), G^\prime)$は同値関係}}
   }
 
-  さらに、上で定まる写像$h$は一意である。
+  共通部分をとられる集合は空ではないので、$\sim \coloneqq \qty(\qty(Y, Y), G)$は同値関係となる。
+
+  $\sim$の商写像$u$について、$Y / \sim, u$は余等化子である。
 }{
-  $\qty[]_{X}$は全射より、右逆写像$r$が存在する。
+  $\sim$の定義より、$\forall x \in X \qty(f(x) \sim g(x))$である。
+  ゆえに、$u \circ f = u \circ g$である。
 
-  \vskip\baselineskip
+  写像$h \colon Y \to Z$について、$h \circ f = h \circ g$であるとする。
 
-  まず、必要性を示す。
-  仮定より以下を満たす。
-  \eq*{
-    \forall x \in X / \sim_{X} \forall z, w \in x \qty(\qty[f(z)]_{Y} = \qty[f(w)]_{Y})
-  }
+  $h$が誘導する同値関係$\sim_h = \qty(\qty(Y, Y), S)$について、$\forall x_0, x_1 \in X \qty(\qty(f(x_0), g(x_1)) \in S)$である。
 
-  ゆえに$h \coloneqq \qty[]_{Y} \circ f \circ r$を考えると、$\qty[]_{Y} \circ f = h \circ \qty[]_{X}$を満たす。
+  すなわち$\Im(q) \subset S$であり、$G$の定義より$G \subset S$である。
 
-  \vskip\baselineskip
+  したがって、$\forall y_0, y_1 \in Y \qty(y_0 \sim y_1 \rightarrow h(y_0) = h(y_1))$である。
 
-  十分性を示す。
-  $\forall x, y \in X $について、$x \sim_{X} y$ならば、$\qty[f(x)]_{Y} = h(\qty[x]_{X}) = h(\qty[y]_{X}) = \qty[f(y)]_{Y}$である。
-  よって、$f(x) \sim_{Y} f(y)$
+  写像$k \coloneqq \qty(\qty(Y / \sim, Z), \qty{\qty(Y_{\sim y}, h(y)) \mid y \in Y})$は、$k \circ u = h$を満たす。
 
-  \vskip\baselineskip
-
-  一意であることを示す。
-  相異なる\num{2}つが存在すると仮定すると、$h \circ \qty[]_{X} = h' \circ \qty[]_{X}$である。
-  右から$r$をかけて、$h = h'$であり、矛盾する。
+  $k^\prime \colon Y / \sim \to Z, k^\prime \neq k$を考えると明らかに満たさないので、$k$は一意である。
 }
 
-\dfn{写像に付随する同値関係}{
-  写像$f \colon X \to Y$について、以下で定める$X$上の関係$\sim_{f}$は同値関係であり、これを写像$f$に付随する同値関係と呼ぶ。
-  \eq*{
-    x \sim_f y \defiff f(x) = f(y)
-  }
+\begin{center}
+  \begin{minipage}{0.4\linewidth}
+    $\mathbf{Set}$ \\
+    \begin{tikzcd}
+      X \ar[dr, "q", dotted] \ar[rrd, "f", bend left] \ar[ddr, "g"', bend right] & & & \\
+      & Y \times Y \ar[r, "\pi(0)"] \ar[d, "\pi(1)"'] & Y \ar[d, "u"] \ar[ddr, "h", bend left] & \\
+      & Y \ar[r, "u"'] \ar[rrd, "h", bend right] & Y / \sim \ar[rd, "k", dotted] & \\
+      & & & Z \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\cor{商集合は余等化子}{
+  集合$X$上の同値関係$\sim = \qty(\qty(X, X), G)$、$\sim$の商写像$u$、積$X \times X, \pi$を考える。
+
+  $X / \sim, u$は、$\pi_0, \pi_1 \colon G \to X$の余等化子である。
 }
 
-\cor*{
-  写像$f \colon X \to Y$について、$f$は$\sim_f, =_Y$と両立する。
-}
+\thm{写像の標準分解}{
+  写像$f \colon X \to Y$と、$\sim_f$の商写像$u$を考える。
 
-\thm{標準分解}{
-  写像$f \colon X \to Y$について、全単射$\bar{f} \colon X / \sim_{f} \to \Im(f)$が存在する。
+  このとき一意な単射$g \colon X / \sim_f \to Y$が存在して、$f = g \circ u$が成り立つ。
 }{
-  \thmref{well-definedな写像}より、写像$\bar{f} \colon X / \sim_{f} \to Y$が存在して、$\Im(\bar{f}) = \Im(f)$である。
+  写像$f$が誘導する同値関係$\sim_f = \qty(\qty(X, X), G)$とする。
 
-  単射であることを示す。
-  $\bar{f}([x]) = \bar{f}([y])$のとき、$f(x) = f(y)$より、$[x] = [y]$である。
+  このとき、$G, \qty(\pi_0, \pi_1)$は$f$の核対であり、$X / \sim_f, u$は$\pi_0, \pi_1$の余等化子である。
+
+  余等化子の普遍性より、写像$g \colon X / \sim_f \to Y$が一意に存在して、$f = g \circ u$である。
+
+  \vskip\baselineskip
+
+  $g(x) = g(y)$とする。
+
+  $u$は右簡約可能であり、\lemref{全射}より全射であるため、$\exists z, w \in X \qty(x = u(z) \land y = u(w))$である。
+
+  今、$f(z) = g(u(z)) = g(x) = g(y) = g(u(w)) = f(w)$であるので、$z \sim_f w$である。
+
+  したがって、$x = u(z) = X_{\sim_f z} = X_{\sim_f w} = u(w) = y$が成り立つ。
+
+  ゆえに単射である。
 }
+
+\begin{center}
+  \begin{minipage}{0.4\linewidth}
+    \begin{tikzcd}
+      G \ar[r, "\pi_0"] \ar[d, "\pi_1"'] & X \ar[d, "u"] \ar[ddr, "f", bend left] & \\
+      X \ar[r, "u"'] \ar[rrd, "f", bend right] & X / \sim_f \ar[rd, "g", dotted] & \\
+      & & Y \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}

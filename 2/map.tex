@@ -122,27 +122,9 @@
   \eq*{
     \dom(f) = \dom(g) \land \cod(f) = \cod(g) \land \forall x \in \dom(f) \qty(f(x) = g(x))
   }
+
+  終域まで含めて相等とすることに注意されたい。
 }
-
-\dfn{包含写像}{
-  集合$X$と、その部分$A$について、以下で定める関係$\iota_{A, X}$は写像である。
-  \eq*{
-    \iota_{A, X} \coloneqq \qty(\qty(A, X), \qty{\qty(x, x) \mid x \in A})
-  }
-
-  この$\iota_{A, X}$を部分写像と呼ぶ。
-}
-
-\dfn{制限写像}{
-  写像$f = \qty(\qty(X, Y), G)$と、$X$の部分$A$について、
-  以下で定める写像$f \rvert_A$を、$f$の$A$への制限写像、または単に制限と呼ぶ。
-  \eq*{
-    f \rvert_A \coloneqq f \circ \iota_{A, X}
-  }
-}
-
-
-\lsubsection{集合と写像の圏}
 
 \rem{写像は射}{
   写像$f = \qty(\qty(X, Y), G)$を考える。
@@ -178,6 +160,161 @@
   }
 }
 
+
+\lsubsection{像と原像}
+
+\dfn{像}{
+  写像$f \colon X \to Y$と、$X$の部分集合$A$について、以下で定める集合を$A$の$f$による像と呼び、$f(A)$で表す。
+  \eq*{
+    f(A) \coloneqq \qty{f(x) \mid x \in A}
+  }
+
+  また、$f(X)$を$\Im(f)$でも表す。
+}
+
+\lem{像の性質}{
+  写像$f \colon X \to Y$について、以下が成り立つ。
+  \eqg*{
+    \forall A_1, A_2 \subset X \qty(A_1 \subset A_2 \rightarrow f(A_1) \subset f(A_2)) \\*
+    \forall B \subset \P(X) \qty(f\qty(\bigcup B) = \bigcup \qty{f(A) \mid A \in B}) \\*
+    \forall B \subset \P(X) \qty(f\qty(\bigcap B) \subset \bigcap \qty{f(A) \mid A \in B}) \\*
+    \forall A_1, A_2 \subset X \qty(f(A_1) \setminus f(A_2) \subset f(A_1 \setminus A_2))
+  }
+}{
+  第一式を示す。
+
+  $y \in f(A_1)$のとき、$\exists x \in A_1 \qty(y = f(x))$、$\exists x \in A_2 \qty(y = f(x))$、ゆえに$y \in f(A_2)$
+
+  \vskip\baselineskip
+
+  第二式を示す。
+  \eqg*{
+    y \in f\qty(\bigcup B) \\*
+    \exists x \in \bigcup B \qty(y = f(x)) \\*
+    \exists A \in B \exists x \in A \qty(y = f(x)) \\*
+    \exists A \in B \qty(y \in f(A)) \\*
+    y \in \bigcup \qty{f(A) \mid A \in B}
+  }
+
+  上からも下からも成り立つので、\axiref{外延性の公理}より成り立つ。
+
+  \vskip\baselineskip
+
+  第三式を示す。
+
+  $y \in f\qty(\bigcap B)$を考える。
+
+  $\exists x \qty(x \in \bigcup B \land \forall A \in B \qty(x \in A) \land y = f(x))$である。
+
+  $\exists x \qty(x \in \bigcup B \land y = f(x))$より、$y \in f\qty(\bigcup B)$であり、第二式より$y \in \bigcup \qty{f(A) \mid A \in B}$である。
+
+  $\exists x \qty(\forall A \in B \qty(x \in A) \land y = f(x))$より、$\forall A \in B \qty(y \in f(A))$である。
+
+  ゆえに、$y \in \bigcap \qty{f(A) \mid A \in B}$である。
+
+  \vskip\baselineskip
+
+  第四式を示す。
+
+  $y \in f(A_1) \setminus f(A_2)$を考える。
+
+  $\exists x \qty(y = f(x) \land x \in A_1) \land \forall x \qty(y = f(x) \rightarrow x \notin A_2)$である。
+
+  ただちに、$\exists x \qty(y = f(x) \land x \in A_1 \setminus A_2)$である。
+
+  したがって、$y \in f \qty(A_1 \setminus A_2)$である。
+}
+
+\dfn{原像}{
+  写像$f \colon X \to Y$と集合$A$について、以下で定める集合を、集合$A$の原像と呼び、$f^{-1}(A)$で表す。
+  \eq*{
+    f^{-1}(A) = \qty{x \in X \mid f(x) \in A}
+  }
+}
+
+\cor{像と原像}{
+  写像$f \colon X \to Y$について、以下が成り立つ。
+  \eqg*{
+    \forall A \subset X \qty(f^{-1} \qty(f(A)) \supset A) \\*
+    \forall B \qty(f \qty(f^{-1}(B)) \subset B)
+  }
+}
+
+\lem{原像の性質}{
+  写像$f$について、以下が成り立つ。
+  \eqg*{
+    \forall A_1, A_2 \qty(A_1 \subset A_2 \rightarrow f^{-1}(A_1) \subset f^{-1}(A_2)) \\*
+    \forall B \qty(f^{-1}\qty(\bigcup B) = \bigcup \qty{f^{-1}(A) \mid A \in B}) \\*
+    \forall B \qty(f^{-1}\qty(\bigcap B) = \bigcap \qty{f^{-1}(A) \mid A \in B}) \\*
+    \forall A_1, A_2 \qty(f^{-1}(A_1) \setminus f^{-1}(A_2) = f^{-1}(A_1 \setminus A_2))
+  }
+}{
+  第一式を示す。
+
+  $x \in f^{-1}(A_1)$について、$f(x) \in A_1 \subset A_2$ゆえに$x \in f^{-1}(A_2)$
+
+  \vskip\baselineskip
+
+  第二式を示す。
+  \eqg*{
+    x \in f^{-1}\qty(\bigcup B) \\*
+    f(x) \in \bigcup B \\*
+    \exists A \in B \qty(f(x) \in A) \\*
+    \exists A \in B \qty(x \in f^{-1}(A)) \\*
+    x \in \bigcup \qty{f^{-1}(A) \mid A \in B}
+  }
+
+  上からも下からも成り立つので、\axiref{外延性の公理}より成り立つ。
+
+  \vskip\baselineskip
+
+  第三式を示す。
+  \eqg*{
+    x \in f^{-1}\qty(\bigcap B) \\*
+    f(x) \in \bigcap B \\*
+    f(x) \in \bigcup B \land \forall A \in B \qty(f(x) \in A) \\*
+    x \in f^{-1}\qty(\bigcup B) \land \forall A \in B \qty(x \in f^{-1}(A)) \\*
+    x \in \bigcup \qty{f^{-1}(A) \mid A \in B} \land \forall A \in B \qty(x \in f^{-1}(A)) \\*
+    x \in \bigcap \qty{f^{-1}(A) \mid A \in B}
+  }
+
+  \num{4}行目から\num{5}行目に第二式を用いている。
+
+  上からも下からも成り立つので、\axiref{外延性の公理}より成り立つ。
+
+  \vskip\baselineskip
+
+  第四式について、
+  \eqg*{
+    x \in f^{-1}(A_1) \setminus f^{-1}(A_2) \\*
+    f(x) \in A_1 \land f(x) \notin A_2 \\*
+    f(x) \in A_1 \setminus A_2 \\*
+    x \in f^{-1} \qty(A_1 \setminus A_2)
+  }
+
+  上からも下からも成り立つので、\axiref{外延性の公理}より成り立つ。
+}
+
+
+\lsubsection{いくつかの重要な集合と写像}
+
+\dfn{包含写像}{
+  集合$X$と、その部分$A$について、以下で定める関係$\iota_{A, X}$は写像である。
+  \eq*{
+    \iota_{A, X} \coloneqq \qty(\qty(A, X), \qty{\qty(x, x) \mid x \in A})
+  }
+
+  この$\iota_{A, X}$を包含写像と呼ぶ。
+}
+
+\dfn{制限写像}{
+  写像$f = \qty(\qty(X, Y), G)$と、$X$の部分$A$について、
+  以下で定める写像$f \rvert_A$を、$f$の$A$への制限写像、または単に制限と呼ぶ。
+  \eq*{
+    f \rvert_A \coloneqq f \circ \iota_{A, X}
+  }
+}
+
 \cor*{
   単集合は$\mathbf{Set}$の終対象である。
 }
@@ -192,22 +329,30 @@
   この写像を$Y$の空写像と呼ぶ。
 }
 
-\cor*{
+\lem{集合の圏における等化子の存在}{
   写像$f, g \colon X \to Y$を考える。
 
-  以下を満たす$\Eq(f, g), u$は、$f, g$の等価子である。
+  以下を満たす$\Eq(f, g), u$は、$f, g$の等化子である。
   \eqg*{
     \Eq(f, g) \coloneqq \qty{x \in X \mid f(x) = g(x)} \\*
-    u(\dom(f)) \coloneqq \iota_{\Eq(f, g), \dom(f)}
+    u \coloneqq \iota_{\Eq(f, g), X}
   }
+}{
+  $f \circ h = g \circ h$なる$h \colon Z \to X$を考える。
+
+  $\forall z \in Z \qty(f(h(z)) = g(h(z)))$より、$\Im(h) \subset \Eq(f, g)$である。
+
+  ゆえに$k = \qty(\qty(Z, \Eq(f, g)), \qty{\qty(z, h(z)) \mid z \in Z})$は写像である。
+
+  $h = u \circ k$である。
+
+  $k^\prime \colon Z \to \Eq(f, g)$について、$k^\prime \neq k$とすると直ちに$h \neq u \circ k^\prime$である。
+
+  したがって一意である。
 }
 
 \dfn{小さい圏}{
-  圏$\bm{C}$について、集合$C$が存在して以下を満たすとき、$\bm{C}$を小さいと呼ぶ。
-  \eqg*{
-    \forall f \in \bm{C} \qty(f \in \mathbf{Set}) \\*
-    \forall c \in \Obj_{\bm{C}} \qty(c \in C)
-  }
+  圏$\bm{C}$について、$\bm{C}$の射を対象とする離散圏$\hat{\bm{C}}$が集合であるとき、$\bm{C}$を小さいと呼ぶ。
 }
 
 \cor*{
@@ -225,6 +370,18 @@
 }
 
 \cor*{
+  集合$X, Y$について、以下で定める離散圏$\bm{2}$と$\bm{2}$から$\mathbf{Set}$への関手$F$を考える。
+  \eqg*{
+    f \in \bm{2} \leftrightarrow f = 0 \lor f = 1 \\*
+    F(0) = X \land F(1) = Y
+  }
+
+  このとき、$X \times Y, \pi$は$F$の積である。
+
+  ただし、$\pi(0)(\qty(x, y)) = x, \pi(1)(\qty(x, y)) = y$とする。
+}
+
+\cor*{
   小さい離散圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への関手$X$を考える。
 
   このとき、以下で定める$x, u$は$X$の和である。
@@ -237,7 +394,7 @@
 
 \lsubsection{選択}
 
-\thm{選択公理が与える写像}{
+\lem{選択公理が与える写像}{
   集合$X, Y$とアリティ\num{2}の述語記号$\psi$について、$\forall x \in X \exists y \in Y \qty(\psi(x, y))$が成り立つとする。
 
   このとき、以下を満たす写像$f \colon X \to Y$が存在する。
@@ -269,10 +426,10 @@
   $\forall x \in X \setminus \qty{\varnothing}$について、$\exists y \qty(y \in x)$である。
   この$y$は、$y \in x$より、$y \in \bigcup X$である。
 
-  ゆえに、\thmref{選択公理が与える写像}より存在する。
+  ゆえに、\lemref{選択公理が与える写像}より存在する。
 }
 
-\thm{非空からなる積は非空}{
+\lem{非空からなる積は非空}{
   空でない集合$J$から$\mathbf{Set}$への関手$X$について、以下が成り立つ。
   \eq*{
     \forall j \in J \qty(X(j) \neq \varnothing) \rightarrow \prod X \neq \varnothing
@@ -282,137 +439,9 @@
 
   \thmref{選択関数の存在}より、写像$f \colon Z \to \bigcup Z$が存在して、$\forall z \in Z \qty(f(z) \in z)$である。
 
-  写像$g \colon J \to \bigcup Z$を$g(j) \coloneqq f(X(j))$で定義すると、$\forall j \in J \qty(f(j) \in X(j))$であるので、$f \in \prod X$である。
+  写像$g \colon J \to \bigcup Z$を$g(j) \coloneqq f(X(j))$で定義すると、$\forall j \in J \qty(g(j) \in X(j))$であるので、$g \in \prod X$である。
 
   ゆえに、$\prod X \neq \varnothing$である。
-}
-
-
-\lsubsection{像と原像}
-
-\dfn{像}{
-  写像$f \colon X \to Y$と、$X$の部分集合$A$について、以下で定める集合を$A$の$f$による像と呼び、$f(A)$で表す。
-  \eq*{
-    f(A) \coloneqq \qty{f(x) \mid x \in A}
-  }
-
-  また、$f(X)$を$\Im(f)$でも表す。
-}
-
-\thm{像の性質}{
-  写像$f \colon X \to Y$について、以下が成り立つ。
-  \eqg*{
-    \forall A_1, A_2 \subset X \qty(A_1 \subset A_2 \rightarrow f(A_1) \subset f(A_2)) \\*
-    \forall B \subset \P(X) \qty(f \qty(\bigcup B) = \bigcup \qty{f(A) \mid A \in B}) \\*
-    \forall B \subset \P(X) \qty(f \qty(\bigcap B) \subset \bigcap \qty{f(A) \mid A \in B}) \\*
-    \forall A_1, A_2 \subset X \qty(f(A_1) \setminus f(A_2) \subset f(A_1 \setminus A_2))
-  }
-}{
-  第一式について、
-  $y \in f(A_1)$のとき、$\exists x \in A_1 \qty(y = f(x))$、$\exists x \in A_2 \qty(y = f(x))$、ゆえに$y \in f(A_2)$
-
-  \vskip\baselineskip
-
-  第二式について、
-  \eqg*{
-    y \in \bigcup \qty{f(A) \mid A \in B} \\*
-    \exists A \in B \qty(y \in f(A)) \\*
-    \exists A \in B \exists x \in A \qty(y = f(x)) \\*
-    \exists x \in \bigcup B \qty(y = f(x)) \\*
-    y \in f \qty(\bigcup B)
-  }
-
-  上からも下からも成り立つので、\axiref{外延性の公理}より成り立つ。
-
-  \vskip\baselineskip
-
-  第三式について、第二式を用いて、
-  \eqg*{
-    y \in f \qty(\bigcap B) \\*
-    \exists x \qty(x \in \bigcap B \land y = f(x)) \\*
-    \exists x \qty(x \in \bigcup B \land \forall A \qty(A \in B \rightarrow x \in A) \land y = f(x)) \\*
-    \exists x \qty(x \in \bigcup B \land y = f(x)) \land \exists x \qty(\forall A \qty(A \in B \rightarrow x \in A) \land y = f(x)) \\*
-    y \in f \qty(\bigcup B) \land \forall A \qty(A \in B \rightarrow y \in f(A)) \\*
-    y \in \bigcup \qty{f(A) \mid A \in B} \land \forall A \qty(A \in B \rightarrow y \in f(A)) \\*
-    y \in \bigcap \qty{f(A) \mid A \in B}
-  }
-
-  \vskip\baselineskip
-
-  第四式について、
-  \eqg*{
-    y \in f(A_1) \setminus f(A_2) \\*
-    \exists x \qty(y = f(x) \land x \in A_1) \land \forall x \qty(y = f(x) \rightarrow x \notin A_2) \\*
-    \exists x \qty(y = f(x) \land x \in A_1 \setminus A_2) \\*
-    y \in f \qty(A_1 \setminus A_2)
-  }
-}
-
-\dfn{原像}{
-  写像$f \colon X \to Y$と集合$A$について、以下で定める集合を、集合$A$の原像と呼び、$f^{-1}(A)$で表す。
-  \eq*{
-    f^{-1}(A) = \qty{x \in X \mid f(x) \in A}
-  }
-}
-
-\cor{像と原像}{
-  写像$f \colon X \to Y$について、以下が成り立つ。
-  \eqg*{
-    \forall A \subset X \qty(f^{-1} \qty(f(A)) \supset A) \\*
-    \forall B \qty(f \qty(f^{-1}(B)) \subset B)
-  }
-}
-
-\thm{原像の性質}{
-  写像$f$について、以下が成り立つ。
-  \eqg*{
-    \forall A_1, A_2 \qty(A_1 \subset A_2 \rightarrow f^{-1}(A_1) \subset f^{-1}(A_2)) \\*
-    \forall B \qty(f^{-1} \qty(\bigcup B) = \bigcup \qty{f^{-1}(A) \mid A \in B}) \\*
-    \forall B \qty(f^{-1} \qty(\bigcap B) = \bigcap \qty{f^{-1}(A) \mid A \in B}) \\*
-    \forall A_1, A_2 \qty(f^{-1}(A_1) \setminus f^{-1}(A_2) = f^{-1}(A_1 \setminus A_2))
-  }
-}{
-  第一式について、
-  $x \in f^{-1}(A_1)$のとき、$f(x) \in A_1 \subset A_2$ゆえに$x \in f^{-1}(A_2)$
-
-  \vskip\baselineskip
-
-  第二式について、
-  \eqg*{
-    x \in \bigcup \qty{f^{-1}(A) \mid A \in B} \\*
-    \exists A \in B \qty(x \in f^{-1}(A)) \\*
-    \exists A \in B \qty(f(x) \in A) \\*
-    f(x) \in \bigcup B \\*
-    x \in f^{-1} \qty(\bigcup B)
-  }
-
-  上からも下からも成り立つので、\axiref{外延性の公理}より成り立つ。
-
-  \vskip\baselineskip
-
-  第三式について、第二式を用いて、
-  \eqg*{
-    x \in f^{-1} \qty(\bigcap B) \\*
-    f(x) \in \bigcap B \\*
-    f(x) \in \bigcup B \land \forall A \qty(A \in B \rightarrow f(x) \in A) \\*
-    x \in f^{-1} \qty(\bigcup B) \land \forall A \qty(A \in B \rightarrow x \in f^{-1}(A)) \\*
-    x \in \bigcup \qty{f^{-1}(A) \mid A \in B} \land \forall A \qty(A \in B \rightarrow x \in f^{-1}(A)) \\*
-    x \in \bigcap \qty{f^{-1}(A) \mid A \in B}
-  }
-
-  上からも下からも成り立つので、\axiref{外延性の公理}より成り立つ。
-
-  \vskip\baselineskip
-
-  第四式について、
-  \eqg*{
-    x \in f^{-1}(A_1) \setminus f^{-1}(A_2) \\*
-    f(x) \in A_1 \land f(x) \notin A_2 \\*
-    f(x) \in A_1 \setminus A_2 \\*
-    x \in f^{-1} \qty(A_1 \setminus A_2)
-  }
-
-  上からも下からも成り立つので、\axiref{外延性の公理}より成り立つ。
 }
 
 
@@ -421,8 +450,8 @@
 \lem{単射}{
   写像$f$について、以下の\num{3}つは同値である。
   \begin{enumerate}
-    \item $f$が左簡約可能（$f$が単射）
-    \item $f$が左一意的
+    \item $f$が左簡約可能
+    \item $f$が左一意的（単射）
     \item $f$が、空写像または左可逆
   \end{enumerate}
 }{
@@ -471,8 +500,8 @@
 \lem{全射}{
   写像$f$について、以下の\num{3}つは同値である。
   \begin{enumerate}
-    \item $f$が右簡約可能（$f$が全射）
-    \item $f$が右全域的
+    \item $f$が右簡約可能
+    \item $f$が右全域的（全射）
     \item $f$が右可逆
   \end{enumerate}
 }{
@@ -491,7 +520,7 @@
 
   $2. \to 3.$を示す。
 
-  \thmref{選択公理が与える写像}の与える写像は、右逆写像である。
+  \lemref{選択公理が与える写像}の与える写像は、右逆写像である。
 
   \vskip\baselineskip
 
@@ -525,9 +554,11 @@
 
   このとき$Y \subset A$である。
 
-  $f(Y) \notin Y$とすると、定義より$f(Y) \in Y$。ゆえに矛盾。
+  $f(Y) \notin Y$とすると、定義より$f(Y) \in Y$である。
+  ゆえに矛盾。
 
-  $f(Y) \in Y$とすると、$f$の単射性より$Y \subset A \land f(Y) \notin Y$。ゆえに矛盾。
+  $f(Y) \in Y$とすると、$\exists Z \subset A \qty(f(Z) \notin Z \land f(Z) = f(Y))$であるが、$f$の単射性より$Y = Z$ゆえに$f(Y) \notin Y$である。
+  ゆえに矛盾。
 
   背理法より示される。
 }

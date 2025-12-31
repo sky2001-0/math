@@ -135,13 +135,19 @@
   このような単一の元からなる集合を単集合（singleton）と呼ぶ。
 }
 
+\cor*{
+  \eq*{
+    \forall x, y \qty(x \in y \leftrightarrow \qty{x} \subset y)
+  }
+}
+
 \axi{正則性の公理}{
   \eq*{
     \forall X \qty(X \neq \varnothing \rightarrow \exists x \qty(x \in X \land \forall y \qty(y \in X \rightarrow y \notin x)))
   }
 }
 
-\lem*{
+\lem{循環所属の禁止}{
   \eq*{
     \forall x \forall y \qty(x \notin y \lor y \notin x)
   }
@@ -150,12 +156,12 @@
 
   \axiref{正則性の公理}より、
   \eq*{
-    \exists z \qty(z \in \qty{x, y} \land \forall t \qty(t \in \qty{x, y} \land t \notin z))
+    \exists z \qty(z \in \qty{x, y} \land \forall t \qty(t \in \qty{x, y} \rightarrow t \notin z))
   }
 
   よって、
   \eq*{
-    \forall t \qty(t \in \qty{x, y} \land t \notin x) \lor \forall t \qty(t \in \qty{x, y} \land t \notin y)
+    \forall t \qty(t \in \qty{x, y} \rightarrow t \notin x) \lor \forall t \qty(t \in \qty{x, y} \rightarrow t \notin y)
   }
 
   ゆえに、
@@ -169,7 +175,7 @@
   }
 }
 
-\cor*{
+\cor{自己所属の禁止}{
   \eq*{
     \forall x \qty(x \notin x)
   }
@@ -254,12 +260,6 @@
 
 \cor*{
   \eq*{
-    \forall X \qty(\P(X) \notin X)
-  }
-}
-
-\cor*{
-  \eq*{
     \forall X \forall Y \qty(X \subset Y \rightarrow \P(X) \subset \P(Y))
   }
 }
@@ -316,7 +316,7 @@
   アリティ\num{1}の述語記号$P$を考える。
   排中律より、
   \eq*{
-    \forall X \qty(\exists a \qty(a \in X \land P(a)) \lor \forall a \lnot \qty(a \in X \land P(a)))
+    \forall X \qty\Big(\exists a \qty(a \in X \land P(a)) \lor \forall a \lnot \qty(a \in X \land P(a)))
   }
 
   $\forall a \lnot \qty(a \in X \land P(a))$のとき、$A = \varnothing$で示される。
@@ -328,7 +328,11 @@
     \psi(x, y) \defiff \qty(P(x) \land y = x) \lor \qty(\lnot P(x) \land y = a)
   }
 
-  \axiref{置換の公理図式}より、
+  $\psi(x, y) \land \psi(x, z)$とすると、$P(x)$であるとき$y = x = z$であり、$\lnot P(x)$であるとき$y = a = z$である。
+
+  排中律より、$y = z$が成り立つ。
+
+  したがって\axiref{置換の公理図式}より、
   \eq*{
     \exists A \forall y \qty(y \in A \leftrightarrow \exists x \qty(x \in X \land \qty(\qty(P(x) \land y = x) \lor \qty(\lnot P(x) \land y = a))))
   }
@@ -490,28 +494,33 @@
   }
 }{
   第一の定理を示す。
-  \eqa*{
-    x \in X \setminus \bigcup A
-    &\leftrightarrow x \in X \land x \notin \bigcup A \\*
-    &\leftrightarrow x \in X \land \forall Y \qty(Y \in A \rightarrow x \notin Y)
-    \leftrightarrow x \in X \land \forall Y \qty(Y \in A \rightarrow x \notin X \setminus Y)
+  以下は上からも下からも成り立つ。
+  \eqg*{
+    x \in X \setminus \bigcup A \\*
+    x \in X \land x \notin \bigcup A \\*
+    x \in X \land \forall Y \qty(Y \in A \rightarrow x \notin Y) \\*
+    x \in X \land \forall Y \qty(Y \in A \rightarrow x \in X \setminus Y)
   }
 
-  $A \neq \varnothing$より、
-  \eq*{
-    \leftrightarrow x \in X \land x \in \bigcap \qty{X \setminus Y \mid Y \in A} \leftrightarrow x \in \bigcap \qty{X \setminus Y \mid Y \in A}
+  $A \neq \varnothing$より、以下が上からも下からも成り立つ。
+  \eqg*{
+    x \in X \setminus \bigcup A \\*
+    x \in X \land x \in \bigcap \qty{X \setminus Y \mid Y \in A} \\*
+    x \in \bigcap \qty{X \setminus Y \mid Y \in A}
   }
 
   \vskip\baselineskip
 
   第二の定理を示す。
-  \eqa*{
-    x \in X \setminus \bigcap A &\leftrightarrow x \in X \land x \notin \bigcap A
-    \leftrightarrow x \in X \land \qty(x \notin \bigcup A \lor \exists Y \qty(Y \in A \land x \notin Y)) \\*
-    &\leftrightarrow x \in X \setminus \bigcup A \lor \exists Y \qty(Y \in A \land x \in X \setminus Y) \\*
-    &\leftrightarrow x \in X \setminus \bigcup A \lor x \in \bigcup \qty{X \setminus Y \mid Y \in A} \\*
-    &\leftrightarrow x \in \bigcap \qty{X \setminus Y \mid Y \in A} \lor x \in \bigcup \qty{X \setminus Y \mid Y \in A} \\*
-    &\leftrightarrow x \in \bigcup \qty{X \setminus Y \mid Y \in A}
+  以下は上からも下からも成り立つ。
+  \eqg*{
+    x \in X \setminus \bigcap A \\*
+    x \in X \land x \notin \bigcap A \\*
+    x \in X \land \qty(x \notin \bigcup A \lor \exists Y \qty(Y \in A \land x \notin Y)) \\*
+    x \in X \setminus \bigcup A \lor \exists Y \qty(Y \in A \land x \in X \setminus Y) \\*
+    x \in X \setminus \bigcup A \lor x \in \bigcup \qty{X \setminus Y \mid Y \in A} \\*
+    x \in \bigcap \qty{X \setminus Y \mid Y \in A} \lor x \in \bigcup \qty{X \setminus Y \mid Y \in A} \\*
+    x \in \bigcup \qty{X \setminus Y \mid Y \in A}
   }
 
   最後から\num{2}行目への変形には、第一の定理を用いた。
@@ -521,8 +530,9 @@
 \lsubsection{順序対と集合の直積}
 
 \dfn{順序対}{
-  \axiref{対の公理}から、$\qty{\qty{x}, \qty{x, y}}$が存在する。
-  このような集合を、順序対と呼び、$\qty(x, y)$で表す。
+  集合$x, y$について、\axiref{対の公理}から、$\qty{\qty{x}, \qty{x, y}}$が存在する。
+
+  この集合を、順序対と呼び、$\qty(x, y)$で表す。
 }
 
 \cor{順序対の相等}{
@@ -540,7 +550,8 @@
 \cor{順序対の取り出し}{
   \eqg*{
     \forall x \forall y \qty(x = \bigcup \bigcap \qty(x, y)) \\*
-    \forall x \forall y \qty(y = \bigcup \bigcap \qty(x, y) \land \qty(\bigcap \qty(x, y) = \bigcap \qty(x, y))) \lor \qty(y = \bigcup \qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)) \land \qty(\bigcap \qty(x, y) \neq \bigcap \qty(x, y)))
+    \forall x \forall y \qty(\qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)) = \varnothing \rightarrow y = \bigcup \bigcap \qty(x, y)) \\*
+    \forall x \forall y \qty(\qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)) \neq \varnothing \rightarrow y = \bigcup \qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)))
   }
 }
 
@@ -578,7 +589,52 @@
 }
 
 
-\lsubsection{無限系譜}
+\lsubsection{後者と無限}
+
+\dfn{後者}{
+  集合$x$について、\axiref{対の公理}、\axiref{和集合の公理}より、$x \cup \qty{x}$が存在する。
+
+  この集合を$x$の後者と呼び、$x^+$で表す。
+}
+
+\lem*{
+  以下が成り立つ。
+  \eq*{
+    \forall x \qty(x \neq x^+)
+  }
+}{
+  \corref{自己所属の禁止}より成り立つ。
+}
+
+\lem{後続と包含}{
+  以下が成り立つ。
+  \eq*{
+    \forall x, y \qty(x \subset y \land y \subset x^+ \rightarrow x = y \lor x^+ = y)
+  }
+}{
+  $x \in y$のときを考える。
+
+  $x \subset y \land \qty{x} \subset y$より、$x^+ \subset y$である。
+  仮定より$x^+ \subset y$であるので、$x^+ = y$である。
+
+  $x \notin y$のときを考える。
+
+  仮定より$y \subset x \cup \qty{x}$より、$y \subset x$である。
+  $x \subset y$であるので、$x = y$である。
+}
+
+\lem{後者は単射的}{
+  以下が成り立つ。
+  \eq*{
+    \forall x, y \qty(x^+ = y^+ \rightarrow x = y)
+  }
+}{
+  $x \in x^+$より、$x \in y^+$であるため、$x \in y \lor x = y$である。
+
+  同様に、$y \in y^+$より、$y \in x \lor x = y$である。
+
+  $x \neq y$とすると、$x \in y \land y \in x$となるが、\lemref{循環所属の禁止}より矛盾する。
+}
 
 \axi{無限の公理}{
   \eq*{
@@ -589,7 +645,7 @@
 \dfn{無限系譜}{
   集合$X$が無限系譜であるとは、以下を満たすことである。
   \eq*{
-    \varnothing \in X \land \forall x \qty(x \in X \rightarrow x \cup \qty{x} \in X)
+    \varnothing \in X \land \forall x \qty(x \in X \rightarrow x^+ \in X)
   }
 
   \axiref{無限の公理}より無限系譜は存在する。
@@ -611,9 +667,9 @@
 
   $\forall X \in A \qty(\varnothing \in X)$であるので、$\varnothing \in \bigcap A$である。
 
-  $\forall x \in \bigcap A$について、$\forall X \in A \qty(x \in X)$であり、無限系譜であることから$x \cup \qty{x} \in X$である。
+  $\forall x \in \bigcap A$について、$\forall X \in A \qty(x \in X)$であり、無限系譜であることから$x^+ \in X$である。
 
-  ゆえに、$x \cup \qty{x} \in \bigcap A$である。
+  ゆえに、$x^+ \in \bigcap A$である。
 
   よって、$\bigcap A$は無限系譜である。
 }
@@ -630,7 +686,7 @@
   \mlemref{-1}より成り立つ。
 }
 
-\lem{最小無限系譜の一意性}{
+\thm{最小無限系譜の一意性}{
   \mlemref{-1}で定める集合は、無限系譜$X$の取り方によらずに一意に定まる。
 }{
   $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とする。
