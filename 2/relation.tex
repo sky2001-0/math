@@ -4,40 +4,47 @@
 
 \dfn{自己関係}{
   関係$\qty(\qty(X, Y), G)$について、$X = Y$であるとき、$X$上の自己関係、または単に$X$上の関係と呼ぶ。
+
+  簡単のために、$X$上の関係と書いて$G$を表すものとする。
+
+  また、$X$上の関係$G$について、アリティ\num{2}の述語記号$G$を以下で定める。
+  \eq*{
+    G\qty(x, y) \defiff \qty(x, y) \in G
+  }
 }
 
 \dfn{反射的}{
-  集合$X$上の関係$\mathfrak{R}$が反射的であるとは、以下を満たすことである。
+  集合$X$上の関係$G$が反射的であるとは、以下を満たすことである。
   \eq*{
-    \forall x \in X \qty(\mathfrak{R}(x, x))
+    \forall x \in X \qty(G(x, x))
   }
 }
 
 \dfn{対称的}{
-  集合$X$上の関係$\mathfrak{R}$が対称的であるとは、以下を満たすことである。
+  集合$X$上の関係$G$が対称的であるとは、以下を満たすことである。
   \eq*{
-    \forall x, y \in X\qty(\mathfrak{R}(x, y) \rightarrow \mathfrak{R}(y, x))
+    \forall x, y \in X\qty(G(x, y) \rightarrow G(y, x))
   }
 }
 
 \dfn{反対称的}{
-  集合$X$上の関係$\mathfrak{R}$が反対称的であるとは、以下を満たすことである。
+  集合$X$上の関係$G$が反対称的であるとは、以下を満たすことである。
   \eq*{
-    \forall x, y \in X \qty(\mathfrak{R}(x, y) \land \mathfrak{R}(y, x) \rightarrow x = y)
+    \forall x, y \in X \qty(G(x, y) \land G(y, x) \rightarrow x = y)
   }
 }
 
 \dfn{推移的}{
-  集合$X$上の関係$\mathfrak{R}$が推移的であるとは、以下を満たすことである。
+  集合$X$上の関係$G$が推移的であるとは、以下を満たすことである。
   \eq*{
-    \forall x, y, z \in X \qty(\mathfrak{R}(x, y) \land \mathfrak{R}(y, z) \rightarrow \mathfrak{R}(x, z))
+    \forall x, y, z \in X \qty(G(x, y) \land G(y, z) \rightarrow G(x, z))
   }
 }
 
 \dfn{完全}{
-  集合$X$上の関係$\mathfrak{R}$が完全であるとは、以下を満たすことである。
+  集合$X$上の関係$G$が完全であるとは、以下を満たすことである。
   \eq*{
-    \forall x, y \in X \qty(x \neq y \rightarrow \mathfrak{R}(x, y) \lor \mathfrak{R}(y, x))
+    \forall x, y \in X \qty(x \neq y \rightarrow G(x, y) \lor G(y, x))
   }
 }
 
@@ -46,32 +53,32 @@
 }
 
 \dfn{写像が誘導する自己関係}{
-  写像$f \colon X \to Y$と、$Y$上の自己関係$\mathfrak{R}_Y$を考える。
+  写像$f \colon X \to Y$と、$Y$上の自己関係$G_Y$を考える。
 
-  このとき、以下で定める$X$上の自己関係$\mathfrak{R}_X$を考える。
+  このとき、以下で定める$X$上の自己関係$G_X$を考える。
   \eq*{
-    \mathfrak{R}_X(x, y) \defiff \mathfrak{R}_Y(f(x), f(y))
+    G_X(x, y) \defiff G_Y(f(x), f(y))
   }
 
-  この$\mathfrak{R}_X$を、$f$が$\mathfrak{R}_Y$から誘導する自己関係と呼ぶ。
+  この$G_X$を、$f$が$G_Y$から誘導する自己関係と呼ぶ。
 }
 
 \rem{包含写像が誘導する自己関係}{
-  集合$X$上の自己関係$\mathfrak{R}$について、特に明示しなければ$X$の部分$A$の自己関係を、包含写像が誘導する自己関係で定めるものとする。
+  集合$X$上の自己関係$G$について、特に明示しなければ$X$の部分$A$の自己関係を、包含写像が誘導する自己関係で定めるものとする。
 }
 
 \cor{写像が誘導する自己関係}{
-  写像$f \colon X \to Y$と、$Y$上の自己関係$\mathfrak{R}_Y$を考える。
+  写像$f \colon X \to Y$と、$Y$上の自己関係$G_Y$を考える。
 
-  $f$が$\mathfrak{R}_Y$から誘導する自己関係$\mathfrak{R}_X$を考える。
+  $f$が$G_Y$から誘導する自己関係$G_X$を考える。
 
   このとき、以下が成り立つ。
   \begin{enumerate}
-    \item $\mathfrak{R}_Y$が反射的ならば、$\mathfrak{R}_X$は反射的である。
-    \item $\mathfrak{R}_Y$が対称的ならば、$\mathfrak{R}_X$は対称的である。
-    \item $f$が単射かつ$\mathfrak{R}_Y$が反対称的ならば、$\mathfrak{R}_X$は反対称的である。
-    \item $\mathfrak{R}_Y$が推移的ならば、$\mathfrak{R}_X$は推移的である。
-    \item $\mathfrak{R}_Y$が完全ならば、$\mathfrak{R}_X$は完全である。
+    \item $G_Y$が反射的ならば、$G_X$は反射的である。
+    \item $G_Y$が対称的ならば、$G_X$は対称的である。
+    \item $f$が単射かつ$G_Y$が反対称的ならば、$G_X$は反対称的である。
+    \item $G_Y$が推移的ならば、$G_X$は推移的である。
+    \item $G_Y$が完全ならば、$G_X$は完全である。
   \end{enumerate}
 }
 
@@ -79,7 +86,7 @@
 \lsubsection{前順序}
 
 \dfn{前順序}{
-  反射的かつ推移的な自己関係$\preccurlyeq \coloneqq \qty(\qty(X, X), G)$を、前順序と呼ぶ。
+  集合$X$上の反射的かつ推移的な自己関係$G$を、前順序と呼ぶ。
 
   前順序であることを明示的に記号$\preccurlyeq$で表す。
 
@@ -205,7 +212,7 @@
 }
 
 \dfn{前順序が誘導する圏}{
-  前順序集合$\qty(X, \preccurlyeq), \preccurlyeq = \qty(\qty(X, X), G)$について、$G$の元$\qty(x, y)$を考える。
+  前順序集合$\qty(X, \preccurlyeq)$について、$\preccurlyeq$の元$\qty(x, y)$を考える。
   $\dom(\qty(x, y)) = \qty(x, x), \cod(\qty(x, y)) = \qty(y, y)$として、合成を$\qty(y, z) \circ \qty(x, y) = \qty(x, z)$で定義すると、
   $G$は圏となる。
 
@@ -278,6 +285,19 @@
   ゆえに、$f(x)$は$f(A)$の上界であるので、$f(x) \preccurlyeq \sup f(A) = y$である。
 }
 
+\lem{単調像と下限}{
+  前順序集合$X, Y$について、単調写像$f \colon X \to Y$を考える。
+
+  $X$の部分$A$について、$A$の下限$x$と、$f(A)$の下限$y$が存在するとする。
+
+  このとき、以下が成り立つ。
+  \eq*{
+    f(x) \preccurlyeq y
+  }
+}{
+  \lemref{単調像と上限}と同様に示せる。
+}
+
 \dfn{射影系}{
   前順序集合$\Lambda$と圏$\bm{C}$について、$\Lambda^\opp$から$\bm{C}$への関手$X$を、射影系と呼ぶ。
 }
@@ -304,15 +324,15 @@
 }
 
 \dfn{写像が誘導する同値関係}{
-  写像$f \colon X \to Y$について、$f$が$=_Y$から誘導する自己関係は同値関係である。
+  写像$f \colon X \to Y$について、$f$が$=_Y$から誘導する$X$上の自己関係は同値関係である。
 
-  この同値関係を、写像$f$が誘導する同値関係と呼ぶ。
+  この同値関係を、写像$f$が誘導する$X$上の同値関係と呼ぶ。
 }
 
 \cor*{
-  写像$f \colon X \to Y$について、$f$が誘導する同値関係$\sim_f$を考える。
+  写像$f \colon X \to Y$について、$f$が誘導する$X$上の同値関係$\sim_f$を考える。
 
-  $\sim_f = \qty(\qty(X, X), G)$について、$G, \qty(\pi_0, \pi_1)$は$f$の核対である。
+  $\sim_f$について、$\sim_f, \qty(\pi_0, \pi_1)$は$f$の核対である。
 
   ただし、$\pi_0(\qty(x, y)) = x, \pi_1(\qty(x, y)) = y$とする。
 }
@@ -346,12 +366,12 @@
   写像$f, g \colon X \to Y$について、
   積$Y \times Y, \pi$が存在するので、一意な射$q$が存在して$f = \pi(0) \circ q \land g = \pi(1) \circ q$である。
 
-  以下の集合$G$を考える。
+  以下の集合$\sim$を考える。
   \eq*{
-    G \coloneqq \bigcap \qty{G^\prime \in Y \times Y \mid \Im(q) \subset G^\prime \land \text{$\qty(\qty(Y, Y), G^\prime)$は同値関係}}
+    \sim \coloneqq \bigcap \qty{G^\prime \in Y \times Y \mid \Im(q) \subset G^\prime \land \text{$G^\prime$は$Y$上の同値関係}}
   }
 
-  共通部分をとられる集合は空ではないので、$\sim \coloneqq \qty(\qty(Y, Y), G)$は同値関係となる。
+  共通部分をとられる集合は$Y \times Y$を要素に持ち空ではないので、$\sim$は$Y$上の同値関係となる。
 
   $\sim$の商写像$u$について、$Y / \sim, u$は余等化子である。
 }{
@@ -360,9 +380,9 @@
 
   写像$h \colon Y \to Z$について、$h \circ f = h \circ g$であるとする。
 
-  $h$が誘導する同値関係$\sim_h = \qty(\qty(Y, Y), S)$について、$\forall x_0, x_1 \in X \qty(\qty(f(x_0), g(x_1)) \in S)$である。
+  $h$が誘導する$Y$上の同値関係$\sim_h$について、$\forall x_0, x_1 \in X \qty(\qty(f(x_0), g(x_1)) \in \sim_f)$である。
 
-  すなわち$\Im(q) \subset S$であり、$G$の定義より$G \subset S$である。
+  すなわち$\Im(q) \subset \sim_f$であり、$G$の定義より$G \subset \sim_f$である。
 
   したがって、$\forall y_0, y_1 \in Y \qty(y_0 \sim y_1 \rightarrow h(y_0) = h(y_1))$である。
 
@@ -384,7 +404,7 @@
 \end{center}
 
 \cor{商集合は余等化子}{
-  集合$X$上の同値関係$\sim = \qty(\qty(X, X), G)$、$\sim$の商写像$u$、積$X \times X, \pi$を考える。
+  集合$X$上の同値関係$\sim$、$\sim$の商写像$u$、積$X \times X, \pi$を考える。
 
   $X / \sim, u$は、$\pi_0, \pi_1 \colon G \to X$の余等化子である。
 }
@@ -394,9 +414,9 @@
 
   このとき一意な単射$g \colon X / \sim_f \to Y$が存在して、$f = g \circ u$が成り立つ。
 }{
-  写像$f$が誘導する同値関係$\sim_f = \qty(\qty(X, X), G)$とする。
+  写像$f$が誘導する同値関係$\sim_f$とする。
 
-  このとき、$G, \qty(\pi_0, \pi_1)$は$f$の核対であり、$X / \sim_f, u$は$\pi_0, \pi_1$の余等化子である。
+  このとき、$\sim_f, \qty(\pi_0, \pi_1)$は$f$の核対であり、$X / \sim_f, u$は$\pi_0, \pi_1$の余等化子である。
 
   余等化子の普遍性より、写像$g \colon X / \sim_f \to Y$が一意に存在して、$f = g \circ u$である。
 
@@ -416,7 +436,7 @@
 \begin{center}
   \begin{minipage}{0.4\linewidth}
     \begin{tikzcd}
-      G \ar[r, "\pi_0"] \ar[d, "\pi_1"'] & X \ar[d, "u"] \ar[ddr, "f", bend left] & \\
+      \sim_f \ar[r, "\pi_0"] \ar[d, "\pi_1"'] & X \ar[d, "u"] \ar[ddr, "f", bend left] & \\
       X \ar[r, "u"'] \ar[rrd, "f", bend right] & X / \sim_f \ar[rd, "g", dotted] & \\
       & & Y \\
     \end{tikzcd}

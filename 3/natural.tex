@@ -4,7 +4,7 @@
 
 \dfn{自然数}{
   自然数論では、\num{3}つの公理（
-    \axiref{零の存在}、\axiref{後者関数は単射}、\axiref{数学的帰納法}
+    \axiref{零は後者ではない}、\axiref{後者は単射}、\axiref{数学的帰納法}
   ）が与えられる。
 
   項を自然数と呼ぶ。
@@ -35,117 +35,35 @@
 \axi{数学的帰納法}{
   アリティ\num{1}の述語記号$\psi$について、以下が成り立つ。
   \eq*{
-    \psi(0) \land \forall k \qty(\psi(k) \rightarrow \psi(s(k))) \rightarrow \forall n \qty(\psi(n))
+    \psi(0) \land \forall k \qty\Big(\psi(k) \rightarrow \psi(s(k))) \rightarrow \forall n \qty(\psi(n))
   }
 }
 
 
-% \lsubsection{自然数の構成}
-
-% \dfn{無限系譜}{
-%   集合$X$が無限系譜であるとは、以下を満たすことである。
-%   \eq*{
-%     \varnothing \in X \land \forall x \qty(x \in X \rightarrow x \cup \qty{x} \in X)
-%   }
-
-%   \axiref{無限の公理}より無限系譜は存在する。
-% }
-
-% \cor*{
-%   \eq*{
-%     \forall X \forall Y \qty(\text{$X$は無限系譜である} \land \text{$Y$は無限系譜である} \rightarrow \text{$X \cap Y$は無限系譜である})
-%   }
-% }
-
-\dfn{後者関数}{
-  無限系譜$X$について、以下のように定める写像$s \colon X \to X$を後者関数（successor）と呼ぶ。
-  \eq*{
-    s(x) \coloneqq x \cup \qty{x}
-  }
-}
-
-% \lem*{
-%   以下が成り立つ。
-%   \eq*{
-%     \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(\text{$X$は無限系譜である}) \rightarrow \text{$\bigcap A$は無限系譜である})
-%   }
-% }{
-%   空でない$A$を考える。
-
-%   $\forall X \in A \qty(\varnothing \in X)$であるので、$\varnothing \in \bigcap A$である。
-
-%   $\forall x \in \bigcap A$について、$\forall X \in A \qty(x \in X)$であり、無限系譜であることから$s(x) \in X$である。
-%   ゆえに、$s(x) \in \bigcap A$
-
-%   よって、$\bigcap A$は無限系譜である。
-% }
-
-% \lem*{
-%   無限系譜$X$について、以下で定める集合は無限系譜である。
-%   \eq*{
-%     \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}
-%   }
-% }{
-%   $A \coloneqq \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とすると、
-%   $X \in A$より、$A \neq \varnothing$である。
-
-%   \mlemref{-1}より成り立つ。
-% }
-
-% \lem*{
-%   \mlemref{-1}で定める集合は、無限系譜$X$の取り方によらずに一意に定まる。
-% }{
-%   $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とする。
-
-%   $X_1, X_2$の\num{2}つの無限系譜を考える。
-
-%   $X_1$の部分で無限系譜である$Y$を考える。
-
-%   \mlemref{-2}より$X_2 \cap Y$も無限系譜であり、定義より$\omega(X_2) \subset X_2 \cap Y \subset Y$である。
-
-%   任意の$Y$について成り立つので、$\omega(X_2) \subset \omega(X_1)$である。
-
-%   同様に$\omega(X_1) \subset \omega(X_2)$であるため、示される。
-% }
-
-\dfn{自然数}{
-  \mlemref{0}より、無限系譜$X$の取り方によらず$\omega(X)$が一意に定まる。
-  これを自然数$\N$（または$\omega$）と呼ぶ。
-  誤解のない範囲で、自然数$\N$の要素も自然数と呼ぶ。
-}
-
-\dfn{数字}{
-  数字を定義する。
-  \eq*{
-    0 \coloneqq \qty{}, 1 \coloneqq \qty{0}, 2 \coloneqq \qty{0, 1}, 3 \coloneqq \qty{0, 1, 2}, \cdots
-  }
-}
+\lsubsection{集合論における自然数}
 
 \thm{Peanoの公理}{
-  以下の全てを満たす。
+  \thmref{最小無限系譜の一意性}より、無限系譜$X$の取り方によらず$\omega(X)$が一意に定まる。
+  これを$\N$で表す。
+
+  $\N$は以下の全てを満たす。
   \eqg*{
-    0 \in \N \\*
-    \forall n \in \N \qty(s(n) \in N) \\*
-    \forall n \in \N \qty(s(n) \neq 0) \\*
-    \forall n, m \in \N \qty(s(n) = s(m) \rightarrow n = m) \\*
-    \forall E \qty(E \subset \N \land 0 \in E \land \forall n \qty(n \in E \rightarrow s(n) \in E) \rightarrow E = \N)
+    \varnothing \in \N \\*
+    \forall n \in \N \qty(n^+ \in \N) \\*
+    \forall n \in \N \qty(n^+ \neq \varnothing) \\*
+    \forall n, m \in \N \qty(n^+ = m^+ \rightarrow n = m) \\*
+    \forall E \qty(E \subset \N \land \varnothing \in E \land \forall n \qty(n \in E \rightarrow n^+ \in E) \rightarrow E = \N)
   }
 }{
   第一、第二の公理は、無限系譜であることより明らか。
 
   \vskip\baselineskip
 
-  第三の公理は$n \in s(n)$と、空集合は要素を持たないことから示される。
+  第三の公理は$n \in n^+$と、空集合は要素を持たないことから示される。
 
   \vskip\baselineskip
 
-  第四の公理を示す。
-
-  $n \in s(n) \rightarrow n \in s(m)$であり、$n \in s(m) \rightarrow n = m \lor n \in m$
-
-  よって、$\qty(n = m \lor n \in m) \land \qty(m = n \lor m \in n)$
-
-  \axiref{正則性の公理}より示される。
+  第四の公理は、\lemref{後者は単射的}より示される。
 
   \vskip\baselineskip
 
@@ -153,181 +71,72 @@
 
   前件より、$E \subset \N$である。
 
-  $0 \in E \land \forall n \qty(n \in E \rightarrow s(n) \in E)$より、$E$は無限系譜である。
+  $\varnothing \in E \land \forall n \qty(n \in E \rightarrow n^+ \in E)$より、$E$は無限系譜である。
 
-  定義より$\N = \omega(E) \subset E$である。
+  最小無限系譜であるので、$\N = \omega(E) \subset E$である。
 }
 
 \thm{数学的帰納法}{
-  アリティ1の述語記号$P$について、
+  アリティ\num{1}の述語記号$\psi$について、
   \eq*{
-    \forall n \qty(n \in \N \rightarrow P(n)) \leftrightarrow P(0) \land \forall n \qty\Big(n \in \N \land \qty\big(P(n) \rightarrow P(s(n))))
+    \forall n \in \N \qty(\psi(n)) \leftrightarrow \psi(0) \land \forall n \in \N \qty\Big(\psi(n) \rightarrow \psi(n^+))
   }
 }{
   右は明らか。
 
   \vskip\baselineskip
 
-  左は、$E = \qty{n \in \N \mid P(n)}$として\thmref{Peanoの公理}第五式から示される。
+  左は、$E = \qty{n \in \N \mid \psi(n)}$として、\thmref{Peanoの公理}第五式から示される。
 }
 
-\dfn{前者関数}{
-  後者関数$s$は、\thmref{Peanoの公理}の第四式より単射であるため、左逆写像を持つ。
+\dfn{自然数集合}{
+  \thmref{Peanoの公理}、\thmref{数学的帰納法}より、以下と$n \in \N$で定める議論領域は自然数である。
+  \eqa*{
+    0 &\coloneqq \varnothing \\*
+    s(n) &\coloneqq n^+
+  }
 
-  これを前者関数$p \in \N \setminus \qty{0} \to \N$と呼ぶ。
+  $\N$を自然数集合と呼ぶ。
+
+  誤解のない限り、自然数集合を自然数と呼ぶ
+  。
 }
 
 \lem*{
+  以下が成り立つ。
   \eq*{
-    \forall n \in \N \qty(n \neq 0 \rightarrow s(p(n)) = n)
+    \forall n \in \N \qty(\text{$n$は順序数})
   }
 }{
-  $n = 0$のとき前件否定より成り立つ。
+  $n = 0$のとき、$\varnothing$は順序数より成り立つ。
 
-  ある$n$で成り立つとき、$p$が$s$の左逆写像より$s(p(s(n))) = s(n)$が成り立つ。
+  ある$n$が順序数であるとき、\corref{順序数の後者は順序数}より$s(n)$は順序数である。
 
-  \thmref{数学的帰納法}より、任意の$n$について成り立つ。
+  \thmref{数学的帰納法}より、任意の自然数$n$について成り立つ。
 }
-
-\lem*{
-  \eq*{
-    \forall n \in \N \qty(m \in n \rightarrow m \in \N)
-  }
-}{
-  $n = 0 = \varnothing$のとき自明。
-
-  ある$n$で成り立つとき、$s(n) = n \cup \qty{n}$より、$s(n)$で成り立つ。
-
-  \thmref{数学的帰納法}より、任意の$n$について成り立つ。
-}
-
-
-\lsubsection{自然数の順序}
 
 \dfn{自然数の順序}{
-  自然数$\N$上で二項関係$\leq$を以下のように定める。{包含の半順序性}より、$\leq$は半順序である。
+  自然数$\N$上で二項関係$\leq$を以下のように定める。
+  \lemref{順序数の比較可能性}より、$\leq$は全順序である。
   \eq*{
     n \leq m \defiff n \subset m
   }
 }
 
-\cor*{
+\lem{自然数は推移的}{
+  以下が成り立つ。
   \eq*{
-    \forall n \in \N \qty(0 \leq n)
-  }
-}
-
-\cor*{
-  \eq*{
-    \forall n \in \N \qty(n < s(n))
-  }
-}
-
-\lem{自然数の順序の要素のよる特徴づけ}{
-  \eq*{
-    \forall n, m \in \N \qty(n \subsetneq m \leftrightarrow n \in m)
+    \forall n \in \N \qty(m \in n \rightarrow m \in \N)
   }
 }{
-  $0$は空集合より、$\lnot \qty(n \in 0) \land \lnot \qty(n \subsetneq 0)$
-  ゆえに、$n \subsetneq 0 \leftrightarrow n \in 0$
+  $n = 0 = \varnothing$のとき明らか。
 
-  ある$m$で成り立つとする。
+  ある$n$で成り立つとき、$s(n) = n \cup \qty{n}$より、$s(n)$で成り立つ。
 
-  \vskip\baselineskip
-
-  左について、仮定より、
-  \eqg*{
-    n \in s(m) \\*
-    n \in m \cup \qty{m} \\*
-    n \in m \lor n = m \\*
-    n \subsetneq m \lor n = m \\*
-    n \subset m
-  }
-
-  $m \notin m$より、
-  \eq*{
-    n \subsetneq m \cup \qty{m} = s(m)
-  }
-
-  \thmref{数学的帰納法}より、左が成り立つ。
-
-  \vskip\baselineskip
-
-  右について、既に示した左を用いて、
-  \eqg*{
-    m \in n \land n \subsetneq s(m) \\*
-    m \subsetneq n \land n \subsetneq s(m) \\*
-    \bot \\*
-    n \subsetneq s(m) \rightarrow m \notin n
-  }
-
-  ゆえに、
-  \eqg*{
-    n \subsetneq s(m) = m \cup \qty{m} \\*
-    n \subset m \\*
-    n \subsetneq m \lor n = m
-  }
-
-  選言の一つ目について、仮定より、
-  \eqg*{
-    n \subsetneq m \\*
-    n \in m \\*
-    n \in s(m)
-  }
-
-  選言の二つ目について、
-  \eq*{
-    n = m \rightarrow n \in s(m)
-  }
-
-  \thmref{数学的帰納法}より左が成り立つ。
+  \thmref{数学的帰納法}より、任意の自然数$n$について成り立つ。
 }
 
-\lem{後者と順序}{
-  \eq*{
-    \forall n, m \in \N \qty(n < m \rightarrow s(n) \leq m)
-  }
-}{
-  $n \leq m \land n \neq m$より、$n \subsetneq m$
-
-  \lemref{自然数の順序の要素のよる特徴づけ}より、$n \in m$。ゆえに、$s(n) = n \cup \qty{n} \subset m$
-}
-
-\thm{自然数の全順序}{
-  $\qty(\N, \leq)$は全順序集合、すなわち以下を満たす。
-  \eq*{
-    \forall n, m \in \N \qty(n \leq m \lor m \leq n)
-  }
-}{
-  $n = 0$について、$\forall m \qty(n \leq m)$である。
-
-  ある$n \in \N$で成り立つとすると、
-  $m \leq n$のとき、$m \leq n \leq s(n)$
-
-  $n \leq m \land \lnot \qty(m \leq n)$すなわち$n \leq m \land n \neq m$のとき、\lemref{後者と順序}より、$s(n) \leq m$
-
-  \thmref{数学的帰納法}より、任意の$n$について示される。
-}
-
-\lem{自然数の順序の後者による保存}{
-  \eq*{
-    \forall n, m \in \N \qty(n < m \rightarrow s(n) < s(m))
-  }
-}{
-  $n < m \land s(m) \leq s(n)$を仮定する。
-
-  $m < s(m)$であるので、$m < s(n)$、
-  ゆえに、$m \in s(n) = n \cup \qty{n}$
-
-  したがって、$m \in n \lor m = n$
-
-  \lemref{自然数の順序の要素のよる特徴づけ}より、$m \leq n$。
-  矛盾する。
-
-  背理法より示される。
-}
-
-\thm{最小値原理}{
+\lem{最小値原理}{
   自然数$\N$の空でない部分集合$A$は最小元を持つ。
 }{
   持たないと仮定する。
@@ -343,50 +152,40 @@
   これは$A$が空でないことに反する。背理法より、示される。
 }
 
-\thm{無限降下法}{
-  アリティ1の述語記号$P$について、
-  \eq*{
-    \forall n \in \N \exists m \in \N \qty(m < n \land P(n) \rightarrow P(m)) \rightarrow \forall n \in \N \qty(\lnot P(n))
-  }
+\thm{自然数は順序数}{
+  自然数$\N$は順序数である。
 }{
-  $\exists n \in \N \qty(P(n))$とすると、$\qty{n \in \N \mid P(n)}$は空でない。\thmref{最小値原理}より、最小値$n_0$を持つ。
-
-  これは仮定に反するので、背理法より示される。
+  \lemref{自然数は推移的}と\lemref{最小値原理}より、順序数である。
 }
 
 
 \lsubsection{自然数の加法}
 
+\dfn{自然数の加法}{
+  自然数$n$について、以下で定める写像$G_n \colon \bigcup \qty{\N^m \mid m \in \N} \to \N$を考える。
+  \eq*{
+    G_n(h) \coloneqq
+    \begin{cases}
+      n & \qty(\dom(h) = 0) \\*
+      s(h(\bigcup \dom(h))) & \qty(\dom(h) \neq 0)
+    \end{cases}
+  }
+
+  このとき、\thmref{超限再帰}が定める写像$+_n \colon \N \to \N$が存在する。
+
+  誤解のない限り、$+_n(m)$を$n + m$と表す。
+}
+
 \lem*{
-  以下で定める部分写像$+$は$\N \times \N$について左全域的である。
+  以下が成り立つ。
   \eqg*{
-    \forall n \in \N \qty(+(\qty(n, 0)) \coloneqq n) \\*
-    \forall n, m \in \N \qty(+(\qty(n, s(m))) \coloneqq s(n + m))
+    \forall n \in \N \qty(n + 0 = n) \\*
+    \forall n, m \in \N \qty(n + s(m) = s(n + m))
   }
 }{
-  $\forall \qty(n, m) \in \N \times \N$に対して、$+(\qty(n, m))$が存在することを示す。
+  第一式について、定義より$+_n(0) = G(+_n \circ \iota_{0, \N}) = n$である。
 
-  $m = 0$のとき定義より成り立つ。
-
-  ある$m$で成り立つとすると、定義より$\qty(n, s(m))$でも成り立つ。
-
-  \thmref{数学的帰納法}より、任意の$m$について示される。
-}
-
-\dfn{自然数の加法}{
-  \mlemref{0}より定まる写像を加法と呼び、$+$で表す。
-
-  書き直して再掲する。
-  \eqg*{
-    \forall n \in \N \qty(n + 0 \coloneqq n) \\*
-    \forall n, m \in \N \qty(n + s(m) \coloneqq s(n + m))
-  }
-}
-
-\cor{1の和}{
-  \eq*{
-    \forall n \in \N \qty(s(n) = n + 1)
-  }
+  第二式について、定義より$+_n(s(m)) = G(+_n \circ \iota_{s(m), \N}) = s(+_n(\bigcup s(m))) = s(+_n(m)) = s(n + m)$である。
 }
 
 \lem{自然数の加法の結合法則}{
@@ -397,18 +196,18 @@
 }{
   $l = 0$のとき、以下より成り立つ。
   \eq*{
-    \qty(n + m) + 0 = \qty(n + m) = n + m = n + \qty(m + 0)
+    \qty(n + m) + 0 = n + m = n + \qty(m + 0)
   }
 
-  ある$l$で成り立つとき、
+  ある自然数$l$で成り立つとき、
   \eqa*{
     \qty(n + m) + s(l) &= s(\qty(n + m) + l) \\*
     &= s(n + \qty(m + l)) \\*
-    &= n + s(\qty(m + l)) \\*
+    &= n + s(m + l) \\*
     &= n + \qty(m + s(l))
   }
 
-  \thmref{数学的帰納法}より、任意の$l$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$l$について示される。
 }
 
 \lem{自然数の加法の単位元}{
@@ -416,21 +215,18 @@
     \forall n \in \N \qty(n + 0 = 0 + n = n)
   }
 }{
-  定義より、
-  \eq*{
-    n + 0 = n
-  }
+  $\forall n \in \N \qty(n + 0 = n)$はすでに示されている。
 
   $\forall n \in \N \qty(0 + n = n)$を示す。
 
   $n = 0$のとき、$0 + 0 = 0$より満たす。
 
-  ある$n$で成り立つとき、
+  ある自然数$n$で成り立つとき、
   \eqa*{
     0 + s(n) = s(0 + n) = s(n)
   }
 
-  \thmref{数学的帰納法}より、任意の$n$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$n$について示される。
 }
 
 \lem*{
@@ -443,12 +239,12 @@
     s(n) + 0 = s(n) = s(n + 0)
   }
 
-  ある$m$について成り立つとき、
+  ある自然数$m$について成り立つとき、
   \eq*{
     s(n) + s(m) = s(s(n) + m) = s(s(n + m)) = s(n + s(m))
   }
 
-  \thmref{数学的帰納法}より、任意の$m$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$m$について示される。
 }
 
 \lem{自然数の加法の交換法則}{
@@ -463,7 +259,7 @@
     n + s(m) = s(n + m) = s(m + n) = s(m) + n
   }
 
-  \thmref{数学的帰納法}より、任意の$m$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$m$について示される。
 }
 
 \lem{自然数の順序の加法による保存}{
@@ -473,12 +269,12 @@
 }{
   $l = 0$のとき、明らか。
 
-  ある$l$で成り立つとき、\lemref{自然数の順序の後者による保存}より、
+  ある自然数$l$で成り立つとき、\lemref{順序数の後者と比較}より、
   \eq*{
     n + s(l) = s(n + l) < s(m + l) = m + s(l)
   }
 
-  \thmref{数学的帰納法}より、任意の$n$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$n$について示される。
 }
 
 \lem{自然数の順序の加法による特徴づけ}{
@@ -496,7 +292,7 @@
 
   ある$n$で成り立つときを考える。$n < m \lor m \leq n$である。
 
-  $n < m$のとき、\lemref{後者と順序}より$s(n) \leq m$である。
+  $n < m$のとき、\lemref{順序数の後者と比較}より$s(n) \leq m$である。
   $s(n) < m$のとき前件否定より自明。$s(n) = m$のとき、$k = 0$で存在。
 
   $m \leq n$のとき、仮定より$\exists k \in \N \qty(m + k = n)$
@@ -515,34 +311,31 @@
 
 \lsubsection{自然数の乗法}
 
-\lem*{
-  以下で定める部分写像$\times$は$\N \times \N$について左全域的である。
-  \eqg*{
-    \forall n \in \N \qty(\times(\qty(n, 0)) \coloneqq 0) \\*
-    \forall n, m \in \N \qty(\times(\qty(n, s(m))) \coloneqq n + \times(\qty(n, m)))
+\dfn{自然数の乗法}{
+  自然数$n$について、以下で定める写像$G_n \colon \bigcup \qty{\N^m \mid m \in \N} \to \N$を考える。
+  \eq*{
+    G_n(h) \coloneqq
+    \begin{cases}
+      0 & \qty(\dom(h) = 0) \\*
+      h(\bigcup \dom(h)) + n & \qty(\dom(h) \neq 0)
+    \end{cases}
   }
-}{
-  $\forall \qty(n, m) \in \N \times \N$に対して、$\times(\qty(n, m))$が存在することを示す。
 
-  $m = 0$のとき定義より成り立つ。
+  このとき、\thmref{超限再帰}が定める写像$\times_n \colon \N \to \N$が存在する。
 
-  ある$m$で成り立つとすると、定義と加法の定義より$\qty(n, s(m))$でも成り立つ。
-
-  \thmref{数学的帰納法}より、任意の$m$について示される。
+  誤解のない限り、$\times_n(m)$を$n \times m$と表す。
 }
 
-\dfn{自然数の乗法}{
-  \mlemref{0}より定まる二項演算を乗法と呼び、$\times$で表す。
-
-  書き直して再掲する。
+\lem*{
+  以下が成り立つ。
   \eqg*{
-    \forall n \in \N \qty(n \times 0 \coloneqq 0) \\*
-    \forall n, m \in \N \qty(n \times s(m) \coloneqq n + n \times m)
+    \forall n \in \N \qty(n \times 0 = 0) \\*
+    \forall n, m \in \N \qty(n \times s(m) = n \times m + n)
   }
+}{
+  第一式について、定義より$\times_n(0) = G(\times_n \circ \iota_{0, \N}) = 0$である。
 
-  乗法$\times$は、加法$+$よりも先に演算される。
-
-  また、$m \times n$を誤解のない範囲で$m n$と略記する。
+  第二式について、定義より$\times_n(s(m)) = G(\times_n \circ \iota_{s(m), \N}) = \times_n(\bigcup s(m)) + n = \times_n(m) + n$である。
 }
 
 \lem{左零元}{
@@ -552,12 +345,16 @@
 }{
   $n = 0$のとき、$0 \times 0 = 0$
 
-  ある$n$で成り立つとき、
+  ある自然数$n$で成り立つとき、
   \eq*{
-    0 \times s(n) = 0 + 0 \times n = 0 + 0 = 0
+    0 \times s(n) = 0 \times n + 0 = 0 + 0 = 0
   }
 
-  \thmref{数学的帰納法}より、任意の$n$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$n$について示される。
+}
+
+\dfn{1}{
+  自然数において、$1 \coloneqq s(0)$で定める。
 }
 
 \lem{自然数の乗法の単位元}{
@@ -567,19 +364,19 @@
 }{
   左について$1 = s(0)$より、
   \eq*{
-    n \times 1 = n \times s(0) = n + n \times 0 = n + 0 = n
+    n \times 1 = n \times s(0) = n \times 0 + n = 0 + n = n
   }
 
   右について考える。
 
   $n = 0$のとき、$1 \times 0 = 0$
 
-  ある$n$で成り立つとき、
+  ある自然数$n$で成り立つとき、
   \eq*{
-    1 \times s(n) = 1 + 1 \times n = 1 + n = s(n)
+    1 \times s(n) = 1 \times n + 1 = n + 1 = n + s(0) = s(n + 0) = s(n)
   }
 
-  \thmref{数学的帰納法}より、任意の$n$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$n$について示される。
 }
 
 \lem{自然数の右分配法則}{
@@ -592,14 +389,14 @@
     \qty(n + m) \times 0 = 0 = 0 + 0 = n \times 0 + m \times 0
   }
 
-  ある$l$で成り立つとき、
+  ある自然数$l$で成り立つとき、
   \eqa*{
-    \qty(n + m) \times s(l) &= n + m + \qty(n + m) \times l \\*
-    &= n + m + n \times l + m \times l \\*
+    \qty(n + m) \times s(l) &= \qty(n + m) \times l + \qty(n + m) \\*
+    &= n \times l + m \times l + n + m \\*
     &= n \times s(l) + m \times s(l)
   }
 
-  \thmref{数学的帰納法}より、任意の$l$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$l$について示される。
 }
 
 \lem{自然数の乗法の交換法則}{
@@ -609,17 +406,25 @@
 }{
   \lemref{左零元}より、$m = 0$について、$n \times 0 = 0 \times n$
 
-  ある$m$で成り立つとき、
+  ある自然数$m$で成り立つとき、
   \eqa*{
-    n \times s(m) &= n + n \times m \\*
-    &= n + m \times n \\*
+    n \times s(m) &=  n \times m + n\\*
     &= m \times n + n \\*
     &= m \times n + 1 \times n \\*
     &= \qty(m + 1) \times n \\*
     &= s(m) \times n
   }
 
-  \thmref{数学的帰納法}より、任意の$n$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$m$について示される。
+}
+
+\lem{自然数の分配法則}{
+  \eqg*{
+    \forall n, m, l \in \N \qty(\qty(n + m) \times l = n \times l + m \times l) \\*
+    \forall n, m, l \in \N \qty(n \times \qty(m + l) = n \times m + n \times l)
+  }
+}{
+  右分配法則と交換法則より示される。
 }
 
 \lem{自然数の乗法の結合法則}{
@@ -633,28 +438,18 @@
     \qty(n \times m) \times 0 = 0 = n \times 0 = n \times \qty(m \times 0)
   }
 
-  ある$l$で成り立つとき、
+  ある自然数$l$で成り立つとき、
   \eqa*{
-    \qty(n \times m) \times s(l) &= n \times m + \qty(n \times m) \times l \\*
-    &= n \times m + n \times \qty(m \times l) \\*
-    &= m \times n + \qty(m \times l) \times n \\*
-    &= \qty(m + m \times l) \times n \\*
-    &= n \times \qty(m + m \times l) \\*
-    &= n \times \qty(1 \times m + l \times m) \\*
-    &= n \times \qty(s(l) \times m) \\*
+    \qty(n \times m) \times s(l) &= \qty(n \times m) \times l + n \times m \\*
+    &= n \times \qty(m \times l) + n \times m \\*
+    &= \qty(m \times l) \times n + m \times n \\*
+    &= \qty(m \times l + m) \times n \\*
+    &= \qty(m \times l + m \times 1) \times n \\*
+    &= n \times \qty(m \times \qty(l + 1)) \\*
     &= n \times \qty(m \times s(l))
   }
 
-  \thmref{数学的帰納法}より、任意の$l$について示される。
-}
-
-\lem{自然数の分配法則}{
-  \eqg*{
-    \forall n, m, l \in \N \qty(\qty(n + m) \times l = n \times l + m \times l) \\*
-    \forall n, m, l \in \N \qty(n \times \qty(m + l) = n \times m + n \times l)
-  }
-}{
-  右分配法則と交換法則より示される。
+  \thmref{数学的帰納法}より、任意の自然数$l$について示される。
 }
 
 \lem{自然数の順序の乗法による保存}{
@@ -666,12 +461,12 @@
 
   $n = 1$のとき、$1$が乗法の単位元であることから明らか。
 
-  ある$n \geq 1$で成り立つとき、
+  ある自然数$n \geq 1$で成り立つとき、
   \eq*{
     s(n) \times m = n \times m + m < n \times m + l < n \times l + l = s(n) \times l
   }
 
-  \thmref{数学的帰納法}より、任意の$n$について示される。
+  \thmref{数学的帰納法}より、任意の自然数$n$について示される。
 }
 
 \lem{自然数の乗法の簡約則}{
@@ -699,51 +494,36 @@
 
 \lsubsection{自然数の除法}
 
-\lem*{
-  \eq*{
-    \forall a, b \in \N \qty(b \neq 0 \rightarrow \exists q, r \in \N \qty(a = b q + r \land r < b))
-  }
-}{
-  $a = 0$のとき、$q = r = 0$で成り立つ。
-
-  ある$a$で成り立つとき、すなわち$n_a, r_a$が存在するときを考える。
-
-  $r_a < b$より、$s(r_a) \leq b$である。
-
-  $s(r_a) < b$のとき、$q_{s(a)} = n_a, r_{s(a)} = s(r_a)$は仮定より満たす。
-
-  $s(r_a) = b$のとき、$q_{s(a)} = s(n_a), r_{s(a)} = 0$は仮定より満たす。
-
-  \thmref{数学的帰納法}より、任意の$a$について成り立つ。
-}
-
-\lem*{
-  \eq*{
-    \forall a, b \in \N \qty(b \neq 0 \rightarrow \forall q, r, q', r' \in \N \qty(a = q b + r \land r < b \land a = q' b + r' \land r' < b \rightarrow q = q' \land r = r'))
-  }
-}{
-  $q < q'$とすると\lemref{自然数の順序の加法による特徴づけ}より、$\exists q_d \in \N \qty(q + q_d = q' \land q_d \geq 1)$
-
-  このとき$a = b q + r = b q' + r'$より、自然数の加法の簡約則から$r = b q_d + r'$
-
-  これは$r < b \leq b q_d \leq b q_d + r$より矛盾。よって$q \geq q'$
-
-  同様に$q \leq q'$。したがって、$q = q'$
-
-  自然数の加法の簡約則から、$r = r'$
-
-  よって示される。
-}
-
 \dfn{自然数の除法}{
-  \mlemref{-1}、\mlemref{0}より、以下の写像$\divisionsymbol \colon \N \times \qty(\N \setminus \qty{0}) \to \N \times \N$を定義できる。
+  $0$でない自然数$b$について、以下で定める写像$G_b \colon \bigcup \qty{\qty(\N \times \N)^a \mid a \in \N} \to \N \times \N$を考える。
   \eq*{
-    a \divisionsymbol b = q \cdots r \defiff a = b q + r
+    G_n(h) \coloneqq
+    \begin{cases}
+      \qty(0, 0) & \qty(\dom(h) = 0) \\*
+      \qty(q, s(r)) & \qty(\dom(h) \neq 0 \land s(r) \in b) \\*
+      \qty(s(q), 0) & \qty(\dom(h) \neq 0 \land s(r) \notin b)
+    \end{cases}
+    \hspace{3em}
+    \text{ただし、$\qty(q, r) \coloneqq h(\bigcup \dom h)$とする。}
   }
 
-  $\divisionsymbol (\qty(a, b))$を$a \divisionsymbol b$と、値域の元$\qty(q, r)$を$q \cdots r$と表記するものとする。
+  このとき、\thmref{超限再帰}が定める写像$\divisionsymbol_b \colon \N \to \N \times \N$が存在する。
+
+  誤解のない限り、$\divisionsymbol_b(a) = \qty(q, r)$を$a \divisionsymbol b = q \cdots r$と表す。
 
   特に、$q$を商、$r$を余りと呼ぶ。
+}
+
+\lem*{
+  以下が成り立つ。
+  \eqg*{
+    \forall b \in \N \setminus \qty{0} \qty(0 \divisionsymbol b \coloneqq 0 \cdots 0) \\*
+    \forall a \in \N \forall b \in \N \setminus \qty{0} \qty(s(a) \divisionsymbol b = q \cdots s(r))
+  }
+}{
+  第一式について、定義より$\times_n(0) = G(\times_n \circ \iota_{0, \N}) = 0$である。
+
+  第二式について、定義より$\times_n(s(m)) = G(\times_n \circ \iota_{s(m), \N}) = \times_n(\bigcup s(m)) + n = \times_n(m) + n$である。
 }
 
 \dfn{倍数}{
@@ -753,6 +533,10 @@
 \cor*{
   任意の自然数$n$について、$0$は$n$の倍数であり、$1$は$n$の約数である。
   また、$n$は$n$の倍数でも約数でもある。
+}
+
+\dfn{2}{
+  自然数において、$2 \coloneqq s(s(0))$で定める。
 }
 
 \dfn{偶奇}{
@@ -767,4 +551,38 @@
 
 \cor*{
   素数$p$の約数は、$1$と$p$である。
+}
+
+
+\lsubsection{点列}
+
+\dfn{有限列}{
+  自然数$n \in \N$から集合$X$へのネットを、$X$上の有限列、または組、$n$-組と呼ぶ。
+}
+
+\dfn{点列}{
+  自然数$\N$から集合$X$へのネットを、$X$上の点列と呼ぶ。
+}
+
+\dfn{点列の部分列}{
+  単射$\varphi \colon \N \to \N$を用いて表せる部分ネット$\qty(x_{\varphi(m)})_{m \in \N}$を点列$\qty(x_n)_{n \in \N}$の部分列と呼ぶ。
+}
+
+\dfn{非交叉列}{
+  点列$\qty(x_n)_{n \in \N}$について以下が成り立つとき、$\qty(x_n)_{n \in \N}$を非交叉列と呼ぶ。
+  \eq*{
+    \forall n, m \in \N \qty(n \neq m \rightarrow x_n \cap x_m = \varnothing)
+  }
+}
+
+\dfn{単調列}{
+  半順序集合$X$上の点列$\qty(x_n)_{n \in \N}$について、以下のいずれかを満たす点列を単調列と呼ぶ。
+  \eqg*{
+    \forall n \in \N \qty(x_n < x_{s(n)}) \\*
+    \forall n \in \N \qty(x_n \leq x_{s(n)}) \\*
+    \forall n \in \N \qty(x_n > x_{s(n)}) \\*
+    \forall n \in \N \qty(x_n \geq x_{s(n)})
+  }
+
+  特にそれぞれ、第一式を満たす点列を狭義単調増加列、第二式を広義単調増加列、第三式を狭義単調減少列、第四式を広義単調減少列と呼ぶ。
 }

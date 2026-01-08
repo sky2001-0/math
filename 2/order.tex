@@ -189,12 +189,19 @@
   順序数$\alpha, \beta$について、$\alpha \cap \beta$は順序数である。
 }
 
-\cor*{
+\cor{順序数の後者は順序数}{
   順序数$\alpha$について、$\alpha^+$は順序数である。
 }
 
 \cor*{
   集合$\alpha$について、$\qty(\alpha^+, \in)$が順序数ならば$\qty(\alpha, \in)$は順序数である。
+}
+
+\cor*{
+  順序数$\alpha$について、以下が成り立つ。
+  \eq*{
+    \alpha = \bigcup \alpha^+
+  }
 }
 
 \lem*{
@@ -279,7 +286,7 @@
   これは、$B$の最小元である。
 }
 
-\lem*{
+\lem{順序数の後者と比較}{
   順序数$\alpha$について、以下が成り立つ。
   \eq*{
     \forall \beta \in \alpha \qty(\beta^+ \in \alpha \lor \beta^+ = \alpha)
@@ -310,7 +317,7 @@
 
   \vskip\baselineskip
 
-  任意の$x \in \alpha$について、\mlemref{-1}より$x^+ \in \alpha \lor x^+ = \alpha$であり、仮定より$x^+ \neq \alpha$であるので、$x^+ \in \alpha$である。
+  任意の$x \in \alpha$について、\lemref{順序数の後者と比較}より$x^+ \in \alpha \lor x^+ = \alpha$であり、仮定より$x^+ \neq \alpha$であるので、$x^+ \in \alpha$である。
 
   $x \in x^+ \land x^+ \in \alpha$より、$\exists \beta \in \alpha \qty(x \in \beta)$すなわち$x \in \bigcup \alpha$である。
 
@@ -334,7 +341,26 @@
 
   $\min A \subset \alpha^+$と、最小性より$\forall \gamma \in \min A \qty(\psi(\gamma))$である。
 
-  仮定より$\psi(\min \alpha)$が成り立つので、反する。
+  仮定より$\psi(\min A)$が成り立つが、$A$の定義より$\lnot \psi(\min A)$であり、反する。
+}
+
+\thm{無限降下法}{
+  アリティ\num{1}の述語記号$\psi$について、以下が成り立つ。
+  \eq*{
+    \forall \alpha \qty\Big(\text{$\alpha$は順序数} \land \psi(\alpha) \rightarrow \exists \beta \in \alpha \qty(\psi(\beta))) \rightarrow \forall \alpha \qty\Big(\text{$\alpha$は順序数} \rightarrow \lnot \psi(\alpha))
+  }
+}{
+  ある順序数$\alpha$が存在して、$\psi(\alpha)$であるとする。
+
+  $A \coloneqq \qty{\beta \in \alpha^+ \mid \psi(\alpha)}$とすると、$\alpha \in A$より、$A$は空でない。
+
+  $A$は順序数$\alpha^+$の部分であるので、最小元$\min A$が存在する。
+
+  仮定より$\exists \beta \in \min A \qty(\psi(\beta))$であるので、$\beta \in A$である。
+
+  $\beta \in \min A$より、$\min A$の最小性に反する。
+
+  背理法より示される。
 }
 
 \thm{超限再帰}{
@@ -406,12 +432,12 @@
 \lsubsection{いくつかの重要な定理}
 
 \lem{整列集合の自己単調単射は増大}{
-  整列集合$\qty(S, \leq)$と、狭義単調写像$f \colon S \to S$について、以下が成り立つ。
+  整列集合$\qty(W, \leq)$と、狭義単調写像$f \colon W \to W$について、以下が成り立つ。
   \eq*{
-    \forall x \in S \qty(x \leq f(x))
+    \forall x \in W \qty(x \leq f(x))
   }
 }{
-  $A \coloneqq \qty{x \in X \mid f(x) < x}$を考える。
+  $A \coloneqq \qty{x \in W \mid f(x) < x}$を考える。
 
   $A \neq \varnothing$とすると、定義より$\min A$が存在する。
 
@@ -421,15 +447,15 @@
 }
 
 \lem{切片からの狭義単調は存在しない}{
-  空でない整列集合$\qty(S, \leq)$と$a \in S$について、狭義単調な$f \colon X_{< a} \to X$は存在しない。
+  空でない整列集合$\qty(W, \leq)$と$a \in W$について、狭義単調な$f \colon W \to W_{< a}$は存在しない。
 }{
   存在するとする。
 
-  $\iota_{X_{< a}, X}$は狭義単調より、$\iota_{X_{< a}, X} \circ f$は狭義単調である。
+  $\iota_{W_{< a}, W}$は狭義単調より、$\iota_{W_{< a}, W} \circ f$は狭義単調である。
 
-  \lemref{整列集合の自己単調単射は増大}より、$a \leq \qty(\iota_{X_{< a}, X} \circ f)(a)$である。
+  \lemref{整列集合の自己単調単射は増大}より、$a \leq \qty(\iota_{W_{< a}, W} \circ f)(a)$である。
 
-  $\iota_{X_{< a}, X}$は包含写像より、$\forall x \in S \qty(\iota_{X_{< a}, X}(x) < a)$より反する。
+  $\iota_{W_{< a}, W}$は包含写像より、$\forall x \in W \qty(\iota_{W_{< a}, W}(x) < a)$より反する。
 }
 
 \cor*{
@@ -439,7 +465,7 @@
 \lem{整列集合は順序型を持つ}{
   整列集合$W$について、$W$と順序同型な順序数が一意に存在する。
 }{
-  \lemref{順序数の比較可能性}、\lemref{順序数の元は順序数}、\lemref{切片からの狭義単調は存在しない}より、存在すれば一意である。
+  \lemref{順序数の比較可能性}、\lemref{切片からの狭義単調は存在しない}より、存在すれば一意である。
 
   \vskip\baselineskip
 
@@ -680,22 +706,36 @@
   \vskip\baselineskip
 
   $S$の部分集合$A$について、完備性より$\sup A \in L$が存在する。
-
-  \lemref{単調像と上限}より、$\sup A = \sup f(A) \preccurlyeq f(\sup A)$である。
+  また、定義より$A = f(A)$である。
 
   $P \coloneqq \qty{x \in L \mid \forall a \in A \qty(a \preccurlyeq x) \land f(x) \preccurlyeq x}$を考える。
 
   $\max S \in P$より、$P$は空ではない。
 
-  $\inf P$
+  \vskip\baselineskip
 
-  ???
+  任意の$a \in A$について、$\forall x \in P \qty(a \preccurlyeq x)$より、$a$は$P$の下界であるので、$a \preccurlyeq \inf P$である。
+  ゆえに、$\inf P$は$A$の上界である。
 
-  したがって、$\sup A = f(\sup A)$であるので、$\sup A \in S$である。
+  したがって$\sup A \preccurlyeq \inf P$であり、\lemref{単調像と上限}と単調性より$\sup A = \sup f(A) \preccurlyeq f(\sup A) \preccurlyeq f(\inf P)$である。
+
+  よって、$f(\inf P)$は$A$の上界である。
+
+  $\forall x \in P \qty(\inf f(P) \preccurlyeq f(x) \preccurlyeq x)$より$\inf f(P)$は$P$の下界であることと\lemref{単調像と下限}から、$f(\inf P) \preccurlyeq \inf f(P) \preccurlyeq \inf P$である。
+
+  単調性より、$f(f(\inf P)) \preccurlyeq f(\inf P)$である。
+
+  したがって、$f(\inf P) \in P$である。
+
+  よって$\inf P \preccurlyeq f(\inf P)$を得るので、$\inf P = f(\inf P)$すなわち$\inf P \in S$である。
 
   \vskip\baselineskip
 
-  同様に$\inf A \in L$である。
+  すでに示した$\sup A \preccurlyeq \inf P$と$\sup A \preccurlyeq f(\inf P) = \inf P$より、$\sup A = \inf P \in S$である。
+
+  \vskip\baselineskip
+
+  同様に$\inf A \in S$である。
 }
 
 \thmf{Cantor-Schr\"{o}der-Bernsteinの定理}{Cantor-Schroder-Bernsteinの定理}{
@@ -822,7 +862,33 @@
 \thm{整列可能定理}{
   集合$X$について、$X$上の自己関係$\leq$が存在して、$\qty(X, \leq)$は整列集合となる。
 }{
-  ???
+  以下で定める集合$W$を考える。
+  \eq*{
+    W \coloneqq \qty{\qty(A, \leq) \mid A \subset X \land \text{$\qty(A, \leq)$は整列集合}}
+  }
+
+  $\qty(\varnothing, \varnothing) \in W$より、$W \neq \varnothing$である。
+
+  $W$上の関係$\preccurlyeq$を以下で定める。
+  \eq*{
+    \qty(A_1, \leq_1) \preccurlyeq \qty(A_2, \leq_2) \defiff A_1 \subset A_2 \land \leq_1 = \leq_2 \cap \qty(A_1 \times A_1)
+  }
+
+  $W$の全順序部分$C$について、以下の組は整列集合であり、$C$の上界である。
+  \eq*{
+    \qty(\bigcup \qty{A \mid \qty(A, \leq) \in C}, \bigcup \qty{\leq \mid \qty(A, \leq) \in C})
+  }
+
+  \thmref{Zornの補題}より、極大元$\qty(A_0, \leq_0)$が存在する。
+
+  $A_0 \subsetneq X$とすると、$\exists a \in X \qty(a \notin A_0)$であり、以下で定める組$G$が存在する。
+  \eq*{
+    G \coloneqq \qty(A_0 \cup \qty{a}, \leq_0 \cup \qty(A_0 \times \qty{a}))
+  }
+
+  $G \in W$であり、$\qty(A_0, \leq_0) \prec G$であるので、極大性に反する。
+
+  ゆえに、$A_0 = X$である。
 }
 
 \thm{濃度の比較可能定理}{

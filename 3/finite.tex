@@ -14,26 +14,28 @@
 
   \vskip\baselineskip
 
-  ある$n$で成り立つとき、全射$f \colon s(n) \to m$が存在することを考える。
+  ある自然数$n$で成り立つとする。
 
-  $0^{s(n)} = \varnothing$より、$m \neq 0$である。
+  全射$f \colon s(n) \to m$が存在するとする。
 
-  $\exists k \in n \qty(f(k) = f(n))$のとき、自明な全射$f \rvert_n$を構成できて、仮定より$m \leq n \leq s(n)$
+  $\Hom_{\mathbf{Set}}\qty(s(n), 0) = \varnothing$より、$m \neq 0$である。
 
-  $\forall k \in n \qty(f(k) \neq f(n))$のとき、以下のような全射$g \colon n \to p(m)$を構成できる。
+  $\exists k \in n \qty(f(k) = f(n))$のとき、全射$f \circ \iota_{n, s(n)}$を構成できて、仮定より$m \leq n \leq s(n)$
+
+  $\forall k \in n \qty(f(k) \neq f(n))$のとき、以下のような全射$g \colon n \to \bigcup m$を構成できる。
   \eq*{
     g(x) =
     \begin{cases}
       f(x) & \qty(f(x) < f(n)) \\*
-      p(f(x)) & \qty(f(x) > f(n))
+      \bigcup f(x) & \qty(f(x) > f(n))
     \end{cases}
   }
 
-  仮定より$p(m) \leq n$より、$m = s(p(m)) \leq s(n)$
+  仮定より$\bigcup m \leq n$より、$m = s(\bigcup m) \leq s(n)$
 
   \vskip\baselineskip
 
-  \thmref{数学的帰納法}より、任意の$n$について成り立つ。
+  \thmref{数学的帰納法}より、任意の自然数$n$について成り立つ。
 }
 
 \lem{単射と要素数}{
@@ -41,7 +43,7 @@
 }{
   $n = 0$のとき、明らか。
 
-  $n \neq 0$のとき、\thmref{単射と左逆写像}より$m$から$n$への左逆写像すなわち全射を構成できて、\lemref{全射と要素数}より$n \leq m$
+  $n \neq 0$のとき、\lemref{単射}より$m$から$n$への左逆写像すなわち全射を構成できて、\lemref{全射と要素数}より$n \leq m$
 }
 
 \thm{鳩の巣原理}{
@@ -63,13 +65,13 @@
 }
 
 \lem{単射と有限}{
-  自然数$n$と集合$A$について、以下の２つは同値である。
+  自然数$n$と集合$A$について、以下の\num{2}つは同値である。
   \begin{enumerate}
     \item $A$は有限集合であり、$\abs{A} \leq n$
     \item 単射$f \colon A \to n$が存在する。
   \end{enumerate}
 }{
-  $1. \rightarrow 2.$を示す。
+  $1. \to 2.$を示す。
 
   全単射$f_1 \colon A \to \abs{A}$が存在して、単射$f_2 \colon \abs{A} \to n$が存在する。
 
@@ -77,30 +79,41 @@
 
   \vskip\baselineskip
 
-  $2. \rightarrow 1.$を示す。
+  $2. \to 1.$を示す。
 
-  $n = 0$のとき、$n^A \neq \varnothing$より、$A = \varnothing$である。
+  $n = 0$のとき、$\Hom_{\mathbf{Set}}(A, n) \neq \varnothing$より、$A = \varnothing$である。
 
-  ある$n$について成り立つとする。
+  ある自然数$n$について成り立つとする。
 
-  $\forall a \in A \qty(f(a) \neq n)$のとき、自明な単射$\tilde{f} \colon A \to n$が存在する。
-  よって$\abs{A} \leq n \leq s(n)$
+  $f \colon A \to s(n)$が存在するとする。
+
+  $\forall a \in A \qty(f(a) \neq n)$のとき、以下で定める単射$\tilde{f} \colon A \to n$が存在する。
+  \eq*{
+    \tilde{f}(m) \coloneqq f(m)
+  }
+
+  よって$\abs{A} \leq n \leq s(n)$である。
 
   $\exists a \in A \qty(f(a) = n)$のとき、単射$\tilde{f} \colon A \setminus \qty{a} \to n$が構成できる。
 
-  仮定より$\exists m \in \N \qty(m \leq n)$であり、全単射$g \colon A \setminus \qty{a} \to m$が存在する。
+  仮定より$A \setminus \qty{a}$は有限集合であり、$\abs{A \setminus \qty{a}} \leq n$である。
 
-  ここで、以下のような全単射$h \colon A \to s(m)$を構成できる。
+  ゆえに全単射$g \colon A \setminus \qty{a} \to \abs{A \setminus \qty{a}}$が存在する。
+
+  ここで、以下のような全単射$h \colon A \to s\qty(\abs{A \setminus \qty{a}})$を構成できる。
   \eq*{
     h(x) =
     \begin{cases}
-      m & \qty(x = a) \\*
+      \abs{A \setminus \qty{a}} & \qty(x = a) \\*
       g(f(x)) & \qty(x \neq a)
     \end{cases}
   }
 
-  $\abs{A} = s(m) \leq s(n)$を得るので成り立つ。
+  $\abs{A} = s\qty(\abs{A \setminus \qty{a}}) \leq s(n)$を得るので成り立つ。
 }
+
+
+\lsubsection{有限集合}
 
 \lem{有限集合の部分}{
   有限集合$X$について、$X$の部分$Y$は有限であり、$\abs{Y} \leq \abs{X}$である。
@@ -113,7 +126,7 @@
 \lem{有限集合の像}{
   有限集合$X$、集合$Y$、写像$f \colon X \to Y$について、像$f(X)$は有限であり、$\abs{f(X)} \leq \abs{X}$である。
 }{
-  \thmref{全射と右逆写像}より、$f \colon X \to f(X)$は右逆写像すなわち単射$f^{-1} \colon f(X) \to X$を持つ。
+  \lemref{全射}より、$f \colon X \to f(X)$は右逆写像すなわち単射$f^{-1} \colon f(X) \to X$を持つ。
 
   $n \in \N$と全単射$g \colon X \to n$が存在するので、単射$g \circ f^{-1} \colon f(X) \to n$が存在して、\lemref{単射と有限}より成り立つ。
 }
@@ -121,7 +134,8 @@
 \lem{有限集合の商}{
   有限集合$X$と、$X$上の同値関係$\sim$について、商集合$X / \sim$は有限であり、$\abs{X / \sim} \leq \abs{X}$である。
 }{
-  商写像$\qty[]$について、$X / \sim = \qty[X]$である。\lemref{有限集合の像}より成り立つ。
+  商写像$\pi$について、$X / \sim = \pi(X)$である。
+  \lemref{有限集合の像}より成り立つ。
 }
 
 \lem{有限集合の和}{
@@ -130,14 +144,14 @@
     \abs{X \cup Y} = \abs{X} + \abs{Y}
   }
 }{
-  $X, Y$は有限より、全単射$f \colon \abs{X} \to X, f' \colon \abs{Y} \to Y$が存在する。
+  $X, Y$は有限より、全単射$f \colon \abs{X} \to X, f^\prime \colon \abs{Y} \to Y$が存在する。
 
   ゆえに、以下のような全単射$g \colon \abs{X} + \abs{Y} \to X \cup Y$を構成できる。
   \eq*{
     g(x) =
     \begin{cases}
-      g(x) & \qty(x < \abs{X}) \\*
-      g'(x - \abs{X}) & \qty(\abs{X} \leq x < \abs{X} + \abs{Y})
+      f(x) & \qty(x < \abs{X}) \\*
+      f^\prime(x - \abs{X}) & \qty(\abs{X} \leq x < \abs{X} + \abs{Y})
     \end{cases}
   }
 }
@@ -175,7 +189,7 @@
 }
 
 \thm{有限有向集合の上界}{
-  空でない有向集合の有限部分集合$A$は、上界を持つ。
+  空でない有向集合の有限部分$A$は、上界を持つ。
 }{
   $\abs{A} = 1$のとき、$A$は唯一つの元を持ち、上界である。
 
@@ -191,7 +205,7 @@
 }
 
 \thm{有限全順序集合の最大元}{
-  空でない全順序集合の有限部分集合$A$は、最大元と最小元を持つ。
+  全順序集合の空でない有限部分$A$は、最大元と最小元を持つ。
 }{
   $\abs{A} = 1$のとき、$A$は唯一つの元を持ち、最大元かつ最小元である。
 
@@ -209,7 +223,7 @@
 }
 
 \thm{自然数の上界と有限}{
-  $\N$の部分集合$A$について、$A$が上に有界ならば$A$は有限である。
+  $\N$の部分$A$について、$A$が上に有界ならば$A$は有限である。
 }{
   上界$n$について考える。
 
@@ -230,11 +244,11 @@
     \end{cases}
   }
 
-  \thmref{数学的帰納法}より、任意の$n$について成り立つ。
+  \thmref{数学的帰納法}より、任意の自然数$n$について成り立つ。
 }
 
 
-\lsubsection{可算}
+\lsubsection{濃度}
 
 \dfn{可算}{
   集合$X$について、$X$が空集合または全射$f \colon \N \to X$が存在するとき、$X$を可算集合と呼ぶ。
@@ -247,68 +261,8 @@
   可算集合の部分集合は可算集合である。
 }
 
-\dfn{有限列}{
-  自然数$n \in \N$から集合$X$へのネットを、$X$上の有限列、または組、$n$-組と呼ぶ。
-}
-
-\dfn{点列}{
-  自然数$\N$から集合$X$へのネットを、$X$上の点列と呼ぶ。
-}
-
-\dfn{点列の部分列}{
-  単射な写像$\varphi \colon \N \to \N$を用いて表せる部分ネット$\qty(x_{\varphi(m)})_{m \in \N}$を点列$\qty(x_n)_{n \in \N}$の部分列と呼ぶ。
-}
-
-\dfn{非交叉列}{
-  点列$\qty(x_n)_{n \in \N}$について以下が成り立つとき、$\qty(x_n)_{n \in \N}$を非交叉列と呼ぶ。
-  \eq*{
-    \forall n, m \in \N \qty(n \neq m \rightarrow x_n \cap x_m = \varnothing)
-  }
-}
-
-\dfn{単調列}{
-  半順序集合$X$上の点列$\qty(x_n)_{n \in \N}$について、以下のいずれかを満たす点列を単調列と呼ぶ。
-  \eqg*{
-    \forall n \in \N \qty(x_n < x_{s(n)}) \\*
-    \forall n \in \N \qty(x_n \leq x_{s(n)}) \\*
-    \forall n \in \N \qty(x_n > x_{s(n)}) \\*
-    \forall n \in \N \qty(x_n \geq x_{s(n)})
-  }
-
-  特にそれぞれ、第一式を満たす点列を狭義単調増加列、第二式を広義単調増加列、第三式を狭義単調減少列、第四式を広義単調減少列と呼ぶ。
-}
-
-\thm{無限集合は可算部分を含む}{
-  有限でない集合$X$について、単射$a \colon \N \to X$が存在する。
-}{
-  $\forall A \subset X \setminus \qty{\varnothing} \exists a \in A \qty(a \in A)$である。
-
-  \thmref{選択公理が与える写像}より定まる写像$f \colon \P(X) \setminus \qty{\varnothing} \to X, f(X) \in A$を考える。
-
-  $X$は空でないので、$\exists a_0 \in X$である。
-
-  $\forall n \in \N$について、点列$a_{s(n)} \coloneqq f(X \setminus \qty{a_m \mid m \in s(n)})$を考えることができる。
-
-  なぜなら、$\exists n \in \N \qty(X \setminus \qty{a_m \mid m \in s(n)} = \varnothing)$とすると、$X$は有限となり仮定に反する。
-
-  定義より$\forall n, m \in \N \qty(a_n \neq a_m)$
-
-  単射$a \colon \N \to X$を持つ。
-}
-
-\thm{自然数の直積は可算}{
-  $\N \times \N$は可算である。
-}{
-  全単射$\varphi \colon \N \times \N \to \N, \varphi \qty(n, m) = \qty(\qty(n + m) \times \qty(n + m + 1)) \divisionsymbol 2 + n$が存在する。
-
-  ただし、$a \divisionsymbol b$を除算の商を表すものとする。
-}
-
-
-\lsubsection{濃度の比較}
-
 \lem*{
-  集合$X$について、自然な全単射$\sigma \colon \P(X) \to 2^X$が存在する。
+  集合$X$について、全単射$\sigma \colon \P(X) \to 2^X$が存在する。
 }{
   $x \in X$について、以下のように$\sigma$を定める。
   \eq*{
@@ -324,13 +278,13 @@
     \sigma^{-1}(f) = \qty{x \in X \mid f(x) = 1}
   }
 
-  \thmref{全単射と逆写像}より全単射である。
+  \lemref{単射}、\lemref{全射}より全単射である。
 }
 
-\lem{自然数から集合への写像の全体}{
+\lem*{
   集合$X$と$n \in \N_{\geq 1}$について、全単射$\sigma \colon X^n \times X \to X^{s(n)}$が存在する。
 
-  また、全単射$\sigma' \colon X \to X^1$が存在する。
+  また、全単射$\sigma^\prime \colon X \to X^1$が存在する。
 }{
   以下で定める$\sigma$は全単射である。
   \eq*{
@@ -341,101 +295,85 @@
     \end{cases}
   }
 
-  以下で定める$\sigma'$は全単射である。
+  以下で定める$\sigma^\prime$は全単射である。
   \eq*{
     \sigma(x)(0) = x
   }
 }
 
-\thm*{
+\lem*{
   集合$X, Y, Z$について、自然な全単射$\sigma \colon \qty(X \times Y) \times Z \to X \times \qty(Y \times Z)$が存在する。
 }{
   $\sigma \qty(\qty(x, y), z) = \qty(x, \qty(y, z))$は全単射である。
 }
 
-\thm{Bernsteinの定理}{
-  集合$A, B$について、$A$から$B$への単射$f$が存在して、$B$から$A$の単射$g$が存在するならば、$A$から$B$への全単射が存在する。
+\thm{無限集合は可算部分を含む}{
+  有限でない集合$X$について、単射$a \colon \N \to X$が存在する。
 }{
-  以下のような点列$\qty(C_n)_{n \in \N}$を考える。
+  集合$M \coloneqq \qty{X \setminus F \mid F \subset X \land \abs{F} < \infty}$を考える。
+
+  $X$は有限でないので、$\varnothing \notin M$である。
+
+  \thmref{選択関数の存在}より定まる写像$c \colon M \to X, f(A) \in A$を考える。
+
+  \lemref{有限集合の像}より、以下の写像$G \colon \bigcup \qty{X^n \mid n \in \N} \to X$を考える。
   \eq*{
+    G(h) \coloneqq c\qty(X \setminus \Im(h))
+  }
+
+  \thmref{超限再帰}より、$f \colon \N \to X, f(n) = c\qty(X \setminus \Im(f \circ \iota_{n, \N}))$が存在する。
+
+  $n < m$とすると、$f(m) = c(X \setminus \Im(f \circ \iota_{m, \N})) \in X \setminus \Im(f \circ \iota_{m, \N})$より、$f(n) \neq f(m)$である。
+
+  ゆえに、$f$は単射である。
+}
+
+\lem*{
+  有限でない順序数$\alpha$について、単射$\alpha \times \alpha \to \alpha$が存在する。
+}{
+  $A \coloneqq \qty{\beta \in \alpha^+ \mid \text{単射$\alpha \to \beta$}}$を考える。
+
+  $\alpha \in A$より、$A$は空でないので、$\min A$が存在する。
+  これを$\alpha_0$とする。
+
+  \vskip\baselineskip
+
+  $\alpha_0 \times \alpha_0 = \bigsqcup \qty{\qty(\qty{\gamma} \times \gamma^+) \cup \qty(\gamma^+ \times \qty{\gamma}) \mid \gamma \in \alpha_0}$が成り立つ。
+
+  順序数$\gamma$について、以下で定める組$\qty\Big(\qty(\qty{\gamma} \times \gamma^+) \cup \qty(\gamma^+ \times \qty{\gamma}), \leq)$は整列順序である。
+  \eq*{
+    \qty(\delta_0, \delta_1) \leq \qty(\eta_0, \eta_1) \defiff \delta_0 < \eta_0 \lor \qty(\delta_0 = \eta_0 \land \delta_1 \leq \eta_1)
+  }
+
+  \lemref{整列集合は順序型を持つ}より、整列集合$\qty(\qty(\qty{\gamma} \times \gamma^+) \cup \qty(\gamma^+ \times \qty{\gamma}), \leq)$と順序同型な順序数$\beta_\gamma$が一意に存在する。
+
+  \vskip\baselineskip
+
+  以下で定める$G \colon \bigcup \qty{\alpha_0^\xi \mid \xi \in \alpha_0} \to \alpha_0$を考える。
+  \eq*{
+    G(h) \coloneqq
     \begin{cases}
-      C_0 \coloneqq A \setminus g(B) \\*
-      C_{s(n)} \coloneqq g(f(C_n))
+      \varnothing & \qty(\dom(h) = \varnothing) \\*
+      h(\bigcup \dom(h)) + \beta_{\dom(h)} & \qty(\bigcup \dom(h) \neq \dom(h)) \\*
+      \sup{h(\gamma) \mid \gamma \in \dom(h)} & \otherwise
     \end{cases}
   }
 
-  点列の値域全体の和集合$C \coloneqq \bigcup \qty{C_n \mid n \in \N}$を考える。
-
-  今、\thmref{De Morganの法則}より$A \setminus C \subset g(B)$と、$g$の単射性から、以下のような写像$h \colon A \to B$が構成できる。
-
-  \eq*{
-    h(x) \coloneqq
-    \begin{cases}
-      f(x) & \qty(x \in C) \\*
-      g^{-1}(x) & \qty(x \in A \setminus C)
-    \end{cases}
-  }
-
-  \vskip\baselineskip
-
-  単射でないと仮定すると、$x \in C_n \land y \in A \setminus C$について、
-  \eq*{
-    h(x) = h(y) \rightarrow g(f(x)) = y \in C_{s(n)}
-  }
-
-  矛盾するので、背理法より単射。
-
-  \vskip\baselineskip
-
-  $D \coloneqq \bigcup \qty{C_{s(n)} \mid n \in \N}$について、$D \subset g(B)$であり、\thmref{像の性質}より、
-  \eq*{
-    g^{-1}(D) = \bigcup \qty{g^{-1}(C_{s(n)}) \mid n \in \N} = \bigcup \qty{f(C_n) \mid n \in \N} = f(C)
-  }
-
-  今、$g(B) \subset A$より、
-  \eq*{
-    A \setminus C = A \setminus \qty(C_0 \cup D) = \qty(A \setminus C_0) \setminus D = \qty(A \setminus \qty(A \setminus g(B))) \setminus D = g(B) \setminus D
-  }
-
-  したがって$g$の単射性と\thmref{原像の性質}より
-  \eq*{
-    h(A \setminus C) = g^{-1}(A \setminus C) = g^{-1}(g(B) \setminus D) = B \setminus g^{-1}(D) = B \setminus f(C)
-  }
-
-  ゆえに全射。
+  ???
 }
 
-\thm{濃度の比較可能定理}{
-  集合$A, B$について、単射$f \colon A \to B$または単射$f' \colon B \to A$が存在する。
+\thm{無限の直積}{
+  有限でない集合$X$について、全単射$X \times X \to X$が存在する。
 }{
-  以下で定義する半順序集合$\qty(\mathcal{M}, \subset)$を考える。
-  \eq*{
-    \mathcal{M} \coloneqq \qty{G \subset A \times B \mid \forall \qty(x_1, y_1), \qty(x_2, y_2) \in G \qty(x_1 = x_2 \leftrightarrow y_1 = y_2)}
-  }
-
-  $\mathcal{M}$の全順序部分$C$を考える。
-
-  $\forall \qty(x_1, y_1), \qty(x_2, y_2) \in \bigcup C \exists G_1, G_2 \in C \qty(\qty(x_1, y_1) \in G_1 \land \qty(x_2, y_2) \in G_2)$である。
-
-  ここで$G_1 \subset G_2 \lor G_2 \subset G_1$より、$x_1 = x_2 \leftrightarrow y_1 = y_2$である。
-
-  ゆえに、$\bigcup C \in \mathcal{M}$は上界である。
-
-  したがって、$\mathcal{M}$は帰納的である。
-
-  \vskip\baselineskip
-
-  \thmref{Zornの補題}より、極大元$G_0$が存在する。
-
-  二項関係$\mathfrak{R}_0 \coloneqq \qty(\qty(X, Y), G_0)$を考える。
-
-  $\exists \qty(x, y) \in \qty(A \setminus \dom(\mathfrak{R}_0)) \times \qty(B \setminus \ran(\mathfrak{R}_0))$とする。
-
-  このとき、$G_1 = \qty{\qty(x, y)} \cup G_0 \in \mathcal{M}$となるので、$G_0$の極大性に反する。\\*
-
-  ゆえに、$A = \dom(\mathfrak{R}_0) \lor B = \ran(\mathfrak{R}_0)$である。
-
-  $A = \dom(\mathfrak{R}_0)$のとき、$\mathfrak{R}_0$は写像であり、$\mathcal{M}$の定義より単射である。
-
-  $B = \ran(\mathfrak{R}_0)$のとき、$\qty(\qty(B, A), \qty{\qty(y, x) \in Y \times X \mid \qty(x, y) \in G_0})$は写像であり、$\mathcal{M}$の定義より単射である。
+  ???
 }
+
+
+
+
+全単射$\varphi \colon \N \times \N \to \N, \varphi \qty(n, m) = \qty(\qty(n + m) \times \qty(n + m + 1)) \divisionsymbol 2 + n$が存在する。
+
+ただし、$a \divisionsymbol b$を除算の商を表すものとする。
+
+
+
