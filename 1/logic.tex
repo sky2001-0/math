@@ -551,6 +551,14 @@
   選言の定義より明らか。
 }
 
+\thm{Dummettの法則}{
+  命題$\phi, \psi$について、以下が成り立つ。
+  \eq*{
+    \vdash \qty(\phi \rightarrow \psi) \lor \qty(\psi \rightarrow \phi)
+  }
+}{
+  略。
+}
 
 \lsubsection{意味論}
 
@@ -648,17 +656,17 @@
   $\forall x \qty(\phi(x))$は項$y$を出現させないので、\axiref{全称の導入則}より、$\forall y \qty(\phi(y))$を得る。
 }
 
-\thm{健全性定理}{
-  \subsecref{命題結合子と推論規則}、\subsecref{述語論理}により得られる推論は健全である。
-}{
-  $\phi \land \psi$は、$\phi$と$\psi$がともに真であるときに真であるとして、そうでないときは偽とする。
+% \thm{健全性定理}{
+%   \subsecref{命題結合子と推論規則}、\subsecref{述語論理}により得られる推論は健全である。
+% }{
+%   $\phi \land \psi$は、$\phi$と$\psi$がともに真であるときに真であるとして、そうでないときは偽とする。
 
-  $\phi \rightarrow \psi$は、$\phi$が真で$\psi$が偽であるときに偽であるとして、そうでないときは真とする。
+%   $\phi \rightarrow \psi$は、$\phi$が真で$\psi$が偽であるときに偽であるとして、そうでないときは真とする。
 
-  $\forall x \qty(\phi(x))$は、議論領域上のあらゆる$x$について$\phi(x)$が真であるときに真であるとして、そうでないときは偽とする。
+%   $\forall x \qty(\phi(x))$は、議論領域上のあらゆる$x$について$\phi(x)$が真であるときに真であるとして、そうでないときは偽とする。
 
-  このとき各推論規則は、真の前提から真の帰結を与える。
-}
+%   このとき各推論規則は、真の前提から真の帰結を与える。
+% }
 
 \dfn{存在量化子}{
   量化子$\exists$を定める。
@@ -727,6 +735,15 @@
   }
 }{
   定義より明らか。
+}
+
+\thm{酒場の法則}{
+  アリティ\num{1}の述語$\phi$について、以下が成り立つ。
+  \eq*{
+    \vdash \exists x \qty(\phi(x) \rightarrow \forall y \qty(\phi(y)))
+  }
+}{
+  略。
 }
 
 \dfn{一意存在量化子}{
