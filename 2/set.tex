@@ -657,7 +657,7 @@
   }
 }
 
-\lem*{
+\lem{無限系譜の共通部分は無限系譜}{
   以下が成り立つ。
   \eq*{
     \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(\text{$X$は無限系譜である}) \rightarrow \text{$\bigcap A$は無限系譜である})
@@ -674,26 +674,26 @@
   よって、$\bigcap A$は無限系譜である。
 }
 
-\lem*{
+\thm{最小無限系譜の一意性}{
   無限系譜$X$について、以下で定める集合は無限系譜である。
   \eq*{
     \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}
   }
+
+  この集合は、無限系譜$X$の取り方によらずに一意に定まる。
 }{
   $A \coloneqq \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とすると、
   $X \in A$より、$A \neq \varnothing$である。
 
-  \mlemref{-1}より成り立つ。
-}
+  \lemref{無限系譜の共通部分は無限系譜}より成り立つ。
 
-\thm{最小無限系譜の一意性}{
-  \mlemref{-1}で定める集合は、無限系譜$X$の取り方によらずに一意に定まる。
-}{
+  \vskip\baselineskip
+
   $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とする。
 
   $X_1, X_2$の\num{2}つの無限系譜を考える。
 
-  \mlemref{-2}より$X_1 \cap X_2$も無限系譜であり、定義より$\omega(X_2) \subset X_1 \cap X_2 \subset X_1$である。
+  \lemref{無限系譜の共通部分は無限系譜}より$X_1 \cap X_2$も無限系譜であり、定義より$\omega(X_2) \subset X_1 \cap X_2 \subset X_1$である。
 
   定義より、$\omega(X_1) \subset \omega(X_2)$である。
 

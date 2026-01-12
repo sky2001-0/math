@@ -204,7 +204,7 @@
   }
 }
 
-\lem*{
+\lem{順序数の所属と真包含の同値性}{
   順序数$\alpha, \beta$について、以下の\num{2}つは同値である。
   \begin{enumerate}
     \item $\alpha \in \beta$
@@ -259,14 +259,14 @@
     \alpha \subset \beta \lor \beta \subset \alpha
   }
 
-  \mlemref{-1}より特に以下が成り立つ。
+  \lemref{順序数の所属と真包含の同値性}より特に以下が成り立つ。
   \eq*{
     \alpha \in \beta \lor \alpha = \beta \lor \beta \in \alpha
   }
 }{
   成り立たないとすると、$\alpha \cap \beta \subsetneq \alpha \land \alpha \cap \beta \subsetneq \beta$である。
 
-  \mlemref{-1}より、$\alpha \cap \beta \in \alpha \land \alpha \cap \beta \in \beta$である。
+  \lemref{順序数の所属と真包含の同値性}より、$\alpha \cap \beta \in \alpha \land \alpha \cap \beta \in \beta$である。
 
   したがって、$\alpha \cap \beta \in \alpha \cap \beta$となるが、\corref{自己所属の禁止}に反する。
 }
@@ -294,7 +294,7 @@
 }{
   $\beta \in \alpha \land \beta^+ \notin \alpha$とする。
 
-  \mlemref{-2}より、$\beta \in \alpha$から$\beta \subsetneq \alpha$すなわち$\beta \subset \alpha \land \beta \neq \alpha$を得る。
+  \lemref{順序数の所属と真包含の同値性}より、$\beta \in \alpha$から$\beta \subsetneq \alpha$すなわち$\beta \subset \alpha \land \beta \neq \alpha$を得る。
 
   \lemref{順序数の比較可能性}より、$\alpha \subset \beta^+$を得る。
 
@@ -431,6 +431,35 @@
 
 \lsubsection{いくつかの重要な定理}
 
+\lem{順序数の濃度の上限}{
+  順序数$\alpha, \beta$について、以下が成り立つとき、単射$\alpha \to \beta$が存在する。
+  \eq*{
+    \forall \xi \in \alpha \qty(\text{全射$\xi \to \beta$が存在しない})
+  }
+}{
+  $h \in \qty{\bigcup \beta^\xi \mid \xi \in \alpha}$について、$h$は全射でないので、$\beta \setminus \Im(h) \neq \varnothing$である。
+
+  以下で与える写像$G \colon \qty{\bigcup \beta^\xi \mid \xi \in \alpha} \to \beta$を考える。
+  \eq*{
+    G(h) \coloneqq \min\qty(\beta \setminus \Im(h))
+  }
+
+  このとき、\thmref{超限再帰}より以下を満たす$f \colon \alpha \to \beta$が一意に定まる。
+  \eq*{
+    \forall \xi \in \alpha \qty(f(\xi) = G(f \circ \iota_{\xi, \alpha}))
+  }
+
+  $\xi \in \eta$のときを考える。
+
+  $f(\eta) = G(f \circ \iota_{\eta, \alpha}) = \min\qty(\beta \setminus \Im(f \circ \iota_{\eta, \alpha})) \notin \Im(f \circ \iota_{\eta, \alpha})$である。
+
+  $f(\xi) \in \Im(f \circ \iota_{\eta, \alpha})$より、$f(\xi) \neq f(\eta)$である。
+
+  $\eta \in \xi$のときも同様である。
+
+  \lemref{順序数の比較可能性}より、$\xi \neq \eta$のとき$\xi \in \eta \lor \eta \in \xi$であるので、$\xi \neq \eta$ならば$f(\xi) \neq f(\eta)$すなわち$f$は単射である。
+}
+
 \lem{整列集合の自己単調単射は増大}{
   整列集合$\qty(W, \leq)$と、狭義単調写像$f \colon W \to W$について、以下が成り立つ。
   \eq*{
@@ -476,7 +505,7 @@
     X \coloneqq \qty{w \in W \mid \text{ある順序数$\alpha$が存在して、順序同型$\alpha \to W_{< w}$が存在する。}}
   }
 
-  一意性と\axiref{置換公理}より、集合$A$が存在して、以下を満たす。
+  一意性と\axiref{置換の公理図式}より、集合$A$が存在して、以下を満たす。
   \eq*{
     A = \qty{\alpha \mid w \in X \land \text{順序同型$\alpha \to W_{< w}$が存在する。}}
   }
@@ -508,16 +537,16 @@
 }{
   $W \coloneqq \qty{\qty(S, R) \mid S \subset X \land R \subset S \times S \land \text{$\qty(S, R)$は整列集合}}$を考える。
 
-  \lemref{整列集合は順序型を持つ}と\axiref{置換公理}より、以下で定める集合$A$が存在する。
+  \lemref{整列集合は順序型を持つ}と\axiref{置換の公理図式}より、以下で定める集合$A$が存在する。
   \eq*{
     A \coloneqq \qty{\text{$w$と順序同型な順序数} \mid w \in W}
   }
 
   \lemref{順序数からなる整列集合}より、$\qty(A, \in)$は整列集合である。
 
-  $\alpha \in A$を考えると、$S \subset X$について整列集合$\qty(S, R)$が存在して、順序同型$f \colon \qty(\alpha, \in) \to \qty(S, R)$が存在する。
+  $\alpha \in A$を考えると、$S \subset X$について整列集合$\qty(S, R)$が存在して、順序同型$g \colon \qty(\alpha, \in) \to \qty(S, R)$が存在する。
 
-  任意の$\beta \in \alpha$について、$f \circ \iota_{\beta, \alpha} \colon \beta \to \Im(f)$は順序同型であるので、$\beta \in A$である。
+  任意の$\beta \in \alpha$について、$g \circ \iota_{\beta, \alpha} \colon \beta \to \Im(g)$は順序同型であるので、$\beta \in A$である。
 
   ゆえに、$\alpha \subset A$である。
 
@@ -525,16 +554,16 @@
 
   \vskip\baselineskip
 
-  順序数$\gamma$について、単射$g \colon \gamma \to X$が存在するとする。
+  順序数$\alpha$について、単射$f \colon \alpha \to X$が存在するとする。
 
-  このとき、$g$の左逆写像$h$を用いて、$\Im(f)$上に以下の整列順序$\leq$を定義できる。
+  このとき、$f$の左逆写像$g$を用いて、$\Im(f)$上に以下の整列順序$\leq$を定義できる。
   \eq*{
-    x < y \defiff h(x) \in h(y)
+    x < y \defiff g(x) \in g(y)
   }
 
-  ゆえに、$\gamma \in A$である。
+  ゆえに、$\alpha \in A$である。
 
-  したがって、$\alpha \notin A$ならば、単射$\alpha \to X$は存在しない。
+  対偶を考えて、$\alpha \notin A$ならば、単射$\alpha \to X$は存在しない。
 
   \vskip\baselineskip
 
@@ -794,7 +823,7 @@
 
 \lsubsection{順序と選択}
 
-\lem*{
+\lem{冪集合の鎖の基本補題}{
   空でない半順序集合$\qty(P, \preccurlyeq)$について、以下で定める半順序集合$\qty(M, \subset)$を考える。
   \eq*{
     M \coloneqq \qty{C \subset P \mid C \neq \varnothing \land \text{$\qty(C, \preccurlyeq)$は全順序集合}}
@@ -830,7 +859,7 @@
 }{
   $M \coloneqq \qty{C \subset P \mid C \neq \varnothing \land \text{$\qty(C, \preccurlyeq)$は全順序集合}}$を考える。
 
-  \mlemref{-1}より、半順序集合$\qty(M, \subset)$は空でないかつ任意の空でない全順序部分は上限を持つ。
+  \lemref{冪集合の鎖の基本補題}より、半順序集合$\qty(M, \subset)$は空でないかつ任意の空でない全順序部分は上限を持つ。
 
   \vskip\baselineskip
 
@@ -1031,7 +1060,7 @@
   $\forall F \in \mathcal{F} \forall G \subset \P(X)$について、$F \subset G$ならば定義より明らかに$G \in \mathcal{F}$
 }
 
-\lem*{
+\lem{ネットとフィルターの基本補題}{
   集合$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$と\thmref{ネットの定めるフィルター}の定めるフィルター$\mathcal{F}$を考える。
 
   このとき、$\mathcal{F}$の任意の細分$\mathcal{F'}$について、以下が成り立つ。
@@ -1063,7 +1092,7 @@
 
   $\Lambda$は有向集合であるので、$\exists \lambda_3 \in \Lambda \qty(\lambda_1 \preccurlyeq \lambda_3 \land \lambda_2 \preccurlyeq \lambda_3)$である。
 
-  \mlemref{-1}より$\exists \lambda_4 \in \Lambda \qty(\lambda_3 \preccurlyeq \lambda_4 \land x_{\lambda_4} \in F_1 \cap F_2)$
+  \lemref{ネットとフィルターの基本補題}より$\exists \lambda_4 \in \Lambda \qty(\lambda_3 \preccurlyeq \lambda_4 \land x_{\lambda_4} \in F_1 \cap F_2)$
 
   $\qty(\lambda_4, F_1 \cap F_2)$は、$\qty{\qty(\lambda_1, F_1), \qty(\lambda_2, F_2)}$の上界であるので、$M$は有向集合である。
 
@@ -1071,13 +1100,13 @@
 
   ここで、写像$\varphi \colon M \to \Lambda, \varphi \qty(\lambda, F) \coloneqq \lambda$を定める。
 
-  \mlemref{-1}より$\forall \lambda \in \Lambda \exists F \in \mathcal{F'} \exists \lambda_1 \in \Lambda \qty(\lambda \preccurlyeq \lambda_1 = \varphi(\lambda_1, F) \land \qty(\lambda_1, F) \in M)$である。
+  \lemref{ネットとフィルターの基本補題}より$\forall \lambda \in \Lambda \exists F \in \mathcal{F'} \exists \lambda_1 \in \Lambda \qty(\lambda \preccurlyeq \lambda_1 = \varphi(\lambda_1, F) \land \qty(\lambda_1, F) \in M)$である。
 
   したがって、$\qty(x_{\varphi(\mu)})_{\mu \in M}$は部分ネットである。
 
   \vskip\baselineskip
 
-  今、\mlemref{-1}より$\forall F \in \mathcal{F'} \exists \lambda_0 \in \Lambda \qty(\qty(\lambda_0, F) \in M)$
+  今、\lemref{ネットとフィルターの基本補題}より$\forall F \in \mathcal{F'} \exists \lambda_0 \in \Lambda \qty(\qty(\lambda_0, F) \in M)$
 
   $\forall \qty(\lambda', F') \in M$について、$\qty(\lambda_0, F) \preccurlyeq \qty(\lambda', F')$ならば、$x_{\lambda'} \in F' \subset F$となる。
 
