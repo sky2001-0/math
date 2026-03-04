@@ -11,7 +11,7 @@
 }
 
 \dfn{基本近縁系}{
-  空でない集合$X$について、以下を満たす集合系$\mathcal{V} \subset \P(X \times X)$を基本近縁系と呼ぶ。
+  集合$X$について、以下を満たす集合系$\mathcal{V} \subset \P(X \times X)$を基本近縁系と呼ぶ。
   \eqg*{
     \mathcal{V} \neq \varnothing \\*
     \forall V \in \mathcal{V} \forall x \in X \qty(\qty(x, x) \in V) \\*
@@ -22,7 +22,7 @@
 }
 
 \lem{基本近縁系の三角性}{
-  空でない集合$X$の基本近縁系$\mathcal{V}$について、以下を満たす。
+  集合$X$の基本近縁系$\mathcal{V}$について、以下を満たす。
   \eq*{
     \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \cup W^{-1} \subset W^{-1} \circ W \subset \qty(W^{-1} \circ W) \circ W \subset V)
   }
@@ -41,46 +41,46 @@
 }
 
 \dfn{近縁系}{
-  空でない集合$X$の基本近縁系$\mathcal{V}$について、以下で与える集合系$\mathcal{U}$を近縁系と呼ぶ。
+  集合$X$の基本近縁系$\mathcal{V}$について、以下で与える集合系$\mathcal{U}$を近縁系と呼ぶ。
   \eq*{
     \mathcal{U} \coloneqq \qty{U \subset X \times X \mid \exists V \in \mathcal{V} \qty(V \subset U)}
   }
 }
 
 \lem{近縁系の一意性}{
-  空でない集合$X$の基本近縁系$\mathcal{V}$と集合系$\mathcal{V'} \subset \P(X \times X)$について、以下を満たすとき、$\mathcal{V'}$は基本近縁系である。
+  集合$X$の基本近縁系$\mathcal{V}$と集合系$\mathcal{V^\prime} \subset \P(X \times X)$について、以下を満たすとき、$\mathcal{V^\prime}$は基本近縁系である。
   \eqg*{
-    \forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \qty(V \subset V') \\*
-    \forall V \in \mathcal{V} \exists V' \in \mathcal{V'} \qty(V' \subset V)
+    \forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \qty(V \subset V^\prime) \\*
+    \forall V \in \mathcal{V} \exists V^\prime \in \mathcal{V^\prime} \qty(V^\prime \subset V)
   }
 
-  さらに\dfnref{近縁系}の定める近縁系$\mathcal{U}$と$\mathcal{U'}$は一致する。
+  さらに\dfnref{近縁系}の定める近縁系$\mathcal{U}$と$\mathcal{U^\prime}$は一致する。
 }{
-  第一式を考える。\dfnref{基本近縁系}第一式から$\exists V \in \mathcal{V}$より、仮定から$\exists V' \in \mathcal{V'}$
+  第一式を考える。\dfnref{基本近縁系}第一式から$\exists V \in \mathcal{V}$より、仮定から$\exists V^\prime \in \mathcal{V^\prime}$
 
   \vskip\baselineskip
 
-  第二式を考える。$\forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \forall x \in X \qty(\qty(x, x) \in V \subset V')$より成り立つ。
+  第二式を考える。$\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \forall x \in X \qty(\qty(x, x) \in V \subset V^\prime)$より成り立つ。
 
   \vskip\baselineskip
 
-  第三式を考える。仮定より$\forall V'_1, V'_2 \in \mathcal{V'} \exists V_1, V_2 \in \mathcal{V} \qty(V_1 \cap V_2 \subset V'_1 \cap V'_2)$である。
+  第三式を考える。仮定より$\forall V^\prime_1, V^\prime_2 \in \mathcal{V^\prime} \exists V_1, V_2 \in \mathcal{V} \qty(V_1 \cap V_2 \subset V^\prime_1 \cap V^\prime_2)$である。
 
-  \dfnref{基本近縁系}第三式より$\exists V \in \mathcal{V} \qty(V \subset V_1 \cap V_2)$であり、仮定より$\exists V' \in \mathcal{V'} \qty(V' \subset V \subset V'_1 \cap V'_2)$
-
-  \vskip\baselineskip
-
-  第四式を考える。$\forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W' \in \mathcal{V'} \qty(W' \circ W' \subset W \circ W \subset V \subset V')$である。
+  \dfnref{基本近縁系}第三式より$\exists V \in \mathcal{V} \qty(V \subset V_1 \cap V_2)$であり、仮定より$\exists V^\prime \in \mathcal{V^\prime} \qty(V^\prime \subset V \subset V^\prime_1 \cap V^\prime_2)$
 
   \vskip\baselineskip
 
-  第五式を考える。$\forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W' \in \mathcal{V'} \qty(W' \subset V' \subset V^{-1} \subset V'^{-1})$である。
+  第四式を考える。$\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W^\prime \in \mathcal{V^\prime} \qty(W^\prime \circ W^\prime \subset W \circ W \subset V \subset V^\prime)$である。
 
   \vskip\baselineskip
 
-  $\forall U \in \mathcal{U} \exists V \in \mathcal{V} \exists V' \in \mathcal{V'} \qty(V' \subset V \subset U)$である。ゆえに、$U \in \mathcal{U'}$である。
+  第五式を考える。$\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W^\prime \in \mathcal{V^\prime} \qty(W^\prime \subset V^\prime \subset V^{-1} \subset V^{\prime -1})$である。
 
-  $\forall U' \in \mathcal{U'} \exists V' \in \mathcal{V'} \exists V \in \mathcal{V} \qty(V \subset V' \subset U')$である。ゆえに、$U' \in \mathcal{U}$である。
+  \vskip\baselineskip
+
+  $\forall U \in \mathcal{U} \exists V \in \mathcal{V} \exists V^\prime \in \mathcal{V^\prime} \qty(V^\prime \subset V \subset U)$である。ゆえに、$U \in \mathcal{U^\prime}$である。
+
+  $\forall U^\prime \in \mathcal{U^\prime} \exists V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \qty(V \subset V^\prime \subset U^\prime)$である。ゆえに、$U^\prime \in \mathcal{U}$である。
 }
 
 \lem{近縁系は基本近縁系}{
@@ -94,7 +94,7 @@
 }
 
 \lem{近縁系の開性}{
-  空でない集合$X$と、$X$の近縁系$\mathcal{U}$について、以下を満たす。
+  集合$X$と、$X$の近縁系$\mathcal{U}$について、以下を満たす。
   \eq*{
     \forall U \in \mathcal{U} \exists V \in \mathcal{U} \forall \qty(x, y) \in V \exists W \in \mathcal{U} \qty(W[y] \subset V[x] \land V \subset U)
   }
@@ -117,7 +117,7 @@
 }
 
 \dfn{一様空間}{
-  空でない集合$X$と、$X$上の近縁系$\mathcal{U}$について、順序対$\qty(X, \mathcal{U})$を一様空間と呼ぶ。または単に$X$と書き、一様空間と集合どちらも表すものとする。
+  集合$X$と、$X$上の近縁系$\mathcal{U}$について、順序対$\qty(X, \mathcal{U})$を一様空間と呼ぶ。または単に$X$と書き、一様空間と集合どちらも表すものとする。
 }
 
 \thm{基本近縁系から定まる位相}{
@@ -128,7 +128,7 @@
     \mathcal{B}(x) \coloneqq \qty{V[x] \coloneqq \qty{y \in X \mid \qty(x, y) \in V} \mid V \in \mathcal{V}}
   }
 
-  さらに、$\mathcal{B}(x)$の与える近傍系$\mathcal{N}(x)$は、近縁系$\mathcal{U}$の与える基本近傍系$\mathcal{N'}(x)$に一致する。
+  さらに、$\mathcal{B}(x)$の与える近傍系$\mathcal{N}(x)$は、近縁系$\mathcal{U}$の与える基本近傍系$\mathcal{N^\prime}(x)$に一致する。
 
   この意味で、一様空間は位相空間である。
 }{
@@ -156,9 +156,9 @@
 
   \vskip\baselineskip
 
-  $\forall N \in \mathcal{N}(x)$について$\exists V \in \mathcal{V} \qty(V[x] \subset N)$であり、$U = V \cup \qty{\qty(x, y) \mid y \in N} \in \mathcal{U}$かつ$N = U[x]$であるので、$N \in \mathcal{N'}(x)$
+  $\forall N \in \mathcal{N}(x)$について$\exists V \in \mathcal{V} \qty(V[x] \subset N)$であり、$U = V \cup \qty{\qty(x, y) \mid y \in N} \in \mathcal{U}$かつ$N = U[x]$であるので、$N \in \mathcal{N^\prime}(x)$
 
-  $\forall N' \in \mathcal{N'}(x)$について$\exists U \subset X \times X \exists V \in \mathcal{V} \qty(V \subset U \land U[x] = N')$であり、$V[x] \subset U[x] = N' \in \mathcal{N}(x)$
+  $\forall N^\prime \in \mathcal{N^\prime}(x)$について$\exists U \subset X \times X \exists V \in \mathcal{V} \qty(V \subset U \land U[x] = N^\prime)$であり、$V[x] \subset U[x] = N^\prime \in \mathcal{N}(x)$
 }
 
 \thmf{一様空間は$T_3$}{一様空間はT_3}{
@@ -188,45 +188,45 @@
 }
 
 \dfn{一様連続}{
-  一様空間$\qty(X, \mathcal{U}), \qty(X', \mathcal{U'})$と写像$f \colon X \to X'$について、$f$が以下を満たすとき、$f$は一様連続であると呼ぶ。
+  一様空間$\qty(X, \mathcal{U}), \qty(X^\prime, \mathcal{U^\prime})$と写像$f \colon X \to X^\prime$について、$f$が以下を満たすとき、$f$は一様連続であると呼ぶ。
   \eq*{
-    \forall U' \in \mathcal{U'} \exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \in U')
+    \forall U^\prime \in \mathcal{U^\prime} \exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \in U^\prime)
   }
 }
 
 \lem{基本近縁系と一様連続}{
-  一様空間$\qty(X, \mathcal{U}), \qty(X', \mathcal{U'})$と写像$f \colon X \to X'$と、$\mathcal{U}, \mathcal{U'}$を与える基本近縁系$\mathcal{V}, \mathcal{V'}$を考える。
+  一様空間$\qty(X, \mathcal{U}), \qty(X^\prime, \mathcal{U^\prime})$と写像$f \colon X \to X^\prime$と、$\mathcal{U}, \mathcal{U^\prime}$を与える基本近縁系$\mathcal{V}, \mathcal{V^\prime}$を考える。
   このとき、以下の２つは同値である。
   \begin{enumerate}
     \item $f$は一様連続
-    \item $\forall V' \in \mathcal{V'} \exists V \in \mathcal{V} \qty(\qty(x, y) \in V \rightarrow \qty(f(x), f(y)) \in V')$
+    \item $\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \qty(\qty(x, y) \in V \rightarrow \qty(f(x), f(y)) \in V^\prime)$
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
 
-  $\forall V' \in \mathcal{V'} \subset \mathcal{U'} \exists U \in \mathcal{U} \exists V \in \mathcal{V} \qty(\qty(x, y) \in V \subset U \rightarrow \qty(f(x), f(y)) \in V')$より明らか。
+  $\forall V^\prime \in \mathcal{V^\prime} \subset \mathcal{U^\prime} \exists U \in \mathcal{U} \exists V \in \mathcal{V} \qty(\qty(x, y) \in V \subset U \rightarrow \qty(f(x), f(y)) \in V^\prime)$より明らか。
 
   \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。
 
-  $\forall U' \in \mathcal{U'} \exists V' \in \mathcal{V'} \exists V \in \mathcal{V} \subset \mathcal{U} \qty(\qty(x, y) \in V \rightarrow \qty(f(x), f(y)) \in V' \subset U')$より明らか。
+  $\forall U^\prime \in \mathcal{U^\prime} \exists V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \subset \mathcal{U} \qty(\qty(x, y) \in V \rightarrow \qty(f(x), f(y)) \in V^\prime \subset U^\prime)$より明らか。
 }
 
 \dfn{一様同型}{
-  一様空間$X, X'$と写像$f \colon X \to X'$について、$f$が全単射かつ$f$と$f^{-1}$がともに一様連続であるとき、$f$を一様同型写像と呼ぶ。
+  一様空間$X, X^\prime$と写像$f \colon X \to X^\prime$について、$f$が全単射かつ$f$と$f^{-1}$がともに一様連続であるとき、$f$を一様同型写像と呼ぶ。
 
-  また、一様同型写像$f \colon X \to X'$が存在するとき、$X$と$X'$は一様同型であると呼ぶ。
+  また、一様同型写像$f \colon X \to X^\prime$が存在するとき、$X$と$X^\prime$は一様同型であると呼ぶ。
 }
 
 \thm{一様連続は連続}{
-  一様空間$\qty(X, \mathcal{U}), \qty(X', \mathcal{U'})$について、一様連続な写像$f \colon X \to X'$は連続である。
+  一様空間$\qty(X, \mathcal{U}), \qty(X^\prime, \mathcal{U^\prime})$について、一様連続な写像$f \colon X \to X^\prime$は連続である。
 }{
-  $\forall x \in X \forall N' \in \mathcal{N}(f(x))$について、定義より$\exists U' \in \mathcal{U'} \qty(N' = U'[f(x)])$である。
+  $\forall x \in X \forall N^\prime \in \mathcal{N}(f(x))$について、定義より$\exists U^\prime \in \mathcal{U^\prime} \qty(N^\prime = U^\prime[f(x)])$である。
 
-  一様連続の定義より$\exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \in U')$である。
+  一様連続の定義より$\exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \in U^\prime)$である。
 
-  今、$U[x] \in \mathcal{N}(x)$であり、$f(U[x]) \subset U'[f(x)] = N'$より点連続。
+  今、$U[x] \in \mathcal{N}(x)$であり、$f(U[x]) \subset U^\prime[f(x)] = N^\prime$より点連続。
 
   $\forall x \in X$で成り立つので、\thmref{連続と点連続}より示される。
 }
@@ -236,21 +236,22 @@
 }
 
 \lem*{
-  一様空間$\qty(X, \mathcal{U})$と、$X$の空でない部分集合$A$を考える。
+  一様空間$\qty(X, \mathcal{U})$と、$X$の部分集合$A$を考える。
 
-  $\mathcal{U}$を与える基本近縁系$\mathcal{V}$について、以下の集合系$\mathcal{V'}$は集合$A$の基本近縁系である。
+  $\mathcal{U}$を与える基本近縁系$\mathcal{V}$について、以下の集合系$\mathcal{V^\prime}$は集合$A$の基本近縁系である。
   \eq*{
-    \mathcal{V'} \coloneqq \qty{\qty(A \times A) \cap V \mid V \in \mathcal{V}}
+    \mathcal{V^\prime} \coloneqq \qty{\qty(A \times A) \cap V \mid V \in \mathcal{V}}
   }
 
-  さらに、$\mathcal{V'}$の与える近縁系と、$\mathcal{U}$からこの補題により与えられる基本近縁系$\mathcal{U'}$、この２つは一致する。
+  さらに、$\mathcal{V^\prime}$の与える近縁系と、$\mathcal{U}$からこの補題により与えられる基本近縁系$\mathcal{U^\prime}$、この２つは一致する。
 }{
   明らか。
 }
 
 \dfn{部分一様空間}{
-  一様空間$\qty(X, \mathcal{U})$と、$X$の空でない部分集合$A$を考える。
-  \mlemref{0}の与える基本近縁系の与える近縁系$\mathcal{U'}$について、一様空間$\qty(A, \mathcal{U'})$を部分一様空間と呼ぶ。
+  一様空間$\qty(X, \mathcal{U})$と、$X$の部分集合$A$を考える。
+
+  \mlemref{0}の与える基本近縁系の与える近縁系$\mathcal{U^\prime}$について、一様空間$\qty(A, \mathcal{U^\prime})$を部分一様空間と呼ぶ。
 }
 
 
@@ -285,17 +286,17 @@
 }
 
 \lem{一様連続とCauchy}{
-  一様空間$\qty(X, \mathcal{U}), \qty(X', \mathcal{U'})$と、一様連続写像$f \colon X \to X'$を考える。
+  一様空間$\qty(X, \mathcal{U}), \qty(X^\prime, \mathcal{U^\prime})$と、一様連続写像$f \colon X \to X^\prime$を考える。
 
   このとき、$X$上のCauchyネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$\qty(f(x_\lambda))_{\lambda \in \Lambda}$はCauchyである。
 }{
-  $\forall U' \in \mathcal{U'}$を考える。
+  $\forall U^\prime \in \mathcal{U^\prime}$を考える。
 
-  一様連続性から、$\exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \subset U')$である。
+  一様連続性から、$\exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \subset U^\prime)$である。
 
   Cauchyより、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in U)$である。
 
-  ゆえに$\qty(f(x_{\lambda_1}), f(x_{\lambda_2})) \in U'$である。
+  ゆえに$\qty(f(x_{\lambda_1}), f(x_{\lambda_2})) \in U^\prime$である。
 }
 
 \thm{収束ネットはCauchy}{
@@ -397,29 +398,29 @@
 }
 
 \thm{Heine-Cantorの定理}{
-  全有界な一様空間$\qty(X, \mathcal{U})$と、一様空間$\qty(X', \mathcal{U'})$について、連続写像$f \colon X \to X'$は一様連続である。
+  全有界な一様空間$\qty(X, \mathcal{U})$と、一様空間$\qty(X^\prime, \mathcal{U^\prime})$について、連続写像$f \colon X \to X^\prime$は一様連続である。
 }{
-  $\forall V' \in \mathcal{V'}$について、\lemref{基本近縁系の三角性}より$\exists W' \in \mathcal{V'} \qty(W'^{-1} \circ W' \subset V')$
+  $\forall V^\prime \in \mathcal{V^\prime}$について、\lemref{基本近縁系の三角性}より$\exists W^\prime \in \mathcal{V^\prime} \qty(W^{\prime -1} \circ W^\prime \subset V^\prime)$
 
-  \thmref{連続と点連続}から$\forall x \in X \exists V \in \mathcal{V} \qty(f(V[x]) \subset W'[f(x)])$である。
+  \thmref{連続と点連続}から$\forall x \in X \exists V \in \mathcal{V} \qty(f(V[x]) \subset W^\prime[f(x)])$である。
 
   \dfnref{基本近縁系}第四式より$\exists W \in \mathcal{V} \qty(W \circ W \subset V)$
 
-  今、$\qty{W(V', x)[x] \mid x \in X}$は被覆である。
+  今、$\qty{W(V^\prime, x)[x] \mid x \in X}$は被覆である。
 
-  全有界性から$\exists Y \subset X \land \abs{Y} < \infty$であり$C \coloneqq \qty{W(V', x)[x] \mid x \in Y}$は被覆となる。
+  全有界性から$\exists Y \subset X \land \abs{Y} < \infty$であり$C \coloneqq \qty{W(V^\prime, x)[x] \mid x \in Y}$は被覆となる。
 
-  \dfnref{基本近縁系}第三式より$S \coloneqq \bigcap \qty{W(V', x) \mid x \in Y} \in \mathcal{V}$である。
+  \dfnref{基本近縁系}第三式より$S \coloneqq \bigcap \qty{W(V^\prime, x) \mid x \in Y} \in \mathcal{V}$である。
 
   \vskip\baselineskip
 
-  $\forall \qty(w, z) \in S(V')$について、$C$は被覆より$\exists y \in Y(V') \qty(w \in W(V', y)[y] \subset V(V', y)[y])$である。
+  $\forall \qty(w, z) \in S(V^\prime)$について、$C$は被覆より$\exists y \in Y(V^\prime) \qty(w \in W(V^\prime, y)[y] \subset V(V^\prime, y)[y])$である。
 
-  $\qty(y, w), \qty(w, z) \in W(V', y)$であり、$\qty(y, z) \in V(V', y)$すなわち$z \in V(V', y)[y]$である。
+  $\qty(y, w), \qty(w, z) \in W(V^\prime, y)$であり、$\qty(y, z) \in V(V^\prime, y)$すなわち$z \in V(V^\prime, y)[y]$である。
 
-  $w, z \in V(V', y)[y]$より$f(w), f(z) \in f(V(V', y)[y]) \subset W'(V')[f(y)]$である。
+  $w, z \in V(V^\prime, y)[y]$より$f(w), f(z) \in f(V(V^\prime, y)[y]) \subset W^\prime(V^\prime)[f(y)]$である。
 
-  したがって$\qty(f(y), f(w)), \qty(f(y), f(z)) \in W'$より$\qty(f(w), f(z)) \in V'$
+  したがって$\qty(f(y), f(w)), \qty(f(y), f(z)) \in W^\prime$より$\qty(f(w), f(z)) \in V^\prime$
 }
 
 \dfn{完備}{
@@ -557,7 +558,8 @@
 
   \vskip\baselineskip
 
-  $Y \coloneqq \bigcup \qty{Y_n \mid n \in \N}$を考える。\thmref{自然数の直積は可算}より$Y$は可算である。
+  $Y \coloneqq \bigcup \qty{Y_n \mid n \in \N}$を考える。
+  \thmref{無限濃度の直積}より$Y$は可算である。
 
   $\forall x \in X \forall n \in \N$について、$Y_n$は開被覆より$\exists y \in Y_n \qty(x \in V_{s(n)}[y])$である。
 
@@ -572,7 +574,7 @@
     \mathcal{B} \coloneqq \qty{V_n[y] \mid \qty(n, y) \in \N \times Y}
   }
 
-  \thmref{自然数の直積は可算}より、$\mathcal{B}$は可算。
+  \thmref{無限濃度の直積}より、$\mathcal{B}$は可算。
 
   $\forall \qty(n, y) \in \N \times Y$について、$\forall z \in V_n[y] \exists m \in \N \qty(V_m[z] \subset V_n[y])$であるので、$V_n[y] \in \mathcal{O}$である。
 

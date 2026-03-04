@@ -9,7 +9,7 @@
 
 \dfn{射}{
   圏論では、\num{6}つの公理（
-    \axiref{始域は冪等}、\axiref{終域は冪等}、\axiref{始域の冪等性と終域の冪等性}、\axiref{合成射の始域と終域}、\axiref{合成射の結合}、\axiref{対象は恒等射}
+    \axiref{始域と終域の冪等性}、\axiref{合成}、\axiref{始域と終域}、\axiref{合成射の始域と終域}、\axiref{合成射の結合}、\axiref{対象は恒等射}
   ）が与えられる。
 
   項を射と呼ぶ。
@@ -21,49 +21,39 @@
   射$f$について、$\dom(f)$を$f$の始域と呼ぶ。
 }
 
-\axi{始域は冪等}{
-  \eq*{
-    \forall f \qty(\dom(\dom(f)) = \dom(f))
-  }
-}
-
 \dfn{終域}{
   アリティ\num{1}の関数記号$\cod()$を考える。
 
   射$f$について、$\cod(f)$を$f$の終域と呼ぶ。
 }
 
-\axi{終域は冪等}{
-  \eq*{
-    \forall f \qty(\cod(\cod(f)) = \cod(f))
-  }
-}
-
-\axi{始域の冪等性と終域の冪等性}{
-  \eq*{
-    \forall f \qty(f = \dom(f) \leftrightarrow f = \cod(f))
+\axi{始域と終域の冪等性}{
+  \eqg*{
+    \forall f \qty(\dom(\dom(f)) = \dom(f)) \\*
+    \forall f \qty(\cod(\cod(f)) = \cod(f)) \\*
+    \forall f \qty(\cod(\dom(f)) = \dom(f)) \\*
+    \forall f \qty(\dom(\cod(f)) = \cod(f))
   }
 }
 
 \dfn{合成}{
-  アリティ\num{2}の関数記号$\circ \qty()$を考える。
-
-  $\circ \qty(f, g)$を、簡単のために$g \circ f$で表す。
-
-  射$f, g$について、$g \circ f$を$f$と$g$の合成と呼ぶ。
+  アリティ\num{3}の述語記号$\Comp()$を考える。
 }
 
-\dfn{可合成}{
-  アリティ\num{2}の述語記号$\Comp()$を、以下で定める。
+\axi{合成}{
   \eq*{
-    \Comp(f, g) \defiff \cod(f) = \dom(g)
+    \forall f, g \qty(\cod(f) = \dom(g) \rightarrow \exists! h \qty(\Comp(f, g, h)))
   }
 }
 
 \axi{合成射の始域と終域}{
   \eq*{
-    \forall f, g \qty(\Comp(f, g) \rightarrow \dom(g \circ f) = \dom(f) \land \cod(g \circ f) = \cod(g))
+    \forall f, g, h \qty(\Comp(f, g, h) \rightarrow \cod(f) = \dom(g) \land \dom(h) = \dom(f) \land \cod(h) = \cod(g))
   }
+}
+
+\dfn{合成}{
+  $\Comp(f, g, h)$であるとき、簡単のために$h$を$g \circ f$で表す。
 }
 
 \axi{合成射の結合}{
@@ -136,9 +126,10 @@
 
 \dfnf{圏$\bm{1}$}{圏1}{
   以下を満たす圏を、$\bm{1}$で表す。
-  \eq*{
-    \exists! a \qty(a \in \bm{1})
-  }
+  \begin{enumerate}
+    \item $\exists! a \qty(a \in \bm{1})$
+    \item $\dom(a) = \cod(a) = a$
+  \end{enumerate}
 
   圏$\bm{1}$の唯一の射を、$\ast$で表す。
 }
@@ -558,11 +549,11 @@
     \item $f$は、$\bm{C}$において、左可逆かつ右可逆である。
   \end{enumerate}
 }{
-  $1. \to 2.$は明らか。
+  $1. \rightarrow 2.$は明らか。
 
   \vskip\baselineskip
 
-  $2. \to 1.$を示す。
+  $2. \rightarrow 1.$を示す。
 
   左可逆より、射$g$が存在して$g \circ f = \dom(f)$であり、右可逆より、射$h$が存在して$f \circ h = \cod(f)$である。
 
@@ -832,13 +823,13 @@
     \item $\pi_0, \pi_1$はともに同型射
   \end{enumerate}
 }{
-  $1. \to 2.$を示す。
+  $1. \rightarrow 2.$を示す。
 
   核対より$f \circ \pi_0 = f \circ \pi_1$であり、左簡約可能より$\pi_0 = \pi_1$である。
 
   \vskip\baselineskip
 
-  $2. \to 3.$を示す。
+  $2. \rightarrow 3.$を示す。
 
   $f \circ \dom(f) = f \circ \dom(f)$より、普遍性から射$u \colon \dom(f) \to R$が存在して、$\pi_0 \circ u = \dom(f) = \pi_1 \circ u$である。
 
@@ -852,7 +843,7 @@
 
   \vskip\baselineskip
 
-  $3. \to 2.$を示す。
+  $3. \rightarrow 2.$を示す。
 
   $f \circ \pi_0 = f \circ \pi_0$より、一意な射$e \colon R \to R$が存在して、$\pi_0 = \pi_0 \circ e = \pi_1 \circ e$である。
 
