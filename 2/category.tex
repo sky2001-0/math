@@ -8,21 +8,21 @@
 }
 
 \dfn{射}{
-  圏論では、\num{6}つの公理（
-    \axiref{始域と終域の冪等性}、\axiref{合成}、\axiref{始域と終域}、\axiref{合成射の始域と終域}、\axiref{合成射の結合}、\axiref{対象は恒等射}
-  ）が与えられる。
+  圏論では、\num{5}つの公理（
+    \axiref{始域と終域の冪等性}、\axiref{合成}、\axiref{合成射の始域と終域}、\axiref{合成射の結合}、\axiref{対象は恒等射}
+  ）を与える。
 
   項を射と呼ぶ。
 }
 
 \dfn{始域}{
-  アリティ\num{1}の関数記号$\dom()$を考える。
+  アリティ\num{1}の全域関数$\dom()$を考える。
 
   射$f$について、$\dom(f)$を$f$の始域と呼ぶ。
 }
 
 \dfn{終域}{
-  アリティ\num{1}の関数記号$\cod()$を考える。
+  アリティ\num{1}の全域関数$\cod()$を考える。
 
   射$f$について、$\cod(f)$を$f$の終域と呼ぶ。
 }
@@ -46,19 +46,21 @@
   }
 }
 
-\axi{合成射の始域と終域}{
-  \eq*{
-    \forall f, g, h \qty(\Comp(f, g, h) \rightarrow \cod(f) = \dom(g) \land \dom(h) = \dom(f) \land \cod(h) = \cod(g))
-  }
+\dfn{合成}{
+  $\Comp(f, g, h)$は、述語$\cod(f) = \dom(g)$上の関数グラフである。
+
+  $h$を関数$g \circ f$で表す。
 }
 
-\dfn{合成}{
-  $\Comp(f, g, h)$であるとき、簡単のために$h$を$g \circ f$で表す。
+\axi{合成射の始域と終域}{
+  \eq*{
+    \forall f, g, h \qty(\cod(f) = \dom(g) \rightarrow \qty(\dom(g \circ f) = \dom(f) \land \cod(g \circ f) = \cod(g)))
+  }
 }
 
 \axi{合成射の結合}{
   \eq*{
-    \forall f, g, h \qty(\Comp(f, g) \land \Comp(g, h) \rightarrow h \circ \qty(g \circ f) = \qty(h \circ g) \circ f)
+    \forall f, g, h \qty(\cod(f) = \dom(g) \land \cod(g) = \dom(h) \rightarrow h \circ \qty(g \circ f) = \qty(h \circ g) \circ f)
   }
 }
 
