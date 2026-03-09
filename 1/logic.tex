@@ -5,7 +5,7 @@
 
 本節では、命題と呼ばれる対象と、それらの間の推論関係 $\vdash$ を公理的に扱う。
 
-本節の各系の証明は、添付のLeanファイル???を参照されたい。
+本節の各系の証明は、添付のLeanファイル\nolinkurl{math/1/logic.lean}を参照されたい。
 
 \rem{古典論理}{
   本ノートでは、古典論理のみを扱う。
@@ -515,7 +515,7 @@
 \cor{アルファ同値}{
   自由変項$y$を出現させない命題$\phi$について、以下が成り立つ。
   \eq*{
-    \forall x \qty(\phi) \vdash \forall y \qty(\phi[x \coloneqq y])
+    \vdash \forall x \qty(\phi) \leftrightarrow \forall y \qty(\phi[x \coloneqq y])
   }
 }
 
@@ -536,7 +536,7 @@
 \cor{存在の除去則}{
   命題$\phi, \psi, \chi$について、以下が成り立つ。
   \eq*{
-    \text{???} \metaand \phi \land \psi[x \coloneqq t] \vdash \chi \metaimply \phi \land \exists x \qty(\psi) \vdash \chi
+    \text{$\phi$と$\chi$が自由変項$x$を出現させない} \metaand \phi \land \psi[x \coloneqq t] \vdash \chi \metaimply \phi \land \exists x \qty(\psi) \vdash \chi
   }
 }
 
