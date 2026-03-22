@@ -3,25 +3,23 @@
 \lsubsection{集合論の述語}
 
 \dfn{集合}{
-  集合論では、\num{9}つの公理（
+  集合論では、
+  \num{1}つの述語（\dfnref{所属}）と、
+  \num{9}つの公理（
     \axiref{外延性の公理}、\axiref{空集合の公理}、\axiref{対の公理}、\axiref{正則性の公理}、\axiref{無限の公理}、\axiref{和集合の公理}、\axiref{冪集合の公理}、\axiref{置換の公理図式}、\axiref{選択の公理}
-  ）が与えられる。
+  ）を満たすものを議論領域とする。
 
-  項を集合と呼ぶ。
+  集合論における項を集合と呼ぶ。
 }
 
 \dfn{所属}{
-  アリティ\num{2}の述語記号$\in$を定める。
+  アリティ\num{2}の述語$\in$を定める。
 
   $\in \qty(x, y)$を、簡単のために$x \in y$で表す。
 }
 
-\rem{集合は類}{
+\rem{類としての集合}{
   集合$y$について、$\in \qty(, y)$はアリティ\num{1}の述語、すなわち類となる。
-
-  ここで、類の$\in$と、所属の$\in$は同一視される。
-
-  一方で、類に対して対応する集合を一般には与えることができない点に注意されたい。
 }
 
 \dfn{要素}{
@@ -29,11 +27,11 @@
 }
 
 \rem{集合系}{
-  その要素に要素があることを強調したいとき、この集合を集合系と呼ぶ。
+  その要素が集合であることを強調したいとき、この集合を集合系と呼ぶ。
 }
 
 \dfn{包含}{
-  集合$X, Y$について、アリティ\num{2}の述語記号$\subset$を以下で定める。
+  集合$X, Y$について、アリティ\num{2}の述語$\subset$を以下で定める。
   \eq*{
     \subset \qty(X, Y) \defiff \forall x \qty(x \in X \rightarrow x \in Y)
   }
@@ -42,7 +40,7 @@
 }
 
 \dfn{真包含}{
-  集合$X, Y$について、アリティ\num{2}の述語記号$\subsetneq$を以下で定める。
+  集合$X, Y$について、アリティ\num{2}の述語$\subsetneq$を以下で定める。
   \eq*{
     \subsetneq \qty(X, Y) \defiff X \subset Y \land X \neq Y
   }
@@ -51,7 +49,7 @@
 }
 
 \dfn{左包含}{
-  集合$X, Y$について、アリティ\num{2}の述語記号$\supset$を以下で定める。
+  集合$X, Y$について、アリティ\num{2}の述語$\supset$を以下で定める。
   \eq*{
     \supset \qty(X, Y) \defiff Y \subset X
   }
@@ -60,7 +58,7 @@
 }
 
 \dfn{左真包含}{
-  集合$X, Y$について、アリティ\num{2}の述語記号$\supsetneq$を以下で定める。
+  集合$X, Y$について、アリティ\num{2}の述語$\supsetneq$を以下で定める。
   \eq*{
     \supsetneq \qty(X, Y) \defiff Y \subsetneq X
   }
@@ -77,7 +75,7 @@
   }
 }
 
-\cor{相等の定義}{
+\cor{集合の相等}{
   以下が成り立つ。
   \eq*{
     \forall X \forall Y \qty(X = Y \leftrightarrow \forall x \qty(x \in X \leftrightarrow x \in Y))
@@ -111,7 +109,13 @@
 
 \dfn{空集合}{
   \axiref{外延性の公理}から、\axiref{空集合の公理}が主張する集合が一意に定まる。
-  この集合を空集合と呼び、$\varnothing$で表す。
+
+  すなわち、以下が成り立つ。
+  \eq*{
+    \exists! A \forall x \qty(x \notin A)
+  }
+
+  上の命題より定まるアリティ\num{0}の全域関数を空集合と呼び、$\varnothing$で表す。
 
   外延的に$\qty{}$とも表す。
 }
@@ -181,12 +185,6 @@
   }
 }
 
-\axi{選択の公理}{
-  \eq*{
-    \forall X \qty(\varnothing \notin X \land \forall x \forall y \qty(x \in X \land y \in X \land x \neq y \rightarrow x \cap y = \varnothing) \rightarrow \exists A \forall x \qty(x \in X \rightarrow \exists t \qty(x \cap A = \qty{t})))
-  }
-}
-
 
 \lsubsection{集合の和と冪}
 
@@ -198,7 +196,13 @@
 
 \dfn{和集合}{
   集合系$X$について、\axiref{和集合の公理}の主張する集合$A$が存在して、これは\axiref{外延性の公理}から一意に定まる。
-  このような集合$A$を、$X$の和集合と呼び、$\bigcup X$で表す。
+
+  すなわち、以下が成り立つ。
+  \eq*{
+    \forall X \exists! A \forall t \qty(t \in A \leftrightarrow \exists B \qty(t \in B \land B \in X))
+  }
+
+  上の命題より定まる全域関数を和集合と呼び、$\bigcup$で表す。
 
   和集合$\bigcup \qty{x, y}$を、簡単のために$x \cup y$とも表す。
 }
@@ -241,7 +245,13 @@
 
 \dfn{冪集合}{
   集合$X$について、\axiref{冪集合の公理}の主張する集合$A$が存在して、これは\axiref{外延性の公理}から一意に定まる。
-  このような集合$A$を、冪集合と呼び、$\P(X)$で表す。
+
+  すなわち、以下が成り立つ。
+  \eq*{
+    \forall X \exists! A \forall t \qty(t \in A \leftrightarrow t \subset X)
+  }
+
+  上の命題より定まる全域関数を冪集合と呼び、$\P$で表す。
 }
 
 \rem{包含される量化子についての略記}{
@@ -293,7 +303,7 @@
 \lsubsection{集合の置換}
 
 \axi{置換の公理図式}{
-  アリティ\num{2}の述語記号$\psi$をパラメータとする以下の公理図式を考える。
+  アリティ\num{2}の述語$\psi$をパラメータとする以下の公理図式を考える。
   \eq*{
     \forall x \forall y \forall z \qty(\psi(x, y) \land \psi(x, z) \rightarrow y = z) \rightarrow \forall X \exists A \forall t \qty(t \in A \leftrightarrow \exists x \qty(x \in X \land \psi(x, t)))
   }
@@ -301,19 +311,19 @@
 
 \rem{集合の内包的定義１}{
   \axiref{外延性の公理}より、\axiref{置換の公理図式}より主張される集合$A$は一意に定まる。
-  \axiref{置換の公理図式}に基づく定義方法を、内包的定義と呼び、\axiref{置換の公理図式}の前件を満たすアリティ\num{2}の述語記号$\psi$について、以下で表す。
+  \axiref{置換の公理図式}に基づく定義方法を、内包的定義と呼び、\axiref{置換の公理図式}の前件を満たすアリティ\num{2}の述語$\psi$について、以下で表す。
   \eq*{
     A = \qty{y \mid \exists x \in X \qty(\psi(x, y))}
   }
 }
 
 \thm{分出の公理図式}{
-  アリティ\num{1}の述語記号$\psi$について、以下が成り立つ。
+  アリティ\num{1}の述語$\psi$について、以下が成り立つ。
   \eq*{
     \forall X \exists A \forall t \qty(t \in A \leftrightarrow t \in X \land \psi(t))
   }
 }{
-  アリティ\num{1}の述語記号$P$を考える。
+  アリティ\num{1}の述語$P$を考える。
   排中律より、
   \eq*{
     \forall X \qty\Big(\exists a \qty(a \in X \land P(a)) \lor \forall a \lnot \qty(a \in X \land P(a)))
@@ -323,7 +333,7 @@
 
   \vskip\baselineskip
 
-  $\exists a \qty(a \in X \land P(a))$のとき、以下のようなアリティ\num{2}の述語記号$\psi$を考える。
+  $\exists a \qty(a \in X \land P(a))$のとき、以下のようなアリティ\num{2}の述語$\psi$を考える。
   \eq*{
     \psi(x, y) \defiff \qty(P(x) \land y = x) \lor \qty(\lnot P(x) \land y = a)
   }
@@ -438,7 +448,7 @@
 \dfn{分割}{
   集合$A$について、以下を満たす$A$の被覆$X$を$A$の分割と呼ぶ。
   \eq*{
-    \forall x, y \in X \qty(x \neq y \rightarrow x \cap y = \varnothing)
+    \varnothing \notin X \land \forall x, y \in X \qty(x \neq y \rightarrow x \cap y = \varnothing)
   }
 
   明示的に以下で表す。
@@ -524,6 +534,12 @@
   }
 
   最後から\num{2}行目への変形には、第一の定理を用いた。
+}
+
+\axi{選択の公理}{
+  \eq*{
+    \forall X \qty(\varnothing \notin X \land \forall x \forall y \qty(x \in X \land y \in X \land x \neq y \rightarrow x \cap y = \varnothing) \rightarrow \exists A \forall x \qty(x \in X \rightarrow \exists t \qty(x \cap A = \qty{t})))
+  }
 }
 
 
@@ -642,58 +658,58 @@
   }
 }
 
-\dfn{無限系譜}{
-  集合$X$が無限系譜であるとは、以下を満たすことである。
+\dfn{帰納的集合}{
+  集合$X$が帰納的集合であるとは、以下を満たすことである。
   \eq*{
     \varnothing \in X \land \forall x \qty(x \in X \rightarrow x^+ \in X)
   }
 
-  \axiref{無限の公理}より無限系譜は存在する。
+  \axiref{無限の公理}より帰納的集合は存在する。
 }
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(\text{$X$は無限系譜である} \land \text{$Y$は無限系譜である} \rightarrow \text{$X \cap Y$は無限系譜である})
+    \forall X \forall Y \qty(\text{$X$は帰納的集合である} \land \text{$Y$は帰納的集合である} \rightarrow \text{$X \cap Y$は帰納的集合である})
   }
 }
 
-\lem{無限系譜の共通部分は無限系譜}{
+\lem{帰納的集合の共通部分は帰納的集合}{
   以下が成り立つ。
   \eq*{
-    \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(\text{$X$は無限系譜である}) \rightarrow \text{$\bigcap A$は無限系譜である})
+    \forall A \qty(A \neq \varnothing \land \forall X \in A \qty(\text{$X$は帰納的集合である}) \rightarrow \text{$\bigcap A$は帰納的集合である})
   }
 }{
   空でない$A$を考える。
 
   $\forall X \in A \qty(\varnothing \in X)$であるので、$\varnothing \in \bigcap A$である。
 
-  $\forall x \in \bigcap A$について、$\forall X \in A \qty(x \in X)$であり、無限系譜であることから$x^+ \in X$である。
+  $\forall x \in \bigcap A$について、$\forall X \in A \qty(x \in X)$であり、帰納的集合であることから$x^+ \in X$である。
 
   ゆえに、$x^+ \in \bigcap A$である。
 
-  よって、$\bigcap A$は無限系譜である。
+  よって、$\bigcap A$は帰納的集合である。
 }
 
-\thm{最小無限系譜の一意性}{
-  無限系譜$X$について、以下で定める集合は無限系譜である。
+\thm{最小帰納的集合の一意性}{
+  帰納的集合$X$について、以下で定める集合は帰納的集合である。
   \eq*{
-    \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}
+    \bigcap \qty{Y \subset X \mid \text{$Y$は帰納的集合である}}
   }
 
-  この集合は、無限系譜$X$の取り方によらずに一意に定まる。
+  この集合は、帰納的集合$X$の取り方によらずに一意に定まる。
 }{
-  $A \coloneqq \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とすると、
+  $A \coloneqq \qty{Y \subset X \mid \text{$Y$は帰納的集合である}}$とすると、
   $X \in A$より、$A \neq \varnothing$である。
 
-  \lemref{無限系譜の共通部分は無限系譜}より成り立つ。
+  \lemref{帰納的集合の共通部分は帰納的集合}より成り立つ。
 
   \vskip\baselineskip
 
-  $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は無限系譜である}}$とする。
+  $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は帰納的集合である}}$とする。
 
-  $X_1, X_2$の\num{2}つの無限系譜を考える。
+  $X_1, X_2$の\num{2}つの帰納的集合を考える。
 
-  \lemref{無限系譜の共通部分は無限系譜}より$X_1 \cap X_2$も無限系譜であり、定義より$\omega(X_2) \subset X_1 \cap X_2 \subset X_1$である。
+  \lemref{帰納的集合の共通部分は帰納的集合}より$X_1 \cap X_2$も帰納的集合であり、定義より$\omega(X_2) \subset X_1 \cap X_2 \subset X_1$である。
 
   定義より、$\omega(X_1) \subset \omega(X_2)$である。
 

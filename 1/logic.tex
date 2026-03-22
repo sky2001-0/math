@@ -465,7 +465,7 @@
 }
 
 \dfn{項への項の代入}{
-  項$u$の変項$x$への項$t$の代入とは、新たな項を得る以下で定められる構造機能的な操作である。
+  項$u$の変項$x$への項$t$の代入とは、新たな項を得る以下で定められる構造帰納的な操作である。
   これを、$u[x \coloneqq t]$で表す。
 
   \begin{enumerate}
@@ -475,14 +475,14 @@
 }
 
 \dfn{命題への項の代入}{
-  命題$\phi$の変項$x$への項$t$の代入とは、新たな命題を得る以下で定められる構造機能的な操作である。
+  命題$\phi$の変項$x$への項$t$の代入とは、新たな命題を得る以下で定められる構造帰納的な操作である。
   これを、$\phi[x \coloneqq t]$で表す。
 
   \begin{enumerate}
     \item 命題が$\bot$であるとき、代入の結果は$\bot$である。
-    \item 命題が$\phi \land \psi$の形をとるとき、$\phi[x \coloneqq t] \land \psi[x \coloneqq t]$
-    \item 命題が$\phi \rightarrow \psi$の形をとるとき、$\phi[x \coloneqq t] \rightarrow \psi[x \coloneqq t]$
-    \item 命題が原始述語$P()$を用いて$P(u, \ldots)$の形をとるとき、$P\qty(u[x \coloneqq t], \ldots)$
+    \item 命題が$\phi \land \psi$の形をとるとき、$\phi[x \coloneqq t] \land \psi[x \coloneqq t]$である。
+    \item 命題が$\phi \rightarrow \psi$の形をとるとき、$\phi[x \coloneqq t] \rightarrow \psi[x \coloneqq t]$である。
+    \item 命題が原始述語$P()$を用いて$P(u, \ldots)$の形をとるとき、$P\qty(u[x \coloneqq t], \ldots)$である。
     \item 命題が$\forall y \qty(\phi)$の形をとるとき、
     \begin{itemize}
       \item $x = y$であるとき、$\forall y \qty(\phi)$である。
@@ -685,10 +685,6 @@
   }
 }
 
-\rem{類は個体ではない}{
-  定義より、類は個体ではないことに注意されたい。
-}
-
 \rem{存在の誤謬}{
   類$X$と命題$\phi$について、
   $\forall x \in X \qty(\phi)$から$\exists x \in X \qty(\phi)$を導くことはできない。
@@ -697,19 +693,36 @@
 }
 
 \dfn{関数グラフ}{
-  述語$D$について、以下を満たす述語$P$を、$D$で定義された関数グラフと呼ぶ。
+  述語$D$について、以下を満たす述語$P$を、$D$上の関数グラフと呼ぶ。
   \eq*{
     \forall x \ldots \qty(D(x, \ldots) \rightarrow \exists! y \qty(P(x, \ldots, y)))
   }
 
-  このとき、以下の略記$F$を定めて、関数と呼ぶ。
+  このとき、以下の略記$F$を定めて、$D$上の関数と呼ぶ。
   \eq*{
     \forall x \ldots \qty(D(x, \ldots) \rightarrow P(x, \ldots, F(x, \ldots)))
   }
 }
 
 \dfn{全域関数グラフ}{
-  述語$D$が恒に真となるとき、$D$で定義された関数グラフ$P$を、全域関数グラフと呼ぶ。
+  述語$D$が恒に真となるとき、$D$上の関数グラフ$P$を、全域関数グラフと呼ぶ。
 
   このとき、関数$F$を、全域関数と呼ぶ。
+}
+
+\axi{Skolem関係の導入}{
+  述語$D$について、以下を満たす述語$P$を考える。
+  \eq*{
+    \forall x \ldots \qty(D(x, \ldots) \rightarrow \exists y \qty(P(x, \ldots, y)))
+  }
+
+  このとき、以下の\num{2}つを満たす新たな述語$Q$をとることができる。
+  \eqg*{
+    \forall x \ldots \qty(D(x, \ldots) \rightarrow \forall y \qty(Q(x, \ldots, y) \rightarrow P(x, \ldots, y))) \\*
+    \forall x \ldots \qty(D(x, \ldots) \rightarrow \exists! y \qty(Q(x, \ldots, y)))
+  }
+}
+
+\rem{Skolem関係の導入}{
+  上の公理の導入により、通常の一階述語論理とは異なる論理体系となる。
 }

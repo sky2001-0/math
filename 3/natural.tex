@@ -43,7 +43,7 @@
 \lsubsection{集合論における自然数}
 
 \thm{Peanoの公理}{
-  \thmref{最小無限系譜の一意性}より、無限系譜$X$の取り方によらず$\omega(X)$が一意に定まる。
+  \thmref{最小帰納的集合の一意性}より、帰納的集合$X$の取り方によらず$\omega(X)$が一意に定まる。
   これを$\N$で表す。
 
   $\N$は以下の全てを満たす。
@@ -55,7 +55,7 @@
     \forall E \qty(E \subset \N \land \varnothing \in E \land \forall n \qty(n \in E \rightarrow n^+ \in E) \rightarrow E = \N)
   }
 }{
-  第一、第二の公理は、無限系譜であることより明らか。
+  第一、第二の公理は、帰納的集合であることより明らか。
 
   \vskip\baselineskip
 
@@ -71,9 +71,9 @@
 
   前件より、$E \subset \N$である。
 
-  $\varnothing \in E \land \forall n \qty(n \in E \rightarrow n^+ \in E)$より、$E$は無限系譜である。
+  $\varnothing \in E \land \forall n \qty(n \in E \rightarrow n^+ \in E)$より、$E$は帰納的集合である。
 
-  最小無限系譜であるので、$\N = \omega(E) \subset E$である。
+  最小帰納的集合であるので、$\N = \omega(E) \subset E$である。
 }
 
 \thm{数学的帰納法}{
