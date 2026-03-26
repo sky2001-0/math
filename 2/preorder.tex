@@ -1,0 +1,59 @@
+\lsection{前順序}
+
+\lsubsection{薄い圏}
+
+\dfn{薄い圏}{
+  圏$\bm{\Lambda}$が以下を満たすとき、圏$\bm{\Lambda}$を薄いという。
+  \eq*{
+    \forall a, b \in \Obj_{\bm{\Lambda}} \forall f, g \in \Hom_{\bm{\Lambda}}\qty(a, b) \qty(f = g)
+  }
+}
+
+\lem{薄い圏の簡約}{
+  薄い圏$\bm{\Lambda}$について、任意の射は左簡約可能かつ右簡約可能である。
+}{
+  射$f, g, h \in \bm{\Lambda}$について、$f \circ g = f \circ h$とする。
+
+  薄い圏であるので、$g = h$である。
+
+  右簡約可能性も同様に示せる。
+}
+
+\dfn{大小}{
+  薄い圏$\bm{\Lambda}$について、述語$\preccurlyeq_{\bm{\Lambda}}$を以下で定める。
+  \eq*{
+    a \preccurlyeq_{\bm{\Lambda}} b \defiff a \in \Obj_{\bm{\Lambda}} \land b \in \Obj_{\bm{\Lambda}} \land \exists f \in \Hom_{\bm{\Lambda}}\qty(a, b)
+  }
+}
+
+\dfn{最大元}{
+  薄い圏$\bm{\Lambda}$について、その終対象を最大元と呼ぶ。
+}
+
+\dfn{最小元}{
+  薄い圏$\bm{\Lambda}$について、その始対象を最小元と呼ぶ。
+}
+
+\dfn{下限}{
+  薄い圏$\bm{\Lambda}$、離散圏$\bm{J}$と、関手$X \colon \bm{J} \to \bm{\Lambda}$を考える。
+
+  $X$の積$x, u$について、$x$を$X$の下限と呼ぶ。
+}
+
+\dfn{上限}{
+  薄い圏$\bm{\Lambda}$、離散圏$\bm{J}$と、関手$X \colon \bm{J} \to \bm{\Lambda}$を考える。
+
+  $X$の和$x, u$について、$x$を$X$の上限と呼ぶ。
+}
+
+\dfn{射影系}{
+  薄い圏$\Lambda$と圏$\bm{C}$について、関手$X \colon \bm{\Lambda} \to \bm{C}$を、射影系と呼ぶ。
+}
+
+\dfn{帰納極限}{
+  射影系$X$ついて、$X$の極限を帰納極限と呼ぶ。
+}
+
+\dfn{射影極限}{
+  射影系$X$ついて、$X$の余極限を射影極限と呼ぶ。
+}

@@ -9,7 +9,8 @@
 
 \dfn{射}{
   圏論では、
-  \num{3}つの述語、関数（\dfnref{始域}、\dfnref{終域}、\dfnref{合成可能性}）と、
+  \num{2}つの全域関数（\dfnref{始域}、\dfnref{終域}）、
+  \num{1}つの述語（\dfnref{合成可能性}）と、
   \num{6}つの公理（
     \axiref{始域の冪等性}、\axiref{終域の冪等性}、\axiref{合成}、\axiref{合成射の始域と終域}、\axiref{合成射の結合}、\axiref{恒等射}
   ）を満たすものを議論領域とする。
@@ -100,6 +101,16 @@
   }
 }
 
+\dfn{空圏}{
+  以下で定める類$\bm{A}$を考える。
+  \eq*{
+    f \in \bm{A} \defiff \bot
+  }
+
+  このとき$\bm{A}$は、圏である。
+  この$\bm{A}$を、空圏と呼ぶ。
+}
+
 \dfn{対象の類}{
   以下で定める類$\Obj_{\bm{C}}$を、圏$\bm{C}$の対象の類と呼ぶ。
   \eq*{
@@ -179,13 +190,23 @@
 \rem{射としての関手}{
   関手について、$=, \dom, \cod, \Comp$を以下で定めることにより、\subsecref{射の公理}を満たす。
 
-  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{C} \to \bm{D}, G \colon \bm{D} \to \bm{E}, H$について、
+  圏$\bm{C}, \bm{D}, \bm{E}, \bm{C^\prime}, \bm{D^\prime}$と、関手$F \colon \bm{C} \to \bm{D}, G \colon \bm{D} \to \bm{E}, H \colon \bm{C^\prime} \to \bm{D^\prime}$について、
   \begin{enumerate}
+    \item $F = H \defiff \forall f \qty(f \in \bm{C} \leftrightarrow f \in \bm{C^\prime}) \land \forall f \qty(f \in \bm{D} \leftrightarrow f \in \bm{D^\prime}) \land \forall f \in \bm{C} \qty(F(f) = H(f))$
     \item $\dom(F) \coloneqq \id_{\bm{C}}$
     \item $\cod(F) \coloneqq \id_{\bm{D}}$
-    \item $F = H \defiff \dom(F) = \dom(H) \land \cod(F) = \cod(H) \land \forall f \in \bm{C} \qty(F(f) = H(f))$
     \item $\circ$は\dfnref{関手の合成}の意味として、$\Comp(F, G, H) \defiff H = G \circ F$
   \end{enumerate}
+}
+
+\dfn{自明な関手}{
+  圏$\bm{C}$について、以下で定める$\Obj_{\bm{C}}$上の関数$I$を考える。
+  \eq*{
+    I(a) \coloneqq a
+  }
+
+  このとき$I$は、$\Obj_{\bm{C}}$から$\bm{C}$への関手である。
+  この$I$を、$\bm{C}$の自明な関手と呼ぶ。
 }
 
 \dfn{圏同型}{
@@ -310,21 +331,21 @@
 
   圏$\bm{C}, \bm{D}$と、関手$F, F^\prime, F^{\prime \prime}, G, G^\prime \colon \bm{C} \to \bm{D}$、自然変換$\eta \colon F \to F^\prime, \theta \colon F^\prime \to F^{\prime \prime}, \epsilon \colon G \to G^\prime$について、
   \begin{enumerate}
+    \item $\eta = \epsilon \defiff F = G \land F^\prime = G^\prime \land \forall a \in \Obj_{\bm{C}} \qty(\eta(a) = \epsilon(a))$
     \item $\dom(\eta) \coloneqq \Id_F$
     \item $\cod(\eta) \coloneqq \Id_{F^\prime}$
-    \item $\eta = \epsilon \defiff F = G \land F^\prime = G^\prime \land \forall a \in \Obj_{\bm{C}} \qty(\eta(a) = \epsilon(a))$
     \item $\circ$は\dfnref{自然変換の垂直合成}の意味として、$\Comp(\eta, \theta, \epsilon) \defiff \epsilon = \theta \circ \eta$
   \end{enumerate}
 }
 
 \dfn{関手圏}{
-  圏$\bm{C}, \bm{D}$について、以下で定める類$A$を考える。
+  圏$\bm{C}, \bm{D}$について、以下で定める類$\bm{A}$を考える。
   \eq*{
-    \eta \in A \defiff \text{自然変換$\eta \colon F \to G$、ただし関手$F, G \colon \bm{C} \to \bm{D}$であるもの}
+    \eta \in \bm{A} \defiff \text{自然変換$\eta \colon F \to G$、ただし関手$F, G \colon \bm{C} \to \bm{D}$であるもの}
   }
 
-  このとき$A$は、圏である。
-  この$A$を、$\bm{C}$から$\bm{D}$への関手圏と呼び、$\Func(\bm{C}, \bm{D})$で表す。
+  このとき$\bm{A}$は、圏である。
+  この$\bm{A}$を、$\bm{C}$から$\bm{D}$への関手圏と呼び、$\Func(\bm{C}, \bm{D})$で表す。
 }
 
 \dfn{自然変換の水平合成}{
@@ -433,9 +454,9 @@
   反対射について、$=, \dom, \cod, \Comp$を以下で定めることにより、\subsecref{射の公理}を満たす。
   射$f, g, h$について、
   \begin{enumerate}
+    \item $f^\opp = g^\opp \defiff f = g$
     \item $\dom(f^\opp) \coloneqq \cod(f)$
     \item $\cod(f^\opp) \coloneqq \dom(f)$
-    \item $f^\opp = g^\opp \defiff f = g$
     \item $\Comp(f^\opp, g^\opp, h^\opp) \defiff h = f \circ g$
   \end{enumerate}
 }
@@ -476,7 +497,7 @@
     \eta^\opp(a) \coloneqq \eta(a)^\opp
   }
 
-  このとき$\eta^\opp$は$F^\opp$から$F^{\prime \opp}$への自然変換である。
+  このとき$\eta^\opp$は$F^{\prime \opp}$から$F^\opp$への自然変換である。
   この$\eta^\opp$を、$\eta$の反対自然変換と呼ぶ。
 }
 
@@ -725,7 +746,7 @@
 
   $2. \rightarrow 1.$を示す。
 
-  本質的全射であるので、\axiref{Skolem関係の導入}より$\Obj_{\bm{D}}$上の関数$G^\prime, \theta$を与えることができる。
+  本質的全射であるので、以下を満たす\axiref{Skolem関係の導入}より$\Obj_{\bm{D}}$上の関数$G^\prime, \theta$を与えることができる。
   \eq*{
     \forall d \in \Obj_{\bm{D}} \qty(G^\prime(d) \in \Obj_{\bm{C}} \land \text{$\theta(d) \colon F(G^\prime(d)) \to d$は同型射})
   }
@@ -737,9 +758,36 @@
 
   上の命題が与える$\bm{D}$上の関数$G$を考える。
 
-  $G$は$\bm{D}$から$\bm{C}$への関手である。
+  $G$の定義より、$\forall f \in \bm{D} \qty(G(f) \in \bm{C})$である。
 
-  $G$の定義より$\theta$は$F \circ G$から$\id_{\bm{C}}$への自然変換であり、$\theta$の定義より自然同型である。
+  任意の射$f \in \bm{D}$について、
+  \eqa*{
+    F(G(\dom(f)))
+    &= \theta(\dom(f))^{-1} \circ \dom(f) \circ \theta(\dom(f)) \\*
+    &= \theta(\dom(f))^{-1} \circ \theta(\dom(f)) \\*
+    &= F(G^\prime(\dom(f))) \\*
+    &= F(\dom(G(f)))
+  }
+
+  $F$は忠実より、$G(\dom(f)) = \dom(G(f))$である。
+
+  同様にして、$G(\cod(f)) = \cod(G(f))$である。
+
+  任意の射$f, g \in \bm{D}$について、$\dom(g) = \cod(f)$とすると、以下が成り立つ。
+  \eqa*{
+    F(G(g \circ f))
+    &= \theta(\cod(g))^{-1} \circ g \circ f \circ \theta(\dom(f)) \\*
+    &= \theta(\cod(g))^{-1} \circ g \circ \theta(\dom(g)) \circ \theta(\dom(g))^{-1} \circ f \circ \theta(\dom(f)) \\*
+    &= \theta(\cod(g))^{-1} \circ g \circ \theta(\dom(g)) \circ \theta(\cod(f))^{-1} \circ f \circ \theta(\dom(f)) \\*
+    &= \qty(F \circ G)(g) \circ \qty(F \circ G)(f) \\*
+    &= F \qty(G(g) \circ G(f))
+  }
+
+  $F$は忠実より、$G(g \circ f) = G(g) \circ G(f)$である。
+
+  ゆえに、$G$は$\bm{D}$から$\bm{C}$への関手である。
+
+  $G$の定義より$\theta$は$F \circ G$から$\id_{\bm{D}}$への自然変換であり、$\theta$の定義より自然同型である。
 
   \vskip\baselineskip
 
@@ -750,26 +798,22 @@
 
   上の命題が与える$\Obj_{\bm{C}}$上の関数$\eta$を考える。
 
-  射$f \in \bm{C}$について、以下が成り立つ。
+  射$h \in \bm{C}$について、以下が成り立つ。
   \eqa*{
-    F\qty(\qty(G \circ F)(f) \circ \eta(\dom(f)))
-    &= \qty(F \circ G \circ F)(f) \circ F(\eta(\dom(f))) \\*
-    &= \qty(F \circ G \circ F)(f) \circ \theta(F(\dom(f)))^{-1} \\*
-    &= \theta(F(\cod(f)))^{-1} \circ F(f) \circ \theta(F(\dom(f))) \circ \theta(F(\dom(f)))^{-1} \\*
-    &= \theta(F(\cod(f)))^{-1} \circ F(f) \\*
-    &= F(\eta(\cod(f))) \circ F(f) \\*
-    &= F(\eta(\cod(f)) \circ f)
+    F\qty(\qty(G \circ F)(h) \circ \eta(\dom(h)))
+    &= \qty(F \circ G \circ F)(h) \circ F(\eta(\dom(h))) \\*
+    &= \qty(F \circ G \circ F)(h) \circ \theta(F(\dom(h)))^{-1} \\*
+    &= \theta(F(\cod(h)))^{-1} \circ F(h) \circ \theta(F(\dom(h))) \circ \theta(F(\dom(h)))^{-1} \\*
+    &= \theta(F(\cod(h)))^{-1} \circ F(h) \\*
+    &= F(\eta(\cod(h))) \circ F(h) \\*
+    &= F(\eta(\cod(h)) \circ h)
   }
 
-  $F$は忠実なので、$\qty(G \circ F)(f) \circ \eta(\dom(f)) = \eta(\cod(f)) \circ f$である。
+  $F$は忠実なので、$\qty(G \circ F)(h) \circ \eta(\dom(h)) = \eta(\cod(h)) \circ h$である。
 
   よって、$\eta$は$\id_{\bm{C}}$から$G \circ F$への自然変換である。
 
   $F$は充満忠実であるので、\lemref{充満忠実ならば同型射を戻す}より、$\eta$の定義より$\eta$は自然同型である。
-}
-
-\rem{圏同値}{
-  Skolem化を許せば、充満忠実であり本質的全射ならば圏同値が言える。
 }
 
 \cor{圏同型ならば圏同値}{
@@ -777,7 +821,7 @@
 }
 
 
-\lsubsection{普遍}
+\lsubsection{普遍射}
 
 \dfn{普遍射}{
   圏$\bm{C}, \bm{D}$と、関手$F \colon \bm{D} \to \bm{C}$、対象$a \in \Obj_{\bm{C}}$を考える。
@@ -822,97 +866,20 @@
 
   さらに上で与える$h$は同型射である。
 }{
-  $x, u$は普遍射であるので、$x^\prime, u^\prime$について定義より、
-  $\bm{D}$の射$g \colon x^\prime \to x$であって$u^\prime = u \circ F(g)$なる射が一意に存在する。
+  $x, u$は普遍射であるので、$x^\prime, u^\prime$について、
+  $\bm{D}$の射$g \colon x^\prime \to x$が一意に存在して、$u^\prime = u \circ F(g)$を満たす。
 
-  同様に$x^\prime, u^\prime$は普遍射であるので、$x, u$について定義より、
-  $\bm{D}$の射$g^\prime \colon x \to x^\prime$であって$u = u^\prime \circ F(g^\prime)$なる射が一意に存在する。
+  同様に$x^\prime, u^\prime$は普遍射であるので、$x, u$について、
+  $\bm{D}$の射$g^\prime \colon x \to x^\prime$が一意に存在して、$u = u^\prime \circ F(g^\prime)$を満たす。
 
   ゆえに、$u = u^\prime \circ F(g^\prime) = u \circ F(g) \circ F(g^\prime) = u \circ F(g \circ g^\prime)$が成り立つ。
 
-  $x, u$は普遍射であるので、$x, u$について定義より、
-  $\bm{D}$の射$i \colon x \to x$であって$u = u \circ F(i)$なる射が一意に存在する。
-
-  $x, g \circ g^\prime$は$i$の条件を満たすので、$i = x = g \circ g^\prime$
+  $x, u$は普遍射であるので、$x, u$について、一意性より、$x = g \circ g^\prime$である。
 
   同様に、$x^\prime = g^\prime \circ g$である。
 
   したがって、$g^\prime$は$g$の逆射である。
 }
-
-\dfn{定値関手}{
-  圏$\bm{C}, \bm{D}$と、対象$a \in \Obj_{\bm{C}}$について、$\bm{D}$上の以下で定める関数$\Delta_a$を考える。
-  \eq*{
-    \Delta_a(f) \coloneqq a
-  }
-
-  このとき$\Delta_a$は、$\bm{D}$から$\bm{C}$への関手である。
-  この$\Delta_a$を、定値関手と呼ぶ。
-}
-
-\dfn{対角関手}{
-  圏$\bm{C}, \bm{D}$について、$\bm{C}$上の以下で定める関数$\Delta$を考える。
-  \eq*{
-    \Delta(f) \coloneqq \text{定値関手$\Delta_{\dom(f)}$から定値関手$\Delta_{\cod(f)}$への自然変換であり、$\forall d \in \bm{D} \qty(\Delta(f)(d) = f)$を満たすもの}
-  }
-
-  このとき$\Delta$は、$\bm{C}$から$\Func(\bm{D}, \bm{C})$への関手である。
-  この$\Delta$を、対角関手と呼ぶ。
-}
-
-\dfn{極限}{
-  圏$\bm{C}, \bm{D}$と、対角関手$\Delta \colon \bm{C} \to \Func(\bm{D}, \bm{C})$を考える。
-
-  関手$X \colon \bm{D} \to \bm{C}$について、$\Delta$から$\Id_X$への普遍射$x, u$を、$x, u$を$X$の極限と呼ぶ。
-}
-
-\begin{center}
-  \begin{minipage}{0.2\linewidth}
-    $\bm{D}$ \\
-    \begin{tikzcd}
-      a \ar[r, "f"'] & b \\
-    \end{tikzcd}
-  \end{minipage}
-  \begin{minipage}{0.3\linewidth}
-    $\bm{C}$ \\
-    \begin{tikzcd}
-      & y \ar[d, "q", dotted, red] \ar[ddl, "p(a)"', bend right=45] \ar[rdd, "p(b)", bend left=45] & \\
-      & x \ar[ld, "u(a)"', near start] \ar[rd, "u(b)", near start] & \\
-      X(a) \ar[rr, "X(f)"'] & & X(b) \\
-    \end{tikzcd}
-  \end{minipage}
-  \begin{minipage}{0.2\linewidth}
-    $\Func(\bm{D}, \bm{C})$ \\
-    \begin{tikzcd}
-      \Delta(y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta(x) \ar[d, "u"] \\
-      & \Id_X \\
-    \end{tikzcd}
-  \end{minipage}
-\end{center}
-
-\dfn{積}{
-  離散圏$\bm{J}$、圏$\bm{C}$と、関手$X \colon \bm{J} \to \bm{C}$について、
-  $X$の極限$x, u$を、$X$の積と呼ぶ。
-
-  特に、この$x$を$\prod X$と表す。
-}
-
-\begin{center}
-  \begin{minipage}{0.3\linewidth}
-    $\bm{C}$ \\
-    \begin{tikzcd}
-      y \ar[r, "q", dotted, red] \ar[dr, "p(j)"'] & \prod X \ar[d, "u(j)"] \\
-      & X(j) \\
-    \end{tikzcd}
-  \end{minipage}
-  \begin{minipage}{0.3\linewidth}
-    $\Func(\bm{J}, \bm{C})$ \\
-    \begin{tikzcd}
-      \Delta(y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta\qty(\prod X) \ar[d, "u"] \\
-      & \Id_X \\
-    \end{tikzcd}
-  \end{minipage}
-\end{center}
 
 \dfn{余普遍射}{
   圏$\bm{C}, \bm{D}$と、関手$F \colon \bm{D} \to \bm{C}$、対象$a \in \Obj_{\bm{C}}$を考える。
@@ -951,136 +918,590 @@
   \end{minipage}
 \end{center}
 
+
+\lsubsection{普遍性の諸概念}
+
+\dfn{終圏}{
+  唯一の射をもち、その射が対象であるような類を考える。
+
+  これは圏であり、終圏と呼ぶ。
+}
+
+\dfn{終関手}{
+  圏$\bm{C}$について、$\bm{C}$から終圏への関手は一意に定まる。
+
+  これを終関手と呼ぶ。
+}
+
+\dfn{終対象}{
+  圏$\bm{C}$を考える。
+
+  終関手$U$から終圏の対象$\ast$への普遍射$x, \ast$について、この$x$を$\bm{C}$の終対象と呼ぶ。
+}
+
+\begin{center}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      y \ar[r, "g", dotted, red] & x \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{始対象}{
+  圏$\bm{C}$を考える。
+
+  $\bm{C}^\opp$の終対象を、$\bm{C}$の始対象と呼ぶ。
+}
+
+\dfn{定値関手}{
+  圏$\bm{C}, \bm{D}$と、対象$a \in \Obj_{\bm{C}}$について、$\bm{D}$上の以下で定める関数$\Delta_a$を考える。
+  \eq*{
+    \Delta_a(f) \coloneqq a
+  }
+
+  このとき$\Delta_a$は、$\bm{D}$から$\bm{C}$への関手である。
+  この$\Delta_a$を、定値関手と呼ぶ。
+}
+
+\dfn{対角関手}{
+  圏$\bm{C}, \bm{D}$について、$\bm{C}$上の以下で定める関数$\Delta$を考える。
+  \eq*{
+    \Delta(f) \coloneqq \text{定値関手$\Delta_{\dom(f)}$から定値関手$\Delta_{\cod(f)}$への自然変換であり、$\forall d \in \bm{D} \qty(\Delta(f)(d) = f)$を満たすもの}
+  }
+
+  このとき$\Delta$は、$\bm{C}$から$\Func(\bm{D}, \bm{C})$への関手である。
+  この$\Delta$を、対角関手と呼ぶ。
+}
+
+\dfn{極限}{
+  圏$\bm{C}, \bm{D}$と、対角関手$\Delta \colon \bm{C} \to \Func(\bm{D}, \bm{C})$を考える。
+
+  関手$X \colon \bm{D} \to \bm{C}$について、$\Delta$から$\Id_X$への普遍射$x, u$を、$X$の極限と呼ぶ。
+}
+
+\begin{center}
+  \begin{minipage}{0.2\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      a \ar[r, "f"'] & b \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      & y \ar[d, "q", dotted, red] \ar[ddl, "p(a)"', bend right=45] \ar[rdd, "p(b)", bend left=45] & \\
+      & x \ar[ld, "u(a)"', near start] \ar[rd, "u(b)", near start] & \\
+      X(a) \ar[rr, "X(f)"'] & & X(b) \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.2\linewidth}
+    $\Func(\bm{D}, \bm{C})$ \\
+    \begin{tikzcd}
+      \Delta(y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta(x) \ar[d, "u"] \\
+      & \Id_X \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
 \dfn{余極限}{
   圏$\bm{C}, \bm{D}$と、対角関手$\Delta \colon \bm{C} \to \Func(\bm{D}, \bm{C})$を考える。
 
-  関手$X \colon \bm{D} \to \bm{C}$について、$X$から$\Delta$への余普遍射を、$X$の余極限と呼ぶ。
+  関手$X \colon \bm{D} \to \bm{C}$について、$\Id_X$から$\Delta$への余普遍射を、$X$の余極限と呼ぶ。
 }
+
+\dfn{積}{
+  離散圏$\bm{J}$、圏$\bm{C}$と、関手$X \colon \bm{J} \to \bm{C}$について、
+  $X$の極限$x, u$を、$X$の積と呼ぶ。
+
+  特に、この$x$を$\prod X$で表す。
+}
+
+\begin{center}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      y \ar[r, "q", dotted, red] \ar[dr, "p(j)"'] & \prod X \ar[d, "u(j)"] \\
+      & X(j) \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\Func(\bm{J}, \bm{C})$ \\
+    \begin{tikzcd}
+      \Delta(y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta\qty(\prod X) \ar[d, "u"] \\
+      & \Id_X \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
 
 \dfn{和}{
   離散圏$\bm{J}$、圏$\bm{C}$と、関手$X \colon \bm{J} \to \bm{C}$について、
-  $X$の余極限を、$X$の和と呼ぶ。
+  $X$の余極限$x, u$を、$X$の和と呼ぶ。
+
+  特に、この$x$を$\coprod X$で表す。
 }
+
+\dfn{コスパン}{
+  相異なる\num{3}つの対象$0, 1, 2$と、射$m_0 \colon 0 \to 2, m_1 \colon 1 \to 2$について、以下の類$\bm{A}$を考える。
+  \eq*{
+    f \in \bm{A} \defiff f = 0 \lor f = 1 \lor f = 2 \lor f = m_0 \lor f = m_1
+  }
+
+  このとき$\bm{A}$は圏である。
+  この$\bm{A}$をコスパンの圏と呼ぶ。
+}
+
+\dfn{引き戻し}{
+  圏$\bm{C}$と、以下を満たす射$f, g \in \bm{C}$を考える。
+  \eq*{
+    \cod(f) = \cod(g)
+  }
+
+  コスパンの圏$\bm{A}$について、以下で定める関手$X \colon \bm{A} \to \bm{C}$を考える。
+  \eqg*{
+    X(m_0) = f \land X(m_1) = g
+  }
+
+  $X$の極限$x, u$について、$x, \qty(u(0), u(1))$を、$f, g$の引き戻しと呼ぶ。
+}
+
+\begin{center}
+  \begin{minipage}{0.2\linewidth}
+    $\bm{A}$ \\
+    \begin{tikzcd}
+      & 1 \ar[d, "m_1"] \\
+      0 \ar[r, "m_0"'] & 2
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.35\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      & y \ar[dd, "q", red, dotted] \ar[dddl, "p(0)"'] \ar[ddrr, "p(1)"] \ar[dddr, "p(2)"] & & \\
+      & & & \\
+      & x \ar[ld, "u(0)"'] \ar[rr, "u(1)"] \ar[rd, "u(2)"'] & & b \ar[ld, "g"] \\
+      a \ar[rr, "f"'] & & c & \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.2\linewidth}
+    $\Func(\bm{A}, \bm{C})$ \\
+    \begin{tikzcd}
+      \Delta(y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta(x) \ar[d, "u"] \\
+      & \Id_X
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{押し出し}{
+  圏$\bm{C}$と、以下を満たす射$f, g \in \bm{C}$を考える。
+  \eq*{
+    \dom(f) = \dom(g)
+  }
+
+  $f^\opp, g^\opp$の引き戻し$x, \qty(u_0, u_1)$について、$x, \qty(u_0^\opp, u_1^\opp)$を$f, g$の押し出しと呼ぶ。
+}
+
+\dfn{核対}{
+  圏$\bm{C}$と、射$f \in \bm{C}$を考える。
+
+  $f, f$の引き戻し$x, \qty(\pi_0, \pi_1)$を、$f$の核対と呼ぶ。
+}
+
+\cor*{
+  $f$の核対$x, \qty(\pi_0, \pi_1)$について、$\pi_0, \pi_1$はともに右可逆である。
+}
+
+\lem{核対と左簡約可能性}{
+  圏$\bm{C}$と、射$f \in \bm{C}$について、$f$の核対$R, \qty(\pi_0, \pi_1)$が存在するとする。
+
+  このとき、以下の\num{3}つは同値である。
+  \begin{enumerate}
+    \item $f$は左簡約可能
+    \item $\pi_0 = \pi_1$
+    \item $\pi_0, \pi_1$はともに同型射
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  核対より$f \circ \pi_0 = f \circ \pi_1$であり、左簡約可能より$\pi_0 = \pi_1$である。
+
+  \vskip\baselineskip
+
+  $2. \rightarrow 3.$を示す。
+
+  $f \circ \dom(f) = f \circ \dom(f)$より、普遍性から射$u \colon \dom(f) \to R$が存在して、$\pi_0 \circ u = \dom(f) = \pi_1 \circ u$である。
+
+  $\pi_0 = \pi_1$より、$\pi_1 = \pi_0 = \pi_1 \circ u \circ \pi_0 = \pi_0 \circ u \circ \pi_0$である。
+
+  $f \circ \pi_0 = f \circ \pi_0$より、普遍性から$R = u \circ \pi_0$である。
+
+  したがって、$\pi_0$は同型射である。
+
+  \vskip\baselineskip
+
+  $3. \rightarrow 2.$を示す。
+
+  $f \circ \pi_0 = f \circ \pi_0$より、一意な射$e \colon R \to R$が存在して、$\pi_0 = \pi_0 \circ e = \pi_1 \circ e$である。
+
+  $\pi_0$は同型射より、$e = R$である。ゆえに、$\pi_0 = \pi_1$である。
+
+  \vskip\baselineskip
+
+  $2. \to 1.$を示す。
+
+  射$g, h \in \bm{C}$について、$f \circ g = f \circ h$とする。
+
+  普遍性より、一意な射$q \colon \dom(g) \to R$が存在して、$g = \pi_0 \circ q \land h = \pi_1 \circ q$である。
+
+  $\pi_0 = \pi_1$より、$g = h$である。
+}
+
+\dfn{並行射}{
+  相異なる\num{2}つの対象$0, 1$と、相異なる射$m_0, m_1 \colon 0 \to 1$について、以下の類$\bm{A}$を考える。
+  \eq*{
+    f \in \bm{A} \defiff f = 0 \lor f = 1 \lor f = m_0 \lor f = m_1
+  }
+
+  このとき$\bm{A}$は圏である。
+  この$\bm{A}$を並行射の圏と呼ぶ。
+}
+
+\dfn{等化子}{
+  圏$\bm{C}$と、以下を満たす射$f, g \in \bm{C}$を考える。
+  \eq*{
+    \dom(f) = \dom(g) \land \cod(f) = \cod(g)
+  }
+
+  並行射の圏$\bm{A}$について、以下で定める関手$X \colon \bm{A} \to \bm{C}$を考える。
+  \eqg*{
+    X(m_0) = f \land X(m_1) = g
+  }
+
+  $X$の極限$x, u$について、$x, u(0)$を、$f, g$の等化子と呼ぶ。
+  この$x$を、$\Eq(f, g)$で表す。
+}
+
+\begin{center}
+  \begin{minipage}{0.2\linewidth}
+    $\bm{A}$ \\
+    \begin{tikzcd}
+      & 0 \ar[d, "m_1"] \\
+      0 \ar[r, "m_0"'] & 1 \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.4\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      & y \ar[dd, "q", red, dotted] \ar[dddl, "p(0)"'] \ar[ddrr, "p(0)"] \ar[dddr, "p(1)"] & & \\
+      & & & \\
+      & \Eq(f, g) \ar[ld, "u(0)"'] \ar[rr, "u(0)"] \ar[rd, "u(1)"'] & & a \ar[ld, "g"] \\
+      a \ar[rr, "f"'] & & b & \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.2\linewidth}
+    $\Func(\bm{A}, \bm{C})$ \\
+    \begin{tikzcd}
+      \Delta(y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta\qty(\Eq(f, g)) \ar[d, "u"] \\
+      & \Id_X \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{余等化子}{
+  圏$\bm{C}$と、以下を満たす射$f, g \in \bm{C}$を考える。
+  \eq*{
+    \dom(f) = \dom(g) \land \cod(f) = \cod(g)
+  }
+
+  $f^\opp, g^\opp$の等化子$x, u$について、$x, u^\opp$を$f, g$の余等化子と呼ぶ。
+}
+
+\lem{等化子から得るモノ射}{
+  $f$と$g$の等化子$\Eq(f, g), \pi$が存在するとする。
+
+  このとき、$\pi$は左簡約可能である。
+}{
+  $\pi \circ h_1 = \pi \circ h_2$なる射$h_1, h_2 \colon y \to \Eq(f, g)$と、射$w \coloneqq \pi \circ h_1$を考える。
+
+  このとき、$f \circ w = f \circ \pi \circ h_1 = g \circ \pi \circ h_1 = g \circ w$より、等化子の普遍性から$w = \pi \circ h$なる$h$が一意に存在する。
+
+  ゆえに、$h_1 = h_2$である。
+
+  したがって、$\pi$は左簡約可能である。
+}
+
+\dfn{対象としての射}{
+  射$f$について、新たなもの$\hat{f}$を考える。
+
+  $\hat{f}$を対象としての射と呼ぶ。
+}
+
+\rem{対象としての射}{
+  対象としての射について、$=, \dom, \cod, \Comp$を以下で定めることにより、\subsecref{射の公理}を満たす。
+  射$f, g, h$について、
+  \begin{enumerate}
+    \item $\hat{f} = \hat{g} \defiff f = g$
+    \item $\dom(\hat{f}) \coloneqq \hat{f}$
+    \item $\cod(\hat{f}) \coloneqq \hat{f}$
+    \item $\Comp(\hat{f}, \hat{g}, \hat{h}) \defiff \hat{h} = \hat{f} \land \hat{h} = \hat{g}$
+  \end{enumerate}
+}
+
+\dfn{射の上の離散圏}{
+  圏$\bm{C}$について、以下で定める類$\hat{\bm{C}}$を考える。
+  \eq*{
+    \hat{f} \in \hat{\bm{C}} \defiff f \in \bm{C}
+  }
+
+  このとき$\hat{\bm{C}}$は圏である。
+  この$\hat{\bm{C}}$を、$\bm{C}$の射の上の離散圏と呼ぶ。
+}
+
+\thm{極限の存在定理}{
+  以下を満たす圏$\bm{J}, \bm{C}$を考える。
+  \begin{enumerate}
+    \item $\Obj_{\bm{J}}$から$\bm{C}$への任意の関手は、積を持つ。
+    \item $\bm{J}$の射の上の離散圏$\hat{\bm{J}}$について、$\hat{\bm{J}}$から$\bm{C}$への任意の関手は、積を持つ。
+    \item $\bm{C}$の任意の射$f, g$について$\dom(f) = \dom(g) \land \cod(f) = \cod(g)$ならば、等化子を持つ。
+  \end{enumerate}
+
+  このとき、関手$X \colon \bm{J} \to \bm{C}$は極限を持つ。
+}{
+  以下で定める$\hat{\bm{J}}$上の関数$S, T$を考える。
+  \eqa*{
+    S(\hat{i}) &\coloneqq \dom(i) \\*
+    T(\hat{i}) &\coloneqq \cod(i)
+  }
+
+  $S, T$はともに$\hat{\bm{J}}$から$\Obj_{\bm{J}}$への関手である。
+
+  以下で定める$\hat{\bm{J}}$上の関数$\alpha$を考える。
+  \eq*{
+    \alpha(\hat{i}) \coloneqq i
+  }
+
+  $\alpha$は、$I \circ S$から$I \circ T$への自然変換である。
+
+  \vskip\baselineskip
+
+  自明な関手$I \colon \Obj_{\bm{J}} \to \bm{J}$、
+  対角関手$\Delta \colon \bm{C} \to \Func(\bm{J}, \bm{C})$、
+  対角関手$\hat{\Delta} \colon \bm{C} \to \Func(\hat{\bm{J}}, \bm{C})$を考える。
+
+  仮定より、$X \circ I$の積$x, \pi$と、$X \circ I \circ T$の積$\hat{x}, \hat{\pi}$が存在する。
+
+  積の定義より、一意な射$f \colon x \to \hat{x}$が存在して、$\pi \ast \Id_T = \hat{\pi} \circ \hat{\Delta}(f)$である。
+
+  積の定義より、一意な射$g \colon x \to \hat{x}$が存在して、$\qty(\Id_X \ast \alpha) \circ \qty(\pi \ast \Id_S) = \hat{\pi} \circ \hat{\Delta}(g)$である。
+
+  仮定より、$f, g$の等化子$\Eq(f, g), u$が存在する。
+
+  \vskip\baselineskip
+
+  $\Obj_{\bm{J}}$上の関数$\lambda$を以下で定める。
+  \eq*{
+    \lambda(j) \coloneqq \pi(j) \circ u
+  }
+
+  射$i \in \bm{J}$について、等化子と積の定義より以下が成り立つ。
+  \eqa*{
+    X(i) \circ \lambda(\dom(i))
+    &= X(i) \circ \pi(\dom(i)) \circ u \\*
+    &= \qty(\qty(\Id_X \ast \alpha) \circ \qty(\pi \ast \Id_S))\qty(\hat{i}) \circ u \\*
+    &= \hat{\pi}\qty(\hat{i}) \circ g \circ u \\*
+    &= \hat{\pi}\qty(\hat{i}) \circ f \circ u \\*
+    &= \qty(\pi \ast \Id_T)\qty(\hat{i}) \circ u \\*
+    &= \pi\qty(\cod(i)) \circ u \\*
+    &= \lambda\qty(\cod(i))
+  }
+
+  よって、$\lambda$は$\Delta\qty(\Eq(f, g))$から$X$への自然変換である。
+
+  \vskip\baselineskip
+
+  $\Eq(f, g), \lambda$が$X$の極限であることを示す。
+
+  対象$y \in \bm{C}$と、自然変換$p \colon \Delta(y) \to X$を考える。
+
+  $x, \pi$は$X \circ I$の積であるので、一意な射$w \colon y \to x$が存在して、以下が成り立つ。
+  \eq*{
+    \forall a \in \Obj_{\bm{J}} \qty(p(a) = \pi(a) \circ w)
+  }
+
+  任意の射$i \in \bm{J}$について、$p$の自然性より以下が成り立つ。
+  \eqa*{
+    \hat{\pi}\qty(\hat{i}) \circ f \circ w
+    &= \qty(\pi \ast \Id_T)\qty(\hat{i}) \circ w \\*
+    &= \pi\qty(\cod(i)) \circ w \\*
+    &= p\qty(\cod(i)) \\*
+    &= X(i) \circ p\qty(\dom(i)) \\*
+    &= X(i) \circ \pi\qty(\dom(i)) \circ w \\*
+    &= \qty(\qty(\Id_X \ast \alpha) \circ \qty(\pi \ast \Id_S))\qty(\hat{i}) \circ w \\*
+    &= \hat{\pi}\qty(\hat{i}) \circ g \circ w
+  }
+
+  $\hat{x}, \hat{\pi}$は$X \circ I \circ T$の積であるので、普遍性より$f \circ w = g \circ w$である。
+
+  $\Eq(f, g), u$は等化子より、一意な射$h \colon y \to \Eq(f, g)$が存在して、$w = u \circ h$を満たす。
+
+  このとき、任意の対象$j \in \Obj_{\bm{J}}$について、以下が成り立つ。
+  \eqa*{
+    \qty(\lambda \circ \Delta(h))(j)
+    &= \lambda(j) \circ h \\*
+    &= \pi(j) \circ u \circ h \\*
+    &= \pi(j) \circ w \\*
+    &= p(j)
+  }
+
+  ゆえに、$p = \lambda \circ \Delta(h)$が成り立つ。
+
+  \vskip\baselineskip
+
+  一意性を示す。
+
+  射$h^\prime \colon y \to \Eq(f, g)$が存在して、$p = \lambda \circ \Delta(h^\prime)$を満たすとする。
+
+  このとき、任意の対象$j \in \Obj_{\bm{J}}$について以下が成り立つ。
+  \eqa*{
+    \pi(j) \circ u \circ h^\prime
+    &= \lambda(j) \circ h^\prime \\*
+    &= \qty(\lambda \circ \Delta(h^\prime))(j) \\*
+    &= p(j) \\*
+    &= \pi(j) \circ w \\*
+    &= \pi(j) \circ u \circ h
+  }
+
+  積の普遍性より$u \circ h^\prime = u \circ h$であり、等化子の普遍性より$h^\prime = h$である。
+}
+
+\begin{center}
+  \begin{minipage}{0.4\linewidth}
+    $\Func(\hat{\bm{J}}, \bm{C})$ \\
+    \begin{tikzcd}
+      & & \hat{\Delta}(x) \ar[dd, "\hat{\Delta}(g)"'] \ar[rd, "\pi \ast \Id_S"] & & \\
+      & & & X \circ I \circ S \ar[dd, "\Id_X \ast \alpha"] \\
+      \hat{\Delta}(x) \ar[rr, "\hat{\Delta}(f)"] \ar[rrrd, "\pi \ast \Id_T"'] & & \hat{\Delta}(\hat{x}) \ar[rd, "\hat{\pi}", near start] & \\
+      & & & X \circ I \circ T \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.4\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      \Eq(f, g) \ar[rr, "u"] \ar[dd, "u"'] & & x \ar[dd, "g"] \ar[rd, "\pi(\dom(i))"] & \\
+      & & & X(\dom(i)) \ar[dd, "X(i)"] \\
+      x \ar[rr, "f"] \ar[rrrd, "\pi(\cod(i))"', near end] & & \hat{x} \ar[rd, "\hat{\pi}(\hat{i})"] & \\
+      & & & X(\cod(i)) \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
 
 
 \lsubsection{随伴}
 
 \dfn{左随伴関手}{
-  圏$\bm{C}, \bm{D}$を考える。
-
-  関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{C} \to \bm{D}$と、自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}$が存在して、以下を満たすとする。
+  圏$\bm{C}, \bm{D}$について、以下を満たす関手$F \colon \bm{D} \to \bm{C}$を左随伴関手と呼ぶ。
   \eq*{
-    \forall c \in \Obj_{\bm{C}} \qty(\text{$G(c), \epsilon(c)$は、$F$から$c$への普遍射である})
+    \forall c \in \Obj_{\bm{C}} \qty(\text{$F$から$c$への普遍射が存在する})
   }
-
-  このとき、$F$を、右随伴が$G$で余単位を$\epsilon$とする左随伴関手と呼ぶ。
 }
 
-\lem{随伴の同型一意性}{
-  圏$\bm{C}, \bm{D}$と、関手$F \colon \bm{D} \to \bm{C}$、関手$G, G^\prime \colon \bm{C} \to \bm{D}$、
-  自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}, \epsilon^\prime \colon F \circ G^\prime \to \id_{\bm{C}}$を考える。
+\dfn{右随伴関手}{
+  圏$\bm{C}, \bm{D}$と関手$G \colon \bm{C} \to \bm{D}$について、$G^\opp$が左随伴関手であるとき、$G$を右随伴関手と呼ぶ。
+}
 
-  $F$は、右随伴が$G$で余単位を$\epsilon$とする左随伴関手であって、右随伴が$G^\prime$で余単位を$\epsilon^\prime$とする左随伴関手であるとする。
-
-  このとき自然同型$\theta \colon G \to G^\prime$が存在して、以下が成り立つ。
-  \eq*{
-    \epsilon^\prime \circ \qty(\Id_F \ast \theta) = \epsilon
-  }
+\thm{左随伴関手}{
+  圏$\bm{C}, \bm{D}$と、関手$F \colon \bm{D} \to \bm{C}$について、以下の\num{4}つは同値である。
+  \begin{enumerate}
+    \item $F$は左随伴関手である。
+    \item 関手$G \colon \bm{C} \to \bm{D}$と自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}$が存在して、以下が成り立つ。
+    \begin{itemize}
+      \item $\forall c \in \Obj_{\bm{C}} \qty(\text{$G(c), \epsilon(c)$は、$F$から$c$への普遍射である})$
+    \end{itemize}
+    \item 関手$G \colon \bm{C} \to \bm{D}$と自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}$が存在して、以下が成り立つ。
+    \begin{itemize}
+      \item $\forall c \in \Obj_{\bm{C}} \forall d \in \Obj_{\bm{D}} \forall f \in \Hom_{\bm{C}}\qty(F(d), c) \exists! g \in \Hom_{\bm{D}}\qty(d, G(c)) \qty(f = \epsilon(c) \circ F(g))$
+    \end{itemize}
+    \item 関手$G \colon \bm{C} \to \bm{D}$と自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}, \eta \colon \id_{\bm{D}} \to G \circ F$が存在して、以下が成り立つ。
+    \begin{itemize}
+      \item $\Id_F = \qty(\epsilon \ast \Id_F) \circ \qty(\Id_F \ast \eta)$
+      \item $\Id_G = \qty(\Id_G \ast \epsilon) \circ \qty(\eta \ast \Id_G)$
+    \end{itemize}
+  \end{enumerate}
 }{
-  以下の命題を示す。
+  $1. \rightarrow 2.$を示す。
+
+  \axiref{Skolem関係の導入}より以下を満たす$\Obj_{\bm{C}}$上の関数$G^\prime, \epsilon$を与えることができる。
   \eq*{
-    \forall c \in \Obj_{\bm{C}} \exists! g \in \bm{D} \qty(\epsilon(c) = \epsilon^\prime(c) \circ F(g))
+    \forall c \in \Obj_{\bm{C}} \qty(\text{$G^\prime(c), \epsilon(c)$は、$F$から$c$への普遍射である})
   }
 
-  対象$c \in \Obj_{\bm{C}}$について、$G^\prime(c), \epsilon^\prime(c)$は$F$から$c$への普遍射であるので、
-  射$g \in \bm{D}$が一意に存在して、$\epsilon(c) = \epsilon^\prime(c) \circ F(g)$が成り立つ。
+  射$f \in \bm{C}$について、普遍性より$\bm{D}$の一意な射$g \colon G^\prime(\dom(f)) \to G^\prime(\cod(f))$が存在して、$f \circ \epsilon(\dom(f)) = \epsilon(\cod(f)) \circ F(g)$である。
 
-  この命題より定まる$\Obj_{\bm{C}}$上の関数$\theta$を考える。
+  この命題が与える$\bm{C}$上の関数$G$を考える。
+
+  $G$の定義より$\forall f \in \bm{C} \qty(G(f) \in \bm{D})$である。
+
+  射$f \in \bm{C}$について、$G$の定義より$\epsilon(\dom(f)) = \dom(f) \circ \epsilon(\dom(f)) = \epsilon(\dom(f)) \circ F(G(\dom(f)))$である。
+
+  $\epsilon(\dom(f)) = \epsilon(\dom(f)) \circ F(G^\prime(\dom(f)))$であるので、普遍性より$G(\dom(f)) = G^\prime(\dom(f)) = \dom(G(f))$である。
+
+  同様に$G(\cod(f)) = \cod(G(f))$である。
+
+  射$f, g \in \bm{C}$について、$\cod(f) = \dom(g)$とすると、以下が成り立つ。
+  \eqa*{
+    \epsilon(\cod(g)) \circ F(G(g) \circ G(f))
+    &= \epsilon(\cod(g)) \circ F(G(g)) \circ F(G(f)) \\*
+    &= g \circ \epsilon(\dom(g)) \circ F(G(f)) \\*
+    &= g \circ \epsilon(\cod(f)) \circ F(G(f)) \\*
+    &= g \circ f \circ \epsilon(\dom(f)) \\*
+    &= \epsilon(\cod(g)) \circ F(G(g \circ f))
+  }
+
+  普遍性より、$G(g \circ f) = G(g) \circ G(f)$である。
+
+  よって、$G$は$\bm{C}$から$\bm{D}$への関手である。
+
+  $G$の定義より$\epsilon$は$F \circ G$から$\id_{\bm{C}}$への自然変換である。
 
   \vskip\baselineskip
 
-  $\theta$が$G$から$G^\prime$への自然変換であることを示す。
-
-  射$f \in \bm{C}$について、$\epsilon, \epsilon^\prime$の自然性と$\theta$の定義より、以下が成り立つ。
-  \eqa*{
-    \epsilon^\prime(\cod(f)) \circ F\qty(\theta(\cod(f)) \circ G(f))
-    &= \epsilon^\prime(\cod(f)) \circ F\qty(\theta(\cod(f))) \circ \qty(F \circ G)(f) \\*
-    &= \epsilon(\cod(f)) \circ \qty(F \circ G)(f) \\*
-    &= f \circ \epsilon(\dom(f)) \\*
-    &= f \circ \epsilon^\prime(\dom(f)) \circ F\qty(\theta(\dom(f))) \\*
-    &= \epsilon^\prime(\cod(f)) \circ \qty(F \circ G^\prime)(f) \circ F\qty(\theta(\dom(f))) \\*
-    &= \epsilon^\prime(\cod(f)) \circ F\qty(G^\prime(f) \circ \theta(\dom(f)))
-  }
-
-  普遍性より、$\theta(\cod(f)) \circ G(f) = G^\prime(f) \circ \theta(\dom(f))$を満たす。
-
-  したがって、$\theta$は$G$から$G^\prime$への自然変換である。
+  $2. \rightarrow 1.$は、明らか。
 
   \vskip\baselineskip
 
-  自然同型であることを示す。
+  $2. \rightarrow 3.$は、普遍射の定義より明らか。
 
-  同様にして、以下を満たす自然変換$\eta \colon G^\prime \to G$を考える。
+  \vskip\baselineskip
+
+  $3. \rightarrow 4.$を示す。
+
+  $3.$について、$c = F(d), f = F(d)$として、以下の命題を満たす。
   \eq*{
-    \forall c \in \Obj_{\bm{C}} \qty(\epsilon^\prime(c) = \epsilon(c) \circ F(\eta(c)))
+    \forall d \in \Obj_{\bm{D}} \exists! g \in \Hom_{\bm{D}}\qty(d, \qty(G \circ F)(d)) \qty(F(d) = \epsilon\qty(F(d)) \circ F(g))
   }
-
-  対象$c \in \Obj_{\bm{C}}$について、定義より以下が成り立つ。
-  \eqa*{
-    \epsilon(c)
-    &= \epsilon^\prime(c) \circ F(\theta(c)) \\*
-    &= \epsilon(c) \circ F(\eta(c)) \circ F(\theta(c)) \\*
-    &= \epsilon(c) \circ F(\eta(c) \circ \theta(c))
-  }
-
-  普遍性より、$\eta(c) \circ \theta(c) = G(c)$である。
-
-  すなわち、$\eta$は$\theta$の逆射である。
-}
-
-\thm{三角恒等式}{
-  圏$\bm{C}, \bm{D}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{C} \to \bm{D}$、自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}$を考える。
-
-  $F$は、右随伴が$G$で余単位を$\epsilon$とする左随伴関手であるとする。
-
-  このとき、自然変換$\eta \colon \id_{\bm{D}} \to G \circ F$が存在して、以下を満たす。
-  \eqg*{
-    \Id_F = \qty(\epsilon \ast \Id_F) \circ \qty(\Id_F \ast \eta) \\*
-    \Id_G = \qty(\Id_G \ast \epsilon) \circ \qty(\eta \ast \Id_G)
-  }
-}{
-  以下の命題を示す。
-  \eq*{
-    \forall d \in \Obj_{\bm{D}} \exists! g \in \bm{D} \qty(F(d) = \epsilon\qty(F(d)) \circ F(g))
-  }
-
-  対象$d \in \Obj_{\bm{D}}$について、$\qty(G \circ F)(d), \qty(\epsilon \ast \Id_F)(d)$は$F$から$F(d)$への普遍射であるので、
-  射$g \in \bm{D}$が一意に存在して、$F(d) = \epsilon\qty(F(d)) \circ F(g)$である。
 
   この命題より定まる$\Obj_{\bm{D}}$上の関数を$\eta$とする。
 
   \vskip\baselineskip
 
-  $\eta$が自然変換であること、および第一式を示す。
+  $\eta$が自然変換であることを示す。
 
-  $\bm{D}$の射$f \colon d \to d^\prime$は以下を満たす。
+  $\bm{D}$の射$h \colon d \to d^\prime$は以下を満たす。
   \eqa*{
-    \qty(\epsilon \ast \Id_F)(d^\prime) \circ F\qty(\qty(G \circ F)(f) \circ \eta(d))
-    &= \qty(\epsilon \ast \Id_F)(d^\prime) \circ \qty(F \circ G \circ F)(f) \circ \qty(\Id_F \ast \eta)(d) \\*
-    &= F(f) \circ \qty(\epsilon \ast \Id_F)(d) \circ \qty(\Id_F \ast \eta)(d) \\*
-    &= F(f) \\*
-    &= \qty(\epsilon \ast \Id_F)(d^\prime) \circ \qty(\Id_F \ast \eta)(d^\prime) \circ F(f) \\*
-    &= \qty(\epsilon \ast \Id_F)(d^\prime) \circ F\qty(\eta(d^\prime) \circ f)
+    \epsilon\qty(F(d^\prime)) \circ F\qty(\qty(G \circ F)(h) \circ \eta(d))
+    &= \epsilon \qty(F(d^\prime)) \circ \qty(F \circ G \circ F)(h) \circ F\qty(\eta(d)) \\*
+    &= F(h) \circ \epsilon\qty(F(d)) \circ F\qty(\eta(d)) \\*
+    &= F(h) \circ F(d) \\*
+    &= F(h) \\*
+    &= F(d^\prime) \circ F(h) \\*
+    &= \epsilon\qty(F(d^\prime)) \circ F\qty(\eta(d^\prime)) \circ F(h) \\*
+    &= \epsilon\qty(F(d^\prime)) \circ F\qty(\eta(d^\prime) \circ h)
   }
 
-  $\qty(G \circ F)(d^\prime), \qty(\epsilon \ast \Id_F)(d^\prime)$は$F$から$F(d^\prime)$への普遍射であるので、
-  射$h \in \bm{D}$が一意に存在して、$F(f) = \qty(\epsilon \ast \Id_F)(d^\prime) \circ F(h)$である。
-
-  したがって、$h = \qty(G \circ F)(f) \circ \eta(d) = \eta(d^\prime) \circ f$である。
+  一意性より、$\qty(G \circ F)(h) \circ \eta(d) = \eta(d^\prime) \circ h$である。
 
   ゆえに、$\eta$は自然変換である。
 
-  \vskip\baselineskip
+  $\eta$の定義より、第一式を満たす。
 
   第二式を示す。
 
@@ -1088,69 +1509,20 @@
 
   $\epsilon$は自然変換であるので、射$w \colon \qty(F \circ G)(c) \to c$について$\epsilon(c) \circ \qty(F \circ G)(w) = w \circ \epsilon\qty(\qty(F \circ G)(c))$である。
 
-  $w = \epsilon(c)$として、$\epsilon(c) \circ \qty(F \circ G)(\epsilon(c)) = \epsilon(c) \circ \epsilon\qty(\qty(F \circ G)(c))$である。
-
-  第一式より、以下が成り立つ。
+  $w = \epsilon(c)$として、$\epsilon(c) \circ \qty(F \circ G)(\epsilon(c)) = \epsilon(c) \circ \epsilon\qty(\qty(F \circ G)(c))$であるので、
+  以下が成り立つ。
   \eqa*{
-    \epsilon(c)
-    &= \epsilon(c) \circ F(G(c)) \\*
-    &= \epsilon(c) \circ \qty(\epsilon \ast \Id_F)(G(c)) \circ \qty(\Id_F \ast \eta)(G(c)) \\*
-    &= \epsilon(c) \circ \epsilon\qty(\qty(F \circ G)(c)) \circ F \qty(\qty(\eta \ast \Id_G)(c)) \\*
-    &= \epsilon(c) \circ \qty(F \circ G)\qty(\epsilon(c)) \circ F \qty(\qty(\eta \ast \Id_G)(c)) \\*
+    \epsilon(c) \circ F\qty(G(c))
+    &= \epsilon(c) \circ \epsilon\qty(F\qty(G(c))) \circ F\qty(\eta(G(c))) \\*
+    &= \epsilon(c) \circ \qty(F \circ G)\qty(\epsilon(c)) \circ F\qty(\eta(G(c))) \\*
     &= \epsilon(c) \circ F \qty\big(\qty(\qty(\Id_G \ast \epsilon) \circ \qty(\eta \ast \Id_G))(c))
   }
 
-  $G(c), \epsilon(c)$は$F$から$c$への普遍射であるため、
-  一意な射$h \colon G(c) \to G(c)$が存在して、$\epsilon(c) = \epsilon(c) \circ F(h)$である。
-
-  $h = G(c)$は明らかに条件を満たすので、一意性より以下を得る。
-  \eq*{
-    \qty(\qty(\Id_G \ast \epsilon) \circ \qty(\eta \ast \Id_G))(c) = \Id_G(c)
-  }
-}
-
-\begin{center}
-  \begin{minipage}{0.35\linewidth}
-    $\bm{D}$ \\
-    \begin{tikzcd}
-      d \ar[rr, "\eta(d)", dotted] \ar[d, "f"'] & & \qty(G \circ F)(d) \ar[d, "\qty(G \circ F)(f)"] \\
-      d^\prime \ar[rr, "\eta(d^\prime)", dotted] & & \qty(G \circ F)(d^\prime) \\
-    \end{tikzcd}
-  \end{minipage}
-  \begin{minipage}{0.5\linewidth}
-    $\bm{C}$ \\
-    \begin{tikzcd}
-      F(d) \ar[rr, "\qty(\Id_F \ast \eta)(d)"] \ar[rrrd, "F(d)"'] \ar[dd, "F(f)"'] & & \qty(F \circ G \circ F)(d) \ar[rd, "\qty(\epsilon \ast \Id_F)(d)"] \ar[dd, "\qty(F \circ G \circ F)(f)"] & \\
-      & & & F(d) \ar[dd, "F(f)"] \\
-      F(d^\prime) \ar[rr, "\qty(\Id_F \ast \eta)(d^\prime)"] \ar[rrrd, "F(d^\prime)"'] & & \qty(F \circ G \circ F)(d^\prime) \ar[rd, "\qty(\epsilon \ast \Id_F)(d^\prime)"] & \\
-      & & & F(d^\prime) \\
-    \end{tikzcd}
-  \end{minipage}
-\end{center}
-
-\dfn{右随伴関手}{
-  圏$\bm{C}, \bm{D}$と、$\bm{D}$から$\bm{C}$への関手$F$、$\bm{C}$から$\bm{D}$への関手$G$、自然変換$\eta \colon \id_{\bm{D}} \to G \circ F$を考える。
-
-  $G^\opp$が、右随伴が$F^\opp$で余単位を$\eta^\opp$とする左随伴関手であるとする。
-
-  このとき$G$を、左随伴が$F$で単位を$\eta$とする右随伴関手と呼ぶ。
-}
-
-\lem{三角恒等ならば随伴}{
-  圏$\bm{C}, \bm{D}$を考える。
-
-  関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{C} \to \bm{D}$と、
-  自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}, \eta \colon \id_{\bm{D}} \to G \circ F$について、以下を満たすとする。
-  \eqg*{
-    \Id_F = \qty(\epsilon \ast \Id_F) \circ \qty(\Id_F \ast \eta) \\*
-    \Id_G = \qty(\Id_G \ast \epsilon) \circ \qty(\eta \ast \Id_G)
-  }
-
-  このとき、$F$は右随伴が$G$で余単位を$\epsilon$とする左随伴関手となり、$G$は左随伴が$F$で単位を$\eta$とする右随伴関手となる。
-}{
-  双対性から、$F$が左随伴関手であることを示せば十分である。
+  一意性より、$\qty(\qty(\Id_G \ast \epsilon) \circ \qty(\eta \ast \Id_G))(c) = \Id_G(c)$である。
 
   \vskip\baselineskip
+
+  $4. \rightarrow 2.$を示す。
 
   対象$a \in \bm{C}$について、$G(a), \epsilon(a)$が$F$から$a$への普遍射となることを示す。
 
@@ -1179,6 +1551,27 @@
   ゆえに一意である。
 }
 
+$3. \rightarrow 4.$
+\begin{center}
+  \begin{minipage}{0.35\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      d \ar[rr, "\eta(d)", dotted] \ar[d, "h"'] & & \qty(G \circ F)(d) \ar[d, "\qty(G \circ F)(h)"] \\
+      d^\prime \ar[rr, "\eta(d^\prime)", dotted] & & \qty(G \circ F)(d^\prime) \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.5\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      F(d) \ar[rr, "\qty(\Id_F \ast \eta)(d)"] \ar[rrrd, "F(d)"'] \ar[dd, "F(h)"'] & & \qty(F \circ G \circ F)(d) \ar[rd, "\qty(\epsilon \ast \Id_F)(d)"] \ar[dd, "\qty(F \circ G \circ F)(h)"] & \\
+      & & & F(d) \ar[dd, "F(h)"] \\
+      F(d^\prime) \ar[rr, "\qty(\Id_F \ast \eta)(d^\prime)"] \ar[rrrd, "F(d^\prime)"'] & & \qty(F \circ G \circ F)(d^\prime) \ar[rd, "\qty(\epsilon \ast \Id_F)(d^\prime)"] & \\
+      & & & F(d^\prime) \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+$4. \rightarrow 2.$
 \begin{center}
   \begin{minipage}{0.45\linewidth}
     $\bm{D}$ \\
@@ -1200,10 +1593,58 @@
   \end{minipage}
 \end{center}
 
-\lem{圏同値ならば随伴}{
-  圏$\bm{C}, \bm{D}$と、関手$F \colon \bm{D} \to \bm{C}$について、$F$が圏同値であるとする。
+\lem{随伴の同型一意性}{
+  圏$\bm{C}, \bm{D}$と、関手$F \colon \bm{D} \to \bm{C}$を考える。
 
-  このとき、関手$G \colon \bm{C} \to \bm{D}$と自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}$が存在して、$F$は$G$を右随伴として$\epsilon$を余単位とする左随伴関手である。
+  関手$G, G^\prime \colon \bm{C} \to \bm{D}$、
+  自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}, \epsilon^\prime \colon F \circ G^\prime \to \id_{\bm{C}}$が、
+  以下を満たすとする。
+  \eqg*{
+    \forall c \in \Obj_{\bm{C}} \qty(\text{$G(c), \epsilon(c)$は、$F$から$c$への普遍射である}) \\*
+    \forall c \in \Obj_{\bm{C}} \qty(\text{$G^\prime(c), \epsilon^\prime(c)$は、$F$から$c$への普遍射である})
+  }
+
+  このとき自然同型$\theta \colon G \to G^\prime$が存在して、以下が成り立つ。
+  \eq*{
+    \epsilon^\prime \circ \qty(\Id_F \ast \theta) = \epsilon
+  }
+}{
+  \thmref{左随伴関手}より、自然変換$\eta \colon \id_{\bm{D}} \to G \circ F, \eta^\prime \colon \id_{\bm{D}} \to G^\prime \circ F$が存在して、以下を満たす。
+  \eqa*{
+    \Id_F &= \qty(\epsilon \ast \Id_F) \circ \qty(\Id_F \ast \eta) \\*
+    \Id_G &= \qty(\Id_G \ast \epsilon) \circ \qty(\eta \ast \Id_G) \\*
+    \Id_F &= \qty(\epsilon^\prime \ast \Id_F) \circ \qty(\Id_F \ast \eta^\prime) \\*
+    \Id_{G^\prime} &= \qty(\Id_{G^\prime} \ast \epsilon^\prime) \circ \qty(\eta^\prime \ast \Id_{G^\prime})
+  }
+
+  自然変換$\theta \coloneqq \qty(\Id_{G^\prime} \ast \epsilon) \circ \qty(\eta^\prime \ast \Id_G)$を考える。
+
+  対象$c \in \Obj_{\bm{C}}$について、以下を満たす。
+  \eqa*{
+    \epsilon^\prime(c) \circ \qty(\Id_F \ast \theta)(c)
+    &= \epsilon^\prime(c) \circ F\qty\big(G^\prime(\epsilon(c)) \circ \eta^\prime(G(c))) \\*
+    &= \epsilon^\prime(c) \circ \qty(F \circ G^\prime)(\epsilon(c)) \circ \qty(\Id_F \ast \eta^\prime)(G(c)) \\*
+    &= \epsilon(c) \circ \epsilon^\prime\qty(\qty(F \circ G)(c)) \circ \qty(\Id_F \ast \eta^\prime)(G(c)) \\*
+    &= \epsilon(c) \circ F(G(c)) \\*
+    &= \epsilon(c)
+  }
+
+  よって、$\epsilon^\prime \circ \qty(\Id_F \ast \theta) = \epsilon$である。
+
+  同様に、自然変換$\theta^\prime \coloneqq \qty(\Id_G \ast \epsilon^\prime) \circ \qty(\eta \ast \Id_{G^\prime})$について、
+  $\epsilon \circ \qty(\Id_F \ast \theta^\prime) = \epsilon^\prime$が成り立つ。
+
+  ゆえに、以下を満たす。
+  \eqa*{
+    \epsilon(c) \circ F(G(c)) &= \epsilon(c) = \epsilon(c) \circ F\qty(\theta^\prime(c) \circ \theta(c)) \\*
+    \epsilon^\prime(c) \circ F(G^\prime(c)) &= \epsilon^\prime(c) = \epsilon^\prime(c) \circ F\qty(\theta(c) \circ \theta^\prime(c)) \\*
+  }
+
+  \thmref{左随伴関手}より、一意性から$\theta(c)$は逆射$\theta^\prime(c)$を持つ。
+}
+
+\lem{圏同値ならば随伴}{
+  圏$\bm{C}, \bm{D}$と、圏同値$F \colon \bm{D} \to \bm{C}$について、$F$は左随伴関手である。
 }{
   圏同値の定義より、
   関手$G \colon \bm{C} \to \bm{D}$と、自然同型$\epsilon \colon F \circ G \to \id_{\bm{C}}, \theta \colon \id_{\bm{D}} \to G \circ F$が存在する。
@@ -1219,89 +1660,84 @@
 
   $\bm{D}$の射$g^\prime \colon d \to G(c)$が存在して、$f = \epsilon(c) \circ F(g^\prime)$とする。
 
-  $F(g) = \epsilon(c)^{-1} \circ f = \epsilon(c)^{-1} \circ f = F(g^\prime)$であり、
+  $F(g) = \epsilon(c)^{-1} \circ f = F(g^\prime)$であり、
   \thmref{圏同値}より$F$は忠実であるので、$g = g^\prime$である。
 
   ゆえに、$G(c), \epsilon(c)$は$F$から$c$への普遍射である。
 }
 
 \thm{左随伴は余極限を保存する}{
-  圏$\bm{C}, \bm{D}, \bm{J}$と、関手$X \colon \bm{J} \to \bm{D}, F \colon \bm{D} \to \bm{C}, G \colon \bm{C} \to \bm{D}$、
-  自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}, \eta \colon \id_{\bm{D}} \to G \circ F$を考える。
-
-  $F$は、右随伴が$G$で余単位を$\epsilon$とする左随伴関手であるとする。
+  圏$\bm{C}, \bm{D}, \bm{J}$と、関手$X \colon \bm{J} \to \bm{D}$、左随伴関手$F \colon \bm{D} \to \bm{C}$を考える。
 
   $X$の余極限$x, u$について、$F(x), \Id_F \ast u$は$F \circ X$の余極限である。
 }{
   対角関手$\Delta_{\bm{D}} \colon \bm{D} \to \Func(\bm{J}, \bm{D}), \Delta_{\bm{C}} \colon \bm{C} \to \Func(\bm{J}, \bm{C})$を考える。
 
-  \vskip\baselineskip
-
-  対象$y \in \bm{C}$と、自然変換$\theta \colon F \circ X \to \Delta_{\bm{C}}(y)$を考える。
+  対象$c \in \bm{C}$と、自然変換$\theta \colon F \circ X \to \Delta_{\bm{C}}(c)$を考える。
 
   \vskip\baselineskip
 
-  以下の命題を示す。
+  \thmref{左随伴関手}より、関手$G \colon \bm{C} \to \bm{D}$と自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}$が存在して、以下が成り立つ。
   \eq*{
-    \forall j \in \Obj_{\bm{D}} \exists! f \in \bm{D} \qty(\epsilon(y) \circ F(f) = \theta(j))
+    \forall c \in \Obj_{\bm{C}} \forall d \in \Obj_{\bm{D}} \forall f \in \Hom_{\bm{C}}\qty(F(d), c) \exists! g \in \Hom_{\bm{D}}\qty(d, G(c)) \qty(f = \epsilon(c) \circ F(g))
   }
 
-  $G(y), \epsilon(y)$は$F$から$y$への普遍射であるので、
-  任意の対象$j \in \Obj_{\bm{J}}$について、射$f \in \bm{D}$が一意に存在して、$\epsilon(y) \circ F(f) = \theta(j)$を満たす。
+  したがって、任意の対象$j \in \Obj_{\bm{J}}$について、射$g \in \Hom_{\bm{D}}\qty(X(j), G(c))$が一意に存在して、$\theta(j) = \epsilon(c) \circ F(g)$を満たす。
 
-  この命題より定まる$\Obj_{\bm{D}}$上の関数を$w$とする。
+  この命題より定まる$\Obj_{\bm{J}}$上の関数を$\eta$とする。
 
   \vskip\baselineskip
 
   任意の対象$j, j^\prime \in \Obj_{\bm{J}}$と、$\bm{J}$の任意の射$i \colon j \to j^\prime$について、以下が成り立つ。
   \eqa*{
-    \epsilon(y) \circ F(w(j^\prime) \circ X(i))
-    &= \epsilon(y) \circ F(w(j^\prime)) \circ \qty(F \circ X)(i) \\*
+    \epsilon(c) \circ F(\eta(j^\prime) \circ X(i))
+    &= \epsilon(c) \circ F(\eta(j^\prime)) \circ \qty(F \circ X)(i) \\*
     &= \theta(j^\prime) \circ \qty(F \circ X)(i) \\*
     &= \theta(j) \\*
-    &= \epsilon(y) \circ F(w(j))
+    &= \epsilon(c) \circ F(\eta(j))
   }
 
-  一意性より、$w(j^\prime) \circ X(i) = w(j)$である。
+  一意性より、$\eta(j^\prime) \circ X(i) = \eta(j)$である。
 
-  よって、$w$は$X$から$\Delta_{\bm{D}}(G(y))$への自然変換である。
+  よって、$\eta$は$X$から$\Delta_{\bm{D}}(G(c))$への自然変換である。
 
   \vskip\baselineskip
 
-  $x, u$は$X$から$\Delta_{\bm{D}}$への余普遍射であるので、$w = \Delta_{\bm{D}}(h) \circ u$を満たす$\bm{D}$の射$h$が一意に存在する。
+  $x, u$は$X$から$\Delta_{\bm{D}}$への余普遍射であるので、
+  $\bm{D}$の射$h \colon x \to G(c)$が一意に存在して、$\eta = \Delta_{\bm{D}}(h) \circ u$を満たす。
 
-  ここで、$g \coloneqq \epsilon(y) \circ F(h)$とすると、任意の対象$j \in \Obj_{\bm{J}}$について以下が成り立つ。
+  ここで、$f \coloneqq \epsilon(c) \circ F(h)$とすると、任意の対象$j \in \Obj_{\bm{J}}$について以下が成り立つ。
   \eqa*{
-    g \circ \qty(\Id_F \ast u)(j)
-    &= \epsilon(y) \circ F(h) \circ \qty(\Id_F \ast u)(j) \\*
-    &= \epsilon(y) \circ F(h \circ u(j)) \\*
-    &= \epsilon(y) \circ \qty(\Id_F \ast w)(j) \\*
+    f \circ \qty(\Id_F \ast u)(j)
+    &= \epsilon(c) \circ F(h) \circ \qty(\Id_F \ast u)(j) \\*
+    &= \epsilon(c) \circ F(h \circ u(j)) \\*
+    &= \epsilon(c) \circ F\qty(\eta(j)) \\*
     &= \theta(j)
   }
 
-  したがって、$\Delta_{\bm{C}}(g) \circ \qty(\Id_F \ast u) = \theta$である。
+  したがって、$\Delta_{\bm{C}}(f) \circ \qty(\Id_F \ast u) = \theta$である。
 
   \vskip\baselineskip
 
-  次に、$\bm{C}$の射$g^\prime \colon F(x) \to y$が存在して、$\Delta_{\bm{C}}(g^\prime) \circ \qty(\Id_F \ast u) = \theta$であるとする。
+  次に、$\bm{C}$の射$f^\prime \colon F(x) \to c$が存在して、$\Delta_{\bm{C}}(f^\prime) \circ \qty(\Id_F \ast u) = \theta$であるとする。
 
-  $G(y), \epsilon(y)$は$F$から$y$への普遍射であるため、$g^\prime = \epsilon(y) \circ F(h^\prime)$を満たす$\bm{D}$の射$h^\prime$が一意に存在する。
+  $f^\prime = \epsilon(c) \circ F(h^\prime)$を満たす$\bm{D}$の射$h^\prime \colon x \to G(c)$が一意に存在する。
 
   任意の対象$j \in \Obj_{\bm{J}}$について、以下が成り立つ。
   \eqa*{
-    \epsilon(y) \circ F\qty(h \circ u(j))
+    \epsilon(c) \circ F\qty(h \circ u(j))
     &= \theta(j) \\*
-    &= g^\prime \circ \qty(\Id_F \ast u)(j) \\*
-    &= \epsilon(y) \circ F(h^\prime) \circ \qty(\Id_F \ast u)(j) \\*
-    &= \epsilon(y) \circ F\qty(h^\prime \circ u(j))
+    &= f^\prime \circ \qty(\Id_F \ast u)(j) \\*
+    &= \epsilon(c) \circ F(h^\prime) \circ \qty(\Id_F \ast u)(j) \\*
+    &= \epsilon(c) \circ F\qty(h^\prime \circ u(j))
   }
 
-  再び$G(y), \epsilon(y)$は$F$から$y$への普遍射であるため、一意性より$h \circ u(j) = h^\prime \circ u(j)$である。
+  再び一意性より、$h \circ u(j) = h^\prime \circ u(j)$である。
 
   ゆえに、$\Delta_{\bm{D}}(h^\prime) \circ u = \Delta_{\bm{D}}(h) \circ u$である。
 
-  $x, u$は、$X$の余極限であるため、一意性より$h = h^\prime$である。
-  したがって、$g = g^\prime$である。
+  $x, u$は$X$の余極限であるため、普遍性より$h = h^\prime$である。
+  したがって、$f = f^\prime$である。
 }
 
 \begin{center}
@@ -1315,17 +1751,17 @@
   \begin{minipage}{0.3\linewidth}
     $\bm{D}$ \\
     \begin{tikzcd}
-      G(y) & & \\
-      & x \ar[lu, "h"'] & \\
-      X(j) \ar[uu, "w(j)"] \ar[rr, "X(i)"'] \ar[ru, "u(j)"] & & X(j^\prime) \ar[lu, "u(j^\prime)"'] \ar[lluu, "w(j^\prime)"', bend right=50] \\
+      G(c) & & \\
+      & x \ar[lu, "h"', dotted] & \\
+      X(j) \ar[uu, "\eta(j)"] \ar[rr, "X(i)"'] \ar[ru, "u(j)"] & & X(j^\prime) \ar[lu, "u(j^\prime)"'] \ar[lluu, "\eta(j^\prime)"', bend right=50] \\
     \end{tikzcd}
   \end{minipage}
   \begin{minipage}{0.3\linewidth}
     $\bm{C}$ \\
     \begin{tikzcd}
-      & \qty(F \circ G)(y) \ar[ld, "\epsilon(y)"'] & \\
-      y & & F(x) \ar[lu, "F(h)"'] \ar[ll, "g"', red, dotted, near start] \\
-      & \qty(F \circ X)(j) \ar[lu, "\theta(j)"] \ar[uu, "\qty(\Id_F \ast w)(j)", near start] \ar[ru, "\qty(\Id_F \ast u)(j)"'] & \\
+      & \qty(F \circ G)(c) \ar[ld, "\epsilon(c)"'] & \\
+      c & & F(x) \ar[lu, "F(h)"'] \ar[ll, "f"', red, dotted, near start] \\
+      & \qty(F \circ X)(j) \ar[lu, "\theta(j)"] \ar[uu, "\qty(\Id_F \ast \eta)(j)", near start] \ar[ru, "\qty(\Id_F \ast u)(j)"'] & \\
     \end{tikzcd}
   \end{minipage}
 \end{center}
@@ -1334,326 +1770,17 @@
   \begin{minipage}{0.35\linewidth}
     $\Func(\bm{J}, \bm{D})$ \\
     \begin{tikzcd}
-      \Delta_{\bm{D}}\qty(G(y)) & \\
+      \Delta_{\bm{D}}\qty(G(c)) & \\
       & \Delta_{\bm{D}}(x) \ar[lu, "\Delta_{\bm{D}}(h)"'] \\
-      X \ar[ru, "u"'] \ar[uu, "w"] & \\
+      X \ar[ru, "u"'] \ar[uu, "\eta"] & \\
     \end{tikzcd}
   \end{minipage}
   \begin{minipage}{0.35\linewidth}
     $\Func(\bm{J}, \bm{C})$ \\
     \begin{tikzcd}
-      & \Delta_{\bm{C}}\qty(\qty(F \circ G)(y)) \ar[ld, "\Delta_{\bm{C}}\qty(\epsilon(y))"'] & \\
-      \Delta_{\bm{C}}(y) & & \Delta_{\bm{C}}\qty(F(x)) \ar[lu, "\Delta_{\bm{C}}\qty(F(h))"'] \ar[ll, "\Delta_{\bm{C}}(g)"', dotted, near start] \\
-      & F \circ X \ar[lu, "\theta"] \ar[uu, "\Id_F \ast w", near start] \ar[ru, "\Id_F \ast u"'] & \\
+      & \Delta_{\bm{C}}\qty(\qty(F \circ G)(c)) \ar[ld, "\Delta_{\bm{C}}\qty(\epsilon(c))"'] & \\
+      \Delta_{\bm{C}}(c) & & \Delta_{\bm{C}}\qty(F(x)) \ar[lu, "\Delta_{\bm{C}}\qty(F(h))"'] \ar[ll, "\Delta_{\bm{C}}(f)"', dotted, near start] \\
+      & F \circ X \ar[lu, "\theta"] \ar[uu, "\Id_F \ast \eta", near start] \ar[ru, "\Id_F \ast u"'] & \\
     \end{tikzcd}
   \end{minipage}
 \end{center}
-
-
-% \cor{圏1の双対}{
-%   $\bm{1}^\opp$は、$\bm{1}$である。
-% }
-
-
-
-% \dfnf{圏$\bm{1}$}{圏1}{
-%   aaa
-% }
-
-% \dfn{終対象}{
-%   圏$\bm{C}$を考える。
-
-%   $\bm{C}$から圏$\bm{1}$への関手は一意に定まり、これを$U$とする。
-
-%   $U$から$\ast$への普遍射$x, u$が存在するならば、$u = \ast$となり、$x$を$\bm{C}$の終対象と呼ぶ。
-% }
-
-% \begin{center}
-%   \begin{minipage}{0.3\linewidth}
-%     $\bm{C}$ \\
-%     \begin{tikzcd}
-%       y \ar[r, "g", dotted, red] & x \\
-%     \end{tikzcd}
-%   \end{minipage}
-%   \begin{minipage}{0.3\linewidth}
-%     $\bm{1}$ \\
-%     \begin{tikzcd}
-%       \ast = U(y) \ar[r, "\ast = U(g)", dotted] \ar[dr, "\ast"'] & \ast = U(x) \ar[d, "\ast"] \\
-%       & \ast \\
-%     \end{tikzcd}
-%   \end{minipage}
-% \end{center}
-
-
-
-% \dfn{引き戻し}{
-%   圏$\bm{C}$と、$\bm{C}$の射$f, g$を考える。
-%   $\cod(f) = \cod(g)$とする。
-
-%   以下で定める圏$\bm{\rightarrow \leftarrow}$から圏$\bm{C}$への関手$X$を考える。
-%   \eqg*{
-%     X(m_0) = f \land X(m_1) = g
-%   }
-
-%   このとき$X$の極限$x, u$が存在するならば、$x, \qty(u(\dom(m_0)), u(\dom(m_1)))$を$f, g$の引き戻しと呼ぶ。
-
-%   これは、$\qty(u(\dom(m_0)), u(\dom(m_1)))$が与えられれば自然性から$u$が与えられるからである。
-% }
-
-% \begin{center}
-%   \begin{minipage}{0.2\linewidth}
-%     $\bm{\rightarrow \leftarrow}$ \\
-%     \begin{tikzcd}
-%       & b^\prime \ar[d, "m_1"] \\
-%       a^\prime \ar[r, "m_0"'] & c^\prime
-%     \end{tikzcd}
-%   \end{minipage}
-%   \begin{minipage}{0.35\linewidth}
-%     $\bm{C}$ \\
-%     \begin{tikzcd}
-%       & y \ar[dd, "q", red, dotted] \ar[dddl, "p(a^\prime)"'] \ar[ddrr, "p(b^\prime)"] \ar[dddr, "p(c^\prime)"] & & \\
-%       & & & \\
-%       & x \ar[ld, "u(a^\prime)"'] \ar[rr, "u(b^\prime)"] \ar[rd, "u(c^\prime)"'] & & b \ar[ld, "g"] \\
-%       a \ar[rr, "f"'] & & c & \\
-%     \end{tikzcd}
-%   \end{minipage}
-%   \begin{minipage}{0.2\linewidth}
-%     $\Func(\bm{\rightarrow \leftarrow}, \bm{C})$ \\
-%     \begin{tikzcd}
-%       \Delta(y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta(x) \ar[d, "u"] \\
-%       & \id
-%     \end{tikzcd}
-%   \end{minipage}
-% \end{center}
-
-% \dfn{核対}{
-%   圏$\bm{C}$と、$\bm{C}$の射$f$を考える。
-
-%   $f, f$の引き戻し$x, \qty(\pi_0, \pi_1)$が存在するならば、$x, \qty(\pi_0, \pi_1)$を$f$の核対と呼ぶ。
-% }
-
-% \cor*{
-%   $f$の核対$x, \qty(\pi_0, \pi_1)$が存在するとする。
-
-%   このとき、$\pi_0, \pi_1$はともに右可逆である。
-% }
-
-% \lem{核対と左簡約可能性}{
-%   圏$\bm{C}$と、$\bm{C}$の射$f$について、$f$の核対$R, \qty(\pi_0, \pi_1)$が存在するとする。
-
-%   このとき、以下の\num{3}つは同値である。
-%   \begin{enumerate}
-%     \item $f$は左簡約可能
-%     \item $\pi_0 = \pi_1$
-%     \item $\pi_0, \pi_1$はともに同型射
-%   \end{enumerate}
-% }{
-%   $1. \rightarrow 2.$を示す。
-
-%   核対より$f \circ \pi_0 = f \circ \pi_1$であり、左簡約可能より$\pi_0 = \pi_1$である。
-
-%   \vskip\baselineskip
-
-%   $2. \rightarrow 3.$を示す。
-
-%   $f \circ \dom(f) = f \circ \dom(f)$より、普遍性から射$u \colon \dom(f) \to R$が存在して、$\pi_0 \circ u = \dom(f) = \pi_1 \circ u$である。
-
-%   $\pi_0 = \pi_1$より、$\pi_1 = \pi_0 = \pi_1 \circ u \circ \pi_0 = \pi_0 \circ u \circ \pi_0$である。
-
-%   $f \circ \pi_0 = f \circ \pi_0$より、普遍性から一意な$e \colon R \to R$が存在して、$\pi_0 \circ e = \pi_0 = \pi_1 \circ e$である。
-
-%   $e = R$が成り立つため、一意性から$e = R = u \circ \pi_0$である。
-
-%   したがって、$\pi_0$は同型射である。
-
-%   \vskip\baselineskip
-
-%   $3. \rightarrow 2.$を示す。
-
-%   $f \circ \pi_0 = f \circ \pi_0$より、一意な射$e \colon R \to R$が存在して、$\pi_0 = \pi_0 \circ e = \pi_1 \circ e$である。
-
-%   $\pi_0$は同型射より、$e = R$である。ゆえに、$\pi_0 = \pi_1$である。
-
-%   \vskip\baselineskip
-
-%   $2. \to 1.$を示す。
-
-%   $\bm{C}$の射$g, h$について、$f \circ g = f \circ h$とする。
-
-%   普遍性より、一意な射$q \colon \dom(g) \to x$が存在して、$g = \pi_0 \circ q \land h = \pi_1 \circ q$である。
-
-%   $\pi_0 = \pi_1$より、$g = h$である。
-% }
-
-% \dfn{等化子}{
-%   圏$\bm{C}$と、$\bm{C}$の射$f, g$を考える。
-%   $\dom(f) = \dom(g) \land \cod(f) = \cod(g)$とする。
-
-%   以下で定める圏$\bm{\rightrightarrows}$から圏$\bm{C}$への関手$X$を考える。
-%   \eqg*{
-%     X(m_0) = f \land X(m_1) = g
-%   }
-
-%   このとき$X$の極限$x, u$が存在するならば、$x, u(\dom(m_0))$を$f, g$の等化子と呼ぶ。
-
-%   これは、$u(\dom(m_0))$が与えられれば自然性から$u$が与えられるからである。
-% }
-
-% \begin{center}
-%   \begin{minipage}{0.2\linewidth}
-%     $\bm{\rightrightarrows}$ \\
-%     \begin{tikzcd}
-%       a \ar[r, "m_0"', bend right] \ar[r, "m_1", bend left] & b^\prime \\
-%     \end{tikzcd}
-%   \end{minipage}
-%   \begin{minipage}{0.4\linewidth}
-%     $\bm{C}$ \\
-%     \begin{tikzcd}
-%       & y \ar[dd, "q", red, dotted] \ar[dddl, "p(a^\prime)"'] \ar[ddrr, "p(a^\prime)"] \ar[dddr, "p(b^\prime)"] & & \\
-%       & & & \\
-%       & \Eq(f, g) \ar[ld, "u(a^\prime)"'] \ar[rr, "u(a^\prime)"] \ar[rd, "u(b^\prime)"'] & & a \ar[ld, "g"] \\
-%       a \ar[rr, "f"'] & & b & \\
-%     \end{tikzcd}
-%   \end{minipage}
-%   \begin{minipage}{0.2\linewidth}
-%     $\Func(\bm{\rightrightarrows}, \bm{C})$ \\
-%     \begin{tikzcd}
-%       \Delta(y) \ar[r, "\Delta(q)", dotted] \ar[dr, "p"'] & \Delta\qty(\Eq(f, g)) \ar[d, "u"] \\
-%       & \id \\
-%     \end{tikzcd}
-%   \end{minipage}
-% \end{center}
-
-% \lem{等化子から得るモノ射}{
-%   $f$と$g$の等化子$\Eq(f, g), \pi$が存在するとする。
-
-%   このとき、$\pi$は左簡約可能である。
-% }{
-%   $\pi \circ h_1 = \pi \circ h_2$なる射$h_1, h_2 \colon y \to \Eq(f, g)$と、射$w \coloneqq \pi \circ h_1$を考える。
-
-%   このとき、$f \circ w = f \circ \pi \circ h_1 = g \circ \pi \circ h_1 = g \circ w$より、等化子の普遍性から$w = \pi \circ h$なる$h$が一意に存在する。
-
-%   ゆえに、$h_1 = h_2$である。
-
-%   したがって、$\pi$は左簡約可能である。
-% }
-
-% \thm{極限の存在定理}{
-%   以下を満たす圏$\bm{J}, \bm{C}$を考える。
-%   \begin{enumerate}
-%     \item $\Obj_{\bm{J}}$から$\bm{C}$への任意の関手は、積を持つ。
-%     \item $\bm{J}$の射を対象とする離散圏$\hat{\bm{J}}$について、$\hat{\bm{J}}$から$\bm{C}$への任意の関手は、積を持つ。
-%     \item $\bm{C}$の任意の射$f, g$について$\dom(f) = \dom(g) \land \cod(f) = \cod(g)$ならば、等化子を持つ。
-%   \end{enumerate}
-
-%   このとき、$\bm{J}$から$\bm{C}$への関手$X$は極限を持つ。
-% }{
-%   $\hat{\bm{J}}$から$\Obj_{\bm{J}}$への関手$c$、$c(\hat{f}) = \cod(f)$と、$\Obj_{\bm{J}}$から$\bm{J}$への自明な関手$I$を考える。
-
-%   $P = X \circ I$と、$R = X \circ I \circ c$を考える。
-%   $P$の積を$\prod P, \pi$、$R$の積を$\prod R, r$とする。
-
-%   $\bm{C}$から$\Func(\hat{\bm{J}}, \bm{C})$への対角関手$\Delta_1$を考える。
-
-%   自然変換$s \colon \Delta_1(\prod P) \to R$、$s(j) = \pi(\cod(j))$を考える。
-%   積の定義より、一意な射$\bar{s} \colon \prod P \to \prod R$が存在して、$s = r \circ \Delta_1(\bar{s})$である。
-
-%   自然変換$t \colon \Delta_1(\prod P) \to R$、$t(j) = X(j) \circ \pi(\dom(j))$を考える。
-%   積の定義より、一意な射$\bar{t} \colon \prod P \to \prod R$が存在して、$t = r \circ \Delta_1(\bar{t})$である。
-
-%   仮定より、$\bar{s}$と$\bar{t}$の等化子$\Eq(\bar{s}, \bar{t}), u$が存在する。
-
-%   \vskip\baselineskip
-
-%   $\bm{C}$から$\Func(\bm{J}, \bm{C})$への対角関手$\Delta_2$を考える。
-
-%   $\lambda \coloneqq \pi \circ \Delta_2(u)$が、$\Delta_2(\Eq(\bar{s}, \bar{t}))$から$X$への自然変換であることを示す。
-
-%   $\bm{J}$の射$j$について、等化子と積の定義より以下が成り立つ。
-%   \eqa*{
-%     X(j) \circ \lambda(\dom(j))
-%     &= X(j) \circ \pi(\dom(j)) \circ \Delta_2(u)(\dom(j)) \\*
-%     &= t(j) \circ u \\*
-%     &= r(j) \circ \bar{t} \circ u \\*
-%     &= r(j) \circ \bar{s} \circ u \\*
-%     &= s(j) \circ u \\*
-%     &= \pi(\cod(j)) \circ u \\*
-%     &= \lambda(\cod(j))
-%   }
-
-%   \vskip\baselineskip
-
-%   $\Eq(\bar{s}, \bar{t}), \lambda$が極限であることを示す。
-
-%   $\bm{C}$の対象$y$と、自然変換$p \colon \Delta_2(y) \to X$を考える。
-
-%   $\prod P$は積より、一意な$\bm{C}$の射$w \colon y \to \prod P$が存在して、$\forall j \in \Obj_{\bm{J}} \qty(p(j) = \pi(j) \circ w)$が成り立つ。
-
-%   等化子より、一意な$\bm{C}$の射$l \colon y \to \Eq(\bar{s}, \bar{t})$が存在して、$w = u \circ l$である。
-
-%   したがって、一意な$\bm{C}$の射$l$が存在して、$p = \lambda \circ \Delta_2(l)$である。
-% }
-
-% \begin{center}
-%   \begin{minipage}{0.35\linewidth}
-%     $\Func(\bm{\hat{J}}, \bm{C})$ \\
-%     \begin{tikzcd}
-%       & \Delta_1(\prod P) \ar[d, "\Delta_1(\bar{t})"'] \ar[rdd, "t"] & \\
-%       \Delta_1(\prod P) \ar[r, "\Delta_1(\bar{s})"] \ar[rrd, "s"'] & \Delta_1(\prod R) \ar[rd, "r", near start] \\
-%       & & R \\
-%     \end{tikzcd}
-%   \end{minipage}
-%   \begin{minipage}{0.5\linewidth}
-%     $\bm{C}$ \\
-%     \begin{tikzcd}
-%       \Eq(\bar{s}, \bar{t}) \ar[rr, "u"] \ar[dd, "u"'] & & \prod P \ar[dd, "\bar{t}"] \ar[rd, "\pi(\dom(j))"] \ar[rddd, "t(j)"'] & \\
-%       & & & X(\dom(j)) \ar[dd, "X(j)"] \\
-%       \prod P \ar[rr, "\bar{s}"] \ar[rrrd, "s(j) = \pi(\cod(j))"', near end] & & \prod R \ar[rd, "r(j)"] & \\
-%       & & & R(j) = X(\cod(j)) \\
-%     \end{tikzcd}
-%   \end{minipage}
-% \end{center}
-
-
-% \lsubsection{余普遍}
-
-
-% \dfn{始対象}{
-%   圏$\bm{C}$を考える。
-
-%   $\bm{C}^\opp$の終対象が存在するならば、これを$\bm{C}$の始対象と呼ぶ。
-% }
-
-
-% \dfn{押し出し}{
-%   圏$\bm{C}$と、$\bm{C}$の射$f, g$を考える。
-%   $\dom(f) = \dom(g)$とする。
-
-%   このとき、$f^\opp, g^\opp$の引き戻しが存在するならば、これを$f, g$の押し出しと呼ぶ。
-% }
-
-% \dfn{余等化子}{
-%   圏$\bm{C}$と、$\bm{C}$の射$f, g$を考える。
-%   $\dom(f) = \dom(g) \land \cod(f) = \cod(g)$とする。
-
-%   このとき、$f^\opp, g^\opp$の等化子が存在するならば、これを$f, g$の余等化子と呼ぶ。
-% }
-
-% \lem{余等化子から得るエピ射}{
-%   $f$と$g$の余等化子$x, u$について、$u$は右簡約可能である。
-% }{
-%   \lemref{等化子から得るモノ射}より、双対性から明らか。
-% }
-
-% \thm{余極限の存在定理}{
-%   以下を満たす圏$\bm{J}, \bm{C}$を考える。
-%   \begin{enumerate}
-%     \item $\Obj_{\bm{J}}$から$\bm{C}$への任意の関手は、和を持つ。
-%     \item $\bm{J}$の射を対象とする離散圏$\hat{\bm{J}}$について、$\hat{\bm{J}}$から$\bm{C}$への任意の関手は、和を持つ。
-%     \item $\bm{C}$の任意の射$f, g$について$\dom(f) = \dom(g) \land \cod(f) = \cod(g)$ならば、余等化子を持つ。
-%   \end{enumerate}
-
-%   このとき、$\bm{J}$から$\bm{C}$への関手$X$は余極限を持つ。
-% }{
-%   \thmref{極限の存在定理}より、双対性より明らか。
-% }

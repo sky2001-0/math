@@ -1,94 +1,38 @@
 \lsection{写像}
 
-\lsubsection{関係}
-
-\dfn{関係}{
-  集合$X, Y$と、集合系$G \subset X \times Y$について、順序対$\mathfrak{R} \coloneqq \qty(\qty(X, Y), G)$を関係と呼ぶ。
-
-  \vskip\baselineskip
-
-  記号の濫用であるが、$\mathfrak{R}$を以下で定めるアリティ\num{2}の述語としても扱う。
-  \eq*{
-    \mathfrak{R}(x, y) \defiff \qty(x, y) \in G
-  }
-}
-
-\dfn{左一意的}{
-  関係$\mathfrak{R}$が以下を満たすとき、$\mathfrak{R}$は左一意的であると言う。
-  \eq*{
-    \forall w, x \qty(\exists y \in Y \qty(\mathfrak{R}(w, y) \land \mathfrak{R}(x, y)) \rightarrow w = x)
-  }
-}
-
-\dfn{右一意的}{
-  関係$\mathfrak{R}$が以下を満たすとき、$\mathfrak{R}$は右一意的であると言う
-  \eq*{
-    \forall y, z \qty(\exists x \in X \qty(\mathfrak{R}(x, y) \land \mathfrak{R}(x, z)) \rightarrow y = z)
-  }
-}
-
-\dfn{一対一}{
-  関係$\mathfrak{R}$が左一意的かつ右一意的であるとき、$\mathfrak{R}$は一対一であると言う。
-}
-
-\dfn{左全域的}{
-  関係$\mathfrak{R} = \qty(\qty(X, Y), G)$が以下を満たすとき、$\mathfrak{R}$は左全域的であると言う。
-  \eq*{
-    \forall x \in X \exists y \in Y \qty(\mathfrak{R}(x, y))
-  }
-}
-
-\dfn{右全域的}{
-  関係$\mathfrak{R} = \qty(\qty(X, Y), G)$が以下を満たすとき、$\mathfrak{R}$は右全域的であると言う。
-  \eq*{
-    \forall y \in Y \exists x \in X \qty(\mathfrak{R}(x, y))
-  }
-}
-
-
 \lsubsection{写像}
 
 \dfn{写像}{
-  右一意的かつ左全域的な関係$f = \qty(\qty(X, Y), G)$を写像と呼ぶ。
-
-  \vskip\baselineskip
-
-  記号の濫用であるが、$f()$を以下で定める$x \in X$についての略記としても扱う。
+  集合$X, Y$と以下を満たす集合$G \subset X \times Y$を考える。
   \eq*{
-    f(x) \coloneqq \bigcup \qty{y \in Y \mid \mathfrak{R}(x, y)}
+    \forall x \in X \exists! y \in Y \qty(\qty(x, y) \in G)
   }
 
-  $f(x)$を$x$での$f$の値と呼ぶ。
+  このとき、順序対$\qty(\qty(X, Y), G)$を写像と呼ぶ。
+
+  写像$f \coloneqq \qty(\qty(X, Y), G)$を、$f \colon X \to Y$で表す。
+
+  写像$f$から定まる$X$上の関数を、記号の濫用であるが、$f$で表す。
 }
 
-\rem{関数クラスによる写像の定義}{
-  集合$X, Y$と、関数クラス$F$について、
-  順序対$\qty(\qty(X, Y), \qty{\qty(x, F(x)) \mid x \in X})$は写像である。
-
-  このとき、記号の濫用であるが、この写像を$F$で表す。
-}
-
-\rem{集合の内包的定義３}{
-  写像$f \colon X \to Y$について、以下を満たすアリティ\num{2}の述語記号$\psi(x, y)$を考える。
+\rem{関数による写像の定義}{
+  集合$X, Y$について、以下を満たす$X$上の関数$f$を考える。
   \eq*{
-    \forall x, y \qty(\psi(x, y) \defiff y = f(x))
+    \forall x \in X \qty(f(x) \in Y)
   }
 
-  $f$が写像であることから\axiref{置換の公理図式}の主張する集合$A$が存在する。
+  このとき、$\qty(\qty(X, Y), \qty{\qty(x, f(x)) \mid x \in X})$は写像である。
 
-  $A$は、より簡潔に以下でも表す。
-  \eq*{
-    A = \qty{f(x) \mid x \in X}
-  }
+  記号の濫用であるが、この写像を$f$で表す。
 }
 
 \dfn{恒等写像}{
-  集合$X$について、以下で定める集合系$\Delta$を考える。
+  集合$X$について、以下で定める$X$上の関数$\id_X$を考える。
   \eq*{
-    \Delta \coloneqq \qty{\qty(x, x) \mid x \in X}
+    \id_X(x) \coloneqq x
   }
 
-  写像$\qty(\qty(X, X), \Delta)$を恒等写像と呼び、$\id_X$で表す。
+  このとき、写像$\id_X \colon X \to X$を$X$の恒等写像と呼ぶ。
 }
 
 \cor*{
@@ -98,79 +42,359 @@
   }
 }
 
-\dfn{合成写像}{
-  写像$f = \qty(\qty(X, Y), G_f), g = \qty(\qty(Y, Z), G_g)$について、以下で定める集合系$G$を考える。
+\dfn{写像の合成}{
+  集合$X, Y, Z$と、写像$f \colon X \to Y, g \colon Y \to Z$を考える。
+
+  以下で定める$X$上の関数$h$を考える。
   \eq*{
-    G \coloneqq \qty{\qty(x, z) \mid \exists y \in Y \qty(y = f(x) \land z = g(y))}
+    h(x) \coloneqq g(f(x))
   }
 
-  関係$\qty(\qty(X, Z), G)$は写像であり、これを$f$と$g$の合成写像、または単に合成と呼び、$g \circ f$で表す。
+  このとき、写像$h \colon X \to Z$を、$f$と$g$の合成写像、または単に合成と呼び、$g \circ f$で表す。
 }
 
 \cor{写像の合成の結合法則}{
-  写像$f = \qty(\qty(X, Y), G_f), g = \qty(\qty(Y, Z), G_g), h = \qty(\qty(Z, W), G_h)$について、以下が成り立つ。
+  集合$X, Y, Z, W$と、写像$f \colon X \to Y, g \colon Y \to Z, h \colon Z \to W$について、
+  以下が成り立つ。
   \eq*{
     \qty(h \circ g) \circ f = h \circ \qty(g \circ f)
   }
 }
 
-\rem{写像の相等}{
-  写像の相等は、集合の相等により定義される。
+\rem{射としての写像}{
+  写像について、$=, \dom, \cod, \Comp$を以下で定めることにより、\subsecref{射の公理}を満たす。
 
-  これは次のように言い換えることができる。
-  写像$f, g$について、$f = g$とは、以下を満たすことである。
+  集合$X, Y, Z, X^\prime, Y^\prime$と、写像$f \colon X \to Y, g \colon Y \to Z, h \colon X^\prime \to Y^\prime$について、
+  \begin{enumerate}
+    \item 等号は集合の相等として定める。
+    \item $\dom(f) \coloneqq \id_X$
+    \item $\cod(f) \coloneqq \id_Y$
+    \item $\circ$は\dfnref{写像の合成}の意味として、$\Comp(f, g, h) \defiff h = g \circ f$
+  \end{enumerate}
+}
+
+\dfn{集合の圏}{
+  以下で定める類$A$を考える。
   \eq*{
-    \dom(f) = \dom(g) \land \cod(f) = \cod(g) \land \forall x \in \dom(f) \qty(f(x) = g(x))
+    f \in A \defiff \text{$f$は写像}
   }
 
-  終域まで含めて相等とすることに注意されたい。
+  このとき$A$は、圏である。
+  この$A$を、集合の圏と呼び、$\mathbf{Set}$で表す。
 }
 
-\rem{写像は射}{
-  写像$f = \qty(\qty(X, Y), G)$を考える。
-  $\dom(f)$を$\id_X$、$\cod(f)$を$\id_Y$として、合成を\dfnref{合成写像}で定義すると、写像は射の公理をみたす。
-
-  ここで記号の濫用であるが、$\id_X$をして$X$を表し、$X$をして$\id_X$を表す。
-}
-
-\dfn{集合と写像の圏}{
-  写像を射とみなすと、写像であることは、圏となる。
-  この圏を、集合と写像の圏と呼び、$\mathbf{Set}$と表す。
-}
-
-\cor*{
-  集合$X, Y$について、$\Hom_{\mathbf{Set}}(X, Y)$は以下を満たす。
+\dfn{写像全体の集合}{
+  集合$X, Y$について、以下で定める集合$Y^X$を、$X$から$Y$への写像全体の集合と呼ぶ。
   \eq*{
-    f \in \Hom_{\mathbf{Set}}(X, Y) \leftrightarrow f \in \qty{\qty(\qty(X, Y), G) \mid G \subset X \times Y \land \text{$G$は右一意かつ左全域}}
+    Y^X \coloneqq \Hom_{\mathbf{Set}}\qty(\id_X, \id_Y)
   }
-}
 
-\dfn{写像の全体}{
-  記号の濫用であるが、$X$から$Y$への写像全体がなす集合を、$\Hom_{\mathbf{Set}}(X, Y)$または$Y^X$で表す。
-  \eq*{
-    \Hom_{\mathbf{Set}}(X, Y) \coloneqq \qty{\qty(\qty(X, Y), G) \mid G \subset X \times Y \land \text{$G$は右一意かつ左全域}}
-  }
+  記号の濫用であるが、$\Hom_{\mathbf{Set}}\qty(X, Y)$と書いて、$Y^X$を表すものとする。
 }
 
 \cor*{
   以下が成り立つ。
-  \eqg*{
-    \forall Y \qty(\Hom_{\mathbf{Set}}(\varnothing, Y) = \qty{\qty(\qty(\varnothing, Y), \varnothing)}) \\*
+  \eq*{
     \forall X \qty(X \neq \varnothing \rightarrow \Hom_{\mathbf{Set}}(X, \varnothing) = \varnothing)
   }
+}
+
+\dfn{小さい圏}{
+  圏$\bm{C}$について、$\bm{C}$の射の上の離散圏$\hat{\bm{C}}$が集合であるとき、$\bm{C}$を小さいと呼ぶ。
+}
+
+\cor*{
+  小さい圏$\bm{J}$について、$\Obj_{\bm{J}}$は小さい。
+}
+
+\dfn{集合から定まる離散圏}{
+  集合$X$について、以下で定める類$A$を考える。
+  \eq*{
+    \id_x \in A \defiff x \in X
+  }
+
+  このとき$A$は、小さい離散圏である。
+  この$A$を、記号の濫用であるが、$X$で表す。
+}
+
+
+\lsubsection{写像における重要な諸概念}
+
+\dfn{像}{
+  写像$f \colon X \to Y$と$X$の部分$A$について、以下で定める集合$f(A)$を$A$の$f$による像と呼ぶ。
+  \eq*{
+    f(A) \coloneqq \qty{f(x) \mid x \in A}
+  }
+
+  また、始域の像$f(X)$を$\Im(f)$で表す。
+}
+
+\dfn{原像}{
+  写像$f \colon X \to Y$と$Y$の部分$A$について、以下で定める集合$f^{-1}(A)$を$A$の原像と呼ぶ。
+  \eq*{
+    f^{-1}(A) \coloneqq \qty{x \in X \mid f(x) \in A}
+  }
+}
+
+\cor{像と原像}{
+  写像$f \colon X \to Y$について、以下が成り立つ。
+  \eqg*{
+    \forall A \subset X \qty(f^{-1} \qty(f(A)) \supset A) \\*
+    \forall B \subset Y \qty(f \qty(f^{-1}(B)) \subset B)
+  }
+}
+
+\dfn{包含写像}{
+  集合$X$と$X$の部分$A$について、以下で定める$A$上の関数$\iota_{A, X}$を考える。
+  \eq*{
+    \iota_{A, X}(x) \coloneqq x
+  }
+
+  このとき、写像$\iota_{A, X} \colon A \to X$を包含写像と呼ぶ。
+}
+
+\cor*{
+  任意の単集合は$\mathbf{Set}$の終対象である。
+}
+
+\cor*{
+  空集合は$\mathbf{Set}$の始対象である。
+}
+
+\dfn{空写像}{
+  空集合は$\mathbf{Set}$の始対象であるので、終域$Y$について、始域が空集合である写像は一意に定まる。
+
+  この写像$\varnothing \to Y$を、$Y$の空写像と呼ぶ。
+}
+
+\lem{集合の圏における等化子の存在}{
+  写像$f, g \colon X \to Y$を考える。
+
+  以下で定める$\Eq(f, g), \pi$は、$f, g$の等化子である。
+  \eqg*{
+    \Eq(f, g) \coloneqq \qty{x \in X \mid f(x) = g(x)} \\*
+    \pi \coloneqq \iota_{\Eq(f, g), X}
+  }
+}{
+  $f \circ h = g \circ h$なる$h \colon Z \to X$を考える。
+
+  $\forall z \in Z \qty(f(h(z)) = g(h(z)))$より、$\Im(h) \subset \Eq(f, g)$である。
+
+  ゆえに$k \colon Z \to \Eq(f, g), k(z) \coloneqq h(z)$は写像であり、$h = \pi \circ k$である。
+
+  写像$k^\prime \colon Z \to \Eq(f, g)$であって、$h = \pi \circ k^\prime$とする。
+
+  任意の$z \in Z$について、以下が成り立つ。
+  \eq*{
+    k^\prime(z) = \iota_{\Eq(f, g), X}(k^\prime(z)) = \pi(k^\prime(z)) = h(z) = \pi(k(z)) = \iota_{\Eq(f, g), X}(k(z)) = k(z)
+  }
+
+  したがって一意である。
+}
+
+\lem{集合の圏における積の存在}{
+  小さい離散圏$\bm{J}$と、関手$X \colon \bm{J} \to \mathbf{Set}$を考える。
+
+  以下で定める$\prod X, \pi$は$X$の積である。
+  \eqg*{
+    \prod X \coloneqq \qty{f \in \Hom_{\mathbf{Set}}\qty(\bm{J}, \bigcup \qty{X(j) \mid j \in \bm{J}}) \mid \forall j \in \bm{J} \qty(f(j) \in X(j))} \\*
+    \pi(j) \coloneqq \qty(\qty(\prod X, X(j)), \qty{\qty(f, f(j)) \mid f \in \prod X})
+  }
+}{
+  $\bm{J}$が離散圏であるので、$\pi$は$\Delta(\prod X)$から$\Id_X$への自然変換である。
+
+  対角関手$\Delta \colon \mathbf{Set} \to \Func(\bm{J}, \mathbf{Set})$を考える。
+
+  \vskip\baselineskip
+
+  集合$A$と、自然変換$u \colon \Delta(A) \to \Id_X$について、以下で定める写像$h \colon A \to \prod X$を考える。
+  \eq*{
+    h(a) \coloneqq \qty(\qty(\bm{J}, \bigcup \qty{X(j) \mid j \in \bm{J}}), \qty{\qty(j, u(j)(a)) \mid j \in \bm{J}})
+  }
+
+  定義より、$u = \pi \circ \Delta(h)$である。
+
+  \vskip\baselineskip
+
+  写像$h^\prime \colon A \to \prod X$が、$u = \pi \circ \Delta(h^\prime)$を満たすとする。
+
+  任意の要素$a \in A$と、任意の対象$j \in \bm{J}$について、以下を満たす。
+  \eqa*{
+    h^\prime(a)(j)
+    &= \pi(j)(h^\prime(a)) \\*
+    &= \qty(\pi(j) \circ h^\prime)(a) \\*
+    &= u(j)(a) \\*
+    &= h(a)(j)
+  }
+
+  したがって、$h^\prime = h$である。
+}
+
+\dfnf{圏$\bm{2}$}{圏2}{
+  相異なる\num{2}つの射をもち、いずれの射も対象であるような類を考える。
+
+  これは離散圏であり、離散圏$\bm{2}$と呼ぶ。
+}
+
+\cor*{
+  集合$X, Y$と、離散圏$\bm{2}$上の関数$F, \pi$を考える。
+  \eq*{
+    F(j) \coloneqq
+    \begin{cases}
+      X & \qty(j = 0) \\
+      Y & \qty(j = 1) \\
+    \end{cases}
+    \qquad
+    \pi(j)(\qty(x, y)) \coloneqq
+    \begin{cases}
+      x & \qty(j = 0) \\
+      y & \qty(j = 1) \\
+    \end{cases}
+  }
+
+  $F$は$\bm{2}$から$\mathbf{Set}$への関手であり、$\pi$は$\Delta(X \times Y)$から$\Id_F$への自然変換である。
+
+  このとき、$X \times Y, \pi$は$F$の積である。
+}
+
+\lem{集合の圏における和の存在}{
+  小さい離散圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への関手$X$を考える。
+
+  このとき、以下で定める$\coprod X, \pi$は$X$の和である。
+  \eqg*{
+    \coprod X \coloneqq \bigcup \qty{\qty{\qty(j, x) \mid x \in X(j)} \mid j \in \bm{J}} \\*
+    \pi(j) \coloneqq \qty(\qty(X(j), \coprod X), \qty{\qty(x, \qty(j, x)) \mid x \in X(j)})
+  }
+}{
+  対角関手$\Delta \colon \mathbf{Set} \to \Func(\bm{J}, \mathbf{Set})$を考える。
+
+  $\bm{J}$が離散圏であるので、$\pi$は$\Id_X$から$\Delta(\prod X)$への自然変換である。
+
+  \vskip\baselineskip
+
+  集合$A$と、自然変換$u \colon \Id_X \to \Delta(A)$を考える。
+
+  以下で定める写像$h \colon \coprod X \to A$を考える。
+  \eq*{
+    h\qty(\qty(j, x)) \coloneqq u(j)(x)
+  }
+
+  任意の要素$x \in X(j)$と任意の射$j \in \bm{J}$について、以下が成り立つ。
+  \eqa*{
+    \qty(h \circ \pi(j))(x)
+    &= h\qty(\pi(j)(x)) \\*
+    &= h\qty(\qty(j, x)) \\*
+    &= u(j)(x)
+  }
+
+  ゆえに、$u = \Delta(h) \circ \pi$が成り立つ。
+
+  \vskip\baselineskip
+
+  写像$h^\prime \colon \coprod X \to A$が$u = \Delta(h^\prime) \circ \pi$を満たすとする。
+
+  任意の$\qty(j, x) \in \coprod X$について、以下を満たす。
+  \eqa*{
+    h^\prime\qty(\qty(j, x))
+    &= h^\prime(\pi(j)(x)) \\*
+    &= \qty(\Delta(h^\prime)(j) \circ \pi(j))(x) \\*
+    &= u(j)(x) \\*
+    &= h\qty(\qty(j, x)) \\*
+  }
+
+  したがって、$h^\prime = h$である。
+}
+
+\lem{集合の圏における余等化子の存在}{
+  写像$f, g \colon X \to Y$について、
+  積$Y \times Y, \pi$が存在するので、一意な射$q$が存在して$f = \pi(0) \circ q \land g = \pi(1) \circ q$である。
+
+  以下の集合$\sim$を考える。
+  \eq*{
+    \sim \coloneqq \bigcap \qty{G^\prime \in Y \times Y \mid \Im(q) \subset G^\prime \land \text{$G^\prime$は$Y$上の同値関係}}
+  }
+
+  共通部分をとられる集合は$Y \times Y$を要素に持ち空ではないので、$\sim$は$Y$上の同値関係となる。
+
+  $\sim$の商写像$u$について、$Y / \sim, u$は余等化子である。
+}{
+  $\sim$の定義より、$\forall x \in X \qty(f(x) \sim g(x))$である。
+  ゆえに、$u \circ f = u \circ g$である。
+
+  写像$h \colon Y \to Z$について、$h \circ f = h \circ g$であるとする。
+
+  $h$が誘導する$Y$上の同値関係$\sim_h$について、$\forall x_0, x_1 \in X \qty(\qty(f(x_0), g(x_1)) \in \sim_f)$である。
+
+  すなわち$\Im(q) \subset \sim_f$であり、$G$の定義より$G \subset \sim_f$である。
+
+  したがって、$\forall y_0, y_1 \in Y \qty(y_0 \sim y_1 \rightarrow h(y_0) = h(y_1))$である。
+
+  写像$k \coloneqq \qty(\qty(Y / \sim, Z), \qty{\qty(Y_{\sim y}, h(y)) \mid y \in Y})$は、$k \circ u = h$を満たす。
+
+  $k^\prime \colon Y / \sim \to Z, k^\prime \neq k$を考えると明らかに満たさないので、$k$は一意である。
+}
+
+\begin{center}
+  \begin{minipage}{0.4\linewidth}
+    $\mathbf{Set}$ \\
+    \begin{tikzcd}
+      X \ar[dr, "q", dotted] \ar[rrd, "f", bend left] \ar[ddr, "g"', bend right] & & & \\
+      & Y \times Y \ar[r, "\pi(0)"] \ar[d, "\pi(1)"'] & Y \ar[d, "u"] \ar[ddr, "h", bend left] & \\
+      & Y \ar[r, "u"'] \ar[rrd, "h", bend right] & Y / \sim \ar[rd, "k", dotted] & \\
+      & & & Z \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+
+\lsubsection{選択}
+
+\thm{選択関数の存在}{
+  任意の集合$X$について、写像$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が存在して、以下が成り立つ。
+  \eq*{
+    \forall x \in X \setminus \qty{\varnothing} \qty(f(x) \in x)
+  }
+}{
+  空集合の定義より、以下の命題が成り立つ。
+  \eq*{
+    \forall x \in X \setminus \qty{\varnothing} \exists y \qty(y \in x)
+  }
+
+  \axiref{Skolem関係の導入}より、$X \setminus \qty{\varnothing}$上の関数$f$が存在する。
+
+  任意の$x \in X \setminus \qty{\varnothing}$について、$f(x) \in x$より$f(x) \in \bigcup X$である。
+
+  ゆえに、$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が与えられる。
+}
+
+\lem{非空からなる積は非空}{
+  空でない集合$J$から$\mathbf{Set}$への関手$X$について、以下が成り立つ。
+  \eq*{
+    \forall j \in J \qty(X(j) \neq \varnothing) \rightarrow \prod X \neq \varnothing
+  }
+}{
+  $Z \coloneqq \qty{X(j) \mid j \in J}$について、定義より$Z \neq \varnothing \land \varnothing \notin Z$である。
+
+  \thmref{選択関数の存在}より、写像$f \colon Z \to \bigcup Z$が存在して、$\forall z \in Z \qty(f(z) \in z)$である。
+
+  写像$g \colon J \to \bigcup Z$を$g(j) \coloneqq f(X(j))$で定義すると、$\forall j \in J \qty(g(j) \in X(j))$であるので、$g \in \prod X$である。
+
+  ゆえに、$\prod X \neq \varnothing$である。
+}
+
+\lem{選択の公理}{
+  以下が成り立つ。
+  \eq*{
+    \forall X \qty(\varnothing \notin X \land \forall x \forall y \qty(x \in X \land y \in X \land x \neq y \rightarrow x \cap y = \varnothing) \rightarrow \exists A \forall x \qty(x \in X \rightarrow \exists t \qty(x \cap A = \qty{t})))
+  }
+}{
+  ???
 }
 
 
 \lsubsection{像と原像}
 
-\dfn{像}{
-  写像$f \colon X \to Y$と、$X$の部分集合$A$について、以下で定める集合を$A$の$f$による像と呼び、$f(A)$で表す。
-  \eq*{
-    f(A) \coloneqq \qty{f(x) \mid x \in A}
-  }
 
-  また、$f(X)$を$\Im(f)$でも表す。
-}
 
 \lem{像の性質}{
   写像$f \colon X \to Y$について、以下が成り立つ。
@@ -225,20 +449,6 @@
   したがって、$y \in f \qty(A_1 \setminus A_2)$である。
 }
 
-\dfn{原像}{
-  写像$f \colon X \to Y$と集合$A$について、以下で定める集合を、集合$A$の原像と呼び、$f^{-1}(A)$で表す。
-  \eq*{
-    f^{-1}(A) = \qty{x \in X \mid f(x) \in A}
-  }
-}
-
-\cor{像と原像}{
-  写像$f \colon X \to Y$について、以下が成り立つ。
-  \eqg*{
-    \forall A \subset X \qty(f^{-1} \qty(f(A)) \supset A) \\*
-    \forall B \qty(f \qty(f^{-1}(B)) \subset B)
-  }
-}
 
 \lem{原像の性質}{
   写像$f$について、以下が成り立つ。
@@ -296,153 +506,6 @@
 }
 
 
-\lsubsection{いくつかの重要な集合と写像}
-
-\dfn{包含写像}{
-  集合$X$と、その部分$A$について、以下で定める関係$\iota_{A, X}$は写像である。
-  \eq*{
-    \iota_{A, X} \coloneqq \qty(\qty(A, X), \qty{\qty(x, x) \mid x \in A})
-  }
-
-  この$\iota_{A, X}$を包含写像と呼ぶ。
-}
-
-\dfn{制限写像}{
-  写像$f = \qty(\qty(X, Y), G)$と、$X$の部分$A$について、
-  以下で定める写像$f \rvert_A$を、$f$の$A$への制限写像、または単に制限と呼ぶ。
-  \eq*{
-    f \rvert_A \coloneqq f \circ \iota_{A, X}
-  }
-}
-
-\cor*{
-  単集合は$\mathbf{Set}$の終対象である。
-}
-
-\cor*{
-  空集合は$\mathbf{Set}$の始対象である。
-}
-
-\dfn{空写像}{
-  空集合は$\mathbf{Set}$の始対象であるので、終域$Y$について、始域が空集合である写像は一意に定まる。
-
-  この写像を$Y$の空写像と呼ぶ。
-}
-
-\lem{集合の圏における等化子の存在}{
-  写像$f, g \colon X \to Y$を考える。
-
-  以下を満たす$\Eq(f, g), u$は、$f, g$の等化子である。
-  \eqg*{
-    \Eq(f, g) \coloneqq \qty{x \in X \mid f(x) = g(x)} \\*
-    u \coloneqq \iota_{\Eq(f, g), X}
-  }
-}{
-  $f \circ h = g \circ h$なる$h \colon Z \to X$を考える。
-
-  $\forall z \in Z \qty(f(h(z)) = g(h(z)))$より、$\Im(h) \subset \Eq(f, g)$である。
-
-  ゆえに$k = \qty(\qty(Z, \Eq(f, g)), \qty{\qty(z, h(z)) \mid z \in Z})$は写像である。
-
-  $h = u \circ k$である。
-
-  $k^\prime \colon Z \to \Eq(f, g)$について、$k^\prime \neq k$とすると直ちに$h \neq u \circ k^\prime$である。
-
-  したがって一意である。
-}
-
-\dfn{小さい圏}{
-  圏$\bm{C}$について、$\bm{C}$の射を対象とする離散圏$\hat{\bm{C}}$が集合であるとき、$\bm{C}$を小さいと呼ぶ。
-}
-
-\cor*{
-  小さい圏$\bm{J}$について、$\Obj_{\bm{J}}$は小さい。
-}
-
-\cor*{
-  小さい離散圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への関手$X$を考える。
-
-  このとき、以下で定める$\prod X, \pi$は$X$の積である。
-  \eqg*{
-    \prod X \coloneqq \qty{f \in \Hom_{\mathbf{Set}}\qty(\bm{J}, \bigcup \qty{X(j) \mid j \in \bm{J}}) \mid \forall j \in \bm{J} \qty(f(j) \in X(j))} \\*
-    \pi(j)(f) \coloneqq f(j)
-  }
-}
-
-\cor*{
-  集合$X, Y$について、以下で定める離散圏$\bm{2}$と$\bm{2}$から$\mathbf{Set}$への関手$F$を考える。
-  \eqg*{
-    f \in \bm{2} \leftrightarrow f = 0 \lor f = 1 \\*
-    F(0) = X \land F(1) = Y
-  }
-
-  このとき、$X \times Y, \pi$は$F$の積である。
-
-  ただし、$\pi(0)(\qty(x, y)) = x, \pi(1)(\qty(x, y)) = y$とする。
-}
-
-\cor*{
-  小さい離散圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への関手$X$を考える。
-
-  このとき、以下で定める$x, u$は$X$の和である。
-  \eqg*{
-    x \coloneqq \bigcup \qty{\qty{\qty(j, x) \mid x \in X(j)} \mid j \in \bm{J}} \\*
-    u(j)(x) \coloneqq \qty(j, x)
-  }
-}
-
-
-\lsubsection{選択}
-
-\lem{選択公理が与える写像}{
-  集合$X, Y$とアリティ\num{2}の述語記号$\psi$について、$\forall x \in X \exists y \in Y \qty(\psi(x, y))$が成り立つとする。
-
-  このとき、以下を満たす写像$f \colon X \to Y$が存在する。
-  \eq*{
-    \forall x \in X \forall y \in Y \qty(f(x) = y \rightarrow \psi(x, y))
-  }
-}{
-  $X = \varnothing$のとき、空写像が存在する。
-
-  \vskip\baselineskip
-
-  $X \neq \varnothing$のときを考える。
-  以下の集合$Z$を考える。
-  \eq*{
-    Z \coloneqq \qty{\qty{\qty(x, y) \mid y \in Y \land \psi(x, y)} \mid x \in X}
-  }
-
-  $Z$について\axiref{選択の公理}の主張する集合$A$が存在する。
-
-  関係$\qty(\qty(X, Y), A)$は、仮定より$X$について左全域的で、$A$の定義より右一意的である。
-}
-
-\thm{選択関数の存在}{
-  任意の集合$X$について、写像$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が存在して、以下が成り立つ。
-  \eq*{
-    \forall x \in X \setminus \qty{\varnothing} \qty(f(x) \in x)
-  }
-}{
-  $\forall x \in X \setminus \qty{\varnothing}$について、$\exists y \qty(y \in x)$である。
-  この$y$は、$y \in x$より、$y \in \bigcup X$である。
-
-  ゆえに、\lemref{選択公理が与える写像}より存在する。
-}
-
-\lem{非空からなる積は非空}{
-  空でない集合$J$から$\mathbf{Set}$への関手$X$について、以下が成り立つ。
-  \eq*{
-    \forall j \in J \qty(X(j) \neq \varnothing) \rightarrow \prod X \neq \varnothing
-  }
-}{
-  $Z \coloneqq \qty{X(j) \mid j \in J}$について、定義より$Z \neq \varnothing \land \varnothing \notin Z$である。
-
-  \thmref{選択関数の存在}より、写像$f \colon Z \to \bigcup Z$が存在して、$\forall z \in Z \qty(f(z) \in z)$である。
-
-  写像$g \colon J \to \bigcup Z$を$g(j) \coloneqq f(X(j))$で定義すると、$\forall j \in J \qty(g(j) \in X(j))$であるので、$g \in \prod X$である。
-
-  ゆえに、$\prod X \neq \varnothing$である。
-}
 
 
 \lsubsection{単射と全射}
@@ -460,7 +523,7 @@
   $f$が空写像であるとき、左一意的である。
   $f$が空写像でないときを考える。
 
-  $x \in \dom(f)$について、写像$g_x \colon \qty{\varnothing} \to \dom(f), g(\varnothing) \coloneqq x$を考える。
+  $x \in \dom(f)$について、写像$g_x \colon \qty{\varnothing} \to \dom(f), g_x(\varnothing) \coloneqq x$を考える。
 
   $f(x) = f(y)$であるとき、$f \circ g_x = f \circ g_y$であり、左簡約可能より$g_x = g_y$、すなわち$x = y$である。
 

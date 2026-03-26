@@ -5,8 +5,8 @@
 \dfn{集合}{
   集合論では、
   \num{1}つの述語（\dfnref{所属}）と、
-  \num{9}つの公理（
-    \axiref{外延性の公理}、\axiref{空集合の公理}、\axiref{対の公理}、\axiref{正則性の公理}、\axiref{無限の公理}、\axiref{和集合の公理}、\axiref{冪集合の公理}、\axiref{置換の公理図式}、\axiref{選択の公理}
+  \num{8}つの公理（
+    \axiref{外延性の公理}、\axiref{空集合の公理}、\axiref{対の公理}、\axiref{正則性の公理}、\axiref{無限の公理}、\axiref{和集合の公理}、\axiref{冪集合の公理}、\axiref{置換の公理図式}
   ）を満たすものを議論領域とする。
 
   集合論における項を集合と呼ぶ。
@@ -19,7 +19,7 @@
 }
 
 \rem{類としての集合}{
-  集合$y$について、$\in \qty(, y)$はアリティ\num{1}の述語、すなわち類となる。
+  集合$y$について、$x \in y$はアリティ\num{1}の述語、すなわち類となる。
 }
 
 \dfn{要素}{
@@ -31,7 +31,7 @@
 }
 
 \dfn{包含}{
-  集合$X, Y$について、アリティ\num{2}の述語$\subset$を以下で定める。
+  集合$X, Y$について、略記$\subset$を以下で定める。
   \eq*{
     \subset \qty(X, Y) \defiff \forall x \qty(x \in X \rightarrow x \in Y)
   }
@@ -40,7 +40,7 @@
 }
 
 \dfn{真包含}{
-  集合$X, Y$について、アリティ\num{2}の述語$\subsetneq$を以下で定める。
+  集合$X, Y$について、略記$\subsetneq$を以下で定める。
   \eq*{
     \subsetneq \qty(X, Y) \defiff X \subset Y \land X \neq Y
   }
@@ -48,8 +48,8 @@
   $\subsetneq \qty(X, Y)$を、簡単のために$X \subsetneq Y$で表す。
 }
 
-\dfn{左包含}{
-  集合$X, Y$について、アリティ\num{2}の述語$\supset$を以下で定める。
+\dfn{逆包含}{
+  集合$X, Y$について、略記$\supset$を以下で定める。
   \eq*{
     \supset \qty(X, Y) \defiff Y \subset X
   }
@@ -57,8 +57,8 @@
   $\supset \qty(X, Y)$を、簡単のために$X \supset Y$で表す。
 }
 
-\dfn{左真包含}{
-  集合$X, Y$について、アリティ\num{2}の述語$\supsetneq$を以下で定める。
+\dfn{逆真包含}{
+  集合$X, Y$について、略記$\supsetneq$を以下で定める。
   \eq*{
     \supsetneq \qty(X, Y) \defiff Y \subsetneq X
   }
@@ -303,61 +303,52 @@
 \lsubsection{集合の置換}
 
 \axi{置換の公理図式}{
-  アリティ\num{2}の述語$\psi$をパラメータとする以下の公理図式を考える。
+  アリティ\num{2}の述語$P$をパラメータとする以下の公理図式を考える。
   \eq*{
-    \forall x \forall y \forall z \qty(\psi(x, y) \land \psi(x, z) \rightarrow y = z) \rightarrow \forall X \exists A \forall t \qty(t \in A \leftrightarrow \exists x \qty(x \in X \land \psi(x, t)))
+    \forall x \forall y \forall z \qty(P(x, y) \land P(x, z) \rightarrow y = z) \rightarrow \forall X \exists A \forall t \qty(t \in A \leftrightarrow \exists x \qty(x \in X \land P(x, t)))
   }
 }
 
 \rem{集合の内包的定義１}{
   \axiref{外延性の公理}より、\axiref{置換の公理図式}より主張される集合$A$は一意に定まる。
-  \axiref{置換の公理図式}に基づく定義方法を、内包的定義と呼び、\axiref{置換の公理図式}の前件を満たすアリティ\num{2}の述語$\psi$について、以下で表す。
+  \axiref{置換の公理図式}に基づく定義方法を、内包的定義と呼び、\axiref{置換の公理図式}の前件を満たすアリティ\num{2}の述語$P$について、以下で表す。
   \eq*{
-    A = \qty{y \mid \exists x \in X \qty(\psi(x, y))}
+    A = \qty{y \mid \exists x \in X \qty(P(x, y))}
+  }
+
+  $X$上の関数$f$について、もとの関数グラフは\axiref{置換の公理図式}の前件を満たすアリティ\num{2}の述語となるので、$f$からも集合を定義できる。
+  これを以下で表す。
+  \eq*{
+    A = \qty{f(x) \mid x \in X}
   }
 }
 
 \thm{分出の公理図式}{
-  アリティ\num{1}の述語$\psi$について、以下が成り立つ。
+  アリティ\num{1}の述語$P$について、以下が成り立つ。
   \eq*{
-    \forall X \exists A \forall t \qty(t \in A \leftrightarrow t \in X \land \psi(t))
+    \forall X \exists A \forall t \qty(t \in A \leftrightarrow t \in X \land P(t))
   }
 }{
-  アリティ\num{1}の述語$P$を考える。
-  排中律より、
+  以下で定めるアリティ\num{2}の述語$Q$を考える。
   \eq*{
-    \forall X \qty\Big(\exists a \qty(a \in X \land P(a)) \lor \forall a \lnot \qty(a \in X \land P(a)))
+    Q(x, y) \defiff \qty(P(x) \land y = \qty{x}) \lor \qty(\lnot P(x) \land y = \varnothing)
   }
 
-  $\forall a \lnot \qty(a \in X \land P(a))$のとき、$A = \varnothing$で示される。
-
-  \vskip\baselineskip
-
-  $\exists a \qty(a \in X \land P(a))$のとき、以下のようなアリティ\num{2}の述語$\psi$を考える。
-  \eq*{
-    \psi(x, y) \defiff \qty(P(x) \land y = x) \lor \qty(\lnot P(x) \land y = a)
-  }
-
-  $\psi(x, y) \land \psi(x, z)$とすると、$P(x)$であるとき$y = x = z$であり、$\lnot P(x)$であるとき$y = a = z$である。
+  $Q(x, y) \land Q(x, z)$とすると、$P(x)$であるとき$y = \qty{x} = z$であり、$\lnot P(x)$であるとき$y = \varnothing = z$である。
 
   排中律より、$y = z$が成り立つ。
 
-  したがって\axiref{置換の公理図式}より、
+  したがって\axiref{置換の公理図式}より、以下が成り立つ。
   \eq*{
-    \exists A \forall y \qty(y \in A \leftrightarrow \exists x \qty(x \in X \land \qty(\qty(P(x) \land y = x) \lor \qty(\lnot P(x) \land y = a))))
+    \exists B \forall y \qty(y \in B \leftrightarrow \exists x \qty(x \in X \land Q(x, y)))
   }
 
-  すなわち、
+  \axiref{和集合の公理}より、以下が成り立つ。
   \eq*{
-    \exists A \forall t \qty(t \in A \leftrightarrow \exists x \qty(\qty(x \in X \land P(x) \land t = x) \lor \qty(x \in X \land \lnot P(x) \land t = a)))
+    \exists A \forall t \qty(t \in A \leftrightarrow \exists x \exists y \qty(t \in y \land x \in X \land Q(x, y)))
   }
 
-  $\exists$を除去して、
-  \eq*{
-    \exists A \forall t \qty(t \in A \leftrightarrow \qty(t \in X \land P(t)) \lor t = a)
-  }
-
-  $t = a \rightarrow \qty(a \in X \land P(a))$より、
+  したがって、以下が成り立つ。
   \eq*{
     \exists A \forall t \qty(t \in A \leftrightarrow t \in X \land P(t))
   }
@@ -367,12 +358,12 @@
   \axiref{外延性の公理}より、\thmref{分出の公理図式}より主張される集合$A$は一意に定まる。
   \thmref{分出の公理図式}に基づく定義方法も、内包的定義と呼び、以下で表す。
   \eq*{
-    A = \qty{t \mid t \in X \land \psi(t)}
+    A = \qty{t \mid t \in X \land P(t)}
   }
 
   簡単のために、以下でも表す。
   \eq*{
-    A = \qty{t \in X \mid \psi(t)}
+    A = \qty{t \in X \mid P(t)}
   }
 }
 
@@ -536,12 +527,6 @@
   最後から\num{2}行目への変形には、第一の定理を用いた。
 }
 
-\axi{選択の公理}{
-  \eq*{
-    \forall X \qty(\varnothing \notin X \land \forall x \forall y \qty(x \in X \land y \in X \land x \neq y \rightarrow x \cap y = \varnothing) \rightarrow \exists A \forall x \qty(x \in X \rightarrow \exists t \qty(x \cap A = \qty{t})))
-  }
-}
-
 
 \lsubsection{順序対と集合の直積}
 
@@ -549,6 +534,14 @@
   集合$x, y$について、\axiref{対の公理}から、$\qty{\qty{x}, \qty{x, y}}$が存在する。
 
   この集合を、順序対と呼び、$\qty(x, y)$で表す。
+}
+
+\cor{順序対の取り出し}{
+  \eqg*{
+    \forall x \forall y \qty(x = \bigcup \bigcap \qty(x, y)) \\*
+    \forall x \forall y \qty(\qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)) = \varnothing \rightarrow y = \bigcup \bigcap \qty(x, y)) \\*
+    \forall x \forall y \qty(\qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)) \neq \varnothing \rightarrow y = \bigcup \qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)))
+  }
 }
 
 \cor{順序対の相等}{
@@ -560,14 +553,6 @@
 \cor{順序対の順序性}{
   \eq*{
     \forall x \forall y \qty(x \neq y \rightarrow \qty(x, y) \neq \qty(y, x))
-  }
-}
-
-\cor{順序対の取り出し}{
-  \eqg*{
-    \forall x \forall y \qty(x = \bigcup \bigcap \qty(x, y)) \\*
-    \forall x \forall y \qty(\qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)) = \varnothing \rightarrow y = \bigcup \bigcap \qty(x, y)) \\*
-    \forall x \forall y \qty(\qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)) \neq \varnothing \rightarrow y = \bigcup \qty(\bigcup \qty(x, y) \setminus \bigcap \qty(x, y)))
   }
 }
 
@@ -605,12 +590,12 @@
 }
 
 
-\lsubsection{後者と無限}
+\lsubsection{後続と無限}
 
-\dfn{後者}{
+\dfn{後続}{
   集合$x$について、\axiref{対の公理}、\axiref{和集合の公理}より、$x \cup \qty{x}$が存在する。
 
-  この集合を$x$の後者と呼び、$x^+$で表す。
+  この集合を$x$の後続と呼び、$x^+$で表す。
 }
 
 \lem*{
@@ -639,7 +624,7 @@
   $x \subset y$であるので、$x = y$である。
 }
 
-\lem{後者は単射的}{
+\lem{後続は単射的}{
   以下が成り立つ。
   \eq*{
     \forall x, y \qty(x^+ = y^+ \rightarrow x = y)
