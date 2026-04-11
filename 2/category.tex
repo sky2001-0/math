@@ -101,16 +101,6 @@
   }
 }
 
-\dfn{空圏}{
-  以下で定める類$\bm{A}$を考える。
-  \eq*{
-    f \in \bm{A} \defiff \bot
-  }
-
-  このとき$\bm{A}$は、圏である。
-  この$\bm{A}$を、空圏と呼ぶ。
-}
-
 \dfn{対象の類}{
   以下で定める類$\Obj_{\bm{C}}$を、圏$\bm{C}$の対象の類と呼ぶ。
   \eq*{
@@ -919,11 +909,15 @@
 \end{center}
 
 \dfn{終圏}{
-  唯一の射をもち、その射が対象であるような類を考える。
+  対象$\ast$について、以下で定める類$\bm{A}$を考える。
+  \eq*{
+    \exists! \ast \in \bm{A}
+  }
 
-  これは圏であり、終圏と呼ぶ。
+  このとき$\bm{A}$は圏である。
+  この$\bm{A}$を、終圏と呼ぶ。
 
-  終圏の唯一の射を$\ast$で表す。
+  また、終圏の唯一の射を$\ast$で表す。
 }
 
 \dfn{終関手}{
@@ -953,95 +947,8 @@
   $\bm{C}^\opp$の終対象を、$\bm{C}$の始対象と呼ぶ。
 }
 
-\dfn{可換四角形}{
-  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
 
-  射$f, f^\prime \in \bm{C}$、$g \in \bm{D}$、$h \in \bm{E}$であって以下の\num{2}つを満たすものを考える。
-  \eqg*{
-    \dom(F(g)) = \dom(f) \land \cod(F(g)) = \dom(f^\prime) \land \cod(f) = \dom(G(h)) \land \cod(G(h)) = \cod(f^\prime) \\
-    f^\prime \circ F(g) = G(h) \circ f
-  }
-
-  このとき、組$\qqty{f, f^\prime, g, h}$を、$F$と$G$による可換四角形と呼ぶ。
-}
-
-\begin{center}
-  \begin{minipage}{0.1\linewidth}
-    $\bm{D}$ \\
-    \begin{tikzcd}
-      \phantom{A} \ar[d, "g"'] \\
-      \phantom{A} \\
-    \end{tikzcd}
-  \end{minipage}
-  \begin{minipage}{0.2\linewidth}
-    $\bm{C}$ \\
-    \begin{tikzcd}
-      \phantom{A} \ar[r, "f"] \ar[d, "F(g)"'] & \phantom{A} \ar[d, "G(h)"] \\
-      \phantom{A} \ar[r, "f^\prime"] & \phantom{A} \\
-    \end{tikzcd}
-  \end{minipage}
-  \begin{minipage}{0.1\linewidth}
-    $\bm{E}$ \\
-    \begin{tikzcd}
-      \phantom{A} \ar[d, "h"] \\
-      \phantom{A} \\
-    \end{tikzcd}
-  \end{minipage}
-\end{center}
-
-\rem{射としての可換四角形}{
-  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
-
-  $F$と$G$による可換四角形について、$=, \dom, \cod, \Comp$を以下で定めることにより、\subsecref{射の公理}を満たす。
-  $F$と$G$による可換四角形$\qqty{f_1, f^\prime_1, g_1, h_1}, \qqty{f_2, f^\prime_2, g_2, h_2}, \qqty{f_3, f^\prime_3, g_3, h_3}$について、
-  \begin{enumerate}
-    \item $\qqty{f_1, f^\prime_1, g_1, h_1} = \qqty{f_2, f^\prime_2, g_2, h_2} \defiff f_1 = f_2 \land f^\prime_1 = f^\prime_2 \land g_1 = g_2 \land h_1 = h_2$
-    \item $\dom(\qqty{f_1, f^\prime_1, g_1, h_1}) \coloneqq \qqty{f_1, f_1, \dom(g_1), \dom(h_1)}$
-    \item $\cod(\qqty{f_1, f^\prime_1, g_1, h_1}) \coloneqq \qqty{f^\prime_1, f^\prime_1, \cod(g_1), \cod(h_1)}$
-    \item $\Comp(\qqty{f_1, f^\prime_1, g_1, h_1}, \qqty{f_2, f^\prime_2, g_2, h_2}, \qqty{f_3, f^\prime_3, g_3, h_3}) \defiff f_3 = f_1 \land f^\prime_3 = f^\prime_2 \land g_3 = g_2 \circ g_1 \land h_3 = h_2 \circ h_1$
-  \end{enumerate}
-}
-
-\dfn{コンマ圏}{
-  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
-
-  射$f, f^\prime, g, h$について、以下で定める類$F \downarrow G$を考える。
-  \eq*{
-    \qqty{f, f^\prime, g, h} \in F \downarrow G \defiff \text{$\qqty{f, f^\prime, g, h}$は$F$と$G$による可換四角形}
-  }
-
-  このとき$F \downarrow G$は圏である。
-  この$F \downarrow G$を、$F$と$G$のコンマ圏と呼ぶ。
-}
-
-\cor{コンマ圏の双対}{
-  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
-
-  以下で定める関手$H \colon \qty(F \downarrow G)^\opp \to G^\opp \downarrow F^\opp$は圏同型である。
-  \eq*{
-    H(\qqty{f, f^\prime, g, h}^\opp) \coloneqq \qqty{\qty(f^\prime)^\opp, f^\opp, h, g}
-  }
-}
-
-\cor*{
-  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
-
-  射$\qqty{f, f^\prime, g, h} \in F \downarrow G$について、以下が成り立つ。
-  \eq*{
-    \qqty{f, f^\prime, g, h} \in \Obj_{F \downarrow G} \defiff f = f^\prime \land g \in \Obj_{\bm{D}} \land h \in \Obj_{\bm{E}}
-  }
-}
-
-\cor*{
-  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
-
-  $\qqty{f_1, f_1, d_1, e_1}, \qqty{f_2, f_2, d_2, e_2} \in \Obj_{F \downarrow G}$を考える。
-
-  射$\qqty{f, f^\prime, g, h} \in F \downarrow G$について、以下が成り立つ。
-  \eq*{
-    \qqty{f, f^\prime, g, h} \in \Hom_{F \downarrow G}\qty(\qqty{f_1, f_1, d_1, e_1}, \qqty{f_2, f_2, d_2, e_2}) \defiff f = f_1 \land f^\prime = f_2 \land g \in \Hom_{\bm{D}}(d_1, d_2) \land h \in \Hom_{\bm{E}}(e_1, e_2)
-  }
-}
+\lsubsection{極限}
 
 \dfn{定値関手}{
   圏$\bm{C}, \bm{D}$と、対象$a \in \Obj_{\bm{C}}$について、$\bm{D}$上の以下で定める関数$\Delta_a$を考える。
@@ -1052,51 +959,6 @@
   このとき$\Delta_a$は、$\bm{D}$から$\bm{C}$への関手である。
   この$\Delta_a$を、定値関手と呼ぶ。
 }
-
-\dfn{関手上方から成る圏}{
-  圏$\bm{C}, \bm{D}$、終圏$\bm{1}$、関手$F \colon \bm{D} \to \bm{C}$、対象$a \in \Obj_{\bm{C}}$、定値関手$\Delta_a \colon \bm{1} \to \bm{C}$を考える。
-
-  コンマ圏$F \downarrow \Delta_a$を、$a$の関手$F$上方から成る圏と呼び、$F \downarrow a$で表す。
-
-  また、コンマ圏$\Delta_a \downarrow F$を、$a$の関手$F$下方から成る圏と呼び、$a \downarrow F$で表す。
-}
-
-\lem{関手上方から成る圏と普遍射}{
-  圏$\bm{C}, \bm{D}$、関手$F \colon \bm{D} \to \bm{C}$、対象$a \in \Obj_{\bm{C}}$を考える。
-
-  このとき、対象$x \in \Obj_{\bm{D}}$と射$u \colon F(x) \to a$について、以下の\num{2}つは同値である。
-  \begin{enumerate}
-    \item $x, u$は、$F$から$a$への普遍射である。
-    \item $\qqty{u, u, x, \ast}$は、関手上方から成る圏$F \downarrow a$の終対象である。
-  \end{enumerate}
-}{
-  $1. \rightarrow 2.$を示す。
-
-  対象$y \in \Obj_{\bm{D}}$と$\bm{C}$の射$f \colon F(y) \to a$について、普遍性より$\bm{D}$の射$g \colon y \to x$が一意に存在して、$f = u \circ F(g)$である。
-
-  よって、$F \downarrow a$の射$\qqty{f, u, g, \ast} \colon \qqty{f, f, y, \ast} \to \qqty{u, u, x, \ast}$が存在する。
-
-  $F \downarrow a$の射$\qqty{f, u, g^\prime, \ast} \colon \qqty{f, f, y, \ast} \to \qqty{u, u, x, \ast}$が存在するとする。
-
-  定義より$f = u \circ F(g^\prime)$であるので、普遍性より$g = g^\prime$である。
-
-  \vskip\baselineskip
-
-  $2. \rightarrow 1.$を示す。
-
-  対象$y \in \Obj_{\bm{D}}$と射$f \colon F(y) \to a$について、$F \downarrow a$の射$\qqty{f, u, g, \ast} \colon \qqty{f, f, y, \ast} \to \qqty{u, u, x, \ast}$が一意に存在する。
-
-  すなわち、$\bm{D}$の$g \colon y \to x$が存在して、$f = u \circ F(g)$である。
-
-  $\bm{D}$の$g^\prime \colon y \to x$が存在して、$f = u \circ F(g^\prime)$とする。
-
-  $F \downarrow a$の射$\qqty{f, u, g^\prime, \ast} \colon \qqty{f, f, y, \ast} \to \qqty{u, u, x, \ast}$が存在するので、$\qqty{f, u, g, \ast} = \qqty{f, u, g^\prime, \ast}$である。
-
-  したがって、$g = g^\prime$である。
-}
-
-
-\lsubsection{極限}
 
 \dfn{対角関手}{
   圏$\bm{C}, \bm{D}$について、$\bm{C}$上の以下で定める関数$\Delta$を考える。
@@ -1142,6 +1004,46 @@
   圏$\bm{C}, \bm{D}$と、対角関手$\Delta \colon \bm{C} \to \Func(\bm{D}, \bm{C})$を考える。
 
   関手$X \colon \bm{D} \to \bm{C}$について、$\Id_X$から$\Delta$への余普遍射を、$X$の余極限と呼ぶ。
+}
+
+\dfn{空圏}{
+  以下で定める類$\bm{A}$を考える。
+  \eq*{
+    f \in \bm{A} \defiff \bot
+  }
+
+  このとき$\bm{A}$は、圏である。
+  この$\bm{A}$を、空圏と呼ぶ。
+}
+
+\lem{空圏の極限と終対象}{
+  圏$\bm{C}$、空圏$\bm{0}$、関手$N \colon \bm{0} \to \bm{C}$を考える。
+
+  このとき、$\Func(\bm{0}, \bm{C})$は$\Id_N$を自然変換としてもつ終圏となる。
+
+  このとき、対象$x \in \Obj_{\bm{C}}$について、以下の\num{2}つは同値である。
+  \begin{enumerate}
+    \item $x$は、$\bm{C}$の終対象である。
+    \item $x, \Id_N$は、$N$の極限である。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  任意の対象$y \in \Obj_{\bm{C}}$と自然変換$u \colon \Delta(y) \to \Id_N$を考える。
+
+  終対象の普遍性より、射$h \colon y \to x$は一意に存在する。
+
+  $u = \Id_N = \Id_N \circ \Id_N = \pi \circ \Delta(h)$より成り立つ。
+
+  \vskip\baselineskip
+
+  $2. \rightarrow 1.$を示す。
+
+  任意の対象$y \in \Obj_{\bm{C}}$を考える。
+
+  極限の普遍性より、射$h \colon y \to x$が一意に存在して、$\Id_N = \Id_N \circ \Delta(h)$である。
+
+  $h^\prime \colon y \to x$が存在するとき、$\Id_N = \Id_N \circ \Delta(h^\prime)$が成り立つので、極限の普遍性より$h = h^\prime$である。
 }
 
 \dfn{積}{
@@ -1465,7 +1367,7 @@
 \end{center}
 
 
-\lsubsection{引き戻し}
+\lsubsection{二項積と引き戻し}
 
 \dfnf{\num{2}つの対象からなる離散圏}{2つの対象からなる離散圏}{
   相異なる\num{2}つの対象$0, 1$について、以下の類$\bm{A}$を考える。
@@ -1493,7 +1395,7 @@
   \begin{minipage}{0.3\linewidth}
     $\bm{C}$ \\
     \begin{tikzcd}
-      y \ar[r, "h", red, dotted] \ar[rd, "u(0)"'] \ar[rr, "u(1)", bend left=30] & a \times b \ar[d, "\pi(0)"] \ar[r, "\pi(1)"'] & b \\
+      y \ar[r, "h", red, dotted] \ar[rd, "u(0)"'] \ar[rr, "u(1)", bend left=45] & a \times b \ar[d, "\pi(0)"] \ar[r, "\pi(1)"'] & b \\
       & a & \\
     \end{tikzcd}
   \end{minipage}
@@ -1650,71 +1552,6 @@
   引き戻しの普遍性より、一意な射$h \colon y \to x$が存在して、$u_0 = \pi_0 \circ h \land u_1 = \pi_1 \circ h$である。
 }
 
-\dfn{スライス圏}{
-  圏$\bm{C}$と、対象$a \in \Obj_{\bm{C}}$について、$a$の関手$\id_{\bm{C}}$上方から成る圏$\id_{\bm{C}} \downarrow a$を考える。
-
-  この$\id_{\bm{C}} \downarrow a$を、$\bm{C}$における$a$のスライス圏と呼び、$\bm{C} \downarrow a$で表す。
-}
-
-\cor*{
-  圏$\bm{C}$と対象$a \in \Obj_{\bm{C}}$を考える。
-
-  $\qqty{a, a, a, \ast}$は、スライス圏$\bm{C} \downarrow a$の終対象である。
-}
-
-\lem{引き戻しとスライス圏の二項積}{
-  圏$\bm{C}$と、以下を満たす射$f, g \in \bm{C}$を考える。
-  \eq*{
-    \cod(f) = \cod(g)
-  }
-
-  対象$x \in \Obj_{\bm{C}}$と、$\bm{C}$の射$\pi_0 \colon x \to \dom(f), \pi_1 \colon x \to \dom(g)$について、以下の\num{2}つは同値である。
-  \begin{enumerate}
-    \item $x, \qty(\pi_0, \pi_1)$は、$f, g$の引き戻しである。
-    \item $\bm{C} \downarrow \cod(f)$について、以下は$\qqty{f, f, \dom(f), \ast}, \qqty{g, g, \dom(g), \ast}$の二項積である。
-    \begin{itemize}
-      \item $\qqty{f \circ \pi_0, f \circ \pi_0, x, \ast}, \qty(\qqty{f \circ \pi_0, f, \pi_0, \ast}, \qqty{f \circ \pi_0, g, \pi_1, \ast})$
-    \end{itemize}
-  \end{enumerate}
-}{
-  $1. \rightarrow 2.$を示す。
-
-  射$u \in \bm{C}$であって$\cod(u) = \cod(f)$を満たすものを考える。
-
-  $\bm{C}$の射$u_0 \colon \dom(u) \to \dom(f), u_1 \colon \dom(u) \to \dom(g)$であって$u = f \circ u_0 = g \circ u_1$を満たすものを考える。
-
-  引き戻しの普遍性から一意な射$h \colon \dom(u) \to x$が存在して、$u_0 = \pi_0 \circ h \land u_1 = \pi_1 \circ h$である。
-
-  したがって、以下の\num{2}つを満たす。
-  \eqg*{
-    \qqty{f \circ u_0, f, u_0, \ast} = \qqty{f \circ \pi_0, f, \pi_0, \ast} \circ \qqty{f \circ \pi_0 \circ h, f \circ \pi_0, h, \ast} \\*
-    \qqty{g \circ u_1, g, u_1, \ast} = \qqty{g \circ \pi_1, g, \pi_1, \ast} \circ \qqty{g \circ \pi_1 \circ h, g \circ \pi_1, h, \ast}
-  }
-
-  一意性は、引き戻しの普遍性より明らか。
-
-  \vskip\baselineskip
-
-  $2. \rightarrow 1.$を示す。
-
-  対象$y \in \Obj_{\bm{C}}$と、以下を満たす射$u_0 \colon y \to \dom(f), u_1 \colon y \to \dom(g)$を考える。
-  \eq*{
-    f \circ u_0 = g \circ u_1
-  }
-
-  $\dom(\qty(u_0, f)) = \dom(\qty(u_1, g))$である。
-
-  二項積の普遍性から一意な射$h \colon y \to x$が存在して、以下の\num{2}つを満たす。
-  \eqg*{
-    \qqty{f \circ u_0, f, u_0, \ast} = \qqty{f \circ \pi_0, f, \pi_0, \ast} \circ \qqty{f \circ \pi_0 \circ h, f \circ \pi_0, h, \ast} \\*
-    \qqty{g \circ u_1, g, u_1, \ast} = \qqty{g \circ \pi_1, g, \pi_1, \ast} \circ \qqty{g \circ \pi_1 \circ h, g \circ \pi_1, h, \ast}
-  }
-
-  定義より$u_0 = \pi_0 \circ h \land u_1 = \pi_1 \circ h$である。
-
-  一意性は、二項積の普遍性より明らか。
-}
-
 \lem{モノの引き戻しはモノ}{
   圏$\bm{C}$と、以下を満たす射$f, g \in \bm{C}$を考える。
   \eq*{
@@ -1819,19 +1656,299 @@
   \lemref{逆射の一意性}より、$\pi_0 = \delta^{-1} = \pi_1$である。
 }
 
-\dfn{点}{
-  圏$\bm{C}$が、終対象$1$を持つとする。
 
-  このとき、以下を満たす射$f \in \bm{C}$を点と呼ぶ。
+\lsubsection{コンマ圏}
+
+\dfn{可換四角形}{
+  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
+
+  射$f, f^\prime \in \bm{C}$、$g \in \bm{D}$、$h \in \bm{E}$であって以下の\num{2}つを満たすものを考える。
+  \eqg*{
+    \dom(F(g)) = \dom(f) \land \cod(F(g)) = \dom(f^\prime) \land \cod(f) = \dom(G(h)) \land \cod(G(h)) = \cod(f^\prime) \\
+    f^\prime \circ F(g) = G(h) \circ f
+  }
+
+  このとき、組$\qqty{f, f^\prime, g, h}$を、$F$と$G$による可換四角形と呼ぶ。
+}
+
+\begin{center}
+  \begin{minipage}{0.1\linewidth}
+    $\bm{D}$ \\
+    \begin{tikzcd}
+      \phantom{A} \ar[d, "g"'] \\
+      \phantom{A} \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.2\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      \phantom{A} \ar[r, "f"] \ar[d, "F(g)"'] & \phantom{A} \ar[d, "G(h)"] \\
+      \phantom{A} \ar[r, "f^\prime"] & \phantom{A} \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.1\linewidth}
+    $\bm{E}$ \\
+    \begin{tikzcd}
+      \phantom{A} \ar[d, "h"] \\
+      \phantom{A} \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\rem{射としての可換四角形}{
+  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
+
+  $F$と$G$による可換四角形について、$=, \dom, \cod, \Comp$を以下で定めることにより、\subsecref{射の公理}を満たす。
+  $F$と$G$による可換四角形$\qqty{f_1, f^\prime_1, g_1, h_1}, \qqty{f_2, f^\prime_2, g_2, h_2}, \qqty{f_3, f^\prime_3, g_3, h_3}$について、
+  \begin{enumerate}
+    \item $\qqty{f_1, f^\prime_1, g_1, h_1} = \qqty{f_2, f^\prime_2, g_2, h_2} \defiff f_1 = f_2 \land f^\prime_1 = f^\prime_2 \land g_1 = g_2 \land h_1 = h_2$
+    \item $\dom(\qqty{f_1, f^\prime_1, g_1, h_1}) \coloneqq \qqty{f_1, f_1, \dom(g_1), \dom(h_1)}$
+    \item $\cod(\qqty{f_1, f^\prime_1, g_1, h_1}) \coloneqq \qqty{f^\prime_1, f^\prime_1, \cod(g_1), \cod(h_1)}$
+    \item $\Comp(\qqty{f_1, f^\prime_1, g_1, h_1}, \qqty{f_2, f^\prime_2, g_2, h_2}, \qqty{f_3, f^\prime_3, g_3, h_3}) \defiff f_3 = f_1 \land f^\prime_3 = f^\prime_2 \land g_3 = g_2 \circ g_1 \land h_3 = h_2 \circ h_1$
+  \end{enumerate}
+}
+
+\dfn{コンマ圏}{
+  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
+
+  射$f, f^\prime, g, h$について、以下で定める類$F \downarrow G$を考える。
   \eq*{
-    \dom(f) = 1
+    \qqty{f, f^\prime, g, h} \in F \downarrow G \defiff \text{$\qqty{f, f^\prime, g, h}$は$F$と$G$による可換四角形}
+  }
+
+  このとき$F \downarrow G$は圏である。
+  この$F \downarrow G$を、$F$と$G$のコンマ圏と呼ぶ。
+}
+
+\cor{コンマ圏の双対}{
+  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
+
+  以下で定める関手$H \colon \qty(F \downarrow G)^\opp \to G^\opp \downarrow F^\opp$は圏同型である。
+  \eq*{
+    H(\qqty{f, f^\prime, g, h}^\opp) \coloneqq \qqty{\qty(f^\prime)^\opp, f^\opp, h, g}
   }
 }
 
-\dfn{ファイバー}{
-  圏$\bm{C}$が、終対象$1$を持つとする。
+\cor*{
+  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
 
-  射$f \in \bm{C}$と、点$y \colon 1 \to \cod(f)$について、$f, y$の引き戻しを、$y$上の$f$のファイバーと呼ぶ。
+  射$\qqty{f, f^\prime, g, h} \in F \downarrow G$について、以下が成り立つ。
+  \eq*{
+    \qqty{f, f^\prime, g, h} \in \Obj_{F \downarrow G} \defiff f = f^\prime \land g \in \Obj_{\bm{D}} \land h \in \Obj_{\bm{E}}
+  }
+}
+
+\cor*{
+  圏$\bm{C}, \bm{D}, \bm{E}$と、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$を考える。
+
+  $\qqty{f_1, f_1, d_1, e_1}, \qqty{f_2, f_2, d_2, e_2} \in \Obj_{F \downarrow G}$を考える。
+
+  射$\qqty{f, f^\prime, g, h} \in F \downarrow G$について、以下が成り立つ。
+  \eq*{
+    \qqty{f, f^\prime, g, h} \in \Hom_{F \downarrow G}\qty(\qqty{f_1, f_1, d_1, e_1}, \qqty{f_2, f_2, d_2, e_2}) \defiff f = f_1 \land f^\prime = f_2 \land g \in \Hom_{\bm{D}}(d_1, d_2) \land h \in \Hom_{\bm{E}}(e_1, e_2)
+  }
+}
+
+\dfn{コンマ圏の射影関手}{
+  圏$\bm{C}, \bm{D}, \bm{E}$、関手$F \colon \bm{D} \to \bm{C}, G \colon \bm{E} \to \bm{C}$と、コンマ圏$F \downarrow G$について、
+  以下で定める$F \downarrow G$上の関数$U_\text{L}, U_\text{R}$を考える。
+  \eqa*{
+    U_\text{L}\qty(\qqty{f, f^\prime, g, h}) &\coloneqq g \\
+    U_\text{R}\qty(\qqty{f, f^\prime, g, h}) &\coloneqq h
+  }
+
+  このとき$U_\text{L}$は$F \downarrow G$から$\bm{D}$への関手であり、
+  $U_\text{R}$は$F \downarrow G$から$\bm{E}$への関手である。
+  この$U_\text{L}$を$F \downarrow G$の左射影関手と呼び、$U_\text{R}$を$F \downarrow G$の右射影関手と呼ぶ。
+}
+
+\dfn{コンマ圏の射影を保つ関手}{
+  圏$\bm{C}, \bm{C^\prime}, \bm{D}, \bm{E}$、
+  関手$F \colon \bm{D} \to \bm{C}, F^\prime \colon \bm{D} \to \bm{C^\prime}, G \colon \bm{E} \to \bm{C}, G^\prime \colon \bm{E} \to \bm{C^\prime}$と、
+  コンマ圏$F \downarrow G, F^\prime \downarrow G^\prime$を考える。
+
+  $F \downarrow G, F^\prime \downarrow G^\prime$のそれぞれの左射影関手を$U_\text{L}, U_\text{L}^\prime$、それぞれの右射影関手を$U_\text{R}, U_\text{R}^\prime$とする。
+
+  このとき、以下を満たす関手$T \colon F \downarrow G \to F^\prime \downarrow G^\prime$を、射影を保つ関手と呼ぶ。
+  \eq*{
+    U_\text{L} = U_\text{L}^\prime \circ T \land U_\text{R} = U_\text{R}^\prime \circ T
+  }
+}
+
+\cor*{
+  圏$\bm{C}, \bm{C^\prime}, \bm{D}, \bm{E}$、
+  関手$F \colon \bm{D} \to \bm{C}, F^\prime \colon \bm{D} \to \bm{C^\prime}, G \colon \bm{E} \to \bm{C}, G^\prime \colon \bm{E} \to \bm{C^\prime}$と、
+  コンマ圏$F \downarrow G, F^\prime \downarrow G^\prime$を考える。
+
+  射影を保つ圏同型$T \colon F \downarrow G \to F^\prime \downarrow G^\prime$について、圏同型の定義より$S \colon F^\prime \downarrow G^\prime \to F \downarrow G$が存在して、$S \circ T = \id_{F \downarrow G} \land T \circ S = \id_{F^\prime \downarrow G^\prime}$である。
+
+  このとき、$S$は射影を保つ関手である。
+}
+
+\dfn{関手上方から成る圏}{
+  圏$\bm{C}, \bm{D}$、終圏$\bm{1}$、関手$F \colon \bm{D} \to \bm{C}$、対象$a \in \Obj_{\bm{C}}$、定値関手$\Delta_a \colon \bm{1} \to \bm{C}$を考える。
+
+  コンマ圏$F \downarrow \Delta_a$を、$a$の関手$F$上方から成る圏と呼び、$F \downarrow a$で表す。
+
+  また、コンマ圏$\Delta_a \downarrow F$を、$a$の関手$F$下方から成る圏と呼び、$a \downarrow F$で表す。
+}
+
+\lem{普遍射と関手上方から成る圏の終対象}{
+  圏$\bm{C}, \bm{D}$、関手$F \colon \bm{D} \to \bm{C}$、対象$c \in \Obj_{\bm{C}}$を考える。
+
+  このとき、対象$x \in \Obj_{\bm{D}}$と射$u \colon F(x) \to c$について、以下の\num{2}つは同値である。
+  \begin{enumerate}
+    \item $x, u$は、$F$から$c$への普遍射である。
+    \item $\qqty{u, u, x, \ast}$は、関手上方から成る圏$F \downarrow c$の終対象である。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  対象$y \in \Obj_{\bm{D}}$と$\bm{C}$の射$f \colon F(y) \to c$について、普遍性より$\bm{D}$の射$g \colon y \to x$が一意に存在して、$f = u \circ F(g)$である。
+
+  よって、$F \downarrow c$の射$\qqty{f, u, g, \ast} \colon \qqty{f, f, y, \ast} \to \qqty{u, u, x, \ast}$が存在する。
+
+  $F \downarrow c$の射$\qqty{f, u, g^\prime, \ast} \colon \qqty{f, f, y, \ast} \to \qqty{u, u, x, \ast}$が存在するとする。
+
+  定義より$f = u \circ F(g^\prime)$であるので、普遍性より$g = g^\prime$である。
+
+  \vskip\baselineskip
+
+  $2. \rightarrow 1.$を示す。
+
+  対象$y \in \Obj_{\bm{D}}$と射$f \colon F(y) \to c$について、$F \downarrow c$の射$\qqty{f, u, g, \ast} \colon \qqty{f, f, y, \ast} \to \qqty{u, u, x, \ast}$が一意に存在する。
+
+  すなわち、$\bm{D}$の$g \colon y \to x$が存在して、$f = u \circ F(g)$である。
+
+  $\bm{D}$の$g^\prime \colon y \to x$が存在して、$f = u \circ F(g^\prime)$とする。
+
+  $F \downarrow c$の射$\qqty{f, u, g^\prime, \ast} \colon \qqty{f, f, y, \ast} \to \qqty{u, u, x, \ast}$が存在するので、$\qqty{f, u, g, \ast} = \qqty{f, u, g^\prime, \ast}$である。
+
+  したがって、$g = g^\prime$である。
+}
+
+\dfn{スライス圏}{
+  圏$\bm{C}$と、対象$a \in \Obj_{\bm{C}}$について、$a$の関手$\id_{\bm{C}}$上方から成る圏$\id_{\bm{C}} \downarrow a$を考える。
+
+  この$\id_{\bm{C}} \downarrow a$を、$\bm{C}$における$a$のスライス圏と呼び、$\bm{C} \downarrow a$で表す。
+}
+
+\cor*{
+  圏$\bm{C}$と対象$a \in \Obj_{\bm{C}}$を考える。
+
+  $\qqty{a, a, a, \ast}$は、スライス圏$\bm{C} \downarrow a$の終対象である。
+}
+
+\lem{引き戻しとスライス圏の二項積}{
+  圏$\bm{C}$と、以下を満たす射$f, g \in \bm{C}$を考える。
+  \eq*{
+    \cod(f) = \cod(g)
+  }
+
+  対象$x \in \Obj_{\bm{C}}$と、$\bm{C}$の射$\pi_0 \colon x \to \dom(f), \pi_1 \colon x \to \dom(g)$について、以下の\num{2}つは同値である。
+  \begin{enumerate}
+    \item $x, \qty(\pi_0, \pi_1)$は、$f, g$の引き戻しである。
+    \item $\bm{C} \downarrow \cod(f)$について、以下は$\qqty{f, f, \dom(f), \ast}, \qqty{g, g, \dom(g), \ast}$の二項積である。
+    \begin{itemize}
+      \item $\qqty{f \circ \pi_0, f \circ \pi_0, x, \ast}, \qty(\qqty{f \circ \pi_0, f, \pi_0, \ast}, \qqty{f \circ \pi_0, g, \pi_1, \ast})$
+    \end{itemize}
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  射$u \in \bm{C}$であって$\cod(u) = \cod(f)$を満たすものを考える。
+
+  $\bm{C}$の射$u_0 \colon \dom(u) \to \dom(f), u_1 \colon \dom(u) \to \dom(g)$であって$u = f \circ u_0 = g \circ u_1$を満たすものを考える。
+
+  引き戻しの普遍性から一意な射$h \colon \dom(u) \to x$が存在して、$u_0 = \pi_0 \circ h \land u_1 = \pi_1 \circ h$である。
+
+  したがって、以下の\num{2}つを満たす。
+  \eqg*{
+    \qqty{f \circ u_0, f, u_0, \ast} = \qqty{f \circ \pi_0, f, \pi_0, \ast} \circ \qqty{f \circ \pi_0 \circ h, f \circ \pi_0, h, \ast} \\*
+    \qqty{g \circ u_1, g, u_1, \ast} = \qqty{g \circ \pi_1, g, \pi_1, \ast} \circ \qqty{g \circ \pi_1 \circ h, g \circ \pi_1, h, \ast}
+  }
+
+  一意性は、引き戻しの普遍性より明らか。
+
+  \vskip\baselineskip
+
+  $2. \rightarrow 1.$を示す。
+
+  対象$y \in \Obj_{\bm{C}}$と、以下を満たす射$u_0 \colon y \to \dom(f), u_1 \colon y \to \dom(g)$を考える。
+  \eq*{
+    f \circ u_0 = g \circ u_1
+  }
+
+  $\dom(\qty(u_0, f)) = \dom(\qty(u_1, g))$である。
+
+  二項積の普遍性から一意な射$h \colon y \to x$が存在して、以下の\num{2}つを満たす。
+  \eqg*{
+    \qqty{f \circ u_0, f, u_0, \ast} = \qqty{f \circ \pi_0, f, \pi_0, \ast} \circ \qqty{f \circ \pi_0 \circ h, f \circ \pi_0, h, \ast} \\*
+    \qqty{g \circ u_1, g, u_1, \ast} = \qqty{g \circ \pi_1, g, \pi_1, \ast} \circ \qqty{g \circ \pi_1 \circ h, g \circ \pi_1, h, \ast}
+  }
+
+  定義より$u_0 = \pi_0 \circ h \land u_1 = \pi_1 \circ h$である。
+
+  一意性は、二項積の普遍性より明らか。
+}
+
+\lem{同型射とスライス圏の圏同型}{
+  圏$\bm{C}$と対象$x, y \in \Obj_{\bm{C}}$について、以下が成り立つ。
+  \begin{enumerate}
+    \item 同型射$u \colon x \to y$が存在する。
+    \item 射影を保つ圏同型$T \colon \bm{C} \downarrow x \to \bm{C} \downarrow y$が存在する。
+  \end{enumerate}
+}{
+  $\bm{C} \downarrow x, \bm{C} \downarrow y$の左射影関手を$U_x, U_y$とする。
+
+  \vskip\baselineskip
+
+  $1. \rightarrow 2.$を示す。
+
+  関手$T \colon \bm{C} \downarrow x \to \bm{C} \downarrow y$を考える。
+  \eq*{
+    T\qty(\qqty{g \circ f, g, f, \ast}) \coloneqq \qqty{u \circ g \circ f, u \circ g, f, \ast}
+  }
+
+  以下で定める関手$T^{-1} \colon \bm{C} \downarrow y \to \bm{C} \downarrow x$が構成できるので、$T$は圏同型である。
+  \eq*{
+    T^{-1}\qty(\qqty{g \circ f, g, f, \ast}) \coloneqq \qqty{u^{-1} \circ g \circ f, u^{-1} \circ g, f, \ast}
+  }
+
+  右射影関手については明らかである。
+
+  左射影関手について、以下を満たす。
+  \eq*{
+    U_x\qty(\qqty{g \circ f, g, f, \ast}) = f = U_y\qty(\qqty{u \circ g \circ f, u \circ g, f, \ast}) = \qty(U_y \circ T)\qty(\qqty{g \circ f, g, f, \ast})
+  }
+
+  \vskip\baselineskip
+
+  $2. \rightarrow 1.$を示す。
+
+  圏同型より、$T^{-1} \colon \bm{C} \downarrow y \to \bm{C} \downarrow x$が存在して、$T^{-1} \circ T = \id_{\bm{C} \downarrow x} \land T \circ T^{-1} = \id_{\bm{C} \downarrow y}$である。
+
+  $\hat{x} \coloneqq \qqty{x, x, x, \ast}$は$\bm{C} \downarrow x$の終対象である。
+
+  \vskip\baselineskip
+
+  $T\qty(\hat{x})$が$\bm{C} \downarrow y$の終対象であることを示す。
+
+  任意の$q \in \bm{C} \downarrow y$について、一意な射$h \colon T^{-1}(q) \to \hat{x}$が存在するので、射$T(h) \colon q \to T(\hat{x})$が存在する。
+
+  射$h^\prime \colon q \to T(\hat{x})$について、終対象の普遍性より$T^{-1}(h^\prime) = h$であるので、$h^\prime = T(T^{-1}(h^\prime)) = T(h)$である。
+
+  \vskip\baselineskip
+
+  $U_x = U_y \circ T$より、射$u \colon x \to y$を用いて$T(\hat{x}) = \qqty{u, u, x, \ast}$と書ける。
+
+  $T(\hat{x}), \qqty{y, y, y, \ast}$はともに$\bm{C} \downarrow y$の終対象であるので、同型射$\qqty{y, u, v, \ast}$が存在する。
+
+  したがって、$u \circ v = y$である。
+
+  射$\hat{x}^\prime \coloneqq \qqty{u, u, v \circ u, \ast} \in \bm{C} \downarrow y$は、$\hat{x}^\prime \colon \hat{x} \to \hat{x}$である。
+
+  終対象の普遍性より、$\hat{x} = \hat{x}^\prime$すなわち$v \circ u = x$である。
 }
 
 
@@ -1856,10 +1973,7 @@
     \begin{itemize}
       \item $\forall c \in \Obj_{\bm{C}} \qty(\text{$G(c), \epsilon(c)$は、$F$から$c$への普遍射である})$
     \end{itemize}
-    \item 関手$G \colon \bm{C} \to \bm{D}$と自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}$が存在して、以下が成り立つ。
-    \begin{itemize}
-      \item $\forall c \in \Obj_{\bm{C}} \forall d \in \Obj_{\bm{D}} \forall f \in \Hom_{\bm{C}}\qty(F(d), c) \exists! g \in \Hom_{\bm{D}}\qty(d, G(c)) \qty(f = \epsilon(c) \circ F(g))$
-    \end{itemize}
+    \item 関手$G \colon \bm{C} \to \bm{D}$と射影を保つ圏同型$T \colon F \downarrow \id_{\bm{C}} \to \id_{\bm{D}} \downarrow G$が存在する。
     \item 関手$G \colon \bm{C} \to \bm{D}$と自然変換$\epsilon \colon F \circ G \to \id_{\bm{C}}, \eta \colon \id_{\bm{D}} \to G \circ F$が存在して、以下が成り立つ。
     \begin{itemize}
       \item $\Id_F = \qty(\epsilon \ast \Id_F) \circ \qty(\Id_F \ast \eta)$
@@ -1904,65 +2018,125 @@
 
   \vskip\baselineskip
 
-  $2. \rightarrow 1.$は、明らか。
+  $2. \rightarrow 3.$を示す。
+
+  可換四角形$\qqty{f, f^\prime, v, u} \in F \downarrow \id_{\bm{C}}$を考える。
+
+  普遍性より一意な射$\bar{f} \colon \dom(v) \to G(\dom(u))$が存在して、$f = \epsilon(\dom(u)) \circ F\qty(\bar{f})$を満たす。
+
+  普遍性より一意な射$\bar{f^\prime} \colon \cod(v) \to G(\cod(u))$が存在して、$f^\prime = \epsilon(\cod(u)) \circ F\qty(\bar{f^\prime})$を満たす。
+
+  ここで、可換四角形の性質と$\epsilon$の自然性より、以下が成り立つ。
+  \eqa*{
+    \epsilon(\cod(u)) \circ F(\bar{f^\prime} \circ v)
+    &= \epsilon(\cod(u)) \circ F(\bar{f^\prime}) \circ F(v) \\
+    &= f^\prime \circ F(v) \\
+    &= u \circ f \\
+    &= u \circ \epsilon(\dom(u)) \circ F(\bar{f}) \\
+    &= \epsilon(\cod(u)) \circ \qty(F \circ G)(u) \circ F(\bar{f}) \\
+    &= \epsilon(\cod(u)) \circ F\qty(G(u) \circ \bar{f})
+  }
+
+  普遍性より、$\bar{f^\prime} \circ v = G(u) \circ \bar{f}$であるので、$\qqty{\bar{f}, \bar{f^\prime}, v, u} \in \id_{\bm{D}} \downarrow G$である。
+
+  以下で定める$F \downarrow \id_{\bm{C}}$上の関数$T$は、$F \downarrow \id_{\bm{C}}$から$\id_{\bm{D}} \downarrow G$への関手である。
+  \eq*{
+    T\qty(\qqty{f, f^\prime, v, u}) \coloneqq \qqty{\bar{f}, \bar{f^\prime}, v, u}
+  }
+
+  定義より、$T$は射影を保つ。
 
   \vskip\baselineskip
 
-  $2. \rightarrow 3.$は、普遍射の定義より明らか。
+  可換四角形$\qqty{g, g^\prime, v, u} \in \id_{\bm{D}} \downarrow G$を考える。
+
+  ここで、可換四角形の性質と$\epsilon$の自然性より、以下が成り立つ。
+  \eqa*{
+    u \circ \epsilon(\dom(u)) \circ F(g)
+    &= \epsilon(\cod(u)) \circ F(G(u)) \circ F(g) \\
+    &= \epsilon(\cod(u)) \circ F(G(u) \circ g) \\
+    &= \epsilon(\cod(u)) \circ F(g^\prime \circ v) \\
+    &= \epsilon(\cod(u)) \circ F(g^\prime) \circ F(v)
+  }
+
+  ゆえに、$\qqty{\epsilon(\dom(u)) \circ F(g), \epsilon(\cod(u)) \circ F(g^\prime), v, u} \in F \downarrow \id_{\bm{C}}$である。
+
+  以下で定める$\id_{\bm{D}} \downarrow G$上の関数$S$は、$\id_{\bm{D}} \downarrow G$から$F \downarrow \id_{\bm{C}}$への関手である。
+  \eq*{
+    S\qty(\qqty{g, g^\prime, v, u}) \coloneqq \qqty{\epsilon(\dom(u)) \circ F(g), \epsilon(\cod(u)) \circ F(g^\prime), v, u}
+  }
+
+  \vskip\baselineskip
+
+  任意の可換四角形$\qqty{f, f^\prime, v, u} \in F \downarrow \id_{\bm{C}}$について、普遍性より以下が成り立つ。
+  \eqa*{
+    \qty(S \circ T)\qty(\qqty{f, f^\prime, v, u})
+    &= \qqty{\epsilon(\dom(u)) \circ F(\bar{f}), \epsilon(\cod(u)) \circ F(\bar{f^\prime}), v, u} \\
+    &= \qqty{f, f^\prime, v, u}
+  }
+
+  任意の可換四角形$\qqty{g, g^\prime, v, u} \in \id_{\bm{D}} \downarrow G$について、普遍性より以下が成り立つ。
+  \eqa*{
+    \qty(T \circ S)\qty(\qqty{g, g^\prime, v, u})
+    &= \qqty{\bar{\epsilon(\dom(u)) \circ F(g)}, \bar{\epsilon(\cod(u)) \circ F(g^\prime)}, v, u} \\
+    &= \qqty{g, g^\prime, v, u}
+  }
+
+  したがって、$T$は圏同型である。
 
   \vskip\baselineskip
 
   $3. \rightarrow 4.$を示す。
 
-  $3.$について、$c = F(d), f = F(d)$として、以下の命題を満たす。
-  \eq*{
-    \forall d \in \Obj_{\bm{D}} \exists! g \in \Hom_{\bm{D}}\qty(d, \qty(G \circ F)(d)) \qty(F(d) = \epsilon\qty(F(d)) \circ F(g))
-  }
-
-  この命題より定まる$\Obj_{\bm{D}}$上の関数を$\eta$とする。
+  圏同型より、$T^{-1} \colon \id_{\bm{D}} \downarrow G \to F \downarrow \id_{\bm{C}}$が存在して、$T^{-1} \circ T = \id_{F \downarrow \id_{\bm{C}}} \land T \circ T^{-1} = \id_{\id_{\bm{D}} \downarrow G}$である。
 
   \vskip\baselineskip
 
-  $\eta$が自然変換であることを示す。
+  対象$c \in \Obj_{\bm{C}}$について、$\qqty{G(c), G(c), G(c), c} \in \Obj_{\id_{\bm{D}} \downarrow G}$である。
 
-  $\bm{D}$の射$h \colon d \to d^\prime$は以下を満たす。
-  \eqa*{
-    \epsilon\qty(F(d^\prime)) \circ F\qty(\qty(G \circ F)(h) \circ \eta(d))
-    &= \epsilon \qty(F(d^\prime)) \circ \qty(F \circ G \circ F)(h) \circ F\qty(\eta(d)) \\*
-    &= F(h) \circ \epsilon\qty(F(d)) \circ F\qty(\eta(d)) \\*
-    &= F(h) \circ F(d) \\*
-    &= F(h) \\*
-    &= F(d^\prime) \circ F(h) \\*
-    &= \epsilon\qty(F(d^\prime)) \circ F\qty(\eta(d^\prime)) \circ F(h) \\*
-    &= \epsilon\qty(F(d^\prime)) \circ F\qty(\eta(d^\prime) \circ h)
-  }
+  よって射$w \in \bm{C}$が一意に存在して、$T^{-1}\qty(\qqty{G(c), G(c), G(c), c}) = \qqty{w, w, G(c), c}$である。
 
-  一意性より、$\qty(G \circ F)(h) \circ \eta(d) = \eta(d^\prime) \circ h$である。
+  この$w$を与える$\Obj_{\bm{C}}$上の関数$\epsilon$を考える。
 
-  ゆえに、$\eta$は自然変換である。
+  射$f \in \bm{C}$について、$\qqty{G(\dom(f)), G(\cod(f)), G(f), f} \in \id_{\bm{D}} \downarrow G$である。
 
-  $\eta$の定義より、第一式を満たす。
+  $T^{-1}$は射影を保つ関手であるので、$T^{-1}\qty(\qqty{G(\dom(f)), G(\cod(f)), G(f), f}) = \qty(\qqty{\epsilon(\dom(f)), \epsilon(\cod(f)), G(f), f})$である。
 
-  第二式を示す。
-
-  対象$c \in \Obj_{\bm{C}}$を考える。
-
-  $\epsilon$は自然変換であるので、射$w \colon \qty(F \circ G)(c) \to c$について$\epsilon(c) \circ \qty(F \circ G)(w) = w \circ \epsilon\qty(\qty(F \circ G)(c))$である。
-
-  $w = \epsilon(c)$として、$\epsilon(c) \circ \qty(F \circ G)(\epsilon(c)) = \epsilon(c) \circ \epsilon\qty(\qty(F \circ G)(c))$であるので、
-  以下が成り立つ。
-  \eqa*{
-    \epsilon(c) \circ F\qty(G(c))
-    &= \epsilon(c) \circ \epsilon\qty(F\qty(G(c))) \circ F\qty(\eta(G(c))) \\*
-    &= \epsilon(c) \circ \qty(F \circ G)\qty(\epsilon(c)) \circ F\qty(\eta(G(c))) \\*
-    &= \epsilon(c) \circ F \qty\big(\qty(\qty(\Id_G \ast \epsilon) \circ \qty(\eta \ast \Id_G))(c))
-  }
-
-  一意性より、$\qty(\qty(\Id_G \ast \epsilon) \circ \qty(\eta \ast \Id_G))(c) = \Id_G(c)$である。
+  したがって、$\epsilon$は$F \circ G$から$\id_{\bm{C}}$への自然変換である。
 
   \vskip\baselineskip
 
-  $4. \rightarrow 2.$を示す。
+  対象$d \in \Obj_{\bm{D}}$について、$\qqty{F(d), F(d), d, F(d)} \in \Obj_{F \downarrow \id_{\bm{C}}}$である。
+
+  よって射$w \in \bm{D}$が一意に存在して、$T\qty(\qqty{F(d), F(d), d, F(d)}) = \qqty{w, w, d, F(d)}$である。
+
+  この$w$を与える$\Obj_{\bm{D}}$上の関数$\eta$を考える。
+
+  射$g \in \bm{D}$について、$\qqty{F(\dom(g)), F(\cod(g)), g, F(g)} \in F \downarrow \id_{\bm{C}}$である。
+
+  $T$は射影を保つ関手であるので、$T\qty(\qqty{F(\dom(g)), F(\cod(g)), g, F(g)}) = \qty(\qqty{\eta(\dom(g)), \eta(\cod(g)), g, F(g)})$である。
+
+  したがって、$\eta$は$\id_{\bm{D}}$から$G \circ F$への自然変換である。
+
+  \vskip\baselineskip
+
+  対象$d \in \Obj_{\bm{D}}$について、$\qqty{\eta(d), \qty(G \circ F)(d), \eta(d), F(d)} \in \id_{\bm{D}} \downarrow G$である。
+
+  $\epsilon, \eta$の定義と$T^{-1}$が射影を保つことより、$T^{-1}\qty(\qqty{\eta(d), \qty(G \circ F)(d), \eta(d), F(d)}) = \qqty{F(d), \qty(\epsilon \ast \Id_F)(d), \eta(d), F(d)}$である。
+
+  可換四角形より、$\qty(\epsilon \ast \Id_F)(d) \circ \qty(\Id_F \ast \eta)(d) = F(d) \circ F(d) = \Id_F(d)$である。
+
+  \vskip\baselineskip
+
+  対象$c \in \Obj_{\bm{C}}$について、$\qqty{\qty(F \circ G)(c), \epsilon(c), G(c), \epsilon(c)} \in F \downarrow \id_{\bm{C}}$である。
+
+  $\epsilon, \eta$の定義と$T$が射影を保つことより、$T\qty(\qqty{\qty(F \circ G)(c), \epsilon(c), G(c), \epsilon(c)}) = \qqty{\qty(\eta \ast \Id_G)(c), G(c), G(c), \epsilon(c)}$である。
+
+  可換四角形より、$\qty(\Id_G \ast \epsilon)(c) \circ \qty(\eta \ast \Id_G)(c) = G(c) \circ G(c) = \Id_G(c)$である。
+
+  \vskip\baselineskip
+
+  $4. \rightarrow 1.$を示す。
 
   対象$a \in \bm{C}$について、$G(a), \epsilon(a)$が$F$から$a$への普遍射となることを示す。
 
@@ -1991,22 +2165,22 @@
   ゆえに一意である。
 }
 
-$3. \rightarrow 4.$
+$2. \rightarrow 3.$
 \begin{center}
   \begin{minipage}{0.35\linewidth}
     $\bm{D}$ \\
     \begin{tikzcd}
-      d \ar[rr, "\eta(d)", dotted] \ar[d, "h"'] & & \qty(G \circ F)(d) \ar[d, "\qty(G \circ F)(h)"] \\
-      d^\prime \ar[rr, "\eta(d^\prime)", dotted] & & \qty(G \circ F)(d^\prime) \\
+      d \ar[rr, "\bar{f}", dotted] \ar[d, "v"'] & & G(c) \ar[d, "G(u)"] \\
+      d^\prime \ar[rr, "\bar{f^\prime}"', dotted] & & G(c^\prime) \\
     \end{tikzcd}
   \end{minipage}
   \begin{minipage}{0.5\linewidth}
     $\bm{C}$ \\
     \begin{tikzcd}
-      F(d) \ar[rr, "\qty(\Id_F \ast \eta)(d)"] \ar[rrrd, "F(d)"'] \ar[dd, "F(h)"'] & & \qty(F \circ G \circ F)(d) \ar[rd, "\qty(\epsilon \ast \Id_F)(d)"] \ar[dd, "\qty(F \circ G \circ F)(h)", near end] & \\
-      & & & F(d) \ar[dd, "F(h)"] \\
-      F(d^\prime) \ar[rr, "\qty(\Id_F \ast \eta)(d^\prime)"] \ar[rrrd, "F(d^\prime)"'] & & \qty(F \circ G \circ F)(d^\prime) \ar[rd, "\qty(\epsilon \ast \Id_F)(d^\prime)"] & \\
-      & & & F(d^\prime) \\
+      F(d) \ar[rr, "F(\bar{f})"] \ar[rrrd, "f"'] \ar[dd, "F(v)"'] & & \qty(F \circ G)(c) \ar[rd, "\epsilon(c)"] \ar[dd, "\qty(F \circ G)(u)", near end] & \\
+      & & & c \ar[dd, "u"] \\
+      F(d^\prime) \ar[rr, "F(\bar{f^\prime})"] \ar[rrrd, "f^\prime"'] & & \qty(F \circ G)(c^\prime) \ar[rd, "\epsilon(c^\prime)"] & \\
+      & & & c^\prime \\
     \end{tikzcd}
   \end{minipage}
 \end{center}

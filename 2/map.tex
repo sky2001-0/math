@@ -24,6 +24,11 @@
   このとき、$\qty(\qty(X, Y), \qty{\qty(x, f(x)) \mid x \in X})$は写像である。
 
   記号の濫用であるが、この写像を$f$で表す。
+
+  写像の定義$f \coloneqq \qty(\qty(X, Y), \qty{\qty(x, f(x)) \mid x \in X})$を、簡潔に以下でも表す。
+  \eq*{
+    f \colon X \to Y, x \mapsto f(x)
+  }
 }
 
 \dfn{恒等写像}{
@@ -118,21 +123,7 @@
 }
 
 
-\lsubsection{集合の圏の普遍性}
-
-\cor*{
-  任意の単集合は$\mathbf{Set}$の終対象である。
-}
-
-\cor*{
-  空集合は$\mathbf{Set}$の始対象である。
-}
-
-\dfn{空写像}{
-  空集合は$\mathbf{Set}$の始対象であるので、終域$Y$について、始域が空集合である写像は一意に定まる。
-
-  この写像$\varnothing \to Y$を、$Y$の空写像と呼ぶ。
-}
+\lsubsection{像と原像、単射と全射}
 
 \dfn{包含写像}{
   集合$X$と$X$の部分$A$について、以下で定める写像$\iota_{A, X} \colon A \to X$を包含写像と呼ぶ。
@@ -150,316 +141,58 @@
   また、始域の像$f(X)$を$\Im(f)$で表す。
 }
 
-\lem{集合の圏における等化子の存在}{
-  写像$f, g \colon X \to Y$を考える。
-
-  以下で定める$\Eq(f, g), \pi$は、$f, g$の等化子である。
-  \eqg*{
-    \Eq(f, g) \coloneqq \qty{x \in X \mid f(x) = g(x)} \\*
-    \pi \coloneqq \iota_{\Eq(f, g), X}
-  }
-}{
-  定義より$f \circ \pi = g \circ \pi$である。
-
-  \vskip\baselineskip
-
-  $f \circ h = g \circ h$なる$h \colon Z \to X$を考える。
-
-  $\forall z \in Z \qty(f(h(z)) = g(h(z)))$より、$\Im(h) \subset \Eq(f, g)$である。
-
-  ゆえに$k \colon Z \to \Eq(f, g), k(z) \coloneqq h(z)$は写像であり、$h = \pi \circ k$である。
-
-  写像$k^\prime \colon Z \to \Eq(f, g)$であって、$h = \pi \circ k^\prime$とする。
-
-  任意の$z \in Z$について、以下が成り立つ。
-  \eq*{
-    k^\prime(z) = \iota_{\Eq(f, g), X}(k^\prime(z)) = \pi(k^\prime(z)) = h(z) = \pi(k(z)) = \iota_{\Eq(f, g), X}(k(z)) = k(z)
-  }
-
-  したがって一意である。
-}
-
-\lem{集合の圏における小さい積の存在}{
-  小さい離散圏$\bm{J}$と、関手$X \colon \bm{J} \to \mathbf{Set}$を考える。
-
-  以下で定める$\prod X, \pi$は$X$の積である。
-  \eqg*{
-    \prod X \coloneqq \qty{f \in \Hom_{\mathbf{Set}}\qty(\bm{J}, \bigcup \qty{X(j) \mid j \in \bm{J}}) \mid \forall j \in \bm{J} \qty(f(j) \in X(j))} \\*
-    \pi(j) \coloneqq \qty(\qty(\prod X, X(j)), \qty{\qty(f, f(j)) \mid f \in \prod X})
-  }
-}{
-  $\bm{J}$が離散圏であるので、$\pi$は$\Delta(\prod X)$から$\Id_X$への自然変換である。
-
-  対角関手$\Delta \colon \mathbf{Set} \to \Func(\bm{J}, \mathbf{Set})$を考える。
-
-  \vskip\baselineskip
-
-  集合$A$と、自然変換$u \colon \Delta(A) \to \Id_X$について、以下で定める写像$h \colon A \to \prod X$を考える。
-  \eq*{
-    h(a) \coloneqq \qty(\qty(\bm{J}, \bigcup \qty{X(j) \mid j \in \bm{J}}), \qty{\qty(j, u(j)(a)) \mid j \in \bm{J}})
-  }
-
-  定義より、$u = \pi \circ \Delta(h)$である。
-
-  \vskip\baselineskip
-
-  写像$h^\prime \colon A \to \prod X$が、$u = \pi \circ \Delta(h^\prime)$を満たすとする。
-
-  任意の要素$a \in A$と、任意の対象$j \in \bm{J}$について、以下を満たす。
-  \eqa*{
-    h^\prime(a)(j)
-    &= \pi(j)(h^\prime(a)) \\*
-    &= \qty(\pi(j) \circ h^\prime)(a) \\*
-    &= u(j)(a) \\*
-    &= h(a)(j)
-  }
-
-  したがって、$h^\prime = h$である。
-}
-
-\thm{集合の圏における小さい極限の存在}{
-  小さい圏$\bm{J}$と、関手$X \colon \bm{J} \to \mathbf{Set}$について、$X$の極限が存在する。
-}{
-  \lemref{集合の圏における等化子の存在}、\lemref{集合の圏における小さい積の存在}、\thmref{極限の存在定理}より、成り立つ。
-}
-
 \cor*{
-  集合$X, Y$と、以下で定める写像$\pi_0 \colon X \times Y \to X, \pi_1 \colon X \times Y \to Y$を考える。
+  写像$f \colon X \to Y$について、以下が成り立つ。
   \eq*{
-    \pi_0\qty(\qty(x, y)) \coloneqq x
-    \qquad
-    \pi_1\qty(\qty(x, y)) \coloneqq y
+    \forall A_1, A_2 \subset X \qty(A_1 \subset A_2 \rightarrow f(A_1) \subset f(A_2))
   }
-
-  このとき、$X \times Y, \qty(\pi_0, \pi_1)$は$X, Y$の二項積である。
 }
 
-\thm{選択関数の存在}{
-  任意の集合$X$について、写像$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が存在して、以下が成り立つ。
-  \eq*{
-    \forall x \in X \setminus \qty{\varnothing} \qty(f(x) \in x)
-  }
-}{
-  空集合の定義より、以下の命題が成り立つ。
-  \eq*{
-    \forall x \in X \setminus \qty{\varnothing} \exists y \qty(y \in x)
-  }
+\dfn{終域の制限}{
+  写像$f \colon X \to Y$と$Y$の部分$B$について、$\Im(f) \subset B$とする。
 
-  \axiref{Skolem関係の導入}より、$X \setminus \qty{\varnothing}$上の関数$f$が存在する。
+  このとき、写像$\bar{f} \colon X \to B, x \mapsto f(x)$が構成できて、$f = \iota_{B, Y} \circ \bar{f}$が成り立つ。
 
-  任意の$x \in X \setminus \qty{\varnothing}$について、$f(x) \in x$より$f(x) \in \bigcup X$である。
-
-  ゆえに、$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が与えられる。
-}
-
-\lem{非空からなる積は非空}{
-  空でない集合$J$から$\mathbf{Set}$への関手$X$について、以下が成り立つ。
-  \eq*{
-    \forall j \in J \qty(X(j) \neq \varnothing) \rightarrow \prod X \neq \varnothing
-  }
-}{
-  $Z \coloneqq \qty{X(j) \mid j \in J}$について、定義より$Z \neq \varnothing \land \varnothing \notin Z$である。
-
-  \thmref{選択関数の存在}より、写像$f \colon Z \to \bigcup Z$が存在して、$\forall z \in Z \qty(f(z) \in z)$である。
-
-  写像$g \colon J \to \bigcup Z$を$g(j) \coloneqq f(X(j))$で定義すると、$\forall j \in J \qty(g(j) \in X(j))$であるので、$g \in \prod X$である。
-
-  ゆえに、$\prod X \neq \varnothing$である。
+  この$\bar{f}$を、$f$の終域$B$への制限と呼ぶ。
 }
 
 \dfn{原像}{
-  写像$f \colon X \to Y$と$Y$の部分$A$について、以下で定める集合$f^{-1}(A)$を$A$の原像と呼ぶ。
+  写像$f \colon X \to Y$と$Y$の部分$B$について、以下で定める集合$f^{-1}(B)$を$B$の原像と呼ぶ。
   \eq*{
-    f^{-1}(A) \coloneqq \qty{x \in X \mid f(x) \in A}
+    f^{-1}(B) \coloneqq \qty{x \in X \mid f(x) \in B}
+  }
+}
+
+\cor*{
+  写像$f \colon X \to Y$について、以下が成り立つ。
+  \eq*{
+    \forall B_1, B_2 \subset Y \qty(B_1 \subset B_2 \rightarrow f^{-1}(B_1) \subset f^{-1}(B_2))
   }
 }
 
 \lem{原像は引き戻し}{
-  写像$f \colon X \to Y$と、集合$A \subset Y$について、以下で定める写像$\hat{f} \colon f^{-1}(A) \to A$を考える。
-  \eq*{
-    \hat{f}(x) \coloneqq x
-  }
+  写像$f \colon X \to Y$と、集合$B \subset Y$について、$f \circ \iota_{f^{-1}(B), X}$の終域$B$への制限$\bar{f}$を考える。
 
-  $f^{-1}(A), \qty(\hat{f}, \iota_{f^{-1}(A), X})$は、$\iota_{A, Y}, f$の引き戻しである。
+  $f^{-1}(B), \qty(\hat{f}, \iota_{f^{-1}(B), X})$は、$\iota_{B, Y}, f$の引き戻しである。
 }{
-  $\iota_{A, Y} \circ \hat{f} = f \circ \iota_{f^{-1}(A), X}$である。
+  $\iota_{B, Y} \circ \bar{f} = f \circ \iota_{f^{-1}(B), X}$である。
 
-  集合$Z$と、写像$u_0 \colon Z \to A, u_1 \colon Z \to X$について、$\iota_{A, Y} \circ u_0 = f \circ u_1$とする。
+  集合$Z$と、写像$u_0 \colon Z \to B, u_1 \colon Z \to X$について、$\iota_{B, Y} \circ u_0 = f \circ u_1$とする。
 
-  $\Im(\iota_{A, Y} \circ u_0) \subset A$より、$\Im(u_1) \subset f^{-1}(A)$である。
+  $\Im(\iota_{B, Y} \circ u_0) \subset B$より、$\Im(u_1) \subset f^{-1}(B)$である。
 
-  写像$\hat{u}_1 \colon Z \to f^{-1}(A), \hat{u}_1(z) \coloneqq u_1(z)$を考える。
+  ゆえに$u_1$の終域$f^{-1}(B)$への制限$\bar{u}_1$が存在して、$u_1 = \iota_{f^{-1}(B), X} \circ \bar{u}_1$である。
 
-  定義より、$u_1 = \iota_{f^{-1}(A), X} \circ \hat{u}_1$である。
+  定義より、$u_1 = \iota_{f^{-1}(B), X} \circ \bar{u}_1$である。
 
-  $z \in Z$について、$\qty(\hat{f} \circ \hat{u}_1)(z) = f(u_1(z)) = u_0(z)$が成り立つ。
+  $z \in Z$について、$\qty(\bar{f} \circ \bar{u}_1)(z) = f(u_1(z)) = u_0(z)$が成り立つ。
 
-  ゆえに、$u_0 = \hat{f} \circ \hat{u}_1$である。
+  ゆえに、$u_0 = \bar{f} \circ \bar{u}_1$である。
 
-  $h^\prime \colon Z \to f^{-1}(A)$が存在して、$u_1 = \iota_{f^{-1}(A), X} \circ h^\prime \land u_0 = \hat{f} \circ h^\prime$とする。
+  $\bar{u}_1^\prime \colon Z \to f^{-1}(B)$が存在して、$u_1 = \iota_{f^{-1}(B), X} \circ \bar{u}_1^\prime \land u_0 = \bar{f} \circ \bar{u}_1^\prime$とする。
 
-  $u_1 = \iota_{f^{-1}(A), X} \circ h^\prime$より、$h^\prime = \hat{u}_1$である。
+  $u_1 = \iota_{f^{-1}(B), X} \circ \bar{u}_1^\prime$より、$\bar{u}_1^\prime = \bar{u}_1$である。
 }
-
-\dfn{商写像}{
-  集合$Y$と、$Y$の分割$P$について、定義より以下が成り立つ。
-  \eq*{
-    \forall y \in Y \exists! A \in P \qty(y \in A)
-  }
-
-  この命題が定める写像$Y \to P$を、分割$P$の商写像と呼ぶ。
-}
-
-\lem{集合の圏における余等化子の存在}{
-  写像$f, g \colon X \to Y$について、以下で定める集合$P$は$Y$の分割である。
-  \eq*{
-    P \coloneqq \qty{\bigcap \qty{A \subset Y \mid y \in A \land \forall x \in X \qty(f(x) \in A \leftrightarrow g(x) \in A)} \mid y \in Y}
-  }
-
-  さらに、$P$の商写像$q \colon Y \to P$について、$P, q$は余等化子である。
-}{
-  要素$y \in Y$について、集合$B_y \coloneqq \qty{A \subset Y \mid y \in A \land \forall x \in X \qty(f(x) \in A \leftrightarrow g(x) \in A)}$を考える。
-
-  $Y \in B_y$より$B_y \neq \varnothing$であるので、$y \in \bigcap B_y$である。
-
-  定義より$\bigcap B_y \in B_y$であり、$\bigcap B_y \subset Y$である。
-
-  $P = \qty{\bigcap B_y \mid y \in Y}$であることに注意して、$Y = \bigcup P$である。
-
-  \vskip\baselineskip
-
-  $y_1, y_2 \in Y$について、$\exists y \in Y \qty(y \in \qty(\bigcap B_{y_1}) \cap \qty(\bigcap B_{y_2}))$とする。
-
-  任意の$A \in B_{y_1}$について、$y \in \bigcap B_{y_1} \subset A$より、$A \in B_y$である。
-  よって、$B_{y_1} \subset B_y$である。
-
-  $A^\prime \in B_y$について、$y_1 \notin A^\prime$とすると、$y_1 \in Y \setminus A^\prime$より、$Y \setminus A^\prime \in B_{y_1}$である。
-
-  $B_{y_1} \subset B_y$より、$Y \setminus A^\prime \in B_y$であるが、これは$y \in A^\prime$に反する。
-
-  よって$y_1 \in A^\prime$である。
-
-  したがって、$B_y \subset B_{y_1}$である。
-
-  ゆえに$B_{y_1} = B_y$である。
-
-  同様にして、$B_{y_2} = B_y$である。
-
-  $\qty(\bigcap B_{y_1}) \cap \qty(\bigcap B_{y_2}) \rightarrow \bigcap B_{y_1} = \bigcap B_{y_2}$であるので、$P$は$Y$の分割である。
-
-  \vskip\baselineskip
-
-  任意の要素$x \in X$を考える。
-
-  $\bigcap B_{f(x)} \in B_{f(x)}$より$g(x) \in \bigcap B_{f(x)}$であるので、
-  $\bigcap B_{f(x)} \in B_{g(x)}$であり、$\bigcap B_{g(x)} \subset \bigcap B_{f(x)}$が成り立つ。
-
-  同様に$\bigcap B_{f(x)} \subset \bigcap B_{g(x)}$であるので、$\bigcap B_{f(x)} = \bigcap B_{g(x)}$である。
-
-  ゆえに、$\qty(q \circ f)(x) = \bigcap B_{f(x)} = \bigcap B_{g(x)} = \qty(q \circ g)(x)$が成り立つ。
-
-  したがって、$q \circ f = q \circ g$である。
-
-  \vskip\baselineskip
-
-  写像$h \colon Y \to Z$が$h \circ f = h \circ g$を満たすとする。
-
-  任意の要素$y \in Y$について、$y \in h^{-1}\qty(\qty{h(y)})$である。
-
-  任意の要素$x \in X$について、$f(x) \in h^{-1}\qty(\qty{h(y)})$ならば$h(y) = h(f(x)) = h(g(x))$より$g(x) \in h^{-1}\qty(\qty{h(y)})$である。
-
-  同様に、$g(x) \in h^{-1}\qty(\qty{h(y)})$ならば$f(x) \in h^{-1}\qty(\qty{h(y)})$である。
-
-  したがって、$h^{-1}\qty(\qty{h(y)}) \in B_y$であり、$\bigcap B_y \subset h^{-1}\qty(\qty{h(y)})$である。
-
-  任意の要素$y_1, y_2 \in Y$が$\bigcap B_{y_1} = \bigcap B_{y_2}$であるならば、$y_1, y_2 \in h^{-1}\qty(\qty{h(y_1)})$から$h(y_1) = h(y_2)$を満たす。
-
-  したがって、$k \coloneqq \qty(\qty(P, Z), \qty{\qty(\bigcap B_y, h(y)) \mid y \in Y})$は写像である。
-
-  任意の$y \in Y$について$(k \circ q)(y) = k\qty(\bigcap B_y) = h(y)$であるから、$k \circ q = h$が成り立つ。
-
-  \vskip\baselineskip
-
-  一意性を示す。
-
-  写像$k^\prime \colon P \to Z$が$k^\prime \circ q = h$を満たすとする。
-
-  任意の$p \in P$について、定義よりある$y \in Y$が存在して$p = \bigcap B_y$であるので、以下が成り立つ。
-  \eq*{
-    k^\prime(p) = k^\prime\qty(\bigcap B_y) = k^\prime(q(y)) = h(y) = k(q(y)) = k\qty(\bigcap B_y) = k(p)
-  }
-
-  したがって、$k^\prime = k$である。
-}
-
-\dfn{写像が誘導する分割}{
-  写像$f \colon Y \to Z$について、以下で定める集合$P$を考える。
-  \eq*{
-    P \coloneqq \qty{f^{-1}\qty(\qty{z}) \mid z \in \Im(f)}
-  }
-
-  このとき、$P$は$Y$の分割である。
-  $P$を、$f$が誘導する分割と呼ぶ。
-
-  $P$の商写像を、$f$が誘導する商写像と呼ぶ。
-}
-
-\lem{集合の圏における小さい和の存在}{
-  小さい離散圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への関手$X$を考える。
-
-  このとき、以下で定める$\coprod X, \kappa$は$X$の和である。
-  \eqg*{
-    \coprod X \coloneqq \bigcup \qty{\qty{\qty(j, x) \mid x \in X(j)} \mid j \in \bm{J}} \\*
-    \kappa(j) \coloneqq \qty(\qty(X(j), \coprod X), \qty{\qty(x, \qty(j, x)) \mid x \in X(j)})
-  }
-}{
-  対角関手$\Delta \colon \mathbf{Set} \to \Func(\bm{J}, \mathbf{Set})$を考える。
-
-  $\bm{J}$が離散圏であるので、$\kappa$は$\Id_X$から$\Delta(\coprod X)$への自然変換である。
-
-  \vskip\baselineskip
-
-  集合$A$と、自然変換$u \colon \Id_X \to \Delta(A)$を考える。
-
-  以下で定める写像$h \colon \coprod X \to A$を考える。
-  \eq*{
-    h\qty(\qty(j, x)) \coloneqq u(j)(x)
-  }
-
-  任意の要素$x \in X(j)$と任意の射$j \in \bm{J}$について、以下が成り立つ。
-  \eqa*{
-    \qty(h \circ \kappa(j))(x)
-    &= h\qty(\kappa(j)(x)) \\*
-    &= h\qty(\qty(j, x)) \\*
-    &= u(j)(x)
-  }
-
-  ゆえに、$u = \Delta(h) \circ \kappa$が成り立つ。
-
-  \vskip\baselineskip
-
-  写像$h^\prime \colon \coprod X \to A$が$u = \Delta(h^\prime) \circ \kappa$を満たすとする。
-
-  任意の$\qty(j, x) \in \coprod X$について、以下を満たす。
-  \eqa*{
-    h^\prime\qty(\qty(j, x))
-    &= h^\prime(\kappa(j)(x)) \\*
-    &= \qty(\Delta(h^\prime)(j) \circ \kappa(j))(x) \\*
-    &= u(j)(x) \\*
-    &= h\qty(\qty(j, x)) \\*
-  }
-
-  したがって、$h^\prime = h$である。
-}
-
-\thm{集合の圏における小さい余極限の存在}{
-  小さい圏$\bm{J}$と、関手$X \colon \bm{J} \to \mathbf{Set}$について、$X$の余極限が存在する。
-}{
-  \lemref{集合の圏における余等化子の存在}、\lemref{集合の圏における小さい和の存在}、\thmref{極限の存在定理}の双対より、成り立つ。
-}
-
-
-\lsubsection{単射と全射}
 
 \dfn{単射}{
   写像$f \colon X \to Y$が以下を満たすとき、$f$を単射という。
@@ -580,6 +313,68 @@
   $3. \rightarrow 1.$は明らか。
 }
 
+\cor*{
+  写像$f$の終域$\Im(f)$への制限は全射である。
+}
+
+\lem{像の普遍性}{
+  写像$f \colon X \to Y$と、$f$の終域$\Im(f)$への制限$\bar{f}$について、
+  写像$g \colon X \to Z$と単射$m \colon Z \to Y$が以下を満たすとする。
+  \eq*{
+    f = m \circ g
+  }
+
+  このとき、写像$h \colon \Im(f) \to Z$が一意に存在して、$\iota_{\Im(f), Y} = m \circ h$である。
+
+  さらに、$h$は単射である。
+
+  また、$g$が全射ならば、$h$は全単射となる。
+}{
+  以下も命題を示す。
+  \eq*{
+    \forall y \in \Im(f) \exists! z \in Z \qty(y = m(z))
+  }
+
+  任意の$y \in \Im(f)$について、$\bar{f}$は全射より、$x \in X$が存在して$y = f(x)$である。
+
+  $z = g(x)$について、$y = f(x) = \qty(m \circ g)(x) = m(z)$である。
+
+  $m$は単射であるから、このような$z$は一意である。
+
+  この命題が定める写像を$h \colon \Im(f) \to Z$とする。
+
+  \vskip\baselineskip
+
+  $h$の定義より、任意の$y \in \Im(f)$について$m(h(y)) = y = \iota_{\Im(f), Y}(y)$が成り立つ。
+
+  したがって、$\iota_{\Im(f), Y} = m \circ h$である。
+
+  $m \circ h$が左簡約可能より、$h$は左簡約可能すなわち単射である。
+
+  \vskip\baselineskip
+
+  写像$h^\prime \colon \Im(f) \to Z$が$\iota_{\Im(f), Y} = m \circ h^\prime$を満たすとする。
+
+  $m \circ h = m \circ h^\prime(y)$より、$m$は単射であるので、$h = h^\prime$である。
+
+  \vskip\baselineskip
+
+  また、$m \circ h \circ \bar{f} = m \circ g$より、$m$が単射であるので、$h \circ \bar{f} = g$である。
+
+  $g$が全射であるとする。
+
+  $h \circ \bar{f}$が右簡約可能より、$h$は右簡約可能すなわち全射である。
+}
+
+\begin{center}
+  \begin{minipage}{0.3\linewidth}
+    \begin{tikzcd}
+      X \ar[rrrr, "f", bend left=45] \ar[rr, "\bar{f}"] \ar[drr, "g"'] & & \Im(f) \ar[rr, "\iota_{\Im(f), Y}"] \ar[d, "h", dotted] & & Y \\
+      & & Z \ar[urr, "m"'] & & \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
 \dfn{全単射}{
   写像$f$が同型射であるとき、$f$を全単射と呼ぶ。
 }
@@ -589,11 +384,376 @@
 }
 
 \cor*{
-  全単射$f \colon X \to Y$と$Y$の部分集合$A$について、原像$f^{-1}(A)$と逆写像の像$f^{-1}(A)$は一致する。
+  全単射$f \colon X \to Y$と$Y$の部分$B$について、原像$f^{-1}(B)$と逆写像の像$f^{-1}(B)$は一致する。
+}
+
+
+\lsubsection{集合の圏の普遍性}
+
+\cor*{
+  任意の単集合は$\mathbf{Set}$の終対象である。
+}
+
+\cor*{
+  空集合は$\mathbf{Set}$の始対象である。
+}
+
+\dfn{空写像}{
+  空集合は$\mathbf{Set}$の始対象であるので、終域$Y$について、始域が空集合である写像は一意に定まる。
+
+  この写像$\varnothing \to Y$を、$Y$の空写像と呼ぶ。
+}
+
+\lem{集合の圏における等化子の存在}{
+  写像$f, g \colon X \to Y$を考える。
+
+  以下で定める$\Eq(f, g), \pi$は、$f, g$の等化子である。
+  \eqg*{
+    \Eq(f, g) \coloneqq \qty{x \in X \mid f(x) = g(x)} \\*
+    \pi \coloneqq \iota_{\Eq(f, g), X}
+  }
+}{
+  定義より$f \circ \pi = g \circ \pi$である。
+
+  \vskip\baselineskip
+
+  $f \circ h = g \circ h$なる写像$h \colon Z \to X$を考える。
+
+  $\forall z \in Z \qty(f(h(z)) = g(h(z)))$より、$\Im(h) \subset \Eq(f, g)$である。
+
+  ゆえに$h$の終域$\Eq(f, g)$への制限$\bar{h}$が存在して、$h = \pi \circ \bar{h}$である。
+
+  写像$\bar{h}^\prime \colon Z \to \Eq(f, g)$であって、$h = \pi \circ \bar{h}^\prime$とする。
+
+  任意の$z \in Z$について、以下が成り立つ。
+  \eq*{
+    \bar{h}^\prime(z) = \pi(\bar{h}^\prime(z)) = h(z) = \pi(\bar{h}(z)) = \bar{h}(z)
+  }
+
+  したがって一意である。
+}
+
+\lem{集合の圏における小さい積の存在}{
+  小さい離散圏$\bm{J}$と、関手$X \colon \bm{J} \to \mathbf{Set}$を考える。
+
+  以下で定める$\prod X, \pi$は$X$の積である。
+  \eqg*{
+    \prod X \coloneqq \qty{f \in \Hom_{\mathbf{Set}}\qty(\bm{J}, \bigcup \qty{X(j) \mid j \in \bm{J}}) \mid \forall j \in \bm{J} \qty(f(j) \in X(j))} \\*
+    \pi(j) \colon \prod X \to X(j), f \mapsto f(j)
+  }
+}{
+  $\bm{J}$が離散圏であるので、$\pi$は$\Delta(\prod X)$から$\Id_X$への自然変換である。
+
+  対角関手$\Delta \colon \mathbf{Set} \to \Func(\bm{J}, \mathbf{Set})$を考える。
+
+  \vskip\baselineskip
+
+  集合$A$と、自然変換$u \colon \Delta(A) \to \Id_X$について、以下で定める写像$h \colon A \to \prod X$を考える。
+  \eq*{
+    h(a) \colon \bm{J} \to \bigcup \qty{X(j) \mid j \in \bm{J}}, j \mapsto u(j)(a)
+  }
+
+  定義より、$u = \pi \circ \Delta(h)$である。
+
+  \vskip\baselineskip
+
+  写像$h^\prime \colon A \to \prod X$が、$u = \pi \circ \Delta(h^\prime)$を満たすとする。
+
+  任意の要素$a \in A$と、任意の対象$j \in \bm{J}$について、以下を満たす。
+  \eqa*{
+    h^\prime(a)(j)
+    &= \pi(j)(h^\prime(a)) \\*
+    &= \qty(\pi(j) \circ h^\prime)(a) \\*
+    &= u(j)(a) \\*
+    &= h(a)(j)
+  }
+
+  したがって、$h^\prime = h$である。
+}
+
+\thm{集合の圏における小さい極限の存在}{
+  小さい圏$\bm{J}$と、関手$X \colon \bm{J} \to \mathbf{Set}$について、$X$の極限が存在する。
+}{
+  \lemref{集合の圏における等化子の存在}、\lemref{集合の圏における小さい積の存在}、\thmref{極限の存在定理}より、成り立つ。
+}
+
+\cor*{
+  集合$X, Y$と、以下で定める写像$\pi_0, \pi_1$を考える。
+  \eq*{
+    \pi_0 \colon X \times Y \to X, \qty(x, y) \mapsto x
+    \qquad
+    \pi_1 \colon X \times Y \to Y, \qty(x, y) \mapsto y
+  }
+
+  このとき、$X \times Y, \qty(\pi_0, \pi_1)$は$X, Y$の二項積である。
+}
+
+\thm{選択関数の存在}{
+  任意の集合$X$について、写像$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が存在して、以下が成り立つ。
+  \eq*{
+    \forall x \in X \setminus \qty{\varnothing} \qty(f(x) \in x)
+  }
+}{
+  空集合の定義より、以下の命題が成り立つ。
+  \eq*{
+    \forall x \in X \setminus \qty{\varnothing} \exists y \qty(y \in x)
+  }
+
+  \axiref{Skolem関係の導入}より、$X \setminus \qty{\varnothing}$上の関数$f$が存在する。
+
+  任意の$x \in X \setminus \qty{\varnothing}$について、$f(x) \in x$より$f(x) \in \bigcup X$である。
+
+  ゆえに、$f \colon X \setminus \qty{\varnothing} \to \bigcup X$が与えられる。
+}
+
+\lem{非空からなる積は非空}{
+  空でない集合$J$から$\mathbf{Set}$への関手$X$について、以下が成り立つ。
+  \eq*{
+    \forall j \in J \qty(X(j) \neq \varnothing) \rightarrow \prod X \neq \varnothing
+  }
+}{
+  $Z \coloneqq \qty{X(j) \mid j \in J}$について、定義より$Z \neq \varnothing \land \varnothing \notin Z$である。
+
+  \thmref{選択関数の存在}より、写像$f \colon Z \to \bigcup Z$が存在して、$\forall z \in Z \qty(f(z) \in z)$である。
+
+  写像$g \colon J \to \bigcup Z, j \mapsto f(X(j))$で定めると、$\forall j \in J \qty(g(j) \in X(j))$であるので、$g \in \prod X$である。
+
+  ゆえに、$\prod X \neq \varnothing$である。
+}
+
+\dfn{商写像}{
+  集合$Y$と、$Y$の分割$P$について、定義より以下が成り立つ。
+  \eq*{
+    \forall y \in Y \exists! A \in P \qty(y \in A)
+  }
+
+  この命題が定める写像$Y \to P$を、分割$P$の商写像と呼ぶ。
+}
+
+\lem{集合の圏における余等化子の存在}{
+  写像$f, g \colon X \to Y$について、以下で定める集合$P$は$Y$の分割である。
+  \eq*{
+    P \coloneqq \qty{\bigcap \qty{A \subset Y \mid y \in A \land \forall x \in X \qty(f(x) \in A \leftrightarrow g(x) \in A)} \mid y \in Y}
+  }
+
+  さらに、$P$の商写像$q \colon Y \to P$について、$P, q$は余等化子である。
+}{
+  要素$y \in Y$について、集合$B_y \coloneqq \qty{A \subset Y \mid y \in A \land \forall x \in X \qty(f(x) \in A \leftrightarrow g(x) \in A)}$を考える。
+
+  $Y \in B_y$より$B_y \neq \varnothing$であるので、$y \in \bigcap B_y$である。
+
+  定義より$\bigcap B_y \in B_y$であり、$\bigcap B_y \subset Y$である。
+
+  $P = \qty{\bigcap B_y \mid y \in Y}$であることに注意して、$Y = \bigcup P$である。
+
+  \vskip\baselineskip
+
+  $y_1, y_2 \in Y$について、$\exists y \in Y \qty(y \in \qty(\bigcap B_{y_1}) \cap \qty(\bigcap B_{y_2}))$とする。
+
+  任意の$A \in B_{y_1}$について、$y \in \bigcap B_{y_1} \subset A$より、$A \in B_y$である。
+  よって、$B_{y_1} \subset B_y$である。
+
+  $A^\prime \in B_y$について、$y_1 \notin A^\prime$とすると、$y_1 \in Y \setminus A^\prime$より、$Y \setminus A^\prime \in B_{y_1}$である。
+
+  $B_{y_1} \subset B_y$より、$Y \setminus A^\prime \in B_y$であるが、これは$y \in A^\prime$に反する。
+
+  よって$y_1 \in A^\prime$である。
+
+  したがって、$B_y \subset B_{y_1}$である。
+
+  ゆえに$B_{y_1} = B_y$である。
+
+  同様にして、$B_{y_2} = B_y$である。
+
+  $\qty(\bigcap B_{y_1}) \cap \qty(\bigcap B_{y_2}) \rightarrow \bigcap B_{y_1} = \bigcap B_{y_2}$であるので、$P$は$Y$の分割である。
+
+  \vskip\baselineskip
+
+  任意の要素$x \in X$を考える。
+
+  $\bigcap B_{f(x)} \in B_{f(x)}$より$g(x) \in \bigcap B_{f(x)}$であるので、
+  $\bigcap B_{f(x)} \in B_{g(x)}$であり、$\bigcap B_{g(x)} \subset \bigcap B_{f(x)}$が成り立つ。
+
+  同様に$\bigcap B_{f(x)} \subset \bigcap B_{g(x)}$であるので、$\bigcap B_{f(x)} = \bigcap B_{g(x)}$である。
+
+  ゆえに、$\qty(q \circ f)(x) = \bigcap B_{f(x)} = \bigcap B_{g(x)} = \qty(q \circ g)(x)$が成り立つ。
+
+  したがって、$q \circ f = q \circ g$である。
+
+  \vskip\baselineskip
+
+  写像$h \colon Y \to Z$が$h \circ f = h \circ g$を満たすとする。
+
+  任意の要素$y \in Y$について、$y \in h^{-1}\qty(\qty{h(y)})$である。
+
+  任意の要素$x \in X$について、$f(x) \in h^{-1}\qty(\qty{h(y)})$ならば$h(y) = h(f(x)) = h(g(x))$より$g(x) \in h^{-1}\qty(\qty{h(y)})$である。
+
+  同様に、$g(x) \in h^{-1}\qty(\qty{h(y)})$ならば$f(x) \in h^{-1}\qty(\qty{h(y)})$である。
+
+  したがって、$h^{-1}\qty(\qty{h(y)}) \in B_y$であり、$\bigcap B_y \subset h^{-1}\qty(\qty{h(y)})$である。
+
+  任意の要素$y_1, y_2 \in Y$が$\bigcap B_{y_1} = \bigcap B_{y_2}$であるならば、$y_1, y_2 \in h^{-1}\qty(\qty{h(y_1)})$から$h(y_1) = h(y_2)$を満たす。
+
+  したがって、$k \coloneqq \qty(\qty(P, Z), \qty{\qty(\bigcap B_y, h(y)) \mid y \in Y})$は写像である。
+
+  任意の$y \in Y$について$(k \circ q)(y) = k\qty(\bigcap B_y) = h(y)$であるから、$k \circ q = h$が成り立つ。
+
+  \vskip\baselineskip
+
+  一意性を示す。
+
+  写像$k^\prime \colon P \to Z$が$k^\prime \circ q = h$を満たすとする。
+
+  任意の$p \in P$について、定義よりある$y \in Y$が存在して$p = \bigcap B_y$であるので、以下が成り立つ。
+  \eq*{
+    k^\prime(p) = k^\prime\qty(\bigcap B_y) = k^\prime(q(y)) = h(y) = k(q(y)) = k\qty(\bigcap B_y) = k(p)
+  }
+
+  したがって、$k^\prime = k$である。
+}
+
+\dfn{写像が誘導する分割}{
+  写像$f \colon Y \to Z$について、以下で定める集合$P$を考える。
+  \eq*{
+    P \coloneqq \qty{f^{-1}\qty(\qty{z}) \mid z \in \Im(f)}
+  }
+
+  このとき、$P$は$Y$の分割である。
+  $P$を、$f$が誘導する分割と呼ぶ。
+
+  $P$の商写像を、$f$が誘導する商写像と呼ぶ。
+}
+
+\lem{集合の圏における小さい和の存在}{
+  小さい離散圏$\bm{J}$と、$\bm{J}$から$\mathbf{Set}$への関手$X$を考える。
+
+  このとき、以下で定める$\coprod X, \kappa$は$X$の和である。
+  \eqg*{
+    \coprod X \coloneqq \bigcup \qty{\qty{\qty(j, x) \mid x \in X(j)} \mid j \in \bm{J}} \\*
+    \kappa(j) \colon X(j) \to \coprod X, x \mapsto \qty(j, x)
+  }
+}{
+  対角関手$\Delta \colon \mathbf{Set} \to \Func(\bm{J}, \mathbf{Set})$を考える。
+
+  $\bm{J}$が離散圏であるので、$\kappa$は$\Id_X$から$\Delta(\coprod X)$への自然変換である。
+
+  \vskip\baselineskip
+
+  集合$A$と、自然変換$u \colon \Id_X \to \Delta(A)$を考える。
+
+  写像$h \colon \coprod X \to A, \qty(j, x) \mapsto u(j)(x)$を考える。
+
+  任意の要素$x \in X(j)$と任意の射$j \in \bm{J}$について、以下が成り立つ。
+  \eqa*{
+    \qty(h \circ \kappa(j))(x)
+    &= h\qty(\kappa(j)(x)) \\*
+    &= h\qty(\qty(j, x)) \\*
+    &= u(j)(x)
+  }
+
+  ゆえに、$u = \Delta(h) \circ \kappa$が成り立つ。
+
+  \vskip\baselineskip
+
+  写像$h^\prime \colon \coprod X \to A$が$u = \Delta(h^\prime) \circ \kappa$を満たすとする。
+
+  任意の$\qty(j, x) \in \coprod X$について、以下を満たす。
+  \eqa*{
+    h^\prime\qty(\qty(j, x))
+    &= h^\prime(\kappa(j)(x)) \\*
+    &= \qty(\Delta(h^\prime)(j) \circ \kappa(j))(x) \\*
+    &= u(j)(x) \\*
+    &= h\qty(\qty(j, x)) \\*
+  }
+
+  したがって、$h^\prime = h$である。
+}
+
+\thm{集合の圏における小さい余極限の存在}{
+  小さい圏$\bm{J}$と、関手$X \colon \bm{J} \to \mathbf{Set}$について、$X$の余極限が存在する。
+}{
+  \lemref{集合の圏における余等化子の存在}、\lemref{集合の圏における小さい和の存在}、\thmref{極限の存在定理}の双対より、成り立つ。
 }
 
 
 \lsubsection{前層}
+
+\dfn{射の対}{
+  射$f, g$について、組$\qty(f, g)$を、$f$と$g$による射の対と呼ぶ。
+}
+
+\rem{射としての射の対}{
+  射$f, f^\prime, g, g^\prime$を考える。
+
+  射の対について、$=, \dom, \cod, \Comp$を以下で定めることにより、\subsecref{射の公理}を満たす。
+  射の対$\qty(f_1, g_1), \qty(f_2, g_2), \qty(f_3, g_3)$について、
+  \begin{enumerate}
+    \item $\qty(f_1, g_1) = \qty(f_2, g_2) \defiff f_1 = f_2 \land g_1 = g_2$
+    \item $\dom(\qty(f_1, g_1)) \coloneqq \qty(\dom(f_1), \dom(g_1))$
+    \item $\cod(\qty(f_1, g_1)) \coloneqq \qty(\cod(f_1), \cod(g_1))$
+    \item $\Comp(\qty(f_1, g_1), \qty(f_2, g_2), \qty(f_3, g_3)) \defiff f_3 = f_2 \circ f_1 \land g_3 = g_2 \circ g_1$
+  \end{enumerate}
+}
+
+\dfn{積圏}{
+  圏$\bm{C}, \bm{D}$と射$f, g$について、以下で定める類$\bm{C} \times \bm{D}$を考える。
+  \eq*{
+    \qty(f, g) \in \bm{C} \times \bm{D} \defiff \qty(f \in \bm{C} \land g \in \bm{D})
+  }
+
+  このとき$\bm{C} \times \bm{D}$は圏である。
+  この$\bm{C} \times \bm{D}$を、$\bm{C}$と$\bm{D}$の積圏と呼ぶ。
+}
+
+\cor*{
+  圏$\bm{C}, \bm{D}$について、以下が成り立つ。
+  \eq*{
+    \qty(f, g) \in \Obj_{\bm{C} \times \bm{D}} \leftrightarrow f \in \Obj_{\bm{C}} \land g \in \Obj_{\bm{D}}
+  }
+}
+
+\rem{小さい圏の積}{
+  小さい圏の対象$f, g$について、対象の対$\qty(f, g)$は集合の順序対とみなせる。
+
+  小さい離散圏$\bm{C}, \bm{D}$について、$\bm{C} \times \bm{D}$は集合とみなせる。
+}
+
+\dfn{積圏の射影関手}{
+  圏$\bm{C}, \bm{D}$と積圏$\bm{C} \times \bm{D}$について、
+  以下で定める$\bm{C} \times \bm{D}$上の関数$U_\text{L}, U_\text{R}$を考える。
+  \eqa*{
+    U_\text{L}\qty(\qty(f, g)) &\coloneqq f \\
+    U_\text{R}\qty(\qty(f, g)) &\coloneqq g
+  }
+
+  このとき$U_\text{L}$は$\bm{C} \times \bm{D}$から$\bm{C}$への関手であり、
+  $U_\text{R}$は$\bm{C} \times \bm{D}$から$\bm{D}$への関手である。
+  この$U_\text{L}$を$\bm{C} \times \bm{D}$の左射影関手と呼び、$U_\text{R}$を$\bm{C} \times \bm{D}$の右射影関手と呼ぶ。
+}
+
+\dfn{積関手}{
+  圏$\bm{C}, \bm{C^\prime}, \bm{D}, \bm{D^\prime}$と、関手$F \colon \bm{C} \to \bm{C^\prime}, G \colon \bm{D} \to \bm{D^\prime}$について、
+  以下で定める$\bm{C} \times \bm{D}$上の関数$H$を考える。
+  \eq*{
+    H\qty(\qty(f, g)) \coloneqq \qty(F(f), G(g))
+  }
+
+  このとき$H$は、$\bm{C} \times \bm{D}$から$\bm{C^\prime} \times \bm{D^\prime}$への関手である。
+  この$H$を、$F$と$G$の積関手と呼び、$F \times G$で表す。
+}
+
+\cor*{
+  圏$\bm{C}, \bm{C^\prime}, \bm{D}, \bm{D^\prime}$と、関手$F \colon \bm{C} \to \bm{C^\prime}, G \colon \bm{D} \to \bm{D^\prime}$を考える。
+
+  $\bm{C} \times \bm{D}, \bm{C^\prime} \times \bm{D^\prime}$の左射影関手をそれぞれ$U_\text{L}, U_\text{L}^\prime$、
+  右射影関手をそれぞれ$U_\text{R}, U_\text{R}^\prime$とする。
+
+  このとき、以下が成り立つ。
+  \eqg*{
+    F \circ U_\text{L} = U_\text{L}^\prime \circ \qty(F \times G) \\
+    G \circ U_\text{R} = U_\text{R}^\prime \circ \qty(F \times G)
+  }
+}
 
 \dfn{局所小}{
   圏$\bm{C}$を考える。
@@ -601,21 +761,73 @@
   任意の対象$a, b \in \Obj_{\bm{C}}$について、$\Hom_{\bm{C}}\qty(a, b)$が集合であるとき、$\bm{C}$は局所小であるという。
 }
 
+\dfn{hom双関手}{
+  局所小圏$\bm{C}$を考える。
+
+  以下で定める$\bm{C}^\opp \times \bm{C}$上の関数$\hom_{\bm{C}}$を考える。
+  \eq*{
+    \hom_{\bm{C}}\qty(\qty(f^\opp, g)) \coloneqq \text{写像$\Hom_{\bm{C}}\qty(\cod(f), \dom(g)) \to \Hom_{\bm{C}}\qty(\dom(f), \cod(g)), h \mapsto g \circ h \circ f$}
+  }
+
+  このとき$\hom_{\bm{C}}$は、$\bm{C}^\opp \times \bm{C}$から$\mathbf{Set}$への関手である。
+  この$\hom_{\bm{C}}$を、局所小圏$\bm{C}$におけるhom双関手と呼ぶ
+}
+
+\lem{コンマ圏の圏同型とhom双関手の自然同型}{
+  圏$\bm{D}, \bm{E}$、局所小圏$\bm{C}, \bm{C^\prime}$、
+  関手$F \colon \bm{D} \to \bm{C}, F^\prime \colon \bm{D} \to \bm{C^\prime}, G \colon \bm{E} \to \bm{C}, G^\prime \colon \bm{E} \to \bm{C^\prime}$と、
+  コンマ圏$F \downarrow G, F^\prime \downarrow G^\prime$を考える。
+
+  このとき、以下の\num{2}つは同値である。
+  \begin{enumerate}
+    \item 射影を保つ圏同型$T \colon F \downarrow G \to F^\prime \downarrow G^\prime$が存在する。
+    \item 自然同型$\eta \colon \hom_{\bm{C}} \circ \qty(F^\opp \times G) \to \hom_{\bm{C^\prime}} \circ \qty(\qty(F^\prime)^\opp \times G^\prime)$が存在する。
+  \end{enumerate}
+}{
+  $1. \rightarrow 2.$を示す。
+
+  対象$\qty(d, e) \in \Obj_{\bm{D}^\opp \times \bm{E}}$を考える。
+
+  射$f \in \Hom_{\bm{C}}\qty(F(d), G(e))$について、$\qqty{f, f, d, e} \in F \downarrow G$である。
+
+  射影を保つ圏同型より、一意な射$f^\prime \in \Hom_{\bm{C^\prime}}\qty(F^\prime(d), G^\prime(e))$が存在して、$T\qty(\qqty{f, f, d, e}) = \qqty{f^\prime, f^\prime, d, e}$である。
+
+  $f$に対して$f^\prime$を与える写像$h \colon \Hom_{\bm{C}}\qty(F(d), G(e)) \to \Hom_{\bm{C^\prime}}\qty(F^\prime(d), G^\prime(e))$が存在する。
+
+  対象$\qty(d, e)$に対してこの写像$h$を与える、$\Obj_{\bm{D}^\opp \times \bm{E}}$上の関数$\eta$を考える。
+
+  \vskip\baselineskip
+
+  射の対$\qty(g^\opp, h) \in \bm{D}^\opp \times \bm{E}$を考える。
+
+  ???
+
+  % $\bm{C}$の射$f \colon F(\cod(g)) \to G(\dom(h))$について、$\qqty{f, G(h) \circ f \circ F(g), }$
+}
+
 \dfn{前層}{
   局所小な圏$\bm{C}$について、関手$\bm{C}^\opp \to \mathbf{Set}$を$\bm{C}$の前層と呼ぶ。
 }
 
-\lem{表現可能関手}{
-  局所小な圏$\bm{C}$と、対象$c \in \Obj_{\bm{C}}$について、以下で定める$\bm{C}$上の関数$\hom_c$を考える。
+\dfn{表現される関手}{
+  局所小な圏$\bm{C}$と、対象$A \in \Obj_{\bm{C}}$について、以下で定める$\bm{C}$上の関数$\hom_c$を考える。
   \eq*{
-    \hom_c(f) \coloneqq \qty\Big(\qty\big(\Hom_{\bm{C}}(\cod(f), c), \Hom_{\bm{C}}(\dom(f), c)), \qty{\qty(g, g \circ f) \mid g \in \Hom_{\bm{C}}(\cod(f), c)})
+    \hom_A(f^\opp) \colon \Hom_{\bm{C}}(\cod(f), A) \to \Hom_{\bm{C}}(\dom(f), A), g \mapsto g \circ f
   }
 
-  このとき$\hom_c \colon \bm{C}^\opp \to \mathbf{Set}$は$\bm{C}$の前層である。
+  このとき$\hom_A$は$\bm{C}$の前層である。
+  前層$\hom_A$を、$A$によって表現される関手と呼ぶ。
+}
+
+\thm{米田の補題}{
+  局所小な圏$\bm{C}$と、対象$A \in \Obj_{\bm{C}}$、前層$F \colon \bm{C}^\opp \to \mathbf{Set}$、要素$a \in F(A)$を考える。
+  このとき以下で定める$\Obj_{\bm{C}}$上の関数$\eta_a$は、$\hom_A$から$F$への自然変換である。
+  \eqa*{
+    \eta_a(X) \colon \Hom_{\bm{C}}\qty(X, A) \to F(X), f \mapsto F(f)(a)
+  }
 }{
   ???
 }
-
 
 % \lsubsection{像と原像}
 
