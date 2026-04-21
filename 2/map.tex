@@ -173,7 +173,7 @@
 \lem{原像は引き戻し}{
   写像$f \colon X \to Y$と、集合$B \subset Y$について、$f \circ \iota_{f^{-1}(B), X}$の終域$B$への制限$\bar{f}$を考える。
 
-  $f^{-1}(B), \qty(\hat{f}, \iota_{f^{-1}(B), X})$は、$\iota_{B, Y}, f$の引き戻しである。
+  $f^{-1}(B), \qty(\bar{f}, \iota_{f^{-1}(B), X})$は、$\iota_{B, Y}, f$の引き戻しである。
 }{
   $\iota_{B, Y} \circ \bar{f} = f \circ \iota_{f^{-1}(B), X}$である。
 
@@ -211,9 +211,11 @@
 }{
   $1. \rightarrow 2.$を示す。
 
-  $x \in X$について、写像$g_x \colon \qty{\varnothing} \to \dom(f), g_x(\varnothing) \coloneqq x$を考える。
+  $x, x^\prime \in X$について$f(x) = f(x^\prime)$であるとする。
 
-  $f(x) = f(y)$であるとき、$f \circ g_x = f \circ g_y$であり、左簡約可能より$g_x = g_y$すなわち$x = y$である。
+  写像$g_x \colon \qty{\varnothing} \to \dom(f), \varnothing \mapsto x$と$g_{x^\prime} \colon \qty{\varnothing} \to \dom(f), \varnothing \mapsto x^\prime$を考える。
+
+  このとき$f \circ g_x = f \circ g_{x^\prime}$であり、左簡約可能より$g_x = g_{x^\prime}$すなわち$x = x^\prime$である。
 
   \vskip\baselineskip
 
@@ -264,8 +266,6 @@
 
   $f(Y) \in Y$とすると、$\exists Z \subset A \qty(f(Z) \notin Z \land f(Z) = f(Y))$であるが、$f$の単射性より$Y = Z$ゆえに$f(Y) \notin Y$である。
   ゆえに矛盾。
-
-  背理法より示される。
 }
 
 \dfn{全射}{
@@ -676,7 +676,7 @@
 }
 
 
-\lsubsection{前層}
+\lsubsection{hom関手}
 
 \dfn{射の対}{
   射$f, g$について、組$\qty(f, g)$を、$f$と$g$による射の対と呼ぶ。
@@ -740,6 +740,8 @@
 
   このとき$H$は、$\bm{C} \times \bm{D}$から$\bm{C^\prime} \times \bm{D^\prime}$への関手である。
   この$H$を、$F$と$G$の積関手と呼び、$F \times G$で表す。
+
+  $H\qty(\qty(f, g))$を、簡単のために$H(f, g)$で表す。
 }
 
 \cor*{
@@ -766,11 +768,35 @@
 
   以下で定める$\bm{C}^\opp \times \bm{C}$上の関数$\hom_{\bm{C}}$を考える。
   \eq*{
-    \hom_{\bm{C}}\qty(\qty(f^\opp, g)) \coloneqq \text{写像$\Hom_{\bm{C}}\qty(\cod(f), \dom(g)) \to \Hom_{\bm{C}}\qty(\dom(f), \cod(g)), h \mapsto g \circ h \circ f$}
+    \hom_{\bm{C}}\qty(f^\opp, g) \coloneqq \text{写像$\Hom_{\bm{C}}\qty(\cod(f), \dom(g)) \to \Hom_{\bm{C}}\qty(\dom(f), \cod(g)), h \mapsto g \circ h \circ f$}
   }
 
   このとき$\hom_{\bm{C}}$は、$\bm{C}^\opp \times \bm{C}$から$\mathbf{Set}$への関手である。
-  この$\hom_{\bm{C}}$を、局所小圏$\bm{C}$におけるhom双関手と呼ぶ
+  この$\hom_{\bm{C}}$を、$\bm{C}$におけるhom双関手と呼ぶ。
+}
+
+\dfn{反変hom関手}{
+  局所小圏$\bm{C}$と射$h \in \bm{C}$を考える。
+
+  以下で定める$\bm{C}^\opp$上の関数$\hom_{\bm{C}}\qty(-, h)$を考える。
+  \eq*{
+    \hom_{\bm{C}}\qty(-, h)(f^\opp) \coloneqq \hom_{\bm{C}}\qty(f^\opp, h)
+  }
+
+  このとき$\hom_{\bm{C}}\qty(-, h)$は、$\bm{C}^\opp$から$\mathbf{Set}$への関手である。
+  この$\hom_{\bm{C}}\qty(-, h)$を、$\bm{C}$の$h$における反変hom関手、または単にhom関手と呼ぶ。
+}
+
+\dfn{共変hom関手}{
+  局所小圏$\bm{C}$と射$h \in \bm{C}$を考える。
+
+  以下で定める$\bm{C}$上の関数$\hom_{\bm{C}}\qty(h^\opp, -)$を考える。
+  \eq*{
+    \hom_{\bm{C}}\qty(h^\opp, -)(f) \coloneqq \hom_{\bm{C}}\qty(h^\opp, f)
+  }
+
+  このとき$\hom_{\bm{C}}\qty(h^\opp, -)$は、$\bm{C}$から$\mathbf{Set}$への関手である。
+  この$\hom_{\bm{C}}\qty(h^\opp, -)$を、$\bm{C}$の$h$における共変hom関手、または単にhom関手と呼ぶ。
 }
 
 \lem{コンマ圏の圏同型とhom双関手の自然同型}{
@@ -788,7 +814,7 @@
 
   対象$\qty(d, e) \in \Obj_{\bm{D}^\opp \times \bm{E}}$を考える。
 
-  射$f \in \Hom_{\bm{C}}\qty(F(d), G(e))$について、$\qqty{f, f, d, e} \in F \downarrow G$である。
+  $\bm{C}$の射$f \colon F(d) \to G(e)$について、$\qqty{f, f, d, e} \in F \downarrow G$である。
 
   射影を保つ圏同型より、一意な射$f^\prime \in \Hom_{\bm{C^\prime}}\qty(F^\prime(d), G^\prime(e))$が存在して、$T\qty(\qqty{f, f, d, e}) = \qqty{f^\prime, f^\prime, d, e}$である。
 
@@ -800,34 +826,283 @@
 
   射の対$\qty(g^\opp, h) \in \bm{D}^\opp \times \bm{E}$を考える。
 
-  ???
+  $d \coloneqq \dom(g), d^\prime \coloneqq \cod(g), e \coloneqq \dom(h), e^\prime \coloneqq \cod(h)$とする。
 
-  % $\bm{C}$の射$f \colon F(\cod(g)) \to G(\dom(h))$について、$\qqty{f, G(h) \circ f \circ F(g), }$
-}
+  $\bm{C}$の射$f \colon F(d^\prime) \to G(e)$を考える。
 
-\dfn{前層}{
-  局所小な圏$\bm{C}$について、関手$\bm{C}^\opp \to \mathbf{Set}$を$\bm{C}$の前層と呼ぶ。
-}
+  今、$\qqty{f \circ F(g), f, g, e} \in F \downarrow G$である。
 
-\dfn{表現される関手}{
-  局所小な圏$\bm{C}$と、対象$A \in \Obj_{\bm{C}}$について、以下で定める$\bm{C}$上の関数$\hom_c$を考える。
+  $\eta$の定義と$T$は射影を保つ関手より、以下が成り立つ。
   \eq*{
-    \hom_A(f^\opp) \colon \Hom_{\bm{C}}(\cod(f), A) \to \Hom_{\bm{C}}(\dom(f), A), g \mapsto g \circ f
+    T\qty(\qqty{f \circ F(g), f, g, e}) = \qqty{\eta(d, e)\qty(f \circ F(g)), \eta(d^\prime, e)(f), g, e}
   }
 
-  このとき$\hom_A$は$\bm{C}$の前層である。
-  前層$\hom_A$を、$A$によって表現される関手と呼ぶ。
+  ゆえに、$\eta(d, e)\qty(f \circ F(g)) = G^\prime(e) \circ \eta(d, e)\qty(f \circ F(g)) = \eta(d^\prime, e)(f) \circ F^\prime(g)$である。
+
+  今、$\qqty{f \circ F(g), G(h) \circ f \circ F(g), d, h} \in F \downarrow G$である。
+
+  $\eta$の定義と$T$は射影を保つ関手より、以下が成り立つ。
+  \eq*{
+    T\qty(\qqty{f \circ F(g), G(h) \circ f \circ F(g), d, h}) = \qqty{\eta(d, e)(f \circ F(g)), \eta(d, e^\prime)\qty(G(h) \circ f \circ F(g)), d, h}
+  }
+
+  ゆえに、$\eta(d, e^\prime)\qty(G(h) \circ f \circ F(g)) = \eta(d, e^\prime)\qty(G(h) \circ f \circ F(g)) \circ F^\prime(d) = G^\prime(h) \circ \eta(d, e)(f \circ F(g))$である。
+
+  したがって、以下が成り立つ。
+  \eqa*{
+    \qty\Big(\qty\big(\hom_{\bm{C^\prime}} \circ \qty(\qty(F^\prime)^\opp \times G^\prime))(g^\opp, h) \circ \eta(d^\prime, e))(f)
+    &= \qty\big(\hom_{\bm{C^\prime}}\qty(\qty(F^\prime)^\opp(g^\opp), G^\prime(h)))\qty(\eta(d^\prime, e)(f)) \\*
+    &= G^\prime(h) \circ \eta(d^\prime, e)(f) \circ F^\prime(g) \\*
+    &= G^\prime(h) \circ \eta(d, e)\qty(f \circ F(g)) \\*
+    &= \eta(d, e^\prime)\qty(G(h) \circ f \circ F(g)) \\*
+    &= \eta(d, e^\prime)\qty\big(\hom_{\bm{C}}\qty(F^\opp(g^\opp), G(h))(f)) \\*
+    &= \qty\Big(\eta(d, e^\prime) \circ \qty\big(\hom_{\bm{C}} \circ \qty(F^\opp \times G))(g^\opp, h))(f)
+  }
+
+  ゆえに、$\eta$は$\hom_{\bm{C}} \circ \qty(F^\opp \times G)$から$\hom_{\bm{C^\prime}} \circ \qty(\qty(F^\prime)^\opp \times G^\prime)$への自然変換である。
+
+  \vskip\baselineskip
+
+  圏同型より、射影を保つ関手$S \colon F^\prime \downarrow G^\prime \to F \downarrow G$が存在して、$S \circ T = \id_{F \downarrow G} \land T \circ S = \id_{F^\prime \downarrow G^\prime}$を満たす。
+
+  同様にして、自然変換$\theta \colon \hom_{\bm{C^\prime}} \circ \qty(\qty(F^\prime)^\opp \times G^\prime) \to \hom_{\bm{C}} \circ \qty(F^\opp \times G)$が存在する。
+
+  対象$\qty(d, e) \in \Obj_{\bm{D}^\opp \times \bm{E}}$を考える。
+
+  $\bm{C}$の射$f \colon F(d) \to G(e)$について、以下が成り立つ。
+  \eqa*{
+    \qqty{f, f, d, e}
+    &= \qty(S \circ T)\qty(\qqty{f, f, d, e}) \\
+    &= \qqty{\theta(d, e)\qty(\eta(d, e)(f)), \theta(d, e)\qty(\eta(d, e)(f)), d, e}
+  }
+
+  同様に、$\bm{C^\prime}$の射$f^\prime \colon F^\prime(d) \to G^\prime(e)$について、以下が成り立つ。
+  \eq*{
+    \eta(d, e)\qty(\theta(d, e)(f^\prime)) = f^\prime
+  }
+
+  したがって、$\eta$は自然同型である。
+
+  \vskip\baselineskip
+
+  $2. \rightarrow 1.$を示す。
+
+  以下で定める$F \downarrow G$上の関数$T$を考える。
+  可換四角形$\qqty{f, f^\prime, g, h} \in F \downarrow G$について、
+  \eq*{
+    T\qty(\qqty{f, f^\prime, g, h}) \coloneqq \qqty{\eta\qty(\dom(g), \dom(h))(f), \eta\qty(\cod(g), \cod(h))(f^\prime), g, h}
+  }
+
+  $\eta$の自然性より、以下が成り立つ。
+  \eqa*{
+    \eta\qty(\cod(g), \cod(h))(f^\prime) \circ F^\prime(g)
+    &= \eta\qty(\dom(g), \cod(h))\qty(f^\prime \circ F(g)) \\*
+    &= \eta\qty(\dom(g), \cod(h))\qty(G(h) \circ f) \\*
+    &= G^\prime(h) \circ \eta\qty(\qty(\dom(g), \dom(h)))(f)
+  }
+
+  ゆえに、$T\qty(\qqty{f, f^\prime, g, h}) \in F^\prime \downarrow G^\prime$である。
+
+  始域について、以下が成り立つ。
+  \eqa*{
+    T\qty(\dom(\qqty{f, f^\prime, g, h}))
+    &= T\qty(\qqty{f, f, \dom(g), \dom(h)}) \\*
+    &= \qqty{\eta\qty(\dom(g), \dom(h))(f), \eta\qty(\dom(g), \dom(h))(f), \dom(g), \dom(h)} \\*
+    &= \dom(T\qty(\qqty{f, f^\prime, g, h}))
+  }
+
+  終域についても同様である。
+
+  可換四角形$\qqty{f_1, f^\prime_1, g_1, h_1}, \qqty{f_2, f^\prime_2, g_2, h_2} \in F \downarrow G$について、$\cod(\qqty{f_1, f^\prime_1, g_1, h_1}) = \dom(\qqty{f_2, f^\prime_2, g_2, h_2})$とする。
+  \eqa*{
+    T\qty(\qqty{f_2, f^\prime_2, g_2, h_2} \circ \qqty{f_1, f^\prime_1, g_1, h_1})
+    &= T\qty(\qqty{f_1, f^\prime_2, g_2 \circ g_1, h_2 \circ h_1}) \\*
+    &= \qqty{\eta\qty(\dom(g_1), \dom(h_1))(f_1), \eta\qty(\cod(g_2), \cod(h_2))(f^\prime_2), g_2 \circ g_1, h_2 \circ h_1} \\*
+    &= T\qty(\qqty{f_2, f^\prime_2, g_2, h_2}) \circ T\qty(\qqty{f_1, f^\prime_1, g_1, h_1})
+  }
+
+  したがって、$T$は$F \downarrow G$から$F^\prime \downarrow G^\prime$への関手であり、定義より$T$は射影を保つ。
+
+  \vskip\baselineskip
+
+  自然同型より、自然変換$\theta \colon \hom_{\bm{C^\prime}} \circ \qty(\qty(F^\prime)^\opp \times G^\prime) \to \hom_{\bm{C}} \circ \qty(F^\opp \times G)$が存在して、
+  $\theta \circ \eta = \Id_{\hom_{\bm{C}} \circ \qty(F^\opp \times G)} \land \eta \circ \theta = \Id_{\hom_{\bm{C^\prime}} \circ \qty(\qty(F^\prime)^\opp \times G^\prime)}$である。
+
+  $\theta$を用いて、上と同様にして射影を保つ関手$S \colon F^\prime \downarrow G^\prime \to F \downarrow G$を得る。
+
+  定義より$S \circ T = \id_{F \downarrow G} \land T \circ S = \id_{F^\prime \downarrow G^\prime}$である。
+}
+
+\begin{center}
+  \begin{minipage}{0.2\linewidth}
+    $\bm{D}^\opp \times \bm{E}$ \\
+    \begin{tikzcd}
+      \qty(d^\prime, e) \ar[d, "\qty(g^\opp{,} h)"] \\
+      \qty(d, e^\prime) \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\bm{C}$ \\
+    \begin{tikzcd}
+      F(d^\prime) \ar[r, "f"] & G(e) \ar[d, "G(h)"] \\
+      F(d) \ar[u, "F(g)"] & G(e^\prime) \\
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.4\linewidth}
+    $\bm{C^\prime}$ \\
+    \begin{tikzcd}
+      & F^\prime(d^\prime) \ar[r, "\eta(d^\prime{,} e)(f)"] & G^\prime(e) \ar[rd, "G^\prime(h)"] & \\
+      F^\prime(d) \ar[ru, "F^\prime(g)"] \ar[rru, "\eta(d{,} e)(f \circ F(g))"'] \ar[rrr, "\eta(d{,} e^\prime)(G(h) \circ f \circ F(g))"'] & & & G^\prime(e^\prime) \\
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
+
+\dfn{評価関手}{
+  圏$\bm{C}$と対象$c \in \Obj_{\bm{C}}$について、以下で定める$\Func(\bm{C}^\opp, \mathbf{Set})$上の関数$\mathrm{ev}_c$を考える。
+  \eq*{
+    \mathrm{ev}_c(\eta) \coloneqq \eta(c)
+  }
+
+  このとき$\mathrm{ev}_c$は、$\Func(\bm{C}^\opp, \mathbf{Set})$から$\mathbf{Set}$への関手である。
+  この$\mathrm{ev}_c$を、対象$c$における評価関手と呼ぶ。
 }
 
 \thm{米田の補題}{
-  局所小な圏$\bm{C}$と、対象$A \in \Obj_{\bm{C}}$、前層$F \colon \bm{C}^\opp \to \mathbf{Set}$、要素$a \in F(A)$を考える。
-  このとき以下で定める$\Obj_{\bm{C}}$上の関数$\eta_a$は、$\hom_A$から$F$への自然変換である。
-  \eqa*{
-    \eta_a(X) \colon \Hom_{\bm{C}}\qty(X, A) \to F(X), f \mapsto F(f)(a)
+  局所小圏$\bm{C}$、対象$c \in \Obj_{\bm{C}}$、$\mathbf{Set}$の終対象$1$、対象$c$における評価関手$\mathrm{ev}_c$を考える。
+
+  関手$F \colon \bm{C}^\opp \to \mathbf{Set}$と自然変換$\eta \colon \hom_{\bm{C}}(-, c) \to F$について、以下で定める$1$上の関数$\eta^\sharp$を考える。
+  \eq*{
+    \eta^\sharp(\ast) \coloneqq \eta(c)(c)
   }
+
+  このとき、$\eta^\sharp$は$1$から$F(c)$への写像である。
+
+  \vskip\baselineskip
+
+  また、以下で定めるコスライス圏$\hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})$上の関数$T$を考える。
+  \eq*{
+    T\qty(\qqty{\eta, \eta^\prime, \ast, \theta}) \coloneqq \qqty{\eta^\sharp, \eta^{\prime \sharp}, \ast, \theta}
+  }
+
+  このとき$T$は、$\hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})$から$1 \downarrow \mathrm{ev}_c$への射影を保つ圏同型である。
 }{
-  ???
+  対象$\qqty{\eta, \eta, \ast, F} \in \Obj_{\hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})}$を考える。
+  このとき、$\eta(c) \colon \hom_{\bm{C}}(c, c) \to F(c)$である。
+
+  $c \in \hom_{\bm{C}}(c, c)$であるので、$\eta(c)(c) \in F(c)$が成り立つ。
+
+  よって、$\eta^\sharp$は$1$から$F(c)$への写像である。
+
+  \vskip\baselineskip
+
+  可換四角形$\qqty{\eta, \eta^\prime, \ast, \theta} \in \hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})$について、以下が成り立つ。
+  \eqa*{
+    \eta^{\prime \sharp}(\ast)
+    &= \eta^\prime(c)(c) \\*
+    &= \qty(\theta \circ \eta)(c)(c) \\*
+    &= \theta(c)\qty(\eta(c)(c)) \\*
+    &= \theta(c)\qty(\eta^\sharp(\ast)) \\*
+    &= \qty(\mathrm{ev}_c(\theta) \circ \eta^\sharp)(\ast)
+  }
+
+  ゆえに、$\qqty{\eta^\sharp, \eta^{\prime \sharp}, \ast, \theta} \in 1 \downarrow \mathrm{ev}_c$が成り立つ。
+
+  始域について、以下が成り立つ。
+  \eqa*{
+    T\qty(\dom\qty(\qqty{\eta, \eta^\prime, \ast, \theta}))
+    &= T\qty(\qqty{\eta, \eta, \ast, \dom(\theta)}) \\*
+    &= \qqty{\eta^\sharp, \eta^\sharp, \ast, \dom(\theta)} \\*
+    &= \dom(\qqty{\eta^\sharp, \eta^{\prime \sharp}, \ast, \theta}) \\*
+    &= \dom(T\qty(\qqty{\eta, \eta^\prime, \ast, \theta}))
+  }
+
+  終域についても同様である。
+
+  可換四角形$\qqty{\eta_1, \eta^\prime_1, \ast, \theta_1}, \qqty{\eta_2, \eta^\prime_2, \ast, \theta_2} \in \hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})$について、
+  $\cod(\qqty{\eta_1, \eta^\prime_1, \ast, \theta_1}) = \dom(\qqty{\eta_2, \eta^\prime_2, \ast, \theta_2})$とする。
+  このとき、以下が成り立つ。
+  \eqa*{
+    T\qty(\qqty{\eta_2, \eta^\prime_2, \ast, \theta_2} \circ \qqty{\eta_1, \eta^\prime_1, \ast, \theta_1})
+    &= T\qty(\qqty{\eta_1, \eta^\prime_2, \ast, \theta_2 \circ \theta_1}) \\*
+    &= \qqty{\eta_1^\sharp, \eta_2^{\prime \sharp}, \ast, \theta_2 \circ \theta_1} \\*
+    &= \qqty{\eta_2^\sharp, \eta_2^{\prime \sharp}, \ast, \theta_2} \circ \qqty{\eta_1^\sharp, \eta_1^{\prime \sharp}, \ast, \theta_1} \\*
+    &= T\qty(\qqty{\eta_2, \eta^\prime_2, \ast, \theta_2}) \circ T\qty(\qqty{\eta_1, \eta^\prime_1, \ast, \theta_1})
+  }
+
+  よって、$T$は$\hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})$から$1 \downarrow \mathrm{ev}_c$への関手である。
+
+  また、定義より$T$は射影を保つ。
+
+  \vskip\baselineskip
+
+  関手$F \colon \bm{C}^\opp \to \mathbf{Set}$と写像$u \colon 1 \to F(c)$について、$\Obj_{\bm{C}^\opp}$上の関数$\tilde{u}$を以下で定める。
+  \eq*{
+    \tilde{u}(a) \coloneqq \text{写像$\hom_{\bm{C}}(a, c) \to F(a), h \mapsto F(h^\opp)(u(\ast))$}
+  }
+
+  射$f \in \bm{C}$と射$h \colon \cod(f) \to c$について、以下が成り立つ。
+  \eqa*{
+    \qty\big(\tilde{u}(\dom(f)) \circ \hom_{\bm{C}}(f^\opp, c))(h)
+    &= \tilde{u}(\dom(f))(h \circ f) \\*
+    &= F(f^\opp \circ h^\opp)(u(\ast)) \\*
+    &= \qty(F(f^\opp) \circ F(h^\opp))(u(\ast)) \\*
+    &= F(f^\opp)\qty\big(F(h^\opp)(u(\ast))) \\*
+    &= F(f^\opp)\qty\big(\tilde{u}(\cod(f))(h)) \\*
+    &= \qty\big(F(f^\opp) \circ \tilde{u}(\cod(f)))(h)
+  }
+
+  よって、$\tilde{u} \colon \hom_{\bm{C}}(-, c) \to F$は自然変換である。
+
+  この$\tilde{u}$を用いて、以下で定める$1 \downarrow \mathrm{ev}_c$上の関数$S$を考える。
+  \eq*{
+    S\qty(\qqty{u, u^\prime, \ast, \theta}) \coloneqq \qqty{\tilde{u}, \tilde{u^\prime}, \ast, \theta}
+  }
+
+  対象$a \in \Obj_{\bm{C}^\opp}$と$\bm{C}$の射$h \colon a \to c$について、以下が成り立つ。
+  \eqa*{
+    \qty(\theta \circ \tilde{u})(a)(h)
+    &= \theta(a)\qty(\tilde{u}(a)(h)) \\*
+    &= \theta(a)\qty\big(\dom(\theta)(h^\opp)(u(\ast))) \\*
+    &= \qty\big(\theta(\dom(h)) \circ \dom(\theta)(h^\opp))(u(\ast)) \\*
+    &= \qty\big(\cod(\theta)(h^\opp) \circ \theta(\cod(h)))(u(\ast)) \\*
+    &= \cod(\theta)(h^\opp)\qty\big(\theta(c)(u(\ast))) \\*
+    &= \cod(\theta)(h^\opp)\qty\big(\qty(\theta(c) \circ u)(\ast)) \\*
+    &= \cod(\theta)(h^\opp)\qty\big(u^\prime(\ast)) \\*
+    &= \tilde{u^\prime}(h)
+  }
+
+  よって、$\qqty{\tilde{u}, \widetilde{u^\prime}, \ast, \theta} \in \hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})$である。
+
+  $S$が関手であり射影を保つことは、定義より直ちに従う。
+
+  \vskip\baselineskip
+
+  関手$F \colon \bm{C}^\opp \to \mathbf{Set}$と自然変換$\eta \colon \hom_{\bm{C}}(-, c) \to F$について、$c \in \hom_{\bm{C}}(c, c)$より以下が成り立つ。
+  \eqa*{
+    \tilde{\eta^\sharp}(a)(h)
+    &= F(h^\opp)\qty(\eta^\sharp(\ast)) \\*
+    &= F(h^\opp)\qty(\eta(c)(c)) \\*
+    &= \qty(F(h^\opp) \circ \eta(c))(c) \\*
+    &= \qty(\eta(a) \circ \hom_{\bm{C}}(h^\opp, c))(c) \\*
+    &= \eta(a)\qty(\hom_{\bm{C}}(h^\opp, c)(c)) \\*
+    &= \eta(a)(h)
+  }
+
+  関手$F \colon \bm{C}^\opp \to \mathbf{Set}$と写像$u \colon 1 \to F(c)$について、
+  $c \in \hom_{\bm{C}}(c, c)$より、以下が成り立つ。
+  \eqa*{
+    \qty(\tilde{u})^\sharp(\ast)
+    &= \tilde{u}(c)(c) \\*
+    &= F(c)(u(\ast)) \\*
+    &= \id_{F(c)}(u(\ast)) \\*
+    &= u(\ast)
+  }
+
+  ゆえに、$S \circ T = \id_{\hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})} \land T \circ S = \id_{1 \downarrow \mathrm{ev}_c}$が成り立つ。
 }
+
+
+
 
 % \lsubsection{像と原像}
 
