@@ -165,7 +165,7 @@
   \eq*{
     \exists \epsilon \in \Q^+ \forall N \in \N \exists n \in \N_{\geq N} \qty(\epsilon \leq x_n)
   }
-  
+
   Cauchy列であることより、
   \eq*{
     \exists N \in \N \forall m \in \N_{\geq N} \qty(\abs{x_n - x_m} < \epsilon / 2)
@@ -234,7 +234,7 @@
 
 \cor*{
   \eq*{
-    \Q \subset \R
+    \Q \subseteq \R
   }
 }
 
@@ -365,7 +365,7 @@
 
   \thmref{R上のArchimedesの原理}より$\forall \epsilon \in \R^+ \exists n \in \N \qty(\qty(u - d) / \epsilon < n)$
 
-  \thmref{順序群の一様構造}より$A \subset \qty{B(\epsilon)[d + m \times \epsilon] \mid m \in s(n)}$である。
+  \thmref{順序群の一様構造}より$A \subseteq \qty{B(\epsilon)[d + m \times \epsilon] \mid m \in s(n)}$である。
 }
 
 
@@ -555,13 +555,13 @@
 
   $x \in B$であり、$v$は$B$の上界であるので、\thmref{上限の存在}から上限$b \coloneqq \sup B$を持つ。
 
-  $b \in V$とすると、$V$は開集合であるので$\exists \epsilon \in \R^+ \qty(\sqty{b - \epsilon, b + \epsilon} \subset V)$
+  $b \in V$とすると、$V$は開集合であるので$\exists \epsilon \in \R^+ \qty(\sqty{b - \epsilon, b + \epsilon} \subseteq V)$
 
   このとき$b - \epsilon$も$B_1$の上界となり矛盾。
   ゆえに$b \notin V$
   よって$b < v$である。
 
-  $b \in U$とすると、$U$は開集合であるので$\exists \epsilon' \in \R^+ \qty(\sqty{b - \epsilon', b + \epsilon'} \subset U)$
+  $b \in U$とすると、$U$は開集合であるので$\exists \epsilon' \in \R^+ \qty(\sqty{b - \epsilon', b + \epsilon'} \subseteq U)$
 
   $b < b + \min \qty{\epsilon', v - b} / 2 \in B$より$b$は上界でない。ゆえに$b \notin U$\\*
 

@@ -72,7 +72,7 @@
 }
 
 \cor{群の共通部分}{
-  群$G$について、$A \subset G$を考える。
+  群$G$について、$A \subseteq G$を考える。
 
   $\forall H \in A$について$H$が$G$の部分群であるとき、$\bigcap A$は$G$の部分群である。
 }
@@ -186,9 +186,9 @@
 }{
   $\exists g \in G \qty(x = g y)$である。
 
-  $\forall w_x \in \varphi(G, x)$について$\exists g_x \in G \qty(w_x = g_x x)$であり、$w_x = \qty(g_x g) y \in \varphi(G, y)$であるので、$\varphi(G, x) \subset \varphi(G, y)$
+  $\forall w_x \in \varphi(G, x)$について$\exists g_x \in G \qty(w_x = g_x x)$であり、$w_x = \qty(g_x g) y \in \varphi(G, y)$であるので、$\varphi(G, x) \subseteq \varphi(G, y)$
 
-  $\forall w_y \in \varphi(G, y)$について$\exists g_y \in G \qty(w_y = g_y y)$であり、$w_y = \qty(g_y g^{-1}) x \in \varphi(G, x)$であるので、$\varphi(G, y) \subset \varphi(G, x)$
+  $\forall w_y \in \varphi(G, y)$について$\exists g_y \in G \qty(w_y = g_y y)$であり、$w_y = \qty(g_y g^{-1}) x \in \varphi(G, x)$であるので、$\varphi(G, y) \subseteq \varphi(G, x)$
 }
 
 \lem*{
@@ -342,7 +342,7 @@
 }{
   商写像$\qty[]$の原像$H \coloneqq \qty[Z]^{-1}$を考えると、商写像の群準同型性より$H$は$G$の部分群である。
 
-  $\qty[\qty{e_Z}]^{-1} = N$であるため、$N \subset H$である。ゆえに$N$は$H$の正規部分群である。
+  $\qty[\qty{e_Z}]^{-1} = N$であるため、$N \subseteq H$である。ゆえに$N$は$H$の正規部分群である。
 
   商写像は全射であるため、$H / N = \qty[\qty[Z]^{-1}] = Z$である。
 }
@@ -378,7 +378,7 @@
 \dfn{群の生成}{
   群$G$の部分集合$S$について、$S$が生成する部分群を以下で定めて、$\ev{S}$で表す。
   \eq*{
-    \ev{S} \coloneqq \bigcap \qty{H \subset G \mid S \subset H \land \text{$H$は$G$の部分群}}
+    \ev{S} \coloneqq \bigcap \qty{H \subseteq G \mid S \subseteq H \land \text{$H$は$G$の部分群}}
   }
 }
 

@@ -5,7 +5,7 @@
 \dfn{位相群}{
   群$\qty(G, \cdot)$と、$G$の開集合系$\mathcal{O}$を考える。
   \dfnref{直積空間}の意味で、位相空間$G \times G$が与えられる。
-  
+
   写像$\varphi \in G^{G \times G}, \varphi(x, y) = x \cdot y^{-1}$が連続であるとき、順序対$\qty(\qty(G, \cdot), \mathcal{O})$を位相群と呼ぶ。
 }
 
@@ -40,27 +40,27 @@
 
   $\forall V_1, V_2 \in \mathcal{V}$について、$\exists B_1, B_2 \in \mathcal{B}(e) \qty(V_1 = \tilde{B_1} \land V_2 = \tilde{B_2})$である。
 
-  \dfnref{基本近傍系}第三式より$\exists B \in \mathcal{B}(e) \qty(B \subset B_1 \cap B_2)$であり、定義より$\tilde{B} \subset V_1 \cap V_2 \land \tilde{B} \in \mathcal{V}$\\*
+  \dfnref{基本近傍系}第三式より$\exists B \in \mathcal{B}(e) \qty(B \subseteq B_1 \cap B_2)$であり、定義より$\tilde{B} \subseteq V_1 \cap V_2 \land \tilde{B} \in \mathcal{V}$\\*
 
   $\forall V \in \mathcal{V} \exists B \in \mathcal{B}(e) \qty(V = \tilde{B})$である。
 
-  \thmref{位相群の自明な連続写像}第二と\thmref{連続と点連続}より$\exists B_1, B_2 \in \mathcal{B}(e) \qty(\cdot(B_1 \times B_2) \subset B)$
+  \thmref{位相群の自明な連続写像}第二と\thmref{連続と点連続}より$\exists B_1, B_2 \in \mathcal{B}(e) \qty(\cdot(B_1 \times B_2) \subseteq B)$
 
-  \dfnref{基本近傍系}第三式より$\exists B' \in \mathcal{B}(e) \qty(\cdot(B' \times B') \subset \cdot(B_1 \times B_2) \subset B)$
+  \dfnref{基本近傍系}第三式より$\exists B' \in \mathcal{B}(e) \qty(\cdot(B' \times B') \subseteq \cdot(B_1 \times B_2) \subseteq B)$
 
-  定義より$\tilde{B'} \circ \tilde{B'} \subset \tilde{\cdot \qty(B' \times B')} \subset \tilde{B} = V$\\*
+  定義より$\tilde{B'} \circ \tilde{B'} \subseteq \tilde{\cdot \qty(B' \times B')} \subseteq \tilde{B} = V$\\*
 
   $\forall V \in \mathcal{V} \exists B \in \mathcal{B}(e) \qty(V = \tilde{B})$である。
 
-  \thmref{位相群の自明な連続写像}第一と\thmref{連続と点連続}より$\exists B' \in \mathcal{B}(e) \qty(-1(B') \subset B)$となるので、$\tilde{B'} \subset V^{-1}$\\*
+  \thmref{位相群の自明な連続写像}第一と\thmref{連続と点連続}より$\exists B' \in \mathcal{B}(e) \qty(-1(B') \subseteq B)$となるので、$\tilde{B'} \subseteq V^{-1}$\\*
 
   $\mathcal{V}$の与える基本近傍系は$\mathcal{B'}(x) = \qty{\tilde{B}[x] \mid B \in \mathcal{B}(e)}$である。\\*
 
-  \thmref{位相群の自明な連続写像}第二と\lemref{直積と連続}より$\forall D \in \mathcal{B}(x) \exists B \in \mathcal{B}(e) \qty(\qty{x y \mid y \in B} \subset D)$
+  \thmref{位相群の自明な連続写像}第二と\lemref{直積と連続}より$\forall D \in \mathcal{B}(x) \exists B \in \mathcal{B}(e) \qty(\qty{x y \mid y \in B} \subseteq D)$
 
-  $\tilde{B}[x] = \qty{y \in G \mid x^{-1} y \in B} = \qty{x z \mid z \in B} \subset D$\\*
+  $\tilde{B}[x] = \qty{y \in G \mid x^{-1} y \in B} = \qty{x z \mid z \in B} \subseteq D$\\*
 
-  \thmref{位相群の自明な連続写像}第二と\lemref{直積と連続}より$\forall B \in \mathcal{B}(e) \exists D \in \mathcal{B}(x) \qty(\qty{x^{-1} y \mid y \in D} \subset B)$
+  \thmref{位相群の自明な連続写像}第二と\lemref{直積と連続}より$\forall B \in \mathcal{B}(e) \exists D \in \mathcal{B}(x) \qty(\qty{x^{-1} y \mid y \in D} \subseteq B)$
 
   $\tilde{B}[x] = \qty{y \in G \mid x^{-1} y \in B} \supset \qty{z \in G \mid x^{-1} z \in \qty{x^{-1} y \mid y \in D}} = D$
 
@@ -127,14 +127,14 @@
 }{
   \thmref{位相群の左一様構造}の$\mathcal{V}$を考える。\\*
 
-  $\forall V \in \mathcal{V}$について、\lemref{基本近縁系の三角性}より$\exists W \in \mathcal{V} \qty(W \cup W^{-1} \subset V)$である。
-  
+  $\forall V \in \mathcal{V}$について、\lemref{基本近縁系の三角性}より$\exists W \in \mathcal{V} \qty(W \cup W^{-1} \subseteq V)$である。
+
   $\qty(x, y) \in W$について、可換性より$\qty(y^{-1}, x^{-1}) \in W$であるため、$\qty(x^{-1}, y^{-1}) \in V$となる。
-  
+
   よって一様連続である。
   $\varphi_1$の逆写像は$\varphi_1$であるため、一様同型写像である。\\*
 
-  $\forall V \in \mathcal{V}$について、$\exists W \in \mathcal{V} \qty(W \circ W \subset V)$
+  $\forall V \in \mathcal{V}$について、$\exists W \in \mathcal{V} \qty(W \circ W \subseteq V)$
 
   Cauchyより、$\exists \lambda_x \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in W)$かつ$\exists \lambda_y \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_y} \qty(\qty(y_{\lambda_1}, y_{\lambda_2}) \in W)$
 
@@ -198,7 +198,7 @@
     \end{cases}
   }
 }{
-  Hausdorffと収束の定義より$\exists B_0 \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(0_F \notin B_0 \land \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B_0)$
+  Hausdorffと収束の定義より$\exists B_0 \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(0_F \notin B_0 \land \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subseteq B_0)$
 
   \dfnref{位相体}と\thmref{点連続と収束}より成り立つ。
 }
@@ -264,17 +264,17 @@
   写像$\varphi \in G^{G \times G}, \varphi(x, y) = x - y$を考える。
 
   $\forall \qty(x, y) \in G \times G$における点連続性を考える。
-  
+
   $\forall a, b \in G \qty(\varphi(x, y) \in \sqty{a, b})$を考える。\\*
 
-  $G^+$が最小元$m$を持つとき、$\qty{x} = \sqty{x - m, x + m} \subset \sqty{a, b}$である。
-  同様に$\qty{y} \subset \sqty{a, b}$でもある。
+  $G^+$が最小元$m$を持つとき、$\qty{x} = \sqty{x - m, x + m} \subseteq \sqty{a, b}$である。
+  同様に$\qty{y} \subseteq \sqty{a, b}$でもある。
 
-  $\forall B \in \mathcal{B}(\varphi(x, y)) \qty(\varphi(\qty{x} \times \qty{y}) = \qty{\varphi(x, y)} \subset B)$である。\\*
+  $\forall B \in \mathcal{B}(\varphi(x, y)) \qty(\varphi(\qty{x} \times \qty{y}) = \qty{\varphi(x, y)} \subseteq B)$である。\\*
 
   $G^+$が最小元を持たないとき、\lemref{順序群の三角性}より$\exists g \in G^+ \qty(g + g \leq \min \qty{\varphi(x, y) - a, b - \varphi(x, y)})$である。
 
-  ゆえに、$\varphi \qty(\sqty{x - g, x + g} \times \sqty{y - g, y + g}) \subset \sqty{a, b}$である。\\*
+  ゆえに、$\varphi \qty(\sqty{x - g, x + g} \times \sqty{y - g, y + g}) \subseteq \sqty{a, b}$である。\\*
 
   \dfnref{順序空間}の定める開基$\mathcal{B}$について、\lemref{最大がない場合の順序の開基}、\lemref{非自明な順序群は最大を持たない}より、$\forall B \in \mathcal{B} \exists a, b \in G \qty(\sqty{a, b} = B)$である。
 
@@ -322,7 +322,7 @@
 }{
 	$\forall g \in G^+ \exists B \in \mathcal{B}(0_G) \qty(B = \sqty{-g, g} \land \tilde{B} = V_g)$である。
 
-	$\forall B \in \mathcal{B}(0_G)$について、$B = \sqty{a, b} \land a < 0_G < b$である。$g = \min \qty{-a, b} \in G^+$について、$V_g \subset \tilde{B}$である。
+	$\forall B \in \mathcal{B}(0_G)$について、$B = \sqty{a, b} \land a < 0_G < b$である。$g = \min \qty{-a, b} \in G^+$について、$V_g \subseteq \tilde{B}$である。
 
 	\lemref{近縁系の一意性}より成り立つ。
 }
@@ -338,7 +338,7 @@
 }{
   非自明性より$\exists g \in G^+$である。
 
-  全有界より$\exists Y \in \P(A) \qty(\abs{Y} < \infty \land A \subset \qty{B(g)[y] \mid y \in Y})$である。
+  全有界より$\exists Y \in \P(A) \qty(\abs{Y} < \infty \land A \subseteq \qty{B(g)[y] \mid y \in Y})$である。
 
   \thmref{有限全順序集合の最大元}より$\exists u, d \in G \qty(u = \max Y \land d = \min Y)$である。
 
@@ -430,7 +430,7 @@
 
   \lemref{順序環の三角性}より、$\exists r \in R^+ \qty(r \times r \leq \min \qty{-a, b})$である。
 
-  $B' \coloneqq \sqty{-r, r} \times \sqty{-r, r} \mathcal{B} \times \mathcal{B}$であり、$\times(B') \subset B$\\*
+  $B' \coloneqq \sqty{-r, r} \times \sqty{-r, r} \mathcal{B} \times \mathcal{B}$であり、$\times(B') \subseteq B$\\*
 
   $\forall x_0 \in R$について、$f \in R^R, f(x) = x \times x_0$を考える。
 
@@ -438,7 +438,7 @@
 
   $x_0 \neq 0_R$のとき、点$0_R$について考える。$\forall B \in \mathcal{B}(0_R) \exists a, b \in R \qty(0_R \in \sqty{a, b} = B)$である。
 
-  $r \coloneqq \min \qty{-a, b} / \abs{x_0}$について、$B' \coloneqq \sqty{-r, r}$であり、$f(B') \subset B$\\*
+  $r \coloneqq \min \qty{-a, b} / \abs{x_0}$について、$B' \coloneqq \sqty{-r, r}$であり、$f(B') \subseteq B$\\*
 
   可換性と\lemref{位相環の条件}より位相環である。
 }

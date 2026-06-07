@@ -3,7 +3,7 @@
 \lsubsection{近縁}
 
 \dfn{集合算}{
-  集合$X$と、集合$A, B \subset X \times X$について、以下で定める略記$A \circ B, A^{-1}$を考える。
+  集合$X$と、集合$A, B \subseteq X \times X$について、以下で定める略記$A \circ B, A^{-1}$を考える。
   \eqg*{
     A \circ B \coloneqq \qty{\qty(x, z) \in X \times X \mid \exists y \in X \qty(\qty(x, y) \in A \land \qty(y, z) \in B)} \\*
     A^{-1} \coloneqq \qty{\qty(x, y) \in X \times X \mid \qty(y, x) \in A}
@@ -11,29 +11,29 @@
 }
 
 \dfn{基本近縁系}{
-  集合$X$について、以下を満たす集合系$\mathcal{V} \subset \P(X \times X)$を基本近縁系と呼ぶ。
+  集合$X$について、以下を満たす集合系$\mathcal{V} \subseteq \P(X \times X)$を基本近縁系と呼ぶ。
   \eqg*{
     \mathcal{V} \neq \varnothing \\*
     \forall V \in \mathcal{V} \forall x \in X \qty(\qty(x, x) \in V) \\*
-    \forall V_1, V_2 \in \mathcal{V} \exists V \in \mathcal{V} \qty(V \subset V_1 \cap V_2) \\*
-    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \circ W \subset V) \\*
-    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \subset V^{-1})
+    \forall V_1, V_2 \in \mathcal{V} \exists V \in \mathcal{V} \qty(V \subseteq V_1 \cap V_2) \\*
+    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \circ W \subseteq V) \\*
+    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \subseteq V^{-1})
   }
 }
 
 \lem{基本近縁系の三角性}{
   集合$X$の基本近縁系$\mathcal{V}$について、以下を満たす。
   \eq*{
-    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \cup W^{-1} \subset W^{-1} \circ W \subset \qty(W^{-1} \circ W) \circ W \subset V)
+    \forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \cup W^{-1} \subseteq W^{-1} \circ W \subseteq \qty(W^{-1} \circ W) \circ W \subseteq V)
   }
 }{
-  \dfnref{基本近縁系}第四式より$\exists S \in \mathcal{V} \qty(S \circ S \subset V)$であり、$\exists R \in \mathcal{V} \qty(R \circ R \subset S)$である。
+  \dfnref{基本近縁系}第四式より$\exists S \in \mathcal{V} \qty(S \circ S \subseteq V)$であり、$\exists R \in \mathcal{V} \qty(R \circ R \subseteq S)$である。
 
-  \dfnref{基本近縁系}第五式より$\exists T \in \mathcal{V} \qty(T \subset R^{-1})$である。
+  \dfnref{基本近縁系}第五式より$\exists T \in \mathcal{V} \qty(T \subseteq R^{-1})$である。
 
-  \dfnref{基本近縁系}第三式より$\exists W \in \mathcal{V} \qty(W \subset S \cap T)$である。
+  \dfnref{基本近縁系}第三式より$\exists W \in \mathcal{V} \qty(W \subseteq S \cap T)$である。
 
-  ゆえに、$\qty(W^{-1} \circ W) \circ W \subset \qty(T^{-1} \circ T) \circ S \subset \qty(R \circ R) \circ S \subset S \circ S \subset V$
+  ゆえに、$\qty(W^{-1} \circ W) \circ W \subseteq \qty(T^{-1} \circ T) \circ S \subseteq \qty(R \circ R) \circ S \subseteq S \circ S \subseteq V$
 
   \vskip\baselineskip
 
@@ -43,15 +43,15 @@
 \dfn{近縁系}{
   集合$X$の基本近縁系$\mathcal{V}$について、以下で与える集合系$\mathcal{U}$を近縁系と呼ぶ。
   \eq*{
-    \mathcal{U} \coloneqq \qty{U \subset X \times X \mid \exists V \in \mathcal{V} \qty(V \subset U)}
+    \mathcal{U} \coloneqq \qty{U \subseteq X \times X \mid \exists V \in \mathcal{V} \qty(V \subseteq U)}
   }
 }
 
 \lem{近縁系の一意性}{
-  集合$X$の基本近縁系$\mathcal{V}$と集合系$\mathcal{V^\prime} \subset \P(X \times X)$について、以下を満たすとき、$\mathcal{V^\prime}$は基本近縁系である。
+  集合$X$の基本近縁系$\mathcal{V}$と集合系$\mathcal{V^\prime} \subseteq \P(X \times X)$について、以下を満たすとき、$\mathcal{V^\prime}$は基本近縁系である。
   \eqg*{
-    \forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \qty(V \subset V^\prime) \\*
-    \forall V \in \mathcal{V} \exists V^\prime \in \mathcal{V^\prime} \qty(V^\prime \subset V)
+    \forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \qty(V \subseteq V^\prime) \\*
+    \forall V \in \mathcal{V} \exists V^\prime \in \mathcal{V^\prime} \qty(V^\prime \subseteq V)
   }
 
   さらに\dfnref{近縁系}の定める近縁系$\mathcal{U}$と$\mathcal{U^\prime}$は一致する。
@@ -60,33 +60,33 @@
 
   \vskip\baselineskip
 
-  第二式を考える。$\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \forall x \in X \qty(\qty(x, x) \in V \subset V^\prime)$より成り立つ。
+  第二式を考える。$\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \forall x \in X \qty(\qty(x, x) \in V \subseteq V^\prime)$より成り立つ。
 
   \vskip\baselineskip
 
-  第三式を考える。仮定より$\forall V^\prime_1, V^\prime_2 \in \mathcal{V^\prime} \exists V_1, V_2 \in \mathcal{V} \qty(V_1 \cap V_2 \subset V^\prime_1 \cap V^\prime_2)$である。
+  第三式を考える。仮定より$\forall V^\prime_1, V^\prime_2 \in \mathcal{V^\prime} \exists V_1, V_2 \in \mathcal{V} \qty(V_1 \cap V_2 \subseteq V^\prime_1 \cap V^\prime_2)$である。
 
-  \dfnref{基本近縁系}第三式より$\exists V \in \mathcal{V} \qty(V \subset V_1 \cap V_2)$であり、仮定より$\exists V^\prime \in \mathcal{V^\prime} \qty(V^\prime \subset V \subset V^\prime_1 \cap V^\prime_2)$
-
-  \vskip\baselineskip
-
-  第四式を考える。$\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W^\prime \in \mathcal{V^\prime} \qty(W^\prime \circ W^\prime \subset W \circ W \subset V \subset V^\prime)$である。
+  \dfnref{基本近縁系}第三式より$\exists V \in \mathcal{V} \qty(V \subseteq V_1 \cap V_2)$であり、仮定より$\exists V^\prime \in \mathcal{V^\prime} \qty(V^\prime \subseteq V \subseteq V^\prime_1 \cap V^\prime_2)$
 
   \vskip\baselineskip
 
-  第五式を考える。$\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W^\prime \in \mathcal{V^\prime} \qty(W^\prime \subset V^\prime \subset V^{-1} \subset V^{\prime -1})$である。
+  第四式を考える。$\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W^\prime \in \mathcal{V^\prime} \qty(W^\prime \circ W^\prime \subseteq W \circ W \subseteq V \subseteq V^\prime)$である。
 
   \vskip\baselineskip
 
-  $\forall U \in \mathcal{U} \exists V \in \mathcal{V} \exists V^\prime \in \mathcal{V^\prime} \qty(V^\prime \subset V \subset U)$である。ゆえに、$U \in \mathcal{U^\prime}$である。
+  第五式を考える。$\forall V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \exists W \in \mathcal{V} \exists W^\prime \in \mathcal{V^\prime} \qty(W^\prime \subseteq V^\prime \subseteq V^{-1} \subseteq V^{\prime -1})$である。
 
-  $\forall U^\prime \in \mathcal{U^\prime} \exists V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \qty(V \subset V^\prime \subset U^\prime)$である。ゆえに、$U^\prime \in \mathcal{U}$である。
+  \vskip\baselineskip
+
+  $\forall U \in \mathcal{U} \exists V \in \mathcal{V} \exists V^\prime \in \mathcal{V^\prime} \qty(V^\prime \subseteq V \subseteq U)$である。ゆえに、$U \in \mathcal{U^\prime}$である。
+
+  $\forall U^\prime \in \mathcal{U^\prime} \exists V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \qty(V \subseteq V^\prime \subseteq U^\prime)$である。ゆえに、$U^\prime \in \mathcal{U}$である。
 }
 
 \lem{近縁系は基本近縁系}{
   近縁系$\mathcal{U}$は基本近縁系である。さらに$\mathcal{U}$から\dfnref{近縁系}より定まる近縁系は、$\mathcal{U}$に一致する。
 }{
-  定義より$\forall U \in \mathcal{U} \exists V \in \mathcal{V} \qty(V \subset U)$である。
+  定義より$\forall U \in \mathcal{U} \exists V \in \mathcal{V} \qty(V \subseteq U)$である。
 
   $\forall V \in \mathcal{V}$について、$V \in \mathcal{U}$である。
 
@@ -96,24 +96,24 @@
 \lem{近縁系の開性}{
   集合$X$と、$X$の近縁系$\mathcal{U}$について、以下を満たす。
   \eq*{
-    \forall U \in \mathcal{U} \exists V \in \mathcal{U} \forall \qty(x, y) \in V \exists W \in \mathcal{U} \qty(W[y] \subset V[x] \land V \subset U)
+    \forall U \in \mathcal{U} \exists V \in \mathcal{U} \forall \qty(x, y) \in V \exists W \in \mathcal{U} \qty(W[y] \subseteq V[x] \land V \subseteq U)
   }
 }{
-  $V \coloneqq \qty{\qty(x, y) \in X \times X \mid \exists S \in \mathcal{U} \qty(S[x] \times S[y] \subset U)}$を考える。定義より$V \subset U$である。
+  $V \coloneqq \qty{\qty(x, y) \in X \times X \mid \exists S \in \mathcal{U} \qty(S[x] \times S[y] \subseteq U)}$を考える。定義より$V \subseteq U$である。
 
-  \lemref{基本近縁系の三角性}より、$\exists T \in \mathcal{U} \qty(\qty(T^{-1} \circ T) \circ T \subset U)$である。
+  \lemref{基本近縁系の三角性}より、$\exists T \in \mathcal{U} \qty(\qty(T^{-1} \circ T) \circ T \subseteq U)$である。
 
-  $\forall \qty(s, t) \in T$について、$\forall \qty(w, z) \in T[s] \times T[t] \qty(\qty(w, z) \in \qty(T^{-1} \circ T) \circ T \subset U)$であるので、$\qty(s, t) \in V$
+  $\forall \qty(s, t) \in T$について、$\forall \qty(w, z) \in T[s] \times T[t] \qty(\qty(w, z) \in \qty(T^{-1} \circ T) \circ T \subseteq U)$であるので、$\qty(s, t) \in V$
 
-  $T \subset V$より、$V \in \mathcal{U}$である。
+  $T \subseteq V$より、$V \in \mathcal{U}$である。
 
   \vskip\baselineskip
 
-  $\forall \qty(x, y) \in V$について、$\exists S \in \mathcal{U} \qty(S[x] \times S[y] \subset U)$である。
+  $\forall \qty(x, y) \in V$について、$\exists S \in \mathcal{U} \qty(S[x] \times S[y] \subseteq U)$である。
 
   \dfnref{基本近縁系}第四式より$\exists W \in \mathcal{U} \qty(W \circ W \in S)$である。
 
-  $\forall z \in W[y]$について$W[z] \subset S[y]$より、$W[x] \times W[z] \subset S[x] \times S[y] \subset U$、すなわち$z \in V[x]$である。
+  $\forall z \in W[y]$について$W[z] \subseteq S[y]$より、$W[x] \times W[z] \subseteq S[x] \times S[y] \subseteq U$、すなわち$z \in V[x]$である。
 }
 
 \dfn{一様空間}{
@@ -141,24 +141,24 @@
   \vskip\baselineskip
 
   第三式を示す。\dfnref{基本近縁系}第三式から$\forall B_1, B_2 \in \mathcal{B}(x) \exists V_1, V_2 \in \mathcal{V} \qty(B_1 = V_1[x] \land B_2 = V_2[x])$について、
-  $\exists V \in \mathcal{V} \qty(V[x] \subset (V_1 \cap V_2)[x] = B_1 \cap B_2 \land V[x] \in \mathcal{B}(x))$
+  $\exists V \in \mathcal{V} \qty(V[x] \subseteq (V_1 \cap V_2)[x] = B_1 \cap B_2 \land V[x] \in \mathcal{B}(x))$
 
   \vskip\baselineskip
 
   第四式を示す。$\forall B \in \mathcal{B}(x) \exists V \in \mathcal{V} \qty(B = V[x])$である。
 
-  \dfnref{基本近縁系}第四式から$\exists W \in \mathcal{V} \qty(W \circ W \subset V)$であり、$\exists C \coloneqq W[x] \in \mathcal{B}(x)$
+  \dfnref{基本近縁系}第四式から$\exists W \in \mathcal{V} \qty(W \circ W \subseteq V)$であり、$\exists C \coloneqq W[x] \in \mathcal{B}(x)$
 
   $\forall y \in C \exists D = W[y] \in \mathcal{B}(y)$である。
 
   $\forall z \in D \qty(\qty(x, y), \qty(y, z) \in W)$より$\qty(x, z) \in V$すなわち$z \in V[x] = B$である。
-  よって$D \subset B$となる。
+  よって$D \subseteq B$となる。
 
   \vskip\baselineskip
 
-  $\forall N \in \mathcal{N}(x)$について$\exists V \in \mathcal{V} \qty(V[x] \subset N)$であり、$U = V \cup \qty{\qty(x, y) \mid y \in N} \in \mathcal{U}$かつ$N = U[x]$であるので、$N \in \mathcal{N^\prime}(x)$
+  $\forall N \in \mathcal{N}(x)$について$\exists V \in \mathcal{V} \qty(V[x] \subseteq N)$であり、$U = V \cup \qty{\qty(x, y) \mid y \in N} \in \mathcal{U}$かつ$N = U[x]$であるので、$N \in \mathcal{N^\prime}(x)$
 
-  $\forall N^\prime \in \mathcal{N^\prime}(x)$について$\exists U \subset X \times X \exists V \in \mathcal{V} \qty(V \subset U \land U[x] = N^\prime)$であり、$V[x] \subset U[x] = N^\prime \in \mathcal{N}(x)$
+  $\forall N^\prime \in \mathcal{N^\prime}(x)$について$\exists U \subseteq X \times X \exists V \in \mathcal{V} \qty(V \subseteq U \land U[x] = N^\prime)$であり、$V[x] \subseteq U[x] = N^\prime \in \mathcal{N}(x)$
 }
 
 \thmf{一様空間は$T_3$}{一様空間はT_3}{
@@ -166,21 +166,21 @@
 }{
   $\forall x \in X \forall B \in \mathcal{B}(x)$を考える。
 
-  定義より$\exists U \in \mathcal{U} \qty(U[x] = B)$であり、\lemref{基本近縁系の三角性}より$\exists V \in \mathcal{U} \qty(V^{-1} \circ V \subset U)$
+  定義より$\exists U \in \mathcal{U} \qty(U[x] = B)$であり、\lemref{基本近縁系の三角性}より$\exists V \in \mathcal{U} \qty(V^{-1} \circ V \subseteq U)$
 
-  \dfnref{基本近縁系}第五式より、$\exists W \in \mathcal{U} \qty(W \subset V^{-1})$である。
+  \dfnref{基本近縁系}第五式より、$\exists W \in \mathcal{U} \qty(W \subseteq V^{-1})$である。
 
-  $W[x] \in \mathcal{N}(x)$より、$\exists D \in \mathcal{B}(x) \qty(D \subset W[x])$である。
+  $W[x] \in \mathcal{N}(x)$より、$\exists D \in \mathcal{B}(x) \qty(D \subseteq W[x])$である。
 
   \vskip\baselineskip
 
   $\forall y \in \bar{D}$について考える。
 
-  \thmref{閉包}より、$\exists z \in X \qty(z \in D \cap W[y] \subset W[x] \cap W[y])$である。
+  \thmref{閉包}より、$\exists z \in X \qty(z \in D \cap W[y] \subseteq W[x] \cap W[y])$である。
 
   $\qty(x, z), \qty(y, z) \in W$より、$\qty(x, y) \in U$である。
 
-  したがって、$\bar{D} \subset U[x] = B$
+  したがって、$\bar{D} \subseteq U[x] = B$
 
   \vskip\baselineskip
 
@@ -204,13 +204,13 @@
 }{
   $1. \rightarrow 2.$を示す。
 
-  $\forall V^\prime \in \mathcal{V^\prime} \subset \mathcal{U^\prime} \exists U \in \mathcal{U} \exists V \in \mathcal{V} \qty(\qty(x, y) \in V \subset U \rightarrow \qty(f(x), f(y)) \in V^\prime)$より明らか。
+  $\forall V^\prime \in \mathcal{V^\prime} \subseteq \mathcal{U^\prime} \exists U \in \mathcal{U} \exists V \in \mathcal{V} \qty(\qty(x, y) \in V \subseteq U \rightarrow \qty(f(x), f(y)) \in V^\prime)$より明らか。
 
   \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。
 
-  $\forall U^\prime \in \mathcal{U^\prime} \exists V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \subset \mathcal{U} \qty(\qty(x, y) \in V \rightarrow \qty(f(x), f(y)) \in V^\prime \subset U^\prime)$より明らか。
+  $\forall U^\prime \in \mathcal{U^\prime} \exists V^\prime \in \mathcal{V^\prime} \exists V \in \mathcal{V} \subseteq \mathcal{U} \qty(\qty(x, y) \in V \rightarrow \qty(f(x), f(y)) \in V^\prime \subseteq U^\prime)$より明らか。
 }
 
 \dfn{一様同型}{
@@ -226,7 +226,7 @@
 
   一様連続の定義より$\exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \in U^\prime)$である。
 
-  今、$U[x] \in \mathcal{N}(x)$であり、$f(U[x]) \subset U^\prime[f(x)] = N^\prime$より点連続。
+  今、$U[x] \in \mathcal{N}(x)$であり、$f(U[x]) \subseteq U^\prime[f(x)] = N^\prime$より点連続。
 
   $\forall x \in X$で成り立つので、\thmref{連続と点連続}より示される。
 }
@@ -272,13 +272,13 @@
     \item $\forall V \in \mathcal{V} \exists \lambda_0 \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_\mu, x_\tau) \in V)$
   \end{enumerate}
 }{
-  $1. \rightarrow 2.$は、$\mathcal{V} \subset \mathcal{U}$より明らか。
+  $1. \rightarrow 2.$は、$\mathcal{V} \subseteq \mathcal{U}$より明らか。
 
   \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。
 
-  $\forall U \in \mathcal{U} \exists V \in \mathcal{V} \exists \lambda_0 \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_\mu, x_\tau) \in V \subset U)$
+  $\forall U \in \mathcal{U} \exists V \in \mathcal{V} \exists \lambda_0 \in \Lambda \forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(x_\mu, x_\tau) \in V \subseteq U)$
 }
 
 \cor*{
@@ -292,7 +292,7 @@
 }{
   $\forall U^\prime \in \mathcal{U^\prime}$を考える。
 
-  一様連続性から、$\exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \subset U^\prime)$である。
+  一様連続性から、$\exists U \in \mathcal{U} \qty(\qty(x, y) \in U \rightarrow \qty(f(x), f(y)) \subseteq U^\prime)$である。
 
   Cauchyより、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_x} \qty(\qty(x_{\lambda_1}, x_{\lambda_2}) \in U)$である。
 
@@ -302,9 +302,9 @@
 \thm{収束ネットはCauchy}{
   収束するネットはCauchyである。
 }{
-  $\forall V \in \mathcal{V}$について、\lemref{基本近縁系の三角性}より$\exists W \in \mathcal{V} \qty(W^{-1} \circ W \subset V)$
+  $\forall V \in \mathcal{V}$について、\lemref{基本近縁系の三角性}より$\exists W \in \mathcal{V} \qty(W^{-1} \circ W \subseteq V)$
 
-  \dfnref{収束}より$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset W[a])$
+  \dfnref{収束}より$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subseteq W[a])$
 
   $a$に収束するとすると、$\forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(a, x_\mu), \qty(a, x_\tau) \in W)$であるので、$\qty(x_\lambda, x_\tau) \in V$
 }
@@ -312,9 +312,9 @@
 \lem{収束する部分を持つCauchyネット}{
   一様空間$X$と$X$上のCauchyネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、$a \in X$に収束する部分ネットを持つならば、$\qty(x_\lambda)_{\lambda \in \Lambda}$は$a$に収束する。
 }{
-  \dfnref{基本近縁系}第四式より$\forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \circ W \subset V)$
+  \dfnref{基本近縁系}第四式より$\forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W \circ W \subseteq V)$
 
-  収束より、$\exists \mu_0 \in M \qty(\qty(x_{\lambda(\mu)})_{\mu \in M_{\succcurlyeq \mu_0}} \subset W[a])$
+  収束より、$\exists \mu_0 \in M \qty(\qty(x_{\lambda(\mu)})_{\mu \in M_{\succcurlyeq \mu_0}} \subseteq W[a])$
 
   Cauchyネットより、$\exists \lambda_0 \in \Lambda \forall \lambda_1, \lambda_2 \in \Lambda_{\succcurlyeq \lambda_0} \qty(\qty(\lambda_1, \lambda_2) \in W)$
 
@@ -326,7 +326,7 @@
 \dfn{全有界}{
   一様空間$\qty(X, \mathcal{U})$が以下を満たすとき、全有界であると呼ぶ。
   \eq*{
-    \forall U \in \mathcal{U} \exists A \subset X \qty(\abs{A} < \infty \land \bigcup \qty{U[x] \mid x \in A} = X)
+    \forall U \in \mathcal{U} \exists A \subseteq X \qty(\abs{A} < \infty \land \bigcup \qty{U[x] \mid x \in A} = X)
   }
 }
 
@@ -338,14 +338,14 @@
   一様空間$\qty(X, \mathcal{U})$と、近縁系$\mathcal{U}$を与える基本近縁系$\mathcal{V}$について、以下の４つは同値である。
   \begin{enumerate}
     \item $X$は全有界
-    \item $\forall V \in \mathcal{V} \exists A \subset X \qty(\abs{A} < \infty \land \bigcup \qty{V[x] \mid x \in A} = X)$
+    \item $\forall V \in \mathcal{V} \exists A \subseteq X \qty(\abs{A} < \infty \land \bigcup \qty{V[x] \mid x \in A} = X)$
     \item $X$上の任意の普遍ネットはCauchyである。
     \item $X$上の任意のネットはCauchyな部分ネットを持つ。
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
 
-  $\mathcal{V} \subset \mathcal{U}$より明らか。
+  $\mathcal{V} \subseteq \mathcal{U}$より明らか。
 
   \vskip\baselineskip
 
@@ -353,17 +353,17 @@
 
   $X$上の普遍ネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について考える。
 
-  \lemref{基本近縁系の三角性}より$\forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W^{-1} \circ W \subset V)$
+  \lemref{基本近縁系の三角性}より$\forall V \in \mathcal{V} \exists W \in \mathcal{V} \qty(W^{-1} \circ W \subseteq V)$
 
   全有界性より$\exists n \in \N \qty(n \neq 0 \land \bigcup \qty{W[x(m)] \mid m \in n} = X)$を得る。
 
-  普遍ネットの定義より$\forall m \in \N \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset W[x(m)] \lor \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset X \setminus W[x(m)])$である。
+  普遍ネットの定義より$\forall m \in \N \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subseteq W[x(m)] \lor \qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subseteq X \setminus W[x(m)])$である。
 
   \thmref{有限有向集合の上界}より、$\qty{\lambda_0(m) \mid m \in n}$の上界$\lambda_1$が存在する。
 
-  $\forall m \in \N \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_1}} \subset X \setminus W[x(m)])$とすると、全有界の定義より矛盾。
+  $\forall m \in \N \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_1}} \subseteq X \setminus W[x(m)])$とすると、全有界の定義より矛盾。
 
-  背理法より、$\exists m \in \N \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_1}} \subset W[x(m)])$
+  背理法より、$\exists m \in \N \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_1}} \subseteq W[x(m)])$
 
   ゆえに$\forall \mu, \tau \in \Lambda_{\succcurlyeq \lambda_1} \qty(\qty(x[m], x_\mu), \qty(x[m], x_\tau))$すなわち$\qty(x_\mu, x_\tau) \in V$
 
@@ -379,7 +379,7 @@
 
   全有界でないと仮定する。$X$の任意の有限部分$A$について、$\bigcup \qty{U[x] \mid x \in A} \neq X$となる近縁$U$が存在する。
 
-  $P \coloneqq \qty{A \subset X \mid \abs{A} < \infty \land A \neq \varnothing}$について、$\qty(P, \subset)$は有向集合であり、
+  $P \coloneqq \qty{A \subseteq X \mid \abs{A} < \infty \land A \neq \varnothing}$について、$\qty(P, \subseteq)$は有向集合であり、
   全有界でないことから$\forall A \in P \exists x \in X \setminus \bigcup \qty{U[x] \mid x \in A}$である。このようなネット$\qty(x_A)_{A \in P}$を考える。
 
   \vskip\baselineskip
@@ -388,9 +388,9 @@
 
   ゆえに$\exists \mu_0 \in M \forall \mu \in M_{\succcurlyeq \mu_0} \qty(x_{\varphi(\mu)} \in U[x_{\varphi(\mu_0)}])$である。
 
-  $\qty{x_{\varphi(\mu_0)}} \in P$であることと、\dfnref{部分ネット}と有向性より、$\exists \mu_1 \in M \qty(\mu_0 \preccurlyeq \mu_1 \land \qty{x_{\varphi(\mu_0)}} \subset \varphi(\mu_1))$となる。
+  $\qty{x_{\varphi(\mu_0)}} \in P$であることと、\dfnref{部分ネット}と有向性より、$\exists \mu_1 \in M \qty(\mu_0 \preccurlyeq \mu_1 \land \qty{x_{\varphi(\mu_0)}} \subseteq \varphi(\mu_1))$となる。
 
-  すなわち、$x_{\varphi(\mu_1)} \in U[x_{\varphi(\mu_0)}] \subset \bigcup \qty{U[x] \mid x \in \varphi(\mu_1)}$であるが、このネットの定義に反する。
+  すなわち、$x_{\varphi(\mu_1)} \in U[x_{\varphi(\mu_0)}] \subseteq \bigcup \qty{U[x] \mid x \in \varphi(\mu_1)}$であるが、このネットの定義に反する。
 
   \vskip\baselineskip
 
@@ -400,25 +400,25 @@
 \thm{Heine-Cantorの定理}{
   全有界な一様空間$\qty(X, \mathcal{U})$と、一様空間$\qty(X^\prime, \mathcal{U^\prime})$について、連続写像$f \colon X \to X^\prime$は一様連続である。
 }{
-  $\forall V^\prime \in \mathcal{V^\prime}$について、\lemref{基本近縁系の三角性}より$\exists W^\prime \in \mathcal{V^\prime} \qty(W^{\prime -1} \circ W^\prime \subset V^\prime)$
+  $\forall V^\prime \in \mathcal{V^\prime}$について、\lemref{基本近縁系の三角性}より$\exists W^\prime \in \mathcal{V^\prime} \qty(W^{\prime -1} \circ W^\prime \subseteq V^\prime)$
 
-  \thmref{連続と点連続}から$\forall x \in X \exists V \in \mathcal{V} \qty(f(V[x]) \subset W^\prime[f(x)])$である。
+  \thmref{連続と点連続}から$\forall x \in X \exists V \in \mathcal{V} \qty(f(V[x]) \subseteq W^\prime[f(x)])$である。
 
-  \dfnref{基本近縁系}第四式より$\exists W \in \mathcal{V} \qty(W \circ W \subset V)$
+  \dfnref{基本近縁系}第四式より$\exists W \in \mathcal{V} \qty(W \circ W \subseteq V)$
 
   今、$\qty{W(V^\prime, x)[x] \mid x \in X}$は被覆である。
 
-  全有界性から$\exists Y \subset X \land \abs{Y} < \infty$であり$C \coloneqq \qty{W(V^\prime, x)[x] \mid x \in Y}$は被覆となる。
+  全有界性から$\exists Y \subseteq X \land \abs{Y} < \infty$であり$C \coloneqq \qty{W(V^\prime, x)[x] \mid x \in Y}$は被覆となる。
 
   \dfnref{基本近縁系}第三式より$S \coloneqq \bigcap \qty{W(V^\prime, x) \mid x \in Y} \in \mathcal{V}$である。
 
   \vskip\baselineskip
 
-  $\forall \qty(w, z) \in S(V^\prime)$について、$C$は被覆より$\exists y \in Y(V^\prime) \qty(w \in W(V^\prime, y)[y] \subset V(V^\prime, y)[y])$である。
+  $\forall \qty(w, z) \in S(V^\prime)$について、$C$は被覆より$\exists y \in Y(V^\prime) \qty(w \in W(V^\prime, y)[y] \subseteq V(V^\prime, y)[y])$である。
 
   $\qty(y, w), \qty(w, z) \in W(V^\prime, y)$であり、$\qty(y, z) \in V(V^\prime, y)$すなわち$z \in V(V^\prime, y)[y]$である。
 
-  $w, z \in V(V^\prime, y)[y]$より$f(w), f(z) \in f(V(V^\prime, y)[y]) \subset W^\prime(V^\prime)[f(y)]$である。
+  $w, z \in V(V^\prime, y)[y]$より$f(w), f(z) \in f(V(V^\prime, y)[y]) \subseteq W^\prime(V^\prime)[f(y)]$である。
 
   したがって$\qty(f(y), f(w)), \qty(f(y), f(z)) \in W^\prime$より$\qty(f(w), f(z)) \in V^\prime$
 }
@@ -463,8 +463,8 @@
 \lem{可算一様空間における基本近傍系の単調列}{
   可算一様空間$\qty(X, \mathcal{U})$について、以下を満たす基本近縁系$\qty(V_n)_{n \in \N}$が存在する。
   \eqg*{
-    \forall n \in \N \qty(\qty(V^{-1}_{s(n)} \circ V_{s(n)}) \circ V_{s(n)} \subset V_n) \\*
-    \forall n \in \N \forall \qty(x, y) \in V_n \exists m \in \N \qty(V_m[y] \subset V_n[x])
+    \forall n \in \N \qty(\qty(V^{-1}_{s(n)} \circ V_{s(n)}) \circ V_{s(n)} \subseteq V_n) \\*
+    \forall n \in \N \forall \qty(x, y) \in V_n \exists m \in \N \qty(V_m[y] \subseteq V_n[x])
   }
 }{
   可算であるので、$\N$からの全射$\varphi$が存在するような基本近縁系$\mathcal{V}$が存在する。
@@ -485,7 +485,7 @@
 
   \vskip\baselineskip
 
-  定義と$\varphi$の全射性より、$\forall V \in \mathcal{V} \exists n \in \N \qty(V_n \subset \varphi(n) = V)$である。
+  定義と$\varphi$の全射性より、$\forall V \in \mathcal{V} \exists n \in \N \qty(V_n \subseteq \varphi(n) = V)$である。
 
   \vskip\baselineskip
 
@@ -511,7 +511,7 @@
 
   同様に、$\forall x_2 \in F_2 \exists n_2 \in \N \qty(V_{n_2}[x_2] \cap F_1 = \varnothing)$である。
 
-  以下の集合$U_1, U_2$を考える。定義より明らかに$F_1 \subset U_1 \land F_2 \subset U_2 \land U_1, U_2 \in \mathcal{O}$である。
+  以下の集合$U_1, U_2$を考える。定義より明らかに$F_1 \subseteq U_1 \land F_2 \subseteq U_2 \land U_1, U_2 \in \mathcal{O}$である。
   \eqg*{
     U_1 \coloneqq \bigcup \qty{V_{s(s(n_1(x)))}[x] \mid x \in F_1} \\*
     U_2 \coloneqq \bigcup \qty{V_{s(s(n_2(x)))}[x] \mid x \in F_2}
@@ -550,7 +550,7 @@
 
   $2. \rightarrow 3.$を示す。
 
-  $\forall \qty(n, x) \in \N \times X$について、$\forall z \in V_n[x] \exists m \in \N \qty(V_m[z] \subset V_n[x])$であるので、$V_n[x] \in \mathcal{O}$である。
+  $\forall \qty(n, x) \in \N \times X$について、$\forall z \in V_n[x] \exists m \in \N \qty(V_m[z] \subseteq V_n[x])$であるので、$V_n[x] \in \mathcal{O}$である。
 
   $n \in \N$について、集合系$D_n \coloneqq \qty{V_n[x] \mid x \in X}$
 
@@ -576,17 +576,17 @@
 
   \thmref{無限濃度の直積}より、$\mathcal{B}$は可算。
 
-  $\forall \qty(n, y) \in \N \times Y$について、$\forall z \in V_n[y] \exists m \in \N \qty(V_m[z] \subset V_n[y])$であるので、$V_n[y] \in \mathcal{O}$である。
+  $\forall \qty(n, y) \in \N \times Y$について、$\forall z \in V_n[y] \exists m \in \N \qty(V_m[z] \subseteq V_n[y])$であるので、$V_n[y] \in \mathcal{O}$である。
 
   \vskip\baselineskip
 
-  $\forall O \in \mathcal{O} \forall x \in O$について、\thmref{基本近傍系の定める位相}より$\exists n \in \N \qty(V_n[x] \subset O)$である。
+  $\forall O \in \mathcal{O} \forall x \in O$について、\thmref{基本近傍系の定める位相}より$\exists n \in \N \qty(V_n[x] \subseteq O)$である。
 
   $x \in \bar{Y}$より$\exists y \in Y \qty(y \in V_{s(s(n))}[x])$である。
 
-  $V_{s(s(n))} \subset V_{s(n)}^{-1}$より、$x \in V_{s(n)}[y]$である。
+  $V_{s(s(n))} \subseteq V_{s(n)}^{-1}$より、$x \in V_{s(n)}[y]$である。
 
-  $\forall z \in V_{s(n)}[y]$について$\qty(x, x), \qty(x, y), \qty(y, z) \in V_{s(n)}$より$\qty(x, z) \in V_n$、すなわち$V_{s(n)}[y] \subset V_n[x] \subset O$
+  $\forall z \in V_{s(n)}[y]$について$\qty(x, x), \qty(x, y), \qty(y, z) \in V_{s(n)}$より$\qty(x, z) \in V_n$、すなわち$V_{s(n)}[y] \subseteq V_n[x] \subseteq O$
 
   \lemref{開集合系の一意性}より、$\mathcal{B}$は$\mathcal{O}$の開基である。
 }

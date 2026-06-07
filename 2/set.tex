@@ -1,8 +1,9 @@
 \lsection{集合論}
 
 \rem{集合論の公理系}{
-  本ノートでは、Zermelo-Fraenkel公理系を採用する。
-  選択公理は、\axiref{Skolem関係の導入}から導入する。
+  本ノートでは、Zermelo-Fraenkel公理系と同値な変形版の公理系を採用する。
+  分出は置換と和集合から導出する。
+  必要に応じて、別途明示する選択原理を加える。
   この取り扱いは一般的でないことに注意されたい。
 }
 
@@ -38,18 +39,18 @@
 }
 
 \dfn{包含}{
-  集合$X, Y$について、略記$\subset$を以下で定める。
+  集合$X, Y$について、略記$\subseteq$を以下で定める。
   \eq*{
-    \subset \qty(X, Y) \defiff \forall x \qty(x \in X \rightarrow x \in Y)
+    \subseteq \qty(X, Y) \defiff \forall x \qty(x \in X \rightarrow x \in Y)
   }
 
-  $\subset \qty(X, Y)$を、簡単のために$X \subset Y$で表す。
+  $\subseteq \qty(X, Y)$を、簡単のために$X \subseteq Y$で表す。
 }
 
 \dfn{真包含}{
   集合$X, Y$について、略記$\subsetneq$を以下で定める。
   \eq*{
-    \subsetneq \qty(X, Y) \defiff X \subset Y \land X \neq Y
+    \subsetneq \qty(X, Y) \defiff X \subseteq Y \land X \neq Y
   }
 
   $\subsetneq \qty(X, Y)$を、簡単のために$X \subsetneq Y$で表す。
@@ -58,7 +59,7 @@
 \dfn{逆包含}{
   集合$X, Y$について、略記$\supset$を以下で定める。
   \eq*{
-    \supset \qty(X, Y) \defiff Y \subset X
+    \supset \qty(X, Y) \defiff Y \subseteq X
   }
 
   $\supset \qty(X, Y)$を、簡単のために$X \supset Y$で表す。
@@ -92,9 +93,9 @@
 \cor{包含の半順序性}{
   以下が成り立つ。
   \eqg*{
-    \forall X \qty(X \subset X) \\*
-    \forall X \forall Y \qty(X \subset Y \land Y \subset X \rightarrow X = Y) \\*
-    \forall X \forall Y \forall Z \qty(X \subset Y \land Y \subset Z \rightarrow X \subset Z)
+    \forall X \qty(X \subseteq X) \\*
+    \forall X \forall Y \qty(X \subseteq Y \land Y \subseteq X \rightarrow X = Y) \\*
+    \forall X \forall Y \forall Z \qty(X \subseteq Y \land Y \subseteq Z \rightarrow X \subseteq Z)
   }
 }
 
@@ -129,7 +130,7 @@
 
 \cor*{
   \eq*{
-    \forall X \qty(\varnothing \subset X)
+    \forall X \qty(\varnothing \subseteq X)
   }
 }
 
@@ -148,7 +149,7 @@
 
 \cor*{
   \eq*{
-    \forall x, y \qty(x \in y \leftrightarrow \qty{x} \subset y)
+    \forall x, y \qty(x \in y \leftrightarrow \qty{x} \subseteq y)
   }
 }
 
@@ -216,19 +217,19 @@
 
 \cor*{
   \eq*{
-    \forall X \forall x \qty(x \in X \rightarrow x \subset \bigcup X)
+    \forall X \forall x \qty(x \in X \rightarrow x \subseteq \bigcup X)
   }
 }
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(X \subset Y \rightarrow \bigcup X \subset \bigcup Y)
+    \forall X \forall Y \qty(X \subseteq Y \rightarrow \bigcup X \subseteq \bigcup Y)
   }
 }
 
 \cor*{
   \eq*{
-    \forall x \forall y \forall z \qty(x \subset y \rightarrow x \cup z \subset y \cup z)
+    \forall x \forall y \forall z \qty(x \subseteq y \rightarrow x \cup z \subseteq y \cup z)
   }
 }
 
@@ -246,7 +247,7 @@
 
 \axi{冪集合の公理}{
   \eq*{
-    \forall X \exists A \forall t \qty(t \in A \leftrightarrow t \subset X)
+    \forall X \exists A \forall t \qty(t \in A \leftrightarrow t \subseteq X)
   }
 }
 
@@ -255,17 +256,17 @@
 
   すなわち、以下が成り立つ。
   \eq*{
-    \forall X \exists! A \forall t \qty(t \in A \leftrightarrow t \subset X)
+    \forall X \exists! A \forall t \qty(t \in A \leftrightarrow t \subseteq X)
   }
 
   上の命題より定まる全域関数を冪集合と呼び、$\P$で表す。
 }
 
 \rem{包含される量化子についての略記}{
-  略記$\forall \subset, \exists \subset$を以下で定める。
+  略記$\forall \subseteq, \exists \subseteq$を以下で定める。
   \eqa*{
-    \forall x \subset X \qty(p(x)) &\defiff \forall x \in \P(X) \qty(p(x)) \\*
-    \exists x \subset X \qty(p(x)) &\defiff \exists x \in \P(X) \qty(p(x))
+    \forall x \subseteq X \qty(p(x)) &\defiff \forall x \in \P(X) \qty(p(x)) \\*
+    \exists x \subseteq X \qty(p(x)) &\defiff \exists x \in \P(X) \qty(p(x))
   }
 }
 
@@ -277,7 +278,7 @@
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(X \subset Y \rightarrow \P(X) \subset \P(Y))
+    \forall X \forall Y \qty(X \subseteq Y \rightarrow \P(X) \subseteq \P(Y))
   }
 }
 
@@ -302,7 +303,7 @@
 \dfn{被覆}{
   集合$A$について、以下を満たす集合$X$を$A$の被覆と呼ぶ。
   \eq*{
-    X \subset \P(A) \land A = \bigcup X
+    X \subseteq \P(A) \land A = \bigcup X
   }
 }
 
@@ -395,19 +396,19 @@
 
 \cor*{
   \eq*{
-    \forall x \forall X \qty(x \in X \rightarrow \bigcap X \subset x)
+    \forall x \forall X \qty(x \in X \rightarrow \bigcap X \subseteq x)
   }
 }
 
 \cor*{
   \eq*{
-    \forall x \forall y \forall z \qty(x \subset y \rightarrow x \cap z \subset y \cap z)
+    \forall x \forall y \forall z \qty(x \subseteq y \rightarrow x \cap z \subseteq y \cap z)
   }
 }
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(X \neq \varnothing \land X \subset Y \rightarrow \bigcap Y \subset \bigcap X)
+    \forall X \forall Y \qty(X \neq \varnothing \land X \subseteq Y \rightarrow \bigcap Y \subseteq \bigcap X)
   }
 }
 
@@ -433,7 +434,7 @@
 
 \cor*{
   \eq*{
-    \forall X \qty(\bigcap X \subset \bigcup X)
+    \forall X \qty(\bigcap X \subseteq \bigcup X)
   }
 }
 
@@ -464,7 +465,7 @@
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(X \setminus Y \subset X)
+    \forall X \forall Y \qty(X \setminus Y \subseteq X)
   }
 }
 
@@ -484,13 +485,13 @@
 
 \cor*{
   \eq*{
-    \forall X \forall Y \forall Z \qty(Y \subset Z \rightarrow X \setminus Z \subset X \setminus Y)
+    \forall X \forall Y \forall Z \qty(Y \subseteq Z \rightarrow X \setminus Z \subseteq X \setminus Y)
   }
 }
 
 \cor*{
   \eq*{
-    \forall X \forall Y \qty(X \subset Y \leftrightarrow X \setminus Y = \varnothing)
+    \forall X \forall Y \qty(X \subseteq Y \leftrightarrow X \setminus Y = \varnothing)
   }
 }
 
@@ -617,18 +618,18 @@
 \lem{後続と包含}{
   以下が成り立つ。
   \eq*{
-    \forall x, y \qty(x \subset y \land y \subset x^+ \rightarrow x = y \lor x^+ = y)
+    \forall x, y \qty(x \subseteq y \land y \subseteq x^+ \rightarrow x = y \lor x^+ = y)
   }
 }{
   $x \in y$のときを考える。
 
-  $x \subset y \land \qty{x} \subset y$より、$x^+ \subset y$である。
-  仮定より$x^+ \subset y$であるので、$x^+ = y$である。
+  $x \subseteq y \land \qty{x} \subseteq y$より、$x^+ \subseteq y$である。
+  仮定より$x^+ \subseteq y$であるので、$x^+ = y$である。
 
   $x \notin y$のときを考える。
 
-  仮定より$y \subset x \cup \qty{x}$より、$y \subset x$である。
-  $x \subset y$であるので、$x = y$である。
+  仮定より$y \subseteq x \cup \qty{x}$より、$y \subseteq x$である。
+  $x \subseteq y$であるので、$x = y$である。
 }
 
 \lem{後続は単射的}{
@@ -685,25 +686,25 @@
 \thm{最小帰納的集合の一意性}{
   帰納的集合$X$について、以下で定める集合は帰納的集合である。
   \eq*{
-    \bigcap \qty{Y \subset X \mid \text{$Y$は帰納的集合である}}
+    \bigcap \qty{Y \subseteq X \mid \text{$Y$は帰納的集合である}}
   }
 
   この集合は、帰納的集合$X$の取り方によらずに一意に定まる。
 }{
-  $A \coloneqq \qty{Y \subset X \mid \text{$Y$は帰納的集合である}}$とすると、
+  $A \coloneqq \qty{Y \subseteq X \mid \text{$Y$は帰納的集合である}}$とすると、
   $X \in A$より、$A \neq \varnothing$である。
 
   \lemref{帰納的集合の共通部分は帰納的集合}より成り立つ。
 
   \vskip\baselineskip
 
-  $\omega(X) \coloneqq \bigcap \qty{Y \subset X \mid \text{$Y$は帰納的集合である}}$とする。
+  $\omega(X) \coloneqq \bigcap \qty{Y \subseteq X \mid \text{$Y$は帰納的集合である}}$とする。
 
   $X_1, X_2$の\num{2}つの帰納的集合を考える。
 
-  \lemref{帰納的集合の共通部分は帰納的集合}より$X_1 \cap X_2$も帰納的集合であり、定義より$\omega(X_2) \subset X_1 \cap X_2 \subset X_1$である。
+  \lemref{帰納的集合の共通部分は帰納的集合}より$X_1 \cap X_2$も帰納的集合であり、定義より$\omega(X_2) \subseteq X_1 \cap X_2 \subseteq X_1$である。
 
-  定義より、$\omega(X_1) \subset \omega(X_2)$である。
+  定義より、$\omega(X_1) \subseteq \omega(X_2)$である。
 
   同様に$\omega(X_1) \supset \omega(X_2)$であるため、示される。
 }

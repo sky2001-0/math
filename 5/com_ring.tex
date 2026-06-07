@@ -23,7 +23,7 @@
   \begin{enumerate}
     \item $a$は$b$の倍元
     \item $a \in \ev{b}$
-    \item $\ev{a} \subset \ev{b}$
+    \item $\ev{a} \subseteq \ev{b}$
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
@@ -53,7 +53,7 @@
 \cor*{
   可換環$R$と、元$a \in R$、イデアル$I$について、以下が成り立つ。
   \eq*{
-    a \in I \rightarrow \ev{a} \subset I
+    a \in I \rightarrow \ev{a} \subseteq I
   }
 }
 
@@ -205,7 +205,7 @@
   単項イデアル整域$D$について、$\P(D)$上の以下を満たす点列$\qty(I_n)_{n \in \N}$を考える。
   \begin{itemize}
     \item $\forall n \in \N$について$I_n$はイデアル
-    \item $I_n \subset I_{s(n)}$
+    \item $I_n \subseteq I_{s(n)}$
   \end{itemize}
 
   このとき、以下が成り立つ。
@@ -217,9 +217,9 @@
 
   単項イデアル整域であるので、$\exists a \in D \qty(\ev{a} = J)$
 
-  $a \in J$より、$\exists N \in \N \qty(a \in I_N)$より、$\ev{a} \subset I_N$
+  $a \in J$より、$\exists N \in \N \qty(a \in I_N)$より、$\ev{a} \subseteq I_N$
 
-  $\forall N \in \N_{\geq N} \qty(\ev{a} \subset I_N \subset I_n \subset J = \ev{a})$
+  $\forall N \in \N_{\geq N} \qty(\ev{a} \subseteq I_N \subseteq I_n \subseteq J = \ev{a})$
 }
 
 \thm{PIDの素イデアルは極大イデアル}{
@@ -248,7 +248,7 @@
   $1_R \in \ev{a}$とすると、$a$は可逆元となり、素元分解できる。
   ゆえに$\ev{a} \neq D$である。\\*
 
-  \thmref{極大左イデアルの存在}、\thmref{極大イデアルは素イデアル}と$D$が単項イデアル整域であることより、素元$p_1$が存在して$a \in \ev{a} \subset \ev{p_1}$
+  \thmref{極大左イデアルの存在}、\thmref{極大イデアルは素イデアル}と$D$が単項イデアル整域であることより、素元$p_1$が存在して$a \in \ev{a} \subseteq \ev{p_1}$
 
   ゆえに$\exists a_1 \in D \qty(a = a_1 p_1)$と書ける。$a \neq 0_D$より$a_1 \neq 0_D$
 
@@ -275,7 +275,7 @@
 
   $a = u \prod_{m \in s(n)} p(m) = u' \prod_{m \in n'} p'(m)$とする。
 
-  $a \in \ev{p(n)}$より、素イデアルの定義から$\exists k \in n' \qty(p'(k) \in \ev{p(n)})$である。ゆえに$\ev{p'(k)} \subset \ev{p(n)}$
+  $a \in \ev{p(n)}$より、素イデアルの定義から$\exists k \in n' \qty(p'(k) \in \ev{p(n)})$である。ゆえに$\ev{p'(k)} \subseteq \ev{p(n)}$
 
   \thmref{PIDの素イデアルは極大イデアル}より$\ev{p'(k)} = \ev{p(n)}$
 
@@ -362,7 +362,7 @@
 
   $a \notin I$である。ここで、$J \coloneqq \qty{r a + i \mid \qty(r, i) \in R \times I}$を考える。
 
-  定義より$I \subset J$であり、$J$はイデアル。ゆえに$I$の極大性から$J = R$
+  定義より$I \subseteq J$であり、$J$はイデアル。ゆえに$I$の極大性から$J = R$
 
   したがって$\exists \qty(r, i) \in R \times I \qty(r a + i = 1_R)$である。
 
@@ -376,7 +376,7 @@
 
   体であるので、$\exists b \in R \qty(\qty[b] \qty[a] = \qty[1_R])$である。
 
-  したがって$b a - 1_R \in I \subset J$である。ここで、$a \in J$より$b a \in J$
+  したがって$b a - 1_R \in I \subseteq J$である。ここで、$a \in J$より$b a \in J$
 
   イデアルは加法について群をなすので$1_R = b a - \qty(b a - 1_R) \in J$である。したがって$J = R$となり矛盾。
 }
@@ -384,7 +384,7 @@
 \thm{体準同型は単射}{
   体$F$、零環ではない環$R$について、環準同型$\varphi \in R^F$は単射である。
 }{
-  $\Ker(\varphi)$はイデアルであり、$\qty{0_F} \subset \Ker(\varphi)$である。
+  $\Ker(\varphi)$はイデアルであり、$\qty{0_F} \subseteq \Ker(\varphi)$である。
 
   $\qty{0_F}$は、\thmref{極大イデアルと体}より極大イデアルであるため、$\Ker(\varphi) = \qty{0_F} \lor \Ker(\varphi) = F$
 
@@ -413,8 +413,8 @@
     K \coloneqq \bigcap \qty{F' \mid \text{$F'$は$F$の部分体}}
   }
 
-  $K$の部分体$L$は、$F$の部分体であるので、定義より$K \subset L$である。
+  $K$の部分体$L$は、$F$の部分体であるので、定義より$K \subseteq L$である。
   ゆえに、$K$は素体である。
 
-  体$F$の素体である部分体$K'$について、$K \subset K'$であり、$K'$が素体であることより$K = K'$
+  体$F$の素体である部分体$K'$について、$K \subseteq K'$であり、$K'$が素体であることより$K = K'$
 }

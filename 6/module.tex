@@ -148,7 +148,7 @@
 \thm{基底の存在}{
   体$F$について、$\qty{0_V}$でない$F$-線形空間$V$は自由である。
 }{
-  $\mathcal{S} \coloneqq \qty{S \in \P(V) \mid \text{$S$は一次独立}}$について$\qty(\mathcal{S}, \subset)$は半順序集合である。
+  $\mathcal{S} \coloneqq \qty{S \in \P(V) \mid \text{$S$は一次独立}}$について$\qty(\mathcal{S}, \subseteq)$は半順序集合である。
 
   $\exists v \in V \setminus \qty{0_V}$について、$\exists r \in F \qty(r v = 0_V)$と仮定すると、$F$は体であることより$v = r^{-1} 0_V = 0_V$となり反する。
 
@@ -173,13 +173,13 @@
   体$F$について、$F$-線形空間$V$を考える。
   $V$の任意の基底$B_1, B_2$について、全単射$f \in B_2^{B_1}$が存在する。
 }{
-  $P \coloneqq \qty{\varphi \in \bigcup \qty{B_2^D \mid D \in \P(B_1) \land B_1 \cap B_2 \subset D} \mid \varphi \rvert_{B_1 \cap B_2} = \id_{B_1 \cap B_2} \land C(\varphi) \coloneqq \dom(\varphi) \cup \qty(B_2 \setminus \Im(\varphi)) \text{は一次独立}}$を考える。
+  $P \coloneqq \qty{\varphi \in \bigcup \qty{B_2^D \mid D \in \P(B_1) \land B_1 \cap B_2 \subseteq D} \mid \varphi \rvert_{B_1 \cap B_2} = \id_{B_1 \cap B_2} \land C(\varphi) \coloneqq \dom(\varphi) \cup \qty(B_2 \setminus \Im(\varphi)) \text{は一次独立}}$を考える。
 
   ここで$p \in B_2^{B_1 \cap B_2}$について、$B_2$が基底であることから$p \in P$である。
 
   $P$上の半順序$\preccurlyeq$を以下のように定義する。
   \eq*{
-    \varphi \preccurlyeq \psi \defiff \dom(\varphi) \subset \dom(\psi) \land \psi \rvert_{\dom(\varphi)} = \varphi
+    \varphi \preccurlyeq \psi \defiff \dom(\varphi) \subseteq \dom(\psi) \land \psi \rvert_{\dom(\varphi)} = \varphi
   }
 
   $P$の全順序部分$Q$を考える。
@@ -188,9 +188,9 @@
 
   $C(q)$が一次独立でないとすると、$\exists C' \in \P(C(q)) \qty(\abs{C'} < \infty \land C' \text{は一次独立でない})$
 
-  $\forall c \in C' \exists \varphi_c \in Q \qty(c \in \dom(\varphi_c) \cup B_2)$であり、\thmref{有限全順序集合の最大元}より、$\qty{\varphi_c \mid c \in C'} \subset Q$は最大元$\varphi_q$を持つ。
+  $\forall c \in C' \exists \varphi_c \in Q \qty(c \in \dom(\varphi_c) \cup B_2)$であり、\thmref{有限全順序集合の最大元}より、$\qty{\varphi_c \mid c \in C'} \subseteq Q$は最大元$\varphi_q$を持つ。
 
-  ここで、$\Im(\varphi_q) \subset \Im(q)$であるので、$C' \subset C(\varphi_q)$であり、$C(\varphi_q)$が一次独立であることに反する。
+  ここで、$\Im(\varphi_q) \subseteq \Im(q)$であるので、$C' \subseteq C(\varphi_q)$であり、$C(\varphi_q)$が一次独立であることに反する。
 
   ゆえに$q$は上界であり、すなわち$P$は帰納的である。
 
@@ -414,7 +414,7 @@
     B \coloneqq \Span(\bigcup \qty{B_1, B_2, B_3, B_4})
   }
 }{
-  $\bigcup \qty{B_1, B_2, B_3, B_4} \subset \bigoplus A$より明らか。
+  $\bigcup \qty{B_1, B_2, B_3, B_4} \subseteq \bigoplus A$より明らか。
 }
 
 \dfn{テンソル積}{

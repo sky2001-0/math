@@ -31,10 +31,10 @@
 \lemf{$\sigma$-加法族の生成}{sigma-加法族の生成}{
   空でない集合$X$と、集合族$\mathcal{T} \in \P(\P(X))$について、以下で定義される$\sigma(\mathcal{T})$は$X$上の$\sigma$-加法族である。
   \eq*{
-    \sigma(\mathcal{T}) \coloneqq \bigcap \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{T} \subset \mathcal{S}}
+    \sigma(\mathcal{T}) \coloneqq \bigcap \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{T} \subseteq \mathcal{S}}
   }
 }{
-  $R \coloneqq \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{T} \subset \mathcal{S}}$とする。
+  $R \coloneqq \qty{\mathcal{S} \in \P(\P(X)) \mid \text{$\mathcal{S}$は$\sigma$-加法族} \land \mathcal{T} \subseteq \mathcal{S}}$とする。
 
   $\P(X) \in R$より、$R \neq \varnothing$である。\\*
 
@@ -70,12 +70,12 @@
     \forall T' \in \mathcal{T'} \qty(f^{-1}(T') \in \mathcal{S})
   }
 }{
-  十分性は、$\mathcal{T'} \subset \mathcal{S'}$より明らか。\\*
+  十分性は、$\mathcal{T'} \subseteq \mathcal{S'}$より明らか。\\*
 
   必要性を示す。
 
   $\mathcal{Q'} \coloneqq \qty{S' \in \mathcal{S'} \mid f^{-1}(S') \in \mathcal{S}}$を考える。
-  $\mathcal{Q'} \subset \mathcal{S'}$である。
+  $\mathcal{Q'} \subseteq \mathcal{S'}$である。
 
   ここで、$X' \in \mathcal{S'} \land f^{-1}(X') = X \in \mathcal{S}$より、$X' \in \mathcal{Q'}$である。
 
@@ -85,7 +85,7 @@
 
   ゆえに、$\mathcal{Q'}$は$\sigma$-加法族である。
 
-  定義より、$\mathcal{T'} \subset \mathcal{Q'}$であるので、$\mathcal{S'}$は$\mathcal{T'}$を含む最小の$\sigma$-加法族であるので、$\mathcal{S'} \subset \mathcal{Q'}$である。
+  定義より、$\mathcal{T'} \subseteq \mathcal{Q'}$であるので、$\mathcal{S'}$は$\mathcal{T'}$を含む最小の$\sigma$-加法族であるので、$\mathcal{S'} \subseteq \mathcal{Q'}$である。
 
   よって、$\mathcal{S'} = \mathcal{Q'}$であるので、$\mathcal{Q'}$の定義より可測。
 }
@@ -157,7 +157,7 @@
 }
 
 \rem{拡大実関数}{
-  写像$f \in Y^X$について、$Y \subset \bar{\R}$であるとき、$f$を関数、または拡大実関数と呼ぶことがある。
+  写像$f \in Y^X$について、$Y \subseteq \bar{\R}$であるとき、$f$を関数、または拡大実関数と呼ぶことがある。
 }
 
 \lem{拡大実数への可測の特徴づけ}{
@@ -195,7 +195,7 @@
   \lemref{開基と連続}より$f$は連続であるので、可測。\\*
 
   $5. \to 1.$を示す。
-  \dfnref{順序空間}の定める開集合系$\mathcal{O}$について、$\R_{< a} \in \mathcal{O} \subset \mathcal{B}_\R$より明らか。
+  \dfnref{順序空間}の定める開集合系$\mathcal{O}$について、$\R_{< a} \in \mathcal{O} \subseteq \mathcal{B}_\R$より明らか。
 }
 
 \lem{可測関数の非負部分は可測}{
@@ -284,9 +284,9 @@
 \thm{測度}{
   測度空間$\qty(\qty(X, \mathcal{S}), \mu)$は以下を満たす。
   \begin{enumerate}
-    \item $\displaystyle \forall A, B \in \mathcal{S} \qty(A \subset B \rightarrow \mu(A) \leq \mu(B))$
+    \item $\displaystyle \forall A, B \in \mathcal{S} \qty(A \subseteq B \rightarrow \mu(A) \leq \mu(B))$
     \item $\displaystyle \forall \qty(S_n)_{n \in \N} \in \mathcal{S}^\N \qty(\mu \qty(\bigcup \qty{S_n \mid n \in \N}) \leq \sum_{n \in \N} \mu(S_n))$
-    \item $\qty(\mathcal{S}, \subset)$上の広義単調増加列$\qty(S_n)_{n \in \N}$について、$\displaystyle \mu \qty(\bigcup \qty{S_n \mid n \in \N}) = \sup{\mu(S_n) \mid n \in \N}$
+    \item $\qty(\mathcal{S}, \subseteq)$上の広義単調増加列$\qty(S_n)_{n \in \N}$について、$\displaystyle \mu \qty(\bigcup \qty{S_n \mid n \in \N}) = \sup{\mu(S_n) \mid n \in \N}$
   \end{enumerate}
 }{
   $1.$を示す。

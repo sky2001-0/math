@@ -3,17 +3,17 @@
 \lsubsection{位相}
 
 \dfn{開基}{
-  集合$X$について、以下を満たす集合系$\mathcal{B} \subset \P(X)$を、$X$の開基と呼ぶ。
+  集合$X$について、以下を満たす集合系$\mathcal{B} \subseteq \P(X)$を、$X$の開基と呼ぶ。
   \eqg*{
     \forall x \in X \exists B \in \mathcal{B} \qty(x \in B) \\*
-    \forall B_1, B_2 \in \mathcal{B} \forall x \in B_1 \cap B_2 \exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)
+    \forall B_1, B_2 \in \mathcal{B} \forall x \in B_1 \cap B_2 \exists B \in \mathcal{B} \qty(x \in B \land B \subseteq B_1 \cap B_2)
   }
 }
 
 \dfn{開集合系}{
   集合$X$の開基$\mathcal{B}$について、以下で与える集合系$\mathcal{O}$を、$X$の開集合系と呼ぶ。
   \eq*{
-    \mathcal{O} \coloneqq \qty{O \subset X \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subset O)}
+    \mathcal{O} \coloneqq \qty{O \subseteq X \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subseteq O)}
   }
 
   また、$\mathcal{O}$の要素を開集合と呼ぶ。
@@ -22,15 +22,15 @@
 \cor*{
   集合$X$の開基$\mathcal{B}$と、$\mathcal{B}$の与える開集合系$\mathcal{O}$は、以下を満たす。
   \eq*{
-    \mathcal{B} \subset \mathcal{O}
+    \mathcal{B} \subseteq \mathcal{O}
   }
 }
 
 \lem{開集合系の一意性}{
-  集合$X$の開基$\mathcal{B}$と集合系$\mathcal{B^\prime} \subset \P(X)$について、以下を満たすとき、$\mathcal{B^\prime}$は$X$の開基である。
+  集合$X$の開基$\mathcal{B}$と集合系$\mathcal{B^\prime} \subseteq \P(X)$について、以下を満たすとき、$\mathcal{B^\prime}$は$X$の開基である。
   \eqg*{
-    \forall B^\prime \in \mathcal{B^\prime} \forall x \in B^\prime \exists B \in \mathcal{B} \qty(x \in B \land B \subset B^\prime) \\*
-    \forall B \in \mathcal{B} \forall x \in B \exists B^\prime \in \mathcal{B^\prime} \qty(x \in B^\prime \land B^\prime \subset B)
+    \forall B^\prime \in \mathcal{B^\prime} \forall x \in B^\prime \exists B \in \mathcal{B} \qty(x \in B \land B \subseteq B^\prime) \\*
+    \forall B \in \mathcal{B} \forall x \in B \exists B^\prime \in \mathcal{B^\prime} \qty(x \in B^\prime \land B^\prime \subseteq B)
   }
 
   さらに$\mathcal{B}$の定める開集合系と、$\mathcal{B^\prime}$の定める開集合系、この\num{2}つは一致する。
@@ -43,15 +43,15 @@
 
   第二式を考える。
 
-  仮定第一式より$\forall B^\prime_1, B^\prime_2 \in \mathcal{B^\prime} \forall x \in B^\prime_1 \cap B^\prime_2 \exists B_1, B_2 \in \mathcal{B} \qty(x \in B_1 \cap B_2 \subset B^\prime_1 \cap B^\prime_2)$である。
+  仮定第一式より$\forall B^\prime_1, B^\prime_2 \in \mathcal{B^\prime} \forall x \in B^\prime_1 \cap B^\prime_2 \exists B_1, B_2 \in \mathcal{B} \qty(x \in B_1 \cap B_2 \subseteq B^\prime_1 \cap B^\prime_2)$である。
 
-  \dfnref{開基}第二式から$\exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)$である。
+  \dfnref{開基}第二式から$\exists B \in \mathcal{B} \qty(x \in B \land B \subseteq B_1 \cap B_2)$である。
 
-  仮定第二式より、$\exists B^\prime \in \mathcal{B} \qty(x \in B^\prime \subset B \subset B^\prime_1 \cap B^\prime_2)$
+  仮定第二式より、$\exists B^\prime \in \mathcal{B} \qty(x \in B^\prime \subseteq B \subseteq B^\prime_1 \cap B^\prime_2)$
 
   \vskip\baselineskip
 
-  $\forall O \in \mathcal{O} \forall x \in O \exists B \in \mathcal{B} \exists B^\prime \in \mathcal{B^\prime} \qty(x \in B^\prime \subset B \subset O)$である。
+  $\forall O \in \mathcal{O} \forall x \in O \exists B \in \mathcal{B} \exists B^\prime \in \mathcal{B^\prime} \qty(x \in B^\prime \subseteq B \subseteq O)$である。
   ゆえに、$O \in \mathcal{O^\prime}$である。
 
   同様に$\forall O^\prime \in \mathcal{O^\prime} \qty(O \in \mathcal{O^\prime})$である。
@@ -62,24 +62,24 @@
   \eqg*{
     X \in \mathcal{O} \\*
     \forall O_1, O_2 \in \mathcal{O} \qty(O_1 \cap O_2 \in \mathcal{O}) \\*
-    \forall A \subset \mathcal{O} \qty(\bigcup A \in \mathcal{O})
+    \forall A \subseteq \mathcal{O} \qty(\bigcup A \in \mathcal{O})
   }
 }{
   第一式を示す。
 
-  \dfnref{開基}第一式より、$\forall x \in X \exists B \in \mathcal{B} \qty(x \in B \land B \subset X)$であるので、$X \in \mathcal{O}$
+  \dfnref{開基}第一式より、$\forall x \in X \exists B \in \mathcal{B} \qty(x \in B \land B \subseteq X)$であるので、$X \in \mathcal{O}$
 
   \vskip\baselineskip
 
   第二式を示す。
-  $O_1, O_2 \in \mathcal{O}$について、$\forall x \in O_1 \cap O_2 \exists B_1, B_2 \in \mathcal{B} \qty(x \in B_1 \cap B_2 \land B_1 \cap B_2 \subset O_1 \cap O_2)$
+  $O_1, O_2 \in \mathcal{O}$について、$\forall x \in O_1 \cap O_2 \exists B_1, B_2 \in \mathcal{B} \qty(x \in B_1 \cap B_2 \land B_1 \cap B_2 \subseteq O_1 \cap O_2)$
 
-  \dfnref{開基}第二式より、$\exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)$であるので、$O_1 \cap O_2 \in \mathcal{O}$
+  \dfnref{開基}第二式より、$\exists B \in \mathcal{B} \qty(x \in B \land B \subseteq B_1 \cap B_2)$であるので、$O_1 \cap O_2 \in \mathcal{O}$
 
   \vskip\baselineskip
 
   第三式を示す。
-  $A \subset \mathcal{O}$について、$\forall x \in \bigcup A \exists O \in \mathcal{O} \exists B \in \mathcal{B} \qty(x \in B \land B \subset O \land O \subset \bigcup A)$であるので$\bigcup A \in \mathcal{O}$
+  $A \subseteq \mathcal{O}$について、$\forall x \in \bigcup A \exists O \in \mathcal{O} \exists B \in \mathcal{B} \qty(x \in B \land B \subseteq O \land O \subseteq \bigcup A)$であるので$\bigcup A \in \mathcal{O}$
 }
 
 \lem{開集合系の公理を満たす集合系}{
@@ -91,9 +91,9 @@
 
   \vskip\baselineskip
 
-  \dfnref{開集合系}より$\mathcal{O} \subset \mathcal{O^\prime}$を得る。
+  \dfnref{開集合系}より$\mathcal{O} \subseteq \mathcal{O^\prime}$を得る。
 
-  \dfnref{開集合系}より$\forall O^\prime \in \mathcal{O^\prime} \forall x \in O^\prime \exists O_x \in \mathcal{O} \qty(x \in O_x \land O_x \subset O^\prime)$である。
+  \dfnref{開集合系}より$\forall O^\prime \in \mathcal{O^\prime} \forall x \in O^\prime \exists O_x \in \mathcal{O} \qty(x \in O_x \land O_x \subseteq O^\prime)$である。
 
   $O^\prime = \bigcup \qty{O_x \mid x \in O^\prime} \in \mathcal{O}$である。
 }
@@ -120,14 +120,14 @@
     \item $\forall B^\prime \in \mathcal{B^\prime} \qty(f^{-1}(B^\prime) \in \mathcal{O})$
   \end{enumerate}
 }{
-  $1. \rightarrow 2.$は、$\mathcal{B} \subset \mathcal{O}$より明らか。
+  $1. \rightarrow 2.$は、$\mathcal{B} \subseteq \mathcal{O}$より明らか。
 
   \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。
   $O^\prime \in \mathcal{O^\prime}$について考える。
 
-  \thmref{開集合系の公理}より$\forall x \in O^\prime \exists B^\prime \in \mathcal{B^\prime} \qty(x \in B^\prime \land B^\prime \subset O^\prime)$である。
+  \thmref{開集合系の公理}より$\forall x \in O^\prime \exists B^\prime \in \mathcal{B^\prime} \qty(x \in B^\prime \land B^\prime \subseteq O^\prime)$である。
 
   ゆえに、$O^\prime = \bigcup \qty{B^\prime(x) \mid x \in O^\prime}$である。。
 
@@ -170,9 +170,9 @@
 
   $\forall x \in f^{-1}(B^\prime_1) \cap f^{-1}(B^\prime_2)$について、\lemref{原像の性質}より$f(x) \in B^\prime_1 \cap B^\prime_2$である。
 
-  ゆえに\dfnref{開基}第二式より$\exists B^\prime \in \mathcal{B^\prime} \qty(f(x) \in B^\prime \land B^\prime \subset B^\prime_1 \cap B^\prime_2)$である。
+  ゆえに\dfnref{開基}第二式より$\exists B^\prime \in \mathcal{B^\prime} \qty(f(x) \in B^\prime \land B^\prime \subseteq B^\prime_1 \cap B^\prime_2)$である。
 
-  \lemref{原像の性質}より$x \in f^{-1}(B^\prime) \land f^{-1}(B^\prime) \subset f^{-1}(B^\prime_1 \cap B^\prime_2) = f^{-1}(B^\prime_1) \cap f^{-1}(B^\prime_2)$
+  \lemref{原像の性質}より$x \in f^{-1}(B^\prime) \land f^{-1}(B^\prime) \subseteq f^{-1}(B^\prime_1 \cap B^\prime_2) = f^{-1}(B^\prime_1) \cap f^{-1}(B^\prime_2)$
 
   \vskip\baselineskip
 
@@ -185,7 +185,7 @@
   \lemref{原像の性質}と\thmref{開集合系の公理}第二式より$\forall O^\prime_1, O^\prime_2 \in \mathcal{O^\prime} \qty(f^{-1}(O^\prime_1) \cap f^{-1}(O^\prime_2) = f^{-1}(O^\prime_1 \cap O^\prime_2) \in \mathcal{O}_2)$
 
   第三式を考える。
-  \lemref{原像の性質}と\thmref{開集合系の公理}第三式より$\forall A^\prime \subset \mathcal{O^\prime} \qty(\bigcup  \qty{f^{-1}(O^\prime) \mid O^\prime \in A^\prime} = f^{-1}(\bigcup A^\prime) \in \mathcal{O}_2)$
+  \lemref{原像の性質}と\thmref{開集合系の公理}第三式より$\forall A^\prime \subseteq \mathcal{O^\prime} \qty(\bigcup  \qty{f^{-1}(O^\prime) \mid O^\prime \in A^\prime} = f^{-1}(\bigcup A^\prime) \in \mathcal{O}_2)$
 
   ゆえに$\mathcal{O}_2$は開集合系である。
 
@@ -193,9 +193,9 @@
 
   $\forall B^\prime \in \mathcal{B^\prime} \forall x \in f^{-1}(B^\prime) \qty(f^{-1}(B^\prime) \in \mathcal{O}_2 \land x \in f^{-1}(B^\prime))$である。
 
-  $\forall O^\prime \in \mathcal{O^\prime} \forall x \in f^{-1}(O^\prime)$について、$\exists B^\prime \in \mathcal{B^\prime} \qty(f(x) \in B^\prime \land B^\prime \subset O^\prime)$である。
+  $\forall O^\prime \in \mathcal{O^\prime} \forall x \in f^{-1}(O^\prime)$について、$\exists B^\prime \in \mathcal{B^\prime} \qty(f(x) \in B^\prime \land B^\prime \subseteq O^\prime)$である。
 
-  よって、\lemref{原像の性質}より$x \in f^{-1}(B^\prime) \land f^{-1}(B^\prime) \subset f^{-1}(O^\prime)$
+  よって、\lemref{原像の性質}より$x \in f^{-1}(B^\prime) \land f^{-1}(B^\prime) \subseteq f^{-1}(O^\prime)$
 
   \lemref{開集合系の一意性}より成り立つ。
 }
@@ -225,7 +225,7 @@
 %   このとき$\mathcal{B}$は、$\prod X$の開基である。
 %   \eqg*{
 %     \mathcal{S} \coloneqq \bigcup \qty{\qty{\pi_j^{-1}(O_j) \mid O_j \in \mathcal{O}_j} \mid j \in J} \\*
-%     \mathcal{B} \coloneqq \qty{\bigcap A \mid A \subset \mathcal{S} \land \abs{A} < \infty}
+%     \mathcal{B} \coloneqq \qty{\bigcap A \mid A \subseteq \mathcal{S} \land \abs{A} < \infty}
 %   }
 % }{
 %   ???
@@ -256,12 +256,12 @@
 \lsubsection{近傍}
 
 \dfn{基本近傍系}{
-  集合$X$とその任意の点$x$について、以下を満たす集合系$\mathcal{B}(x) \subset \P(X)$を基本近傍系と呼ぶ。
+  集合$X$とその任意の点$x$について、以下を満たす集合系$\mathcal{B}(x) \subseteq \P(X)$を基本近傍系と呼ぶ。
   \eqg*{
     \mathcal{B}(x) \neq \varnothing \\*
     \forall B \in \mathcal{B}(x) \qty(x \in B) \\*
-    \forall B_1, B_2 \in \mathcal{B}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B_1 \cap B_2) \\*
-    \forall B \in \mathcal{B}(x) \exists B^\prime \in \mathcal{B}(x) \forall y \in B^\prime \exists D \in \mathcal{B}(y) \qty(D \subset B)
+    \forall B_1, B_2 \in \mathcal{B}(x) \exists B \in \mathcal{B}(x) \qty(B \subseteq B_1 \cap B_2) \\*
+    \forall B \in \mathcal{B}(x) \exists B^\prime \in \mathcal{B}(x) \forall y \in B^\prime \exists D \in \mathcal{B}(y) \qty(D \subseteq B)
   }
 }
 
@@ -272,22 +272,22 @@
 \dfn{近傍系}{
   集合$X$の基本近傍系$\mathcal{B}(x)$について、以下で与える集合系$\mathcal{N}(x)$を近傍系と呼ぶ。
   \eq*{
-    \mathcal{N}(x) \coloneqq \qty{N \subset X \mid \exists B \in \mathcal{B}(x) \qty(B \subset N)}
+    \mathcal{N}(x) \coloneqq \qty{N \subseteq X \mid \exists B \in \mathcal{B}(x) \qty(B \subseteq N)}
   }
 }
 
 \cor*{
   集合$X$の基本近傍系$\mathcal{B}(x)$と、$\mathcal{B}(x)$の与える開集合系$\mathcal{N}(x)$は、以下を満たす。
   \eq*{
-    \forall x \in X \qty(\mathcal{B}(x) \subset \mathcal{N}(x))
+    \forall x \in X \qty(\mathcal{B}(x) \subseteq \mathcal{N}(x))
   }
 }
 
 \lem{近傍系の一意性}{
-  集合$X$の基本近傍系$\mathcal{B}(x)$と集合系$\mathcal{B^\prime}(x) \subset \P(X)$について、以下を満たすとき、$\mathcal{B^\prime}(x)$は基本近傍系である。
+  集合$X$の基本近傍系$\mathcal{B}(x)$と集合系$\mathcal{B^\prime}(x) \subseteq \P(X)$について、以下を満たすとき、$\mathcal{B^\prime}(x)$は基本近傍系である。
   \eqg*{
-    \forall B^\prime \in \mathcal{B^\prime}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B^\prime) \\*
-    \forall B \in \mathcal{B}(x) \exists B^\prime \in \mathcal{B^\prime}(x) \qty(B^\prime \subset B)
+    \forall B^\prime \in \mathcal{B^\prime}(x) \exists B \in \mathcal{B}(x) \qty(B \subseteq B^\prime) \\*
+    \forall B \in \mathcal{B}(x) \exists B^\prime \in \mathcal{B^\prime}(x) \qty(B^\prime \subseteq B)
   }
 
   さらに$\mathcal{B}(x)$の定める近傍系と、$\mathcal{B^\prime}(x)$の定める近傍系、この\num{2}つは一致する。
@@ -298,39 +298,39 @@
   \vskip\baselineskip
 
   第二式を考える。
-  \dfnref{基本近傍系}第二式より$\forall B^\prime \in \mathcal{B^\prime}(x) \exists B \in \mathcal{B}(x) \qty(x \in B \subset B^\prime)$
+  \dfnref{基本近傍系}第二式より$\forall B^\prime \in \mathcal{B^\prime}(x) \exists B \in \mathcal{B}(x) \qty(x \in B \subseteq B^\prime)$
 
   \vskip\baselineskip
 
   第三式を考える。
-  \dfnref{基本近傍系}第三式より$\forall B^\prime_1, B^\prime_2 \in \mathcal{B^\prime}(x) \exists B_1, B_2, B \in \mathcal{B}(x) \exists B^\prime \in \mathcal{B^\prime}(x) \qty(B^\prime \subset B \subset B_1 \cap B_2 \subset B^\prime_1 \cap B^\prime_2)$
+  \dfnref{基本近傍系}第三式より$\forall B^\prime_1, B^\prime_2 \in \mathcal{B^\prime}(x) \exists B_1, B_2, B \in \mathcal{B}(x) \exists B^\prime \in \mathcal{B^\prime}(x) \qty(B^\prime \subseteq B \subseteq B_1 \cap B_2 \subseteq B^\prime_1 \cap B^\prime_2)$
 
   \vskip\baselineskip
 
   第四式を考える。
-  仮定より$\forall B^\prime \in \mathcal{B^\prime}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B^\prime)$である。
+  仮定より$\forall B^\prime \in \mathcal{B^\prime}(x) \exists B \in \mathcal{B}(x) \qty(B \subseteq B^\prime)$である。
 
-  \dfnref{基本近傍系}第四式より$\exists C \in \mathcal{B}(x) \forall y \in C \exists D \in \mathcal{B}(y) \qty(D \subset B)$である。
+  \dfnref{基本近傍系}第四式より$\exists C \in \mathcal{B}(x) \forall y \in C \exists D \in \mathcal{B}(y) \qty(D \subseteq B)$である。
 
-  仮定より$\exists C^\prime \in \mathcal{B^\prime}(x) \qty(C^\prime \subset C)$より、$\forall y \in C^\prime \exists D \in \mathcal{B}(y) \qty(D \subset B)$である。
+  仮定より$\exists C^\prime \in \mathcal{B^\prime}(x) \qty(C^\prime \subseteq C)$より、$\forall y \in C^\prime \exists D \in \mathcal{B}(y) \qty(D \subseteq B)$である。
 
-  仮定より$\exists D^\prime \in \mathcal{B^\prime}(y) \qty(D^\prime \subset D)$であり、$D^\prime \subset D \subset B^\prime \subset B$より成り立つ。
+  仮定より$\exists D^\prime \in \mathcal{B^\prime}(y) \qty(D^\prime \subseteq D)$であり、$D^\prime \subseteq D \subseteq B^\prime \subseteq B$より成り立つ。
 
   \vskip\baselineskip
 
-  $\forall N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \exists B^\prime \in \mathcal{B^\prime}(x) \qty(B^\prime \subset B \subset N)$である。
+  $\forall N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \exists B^\prime \in \mathcal{B^\prime}(x) \qty(B^\prime \subseteq B \subseteq N)$である。
   ゆえに、$N \in \mathcal{N^\prime}(x)$である。
 
-  $\forall N^\prime \in \mathcal{N^\prime}(x) \exists B^\prime \in \mathcal{B^\prime}(x) \exists B \in \mathcal{B}(x) \qty(B \subset B^\prime \subset N^\prime)$である。
+  $\forall N^\prime \in \mathcal{N^\prime}(x) \exists B^\prime \in \mathcal{B^\prime}(x) \exists B \in \mathcal{B}(x) \qty(B \subseteq B^\prime \subseteq N^\prime)$である。
   ゆえに、$N^\prime \in \mathcal{N}(x)$である。
 }
 
 \lem{近傍系は基本近傍系}{
   近傍系$\mathcal{N}(x)$は基本近傍系である。さらに$\mathcal{N}(x)$から\dfnref{近傍系}より定まる近傍系は、$\mathcal{N}(x)$に一致する。
 }{
-  定義より$\forall \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(B \subset N)$である。
+  定義より$\forall \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(B \subseteq N)$である。
 
-  $\mathcal{B}(x) \subset \mathcal{N}(x)$である。
+  $\mathcal{B}(x) \subseteq \mathcal{N}(x)$である。
 
   \lemref{近傍系の一意性}より成り立つ。
 }
@@ -355,7 +355,7 @@
   \vskip\baselineskip
 
   第三式を考える。
-  \dfnref{開基}第二式より$\exists B \in \mathcal{B} \qty(x \in B \land B \subset B_1 \cap B_2)$が成り立つ。
+  \dfnref{開基}第二式より$\exists B \in \mathcal{B} \qty(x \in B \land B \subseteq B_1 \cap B_2)$が成り立つ。
 
   ゆえに、$B \in \mathcal{B}(x)$
 
@@ -366,10 +366,10 @@
 
   \vskip\baselineskip
 
-  $\mathcal{B} \subset \mathcal{O}$より、$\mathcal{B}(x) \subset \mathcal{B^\prime}(x)$である。
+  $\mathcal{B} \subseteq \mathcal{O}$より、$\mathcal{B}(x) \subseteq \mathcal{B^\prime}(x)$である。
 
-  $\forall B^\prime \in \mathcal{B^\prime}(x)$について、$x \in B^\prime \land \forall y \in B^\prime \exists B \in \mathcal{B} \qty(y \in B \land B \subset B^\prime)$である。
-  ゆえに、$\exists B \in \mathcal{B}(x) \qty(B \subset B^\prime)$
+  $\forall B^\prime \in \mathcal{B^\prime}(x)$について、$x \in B^\prime \land \forall y \in B^\prime \exists B \in \mathcal{B} \qty(y \in B \land B \subseteq B^\prime)$である。
+  ゆえに、$\exists B \in \mathcal{B}(x) \qty(B \subseteq B^\prime)$
 
   \lemref{近傍系の一意性}より成り立つ。
 }
@@ -379,7 +379,7 @@
 
   このとき、以下の集合$\mathcal{O}$は$X$の開基であり、かつ$\mathcal{O}$の定める開集合系は$\mathcal{O}$である。
   \eq*{
-    \mathcal{O} \coloneqq \qty{O \subset X \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subset O)}
+    \mathcal{O} \coloneqq \qty{O \subseteq X \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subseteq O)}
   }
 
   さらに$\mathcal{O}$と、$\mathcal{N}(x)$からこの定理の与える開集合系$\mathcal{O^\prime}$、この\num{2}つは一致する。
@@ -389,33 +389,33 @@
   \vskip\baselineskip
 
   第一式を考える。
-  \dfnref{基本近傍系}第一式より$\forall x \in X \exists B \in \mathcal{B}(x) \qty(B \subset X)$であるので、$X \in \mathcal{O}$
+  \dfnref{基本近傍系}第一式より$\forall x \in X \exists B \in \mathcal{B}(x) \qty(B \subseteq X)$であるので、$X \in \mathcal{O}$
 
   \vskip\baselineskip
 
   第二式を考える。
   $O_1, O_2 \in \mathcal{O}$とする。
 
-  $\forall x \in O_1 \cap O_2$について、定義より$\exists B_1, B_2 \in \mathcal{B}(x) \qty(B_1 \cap B_2 \subset O_1 \cap O_2)$である。
+  $\forall x \in O_1 \cap O_2$について、定義より$\exists B_1, B_2 \in \mathcal{B}(x) \qty(B_1 \cap B_2 \subseteq O_1 \cap O_2)$である。
 
-  \dfnref{基本近傍系}第三式より$\exists B \in \mathcal{B} \qty(B \subset B_1 \cap B_2 \subset O_1 \cap O_2)$であるので、$O_1 \cap O_2 \in \mathcal{N}(x)$である。
+  \dfnref{基本近傍系}第三式より$\exists B \in \mathcal{B} \qty(B \subseteq B_1 \cap B_2 \subseteq O_1 \cap O_2)$であるので、$O_1 \cap O_2 \in \mathcal{N}(x)$である。
 
   \vskip\baselineskip
 
   第三式を考える。
-  $A \subset \mathcal{O}$を考える。
+  $A \subseteq \mathcal{O}$を考える。
 
   $A = \varnothing$のとき、$\bigcup A = \bigcup \varnothing = \varnothing \in \mathcal{O}$より成り立つ。
 
-  $A \neq \varnothing$のとき、$\forall x \in \bigcup A$について、$\exists O \in \mathcal{O} \qty(x \in O \subset \bigcup A)$である。
+  $A \neq \varnothing$のとき、$\forall x \in \bigcup A$について、$\exists O \in \mathcal{O} \qty(x \in O \subseteq \bigcup A)$である。
 
-  定義より$\exists B \in \mathcal{B}(x) \qty(B \subset O \subset \bigcup A)$である。定義より示される。
+  定義より$\exists B \in \mathcal{B}(x) \qty(B \subseteq O \subseteq \bigcup A)$である。定義より示される。
 
   \vskip\baselineskip
 
-  $\forall x \in X \qty(\mathcal{B}(x) \subset \mathcal{N}(x))$より、$\mathcal{O} \subset \mathcal{O^\prime}$である。
+  $\forall x \in X \qty(\mathcal{B}(x) \subseteq \mathcal{N}(x))$より、$\mathcal{O} \subseteq \mathcal{O^\prime}$である。
 
-  $\forall O^\prime \in \mathcal{O^\prime} \forall y \in O^\prime \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(N \subset B \subset O)$より、$\mathcal{O^\prime} \subset \mathcal{O}$である。
+  $\forall O^\prime \in \mathcal{O^\prime} \forall y \in O^\prime \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(N \subseteq B \subseteq O)$より、$\mathcal{O^\prime} \subseteq \mathcal{O}$である。
 }
 
 \lem*{
@@ -433,28 +433,28 @@
 }{
   以下より一致する。
   \eq*{
-    \mathcal{O^\prime} = \qty{O \subset X \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subset O)} = \qty{O \subset X \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subset O)} = \mathcal{O}
+    \mathcal{O^\prime} = \qty{O \subseteq X \mid \forall x \in O \exists B \in \mathcal{B}(x) \qty(B \subseteq O)} = \qty{O \subseteq X \mid \forall x \in O \exists B \in \mathcal{B} \qty(x \in B \land B \subseteq O)} = \mathcal{O}
   }
 
   \vskip\baselineskip
 
   定義より、以下である。
   \eq*{
-    \mathcal{B^\prime}(x) = \qty{B^\prime \subset X \mid x \in B^\prime \land \forall y \in B^\prime \exists D \in \mathcal{B}(y) \qty(D \subset B^\prime)}
+    \mathcal{B^\prime}(x) = \qty{B^\prime \subseteq X \mid x \in B^\prime \land \forall y \in B^\prime \exists D \in \mathcal{B}(y) \qty(D \subseteq B^\prime)}
   }
 
-  $\forall B^\prime \in \mathcal{B^\prime}(x)$について、\dfnref{基本近傍系}第二式より$x \in B^\prime$であるので、定義から$\exists B \in \mathcal{B}(x) \qty(B \subset B^\prime)$である。
+  $\forall B^\prime \in \mathcal{B^\prime}(x)$について、\dfnref{基本近傍系}第二式より$x \in B^\prime$であるので、定義から$\exists B \in \mathcal{B}(x) \qty(B \subseteq B^\prime)$である。
 
   \vskip\baselineskip
 
-  $\forall B \in \mathcal{B}(x)$について、$B^\prime \coloneqq \qty{y \in X \mid \exists E \in \mathcal{B}(y) \qty(E \subset B)}$を考える。
-  定義より$B^\prime \subset B$であり、$x \in B^\prime$である。
+  $\forall B \in \mathcal{B}(x)$について、$B^\prime \coloneqq \qty{y \in X \mid \exists E \in \mathcal{B}(y) \qty(E \subseteq B)}$を考える。
+  定義より$B^\prime \subseteq B$であり、$x \in B^\prime$である。
 
-  $\forall y \in B^\prime \exists E \in \mathcal{B}(y) \qty(E \subset B)$について、\dfnref{基本近傍系}第四式より$\exists C \in \mathcal{B}(y) \forall z \in C \exists D \in \mathcal{B}(z) \qty(D \subset E \subset B)$である。
+  $\forall y \in B^\prime \exists E \in \mathcal{B}(y) \qty(E \subseteq B)$について、\dfnref{基本近傍系}第四式より$\exists C \in \mathcal{B}(y) \forall z \in C \exists D \in \mathcal{B}(z) \qty(D \subseteq E \subseteq B)$である。
 
-  定義より$z \in B^\prime$である。したがって$C \subset B^\prime$である。
+  定義より$z \in B^\prime$である。したがって$C \subseteq B^\prime$である。
 
-  よって$B^\prime \subset B$である。
+  よって$B^\prime \subseteq B$である。
 
   \vskip\baselineskip
 
@@ -464,7 +464,7 @@
 \dfn{収束}{
   位相空間$X$と$X$上の点$a$について、$X$上のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$が以下を満たすとき、$\qty(x_\lambda)_{\lambda \in \Lambda}$は$a$に収束すると呼ぶ。
   \eq*{
-    \forall N \in \mathcal{N}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset N)
+    \forall N \in \mathcal{N}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subseteq N)
   }
 
   また、この$a$を$\qty(x_\lambda)_{\lambda \in \Lambda}$の収束先と呼び、一意に定まるとき$\lim_{\lambda \rightarrow \infty} \qty(x_\lambda)_{\lambda \in \Lambda} \coloneqq a$と表す。
@@ -479,22 +479,22 @@
   このとき、以下の\num{2}つは同値である。
   \begin{enumerate}
     \item $\qty(x_\lambda)_{\lambda \in \Lambda}$は$a$に収束する。
-    \item $\forall B \in \mathcal{B}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B)$
+    \item $\forall B \in \mathcal{B}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subseteq B)$
   \end{enumerate}
 }{
-  $1. \rightarrow 2.$は、$\mathcal{B}(a) \subset \mathcal{N}(a)$より明らか。
+  $1. \rightarrow 2.$は、$\mathcal{B}(a) \subseteq \mathcal{N}(a)$より明らか。
 
   \vskip\baselineskip
 
   $2. \rightarrow 1.$を示す。
 
-  $\forall N \in \mathcal{N}(a) \exists B \in \mathcal{B}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B \subset N)$
+  $\forall N \in \mathcal{N}(a) \exists B \in \mathcal{B}(a) \exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subseteq B \subseteq N)$
 }
 
 \dfn{点連続}{
   位相空間$X, X^\prime$と点$x \in X$、写像$f \colon X \to X^\prime$について、以下を満たすとき、写像$f$は点$x$で連続であると言う。
   \eq*{
-    \forall N^\prime \in \mathcal{N}(f(x)) \exists N \in \mathcal{N}(x) \qty(f(N) \subset N^\prime)
+    \forall N^\prime \in \mathcal{N}(f(x)) \exists N \in \mathcal{N}(x) \qty(f(N) \subseteq N^\prime)
   }
 }
 
@@ -506,20 +506,20 @@
   位相空間$X, X^\prime$と点$x \in X$、写像$f \colon X \to X^\prime$と、近傍系$\mathcal{N}(x)$を与える基本近傍系$\mathcal{B}(x)$について、以下の３つは同値である。
   \begin{enumerate}
     \item $f$が$x$で連続
-    \item $\forall B^\prime \in \mathcal{B}(f(x)) \exists B \in \mathcal{B}(x) \qty(f(B) \subset B^\prime)$
+    \item $\forall B^\prime \in \mathcal{B}(f(x)) \exists B \in \mathcal{B}(x) \qty(f(B) \subseteq B^\prime)$
     \item $x$に収束する任意のネット$\qty(x_\lambda)_{\lambda \in \Lambda}$について、ネット$\qty(f(x_\lambda))_{\lambda \in \Lambda}$は$f(x)$に収束する。
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
   \eq*{
-    \forall B^\prime \in \mathcal{B}(f(x)) \subset \mathcal{N}(f(x)) \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(f(B) \subset f(N) \subset B^\prime)
+    \forall B^\prime \in \mathcal{B}(f(x)) \subseteq \mathcal{N}(f(x)) \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(f(B) \subseteq f(N) \subseteq B^\prime)
   }
 
   \vskip\baselineskip
 
   $2. \rightarrow 3.$を示す。
   \eq*{
-    \forall B^\prime \in \mathcal{B}(f(x)) \exists B \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(\qty(f(x_\lambda))_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \in f(B) \subset B^\prime)
+    \forall B^\prime \in \mathcal{B}(f(x)) \exists B \in \mathcal{B}(x) \exists \lambda_0 \in \Lambda \qty(\qty(f(x_\lambda))_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \in f(B) \subseteq B^\prime)
   }
 
   \vskip\baselineskip
@@ -550,9 +550,9 @@
 
   $B^\prime \in \mathcal{B}^\prime$について、$f^{-1}(B^\prime) = \varnothing$のとき明らか。$f^{-1}(B^\prime) \neq \varnothing$のときを考える。
 
-  $\forall x \in f^{-1}(B^\prime)$について、$B^\prime \in \mathcal{B}(f(x))$であるので点連続性から$\exists B \in \mathcal{B}(x) \qty(f(B) \subset B^\prime)$となる。
+  $\forall x \in f^{-1}(B^\prime)$について、$B^\prime \in \mathcal{B}(f(x))$であるので点連続性から$\exists B \in \mathcal{B}(x) \qty(f(B) \subseteq B^\prime)$となる。
 
-  \corref{像と原像}より$B \subset f^{-1}(f(B)) \subset f^{-1}(B^\prime)$であるので、\thmref{基本近傍系の定める位相}より、$f^{-1}(B^\prime)$は開集合である。
+  \corref{像と原像}より$B \subseteq f^{-1}(f(B)) \subseteq f^{-1}(B^\prime)$であるので、\thmref{基本近傍系の定める位相}より、$f^{-1}(B^\prime)$は開集合である。
 
   \vskip\baselineskip
 
@@ -560,9 +560,9 @@
 
   $\forall x \in X \forall B^\prime \in \mathcal{B}(f(x))$について、$B^\prime \in \mathcal{B^\prime}$より、$f^{-1}(B^\prime) \in \mathcal{O}$である。
 
-  今、$x \in f^{-1}(B^\prime)$であるので、\dfnref{開集合系}より$\exists B \in \mathcal{B}(x) \qty(B \subset f^{-1}(B^\prime))$となる。
+  今、$x \in f^{-1}(B^\prime)$であるので、\dfnref{開集合系}より$\exists B \in \mathcal{B}(x) \qty(B \subseteq f^{-1}(B^\prime))$となる。
 
-  したがって、\corref{像と原像}より$f(B) \subset f(f^{-1}(B^\prime)) \subset B^\prime$
+  したがって、\corref{像と原像}より$f(B) \subseteq f(f^{-1}(B^\prime)) \subseteq B^\prime$
 }
 
 
@@ -571,7 +571,7 @@
 \dfn{閉集合系}{
   位相空間$\qty(X, \mathcal{O})$について、以下を満たす集合系$\mathcal{F}$を閉集合系と呼ぶ。
   \eq*{
-    \mathcal{F} \coloneqq \qty{F \subset X \mid X \setminus F \in \mathcal{O}}
+    \mathcal{F} \coloneqq \qty{F \subseteq X \mid X \setminus F \in \mathcal{O}}
   }
 
   また、$\mathcal{F}$の要素を閉集合と呼ぶ。
@@ -581,7 +581,7 @@
   位相空間$X$について、閉集合系$\mathcal{F}$は以下を満たす。
   \eqg*{
     \varnothing, X \in \mathcal{F} \\*
-    \forall A \subset \mathcal{F} \qty(A \neq \varnothing \rightarrow \bigcap A \in \mathcal{F}) \\*
+    \forall A \subseteq \mathcal{F} \qty(A \neq \varnothing \rightarrow \bigcap A \in \mathcal{F}) \\*
     \forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cup F_2 \in \mathcal{F})
   }
 }{
@@ -591,7 +591,7 @@
 \dfn{閉包}{
   位相空間$X$と$X$の部分集合$A$について、以下で定義する集合を閉包と呼び、$\bar{A}$で表す。
   \eq*{
-    \bar{A} = \bigcap \qty{F \in \mathcal{F} \mid A \subset F}
+    \bar{A} = \bigcap \qty{F \in \mathcal{F} \mid A \subseteq F}
   }
 }
 
@@ -602,8 +602,8 @@
 \cor*{
   位相空間$X$について、以下が成り立つ。
   \eqg*{
-    \forall A, B \subset X \qty(A \subset B \rightarrow \bar{A} \subset \bar{B}) \\*
-    \forall D \subset \P(X) \qty(\bigcup \qty{\bar{A} \mid A \in D} \subset \bar{\bigcup D})
+    \forall A, B \subseteq X \qty(A \subseteq B \rightarrow \bar{A} \subseteq \bar{B}) \\*
+    \forall D \subseteq \P(X) \qty(\bigcup \qty{\bar{A} \mid A \in D} \subseteq \bar{\bigcup D})
   }
 }
 
@@ -620,15 +620,15 @@
 
   $\exists N \in \mathcal{N}(x) \qty(A \cap N = \varnothing)$と仮定する。
 
-  $\exists O \in \mathcal{O} \qty(x \in O \land O \subset N)$であるので、$x \notin X \setminus O$
+  $\exists O \in \mathcal{O} \qty(x \in O \land O \subseteq N)$であるので、$x \notin X \setminus O$
 
-  $X \setminus O \in \mathcal{F}$であり、$A \subset X \setminus N \subset X \setminus O$
+  $X \setminus O \in \mathcal{F}$であり、$A \subseteq X \setminus N \subseteq X \setminus O$
 
   $x \in \bar{A}$とすると、$x \in X \setminus O$となり矛盾。背理法より示される。
 
   \vskip\baselineskip
 
-  $2. \rightarrow 3.$は$\mathcal{B}(x) \subset \mathcal{N}(x)$より明らか。
+  $2. \rightarrow 3.$は$\mathcal{B}(x) \subseteq \mathcal{N}(x)$より明らか。
 
   \vskip\baselineskip
 
@@ -644,9 +644,9 @@
 
   $4. \rightarrow 1.$を考える。
 
-  $x \notin \bar{A}$に収束するネット$\qty(y_\lambda)_{\lambda \in \Lambda} \subset A$が存在すると仮定する。
+  $x \notin \bar{A}$に収束するネット$\qty(y_\lambda)_{\lambda \in \Lambda} \subseteq A$が存在すると仮定する。
 
-  $\exists F \in \mathcal{F} \qty(x \notin F \cap A \subset F)$より、$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset X \setminus F \subset X \setminus A)$
+  $\exists F \in \mathcal{F} \qty(x \notin F \cap A \subseteq F)$より、$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subseteq X \setminus F \subseteq X \setminus A)$
 
   これは$A$上のネットであることに反する。背理法より示される。
 }
@@ -654,7 +654,7 @@
 \dfn{開被覆}{
   位相空間$\qty(X, \mathcal{O})$とその被覆$C$について、以下が成り立つとき、$C$を開被覆と呼ぶ。
   \eq*{
-    C \subset \mathcal{O}
+    C \subseteq \mathcal{O}
   }
 }
 
@@ -665,7 +665,7 @@
 \lem{コンパクトの言い換え}{
   コンパクトな位相空間について、以下が成り立つ。
   \eq*{
-    \forall A \subset \mathcal{F} \qty(A \neq \varnothing \land \bigcap A = \varnothing \rightarrow \exists A^\prime \subset A \qty(A^\prime \neq \varnothing \land \bigcap A^\prime = \varnothing \land \abs{A^\prime} < \infty))
+    \forall A \subseteq \mathcal{F} \qty(A \neq \varnothing \land \bigcap A = \varnothing \rightarrow \exists A^\prime \subseteq A \qty(A^\prime \neq \varnothing \land \bigcap A^\prime = \varnothing \land \abs{A^\prime} < \infty))
   }
 }{
   コンパクトの定義と\thmref{De Morganの法則}より成り立つ。
@@ -698,7 +698,7 @@
 
   すなわち、$\forall N \in \mathcal{N}(a) \forall \lambda \in \Lambda \exists \mu \in \Lambda \qty(\lambda \preccurlyeq \mu \land x_\mu \in N)$
 
-  普遍ネットの定義とあわせて、$\forall N \in \mathcal{N}(a) \exists \lambda \in \Lambda \qty(\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}} \subset N)$
+  普遍ネットの定義とあわせて、$\forall N \in \mathcal{N}(a) \exists \lambda \in \Lambda \qty(\qty(x_\mu)_{\mu \in \Lambda_{\succcurlyeq \lambda}} \subseteq N)$
 
   \vskip\baselineskip
 
@@ -713,14 +713,14 @@
   コンパクトでないと仮定する。
   その任意の有限部分集合が開被覆とならない$X$の開被覆$C$が存在する。
 
-  $P \coloneqq \qty{A \subset C \mid \abs{A} < \infty \land A \neq \varnothing}$について$\qty(P, \subset)$は有向集合であり、コンパクトでないことから$\forall A \in P \exists x \in X \setminus \bigcup A$である。
+  $P \coloneqq \qty{A \subseteq C \mid \abs{A} < \infty \land A \neq \varnothing}$について$\qty(P, \subseteq)$は有向集合であり、コンパクトでないことから$\forall A \in P \exists x \in X \setminus \bigcup A$である。
   このようなネット$\qty(x_A)_{A \in P}$を考える。
 
   仮定より、$a \in X$に収束する部分ネット$\qty(x_{\varphi(\mu)})_{\mu \in M}$を持つ。
 
-  開被覆であることより$\exists C_0 \in C \qty(a \in C_0 \land \qty{C_0} \in P)$であり、\dfnref{部分ネット}より$\exists \mu_0 \in M \qty(\qty{C_0} \subset \varphi(\mu_0))$である。
+  開被覆であることより$\exists C_0 \in C \qty(a \in C_0 \land \qty{C_0} \in P)$であり、\dfnref{部分ネット}より$\exists \mu_0 \in M \qty(\qty{C_0} \subseteq \varphi(\mu_0))$である。
 
-  $a \in \bigcup \varphi(\mu_0) \in \mathcal{O}$であり、収束することと有向性より$\exists \mu_1 \in M \qty(\varphi(\mu_0) \subset \varphi(\mu_1) \land x_{\varphi(\mu_1)} \in \bigcup \varphi(\mu_0) \subset \bigcup \varphi(\mu_1))$であるが、このネットの定義に反する。
+  $a \in \bigcup \varphi(\mu_0) \in \mathcal{O}$であり、収束することと有向性より$\exists \mu_1 \in M \qty(\varphi(\mu_0) \subseteq \varphi(\mu_1) \land x_{\varphi(\mu_1)} \in \bigcup \varphi(\mu_0) \subseteq \bigcup \varphi(\mu_1))$であるが、このネットの定義に反する。
 
   背理法より示される。
 }
@@ -753,9 +753,9 @@
 
   $\forall x \in X \exists O^\prime \in C^\prime \qty(f(x) \in O^\prime)$より、$C$は$X$の開被覆である。
 
-  コンパクト性から、$\exists A^\prime \subset C^\prime \qty(\abs{A^\prime} < \infty \land X = \bigcup \qty{f^{-1}(O^\prime) \mid O^\prime \in A^\prime})$
+  コンパクト性から、$\exists A^\prime \subseteq C^\prime \qty(\abs{A^\prime} < \infty \land X = \bigcup \qty{f^{-1}(O^\prime) \mid O^\prime \in A^\prime})$
 
-  \lemref{像の性質}、\corref{像と原像}から$f(X) = \bigcup \qty{f(f^{-1}(O^\prime)) \mid O^\prime \in A^\prime} \subset \bigcup \qty{O^\prime \mid O^\prime \in A^\prime}$より$A^\prime$は有限開被覆である。
+  \lemref{像の性質}、\corref{像と原像}から$f(X) = \bigcup \qty{f(f^{-1}(O^\prime)) \mid O^\prime \in A^\prime} \subseteq \bigcup \qty{O^\prime \mid O^\prime \in A^\prime}$より$A^\prime$は有限開被覆である。
 }
 
 \dfnf{Lindel\"{o}f}{Lindelof}{
@@ -787,7 +787,7 @@
 
   今、開被覆より$\exists l \in \N \qty(a \in O_l)$であり、収束の定義から$\exists j \in \N \forall j^\prime \in \N \qty(j \leq j^\prime \rightarrow x_{j^\prime} \in O_l)$。
 
-  \dfnref{部分ネット}より$\exists h \in \N \qty(l \leq n(h))$であり、$\forall h^\prime \in \N \qty(h \leq h^\prime \rightarrow a \in X \setminus \bigcup P_{n(h^\prime)} \subset X \setminus \bigcup P_{n(l)} \subset X \setminus O_l)$
+  \dfnref{部分ネット}より$\exists h \in \N \qty(l \leq n(h))$であり、$\forall h^\prime \in \N \qty(h \leq h^\prime \rightarrow a \in X \setminus \bigcup P_{n(h^\prime)} \subseteq X \setminus \bigcup P_{n(l)} \subseteq X \setminus O_l)$
 
   矛盾するので、背理法よりコンパクト。
 }
@@ -819,7 +819,7 @@
 }{
   $1. \rightarrow 2.$を示す。
   \eq*{
-    \forall x, y \in X \qty(x \neq y \rightarrow \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(y \in X \setminus N \subset X \setminus B))
+    \forall x, y \in X \qty(x \neq y \rightarrow \exists N \in \mathcal{N}(x) \exists B \in \mathcal{B}(x) \qty(y \in X \setminus N \subseteq X \setminus B))
   }
 
   \vskip\baselineskip
@@ -874,7 +874,7 @@
 }{
   $1. \rightarrow 2.$を示す。
   \eq*{
-    \forall x, y \in X \qty(x \neq y \rightarrow \exists N_x \in \mathcal{N}(x) \exists N_y \in \mathcal{N}(y) \exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y \subset N_x \cap N_y = \varnothing))
+    \forall x, y \in X \qty(x \neq y \rightarrow \exists N_x \in \mathcal{N}(x) \exists N_y \in \mathcal{N}(y) \exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y \subseteq N_x \cap N_y = \varnothing))
   }
 
   \vskip\baselineskip
@@ -885,7 +885,7 @@
 
   仮定より$\exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y = \varnothing)$
 
-  \lemref{基本近傍系と収束}より$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subset B_x \cap B_y)$
+  \lemref{基本近傍系と収束}より$\exists \lambda_0 \in \Lambda \qty(\qty(x_\lambda)_{\lambda \in \Lambda_{\succcurlyeq \lambda_0}} \subseteq B_x \cap B_y)$
 
   これは矛盾する。背理法より示される。
 
@@ -914,13 +914,13 @@
 
   $\forall \qty(x, y) \in \qty(X \times X) \setminus \Delta$について、$\exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \cap B_y = \varnothing)$である。
 
-  よって$B_x \times B_y \subset \qty(X \times X) \setminus \Delta$であるので、$\qty(X \times X) \setminus \Delta$は開集合である。
+  よって$B_x \times B_y \subseteq \qty(X \times X) \setminus \Delta$であるので、$\qty(X \times X) \setminus \Delta$は開集合である。
 
   \vskip\baselineskip
 
   $4. \rightarrow 2.$を示す。
 
-  $\forall \qty(x, y) \in \qty(X \times X) \setminus \Delta$について、$\exists B_x, B_y \in \mathcal{B} \qty(\qty(x, y) \in B_x \times B_y \subset \qty(X \times X) \setminus \Delta)$である。
+  $\forall \qty(x, y) \in \qty(X \times X) \setminus \Delta$について、$\exists B_x, B_y \in \mathcal{B} \qty(\qty(x, y) \in B_x \times B_y \subseteq \qty(X \times X) \setminus \Delta)$である。
 
   よって、$B_x \in \mathcal{B}(x) \land B_y \in \mathcal{B}(y) \land B_x \cap B_y = \varnothing$である。
 
@@ -928,9 +928,9 @@
 
   $2. \rightarrow 5.$を示す。
 
-  $\forall x, y \in X \qty(x \neq y \rightarrow \exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \subset X \setminus B_y \in \mathcal{F}))$
+  $\forall x, y \in X \qty(x \neq y \rightarrow \exists B_x \in \mathcal{B}(x) \exists B_y \in \mathcal{B}(y) \qty(B_x \subseteq X \setminus B_y \in \mathcal{F}))$
 
-  よって$\bar{B_x} \subset X \setminus B_y$であるので、$y \notin \bar{B_x}$
+  よって$\bar{B_x} \subseteq X \setminus B_y$であるので、$y \notin \bar{B_x}$
 
   \vskip\baselineskip
 
@@ -938,7 +938,7 @@
 
   $\forall x, y \in X \qty(x \neq y)$について、$\exists B \in \mathcal{B}(x) \qty(y \notin \bar{B})$
 
-  $y \in X \setminus \bar{B} \in \mathcal{O}$より、$\exists B^\prime \in \mathcal{B}(y) \qty(B^\prime \subset X \setminus \bar{B})$。
+  $y \in X \setminus \bar{B} \in \mathcal{O}$より、$\exists B^\prime \in \mathcal{B}(y) \qty(B^\prime \subseteq X \setminus \bar{B})$。
 
   $B \cap B^\prime = \varnothing$より成り立つ。
 }
@@ -964,7 +964,7 @@
 \dfnf{$T_3$空間}{T_3空間}{
   位相空間$X$が以下を満たすとき、$X$を$T_3$空間と呼ぶ。
   \eq*{
-    \forall x \in X \forall F \in \mathcal{F} \qty(x \notin F \rightarrow \exists O_x, O_F \in \mathcal{O} \qty(x \in O_x \land F \subset O_F \land O_x \cap O_F = \varnothing))
+    \forall x \in X \forall F \in \mathcal{F} \qty(x \notin F \rightarrow \exists O_x, O_F \in \mathcal{O} \qty(x \in O_x \land F \subseteq O_F \land O_x \cap O_F = \varnothing))
   }
 }
 
@@ -972,32 +972,32 @@
   位相空間$X$と、開基$\mathcal{B}$について、以下の４つは同値である。
   \begin{enumerate}
     \item $X$は$T_3$空間
-    \item $\forall x \in X \forall B \in \mathcal{B}(x) \exists D \in \mathcal{B}(x) \qty(\bar{D} \subset B)$
-    \item $\forall x \in X \forall F \in \mathcal{F} \qty(x \notin F \rightarrow \exists O_x, O_F \in \mathcal{O} \qty(x \in O_x \land F \subset O_F \land \bar{O_x} \cap \bar{O_F} = \varnothing))$
-    \item $\forall F \in \mathcal{F} \qty(F = \bigcap \qty{\bar{O} \mid O \in \mathcal{O} \land F \subset O})$
+    \item $\forall x \in X \forall B \in \mathcal{B}(x) \exists D \in \mathcal{B}(x) \qty(\bar{D} \subseteq B)$
+    \item $\forall x \in X \forall F \in \mathcal{F} \qty(x \notin F \rightarrow \exists O_x, O_F \in \mathcal{O} \qty(x \in O_x \land F \subseteq O_F \land \bar{O_x} \cap \bar{O_F} = \varnothing))$
+    \item $\forall F \in \mathcal{F} \qty(F = \bigcap \qty{\bar{O} \mid O \in \mathcal{O} \land F \subseteq O})$
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
 
   $\forall B \in \mathcal{B}(x)$について、$x \in X \setminus B \land X \setminus B \in \mathcal{F}$である。
 
-  仮定より、$\exists O_x, O_F \in \mathcal{O} \qty(x \in O_x \land X \setminus B \subset O_F \land O_x \cap O_F = \varnothing)$である。
+  仮定より、$\exists O_x, O_F \in \mathcal{O} \qty(x \in O_x \land X \setminus B \subseteq O_F \land O_x \cap O_F = \varnothing)$である。
 
-  ここで$O_x \in \mathcal{N}(x)$であるので、$\exists D \in \mathcal{B}(x) \qty(D \subset O_x)$である。
+  ここで$O_x \in \mathcal{N}(x)$であるので、$\exists D \in \mathcal{B}(x) \qty(D \subseteq O_x)$である。
 
-  $D \subset O_x \subset X \setminus O_F$であるので、閉包の定義より$\bar{D} \subset X \setminus O_F \subset X \setminus \qty(X \setminus B) = B$
+  $D \subseteq O_x \subseteq X \setminus O_F$であるので、閉包の定義より$\bar{D} \subseteq X \setminus O_F \subseteq X \setminus \qty(X \setminus B) = B$
 
   \vskip\baselineskip
 
   $2. \rightarrow 3.$を示す。
 
-  $x \in X \setminus F \in \mathcal{O}$であるので、$X \setminus F \in \mathcal{N}(x)$すなわち、$\exists B \in \mathcal{B}(x) \qty(B \subset X \setminus F)$である。
+  $x \in X \setminus F \in \mathcal{O}$であるので、$X \setminus F \in \mathcal{N}(x)$すなわち、$\exists B \in \mathcal{B}(x) \qty(B \subseteq X \setminus F)$である。
 
-  仮定より、$\exists D \in \mathcal{B}(x) \qty(\bar{D} \subset B)$であり、再び仮定より、$\exists E \in \mathcal{B}(x) \qty(\bar{E} \subset D)$
+  仮定より、$\exists D \in \mathcal{B}(x) \qty(\bar{D} \subseteq B)$であり、再び仮定より、$\exists E \in \mathcal{B}(x) \qty(\bar{E} \subseteq D)$
 
-  $F = X \setminus \qty(X \setminus F) \subset X \setminus B \subset X \setminus \bar{D} \subset X \setminus D$である。
+  $F = X \setminus \qty(X \setminus F) \subseteq X \setminus B \subseteq X \setminus \bar{D} \subseteq X \setminus D$である。
 
-  $O_F \coloneqq X \setminus \bar{D}$とすると、$X \setminus D \in \mathcal{F}$より、$\bar{O_F} \subset X \setminus D \subset X \setminus \bar{E}$
+  $O_F \coloneqq X \setminus \bar{D}$とすると、$X \setminus D \in \mathcal{F}$より、$\bar{O_F} \subseteq X \setminus D \subseteq X \setminus \bar{E}$
 
   $O_x \coloneqq E$として成り立つ。
 
@@ -1005,20 +1005,20 @@
 
   $3. \rightarrow 4.$を示す。
 
-  $A \coloneqq \qty{\bar{O} \mid O \in \mathcal{O} \land F \subset O}$とする。
+  $A \coloneqq \qty{\bar{O} \mid O \in \mathcal{O} \land F \subseteq O}$とする。
   $X \in A$より、$X \neq \varnothing$である。
 
-  定義より$F \subset \bigcap A$である。
+  定義より$F \subseteq \bigcap A$である。
 
-  $\forall x \in X \setminus F$について、仮定より$\exists O_F \in \mathcal{O} \qty(F \subset O_F \land x \notin \bar{O_F})$であるので、$x \notin \bigcap A$
+  $\forall x \in X \setminus F$について、仮定より$\exists O_F \in \mathcal{O} \qty(F \subseteq O_F \land x \notin \bar{O_F})$であるので、$x \notin \bigcap A$
 
-  ゆえに、$X \setminus F \subset X \setminus \bigcap A$
+  ゆえに、$X \setminus F \subseteq X \setminus \bigcap A$
 
   \vskip\baselineskip
 
   $4. \rightarrow 1.$を示す。
 
-  $\forall x \in X \forall F \in \mathcal{F} \qty(x \notin F)$のとき、仮定より$\exists O_F \in \mathcal{O} \qty(x \notin \bar{O_F} \land F \subset O_F)$
+  $\forall x \in X \forall F \in \mathcal{F} \qty(x \notin F)$のとき、仮定より$\exists O_F \in \mathcal{O} \qty(x \notin \bar{O_F} \land F \subseteq O_F)$
 
   $O_x \coloneqq X \setminus \bar{O_F}$として成り立つ。
 }
@@ -1034,7 +1034,7 @@
 \dfnf{$T_4$空間}{T_4空間}{
   位相空間$X$が以下を満たすとき、$X$を$T_4$空間と呼ぶ。
   \eq*{
-    \forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing \rightarrow \exists O_1, O_2 \in \mathcal{O} \qty(F_1 \subset O_1 \land F_2 \subset O_2 \land O_1 \cap O_2 = \varnothing))
+    \forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing \rightarrow \exists O_1, O_2 \in \mathcal{O} \qty(F_1 \subseteq O_1 \land F_2 \subseteq O_2 \land O_1 \cap O_2 = \varnothing))
   }
 }
 
@@ -1042,23 +1042,23 @@
   位相空間$\qty(X, \mathcal{O})$について、以下の３つは同値である。
   \begin{enumerate}
     \item $X$は$T_4$空間
-    \item $\forall O \in \mathcal{O} \forall F \in \mathcal{F} \qty(F \subset O \rightarrow \exists U \in \mathcal{O} \qty(F \subset U \land \bar{U} \subset O))$
-    \item $\forall O_1, O_2 \in \mathcal{O} \qty(O_1 \cup O_2 = X \rightarrow \exists F_1, F_2 \in \mathcal{F} \qty(F_1 \subset O_1 \land F_2 \subset O_2 \land F_1 \cup F_2 = X))$
+    \item $\forall O \in \mathcal{O} \forall F \in \mathcal{F} \qty(F \subseteq O \rightarrow \exists U \in \mathcal{O} \qty(F \subseteq U \land \bar{U} \subseteq O))$
+    \item $\forall O_1, O_2 \in \mathcal{O} \qty(O_1 \cup O_2 = X \rightarrow \exists F_1, F_2 \in \mathcal{F} \qty(F_1 \subseteq O_1 \land F_2 \subseteq O_2 \land F_1 \cup F_2 = X))$
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を示す。
 
-  $X \setminus O \in \mathcal{F}$から、仮定より$\exists U, U^\prime \in \mathcal{O} \qty(F \subset U \land X \setminus O \subset U^\prime \land U \cap U^\prime = \varnothing)$である。
+  $X \setminus O \in \mathcal{F}$から、仮定より$\exists U, U^\prime \in \mathcal{O} \qty(F \subseteq U \land X \setminus O \subseteq U^\prime \land U \cap U^\prime = \varnothing)$である。
 
-  $U \subset X \setminus U^\prime \in \mathcal{F}$であるので、$\bar{U} \subset X \setminus U^\prime \subset X \setminus \qty(X \setminus O) = O$
+  $U \subseteq X \setminus U^\prime \in \mathcal{F}$であるので、$\bar{U} \subseteq X \setminus U^\prime \subseteq X \setminus \qty(X \setminus O) = O$
 
   \vskip\baselineskip
 
   $2. \rightarrow 3.$を示す。
 
-  $X \setminus O_1 \subset O_2 \land X \setminus O_1 \in \mathcal{F}$より、仮定より$\exists U \in \mathcal{O} \qty(X \setminus O_1 \subset U \land \bar{U} \subset O_2)$
+  $X \setminus O_1 \subseteq O_2 \land X \setminus O_1 \in \mathcal{F}$より、仮定より$\exists U \in \mathcal{O} \qty(X \setminus O_1 \subseteq U \land \bar{U} \subseteq O_2)$
 
-  $X \setminus U \subset X \setminus \qty(X \setminus O_1) = O_1 \land \qty(X \setminus U) \cup \bar{U} = X$より示される。
+  $X \setminus U \subseteq X \setminus \qty(X \setminus O_1) = O_1 \land \qty(X \setminus U) \cup \bar{U} = X$より示される。
 
   \vskip\baselineskip
 
@@ -1066,9 +1066,9 @@
 
   $\forall F_1, F_2 \in \mathcal{F} \qty(F_1 \cap F_2 = \varnothing)$とする。
 
-  $\qty(X \setminus F_1) \cup \qty(X \setminus F_2) = X$であるので、仮定より$\exists H_1, H_2 \in \mathcal{F} \qty(H_1 \subset X \setminus F_1 \land H_2 \subset X \setminus F_2 \land H_1 \cup H_2 = X)$
+  $\qty(X \setminus F_1) \cup \qty(X \setminus F_2) = X$であるので、仮定より$\exists H_1, H_2 \in \mathcal{F} \qty(H_1 \subseteq X \setminus F_1 \land H_2 \subseteq X \setminus F_2 \land H_1 \cup H_2 = X)$
 
-  $F_1 = X \setminus \qty(X \setminus F_1) \subset X \setminus H_1 \land F_2 = X \setminus \qty(X \setminus F_2) \subset X \setminus H_2$
+  $F_1 = X \setminus \qty(X \setminus F_1) \subseteq X \setminus H_1 \land F_2 = X \setminus \qty(X \setminus F_2) \subseteq X \setminus H_2$
 
   ここで、$O_1 \coloneqq X \setminus H_1, O_2 \coloneqq X \setminus H_2$として成り立つ。
 }
@@ -1088,13 +1088,13 @@
 
   $\forall x \in F_1$について、$x \in X \setminus F_2$より、仮定から$\exists O_1(x) \in \mathcal{O} \qty(x \in O_1(x) \land \bar{O_1(x)} \cap F_2 = \varnothing)$
 
-  Lindel\"{o}fより、$F_1$の可算部分$A_1$が存在して、$F_1 \subset \bigcup \qty{O_1(x) \mid x \in A_1}$
+  Lindel\"{o}fより、$F_1$の可算部分$A_1$が存在して、$F_1 \subseteq \bigcup \qty{O_1(x) \mid x \in A_1}$
 
-  すなわち、写像$\varphi_1 \colon \N \to \mathcal{O}$が存在して、$F_1 \subset \bigcup \qty{\varphi_1(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_1(n)} \cap F_2 = \varnothing)$
+  すなわち、写像$\varphi_1 \colon \N \to \mathcal{O}$が存在して、$F_1 \subseteq \bigcup \qty{\varphi_1(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_1(n)} \cap F_2 = \varnothing)$
 
   \vskip\baselineskip
 
-  同様に、写像$\varphi_2 \colon \N \to \mathcal{O}$が存在して、$F_2 \subset \bigcup \qty{\varphi_2(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_2(n)} \cap F_1 = \varnothing)$
+  同様に、写像$\varphi_2 \colon \N \to \mathcal{O}$が存在して、$F_2 \subseteq \bigcup \qty{\varphi_2(n) \mid n \in \N} \land \forall n \in \N \qty(\bar{\varphi_2(n)} \cap F_1 = \varnothing)$
 
   \vskip\baselineskip
 
@@ -1110,7 +1110,7 @@
 
   $n_1 \leq n_2 \lor n_1 > n_2$の場合分けにより、どちらの場合も矛盾。ゆえに$U_1 \cap U_2 = \varnothing$
 
-  $F_1 \subset U_1 \land F_2 \subset U_2$より示される。
+  $F_1 \subseteq U_1 \land F_2 \subseteq U_2$より示される。
 }
 
 
@@ -1128,7 +1128,7 @@
   \begin{enumerate}
     \item $X$は連結でない
     \item $\exists U, V \in \mathcal{O} \setminus \qty{\varnothing} \qty(X = U \cup V \land U \cap V = \varnothing)$
-    \item $\exists A, B \subset X \setminus \qty{\varnothing} \qty(X = A \cup B \land A \cap \bar{B} = \varnothing \land \bar{A} \cap B = \varnothing)$
+    \item $\exists A, B \subseteq X \setminus \qty{\varnothing} \qty(X = A \cup B \land A \cap \bar{B} = \varnothing \land \bar{A} \cap B = \varnothing)$
   \end{enumerate}
 }{
   $1. \rightarrow 2.$を考える。
@@ -1163,9 +1163,9 @@
 }{
   $f(X)$が連結でないと仮定する。
 
-  \thmref{非連結}より$\exists U, V \in \mathcal{O^\prime} \qty(f(X) \subset U \cup V \land U \cap V = \varnothing \land U \cap f(X) \neq \varnothing \land V \cap f(X) \neq \varnothing)$
+  \thmref{非連結}より$\exists U, V \in \mathcal{O^\prime} \qty(f(X) \subseteq U \cup V \land U \cap V = \varnothing \land U \cap f(X) \neq \varnothing \land V \cap f(X) \neq \varnothing)$
 
-  $\exists y \in U \cap f(X) \exists x \in X \qty(f(x) = y)$すなわち$x \in f^{-1}(U \cap f(X)) \subset f^{-1}(U)$であるので、$f^{-1}(U) \neq \varnothing$となる。
+  $\exists y \in U \cap f(X) \exists x \in X \qty(f(x) = y)$すなわち$x \in f^{-1}(U \cap f(X)) \subseteq f^{-1}(U)$であるので、$f^{-1}(U) \neq \varnothing$となる。
   同様に$f^{-1}(V) \neq \varnothing$
 
   $f$は連続より$f^{-1}(U), f^{-1}(V) \in \mathcal{O} \setminus \qty{\varnothing}$である。
@@ -1187,7 +1187,7 @@
 \lem{第一可算空間における基本近傍系の単調列}{
   第一可算な位相空間$X$とその任意の点$x \in X$について、以下を満たす基本近傍系$\qty(B_n)_{n \in \N}$が存在する。
   \eqg*{
-    \forall n \in \N \qty(B_{s(n)} \subset B_n)
+    \forall n \in \N \qty(B_{s(n)} \subseteq B_n)
   }
 }{
   第一可算であるので、$\N$からの全射$\varphi$が存在するような基本近傍系$\mathcal{B}(x)$が存在する。
@@ -1198,13 +1198,13 @@
     B_{s(n)} \coloneqq B_n \cap \varphi(s(n))
   }
 
-  定義と$\varphi$の全射性より、$\forall B \in \mathcal{B}(x) \exists n \in \N \qty(B_n \subset \varphi(n) = B)$である。
+  定義と$\varphi$の全射性より、$\forall B \in \mathcal{B}(x) \exists n \in \N \qty(B_n \subseteq \varphi(n) = B)$である。
 
   \vskip\baselineskip
 
-  $\varphi(0) \subset B_0$である。$\exists B \in \mathcal{B} \qty(B \subset B_n)$とすると、$\exists B^\prime \in \mathcal{B}(x) \qty(B^\prime \subset B \cap \varphi(s(n)) \subset B_{s(n)})$
+  $\varphi(0) \subseteq B_0$である。$\exists B \in \mathcal{B} \qty(B \subseteq B_n)$とすると、$\exists B^\prime \in \mathcal{B}(x) \qty(B^\prime \subseteq B \cap \varphi(s(n)) \subseteq B_{s(n)})$
 
-  \thmref{数学的帰納法}より、$\forall n \in \N \exists B \in \mathcal{B}(x) \qty(B \subset B_n)$である。
+  \thmref{数学的帰納法}より、$\forall n \in \N \exists B \in \mathcal{B}(x) \qty(B \subseteq B_n)$である。
 
   \vskip\baselineskip
 
@@ -1214,7 +1214,7 @@
 \thm{Bolzano-Weierstrassの定理}{
   第一可算でコンパクトな位相空間$X$は、点列コンパクトである。
 }{
-  $X$上の点列$\qty(x_k)_{k \in \N}$について、$\qty(F_k)_{k \in \N}, F_k = \qty{x_l \mid l \in \N \land l \geq k} \subset X$を考える。
+  $X$上の点列$\qty(x_k)_{k \in \N}$について、$\qty(F_k)_{k \in \N}, F_k = \qty{x_l \mid l \in \N \land l \geq k} \subseteq X$を考える。
 
   \vskip\baselineskip
 
@@ -1282,14 +1282,14 @@
 
   第二可算性より、点列$\qty(B_n)_{n \in \N}$が存在して$\qty{B_n \mid n \in \N}$は開基である。
 
-  開被覆$C$について、\dfnref{開集合系}より$\forall x \in X \exists O \in C \exists n \in \N \qty(x \in B_n \land B_n \subset O)$
+  開被覆$C$について、\dfnref{開集合系}より$\forall x \in X \exists O \in C \exists n \in \N \qty(x \in B_n \land B_n \subseteq O)$
 
   \lemref{選択公理が与える写像}より$n(x)$を考える。
   このとき、$\qty{B_{n(x)} \mid x \in \N} = \qty{B_m \mid m \in \Im(n)}$は開被覆である。
 
-  $\forall m \in \Im(n) \exists O \in C \qty(B_m \subset O)$より\lemref{選択公理が与える写像}の与える$O(m)$が与えられて、$C^\prime \coloneqq \qty{O(m) \mid m \in \Im(n)}$とする。
+  $\forall m \in \Im(n) \exists O \in C \qty(B_m \subseteq O)$より\lemref{選択公理が与える写像}の与える$O(m)$が与えられて、$C^\prime \coloneqq \qty{O(m) \mid m \in \Im(n)}$とする。
 
-  今、$X = \bigcup \qty{B_m \mid m \in \Im(n)} \subset \bigcup C^\prime \subset X$より、$C^\prime$は開被覆であり、定義より$C$の可算部分である。
+  今、$X = \bigcup \qty{B_m \mid m \in \Im(n)} \subseteq \bigcup C^\prime \subseteq X$より、$C^\prime$は開被覆であり、定義より$C$の可算部分である。
 
   \vskip\baselineskip
 
@@ -1303,9 +1303,9 @@
 
   ここで、$\exists x \in X \setminus \bar{M}$と仮定する。
 
-  $\exists B^\prime \in \mathcal{B} \qty(x \in B^\prime \subset X \setminus \bar{M})$である。
+  $\exists B^\prime \in \mathcal{B} \qty(x \in B^\prime \subseteq X \setminus \bar{M})$である。
 
-  したがって、$x_{B^\prime} \in X \setminus \bar{M} \subset X \setminus M$より矛盾。背理法より示される。
+  したがって、$x_{B^\prime} \in X \setminus \bar{M} \subseteq X \setminus M$より矛盾。背理法より示される。
 }
 
 
@@ -1323,7 +1323,7 @@
     \mathcal{B} \coloneqq \qty{\sqty{a, b} \mid \qty(a, b) \in \hat{X} \times \hat{X}}
   }
 }{
-  $\forall B \in \mathcal{B} \qty(-\infty \notin B \land \infty \notin B)$であるので、$\mathcal{B} \subset \P(X)$である。
+  $\forall B \in \mathcal{B} \qty(-\infty \notin B \land \infty \notin B)$であるので、$\mathcal{B} \subseteq \P(X)$である。
 
   \vskip\baselineskip
 
@@ -1357,7 +1357,7 @@
     \item $\sqty{x, b} = \varnothing \lor b \in F_1 \lor \qty(b \notin F_2 \land \sqty{x, b} \cap F_1 = \varnothing)$
   \end{itemize}
 }{
-  \thmref{閉包}より、$\exists p, q \in \hat{X} \qty(x \in \sqty{p, q} \subset X \setminus F_1)$である。
+  \thmref{閉包}より、$\exists p, q \in \hat{X} \qty(x \in \sqty{p, q} \subseteq X \setminus F_1)$である。
 
   $\sqty{p, x} = \varnothing$のとき、$a \coloneqq p$で成り立つ。
 
@@ -1379,7 +1379,7 @@
 
   $x \notin F_2$より\mlemref{-1}の条件を満たす$a_x, b_x \in \hat{X}$が存在する。
 
-  ここで、$U \coloneqq \bigcup \qty{\sqty{a_x, b_x} \mid x \in F_1}$を考える。明らかに$F_1 \subset U \land U \in \mathcal{O}$である。
+  ここで、$U \coloneqq \bigcup \qty{\sqty{a_x, b_x} \mid x \in F_1}$を考える。明らかに$F_1 \subseteq U \land U \in \mathcal{O}$である。
 
   \vskip\baselineskip
 
@@ -1404,5 +1404,5 @@
   同様に$b^\prime$を定めると、$y \notin U$より$y \in \sqty{a^\prime, b^\prime} \land \sqty{a^\prime, b^\prime} \cap U = \varnothing$である。
   \thmref{閉包}より$y \notin \bar{U}$
 
-  よって、$F_2 \subset X \setminus \bar{U}$
+  よって、$F_2 \subseteq X \setminus \bar{U}$
 }

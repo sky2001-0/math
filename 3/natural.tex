@@ -52,7 +52,7 @@
     \forall n \in \N \qty(n^+ \in \N) \\*
     \forall n \in \N \qty(n^+ \neq \varnothing) \\*
     \forall n, m \in \N \qty(n^+ = m^+ \rightarrow n = m) \\*
-    \forall E \qty(E \subset \N \land \varnothing \in E \land \forall n \qty(n \in E \rightarrow n^+ \in E) \rightarrow E = \N)
+    \forall E \qty(E \subseteq \N \land \varnothing \in E \land \forall n \qty(n \in E \rightarrow n^+ \in E) \rightarrow E = \N)
   }
 }{
   第一、第二の公理は、帰納的集合であることより明らか。
@@ -69,11 +69,11 @@
 
   第五の公理を示す。
 
-  前件より、$E \subset \N$である。
+  前件より、$E \subseteq \N$である。
 
   $\varnothing \in E \land \forall n \qty(n \in E \rightarrow n^+ \in E)$より、$E$は帰納的集合である。
 
-  最小帰納的集合であるので、$\N = \omega(E) \subset E$である。
+  最小帰納的集合であるので、$\N = \omega(E) \subseteq E$である。
 }
 
 \thm{数学的帰納法}{
@@ -119,7 +119,7 @@
   自然数$\N$上で二項関係$\leq$を以下のように定める。
   \lemref{順序数の比較可能性}より、$\leq$は全順序である。
   \eq*{
-    n \leq m \defiff n \subset m
+    n \leq m \defiff n \subseteq m
   }
 }
 

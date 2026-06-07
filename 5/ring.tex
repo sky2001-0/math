@@ -102,19 +102,19 @@
 \dfn{極大左イデアル}{
   環$R$の左イデアル$I$について、以下を満たすとき、$I$を極大左イデアルと呼ぶ。
   \begin{itemize}
-    \item $R$の任意のイデアル$J$について、$I \subset J \rightarrow J = I \lor J = R$
+    \item $R$の任意のイデアル$J$について、$I \subseteq J \rightarrow J = I \lor J = R$
     \item $R \neq I$
   \end{itemize}
 }
 
 \thm{極大左イデアルの存在}{
-  環$R$と左イデアル$I$について、$I \neq R$ならば、極大左イデアル$J$が存在して、$I \subset J$である。
+  環$R$と左イデアル$I$について、$I \neq R$ならば、極大左イデアル$J$が存在して、$I \subseteq J$である。
 }{
-  $T = \qty{J \in \P(R) \mid J \text{は左イデアル} \land I \subset J \land J \neq R}$を考える。
+  $T = \qty{J \in \P(R) \mid J \text{は左イデアル} \land I \subseteq J \land J \neq R}$を考える。
 
   $I \in T$である。
 
-  半順序集合$\qty(T, \subset)$の部分$S$が全順序であるとする。
+  半順序集合$\qty(T, \subseteq)$の部分$S$が全順序であるとする。
 
   このとき、$\bigcup S$は左イデアルである。$1_R \notin \bigcup S$より、$\bigcup S \in T$である。
 

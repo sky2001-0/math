@@ -26,6 +26,23 @@
   }
 }
 
+\dfn{前順序に関わるいくつかの述語}{
+  薄い圏$\bm{\Lambda}$について、述語$\prec, \succcurlyeq, \succ$を以下のように定める。
+  \eqg*{
+    a \prec b \defiff a \preccurlyeq b \land a \neq b \\*
+    a \succcurlyeq b \defiff b \preccurlyeq a \\*
+    a \succ b \defiff b \prec a
+  }
+}
+
+\cor*{
+  薄い圏$\bm{\Lambda}$について、以下が成り立つ。
+  \eqg*{
+    \forall a, b \in \bm{\Lambda} \qty(a \preccurlyeq b \leftrightarrow a \prec b \lor a = b) \\*
+    \forall a, b \in \bm{\Lambda} \qty(a \succcurlyeq b \leftrightarrow a \succ b \lor a = b)
+  }
+}
+
 \dfn{最大元}{
   薄い圏$\bm{\Lambda}$について、その終対象を最大元と呼ぶ。
 }
@@ -37,17 +54,17 @@
 \dfn{下限}{
   薄い圏$\bm{\Lambda}$、離散圏$\bm{J}$と、関手$X \colon \bm{J} \to \bm{\Lambda}$を考える。
 
-  $X$の積$x, u$について、$x$を$X$の下限と呼ぶ。
+  $X$の積$a, u$について、$a$を$X$の下限と呼ぶ。
 }
 
 \dfn{上限}{
   薄い圏$\bm{\Lambda}$、離散圏$\bm{J}$と、関手$X \colon \bm{J} \to \bm{\Lambda}$を考える。
 
-  $X$の和$x, u$について、$x$を$X$の上限と呼ぶ。
+  $X$の和$a, u$について、$a$を$X$の上限と呼ぶ。
 }
 
 \dfn{射影系}{
-  薄い圏$\Lambda$と圏$\bm{C}$について、関手$X \colon \bm{\Lambda} \to \bm{C}$を、射影系と呼ぶ。
+  薄い圏$\bm{\Lambda}$と圏$\bm{C}$について、関手$X \colon \bm{\Lambda} \to \bm{C}$を、射影系と呼ぶ。
 }
 
 \dfn{帰納極限}{
@@ -57,3 +74,79 @@
 \dfn{射影極限}{
   射影系$X$ついて、$X$の余極限を射影極限と呼ぶ。
 }
+
+
+\lsubsection{前順序集合}
+
+\rem{射としての前順序}{
+  集合$P$と以下を満たす集合$\Lambda \subseteq P \times P$を考える。
+  \eqg*{
+    \forall a \in P \qty(\qty(a, a) \in \Lambda) \\*
+    \forall a, b, c \in P \qty\big(\qty(a, b) \in \Lambda \land \qty(b, c) \in \Lambda \rightarrow \qty(a, c) \in \Lambda)
+  }
+
+  $\Lambda$の元について、$=, \dom, \cod, \Comp$を以下で定めることにより、\subsecref{射の公理}を満たす。
+
+  $\qty(a, b), \qty(b, c), \qty(a^\prime, c^\prime) \in \Lambda$について、
+  \begin{enumerate}
+    \item 等号は集合の相等として定める。
+    \item $\dom(\qty(a, b)) \coloneqq \qty(a, a)$
+    \item $\cod(\qty(a, b)) \coloneqq \qty(b, b)$
+    \item $\Comp(\qty(a, b), \qty(b, c), \qty(a^\prime, c^\prime)) \defiff \qty(a, c) = \qty(a^\prime, c^\prime)$
+  \end{enumerate}
+
+  このとき、$\Lambda$は薄い圏となる。
+}
+
+\dfn{前順序集合}{
+  集合$P$と以下を満たす集合$\Lambda \subseteq P \times P$を考える。
+  \eqg*{
+    \forall a \in P \qty(\qty(a, a) \in \Lambda) \\*
+    \forall a, b, c \in P \qty\big(\qty(a, b) \in \Lambda \land \qty(b, c) \in \Lambda \rightarrow \qty(a, c) \in \Lambda)
+  }
+
+  薄い圏$\Lambda$の大小$\preccurlyeq_\Lambda$を用いて、前順序集合の大小$\preccurlyeq_P$を以下で定める。
+  \eq*{
+    a \preccurlyeq_P b \defiff \qty(a, a) \preccurlyeq_\Lambda \qty(b, b)
+  }
+
+  このとき、$\qty(P, \preccurlyeq_P)$を前順序集合と呼ぶ。
+}
+
+\dfn{上界}{
+  前順序集合$\qty(P, \preccurlyeq)$について、$P$の部分$A$を考える。
+
+  $A$が上に有界であるとは、以下を満たすことである。
+  \eq*{
+    \exists b \in P \forall a \in A \qty(a \preccurlyeq b)
+  }
+
+  このとき、$b$を$A$の上界と呼ぶ。
+}
+
+\dfn{下界}{
+  前順序集合$\qty(P, \preccurlyeq)$について、$P$の部分$A$を考える。
+
+  $A$が下に有界であるとは、以下を満たすことである。
+  \eq*{
+    \exists b \in P \forall a \in A \qty(b \preccurlyeq a)
+  }
+
+  このとき、$b$を$A$の下界と呼ぶ。
+}
+
+\dfn{有界}{
+  前順序集合$\qty(P, \preccurlyeq)$について、$P$の部分$A$を考える。
+
+  $A$が有界であるとは、$A$が上に有界かつ下に有界であることである。
+}
+
+\cor*{
+  空でない前順序集合$\qty(P, \preccurlyeq)$について、$\varnothing$は有界である。
+}
+
+単調、前順序の圏
+
+\lsubsection{有向集合}
+
+\lsubsection{同値関係}

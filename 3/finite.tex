@@ -308,15 +308,15 @@
 }
 
 \lem{自然数は最小の無限順序数}{
-  有限でない順序数$\alpha$について、$\N \subset \alpha$である。
+  有限でない順序数$\alpha$について、$\N \subseteq \alpha$である。
 }{
-  自然数は順序数であるので、任意の$n \in \N$について、\lemref{順序数の比較可能性}より$n \in \alpha \lor \alpha \subset n$である。
+  自然数は順序数であるので、任意の$n \in \N$について、\lemref{順序数の比較可能性}より$n \in \alpha \lor \alpha \subseteq n$である。
 
-  $\alpha \subset n$であるとき、\lemref{単射と有限}より$\alpha$は有限となり、反する。
+  $\alpha \subseteq n$であるとき、\lemref{単射と有限}より$\alpha$は有限となり、反する。
 
   したがって、$n \in \alpha$である。
 
-  ゆえに、$\N \subset \alpha$である。
+  ゆえに、$\N \subseteq \alpha$である。
 }
 
 \thm{無限集合は可算部分を含む}{
@@ -330,7 +330,7 @@
 \lem{無限順序数の後続の濃度}{
   有限でない順序数$\alpha$について、単射$\alpha^+ \to \alpha$が存在する。
 }{
-  \lemref{自然数は最小の無限順序数}より、$\N \subset \alpha$である。
+  \lemref{自然数は最小の無限順序数}より、$\N \subseteq \alpha$である。
 
   以下で定める$\varphi \colon \alpha^+ \to \alpha$は単射である。
   \eq*{
@@ -380,7 +380,7 @@
 
   任意の$\qty(\xi_0, \xi_1) \in \min A \times \min A$について、$\xi_2 \coloneqq \max{\xi_0, \xi_1}^+$として、以下が成り立つ。
   \eq*{
-    \qty(\min A \times \min A)_{< \qty(\xi_0, \xi_1)} \subset \xi_2 \times \xi_2
+    \qty(\min A \times \min A)_{< \qty(\xi_0, \xi_1)} \subseteq \xi_2 \times \xi_2
   }
 
   \lemref{順序数の後続と比較}より、$\xi_2 \in \min A \lor \xi_2 = \min A$であり、$\xi_2 = \min A$のとき\lemref{無限順序数の後続の濃度}より単射$\min A \to \max{\xi_0, \xi_1}$が存在しないことに反する。
