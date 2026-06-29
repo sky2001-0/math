@@ -1,9 +1,7 @@
 \lsection{集合論}
 
 \rem{集合論の公理系}{
-  本ノートでは、Zermelo-Fraenkel公理系と同値な変形版の公理系を採用する。
-  分出は置換と和集合から導出する。
-  必要に応じて、別途明示する選択原理を加える。
+  本ノートでは、Zermelo-Fraenkel公理系に\axiref{Skolem関係の導入}を加えた集合論を扱う。
   この取り扱いは一般的でないことに注意されたい。
 }
 
@@ -311,7 +309,7 @@
 \lsubsection{集合の置換}
 
 \axi{置換の公理図式}{
-  アリティ\num{2}の述語$P$をパラメータとする以下の公理図式を考える。
+  アリティ\num{2}の集合論で定義可能な述語$P$をパラメータとする以下の公理図式を考える。
   \eq*{
     \forall x \forall y \forall z \qty(P(x, y) \land P(x, z) \rightarrow y = z) \rightarrow \forall X \exists A \forall t \qty(t \in A \leftrightarrow \exists x \qty(x \in X \land P(x, t)))
   }
@@ -332,7 +330,7 @@
 }
 
 \thm{分出の公理図式}{
-  アリティ\num{1}の述語$P$について、以下が成り立つ。
+  アリティ\num{1}の集合論で定義可能な述語$P$について、以下が成り立つ。
   \eq*{
     \forall X \exists A \forall t \qty(t \in A \leftrightarrow t \in X \land P(t))
   }

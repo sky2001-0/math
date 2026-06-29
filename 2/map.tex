@@ -218,7 +218,7 @@
 
   $x, x^\prime \in X$について$f(x) = f(x^\prime)$であるとする。
 
-  写像$g_x \colon \qty{\varnothing} \to \dom(f), \varnothing \mapsto x$と$g_{x^\prime} \colon \qty{\varnothing} \to \dom(f), \varnothing \mapsto x^\prime$を考える。
+  写像$g_x \colon \qty{\varnothing} \to X, \varnothing \mapsto x$と$g_{x^\prime} \colon \qty{\varnothing} \to X, \varnothing \mapsto x^\prime$を考える。
 
   このとき$f \circ g_x = f \circ g_{x^\prime}$であり、左簡約可能より$g_x = g_{x^\prime}$すなわち$x = x^\prime$である。
 
@@ -703,7 +703,7 @@
 \dfn{積圏}{
   圏$\bm{C}, \bm{D}$と射$f, g$について、以下で定める類$\bm{C} \times \bm{D}$を考える。
   \eq*{
-    \qty(f, g) \in \bm{C} \times \bm{D} \defiff \qty(f \in \bm{C} \land g \in \bm{D})
+    \qty(f, g) \in \bm{C} \times \bm{D} \defiff f \in \bm{C} \land g \in \bm{D}
   }
 
   このとき$\bm{C} \times \bm{D}$は圏である。
@@ -1108,7 +1108,7 @@
     &= \tilde{u^\prime}(h)
   }
 
-  よって、$\qqty{\tilde{u}, \widetilde{u^\prime}, \ast, \theta} \in \hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})$である。
+  よって、$\qqty{\tilde{u}, \tilde{u^\prime}, \ast, \theta} \in \hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})$である。
 
   $S$が関手であり射影を保つことは、定義より直ちに従う。
 
@@ -1137,3 +1137,27 @@
 
   ゆえに、$S \circ T = \id_{\hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})} \land T \circ S = \id_{1 \downarrow \mathrm{ev}_c}$が成り立つ。
 }
+
+\begin{center}
+  \begin{minipage}{0.3\linewidth}
+    $\hom_{\bm{C}}(-, c) \downarrow \Func(\bm{C}^\opp, \mathbf{Set})$ \\
+    \begin{tikzcd}
+      \hom_{\bm C}(-,c) \ar[r, "\eta"] \ar[dr, "\eta^\prime"'] & F \ar[d, "\theta"] \\
+      & F^\prime
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.2\linewidth}
+    $1 \downarrow \mathrm{ev}_c$ \\
+    \begin{tikzcd}
+      1 \ar[r, "\eta^\sharp"] \ar[dr, "{\eta^{\prime\sharp}}"'] & F(c) \ar[d, "\theta(c)"] \\
+      & F^\prime(c)
+    \end{tikzcd}
+  \end{minipage}
+  \begin{minipage}{0.3\linewidth}
+    $\mathbf{Set}$ \\
+    \begin{tikzcd}
+      \hom_{\bm{C}}(c, c) \ar[r, "\eta(c)"] \ar[d, "{\hom_{\bm{C}}(h^\opp, c)}"'] & F(c) \ar[d, "F(h^\opp)"] \\
+      \hom_{\bm{C}}(d, c) \ar[r, "\eta(d)"'] & F(d)
+    \end{tikzcd}
+  \end{minipage}
+\end{center}
