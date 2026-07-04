@@ -265,18 +265,18 @@
 
   $\forall \qty(x, y) \in G \times G$における点連続性を考える。
 
-  $\forall a, b \in G \qty(\varphi(x, y) \in \sqty{a, b})$を考える。\\*
+  $\forall a, b \in G \qty(\varphi(x, y) \in \outsqbr{a, b})$を考える。\\*
 
-  $G^+$が最小元$m$を持つとき、$\qty{x} = \sqty{x - m, x + m} \subseteq \sqty{a, b}$である。
-  同様に$\qty{y} \subseteq \sqty{a, b}$でもある。
+  $G^+$が最小元$m$を持つとき、$\qty{x} = \outsqbr{x - m, x + m} \subseteq \outsqbr{a, b}$である。
+  同様に$\qty{y} \subseteq \outsqbr{a, b}$でもある。
 
   $\forall B \in \mathcal{B}(\varphi(x, y)) \qty(\varphi(\qty{x} \times \qty{y}) = \qty{\varphi(x, y)} \subseteq B)$である。\\*
 
   $G^+$が最小元を持たないとき、\lemref{順序群の三角性}より$\exists g \in G^+ \qty(g + g \leq \min \qty{\varphi(x, y) - a, b - \varphi(x, y)})$である。
 
-  ゆえに、$\varphi \qty(\sqty{x - g, x + g} \times \sqty{y - g, y + g}) \subseteq \sqty{a, b}$である。\\*
+  ゆえに、$\varphi \qty(\outsqbr{x - g, x + g} \times \outsqbr{y - g, y + g}) \subseteq \outsqbr{a, b}$である。\\*
 
-  \dfnref{順序空間}の定める開基$\mathcal{B}$について、\lemref{最大がない場合の順序の開基}、\lemref{非自明な順序群は最大を持たない}より、$\forall B \in \mathcal{B} \exists a, b \in G \qty(\sqty{a, b} = B)$である。
+  \dfnref{順序空間}の定める開基$\mathcal{B}$について、\lemref{最大がない場合の順序の開基}、\lemref{非自明な順序群は最大を持たない}より、$\forall B \in \mathcal{B} \exists a, b \in G \qty(\outsqbr{a, b} = B)$である。
 
   \thmref{連続と点連続}より$\varphi$は連続である。
 }
@@ -320,9 +320,9 @@
 
   さらに、基本近縁系$\mathcal{V}$の定める近縁系$\mathcal{U'}$は、\thmref{位相群の左一様構造}の定める近縁系$\mathcal{U}$に一致する。
 }{
-	$\forall g \in G^+ \exists B \in \mathcal{B}(0_G) \qty(B = \sqty{-g, g} \land \tilde{B} = V_g)$である。
+	$\forall g \in G^+ \exists B \in \mathcal{B}(0_G) \qty(B = \outsqbr{-g, g} \land \tilde{B} = V_g)$である。
 
-	$\forall B \in \mathcal{B}(0_G)$について、$B = \sqty{a, b} \land a < 0_G < b$である。$g = \min \qty{-a, b} \in G^+$について、$V_g \subseteq \tilde{B}$である。
+	$\forall B \in \mathcal{B}(0_G)$について、$B = \outsqbr{a, b} \land a < 0_G < b$である。$g = \min \qty{-a, b} \in G^+$について、$V_g \subseteq \tilde{B}$である。
 
 	\lemref{近縁系の一意性}より成り立つ。
 }
@@ -426,19 +426,19 @@
 }{
   $\qty(0_R, 0_R)$について考える。
 
-  $\forall B \in \mathcal{B}(0_R) \exists a, b \in R \qty(0_R \in \sqty{a, b} = B)$である。
+  $\forall B \in \mathcal{B}(0_R) \exists a, b \in R \qty(0_R \in \outsqbr{a, b} = B)$である。
 
   \lemref{順序環の三角性}より、$\exists r \in R^+ \qty(r \times r \leq \min \qty{-a, b})$である。
 
-  $B' \coloneqq \sqty{-r, r} \times \sqty{-r, r} \mathcal{B} \times \mathcal{B}$であり、$\times(B') \subseteq B$\\*
+  $B' \coloneqq \outsqbr{-r, r} \times \outsqbr{-r, r} \mathcal{B} \times \mathcal{B}$であり、$\times(B') \subseteq B$\\*
 
   $\forall x_0 \in R$について、$f \in R^R, f(x) = x \times x_0$を考える。
 
   $x_0 = 0_R$のとき、定値写像より連続。
 
-  $x_0 \neq 0_R$のとき、点$0_R$について考える。$\forall B \in \mathcal{B}(0_R) \exists a, b \in R \qty(0_R \in \sqty{a, b} = B)$である。
+  $x_0 \neq 0_R$のとき、点$0_R$について考える。$\forall B \in \mathcal{B}(0_R) \exists a, b \in R \qty(0_R \in \outsqbr{a, b} = B)$である。
 
-  $r \coloneqq \min \qty{-a, b} / \abs{x_0}$について、$B' \coloneqq \sqty{-r, r}$であり、$f(B') \subseteq B$\\*
+  $r \coloneqq \min \qty{-a, b} / \abs{x_0}$について、$B' \coloneqq \outsqbr{-r, r}$であり、$f(B') \subseteq B$\\*
 
   可換性と\lemref{位相環の条件}より位相環である。
 }
@@ -475,11 +475,11 @@
     \item $-1 \in \qty(F^\times)^{F^\times}$
   \end{itemize}
 }{
-  開基$B = \sqty{a, b} \cap F^\times$を考える。
+  開基$B = \outsqbr{a, b} \cap F^\times$を考える。
 
   $B = \varnothing$のとき、${-1}^{-1}(B) = \varnothing \in \mathcal{O}$である。
 
-  $0 < a < b$のとき、${-1}^{-1}(B) = \sqty{1 / b, 1 / a} \in \mathcal{O}$である。
+  $0 < a < b$のとき、${-1}^{-1}(B) = \outsqbr{1 / b, 1 / a} \in \mathcal{O}$である。
 
   $0 = a < b$のとき、${-1}^{-1}(B) = \qty{x \in F \mid 1 / b < x} \in \mathcal{O}$である。
 

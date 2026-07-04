@@ -1320,18 +1320,18 @@
 
   このとき、以下の集合系$\mathcal{B}$は$X$の開基である。
   \eq*{
-    \mathcal{B} \coloneqq \qty{\sqty{a, b} \mid \qty(a, b) \in \hat{X} \times \hat{X}}
+    \mathcal{B} \coloneqq \qty{\outsqbr{a, b} \mid \qty(a, b) \in \hat{X} \times \hat{X}}
   }
 }{
   $\forall B \in \mathcal{B} \qty(-\infty \notin B \land \infty \notin B)$であるので、$\mathcal{B} \subseteq \P(X)$である。
 
   \vskip\baselineskip
 
-  第一式を示す。$\forall x \in X \qty(x \in \sqty{-\infty, \infty})$である。
+  第一式を示す。$\forall x \in X \qty(x \in \outsqbr{-\infty, \infty})$である。
 
   \vskip\baselineskip
 
-  第二式を示す。$\forall a_1, b_1, a_2, b_2 \in \hat{X}$について、$\sqty{a_1, b_1} \cap \sqty{a_2, b_2} = \sqty{\max \qty{a_1, a_2}, \min \qty{b_1, b_2}} \in \mathcal{B}$である。
+  第二式を示す。$\forall a_1, b_1, a_2, b_2 \in \hat{X}$について、$\outsqbr{a_1, b_1} \cap \outsqbr{a_2, b_2} = \outsqbr{\max \qty{a_1, a_2}, \min \qty{b_1, b_2}} \in \mathcal{B}$である。
 }
 
 \dfn{順序空間}{
@@ -1343,7 +1343,7 @@
 }{
   定義より開区間は開集合である。
 
-  閉区間$\qty[a, b]$を考える。$X \setminus \qty[a, b] = \sqty{-\infty, a} \cup \sqty{b, \infty} \in \mathcal{O}$より成り立つ。
+  閉区間$\qty[a, b]$を考える。$X \setminus \qty[a, b] = \outsqbr{-\infty, a} \cup \outsqbr{b, \infty} \in \mathcal{O}$より成り立つ。
 }
 
 \lem*{
@@ -1351,19 +1351,19 @@
 
   $F_1 \cap F_2 = \varnothing$であるとき、$\forall x \in F_1$について以下の全てを満たす$a, b \in \hat{X}$が存在する。
   \begin{itemize}
-    \item $x \in \sqty{a, b}$
-    \item $\sqty{a, b} \cap F_2 = \varnothing$
-    \item $\sqty{a, x} = \varnothing \lor a \in F_1 \lor \qty(a \notin F_2 \land \sqty{a, x} \cap F_1 = \varnothing)$
-    \item $\sqty{x, b} = \varnothing \lor b \in F_1 \lor \qty(b \notin F_2 \land \sqty{x, b} \cap F_1 = \varnothing)$
+    \item $x \in \outsqbr{a, b}$
+    \item $\outsqbr{a, b} \cap F_2 = \varnothing$
+    \item $\outsqbr{a, x} = \varnothing \lor a \in F_1 \lor \qty(a \notin F_2 \land \outsqbr{a, x} \cap F_1 = \varnothing)$
+    \item $\outsqbr{x, b} = \varnothing \lor b \in F_1 \lor \qty(b \notin F_2 \land \outsqbr{x, b} \cap F_1 = \varnothing)$
   \end{itemize}
 }{
-  \thmref{閉包}より、$\exists p, q \in \hat{X} \qty(x \in \sqty{p, q} \subseteq X \setminus F_1)$である。
+  \thmref{閉包}より、$\exists p, q \in \hat{X} \qty(x \in \outsqbr{p, q} \subseteq X \setminus F_1)$である。
 
-  $\sqty{p, x} = \varnothing$のとき、$a \coloneqq p$で成り立つ。
+  $\outsqbr{p, x} = \varnothing$のとき、$a \coloneqq p$で成り立つ。
 
-  $\exists z \in \sqty{p, x} \cap F_1$のとき、$a \coloneqq z$で成り立つ。
+  $\exists z \in \outsqbr{p, x} \cap F_1$のとき、$a \coloneqq z$で成り立つ。
 
-  $\exists z \in \sqty{p, x} \land \sqty{p, x} \cap F_1 = \varnothing$のとき、$a \coloneqq z$で成り立つ。
+  $\exists z \in \outsqbr{p, x} \land \outsqbr{p, x} \cap F_1 = \varnothing$のとき、$a \coloneqq z$で成り立つ。
 
   同様に$b$を定めることができて、条件を満たす。
 }
@@ -1379,15 +1379,15 @@
 
   $x \notin F_2$より\mlemref{-1}の条件を満たす$a_x, b_x \in \hat{X}$が存在する。
 
-  ここで、$U \coloneqq \bigcup \qty{\sqty{a_x, b_x} \mid x \in F_1}$を考える。明らかに$F_1 \subseteq U \land U \in \mathcal{O}$である。
+  ここで、$U \coloneqq \bigcup \qty{\outsqbr{a_x, b_x} \mid x \in F_1}$を考える。明らかに$F_1 \subseteq U \land U \in \mathcal{O}$である。
 
   \vskip\baselineskip
 
-  $\forall y \in F_2$を考える。$y \notin F_1 = \bar{F_1}$より、$\exists \qty(c, d) \in \hat{X} \times \hat{X} \qty(\sqty{c, d} \cap F_1 = \varnothing)$である。
+  $\forall y \in F_2$を考える。$y \notin F_1 = \bar{F_1}$より、$\exists \qty(c, d) \in \hat{X} \times \hat{X} \qty(\outsqbr{c, d} \cap F_1 = \varnothing)$である。
 
   \vskip\baselineskip
 
-  $F^\prime_1 \coloneqq \qty{x \in F_1 \mid x < y \land \sqty{a_x, b_x} \cap \sqty{c, d} \neq \varnothing}$とする。
+  $F^\prime_1 \coloneqq \qty{x \in F_1 \mid x < y \land \outsqbr{a_x, b_x} \cap \outsqbr{c, d} \neq \varnothing}$とする。
 
   $\exists x_1, x_2 \in F^\prime_1 \qty(x_1 < x_2)$とすると、$c$の定義と\mlemref{-1}第二式より$x_1 < x_2 < c < b_{x_1} \land b_{x_1} \notin F_1$である。
 
@@ -1401,7 +1401,7 @@
 
   \vskip\baselineskip
 
-  同様に$b^\prime$を定めると、$y \notin U$より$y \in \sqty{a^\prime, b^\prime} \land \sqty{a^\prime, b^\prime} \cap U = \varnothing$である。
+  同様に$b^\prime$を定めると、$y \notin U$より$y \in \outsqbr{a^\prime, b^\prime} \land \outsqbr{a^\prime, b^\prime} \cap U = \varnothing$である。
   \thmref{閉包}より$y \notin \bar{U}$
 
   よって、$F_2 \subseteq X \setminus \bar{U}$

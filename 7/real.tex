@@ -286,12 +286,12 @@
 \lem*{
   全単射$\varphi \in \R^{\qty[0, 1]}$が存在する。
 }{
-  以下の写像は、全単射$f \in \R^{\sqty{0, 1}}$である。
+  以下の写像は、全単射$f \in \R^{\outsqbr{0, 1}}$である。
   \eq*{
     f(x) \coloneqq \frac{1 / 2 - x}{x \qty(x - 1)}
   }
 
-  以下の写像は、全単射$g \in \sqty{0, 1}^{\qty[0, 1]}$である。
+  以下の写像は、全単射$g \in \outsqbr{0, 1}^{\qty[0, 1]}$である。
   \eq*{
     g(x) \coloneqq
     \begin{cases}
@@ -524,7 +524,7 @@
 }{
   $\sup A \notin \bar{A}$と仮定する。
 
-  \thmref{閉包}より$\exists \epsilon \in \R^+ \qty(A \cap \sqty{\sup A - \epsilon, \sup A + \epsilon} = \varnothing)$である。
+  \thmref{閉包}より$\exists \epsilon \in \R^+ \qty(A \cap \outsqbr{\sup A - \epsilon, \sup A + \epsilon} = \varnothing)$である。
 
   $\sup A - \epsilon / 2$も上界となり、上限の定義に反する。
 
@@ -555,13 +555,13 @@
 
   $x \in B$であり、$v$は$B$の上界であるので、\thmref{上限の存在}から上限$b \coloneqq \sup B$を持つ。
 
-  $b \in V$とすると、$V$は開集合であるので$\exists \epsilon \in \R^+ \qty(\sqty{b - \epsilon, b + \epsilon} \subseteq V)$
+  $b \in V$とすると、$V$は開集合であるので$\exists \epsilon \in \R^+ \qty(\outsqbr{b - \epsilon, b + \epsilon} \subseteq V)$
 
   このとき$b - \epsilon$も$B_1$の上界となり矛盾。
   ゆえに$b \notin V$
   よって$b < v$である。
 
-  $b \in U$とすると、$U$は開集合であるので$\exists \epsilon' \in \R^+ \qty(\sqty{b - \epsilon', b + \epsilon'} \subseteq U)$
+  $b \in U$とすると、$U$は開集合であるので$\exists \epsilon' \in \R^+ \qty(\outsqbr{b - \epsilon', b + \epsilon'} \subseteq U)$
 
   $b < b + \min \qty{\epsilon', v - b} / 2 \in B$より$b$は上界でない。ゆえに$b \notin U$\\*
 
