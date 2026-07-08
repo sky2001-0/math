@@ -266,7 +266,7 @@
 }
 
 \cor{有向集合としての基本近傍系}{
-  集合$X$とその点$x \in X$について、$\qty(\mathcal{B}(x), \supset)$は有向集合である。
+  集合$X$とその点$x \in X$について、$\qty(\mathcal{B}(x), \supseteq)$は有向集合である。
 }
 
 \dfn{近傍系}{
@@ -530,7 +530,7 @@
     \exists N^\prime \in \mathcal{N}(f(x)) \forall N \in \mathcal{N}(x) \exists y \in N \qty(f(y) \notin N^\prime)
   }
 
-  \lemref{選択公理が与える写像}より、写像$g \colon \mathcal{N}(x) \to X, f(g(N)) \notin N^\prime$が存在して、$\qty(\mathcal{N}(x), \supset)$は\corref{有向集合としての基本近傍系}より有向集合である。
+  \lemref{選択公理が与える写像}より、写像$g \colon \mathcal{N}(x) \to X, f(g(N)) \notin N^\prime$が存在して、$\qty(\mathcal{N}(x), \supseteq)$は\corref{有向集合としての基本近傍系}より有向集合である。
 
   今、$g$から構成されるネットは、順序を包含で定義したことから$x$に収束するが、$f \circ g$から構成されるネットは$f(x)$に収束しない。背理法より示される。
 }
@@ -636,7 +636,7 @@
 
   仮定より$\forall B \in \mathcal{B}(x) \exists y \in A \qty(y \in B)$である。
 
-  \corref{有向集合としての基本近傍系}より、$\qty(\mathcal{B}(x), \supset)$は有向集合である。
+  \corref{有向集合としての基本近傍系}より、$\qty(\mathcal{B}(x), \supseteq)$は有向集合である。
 
   ネット$\qty(y_B)_{B \in \mathcal{B}(x)}$は、順序を包含で定義したことから$x$に収束する。
 
@@ -901,7 +901,7 @@
 
   $\mathcal{N}(x) \times \mathcal{N}(y)$上の半順序を以下のように定義する。
   \eq*{
-    \qty(N_x, N_y) \preccurlyeq \qty(N^\prime_x, N^\prime_y) \defiff N_x \supset N^\prime_x \land N_y \supset N^\prime_y
+    \qty(N_x, N_y) \preccurlyeq \qty(N^\prime_x, N^\prime_y) \defiff N_x \supseteq N^\prime_x \land N_y \supseteq N^\prime_y
   }
 
   \corref{有向集合としての基本近傍系}より、$\qty(\mathcal{N}(x) \times \mathcal{N}(y), \preccurlyeq)$は有向集合である。
@@ -1133,7 +1133,7 @@
 }{
   $1. \rightarrow 2.$を考える。
 
-  開集合、閉集合の定義より$\mathcal{O} \cap \mathcal{F} \supset \qty{\varnothing, X}$であるので、非連結ならば$\exists U \in \mathcal{O} \cap \mathcal{F} \setminus \qty{\varnothing, X}$である。
+  開集合、閉集合の定義より$\mathcal{O} \cap \mathcal{F} \supseteq \qty{\varnothing, X}$であるので、非連結ならば$\exists U \in \mathcal{O} \cap \mathcal{F} \setminus \qty{\varnothing, X}$である。
 
   $V \coloneqq X \setminus U \in \mathcal{O} \setminus \qty{\varnothing}$より成り立つ。
 
@@ -1170,7 +1170,7 @@
 
   $f$は連続より$f^{-1}(U), f^{-1}(V) \in \mathcal{O} \setminus \qty{\varnothing}$である。
 
-  \corref{像と原像}、\lemref{原像の性質}より$f^{-1}(U) \cup f^{-1}(V) = f^{-1}(U \cup V) \supset f^{-1}(f(X)) \supset X$
+  \corref{像と原像}、\lemref{原像の性質}より$f^{-1}(U) \cup f^{-1}(V) = f^{-1}(U \cup V) \supseteq f^{-1}(f(X)) \supseteq X$
 
   \lemref{原像の性質}より$f^{-1}(U) \cap f^{-1}(V) = f^{-1}(U \cap V) = f^{-1}(\varnothing) = \varnothing$
 

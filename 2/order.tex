@@ -14,7 +14,7 @@
 }
 
 \cor*{
-  集合$P$について、$\qty(P, \subseteq)$は半順序集合である。また、$\qty(P, \supset)$も半順序集合である。
+  集合$P$について、$\qty(P, \subseteq)$は半順序集合である。また、$\qty(P, \supseteq)$も半順序集合である。
 }
 
 \dfn{極大元}{
@@ -781,8 +781,8 @@
     F(X) \coloneqq A \setminus g\qty(B \setminus f(X))
   }
 
-  $X \subseteq Y \subseteq A$について、\lemref{像の性質}より$f(X) \subseteq f(Y)$であり、$B \setminus f(X) \supset B \setminus f(Y)$であり、
-  \lemref{像の性質}より$g\qty(B \setminus f(X)) \supset g\qty(B \setminus f(Y))$であり、$F(X) \subseteq F(Y)$である。
+  $X \subseteq Y \subseteq A$について、\lemref{像の性質}より$f(X) \subseteq f(Y)$であり、$B \setminus f(X) \supseteq B \setminus f(Y)$であり、
+  \lemref{像の性質}より$g\qty(B \setminus f(X)) \supseteq g\qty(B \setminus f(Y))$であり、$F(X) \subseteq F(Y)$である。
 
   ゆえに、$F$は完備束$\qty(\P(A), \subseteq)$上の単調写像である。
 
@@ -1082,7 +1082,7 @@
 }{
   $M \coloneqq \qty{\qty(\lambda, F) \in \Lambda \times \mathcal{F'} \mid x_\lambda \in F}$を考える。
 
-  $M$上の前順序$\forall \qty(\lambda_1, F_1), \qty(\lambda_2, F_2) \in M \qty(\qty(\lambda_1, F_1) \preccurlyeq \qty(\lambda_2, F_2) \defiff \lambda_1 \preccurlyeq \lambda_2 \land F_1 \supset F_2)$を考える。
+  $M$上の前順序$\forall \qty(\lambda_1, F_1), \qty(\lambda_2, F_2) \in M \qty(\qty(\lambda_1, F_1) \preccurlyeq \qty(\lambda_2, F_2) \defiff \lambda_1 \preccurlyeq \lambda_2 \land F_1 \supseteq F_2)$を考える。
 
   \vskip\baselineskip
 
