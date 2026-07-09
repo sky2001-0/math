@@ -1206,7 +1206,7 @@
 
   $\dom(f) \circ g = \dom(f) \circ h$より、普遍性から一意な射$u$が存在して、$u \circ f = \dom(f)$である。
 
-  $f \circ u \circ f = f \circ \dom(f) = f$と$f \circ g = f \circ h$より、普遍性から$f \circ u = \cod(f)$である。
+  $f \circ u \circ f = f \circ \dom(f) = \cod(f) \circ f$より、普遍性から$f \circ u = \cod(f)$である。
 }
 
 \begin{center}
@@ -1598,15 +1598,19 @@
 }{
   $f \circ f^{-1} \circ g = g \circ \cod(\pi_1)$より、普遍性から一意な射$h$が存在して、$f^{-1} \circ g = \pi_0 \circ h \land \cod(\pi_1) = \pi_1 \circ h$である。
 
-  $f \circ \pi_0 \circ h \circ \pi_1 = f \circ f^{-1} \circ g \circ \pi_1 = g \circ \pi_1 \circ \dom(\pi_1)$より、普遍性から$h \circ \pi_1 = \dom(\pi_1)$である。
+  $\pi_0 \circ h \circ \pi_1 = f^{-1} \circ g \circ \pi_1 = f^{-1} \circ f \circ \pi_0 = \pi_0 = \pi_0 \circ x$である。
+
+  $\pi_1 \circ h \circ \pi_1 = \cod(\pi_1) \circ \pi_1 = \pi_1 \circ x$である。
+
+  普遍性より、$h \circ \pi_1 = x$である。
 }
 
 \begin{center}
   \begin{minipage}{0.5\linewidth}
     $\bm{C}$ \\
     \begin{tikzcd}[column sep=large, row sep=normal]
-      \dom(\pi_1) \ar[r, "\pi_1"] \ar[rr, "\dom(\pi_1)", dotted, bend left=30] & \cod(\pi_1) \ar[r, "h", dotted] \ar[rr, "\cod(\pi_1)", bend left=30] \ar[rd, "f^{-1} \circ g"'] & \dom(\pi_1) \ar[d, "\pi_0"] \ar[r, "\pi_1"] & \cod(\pi_1) \ar[d, "g"] \\
-      & & a \ar[r, "f"'] & b \\
+      x \ar[r, "\pi_1"] \ar[d, "\pi_0"] & \cod(\pi_1) \ar[r, "h", dotted] \ar[rr, "\cod(\pi_1)", bend left=30] \ar[d, "g"] & \dom(\pi_1) \ar[d, "\pi_0"] \ar[r, "\pi_1"] & \cod(\pi_1) \ar[d, "g"] \\
+      \phantom{a} \ar[r, "f"'] \ar[rr, "\cod(\pi_0)"', bend right=30] & \phantom{b} \ar[r, "f^{-1}"'] & \phantom{a} \ar[r, "f"'] & \phantom{b} \\
     \end{tikzcd}
   \end{minipage}
 \end{center}
@@ -1659,9 +1663,11 @@
 
   \lemref{核対の対角射}より、一意な射$\delta \colon \dom(f) \to x$が存在して、$\pi_0 \circ \delta = \dom(f) = \pi_1 \circ \delta$である。
 
-  $\pi_0 = \pi_1$より、$f \circ \pi_1 \circ x = f \circ \pi_1 = f \circ \pi_0 = f \circ \dom(f) \circ \pi_0 = f \circ \pi_0 \circ \delta \circ \pi_0$である。
+  $\pi_0 \circ \qty(\delta \circ \pi_0) = \dom(f) \circ \pi_0 = \pi_0 \circ x$である。
 
-  普遍性から$x = \delta \circ \pi_0$である。
+  $\pi_0 = \pi_1$より、$\pi_1 \circ \qty(\delta \circ \pi_0) = \pi_0 \circ x = \pi_1 \circ x$である。
+
+  普遍性より、$\delta \circ \pi_0 = x$である。
 
   したがって、$\pi_0$は同型射であり、同様に$\pi_1$は同型射である。
 
