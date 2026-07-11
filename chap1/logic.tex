@@ -121,8 +121,9 @@
 
 \cor{連言の冪等律}{
   命題$\phi$について、以下が成り立つ。
-  \eq*{
-    \phi \vdash \phi \land \phi
+  \eqa*{
+    \phi &\vdash \phi \land \phi \\*
+    \phi \land \phi &\vdash \phi
   }
 }
 
@@ -317,8 +318,9 @@
 
 \cor{連言の単位}{
   命題$\phi$について、以下が成り立つ。
-  \eq*{
-    \phi \vdash \top \land \phi
+  \eqa*{
+    \phi &\vdash \top \land \phi \\*
+    \top \land \phi &\vdash \phi
   }
 }
 
@@ -339,8 +341,9 @@
 
 \cor{選言の冪等}{
   命題$\phi$について、以下が成り立つ。
-  \eq*{
-    \phi \vdash \phi \lor \phi
+  \eqa*{
+    \phi &\vdash \phi \lor \phi \\*
+    \phi \lor \phi &\vdash \phi
   }
 }
 
@@ -368,25 +371,31 @@
 
 \cor{吸収律}{
   命題$\phi, \psi$について、以下が成り立つ。
-  \eqg*{
-    \vdash \phi \lor \qty(\phi \land \psi) \leftrightarrow \phi \\*
-    \vdash \phi \land \qty(\phi \lor \psi) \leftrightarrow \phi
+  \eqa*{
+    \phi \lor \qty(\phi \land \psi) &\vdash \phi \\*
+    \phi &\vdash \phi \lor \qty(\phi \land \psi) \\*
+    \phi \land \qty(\phi \lor \psi) &\vdash \phi \\*
+    \phi &\vdash \phi \land \qty(\phi \lor \psi)
   }
 }
 
 \cor{分配律}{
   命題$\phi, \psi, \chi$について、以下が成り立つ。
-  \eqg*{
-    \vdash \phi \lor \qty(\psi \land \chi) \leftrightarrow \qty(\phi \lor \psi) \land \qty(\phi \lor \chi) \\*
-    \vdash \phi \land \qty(\psi \lor \chi) \leftrightarrow \qty(\phi \land \psi) \lor \qty(\phi \land \chi)
+  \eqa*{
+    \phi \lor \qty(\psi \land \chi) &\vdash \qty(\phi \lor \psi) \land \qty(\phi \lor \chi) \\*
+    \qty(\phi \lor \psi) \land \qty(\phi \lor \chi) &\vdash \phi \lor \qty(\psi \land \chi) \\*
+    \phi \land \qty(\psi \lor \chi) &\vdash \qty(\phi \land \psi) \lor \qty(\phi \land \chi) \\*
+    \qty(\phi \land \psi) \lor \qty(\phi \land \chi) &\vdash \phi \land \qty(\psi \lor \chi)
   }
 }
 
 \cor{De Morganの法則}{
   命題$\phi, \psi$について、以下が成り立つ。
-  \eqg*{
-    \vdash \lnot \phi \lor \lnot \psi \leftrightarrow \lnot \qty(\phi \land \psi) \\*
-    \vdash \lnot \phi \land \lnot \psi \leftrightarrow \lnot \qty(\phi \lor \psi)
+  \eqa*{
+    \lnot \phi \lor \lnot \psi &\vdash \lnot \qty(\phi \land \psi) \\*
+    \lnot \qty(\phi \land \psi) &\vdash \lnot \phi \lor \lnot \psi \\*
+    \lnot \phi \land \lnot \psi &\vdash \lnot \qty(\phi \lor \psi) \\*
+    \lnot \qty(\phi \lor \psi) &\vdash \lnot \phi \land \lnot \psi
   }
 }
 
@@ -516,8 +525,9 @@
 
 \cor{アルファ同値}{
   変項$x$、自由変項$y$を出現させない命題$\phi$について、以下が成り立つ。
-  \eq*{
-    \vdash \forall x \qty(\phi) \leftrightarrow \forall y \qty(\phi[x \coloneqq y])
+  \eqa*{
+    \forall x \qty(\phi) &\vdash \forall y \qty(\phi[x \coloneqq y]) \\*
+    \forall y \qty(\phi[x \coloneqq y]) &\vdash \forall x \qty(\phi)
   }
 }
 
@@ -544,23 +554,27 @@
 
 \cor{量化子と否定}{
   変項$x$、命題$\phi$について、以下が成り立つ。
-  \eqg*{
-    \vdash \forall x \qty(\lnot \phi) \leftrightarrow \lnot \exists x \qty(\phi) \\*
-    \vdash \lnot \forall x \qty(\phi) \leftrightarrow \exists x \qty(\lnot \phi)
+  \eqa*{
+    \forall x \qty(\lnot \phi) &\vdash \lnot \exists x \qty(\phi) \\*
+    \lnot \exists x \qty(\phi) &\vdash \forall x \qty(\lnot \phi) \\*
+    \lnot \forall x \qty(\phi) &\vdash \exists x \qty(\lnot \phi) \\*
+    \exists x \qty(\lnot \phi) &\vdash \lnot \forall x \qty(\phi)
   }
 }
 
 \cor{全称量化子と連言}{
   変項$x$、命題$\phi, \psi$について、以下が成り立つ。
-  \eq*{
-    \vdash \forall x \qty(\phi \land \psi) \leftrightarrow \forall x \qty(\phi) \land \forall x \qty(\psi)
+  \eqa*{
+    \forall x \qty(\phi \land \psi) &\vdash \forall x \qty(\phi) \land \forall x \qty(\psi) \\*
+    \forall x \qty(\phi) \land \forall x \qty(\psi) &\vdash \forall x \qty(\phi \land \psi)
   }
 }
 
 \cor{存在量化子と選言}{
   変項$x$、命題$\phi, \psi$について、以下が成り立つ。
-  \eq*{
-    \vdash \exists x \qty(\phi \lor \psi) \leftrightarrow \exists x \qty(\phi) \lor \exists x \qty(\psi)
+  \eqa*{
+    \exists x \qty(\phi \lor \psi) &\vdash \exists x \qty(\phi) \lor \exists x \qty(\psi) \\*
+    \exists x \qty(\phi) \lor \exists x \qty(\psi) &\vdash \exists x \qty(\phi \lor \psi)
   }
 }
 

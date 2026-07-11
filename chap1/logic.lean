@@ -951,13 +951,19 @@ theorem proof_contraposition :
 
 -- 連言への代入
 theorem substitution_iff :
-  φ land (φ iff ψ) vdash ψ
+  (φ land χ) land (φ iff ψ) vdash ψ land χ
 := by
-  apply modus_ponens
-  . exact elim_and1
+  apply intro_and
+  . apply modus_ponens
+    . calc
+      _ vdash φ land χ := elim_and1
+      _ vdash φ := elim_and1
+    . calc
+      _ vdash φ iff ψ := elim_and2
+      _ vdash φ imply ψ := elim_and1
   . calc
-    φ land (φ iff ψ) vdash φ iff ψ := elim_and2
-    _ vdash φ imply ψ := elim_and1
+    _ vdash φ land χ := elim_and1
+    _ vdash χ := elim_and2
 
 -- 含意の前件への代入
 theorem substitution_iff_to_imply1 :
@@ -1089,8 +1095,13 @@ theorem elim_or0 :
 
 -- 選言の冪等律
 theorem lor_idempotence :
-  φ vdash φ lor φ
-:= intro_or1
+  Equiv φ (φ lor φ)
+:= by
+  constructor
+  . exact intro_or1
+  . apply elim_or0
+    . exact ax
+    . exact ax
 
 -- 選言の結合律
 theorem lor_associative1 :
