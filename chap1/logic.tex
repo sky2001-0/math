@@ -2,8 +2,6 @@
 
 本節では、命題と呼ばれる対象と、それらの間の推論関係 $\vdash$ を公理的に扱う。
 
-本節の各系の証明は、添付のLeanファイル\nolinkurl{math/1/logic.lean}を参照されたい。
-
 \rem{古典論理}{
   本ノートでは、古典論理のみを扱う。
 }
@@ -489,6 +487,7 @@
     \item 命題が$\forall y \qty(\phi)$の形をとるとき、
     \begin{itemize}
       \item $x$が$y$であるとき、$\forall y \qty(\phi)$である。
+      \item 命題$\phi$が$x$を自由変項として出現させないとき、$\forall y \qty(\phi)$である。
       \item 項$t$が$y$を自由変項として出現させないとき、$\forall y \qty(\phi[x \coloneqq t])$である。
       \item いずれでもないとき、$t, \phi$に出現しない$x$とは異なる新しい変項$z$を持ってきて、$\forall z \qty(\phi[y \coloneqq z][x \coloneqq t])$である。
     \end{itemize}

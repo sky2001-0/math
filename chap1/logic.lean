@@ -3,8 +3,6 @@ import Mathlib.Data.Finset.Basic
 import Mathlib.Data.Finset.Union
 import Mathlib.Data.Finset.Lattice.Fold
 
-set_option autoImplicit false
-
 -- # 一階述語論理
 
 namespace FirstOrderLogic
@@ -13,9 +11,9 @@ namespace FirstOrderLogic
 
 -- 非論理記号の型
 structure Signature where
-  Func      : Type
+  Func : Type
   FuncArity : Func -> Nat
-  Pred      : Type
+  Pred : Type
   PredArity : Pred -> Nat
 
 variable {S : Signature}
@@ -506,25 +504,25 @@ end Formula
 
 -- 推論規則
 inductive Derive : Formula S -> Formula S -> Prop
-| ax {φ} :
+| ax {φ: Formula S} :
   Derive φ φ
-| cut {φ ψ χ} :
+| cut {φ ψ χ: Formula S} :
   Derive φ ψ -> Derive ψ χ -> Derive φ χ
-| intro_and {φ ψ χ} :
+| intro_and {φ ψ χ: Formula S} :
   Derive φ ψ -> Derive φ χ -> Derive φ (Formula.land ψ χ)
-| elim_and1 {φ ψ} :
+| elim_and1 {φ ψ: Formula S} :
   Derive (Formula.land φ ψ) φ
-| elim_and2 {φ ψ} :
+| elim_and2 {φ ψ: Formula S} :
   Derive (Formula.land φ ψ) ψ
-| intro_imp {φ ψ χ} :
+| intro_imp {φ ψ χ: Formula S} :
   Derive (Formula.land φ ψ) χ -> Derive φ (Formula.imply ψ χ)
-| elim_imp {φ ψ} :
+| elim_imp {φ ψ: Formula S} :
   Derive (Formula.land φ (Formula.imply φ ψ)) ψ
-| dne {φ} :
+| dne {φ: Formula S} :
   Derive (Formula.imply (Formula.imply φ Formula.bot) Formula.bot) φ
-| intro_forall {φ ψ} {x : Variable} :
+| intro_forall {φ ψ: Formula S} {x : Variable} :
   (x ∉ Formula.free_vars φ) -> Derive φ ψ -> Derive φ (Formula.lforall x ψ)
-| elim_forall {φ} {x : Variable} {t : Term S} :
+| elim_forall {φ: Formula S} {x : Variable} {t : Term S} :
   -- tの自由変数でありφの束縛変数であるものは、置換できれいにする。
   Derive (Formula.lforall x φ) (Formula.substitute x t φ)
 

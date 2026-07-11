@@ -1,8 +1,8 @@
 $TargetFiles = @(
-    "1\logic.tex",
-    "2\category.tex",
-    "2\set.tex",
-    "2\map.tex"
+    "chap1\logic.tex",
+    "chap2\category.tex",
+    "chap2\set.tex",
+    "chap2\map.tex"
 )
 
 $counter = 1

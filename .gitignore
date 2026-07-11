@@ -1,7 +1,14 @@
-latex-output
-!main.pdf
+latex-output/*
+!latex-output/main.pdf
 
 99*
 
 .DS_Store
 .vscode
+
+.lake/
+
+txt_convert/*
+!txt_convert/convert.ps1
+!txt_convert/検証プロンプト.md
+/.lake

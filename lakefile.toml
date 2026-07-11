@@ -1,0 +1,19 @@
+name = "math"
+version = "0.1.0"
+defaultTargets = ["math"]
+
+[leanOptions]
+autoImplicit = false
+linter.unusedVariables = true
+linter.unusedSectionVars = true
+linter.unreachableTactic = true
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.31.0"
+
+[[lean_lib]]
+name = "math"
+srcDir = "."
+roots = ["chap1.logic"]
