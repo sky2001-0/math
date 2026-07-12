@@ -306,6 +306,48 @@ namespace Formula
           exact ih h0'.1
         simp [rename, free_vars, w_eq_y, h0_φz, h0'.2]
 
+  lemma rename_same :
+    x ∉ free_vars φ
+    -> rename x y φ = φ
+  := by
+    intro h0
+    induction φ with
+    | bot => simp [rename]
+    | land φ ψ ihφ ihψ =>
+      have h0_split : x ∉ free_vars φ ∧ x ∉ free_vars ψ := by
+        simpa [free_vars, not_or] using h0
+      simp [rename, ihφ h0_split.1, ihψ h0_split.2]
+    | imply φ ψ ihφ ihψ =>
+      have h0_split : x ∉ free_vars φ ∧ x ∉ free_vars ψ := by
+        simpa [free_vars, not_or] using h0
+      simp [rename, ihφ h0_split.1, ihψ h0_split.2]
+    | pred p args =>
+      have hargs : ∀ i, x ∉ Term.vars (args i) := by
+        intro i x_mem
+        apply h0
+        simpa [free_vars] using (VarSet.mem_replace (f := fun i => Term.vars (args i))).2 ⟨i, x_mem⟩
+      simp [rename, Term.subst_same, hargs]
+    | lforall z φ ih =>
+      by_cases z_eq_x : z = x
+      . simp [rename, z_eq_x]
+      . have h0_φ : x ∉ free_vars φ := by
+          have x_neq_z : x ≠ z := by simpa [eq_comm] using z_eq_x
+          simpa [free_vars, x_neq_z] using h0
+        simp [rename, z_eq_x, ih h0_φ]
+
+  lemma rename_clean :
+    x ≠ y
+    -> x ∉ free_vars (rename x y φ)
+  := by
+    intro x_neq_y
+    induction φ with
+    | bot => simp [rename, free_vars]
+    | land φ ψ ihφ ihψ => simp [rename, free_vars, ihφ, ihψ]
+    | imply φ ψ ihφ ihψ => simp [rename, free_vars, ihφ, ihψ]
+    | pred p args => simp [rename, free_vars, Term.subst_clean, x_neq_y]
+    | lforall z φ ih =>
+      by_cases z_eq_x : z = x <;> simp [rename, free_vars, z_eq_x, ih]
+
   -- 命題内の変数への項の代入
   def substitute (x : Variable) (t : Term S) : Formula S → Formula S
   | .bot => bot
@@ -327,6 +369,39 @@ namespace Formula
   decreasing_by
     all_goals
       simp [size, size_rename] <;> omega
+
+  lemma rename_eq_substitute :
+    y ∉ all_vars φ
+    -> rename x y φ = substitute x (Term.var y) φ
+  := by
+    intro h0
+    induction φ with
+    | bot => simp [rename, substitute]
+    | land φ ψ ihφ ihψ =>
+      have h0_split : y ∉ all_vars φ ∧ y ∉ all_vars ψ := by
+        simpa [all_vars, free_vars, bound_vars, not_or, and_assoc, and_left_comm, and_comm] using h0
+      simp [rename, substitute, ihφ h0_split.1, ihψ h0_split.2]
+    | imply φ ψ ihφ ihψ =>
+      have h0_split : y ∉ all_vars φ ∧ y ∉ all_vars ψ := by
+        simpa [all_vars, free_vars, bound_vars, not_or, and_assoc, and_left_comm, and_comm] using h0
+      simp [rename, substitute, ihφ h0_split.1, ihψ h0_split.2]
+    | pred p args => simp [rename, substitute]
+    | lforall z φ ih =>
+      have y_neq_z : y ≠ z := by
+        show y = z -> False
+        intro y_eq_z
+        exact h0 (by simp [all_vars, bound_vars, y_eq_z])
+      have h0_φ : y ∉ all_vars φ := by
+        simpa [all_vars, free_vars, bound_vars, y_neq_z, eq_comm] using h0
+      by_cases z_eq_x : z = x
+      . simp [rename, substitute, z_eq_x]
+      . by_cases x_free : x ∈ free_vars φ
+        . have z_notin_y : z ∉ Term.vars (Term.var (S:=S) y) := by
+            simp [Term.vars, eq_comm, y_neq_z]
+          have x_neq_z : x ≠ z := by simpa [eq_comm] using z_eq_x
+          simp [rename, substitute, z_eq_x, x_neq_z, x_free, z_notin_y, ih h0_φ]
+        . have x_neq_z : x ≠ z := by simpa [eq_comm] using z_eq_x
+          simp [rename, substitute, z_eq_x, x_neq_z, x_free, rename_same x_free]
 
   lemma subst_self :
     substitute x (Term.var x) φ = φ
@@ -538,20 +613,20 @@ namespace Formula
   open Derive
 
   lemma subst_double :
-    y ∉ all_vars φ
+    y ∉ free_vars φ
     -> Equiv (substitute y (Term.var x) (substitute x (Term.var y) φ)) φ
   := by
     intro h0
     have hmain :
-      ∀ n : Nat, ∀ φ : Formula S,
+      ∀ n : Nat, ∀ x y : Variable, ∀ φ : Formula S,
       size φ = n ->
-      y ∉ all_vars φ ->
+      y ∉ free_vars φ ->
       Equiv (substitute y (Term.var x) (substitute x (Term.var y) φ)) φ
     := by
       intro n
       induction n using Nat.strong_induction_on with
       | h n ih =>
-        intro φ hsize h0
+        intro x y φ hsize h0
         cases φ with
         | bot =>
           constructor <;> simpa [substitute] using ax
@@ -561,22 +636,14 @@ namespace Formula
           have h0_split :
             y ∉ Formula.free_vars φ
             ∧ y ∉ Formula.free_vars ψ
-            ∧ y ∉ Formula.bound_vars φ
-            ∧ y ∉ Formula.bound_vars ψ
           := by
-            simpa [all_vars, free_vars, bound_vars, not_or] using h0
+            simpa [free_vars, not_or] using h0
           let φ_new := substitute y (Term.var x) (substitute x (Term.var y) φ)
           let ψ_new := substitute y (Term.var x) (substitute x (Term.var y) ψ)
           have ihφ : Equiv φ_new φ := by
-            have h0_φ : y ∉ all_vars φ := by
-              obtain ⟨h0_φf, _, h0_φb, _⟩ := h0_split
-              simp [all_vars, h0_φf, h0_φb]
-            simpa [φ_new] using (ih (size φ) (by omega) φ rfl h0_φ)
+            simpa [φ_new] using (ih (size φ) (by omega) x y φ rfl h0_split.1)
           have ihψ : Equiv ψ_new ψ := by
-            have h0_ψ : y ∉ all_vars ψ := by
-              obtain ⟨_, h0_ψf, _, h0_ψb⟩ := h0_split
-              simp [all_vars, h0_ψf, h0_ψb]
-            simpa [ψ_new] using (ih (size ψ) (by omega) ψ rfl h0_ψ)
+            simpa [ψ_new] using (ih (size ψ) (by omega) x y ψ rfl h0_split.2)
           constructor
           . have ih : Derive (land φ_new ψ_new) (land φ ψ) := by
               apply intro_and
@@ -602,22 +669,14 @@ namespace Formula
           have h0_split :
             y ∉ Formula.free_vars φ
             ∧ y ∉ Formula.free_vars ψ
-            ∧ y ∉ Formula.bound_vars φ
-            ∧ y ∉ Formula.bound_vars ψ
           := by
-            simpa [all_vars, free_vars, bound_vars, not_or] using h0
+            simpa [free_vars, not_or] using h0
           let φ_new := substitute y (Term.var x) (substitute x (Term.var y) φ)
           let ψ_new := substitute y (Term.var x) (substitute x (Term.var y) ψ)
           have ihφ : Equiv φ_new φ := by
-            have h0_φ : y ∉ all_vars φ := by
-              obtain ⟨h0_φf, _, h0_φb, _⟩ := h0_split
-              simp [all_vars, h0_φf, h0_φb]
-            simpa [φ_new] using (ih (size φ) (by omega) φ rfl h0_φ)
+            simpa [φ_new] using (ih (size φ) (by omega) x y φ rfl h0_split.1)
           have ihψ : Equiv ψ_new ψ := by
-            have h0_ψ : y ∉ all_vars ψ := by
-              obtain ⟨_, h0_ψf, _, h0_ψb⟩ := h0_split
-              simp [all_vars, h0_ψf, h0_ψb]
-            simpa [ψ_new] using (ih (size ψ) (by omega) ψ rfl h0_ψ)
+            simpa [ψ_new] using (ih (size ψ) (by omega) x y ψ rfl h0_split.2)
           constructor
           . have ih : Derive (imply φ_new ψ_new) (imply φ ψ) := by
               have : Derive (land (imply φ_new ψ_new) φ) ψ := by
@@ -650,75 +709,137 @@ namespace Formula
             intro i
             show y ∈ Term.vars (args i) -> False
             intro h0_i
-            have h0_false : y ∈ all_vars (pred p args) := by
-              simp [all_vars, free_vars, bound_vars]
+            have h0_false : y ∈ free_vars (pred p args) := by
+              simp [free_vars]
               exact ⟨i, h0_i⟩
             exact h0 h0_false
           constructor <;> simpa [substitute, hargs, Term.subst_double] using ax
         | lforall z φ =>
           have hsize': size φ + 1 = n := by
             simpa [size] using hsize
-          have y_neq_z : y ≠ z := by
-            show y = z -> False
-            intro y_eq_z
-            have h0_false : y ∈ all_vars (lforall z φ) := by
-              simp [all_vars, bound_vars, y_eq_z]
-            exact h0 h0_false
-          have y_nfree : y ∉ free_vars φ := by
-            show y ∈ free_vars φ -> False
-            intro y_free
-            have h0_false : y ∈ all_vars (lforall z φ) := by
-              simp [all_vars, free_vars, y_free, y_neq_z]
-            exact h0 h0_false
-          have y_nbound : y ∉ bound_vars φ := by
-            show y ∈ bound_vars φ -> False
-            intro y_bound
-            have h0_false : y ∈ all_vars (lforall z φ) := by
-              simp [all_vars, bound_vars, y_bound, y_neq_z]
-            exact h0 h0_false
-          have h0_φ : y ∉ all_vars φ := by
-            simp [all_vars, y_nfree, y_nbound]
-          by_cases x_eq_z : x = z
-          · have is_same :
-              (substitute y (Term.var x) (substitute x (Term.var y) (lforall z φ))) = (lforall z φ)
-            := by
-              simp [substitute, x_eq_z, y_nfree]
-            constructor <;> simpa [is_same] using ax
-          · by_cases x_free : x ∈ free_vars φ
-            · let φ_new := substitute y (Term.var x) (substitute x (Term.var y) φ)
-              have ihφ : Equiv φ_new φ := by
-                simpa [φ_new] using (ih (size φ) (by omega) φ rfl h0_φ)
-              have z_notin_y : z ∉ Term.vars (Term.var (S:=S) y) := by
-                simp [Term.vars, eq_comm, y_neq_z]
-              have z_notin_x : z ∉ Term.vars (Term.var (S:=S) x) := by
-                simp [Term.vars, eq_comm, x_eq_z]
-              have hy_new : y ∈ free_vars (substitute x (Term.var y) φ) := by
-                exact Formula.subst_new x_free
-              constructor
-              . have ih : Derive (lforall z φ_new) (lforall z φ) := by
-                  have h0_z : z ∉ free_vars (lforall z φ_new) := by
-                    simp [free_vars]
-                  have ih_φ : Derive (lforall z φ_new) φ := by
+          by_cases y_eq_z : y = z
+          · subst z
+            by_cases x_eq_y : x = y
+            · constructor <;> simpa [substitute, x_eq_y] using ax
+            · by_cases x_free : x ∈ free_vars φ
+              · let w := VarSet.fresh (Term.vars (Term.var (S:=S) y) ∪ all_vars φ ∪ {x})
+                let φ_r := rename y w φ
+                let φ_new := substitute y (Term.var x) (substitute x (Term.var y) φ_r)
+                have y_neq_w : y ≠ w := by
+                  exact VarSet.fresh_not_mem (by simp [Term.vars])
+                have w_neq_y : w ≠ y := by simpa [eq_comm] using y_neq_w
+                have x_neq_w : x ≠ w := by
+                  exact VarSet.fresh_not_mem (by simp [Term.vars])
+                have w_neq_x : w ≠ x := by simpa [eq_comm] using x_neq_w
+                have w_nall_φ : w ∉ all_vars φ := by
+                  show w ∈ all_vars φ -> False
+                  intro w_mem
+                  have hmem : w ∈ Term.vars (Term.var (S:=S) y) ∪ all_vars φ ∪ {x} := by
+                    simp [w_mem]
+                  exact (VarSet.fresh_not_mem hmem) (by simp [w])
+                have w_nfree_φ : w ∉ free_vars φ := by
+                  intro w_mem
+                  exact w_nall_φ (by simp [all_vars, w_mem])
+                have y_nfree_φr : y ∉ free_vars φ_r := by
+                  exact rename_clean y_neq_w
+                have x_free_φr : x ∈ free_vars φ_r := by
+                  exact rename_preserve x_free x_eq_y
+                have y_free_after : y ∈ free_vars (substitute x (Term.var y) φ_r) := by
+                  exact subst_new x_free_φr
+                have ihφr : Equiv φ_new φ_r := by
+                  simpa [φ_new] using
+                    (ih (size φ_r) (by simp [φ_r, size_rename]; omega) x y φ_r rfl y_nfree_φr)
+                have lift_ih : Equiv (lforall w φ_new) (lforall w φ_r) := by
+                  constructor
+                  · apply intro_forall (by simp [free_vars])
                     calc
-                      Derive (lforall z φ_new) (substitute z (Term.var z) φ_new) := elim_forall
-                      Derive _ φ_new := by simpa [subst_self] using ax
+                      Derive (lforall w φ_new) φ_new := by
+                        simpa [subst_self] using (elim_forall (S:=S) (x:=w) (t:=Term.var w) (φ:=φ_new))
+                      Derive _ φ_r := ihφr.1
+                  · apply intro_forall (by simp [free_vars])
+                    calc
+                      Derive (lforall w φ_r) φ_r := by
+                        simpa [subst_self] using (elim_forall (S:=S) (x:=w) (t:=Term.var w) (φ:=φ_r))
+                      Derive _ φ_new := ihφr.2
+                have rename_as_subst : φ_r = substitute y (Term.var w) φ := by
+                  exact rename_eq_substitute w_nall_φ
+                have roundtrip :
+                    Equiv (substitute w (Term.var y) (substitute y (Term.var w) φ)) φ := by
+                  exact ih (size φ) (by omega) y w φ rfl w_nfree_φ
+                have alpha_inner : Equiv (lforall w φ_r) (lforall y φ) := by
+                  constructor
+                  · apply intro_forall
+                      (by simp [free_vars, y_nfree_φr, y_neq_w])
+                    calc
+                      Derive (lforall w φ_r) (substitute w (Term.var y) φ_r) := elim_forall
+                      Derive _ φ := by
+                        simpa [rename_as_subst] using roundtrip.1
+                  · apply intro_forall
+                      (by simp [free_vars, w_nfree_φ, w_neq_y])
+                    calc
+                      Derive (lforall y φ) (substitute y (Term.var w) φ) := elim_forall
+                      Derive _ φ_r := by simpa [rename_as_subst] using ax
+                have first_subst :
+                    substitute x (Term.var y) (lforall y φ) =
+                      lforall w (substitute x (Term.var y) φ_r) := by
+                  simp [substitute, x_eq_y, x_free, Term.vars, w, φ_r]
+                have second_subst :
+                    substitute y (Term.var x) (lforall w (substitute x (Term.var y) φ_r)) =
+                      lforall w φ_new := by
+                  simp [substitute, y_neq_w, y_free_after, w_neq_x, φ_new, Term.vars]
+                have normal_form :
+                    substitute y (Term.var x) (substitute x (Term.var y) (lforall y φ)) =
+                      lforall w φ_new := by
+                  rw [first_subst, second_subst]
+                constructor
+                · calc
+                    Derive
+                      (substitute y (Term.var x) (substitute x (Term.var y) (lforall y φ)))
+                      (lforall w φ_new) := by
+                          simpa only [normal_form] using (ax : Derive (lforall w φ_new) (lforall w φ_new))
+                    Derive _ (lforall w φ_r) := lift_ih.1
+                    Derive _ (lforall y φ) := alpha_inner.1
+                · calc
+                    Derive (lforall y φ) (lforall w φ_r) := alpha_inner.2
+                    Derive _ (lforall w φ_new) := lift_ih.2
+                    Derive _ (substitute y (Term.var x) (substitute x (Term.var y) (lforall y φ))) := by
+                      simpa only [normal_form] using (ax : Derive (lforall w φ_new) (lforall w φ_new))
+              · constructor <;> simpa [substitute, x_eq_y, x_free] using ax
+          · have y_nfree : y ∉ free_vars φ := by
+              simpa [free_vars, y_eq_z] using h0
+            by_cases x_eq_z : x = z
+            · have is_same :
+                  substitute y (Term.var x) (substitute x (Term.var y) (lforall z φ)) = lforall z φ := by
+                  simp [substitute, x_eq_z, y_nfree]
+              constructor <;> simpa [is_same] using ax
+            · by_cases x_free : x ∈ free_vars φ
+              · let φ_new := substitute y (Term.var x) (substitute x (Term.var y) φ)
+                have ihφ : Equiv φ_new φ := by
+                  simpa [φ_new] using (ih (size φ) (by omega) x y φ rfl y_nfree)
+                have z_notin_y : z ∉ Term.vars (Term.var (S:=S) y) := by
+                  simp [Term.vars, eq_comm, y_eq_z]
+                have z_notin_x : z ∉ Term.vars (Term.var (S:=S) x) := by
+                  simp [Term.vars, eq_comm, x_eq_z]
+                have hy_new : y ∈ free_vars (substitute x (Term.var y) φ) := subst_new x_free
+                constructor
+                · have ih_all : Derive (lforall z φ_new) (lforall z φ) := by
+                    apply intro_forall (by simp [free_vars])
+                    calc
+                      Derive (lforall z φ_new) φ_new := by
+                        simpa [subst_self] using (elim_forall (S:=S) (x:=z) (t:=Term.var z) (φ:=φ_new))
                       Derive _ φ := ihφ.1
-                  exact intro_forall h0_z ih_φ
-                simpa [substitute, φ_new, x_eq_z, x_free, y_neq_z, z_notin_y, z_notin_x, hy_new] using ih
-              . have ih : Derive (lforall z φ) (lforall z φ_new) := by
-                  have h0_z : z ∉ free_vars (lforall z φ) := by
-                    simp [free_vars]
-                  have ih_φ : Derive (lforall z φ) φ_new := by
+                  simpa [substitute, φ_new, x_eq_z, x_free, y_eq_z, z_notin_y, z_notin_x, hy_new] using ih_all
+                · have ih_all : Derive (lforall z φ) (lforall z φ_new) := by
+                    apply intro_forall (by simp [free_vars])
                     calc
-                      Derive (lforall z φ) (substitute z (Term.var z) φ) := elim_forall
-                      Derive _ φ := by simpa [subst_self] using ax
+                      Derive (lforall z φ) φ := by
+                        simpa [subst_self] using (elim_forall (S:=S) (x:=z) (t:=Term.var z) (φ:=φ))
                       Derive _ φ_new := ihφ.2
-                  exact intro_forall h0_z ih_φ
-                simpa [substitute, φ_new, x_eq_z, x_free, y_neq_z, z_notin_y, z_notin_x, hy_new] using ih
-            · constructor <;>
-                simpa [substitute, x_eq_z, x_free, y_nfree, y_neq_z] using ax
+                  simpa [substitute, φ_new, x_eq_z, x_free, y_eq_z, z_notin_y, z_notin_x, hy_new] using ih_all
+              · constructor <;>
+                  simpa [substitute, x_eq_z, x_free, y_nfree, y_eq_z] using ax
 
-    exact hmain (size φ) φ rfl h0
+    exact hmain (size φ) x y φ rfl h0
 
 end Formula
 
@@ -1380,16 +1501,14 @@ theorem forall_monotone :
 
 -- アルファ同値の導出
 theorem alpha_equivalence:
-  y ∉ Formula.all_vars φ
+  y ∉ Formula.free_vars φ
   -> Equiv (lforall x, φ) (lforall y, Formula.substitute x (Term.var y) φ)
 := by
   intro h0
-  have h0_split : y ∉ Formula.free_vars φ ∧ y ∉ Formula.bound_vars φ := by
-    simpa [Formula.all_vars, not_or] using h0
   let φ_y := Formula.substitute x (Term.var y) φ
   constructor
   . have h0_1 : y ∉ Formula.free_vars (lforall x, φ) := by
-      simp [Formula.free_vars, h0_split]
+      simp [Formula.free_vars, h0]
     have allφ_derives_φy : (lforall x, φ) vdash φ_y := by
       exact elim_forall
     exact intro_forall h0_1 allφ_derives_φy
