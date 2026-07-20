@@ -11,10 +11,8 @@ namespace FirstOrderLogic
 
 -- 非論理記号の型
 structure Signature where
-  Func : Type
-  FuncArity : Func -> Nat
-  Pred : Type
-  PredArity : Pred -> Nat
+  Func : Nat -> Type
+  Pred : Nat -> Type
 
 variable {S : Signature}
 
@@ -53,7 +51,7 @@ end VarSet
 -- 項の型
 inductive Term (S : Signature) : Type
 | var  : Variable -> Term S
-| func : (f : S.Func) -> (Fin (S.FuncArity f) -> Term S) -> Term S
+| func : {n : Nat} -> (f : S.Func n) -> (Fin n -> Term S) -> Term S
 
 namespace Term
 
@@ -156,7 +154,7 @@ inductive Formula (S : Signature) : Type
 | bot     : Formula S
 | land    : Formula S -> Formula S -> Formula S
 | imply   : Formula S -> Formula S -> Formula S
-| pred    : (p : S.Pred) -> (Fin (S.PredArity p) -> Term S) -> Formula S
+| pred    : {n : Nat} -> (p : S.Pred n) -> (Fin n -> Term S) -> Formula S
 | lforall : Variable -> Formula S -> Formula S
 
 namespace Formula
@@ -299,8 +297,7 @@ namespace Formula
     | land φ1 φ2 ihφ1 ihφ2 => simp [rename, free_vars, ihφ1, ihφ2]
     | imply φ1 φ2 ihφ1 ihφ2 => simp [rename, free_vars, ihφ1, ihφ2]
     | pred p args => simp [rename, free_vars, Term.subst_clean, x_neq_y]
-    | lforall z ψ ih =>
-      by_cases z_eq_x : z = x <;> simp [rename, free_vars, z_eq_x, ih]
+    | lforall z ψ ih => by_cases z_eq_x : z = x <;> simp [rename, free_vars, z_eq_x, ih]
 
   lemma rename_cancel
     {x y : Variable} {φ : Formula S}
@@ -510,35 +507,40 @@ namespace Formula
 
 end Formula
 
+abbrev ClosedFormula (S : Signature) := { φ : Formula S // Formula.free_vars φ = ∅ }
+abbrev Axioms (S : Signature) := Set (ClosedFormula S)
+variable {A : Axioms S}
+
 -- ## 古典論理の推論規則
 
 -- 推論規則
-inductive Derive : Formula S -> Formula S -> Prop
-| ax {φ: Formula S} :
-  Derive φ φ
+inductive Derive (A : Axioms S) : Formula S -> Formula S -> Prop
+| hyp {φ: Formula S} :
+  Derive A φ φ
 | cut {φ ψ χ: Formula S} :
-  Derive φ ψ -> Derive ψ χ -> Derive φ χ
+  Derive A φ ψ -> Derive A ψ χ -> Derive A φ χ
 | intro_and {φ ψ χ: Formula S} :
-  Derive φ ψ -> Derive φ χ -> Derive φ (Formula.land ψ χ)
+  Derive A φ ψ -> Derive A φ χ -> Derive A φ (Formula.land ψ χ)
 | elim_and1 {φ ψ: Formula S} :
-  Derive (Formula.land φ ψ) φ
+  Derive A (Formula.land φ ψ) φ
 | elim_and2 {φ ψ: Formula S} :
-  Derive (Formula.land φ ψ) ψ
+  Derive A (Formula.land φ ψ) ψ
 | intro_imp {φ ψ χ: Formula S} :
-  Derive (Formula.land φ ψ) χ -> Derive φ (Formula.imply ψ χ)
+  Derive A (Formula.land φ ψ) χ -> Derive A φ (Formula.imply ψ χ)
 | elim_imp {φ ψ: Formula S} :
-  Derive (Formula.land φ (Formula.imply φ ψ)) ψ
+  Derive A (Formula.land φ (Formula.imply φ ψ)) ψ
 | dne {φ: Formula S} :
-  Derive (Formula.imply (Formula.imply φ Formula.bot) Formula.bot) φ
+  Derive A (Formula.imply (Formula.imply φ Formula.bot) Formula.bot) φ
 | intro_forall {φ ψ: Formula S} {x : Variable} :
-  (x ∉ Formula.free_vars φ) -> Derive φ ψ -> Derive φ (Formula.lforall x ψ)
+  (x ∉ Formula.free_vars φ) -> Derive A φ ψ -> Derive A φ (Formula.lforall x ψ)
 | elim_forall {φ: Formula S} {x : Variable} {t : Term S} :
-  -- tの自由変数でありφの束縛変数であるものは、置換できれいにする。
-  Derive (Formula.lforall x φ) (Formula.substitute x t φ)
+  Derive A (Formula.lforall x φ) (Formula.substitute x t φ)
+| ax {φ : A} :
+  Derive A Formula.top φ
 
 -- Derive が推移律を満たすことを、Leanに教える。
-instance : Trans (Derive (S := S)) (Derive (S := S)) (Derive (S := S)) where
-  trans := Derive.cut (S := S)
+instance : Trans (Derive A) (Derive A) (Derive A) where
+  trans := Derive.cut (A:=A)
 
 namespace Derive
 
@@ -546,8 +548,8 @@ namespace Derive
 
   theorem land_mono
     {φ1 φ2 ψ1 ψ2 : Formula S }
-    (hφ : Derive φ1 φ2) (hψ : Derive ψ1 ψ2) :
-    Derive (land φ1 ψ1) (land φ2 ψ2)
+    (hφ : Derive A φ1 φ2) (hψ : Derive A ψ1 ψ2) :
+    Derive A (land φ1 ψ1) (land φ2 ψ2)
   := by
     apply intro_and
     . exact cut elim_and1 hφ
@@ -555,35 +557,35 @@ namespace Derive
 
   theorem imply_mono
     {φ1 φ2 ψ1 ψ2 : Formula S }
-    (hφ : Derive φ1 φ2) (hψ : Derive ψ1 ψ2) :
-    Derive (imply φ2 ψ1) (imply φ1 ψ2)
+    (hφ : Derive A φ1 φ2) (hψ : Derive A ψ1 ψ2) :
+    Derive A (imply φ2 ψ1) (imply φ1 ψ2)
   := by
     apply intro_imp
     calc
-      Derive (land (imply φ2 ψ1) φ1) (land φ2 (imply φ2 ψ1)) := by
+      Derive A (land (imply φ2 ψ1) φ1) (land φ2 (imply φ2 ψ1)) := by
         apply intro_and
         . exact cut elim_and2 hφ
         . exact elim_and1
-      Derive _ ψ1 := elim_imp
-      Derive _ ψ2 := hψ
+      Derive A _ ψ1 := elim_imp
+      Derive A _ ψ2 := hψ
 
   theorem lforall_mono
     {x : Variable} {φ ψ : Formula S}
-    (h : Derive φ ψ) :
-    Derive (lforall x φ) (lforall x ψ)
+    (h : Derive A φ ψ) :
+    Derive A (lforall x φ) (lforall x ψ)
   := by
     have x_nin_FVxφ : x ∉ free_vars (lforall x φ) := by
       simp [free_vars]
     apply intro_forall x_nin_FVxφ
     calc
-      Derive (lforall x φ) (substitute x (Term.var x) φ) := elim_forall
-      Derive _ φ := by simpa [subst_self] using ax
-      Derive _ ψ := h
+      Derive A (lforall x φ) (substitute x (Term.var x) φ) := elim_forall
+      Derive A _ φ := by simpa [subst_self] using hyp
+      Derive A _ ψ := h
 
 end Derive
 
 -- 双方向推論
-def Equiv (φ ψ : Formula S) : Prop := And (Derive φ ψ) (Derive ψ φ)
+def Equiv (A : Axioms S) (φ ψ : Formula S) : Prop := And (Derive A φ ψ) (Derive A ψ φ)
 
 namespace Equiv
 
@@ -591,74 +593,74 @@ namespace Equiv
 
   lemma refl
     {φ : Formula S} :
-    Equiv φ φ
-  := ⟨.ax, .ax⟩
+    Equiv A φ φ
+  := ⟨.hyp, .hyp⟩
 
   lemma symm
     {φ ψ : Formula S}
-    (h : Equiv φ ψ) :
-    Equiv ψ φ
+    (h : Equiv A φ ψ) :
+    Equiv A ψ φ
   := And.intro h.2 h.1
 
   lemma trans
     {φ ψ χ : Formula S}
-    (h1 : Equiv φ ψ) (h2 : Equiv ψ χ) :
-    Equiv φ χ
+    (h1 : Equiv A φ ψ) (h2 : Equiv A ψ χ) :
+    Equiv A φ χ
   := And.intro (.cut h1.1 h2.1) (.cut h2.2 h1.2)
 
   lemma land_mono
     {φ1 φ2 ψ1 ψ2 : Formula S}
-    (hφ : Equiv φ1 φ2) (hψ : Equiv ψ1 ψ2) :
-    Equiv (land φ1 ψ1) (land φ2 ψ2)
+    (hφ : Equiv A φ1 φ2) (hψ : Equiv A ψ1 ψ2) :
+    Equiv A (land φ1 ψ1) (land φ2 ψ2)
   := by
-    exact ⟨Derive.land_mono hφ.1 hψ.1, Derive.land_mono hφ.2 hψ.2⟩
+    exact ⟨.land_mono hφ.1 hψ.1, .land_mono hφ.2 hψ.2⟩
 
   lemma imply_mono
     {φ1 φ2 ψ1 ψ2 : Formula S}
-    (hφ : Equiv φ1 φ2) (hψ : Equiv ψ1 ψ2) :
-    Equiv (imply φ1 ψ1) (imply φ2 ψ2)
+    (hφ : Equiv A φ1 φ2) (hψ : Equiv A ψ1 ψ2) :
+    Equiv A (imply φ1 ψ1) (imply φ2 ψ2)
   := by
-    exact ⟨Derive.imply_mono hφ.2 hψ.1, Derive.imply_mono hφ.1 hψ.2⟩
+    exact ⟨.imply_mono hφ.2 hψ.1, .imply_mono hφ.1 hψ.2⟩
 
   lemma lforall_mono
     {x : Variable} {φ ψ : Formula S}
-    (h : Equiv φ ψ) :
-    Equiv (Formula.lforall x φ) (Formula.lforall x ψ)
+    (h : Equiv A φ ψ) :
+    Equiv A (lforall x φ) (lforall x ψ)
   := by
-    exact ⟨Derive.lforall_mono h.1, Derive.lforall_mono h.2⟩
+    exact ⟨.lforall_mono h.1, .lforall_mono h.2⟩
 
   lemma lnot_mono
     {φ ψ : Formula S}
-    (h : Equiv φ ψ) :
-    Equiv (Formula.lnot φ) (Formula.lnot ψ)
+    (h : Equiv A φ ψ) :
+    Equiv A (lnot φ) (lnot ψ)
   := by
-    simpa [Formula.lnot] using imply_mono h Equiv.refl
+    simpa [lnot] using imply_mono h Equiv.refl
 
   lemma iff_mono
     {φ1 φ2 ψ1 ψ2 : Formula S}
-    (hφ : Equiv φ1 φ2) (hψ : Equiv ψ1 ψ2) :
-    Equiv (Formula.iff φ1 ψ1) (Formula.iff φ2 ψ2)
+    (hφ : Equiv A φ1 φ2) (hψ : Equiv A ψ1 ψ2) :
+    Equiv A (iff φ1 ψ1) (iff φ2 ψ2)
   := by
-    simpa [Formula.iff] using land_mono (imply_mono hφ hψ) (imply_mono hψ hφ)
+    simpa [iff] using land_mono (imply_mono hφ hψ) (imply_mono hψ hφ)
 
   lemma lor_mono
     {φ1 φ2 ψ1 ψ2 : Formula S}
-    (hφ : Equiv φ1 φ2) (hψ : Equiv ψ1 ψ2) :
-    Equiv (Formula.lor φ1 ψ1) (Formula.lor φ2 ψ2)
+    (hφ : Equiv A φ1 φ2) (hψ : Equiv A ψ1 ψ2) :
+    Equiv A (lor φ1 ψ1) (lor φ2 ψ2)
   := by
-    simpa [Formula.lor] using imply_mono (lnot_mono hφ) hψ
+    simpa [lor] using imply_mono (lnot_mono hφ) hψ
 
-  lemma lexists
+  lemma lexists_mono
     {x : Variable} {φ ψ : Formula S}
-    (h : Equiv φ ψ) :
-    Equiv (Formula.lexists x φ) (Formula.lexists x ψ)
+    (h : Equiv A φ ψ) :
+    Equiv A (lexists x φ) (lexists x ψ)
   := by
-    simpa [Formula.lexists] using lnot_mono (lforall_mono (lnot_mono h))
+    simpa [lexists] using lnot_mono (lforall_mono (lnot_mono h))
 
 end Equiv
 
 -- Equiv が推移律を満たすことを、Leanに教える。
-instance : Trans (Equiv (S := S)) (Equiv (S := S)) (Equiv (S := S)) where
+instance : Trans (Equiv A) (Equiv A) (Equiv A) where
   trans := Equiv.trans
 
 namespace Formula
@@ -668,13 +670,13 @@ namespace Formula
   lemma subst_cancel
     {x y : Variable} {φ : Formula S}
     (y_nin_FVφ : y ∉ free_vars φ) :
-    Equiv (substitute y (Term.var x) (substitute x (Term.var y) φ)) φ
+    Equiv A (substitute y (Term.var x) (substitute x (Term.var y) φ)) φ
   := by
     induction hsize : size φ using Nat.strong_induction_on generalizing φ x y with
     | h n ih =>
       cases φ with
       | bot =>
-        constructor <;> simpa [substitute] using ax
+        constructor <;> simpa [substitute] using hyp
       | land φ1 φ2 =>
         simp [size] at hsize
         simp [free_vars, not_or] at y_nin_FVφ
@@ -691,13 +693,13 @@ namespace Formula
         · exact ih (size φ2) (by omega) y_nin_FVφ.2 rfl
       | pred p args =>
         simp [free_vars] at y_nin_FVφ
-        simpa [substitute, y_nin_FVφ, Term.subst_cancel] using Equiv.refl
+        simpa [substitute, y_nin_FVφ, Term.subst_cancel] using Equiv.refl (A:=A)
       | lforall z ψ =>
         simp [size] at hsize
         simp [free_vars] at y_nin_FVφ
         by_cases x_eq_z : x = z
         · by_cases y_eq_x : y = x
-          . simpa [substitute, x_eq_z, y_eq_x] using Equiv.refl
+          . simpa [substitute, x_eq_z, y_eq_x] using Equiv.refl (A:=A)
           · have y_nin_FVψ : y ∉ free_vars ψ := by
               have y_neq_z : y ≠ z := by
                 simpa [x_eq_z] using y_eq_x
@@ -720,45 +722,45 @@ namespace Formula
                 simp
               let ψ_rename := rename z w ψ
               calc
-                Equiv _ (substitute z (Term.var x) (substitute x (Term.var z) (lforall z ψ))) := by
+                Equiv A _ (substitute z (Term.var x) (substitute x (Term.var z) (lforall z ψ))) := by
                   simpa [y_eq_z] using Equiv.refl
-                Equiv _ (substitute z (Term.var x) (lforall w (substitute x (Term.var z) ψ_rename))) := by
+                Equiv A _ (substitute z (Term.var x) (lforall w (substitute x (Term.var z) ψ_rename))) := by
                   simpa [substitute, x_eq_z, x_in_FVψ, Term.vars, w, ψ_rename] using Equiv.refl
-                Equiv _ (lforall w (substitute z (Term.var x) (substitute x (Term.var z) ψ_rename))) := by
+                Equiv A _ (lforall w (substitute z (Term.var x) (substitute x (Term.var z) ψ_rename))) := by
                   have z_in_new : z ∈ free_vars (substitute x (Term.var z) ψ_rename) := by
                     have x_in_FVψrename : x ∈ free_vars ψ_rename := by
                       exact rename_preserve x_in_FVψ x_eq_z
                     exact subst_new x_in_FVψrename
                   simpa [substitute, z_neq_w, z_in_new, Ne.symm x_neq_w, Term.vars] using Equiv.refl
-                Equiv _ (lforall w ψ_rename) := by
+                Equiv A _ (lforall w ψ_rename) := by
                   apply Equiv.lforall_mono
                   have z_nin_FVψ_rename : z ∉ free_vars ψ_rename := by
                     exact rename_clean z_neq_w
                   exact ih (size ψ_rename) (by simp [ψ_rename, rename_size]; omega) z_nin_FVψ_rename rfl
-                Equiv _ (lforall w (substitute z (Term.var w) ψ)) := by
+                Equiv A _ (lforall w (substitute z (Term.var w) ψ)) := by
                    simpa [rename_eq_substitute w_nin_ψ, ψ_rename] using Equiv.refl
-                Equiv _ (lforall z ψ) := by
+                Equiv A _ (lforall z ψ) := by
                   have w_nin_FVψ : w ∉ free_vars ψ := by
                     simp [all_vars] at w_nin_ψ
                     exact w_nin_ψ.1
                   constructor
                   . calc
-                      Derive _ (lforall z (substitute w (Term.var z) (substitute z (Term.var w) ψ))) := by
+                      Derive A _ (lforall z (substitute w (Term.var z) (substitute z (Term.var w) ψ))) := by
                         have z_nin_FVwψsub : z ∉ free_vars (lforall w (substitute z (Term.var w) ψ)) := by
                           have z_nin_FVψ_rename : z ∉ free_vars (substitute z (Term.var w) ψ) := by
                             exact subst_clean z_neq_w
                           simp [free_vars, z_nin_FVψ_rename]
                         exact intro_forall z_nin_FVwψsub elim_forall
-                      Derive _ _ := by
+                      Derive A _ _ := by
                         apply Derive.lforall_mono
-                        have ihψ : Equiv (substitute w (Term.var z) (substitute z (Term.var w) ψ)) ψ := by
+                        have ihψ : Equiv A (substitute w (Term.var z) (substitute z (Term.var w) ψ)) ψ := by
                           exact ih (size ψ) (by omega) (x := z) (y := w) w_nin_FVψ rfl
                         exact ihψ.1
                   . have w_nin_FVzψ : w ∉ free_vars (lforall z ψ) := by
                       simp [free_vars, w_nin_FVψ]
                     exact intro_forall w_nin_FVzψ elim_forall
             · have y_in_ψnew : y ∈ free_vars (substitute x (Term.var y) ψ) := subst_new x_in_FVψ
-              have ihψ : Equiv (substitute y (Term.var x) (substitute x (Term.var y) ψ)) ψ := by
+              have ihψ : Equiv A (substitute y (Term.var x) (substitute x (Term.var y) ψ)) ψ := by
                 have y_nin_FVψ : y ∉ free_vars ψ :=
                     mt y_nin_FVφ y_eq_z
                 exact ih (size ψ) (by omega) y_nin_FVψ rfl
@@ -769,11 +771,13 @@ namespace Formula
                 mt y_nin_FVφ y_eq_z
               simpa [substitute, x_eq_z, x_in_FVψ, y_eq_z, y_nin_FVψ] using Equiv.refl
 
--- end Formula
+end Formula
 
 -- ## 古典論理の重要な定理
 
--- -- Lean上の表記を簡潔にするために
+open Derive
+
+-- Lean上の表記を簡潔にするために
 notation "bot" => Formula.bot
 notation "top" => Formula.top
 prefix:58 "lnot" => Formula.lnot
@@ -783,73 +787,71 @@ infixr:55 " imply " => Formula.imply
 infixr:54 " iff " => Formula.iff
 notation:53 "lforall" x "," φ => Formula.lforall x φ
 notation:52 "lexists" x "," φ => Formula.lexists x φ
-notation:51 φ " vdash " ψ => Derive φ ψ
-
-open Derive
+notation:51 φ " vdash[" A "] " ψ => Derive A φ ψ
 
 -- Modus Ponens
 theorem modus_ponens
   {φ ψ χ : Formula S}
-  (h1 : φ vdash ψ) (h2 : φ vdash ψ imply χ) :
-  φ vdash χ
+  (h1 : φ vdash[A] ψ) (h2 : φ vdash[A] ψ imply χ) :
+  φ vdash[A] χ
 := by
   calc
-    φ vdash ψ land (ψ imply χ) := by
+    φ vdash[A] ψ land (ψ imply χ) := by
       apply intro_and
       . exact h1
       . exact h2
-    _ vdash χ := elim_imp
+    _ vdash[A] χ := elim_imp
 
 -- 弱化
 theorem weaken
   {φ ψ χ : Formula S}
-  (h : φ vdash ψ) :
-  φ land χ vdash ψ
+  (h : φ vdash[A] ψ) :
+  φ land χ vdash[A] ψ
 := by
   calc
-    φ land χ vdash φ := elim_and1
-    _ vdash ψ := h
+    φ land χ vdash[A] φ := elim_and1
+    _ vdash[A] ψ := h
 
 -- 連言の冪等律
 theorem land_idempotence
   {φ : Formula S} :
-  Equiv φ (φ land φ)
+  Equiv A φ (φ land φ)
 := by
   constructor
   . apply intro_and
-    . exact ax
-    . exact ax
+    . exact hyp
+    . exact hyp
   . exact elim_and1
 
 -- 連言の結合律
 theorem land_associative1
   {φ ψ χ : Formula S} :
-  Equiv ((φ land ψ) land χ) (φ land (ψ land χ))
+  Equiv A ((φ land ψ) land χ) (φ land (ψ land χ))
 := by
   constructor
   . apply intro_and
     . calc
-        (φ land ψ) land χ vdash φ land ψ := elim_and1
-        _ vdash φ := elim_and1
+        (φ land ψ) land χ vdash[A] φ land ψ := elim_and1
+        _ vdash[A] φ := elim_and1
     . apply intro_and
       . calc
-        (φ land ψ) land χ vdash φ land ψ := elim_and1
-        _ vdash ψ := elim_and2
+        (φ land ψ) land χ vdash[A] φ land ψ := elim_and1
+        _ vdash[A] ψ := elim_and2
       . exact elim_and2
   . apply intro_and
     . apply intro_and
       . exact elim_and1
       . calc
-        φ land (ψ land χ) vdash (ψ land χ) := elim_and2
-        _ vdash ψ := elim_and1
+        φ land (ψ land χ) vdash[A] (ψ land χ) := elim_and2
+        _ vdash[A] ψ := elim_and1
     . calc
-      φ land (ψ land χ) vdash (ψ land χ) := elim_and2
-      _ vdash χ := elim_and2
+      φ land (ψ land χ) vdash[A] (ψ land χ) := elim_and2
+      _ vdash[A] χ := elim_and2
 
 -- 連言の交換律
 theorem land_exchange
   {φ ψ : Formula S} :
-  (φ land ψ) vdash (ψ land φ)
+  (φ land ψ) vdash[A] (ψ land φ)
 := by
   apply intro_and
   . exact elim_and2
@@ -858,7 +860,7 @@ theorem land_exchange
 -- 仮言三段論法
 theorem hypothetical_syllogism
   {φ ψ χ : Formula S} :
-  ((φ imply ψ) land (ψ imply χ)) vdash (φ imply χ)
+  ((φ imply ψ) land (ψ imply χ)) vdash[A] (φ imply χ)
 := by
   apply intro_imp
   let Γ := ((φ imply ψ) land (ψ imply χ)) land φ
@@ -866,28 +868,28 @@ theorem hypothetical_syllogism
   . apply modus_ponens
     . exact elim_and2
     . calc
-      Γ vdash (φ imply ψ) land (ψ imply χ) := elim_and1
-      _ vdash φ imply ψ := elim_and1
+      Γ vdash[A] (φ imply ψ) land (ψ imply χ) := elim_and1
+      _ vdash[A] φ imply ψ := elim_and1
   . calc
-    Γ vdash (φ imply ψ) land (ψ imply χ) := elim_and1
-    _ vdash ψ imply χ := elim_and2
+    Γ vdash[A] (φ imply ψ) land (ψ imply χ) := elim_and1
+    _ vdash[A] ψ imply χ := elim_and2
 
 -- 逆演繹定理
 theorem converse_deduction
   {φ ψ χ : Formula S}
-  (h : φ vdash ψ imply χ) :
-  φ land ψ vdash χ
+  (h : φ vdash[A] ψ imply χ) :
+  φ land ψ vdash[A] χ
 := by
   apply modus_ponens
   . exact elim_and2
   . calc
-    _ vdash φ := elim_and1
-    _ vdash ψ imply χ := h
+    _ vdash[A] φ := elim_and1
+    _ vdash[A] ψ imply χ := h
 
 -- Lukasiewiczの第一公理
 theorem lukasiewicz
   {φ ψ : Formula S} :
-  φ vdash ψ imply φ
+  φ vdash[A] ψ imply φ
 := by
   exact intro_imp elim_and1
 
@@ -896,110 +898,110 @@ theorem lukasiewicz
 -- 否定の導入則
 theorem intro_not
   {φ ψ : Formula S}
-  (h : (φ land ψ) vdash bot) :
-  φ vdash lnot ψ
+  (h : (φ land ψ) vdash[A] bot) :
+  φ vdash[A] lnot ψ
 := by
   exact intro_imp h
 
 -- 否定の除去則
 theorem elim_not
   {φ : Formula S} :
-  φ land lnot φ vdash bot
+  φ land lnot φ vdash[A] bot
 := elim_imp
 
 -- 二重否定導入
 theorem intro_dn
   {φ : Formula S} :
-  φ vdash lnot lnot φ
+  φ vdash[A] lnot lnot φ
 := by
   exact intro_imp elim_not
 
 -- 爆発律
 theorem explosion
   {φ : Formula S} :
-  bot vdash φ
+  bot vdash[A] φ
 := by
   calc
-    bot vdash lnot lnot φ := intro_imp elim_and1
-    _ vdash _ := dne
+    bot vdash[A] lnot lnot φ := intro_imp elim_and1
+    _ vdash[A] _ := dne
 
 -- 否定含意からの前件の取り出し
 theorem not_imply_elim
   {φ ψ : Formula S} :
-  lnot (φ imply ψ) vdash φ
+  lnot (φ imply ψ) vdash[A] φ
 := by
   calc
-    lnot (φ imply ψ) vdash lnot lnot φ := by
+    lnot (φ imply ψ) vdash[A] lnot lnot φ := by
       apply intro_not
       let Γ := (lnot (φ imply ψ)) land (lnot φ)
       apply modus_ponens
       . apply intro_imp
         calc
-          Γ land φ vdash bot := by
+          Γ land φ vdash[A] bot := by
             apply modus_ponens
             . exact elim_and2
             . calc
-              Γ land φ vdash Γ := elim_and1
-              _ vdash lnot φ := elim_and2
-          _ vdash ψ := explosion
+              Γ land φ vdash[A] Γ := elim_and1
+              _ vdash[A] lnot φ := elim_and2
+          _ vdash[A] ψ := explosion
       . exact elim_and1
-    _ vdash φ := dne
+    _ vdash[A] φ := dne
 
 -- Pierce則
 theorem peirce
   {φ ψ : Formula S} :
-  (φ imply ψ) imply φ vdash φ
+  (φ imply ψ) imply φ vdash[A] φ
 := by
   calc
-    (φ imply ψ) imply φ vdash lnot lnot φ := by
+    (φ imply ψ) imply φ vdash[A] lnot lnot φ := by
       apply intro_imp
       let Γ := ((φ imply ψ) imply φ) land lnot φ
       apply modus_ponens
       . apply modus_ponens
         . calc
-            Γ vdash lnot φ := elim_and2
-            _ vdash φ imply ψ := by
+            Γ vdash[A] lnot φ := elim_and2
+            _ vdash[A] φ imply ψ := by
               apply intro_imp
               calc
-                _ vdash φ land lnot φ := land_exchange
-                _ vdash bot := elim_not
-                _ vdash ψ := explosion
+                _ vdash[A] φ land lnot φ := land_exchange
+                _ vdash[A] bot := elim_not
+                _ vdash[A] ψ := explosion
         . exact elim_and1
       . exact elim_and2
-    _ vdash _ := dne
+    _ vdash[A] _ := dne
 
 -- 背理法
 theorem proof_contradiction
   {φ ψ : Formula S}
-  (h : φ land lnot ψ vdash bot) :
-  φ vdash ψ
+  (h : φ land lnot ψ vdash[A] bot) :
+  φ vdash[A] ψ
 := by
   calc
-    φ vdash lnot lnot ψ := intro_imp h
-    _ vdash ψ := dne
+    φ vdash[A] lnot lnot ψ := intro_imp h
+    _ vdash[A] ψ := dne
 
 -- 対偶法
 theorem proof_contraposition
   {φ ψ : Formula S} :
-  (lnot φ vdash lnot ψ) <-> (ψ vdash φ)
+  (lnot φ vdash[A] lnot ψ) <-> (ψ vdash[A] φ)
 := by
   constructor
   . intro h1
     calc
-      ψ vdash lnot lnot φ := by
+      ψ vdash[A] lnot lnot φ := by
         apply intro_imp
         apply modus_ponens
         . exact elim_and1
         . calc
-            ψ land lnot φ vdash lnot φ := elim_and2
-            _ vdash lnot ψ := h1
-      _ vdash φ := dne
+            ψ land lnot φ vdash[A] lnot φ := elim_and2
+            _ vdash[A] lnot ψ := h1
+      _ vdash[A] φ := dne
   . intro h2
     apply intro_imp
     apply modus_ponens
     . calc
-        lnot φ land ψ vdash ψ := elim_and2
-        _ vdash φ := h2
+        lnot φ land ψ vdash[A] ψ := elim_and2
+        _ vdash[A] φ := h2
     . exact elim_and1
 
 -- ## 同値
@@ -1007,79 +1009,79 @@ theorem proof_contraposition
 -- 連言への代入
 theorem substitution_iff
   {φ ψ χ : Formula S} :
-  (φ land χ) land (φ iff ψ) vdash ψ land χ
+  (φ land χ) land (φ iff ψ) vdash[A] ψ land χ
 := by
   apply intro_and
   . apply modus_ponens
     . calc
-      _ vdash φ land χ := elim_and1
-      _ vdash φ := elim_and1
+      _ vdash[A] φ land χ := elim_and1
+      _ vdash[A] φ := elim_and1
     . calc
-      _ vdash φ iff ψ := elim_and2
-      _ vdash φ imply ψ := elim_and1
+      _ vdash[A] φ iff ψ := elim_and2
+      _ vdash[A] φ imply ψ := elim_and1
   . calc
-    _ vdash φ land χ := elim_and1
-    _ vdash χ := elim_and2
+    _ vdash[A] φ land χ := elim_and1
+    _ vdash[A] χ := elim_and2
 
 -- 含意の前件への代入
 theorem substitution_iff_to_imply1
   {φ ψ χ : Formula S} :
-  (φ imply ψ) land (φ iff χ) vdash χ imply ψ
+  (φ imply ψ) land (φ iff χ) vdash[A] χ imply ψ
 := by
   calc
-    (φ imply ψ) land (φ iff χ) vdash (χ imply φ) land (φ imply ψ) := by
+    (φ imply ψ) land (φ iff χ) vdash[A] (χ imply φ) land (φ imply ψ) := by
       apply intro_and
       . calc
-          (φ imply ψ) land (φ iff χ) vdash φ iff χ := elim_and2
-          _ vdash χ imply φ := elim_and2
+          (φ imply ψ) land (φ iff χ) vdash[A] φ iff χ := elim_and2
+          _ vdash[A] χ imply φ := elim_and2
       . exact elim_and1
-    _ vdash χ imply ψ := hypothetical_syllogism
+    _ vdash[A] χ imply ψ := hypothetical_syllogism
 
 -- 含意の後件への代入
 theorem substitution_iff_to_imply2
   {φ ψ χ : Formula S} :
-  (φ imply ψ) land (ψ iff χ) vdash φ imply χ
+  (φ imply ψ) land (ψ iff χ) vdash[A] φ imply χ
 := by
   calc
-    (φ imply ψ) land (ψ iff χ) vdash (φ imply ψ) land (ψ imply χ) := by
+    (φ imply ψ) land (ψ iff χ) vdash[A] (φ imply ψ) land (ψ imply χ) := by
       apply intro_and
       . exact elim_and1
       . calc
-          (φ imply ψ) land (ψ iff χ) vdash ψ iff χ := elim_and2
-          _ vdash ψ imply χ := elim_and1
-    _ vdash φ imply χ := hypothetical_syllogism
+          (φ imply ψ) land (ψ iff χ) vdash[A] ψ iff χ := elim_and2
+          _ vdash[A] ψ imply χ := elim_and1
+    _ vdash[A] φ imply χ := hypothetical_syllogism
 
 -- 真理の導入則
 theorem intro_top
   {φ : Formula S} :
-  φ vdash top
+  φ vdash[A] top
 := by
   exact intro_imp elim_and2
 
 lemma intro_imp_from_derivation
   {φ ψ : Formula S}
-  (h : φ vdash ψ) :
-  top vdash φ imply ψ
+  (h : φ vdash[A] ψ) :
+  top vdash[A] φ imply ψ
 := by
   apply intro_imp
   calc
-    top land φ vdash φ := elim_and2
-    _ vdash ψ := h
+    top land φ vdash[A] φ := elim_and2
+    _ vdash[A] ψ := h
 
 lemma derive_from_top_imp
   {φ ψ : Formula S}
-  (h : top vdash φ imply ψ) :
-  φ vdash ψ
+  (h : top vdash[A] φ imply ψ) :
+  φ vdash[A] ψ
 := by
   apply modus_ponens
-  . exact ax
+  . exact hyp
   . calc
-      φ vdash top := intro_top
-      _ vdash φ imply ψ := h
+      φ vdash[A] top := intro_top
+      _ vdash[A] φ imply ψ := h
 
 lemma equiv_iff_top_derives_iff
   {φ ψ : Formula S} :
-  Equiv φ ψ <-> top vdash φ iff ψ
+  Equiv A φ ψ <-> top vdash[A] φ iff ψ
 := by
   constructor
   . rintro ⟨hφψ, hψφ⟩
@@ -1090,22 +1092,22 @@ lemma equiv_iff_top_derives_iff
     constructor
     . apply derive_from_top_imp
       calc
-        top vdash φ iff ψ := h
-        _ vdash φ imply ψ := elim_and1
+        top vdash[A] φ iff ψ := h
+        _ vdash[A] φ imply ψ := elim_and1
     . apply derive_from_top_imp
       calc
-        top vdash φ iff ψ := h
-        _ vdash ψ imply φ := elim_and2
+        top vdash[A] φ iff ψ := h
+        _ vdash[A] ψ imply φ := elim_and2
 
 -- 連言の単位律
 theorem land_unit
   {φ : Formula S} :
-  Equiv φ (top land φ)
+  Equiv A φ (top land φ)
 := by
   constructor
   . apply intro_and
     . exact intro_top
-    . exact ax
+    . exact hyp
   . exact elim_and2
 
 -- ## 選言
@@ -1113,121 +1115,121 @@ theorem land_unit
 -- 選言の導入則１
 theorem intro_or1
   {φ ψ : Formula S} :
-  φ vdash φ lor ψ
+  φ vdash[A] φ lor ψ
 := by
   apply intro_imp
   calc
-    φ land lnot φ vdash bot := elim_not
-    _ vdash ψ := explosion
+    φ land lnot φ vdash[A] bot := elim_not
+    _ vdash[A] ψ := explosion
 
 -- 選言の導入則２
 theorem intro_or2
   {φ ψ : Formula S} :
-  φ vdash ψ lor φ
+  φ vdash[A] ψ lor φ
 := lukasiewicz
 
 -- 選言の除去則
 theorem elim_or
   {φ ψ χ ω : Formula S}
-  (h1 : φ land ψ vdash χ) (h2 : φ land ω vdash χ) :
-  φ land (ψ lor ω) vdash χ
+  (h1 : φ land ψ vdash[A] χ) (h2 : φ land ω vdash[A] χ) :
+  φ land (ψ lor ω) vdash[A] χ
 := by
   calc
-    φ land (ψ lor ω) vdash lnot lnot χ := by
+    φ land (ψ lor ω) vdash[A] lnot lnot χ := by
       apply intro_not
       let Γ1 := (φ land (ψ lor ω)) land lnot χ
-      have Γ1_derives_φ : Γ1 vdash φ := by
+      have Γ1_derives_φ : Γ1 vdash[A] φ := by
         calc
-          Γ1 vdash φ land (ψ lor ω) := elim_and1
-          _ vdash φ := elim_and1
+          Γ1 vdash[A] φ land (ψ lor ω) := elim_and1
+          _ vdash[A] φ := elim_and1
       apply modus_ponens
       . calc
-          Γ1 vdash φ land ψ := by
+          Γ1 vdash[A] φ land ψ := by
             apply intro_and
             . exact Γ1_derives_φ
             . calc
-              Γ1 vdash lnot lnot ψ := by
+              Γ1 vdash[A] lnot lnot ψ := by
                 apply intro_not
                 let Γ2 := Γ1 land lnot ψ
                 apply modus_ponens
                 . calc
-                    Γ2 vdash φ land ω := by
+                    Γ2 vdash[A] φ land ω := by
                       apply intro_and
                       . calc
-                          Γ2 vdash Γ1 := elim_and1
-                          _ vdash φ := Γ1_derives_φ
+                          Γ2 vdash[A] Γ1 := elim_and1
+                          _ vdash[A] φ := Γ1_derives_φ
                       . apply modus_ponens
                         . exact elim_and2
                         . calc
-                          Γ2 vdash Γ1 := elim_and1
-                          _ vdash φ land (ψ lor ω) := elim_and1
-                          _ vdash ψ lor ω := elim_and2
-                    _ vdash χ := h2
+                          Γ2 vdash[A] Γ1 := elim_and1
+                          _ vdash[A] φ land (ψ lor ω) := elim_and1
+                          _ vdash[A] ψ lor ω := elim_and2
+                    _ vdash[A] χ := h2
                 . calc
-                    Γ2 vdash Γ1 := elim_and1
-                    _ vdash lnot χ := elim_and2
-              _ vdash ψ := dne
-          _ vdash χ := h1
+                    Γ2 vdash[A] Γ1 := elim_and1
+                    _ vdash[A] lnot χ := elim_and2
+              _ vdash[A] ψ := dne
+          _ vdash[A] χ := h1
       . exact elim_and2
-    _ vdash χ := dne
+    _ vdash[A] χ := dne
 
 -- 選言の除去則（簡易版）
 theorem elim_or0
   {φ ψ χ : Formula S}
-  (h1 : φ vdash ψ) (h2 : χ vdash ψ) :
-  φ lor χ vdash ψ
+  (h1 : φ vdash[A] ψ) (h2 : χ vdash[A] ψ) :
+  φ lor χ vdash[A] ψ
 := by
   calc
-    φ lor χ vdash top land (φ lor χ) := land_unit.left
-    _ vdash ψ := by
+    φ lor χ vdash[A] top land (φ lor χ) := land_unit.left
+    _ vdash[A] ψ := by
       apply elim_or
       . calc
-          top land φ vdash φ land top := land_exchange
-          φ land top vdash ψ := weaken h1
+          top land φ vdash[A] φ land top := land_exchange
+          φ land top vdash[A] ψ := weaken h1
       . calc
-          top land χ vdash χ land top := land_exchange
-          χ land top vdash ψ := weaken h2
+          top land χ vdash[A] χ land top := land_exchange
+          χ land top vdash[A] ψ := weaken h2
 
 -- 選言の冪等律
 theorem lor_idempotence
   {φ : Formula S} :
-  Equiv φ (φ lor φ)
+  Equiv A φ (φ lor φ)
 := by
   constructor
   . exact intro_or1
   . apply elim_or0
-    . exact ax
-    . exact ax
+    . exact hyp
+    . exact hyp
 
 -- 選言の結合律
 theorem lor_associative1
   {φ ψ χ : Formula S} :
-  Equiv ((φ lor ψ) lor χ) (φ lor (ψ lor χ))
+  Equiv A ((φ lor ψ) lor χ) (φ lor (ψ lor χ))
 := by
   constructor
   . apply elim_or0
     . apply elim_or0
       . exact intro_or1
       . calc
-          ψ vdash ψ lor χ := intro_or1
-          _ vdash φ lor (ψ lor χ) := intro_or2
+          ψ vdash[A] ψ lor χ := intro_or1
+          _ vdash[A] φ lor (ψ lor χ) := intro_or2
     . calc
-        χ vdash ψ lor χ := intro_or2
-        _ vdash φ lor (ψ lor χ) := intro_or2
+        χ vdash[A] ψ lor χ := intro_or2
+        _ vdash[A] φ lor (ψ lor χ) := intro_or2
   . apply elim_or0
     . calc
-        φ vdash φ lor ψ := intro_or1
-        _ vdash (φ lor ψ) lor χ := intro_or1
+        φ vdash[A] φ lor ψ := intro_or1
+        _ vdash[A] (φ lor ψ) lor χ := intro_or1
     . apply elim_or0
       . calc
-          ψ vdash φ lor ψ := intro_or2
-          _ vdash (φ lor ψ) lor χ := intro_or1
+          ψ vdash[A] φ lor ψ := intro_or2
+          _ vdash[A] (φ lor ψ) lor χ := intro_or1
       . exact intro_or2
 
 -- 選言の交換律
 theorem lor_exchange
   {φ ψ : Formula S} :
-  φ lor ψ vdash ψ lor φ
+  φ lor ψ vdash[A] ψ lor φ
 := by
   apply elim_or0
   . exact intro_or2
@@ -1236,73 +1238,73 @@ theorem lor_exchange
 -- 選言三段論法
 theorem disjunctive_syllogism
   {φ ψ : Formula S} :
-  lnot φ land (φ lor ψ) vdash ψ
+  lnot φ land (φ lor ψ) vdash[A] ψ
 := by
   apply elim_or
   . calc
-    lnot φ land φ vdash φ land lnot φ := land_exchange
-    _ vdash bot := elim_not
-    _ vdash ψ := explosion
+    lnot φ land φ vdash[A] φ land lnot φ := land_exchange
+    _ vdash[A] bot := elim_not
+    _ vdash[A] ψ := explosion
   . exact elim_and2
 
 -- 吸収律１
 theorem absorption1
   {φ ψ : Formula S} :
-  Equiv (φ lor (φ land ψ)) φ
+  Equiv A (φ lor (φ land ψ)) φ
 := by
   constructor
   . apply elim_or0
-    . exact ax
+    . exact hyp
     . exact elim_and1
   . exact intro_or1
 
 -- 吸収律２
 theorem absorption2
   {φ ψ : Formula S} :
-  Equiv (φ land (φ lor ψ)) φ
+  Equiv A (φ land (φ lor ψ)) φ
 := by
   constructor
   . exact elim_and1
   . apply intro_and
-    . exact ax
+    . exact hyp
     . exact intro_or1
 
 -- 分配律１
 theorem distributive1
   {φ ψ χ : Formula S} :
-  Equiv (φ lor (ψ land χ)) ((φ lor ψ) land (φ lor χ))
+  Equiv A (φ lor (ψ land χ)) ((φ lor ψ) land (φ lor χ))
 := by
   constructor
   . apply intro_and
     . apply elim_or0
       . exact intro_or1
       . calc
-          ψ land χ vdash ψ := elim_and1
-          _ vdash φ lor ψ := intro_or2
+          ψ land χ vdash[A] ψ := elim_and1
+          _ vdash[A] φ lor ψ := intro_or2
     . apply elim_or0
       . exact intro_or1
       . calc
-          ψ land χ vdash χ := elim_and2
-          _ vdash φ lor χ := intro_or2
+          ψ land χ vdash[A] χ := elim_and2
+          _ vdash[A] φ lor χ := intro_or2
   . apply elim_or
     . calc
-        (φ lor ψ) land φ vdash φ := elim_and2
-        _ vdash φ lor (ψ land χ) := intro_or1
+        (φ lor ψ) land φ vdash[A] φ := elim_and2
+        _ vdash[A] φ lor (ψ land χ) := intro_or1
     . calc
-        (φ lor ψ) land χ vdash χ land (φ lor ψ) := land_exchange
-        _ vdash φ lor (ψ land χ) := by
+        (φ lor ψ) land χ vdash[A] χ land (φ lor ψ) := land_exchange
+        _ vdash[A] φ lor (ψ land χ) := by
           apply elim_or
           . calc
-              χ land φ vdash φ := elim_and2
-              _ vdash φ lor (ψ land χ) := intro_or1
+              χ land φ vdash[A] φ := elim_and2
+              _ vdash[A] φ lor (ψ land χ) := intro_or1
           . calc
-              χ land ψ vdash ψ land χ := land_exchange
-              _ vdash φ lor (ψ land χ) := intro_or2
+              χ land ψ vdash[A] ψ land χ := land_exchange
+              _ vdash[A] φ lor (ψ land χ) := intro_or2
 
 -- 分配律２
 theorem distributive2
   {φ ψ χ : Formula S} :
-  Equiv (φ land (ψ lor χ)) ((φ land ψ) lor (φ land χ))
+  Equiv A (φ land (ψ lor χ)) ((φ land ψ) lor (φ land χ))
 := by
   constructor
   . apply elim_or
@@ -1312,69 +1314,69 @@ theorem distributive2
     . apply intro_and
       . exact elim_and1
       . calc
-          φ land ψ vdash ψ := elim_and2
-          _ vdash ψ lor χ := intro_or1
+          φ land ψ vdash[A] ψ := elim_and2
+          _ vdash[A] ψ lor χ := intro_or1
     . apply intro_and
       . exact elim_and1
       . calc
-          φ land χ vdash χ := elim_and2
-          _ vdash ψ lor χ := intro_or2
+          φ land χ vdash[A] χ := elim_and2
+          _ vdash[A] ψ lor χ := intro_or2
 
 -- De Morganの法則１
 theorem de_morgan1
   {φ ψ : Formula S} :
-  Equiv ((lnot φ) lor (lnot ψ)) (lnot (φ land ψ))
+  Equiv A ((lnot φ) lor (lnot ψ)) (lnot (φ land ψ))
 := by
   constructor
   . apply intro_not
     let Γ1 := (lnot φ lor lnot ψ) land (φ land ψ)
     calc
-      Γ1 vdash (φ land ψ) land (lnot φ lor lnot ψ) := land_exchange
-      _ vdash bot := by
+      Γ1 vdash[A] (φ land ψ) land (lnot φ lor lnot ψ) := land_exchange
+      _ vdash[A] bot := by
         apply elim_or
         . apply modus_ponens
           . calc
-              (φ land ψ) land lnot φ vdash φ land ψ := elim_and1
-              φ land ψ vdash φ := elim_and1
+              (φ land ψ) land lnot φ vdash[A] φ land ψ := elim_and1
+              φ land ψ vdash[A] φ := elim_and1
           . exact elim_and2
         . apply modus_ponens
           . exact cut elim_and1 elim_and2
           . exact elim_and2
   · let Θ := lnot φ lor lnot ψ
     calc
-      lnot (φ land ψ) vdash lnot lnot Θ := by
+      lnot (φ land ψ) vdash[A] lnot lnot Θ := by
         apply intro_not
         let Γ2 := (lnot (φ land ψ)) land lnot Θ
         apply modus_ponens
         . calc
-            (lnot (φ land ψ)) land lnot Θ vdash lnot φ := by
+            (lnot (φ land ψ)) land lnot Θ vdash[A] lnot φ := by
               apply intro_not
               apply modus_ponens
               . calc
-                  (Γ2 land φ) vdash lnot ψ := by
+                  (Γ2 land φ) vdash[A] lnot ψ := by
                     apply intro_not
                     apply modus_ponens
                     . apply intro_and
                       . calc
-                          (Γ2 land φ) land ψ vdash Γ2 land φ := elim_and1
-                          Γ2 land φ vdash φ := elim_and2
+                          (Γ2 land φ) land ψ vdash[A] Γ2 land φ := elim_and1
+                          Γ2 land φ vdash[A] φ := elim_and2
                       . exact elim_and2
                     . calc
-                        (Γ2 land φ) land ψ vdash Γ2 land φ := elim_and1
-                        _ vdash (lnot (φ land ψ)) land lnot Θ := elim_and1
-                        _ vdash lnot (φ land ψ) := elim_and1
-                  _ vdash Θ := intro_or2
+                        (Γ2 land φ) land ψ vdash[A] Γ2 land φ := elim_and1
+                        _ vdash[A] (lnot (φ land ψ)) land lnot Θ := elim_and1
+                        _ vdash[A] lnot (φ land ψ) := elim_and1
+                  _ vdash[A] Θ := intro_or2
               . calc
-                  Γ2 land φ vdash (lnot (φ land ψ)) land lnot Θ := elim_and1
-                  _ vdash lnot Θ := elim_and2
-            _ vdash Θ := intro_or1
+                  Γ2 land φ vdash[A] (lnot (φ land ψ)) land lnot Θ := elim_and1
+                  _ vdash[A] lnot Θ := elim_and2
+            _ vdash[A] Θ := intro_or1
         . exact elim_and2
-      _ vdash Θ := dne
+      _ vdash[A] Θ := dne
 
 -- De Morganの法則２
 theorem de_morgan2
   {φ ψ : Formula S} :
-  Equiv (lnot φ land lnot ψ) (lnot (φ lor ψ))
+  Equiv A (lnot φ land lnot ψ) (lnot (φ lor ψ))
 := by
   constructor
   · apply intro_not
@@ -1382,149 +1384,149 @@ theorem de_morgan2
     . apply modus_ponens
       . exact elim_and2
       . calc
-          (lnot φ land lnot ψ) land φ vdash lnot φ land lnot ψ := elim_and1
-          _ vdash lnot φ := elim_and1
+          (lnot φ land lnot ψ) land φ vdash[A] lnot φ land lnot ψ := elim_and1
+          _ vdash[A] lnot φ := elim_and1
     . apply modus_ponens
       . exact elim_and2
       . calc
-          (lnot φ land lnot ψ) land ψ vdash lnot φ land lnot ψ := elim_and1
-          _ vdash lnot ψ := elim_and2
+          (lnot φ land lnot ψ) land ψ vdash[A] lnot φ land lnot ψ := elim_and1
+          _ vdash[A] lnot ψ := elim_and2
   · apply intro_and
     · apply intro_not
       apply modus_ponens
       . calc
-          lnot (φ lor ψ) land φ vdash φ := elim_and2
-          φ vdash φ lor ψ := intro_or1
+          lnot (φ lor ψ) land φ vdash[A] φ := elim_and2
+          φ vdash[A] φ lor ψ := intro_or1
       . exact elim_and1
     · apply intro_not
       apply modus_ponens
       . calc
-          lnot (φ lor ψ) land ψ vdash ψ := elim_and2
-          ψ vdash φ lor ψ := intro_or2
+          lnot (φ lor ψ) land ψ vdash[A] ψ := elim_and2
+          ψ vdash[A] φ lor ψ := intro_or2
       . exact elim_and1
 
 -- 排中律
 theorem excluded_middle
   {φ : Formula S} :
-  top vdash φ lor lnot φ
+  top vdash[A] φ lor lnot φ
 := by
   let Θ := φ lor lnot φ
   calc
-    top vdash lnot lnot Θ := by
+    top vdash[A] lnot lnot Θ := by
       apply intro_imp
       calc
-        top land lnot Θ vdash lnot Θ := elim_and2
-        _ vdash bot := by
+        top land lnot Θ vdash[A] lnot Θ := elim_and2
+        _ vdash[A] bot := by
           apply modus_ponens
           . calc
-              lnot Θ vdash lnot φ := by
+              lnot Θ vdash[A] lnot φ := by
                 apply intro_not
                 apply modus_ponens
                 . calc
-                    lnot Θ land φ vdash φ := elim_and2
-                    φ vdash Θ := intro_or1
+                    lnot Θ land φ vdash[A] φ := elim_and2
+                    φ vdash[A] Θ := intro_or1
                 . exact elim_and1
-              _ vdash Θ := intro_or2
-          . exact ax
-    _ vdash Θ := dne
+              _ vdash[A] Θ := intro_or2
+          . exact hyp
+    _ vdash[A] Θ := dne
 
 -- Dummetの法則
 theorem dummet
   {φ ψ : Formula S} :
-  top vdash (φ imply ψ) lor (ψ imply φ)
+  top vdash[A] (φ imply ψ) lor (ψ imply φ)
 := by
     let Θ := φ imply ψ
     calc
-      top vdash Θ lor lnot Θ := excluded_middle
-      Θ lor lnot Θ vdash Θ lor (ψ imply φ) := by
+      top vdash[A] Θ lor lnot Θ := excluded_middle
+      Θ lor lnot Θ vdash[A] Θ lor (ψ imply φ) := by
         apply elim_or0
         . exact intro_or1
         . calc
-            lnot Θ vdash ψ imply φ := by
+            lnot Θ vdash[A] ψ imply φ := by
               calc
-                lnot Θ vdash (φ imply ψ) imply φ := by
+                lnot Θ vdash[A] (φ imply ψ) imply φ := by
                   apply intro_imp
                   calc
-                    lnot Θ land Θ vdash Θ land lnot Θ := land_exchange
-                    _ vdash bot := elim_not
-                    _ vdash φ := explosion
-                _ vdash φ := peirce
-                _ vdash ψ imply φ := lukasiewicz
-            _ vdash Θ lor (ψ imply φ) := intro_or2
+                    lnot Θ land Θ vdash[A] Θ land lnot Θ := land_exchange
+                    _ vdash[A] bot := elim_not
+                    _ vdash[A] φ := explosion
+                _ vdash[A] φ := peirce
+                _ vdash[A] ψ imply φ := lukasiewicz
+            _ vdash[A] Θ lor (ψ imply φ) := intro_or2
 
 -- ## 量化
 
 -- 全称の除去則（簡易版）
 theorem elim_forall0
   {x : Variable} {φ : Formula S} :
-  (lforall x, φ) vdash φ
+  (lforall x, φ) vdash[A] φ
 := by
   calc
-    (lforall x, φ) vdash (Formula.substitute x (Term.var x) φ) := elim_forall
-    _ vdash φ := by simpa [Formula.subst_self] using ax
+    (lforall x, φ) vdash[A] (Formula.substitute x (Term.var x) φ) := elim_forall
+    _ vdash[A] φ := by simpa [Formula.subst_self] using hyp
 
 -- 量化と演繹
 theorem forall_monotone
   {x : Variable} {φ ψ : Formula S} :
-  (φ vdash ψ) -> ((lforall x, φ) vdash (lforall x, ψ))
+  (φ vdash[A] ψ) -> ((lforall x, φ) vdash[A] (lforall x, ψ))
 := Derive.lforall_mono
 
 -- アルファ同値の導出
 theorem alpha_equivalence
   {x y : Variable} {φ : Formula S}
   (y_nin_FVφ : y ∉ Formula.free_vars φ) :
-  Equiv (lforall x, φ) (lforall y, Formula.substitute x (Term.var y) φ)
+  Equiv A (lforall x, φ) (lforall y, Formula.substitute x (Term.var y) φ)
 := by
   let φ_y := Formula.substitute x (Term.var y) φ
   constructor
   . have y_nin_FVxφ : y ∉ Formula.free_vars (lforall x, φ) := by
       simp [Formula.free_vars, y_nin_FVφ]
-    have allφ_derives_φy : (lforall x, φ) vdash φ_y := by
+    have allφ_derives_φy : (lforall x, φ) vdash[A] φ_y := by
       exact elim_forall
     exact intro_forall y_nin_FVxφ allφ_derives_φy
   . by_cases y_eq_x : y = x
-    . simpa [y_eq_x, φ_y, Formula.subst_self] using ax
+    . simpa [y_eq_x, φ_y, Formula.subst_self] using hyp
     . have y_nin_FVyφy : x ∉ Formula.free_vars (lforall y, φ_y) := by
         have y_nin_FVφy : x ∉ Formula.free_vars φ_y := by
           have x_neq_y : x ≠ y := by
             simpa [eq_comm] using y_eq_x
           exact Formula.subst_clean x_neq_y
         simp [y_nin_FVφy, Formula.free_vars]
-      have allφy_derives_φ : (lforall y, φ_y) vdash φ := by
+      have allφy_derives_φ : (lforall y, φ_y) vdash[A] φ := by
         calc
-          (lforall y, φ_y) vdash (Formula.substitute y (Term.var x) φ_y) := by
+          (lforall y, φ_y) vdash[A] (Formula.substitute y (Term.var x) φ_y) := by
             simpa [Formula.substitute] using elim_forall
-          _ vdash φ := (Formula.subst_cancel y_nin_FVφ).1
+          _ vdash[A] φ := (Formula.subst_cancel y_nin_FVφ).1
       exact intro_forall y_nin_FVyφy allφy_derives_φ
 
 -- 存在の導入則
 theorem intro_exists
   {x : Variable} {t : Term S} {φ : Formula S} :
-  (Formula.substitute x t φ) vdash (lexists x, φ)
+  (Formula.substitute x t φ) vdash[A] (lexists x, φ)
 := by
   apply intro_not
   apply modus_ponens
   . exact elim_and1
   . calc
-      (Formula.substitute x t φ) land (lforall x, lnot φ) vdash (lforall x, lnot φ) := elim_and2
-      _ vdash (Formula.substitute x t (lnot φ)) := elim_forall
-      _ vdash lnot (Formula.substitute x t φ) := by
-        simpa [Formula.lnot, Formula.substitute] using ax
+      (Formula.substitute x t φ) land (lforall x, lnot φ) vdash[A] (lforall x, lnot φ) := elim_and2
+      _ vdash[A] (Formula.substitute x t (lnot φ)) := elim_forall
+      _ vdash[A] lnot (Formula.substitute x t φ) := by
+        simpa [Formula.lnot, Formula.substitute] using hyp
 
 -- 存在の導入則（簡易版）
 theorem intro_exists0
   {x : Variable} {φ : Formula S} :
-  φ vdash (lexists x, φ)
+  φ vdash[A] (lexists x, φ)
 := by
   calc
-    φ vdash (Formula.substitute x (Term.var x) φ) := by simpa [Formula.subst_self] using ax
-    _ vdash (lexists x, φ) := intro_exists
+    φ vdash[A] (Formula.substitute x (Term.var x) φ) := by simpa [Formula.subst_self] using hyp
+    _ vdash[A] (lexists x, φ) := intro_exists
 
 -- 存在の除去則
 theorem elim_exists
   {x : Variable} {φ ψ χ : Formula S}
-  (x_nin_FVφ_cup_FVχ : x ∉ Formula.free_vars φ ∪ Formula.free_vars χ) (h : φ land ψ vdash χ) :
-  (φ land (lexists x, ψ) vdash χ)
+  (x_nin_FVφ_cup_FVχ : x ∉ Formula.free_vars φ ∪ Formula.free_vars χ) (h : φ land ψ vdash[A] χ) :
+  (φ land (lexists x, ψ) vdash[A] χ)
 := by
   let Γ := (φ land (lexists x, ψ)) land (lnot χ)
 
@@ -1537,41 +1539,41 @@ theorem elim_exists
     apply intro_not
     apply modus_ponens
     . calc
-        (Γ land ψ) vdash (φ land ψ) := by
+        (Γ land ψ) vdash[A] (φ land ψ) := by
           apply intro_and
           . calc
-            Γ land ψ vdash Γ := elim_and1
-            _ vdash φ land (lexists x, ψ) := elim_and1
-            _ vdash φ := elim_and1
+            Γ land ψ vdash[A] Γ := elim_and1
+            _ vdash[A] φ land (lexists x, ψ) := elim_and1
+            _ vdash[A] φ := elim_and1
           . exact elim_and2
-        _ vdash χ := h
+        _ vdash[A] χ := h
     . calc
-      Γ land ψ vdash Γ := elim_and1
-      _ vdash lnot χ := elim_and2
+      Γ land ψ vdash[A] Γ := elim_and1
+      _ vdash[A] lnot χ := elim_and2
   . calc
-      Γ vdash (φ land (lexists x, ψ)) := elim_and1
-      _ vdash lexists x, ψ := elim_and2
+      Γ vdash[A] (φ land (lexists x, ψ)) := elim_and1
+      _ vdash[A] lexists x, ψ := elim_and2
 
 -- 存在の除去則（簡易版）
 theorem elim_exists0
   {x : Variable} {φ ψ : Formula S}
-  (x_nin_FVψ : x ∉ Formula.free_vars ψ) (h : φ vdash ψ) :
-  (lexists x, φ) vdash ψ
+  (x_nin_FVψ : x ∉ Formula.free_vars ψ) (h : φ vdash[A] ψ) :
+  (lexists x, φ) vdash[A] ψ
 := by
   calc
-    (lexists x, φ) vdash top land (lexists x, φ) := land_unit.left
-    _ vdash ψ := by
+    (lexists x, φ) vdash[A] top land (lexists x, φ) := land_unit.left
+    _ vdash[A] ψ := by
       have x_nin_FVtop_cup_FVψ : x ∉ Formula.free_vars (S:=S) top ∪ Formula.free_vars ψ := by
         simpa [Formula.free_vars, Formula.top] using x_nin_FVψ
       apply elim_exists x_nin_FVtop_cup_FVψ
       calc
-        top land φ vdash φ := elim_and2
-        _ vdash ψ := h
+        top land φ vdash[A] φ := elim_and2
+        _ vdash[A] ψ := h
 
 -- 全称量化子の交換
 theorem forall_exchange
   {x y : Variable} {φ : Formula S} :
-  (lforall x, (lforall y, φ)) vdash (lforall y, (lforall x, φ))
+  (lforall x, (lforall y, φ)) vdash[A] (lforall y, (lforall x, φ))
 := by
   let Γ := lforall x, (lforall y, φ)
   have y_nin_FVΓ : y ∉ Formula.free_vars Γ := by
@@ -1581,13 +1583,13 @@ theorem forall_exchange
     simp [Γ, Formula.free_vars]
   apply intro_forall x_nin_FVΓ
   calc
-    Γ vdash (lforall y, φ) := elim_forall0
-    _ vdash φ := elim_forall0
+    Γ vdash[A] (lforall y, φ) := elim_forall0
+    _ vdash[A] φ := elim_forall0
 
 -- 存在量化子の交換
 theorem exists_exchange
   {x y : Variable} {φ : Formula S} :
-  (lexists x, (lexists y, φ)) vdash (lexists y, (lexists x, φ))
+  (lexists x, (lexists y, φ)) vdash[A] (lexists y, (lexists x, φ))
 := by
   let Θ := lexists y, (lexists x, φ)
   have x_nin_FVΘ : x ∉ Formula.free_vars Θ := by
@@ -1597,13 +1599,13 @@ theorem exists_exchange
     simp [Θ, Formula.free_vars, Formula.lexists, Formula.lnot]
   apply elim_exists0 y_nin_FVΘ
   calc
-    φ vdash (lexists x, φ) := intro_exists0
-    _ vdash Θ := intro_exists0
+    φ vdash[A] (lexists x, φ) := intro_exists0
+    _ vdash[A] Θ := intro_exists0
 
 -- 量化子と否定１
 theorem forall_exists_lnot1
   {x : Variable} {φ : Formula S} :
-  Equiv (lforall x, lnot φ) (lnot (lexists x, φ))
+  Equiv A (lforall x, lnot φ) (lnot (lexists x, φ))
 := by
   constructor
   . exact intro_dn
@@ -1612,7 +1614,7 @@ theorem forall_exists_lnot1
 -- 量化子と否定２
 theorem forall_exists_lnot2
   {x : Variable} {φ : Formula S} :
-  Equiv (lnot (lforall x, φ)) (lexists x, lnot φ)
+  Equiv A (lnot (lforall x, φ)) (lexists x, lnot φ)
 := by
   constructor
   . exact proof_contraposition.2 (forall_monotone dne)
@@ -1621,7 +1623,7 @@ theorem forall_exists_lnot2
 -- 全称量化子と連言
 theorem forall_distribution_over_land
   {x : Variable} {φ ψ : Formula S} :
-  Equiv ((lforall x, φ) land (lforall x, ψ)) (lforall x, φ land ψ)
+  Equiv A ((lforall x, φ) land (lforall x, ψ)) (lforall x, φ land ψ)
 := by
   constructor
   . let Γ1 := (lforall x, φ) land (lforall x, ψ)
@@ -1630,28 +1632,28 @@ theorem forall_distribution_over_land
     apply intro_forall x_nin_FVΓ1
     apply intro_and
     . calc
-        Γ1 vdash (lforall x, φ) := elim_and1
-        _ vdash φ := elim_forall0
+        Γ1 vdash[A] (lforall x, φ) := elim_and1
+        _ vdash[A] φ := elim_forall0
     . calc
-        Γ1 vdash (lforall x, ψ) := elim_and2
-        _ vdash ψ := elim_forall0
+        Γ1 vdash[A] (lforall x, ψ) := elim_and2
+        _ vdash[A] ψ := elim_forall0
   . let Γ2 := lforall x, φ land ψ
     have x_nin_FVΓ2 : x ∉ Formula.free_vars Γ2 := by
       simp [Γ2, Formula.free_vars]
     apply intro_and
     . apply intro_forall x_nin_FVΓ2
       calc
-        Γ2 vdash φ land ψ := elim_forall0
-        _ vdash φ := elim_and1
+        Γ2 vdash[A] φ land ψ := elim_forall0
+        _ vdash[A] φ := elim_and1
     . apply intro_forall x_nin_FVΓ2
       calc
-        Γ2 vdash φ land ψ := elim_forall0
-        _ vdash ψ := elim_and2
+        Γ2 vdash[A] φ land ψ := elim_forall0
+        _ vdash[A] ψ := elim_and2
 
 -- 存在量化子と選言
 theorem exists_distribution_over_lor
   {x : Variable} {φ ψ : Formula S} :
-  Equiv ((lexists x, φ) lor (lexists x, ψ)) (lexists x, φ lor ψ)
+  Equiv A ((lexists x, φ) lor (lexists x, ψ)) (lexists x, φ lor ψ)
 := by
   let Γ1 := (lexists x, φ) lor (lexists x, ψ)
   let Γ2 := lexists x, φ lor ψ
@@ -1661,46 +1663,46 @@ theorem exists_distribution_over_lor
     apply elim_or0
     . apply elim_exists0 x_nin_FVΓ2
       calc
-        φ vdash φ lor ψ := intro_or1
-        _ vdash Γ2 := intro_exists0
+        φ vdash[A] φ lor ψ := intro_or1
+        _ vdash[A] Γ2 := intro_exists0
     . apply elim_exists0 x_nin_FVΓ2
       calc
-        ψ vdash φ lor ψ := intro_or2
-        _ vdash Γ2 := intro_exists0
+        ψ vdash[A] φ lor ψ := intro_or2
+        _ vdash[A] Γ2 := intro_exists0
   · have x_nin_FVΓ1 : x ∉ Formula.free_vars Γ1 := by
       simp [Γ1, Formula.free_vars, Formula.lor, Formula.lexists, Formula.lnot]
     apply elim_exists0 x_nin_FVΓ1
     apply elim_or0
     · calc
-        φ vdash (lexists x, φ) := intro_exists0
-        _ vdash Γ1 := intro_or1
+        φ vdash[A] (lexists x, φ) := intro_exists0
+        _ vdash[A] Γ1 := intro_or1
     · calc
-        ψ vdash (lexists x, ψ) := intro_exists0
-        _ vdash Γ1 := intro_or2
+        ψ vdash[A] (lexists x, ψ) := intro_exists0
+        _ vdash[A] Γ1 := intro_or2
 
 -- 全称量化子と選言
 theorem forall_distribution_over_lor
   {x : Variable} {φ ψ : Formula S} :
-  ((lforall x, φ) lor (lforall x, ψ)) vdash (lforall x, φ lor ψ)
+  ((lforall x, φ) lor (lforall x, ψ)) vdash[A] (lforall x, φ lor ψ)
 := by
   apply elim_or0
   · have x_nin_FVxφ : x ∉ Formula.free_vars (lforall x, φ) := by
       simp [Formula.free_vars]
     apply intro_forall x_nin_FVxφ
     calc
-      (lforall x, φ) vdash φ := elim_forall0
-      _ vdash φ lor ψ := intro_or1
+      (lforall x, φ) vdash[A] φ := elim_forall0
+      _ vdash[A] φ lor ψ := intro_or1
   · have x_nin_FVxψ : x ∉ Formula.free_vars (lforall x, ψ) := by
       simp [Formula.free_vars]
     apply intro_forall x_nin_FVxψ
     calc
-      (lforall x, ψ) vdash ψ := elim_forall0
-      _ vdash φ lor ψ := intro_or2
+      (lforall x, ψ) vdash[A] ψ := elim_forall0
+      _ vdash[A] φ lor ψ := intro_or2
 
 -- 存在量化子と連言
 theorem exists_distribution_over_land
   {x : Variable} {φ ψ : Formula S} :
-  (lexists x, (φ land ψ)) vdash (lexists x, φ) land (lexists x, ψ)
+  (lexists x, (φ land ψ)) vdash[A] (lexists x, φ) land (lexists x, ψ)
 := by
   let Θ := (lexists x, φ) land (lexists x, ψ)
   have x_nin_FVΘ : x ∉ Formula.free_vars Θ := by
@@ -1708,17 +1710,17 @@ theorem exists_distribution_over_land
   apply elim_exists0 x_nin_FVΘ
   apply intro_and
   · calc
-      φ land ψ vdash φ := elim_and1
-      _ vdash lexists x, φ := intro_exists0
+      φ land ψ vdash[A] φ := elim_and1
+      _ vdash[A] lexists x, φ := intro_exists0
   · calc
-      φ land ψ vdash ψ := elim_and2
-      _ vdash lexists x, ψ := intro_exists0
+      φ land ψ vdash[A] ψ := elim_and2
+      _ vdash[A] lexists x, ψ := intro_exists0
 
 -- 酒場の法則
 theorem drinking_principle
   {x y : Variable} {φ : Formula S}
   (y_nin_FVφ : y ∉ Formula.free_vars φ) :
-  top vdash lexists x, (φ imply (lforall y, (Formula.substitute x (Term.var y) φ)))
+  top vdash[A] lexists x, (φ imply (lforall y, (Formula.substitute x (Term.var y) φ)))
 := by
   let φ_y := Formula.substitute x (Term.var y) φ
   let Γ := lforall y, φ_y
@@ -1728,42 +1730,53 @@ theorem drinking_principle
   . exact elim_and2
   . let Θ := lforall x, (lnot (φ imply Γ))
     calc
-      top land Θ vdash Θ := elim_and2
-      _ vdash Γ := by
+      top land Θ vdash[A] Θ := elim_and2
+      _ vdash[A] Γ := by
         have y_nin_FVΘ : y ∉ Formula.free_vars Θ := by
           simp [Θ, Γ, Formula.free_vars, Formula.lnot, y_nin_FVφ]
         apply intro_forall y_nin_FVΘ
         calc
-          Θ vdash (Formula.substitute x (Term.var y) (lnot (φ imply Γ))) := elim_forall
-          _ vdash lnot (φ_y imply Γ_y) := by
-            simpa [Formula.substitute, Formula.lnot] using ax
-          _ vdash φ_y := not_imply_elim
-      Γ vdash (φ imply Γ) := lukasiewicz
-      _ vdash lnot Θ := intro_exists0
+          Θ vdash[A] (Formula.substitute x (Term.var y) (lnot (φ imply Γ))) := elim_forall
+          _ vdash[A] lnot (φ_y imply Γ_y) := by
+            simpa [Formula.substitute, Formula.lnot] using hyp
+          _ vdash[A] φ_y := not_imply_elim
+      Γ vdash[A] (φ imply Γ) := lukasiewicz
+      _ vdash[A] lnot Θ := intro_exists0
+
+
+-- inductive EqualityPred : Nat → Type
+-- | equal : EqualityPred 2
+
+-- def EqualitySignature : Signature where
+--   Func _ := Empty
+--   Pred := EqualityPred
+
+-- def EqualityAxiom
+
 
 -- ## 推論規則の追加
 
-abbrev ExtraRule (S : Signature) := Formula S -> Formula S -> Prop
+-- abbrev ExtraRule (S : Signature) := Formula S -> Formula S -> Prop
 
-inductive DeriveWith (R : ExtraRule S) : Formula S -> Formula S -> Prop
-| core { φ ψ : Formula S } :
-  Derive φ ψ -> DeriveWith R φ ψ
-| extra { φ ψ : Formula S } :
-  R φ ψ -> DeriveWith R φ ψ
-| cut { φ ψ χ : Formula S } :
-  DeriveWith R φ ψ -> DeriveWith R ψ χ -> DeriveWith R φ χ
-| intro_and { φ ψ χ : Formula S } :
-  DeriveWith R φ ψ -> DeriveWith R φ χ -> DeriveWith R φ (Formula.land ψ χ)
-| intro_imp { φ ψ χ : Formula S } :
-  DeriveWith R (Formula.land φ ψ) χ -> DeriveWith R φ (Formula.imply ψ χ)
-| intro_forall { φ ψ : Formula S } { x : Variable } :
-  x ∉ Formula.free_vars φ -> DeriveWith R φ ψ -> DeriveWith R φ (Formula.lforall x ψ)
+-- inductive DeriveWith (R : ExtraRule S) : Formula S -> Formula S -> Prop
+-- | core { φ ψ : Formula S } :
+--   Derive φ ψ -> DeriveWith R φ ψ
+-- | extra { φ ψ : Formula S } :
+--   R φ ψ -> DeriveWith R φ ψ
+-- | cut { φ ψ χ : Formula S } :
+--   DeriveWith R φ ψ -> DeriveWith R ψ χ -> DeriveWith R φ χ
+-- | intro_and { φ ψ χ : Formula S } :
+--   DeriveWith R φ ψ -> DeriveWith R φ χ -> DeriveWith R φ (Formula.land ψ χ)
+-- | intro_imp { φ ψ χ : Formula S } :
+--   DeriveWith R (Formula.land φ ψ) χ -> DeriveWith R φ (Formula.imply ψ χ)
+-- | intro_forall { φ ψ : Formula S } { x : Variable } :
+--   x ∉ Formula.free_vars φ -> DeriveWith R φ ψ -> DeriveWith R φ (Formula.lforall x ψ)
 
 -- namespace DeriveWith
 
 --   open Formula
 
---   theorem ax : DeriveWith R φ φ := .core Derive.ax
+--   theorem hyp : DeriveWith R φ φ := .core Derive.hyp
 
 --   theorem elim_and1 : DeriveWith R (Formula.land φ ψ) φ := .core Derive.elim_and1
 
@@ -1882,12 +1895,12 @@ inductive DeriveWith (R : ExtraRule S) : Formula S -> Formula S -> Prop
 --             (equal t s) eqvdash top := DeriveWith.intro_top
 --             _ eqvdash (equal t t) := eq_reflexive
 --             _ eqvdash (substitute x t (equal (Term.var x) t)) := by
---               simpa [subst_equal] using (DeriveWith.ax :
+--               simpa [subst_equal] using (DeriveWith.hyp :
 --                 DeriveWith (EqualityRule S) (equal t t) (equal t t))
---         . exact DeriveWith.ax
+--         . exact DeriveWith.hyp
 --       _ eqvdash (substitute x s (equal (Term.var x) t)) := eq_subst
 --       _ eqvdash (equal s t) := by
---         simpa [subst_equal] using (DeriveWith.ax :
+--         simpa [subst_equal] using (DeriveWith.hyp :
 --           DeriveWith (EqualityRule S) (equal s t) (equal s t))
 
 --   theorem eq_transitive :
@@ -1919,7 +1932,7 @@ inductive DeriveWith (R : ExtraRule S) : Formula S -> Formula S -> Prop
 --         . exact DeriveWith.elim_and2
 --       _ eqvdash (substitute x u (equal t (Term.var x))) := eq_subst
 --       _ eqvdash (equal t u) := by
---         simpa [subst_equal] using (DeriveWith.ax :
+--         simpa [subst_equal] using (DeriveWith.hyp :
 --           DeriveWith (EqualityRule S) (equal t u) (equal t u))
 
 --   theorem neq_symmetry :
